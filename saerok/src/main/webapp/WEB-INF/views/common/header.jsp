@@ -40,21 +40,9 @@
             <!-- 아토 누르면 메인페이지로 넘어가도록!!  -->
             <!-- Divider -->
             <hr class="sidebar-divider my-0">
-
-            <!-- Nav Item - Dashboard
-            <li class="nav-item">
-                <a class="nav-link" href="">
-                    <i class="fas fa-fw fa-list"></i>
-                    <span>메인페이지</span></a>
-            </li> -->
-
             <!-- Divider -->
             <hr class="sidebar-divider">
             <!-- Heading -->
-            <!-- <div class="sidebar-heading">
-                
-            </div> -->
-            <!-- Nav Item - Pages Collapse Menu -->
             <li class="nav-item">
                 <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseHR"
                     aria-expanded="true" aria-controls="collapseHR">
@@ -63,15 +51,12 @@
                 </a>
                 <div id="collapseHR" class="collapse" aria-labelledby="headingHR" data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
-                        <!-- <h6 class="collapse-header">사원등록</h6> -->
                         <a class="collapse-item" href="">사원등록</a>
                         <a class="collapse-item" href="">사원조회</a>
                         <a class="collapse-item" href="">조직도</a>
                     </div>
                 </div>
             </li>
-
-            <!-- Nav Item - Utilities Collapse Menu -->
             <li class="nav-item">
                 <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseSKD"
                     aria-expanded="true" aria-controls="collapseSKD">
@@ -81,7 +66,6 @@
                 <div id="collapseSKD" class="collapse" aria-labelledby="headingSKD"
                     data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
-                        <!-- <h6 class="collapse-header">Custom Utilities:</h6> -->
                         <a class="collapse-item" href="">근태등록</a>
                         <a class="collapse-item active" href="">근태조회</a>
                         <a class="collapse-item" href="">개인일정</a>
@@ -89,15 +73,6 @@
                     </div>
                 </div>
             </li>
-            <!-- Divider -->
-            <!-- <hr class="sidebar-divider"> -->
-
-            <!-- Heading -->
-            <!-- <div class="sidebar-heading">
-                Addons
-            </div> -->
-
-            <!-- Nav Item - Pages Collapse Menu -->
             <li class="nav-item">
                 <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseMsg"
                     aria-expanded="true" aria-controls="collapseMsg">
@@ -106,20 +81,15 @@
                 </a>
                 <div id="collapseMsg" class="collapse" aria-labelledby="headingMsg" data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
-                        <!-- <h6 class="collapse-header">Login Screens:</h6> -->
                         <a class="collapse-item" href="">받은쪽지함</a>
                         <a class="collapse-item" href="">쪽지쓰기</a>
                         <a class="collapse-item" href="">보낸쪽지함</a>
                         <a class="collapse-item" href="">중요쪽지함</a>
-                        <!-- <div class="collapse-divider"></div> -->
-                        <!-- <h6 class="collapse-header">중요쪽지함</h6> -->
                         <a class="collapse-item" href="">임시보관함</a>
                         <a class="collapse-item" href="">휴지통</a>
                     </div>
                 </div>
             </li>
-            
-            <!-- Nav Item - Charts -->
             <li class="nav-item">
                 <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseCharts"
                     aria-expanded="true" aria-controls="collapseCharts">
@@ -128,7 +98,6 @@
                 </a>
                     <div id="collapseCharts" class="collapse" aria-labelledby="headingCharts" data-parent="#accordionSidebar">
                         <div class="bg-white py-2 collapse-inner rounded">
-                            <!-- <h6 class="collapse-header">Login Screens:</h6> -->
                             <a class="collapse-item" href="">매출현황</a>
                             <a class="collapse-item" href="">지점별매출</a>
                             <a class="collapse-item" href="">발주목록</a>
@@ -152,8 +121,6 @@
                         </div>
                     </div>
             </li>
-
-            <!-- Nav Item - Tables -->
             <li class="nav-item">
                 <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseEDSM"
                     aria-expanded="true" aria-controls="collapseEDSM">
@@ -162,7 +129,6 @@
                 </a>
                     <div id="collapseEDSM" class="collapse" aria-labelledby="headingEDSM" data-parent="#accordionSidebar">
                         <div class="bg-white py-2 collapse-inner rounded">
-                            <!-- <h6 class="collapse-header">Login Screens:</h6> -->
                             <a class="collapse-item" href="">전체문서함</a>
                             <div id="collapseEDSM" class="collapse" aria-labelledby="headingEDSM"data-parent="#accordionSidebar" >
                                 <div class="bg-white py-2 collapse-inner rounded">
@@ -175,7 +141,6 @@
                         </div>
                     </div>
             </li>
-
             <!-- Divider -->
             <hr class="sidebar-divider d-none d-md-block">
 
@@ -183,16 +148,13 @@
             <div class="text-center d-none d-md-inline">
                 <button class="rounded-circle border-0" id="sidebarToggle"></button>
             </div>
-
         </ul>
         <!-- End of Sidebar -->
 
         <!-- Content Wrapper -->
         <div id="content-wrapper" class="d-flex flex-column">
-
             <!-- Main Content -->
             <div id="content">
-
                 <!-- Topbar -->
                 <nav class="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top shadow">
 
@@ -388,40 +350,6 @@
 
                 </nav>
                 <!-- End of Topbar -->
-
-                <!-- 여기부터 본문쓰세용 -->
-                <section>
-                   
-                 <div class="container-fluid"> 
-
-                 <div class="row">
-
-                        <!-- Border Left Utilities -->
-                    <div class="col-lg-6"> 
-
-                </div>
-                <!-- /.container-fluid -->
-                </div>
-             </div>
-            <!-- End of Main Content -->
-
-        </section>
-
-            <!-- Footer -->
-            <!-- <footer class="sticky-footer bg-white">
-                <div class="container my-auto">
-                    <div class="copyright text-center my-auto">
-                        <span>Copyright &copy; Your Website 2020</span>
-                    </div>
-                </div>
-            </footer> -->
-            <!-- End of Footer -->
-
-        </div>
-        <!-- End of Content Wrapper -->
-
-    </div>
-    <!-- End of Page Wrapper -->
 
     <!-- Scroll to Top Button-->
     <a class="scroll-to-top rounded" href="#page-top">
