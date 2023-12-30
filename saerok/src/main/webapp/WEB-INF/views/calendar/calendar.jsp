@@ -4,7 +4,7 @@
 <jsp:include page="/WEB-INF/views/common/header.jsp"/>
 <section class="max1920px">
 <link href='fullcalendar/' rel='stylesheet' />
-<jsp:include page="/WEB-INF/views/common/side-nav.jsp"/>
+<jsp:include page="/WEB-INF/views/common/header.jsp"/>
 <script src='https://cdn.jsdelivr.net/npm/fullcalendar-scheduler@6.1.8/index.global.min.js'></script>
 <script>
 	let today=new Date();
