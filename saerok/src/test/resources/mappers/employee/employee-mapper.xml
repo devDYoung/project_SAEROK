@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<!-- 지혜 -->
+<mapper namespace="emp">
+  <resultMap type="emp" id="empMap">
+  	<id column="EMP_NO" property="empNo"/>
+  	<result column="EMP_PW" property="empPw"/>
+  	<result column="EMP_NAME" property="empName"/>
+  	<result column="EMP_PHONE" property="empPhone"/>
+  	<result column="EMP_EMAIL" property="empEmail"/>
+  	<result column="EMP_ADDR" property="empAddr"/>
+  	<result column="EMP_DETAIL_ADDR" property="empDetailAddr"/>
+  	<result column="EMP_DATE" property="empDate"/>
+  	<result column="WORK_YN" property="workYn"/>
+  	<result column="ORI_FILENAME" property="oriFileName"/>
+  	<result column="DEST_FILENAME" property="destFileName"/>
+  	<result column="ISSUE_ANNU" property="issueAnnu"/>
+  	<result column="USE_ANNU" property="useAnnu"/>
+  	<result column="DEPT_CODE" property="deptCode"/>
+  	<result column="DEPT_NAME" property="deptName"/>
+  	<result column="JOB_CODE" property="jobCode"/>
+  	<result column="JOB_NAME" property="jobName"/>
+  </resultMap>
+  
+  
+  
+</mapper>
