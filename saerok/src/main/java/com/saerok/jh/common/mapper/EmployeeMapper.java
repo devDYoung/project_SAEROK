@@ -25,7 +25,8 @@ public interface EmployeeMapper {
 	@Insert("INSERT INTO EMPLOYEE" + "VALUES(#{empName},#{empPw},#{empNo},"
 			+ "#{empPhone},#{empEmail},#{deptCode},#{empAddr},#{empDetailAddr},#{jobCode},#{empDate}")
 	int insertEmployee(Employee e);
-
+	
+	//마
 	@Update("UPDATE EMPLOYEE SET\r\n"
 			+ "		EMP_NAME=#{empName}, EMP_PW=#{password}, GENDER=#{gender}, AGE=#{age},"
 			+ "		EMAIL=#{email}, PHONE=#{phone}, ADDRESS=#{address} WHERE\r\n"
