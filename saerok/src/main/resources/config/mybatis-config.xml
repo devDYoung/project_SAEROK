@@ -3,7 +3,7 @@
 <configuration>
 	<typeAliases>
 		<!-- 지혜 -->
-		<typeAlias alias="emp" type="com.saerok.jh.employee.model.dto" />
+		<typeAlias alias="emp" type="com.saerok.jh.employee.model.dto.Employee" />
 		
 		
 		<!-- 지영  -->
