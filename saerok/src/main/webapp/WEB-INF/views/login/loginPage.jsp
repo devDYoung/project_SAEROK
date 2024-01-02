@@ -34,7 +34,7 @@
                             <div class="col-lg-10"> <!-- Adjusted column size -->
                                 <div class="p-5">
                                     <div class="text-center">
-                                        <img src="${pageContext.request.contextPath }/resources/img/ato.jpg"  alt="아토 logo">
+                                        <img src="${pageContext.request.contextPath }/resources/img/ato100px.png"  alt="아토 logo">
                                         <br><br>
                                         <p>아토에 오신 것을 환영합니다!</p>
                                     </div>
