@@ -39,7 +39,7 @@
                                         <p>아토에 오신 것을 환영합니다!</p>
                                     </div>
                                     <!-- 로그인 form -->
-                                    <form action="${path}/login" method="post" id="login-form">
+                                    <form action="${path}/loginPage" method="post" id="login-form">
                                         <div class="form-group">
                                             <input type="text" name="empNo" id="no"
                                                 class="form-control form-control-user" placeholder="사원번호 입력">

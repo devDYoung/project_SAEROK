@@ -32,9 +32,9 @@ public class SecurityConfig {
 				}).formLogin(formlogin->{
 					formlogin
 					.loginPage("/loginPage")
-							/* .loginProcessingUrl("/login") */
+							/* .loginProcessingUrl("/loginPage") */
 					.failureForwardUrl("/loginfail")
-					.successForwardUrl("/loginsuccess")
+					.successForwardUrl("/")
 					.usernameParameter("empNo")
 					.passwordParameter("empPw");
 				})
