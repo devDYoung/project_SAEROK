@@ -1,0 +1,100 @@
+//package com.saerok.jy.commute.service;
+//
+//import org.springframework.stereotype.Service;
+//
+//@Service
+//public class CommuteServiceImpl implements CommuteService{
+//	
+//	@Autowired
+//	private WorkingManagementDao workingManagementDao;
+//	
+//	@Override
+//	public int insertStartWork(String empId) {
+//		return workingManagementDao.insertStartWork(empId);
+//	}
+//	
+//	@Override
+//	public int updateStartWork(Map<String, Object> param) {
+//		return workingManagementDao.updateStartWork(param);
+//	}
+//	
+//	@Override
+//	public WorkingManagement selectStartwork(String no) {
+//		return workingManagementDao.selectStartwork(no);
+//	}
+//	
+//	@Override
+//	public int checkStartwork(Map<String, Object> param) {
+//		return workingManagementDao.checkStartwork(param);
+//	}
+//	
+//	@Override
+//	public WorkingManagement checkWorkTime(Map<String, Object> param) {
+//		return workingManagementDao.checkWorkTime(param);
+//	}
+//	
+//	@Override
+//	public int updateEndWok(Map<String, Object> param) {
+//		return workingManagementDao.updateEndWork(param);
+//	}
+//	
+//	@Override
+//	public int updateDayWorkTime(Map<String, Object> param) {
+//		return workingManagementDao.updateDayWorkTime(param);
+//	}
+//	
+//	@Override
+//	public int updateDayWorkTimeHalf(Map<String, Object> param) {
+//		return workingManagementDao.updateDayWorkTimeHalf(param);
+//	}
+//	
+//	@Override
+//	public List<WorkingManagement> selectMonthWork(Map<String, Object> param) {
+//		return workingManagementDao.selectMonthWok(param);
+//	}
+//	
+//	@Override
+//	public int totalMonthTime(Map<String, Object> param) {
+//		return workingManagementDao.totalMonthTime(param);
+//	}
+//	
+//	@Override
+//	public List<WorkingManagement> selectWeekDatas(Map<String, Object> param) {
+//		return workingManagementDao.selectWeekDatas(param);
+//	}
+//	
+//	@Override
+//	public int weekTotalTime(Map<String, Object> param) {
+//		return workingManagementDao.weekTotalTime(param);
+//	}
+//	
+//	//주간 기본근무시간 가져오기
+//	@Override
+//	public int selectWeekWorkTime(Map<String, Object> startEndMap) {
+//		return workingManagementDao.selectWeekWorkTime(startEndMap);
+//	}
+//	
+//	//주간 연장근무시간 가져오기
+//	@Override
+//	public int selectWeekOverTime(Map<String, Object> startEndMap) {
+//		return workingManagementDao.selectWeekOverTime(startEndMap);
+//	}
+//	
+//	//월 연장근무시간 가져오기
+//	@Override
+//	public int monthOverTime(Map<String, Object> startEndMap) {
+//		return workingManagementDao.monthOverTime(startEndMap);
+//	}
+//	
+//	@Override
+//	public int insertRegDateState(WorkingManagement working) {
+//		return workingManagementDao.insertRegDateState(working);
+//	} // insertRegDateState() end
+//	
+//	
+//	@Override
+//	public List<Map<String, Object>> findByEmpIdNoDate(String empId) {
+//		return workingManagementDao.findByEmpIdNoDate(empId);
+//	} // findByEmpIdNoDate() end
+//
+//}
