@@ -14,7 +14,7 @@
 	<!-- header 추가하기 -->
 	<div class="new-split-item left" style="width: inherit">
 		<div class="new-sidebar">
-			<a class="main-btn" href="/gabia.biz/mail/webmail/m_write">flex <span>편지쓰기</span>
+			<a class="main-btn" href="/gabia.biz/mail/webmail/m_write"> <span>편지쓰기</span>
 			</a>
 			<!-- 메뉴 활성바 내리기 추가할 것 -->
 

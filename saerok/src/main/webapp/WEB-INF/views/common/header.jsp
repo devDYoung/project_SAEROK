@@ -89,10 +89,10 @@
                 </a>
                 <div id="collapseMsg" class="collapse" aria-labelledby="headingMsg" data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
-                        <a class="collapse-item" href="">받은쪽지함</a>
                         <a class="collapse-item" href="">쪽지쓰기</a>
+                        <a class="collapse-item" href="">받은쪽지함</a>
                         <a class="collapse-item" href="">보낸쪽지함</a>
-                        <a class="collapse-item" href="">중요쪽지함</a>
+                        <!-- <a class="collapse-item" href="">중요쪽지함</a> -->
                         <a class="collapse-item" href="">임시보관함</a>
                         <a class="collapse-item" href="">휴지통</a>
                     </div>
