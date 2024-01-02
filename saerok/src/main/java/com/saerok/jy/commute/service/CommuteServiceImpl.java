@@ -58,44 +58,6 @@ public class CommuteServiceImpl implements CommuteService{
 	}
 	
 	@Override
-	public List<Commute> selectMonthWork(Map<String, Object> param) {
-		return commuteDao.selectMonthWok(session, param);
-	}
-	
-	@Override
-	public int totalMonthTime(Map<String, Object> param) {
-		return commuteDao.totalMonthTime(session, param);
-	}
-	
-	@Override
-	public List<Commute> selectWeekDatas(Map<String, Object> param) {
-		return commuteDao.selectWeekDatas(session, param);
-	}
-	
-	@Override
-	public int weekTotalTime(Map<String, Object> param) {
-		return commuteDao.weekTotalTime(session, param);
-	}
-	
-	//주간 기본근무시간 가져오기
-	@Override
-	public int selectWeekWorkTime(Map<String, Object> startEndMap) {
-		return commuteDao.selectWeekWorkTime(session, startEndMap);
-	}
-	
-	//주간 연장근무시간 가져오기
-	@Override
-	public int selectWeekOverTime(Map<String, Object> startEndMap) {
-		return commuteDao.selectWeekOverTime(session, startEndMap);
-	}
-	
-	//월 연장근무시간 가져오기
-	@Override
-	public int monthOverTime(Map<String, Object> startEndMap) {
-		return commuteDao.monthOverTime(session, startEndMap);
-	}
-	
-	@Override
 	public int insertRegDateState(Commute work) {
 		return commuteDao.insertRegDateState(session, work);
 	} // insertRegDateState() end

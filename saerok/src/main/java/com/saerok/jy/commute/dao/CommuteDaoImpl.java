@@ -43,41 +43,6 @@ public class CommuteDaoImpl implements CommuteDao{
     }
 
     @Override
-    public List<Commute> selectMonthWok(SqlSession session, Map<String, Object> param) {
-        return session.selectList("selectMonthWok", param);
-    }
-
-    @Override
-    public List<Commute> selectWeekDatas(SqlSession session, Map<String, Object> param) {
-        return session.selectList("selectWeekDatas", param);
-    }
-
-    @Override
-    public int weekTotalTime(SqlSession session, Map<String, Object> param) {
-        return session.selectOne("weekTotalTime", param);
-    }
-
-    @Override
-    public int totalMonthTime(SqlSession session, Map<String, Object> param) {
-        return session.selectOne("totalMonthTime", param);
-    }
-
-    @Override
-    public int selectWeekWorkTime(SqlSession session, Map<String, Object> startEndMap) {
-        return session.selectOne("selectWeekWorkTime", startEndMap);
-    }
-
-    @Override
-    public int selectWeekOverTime(SqlSession session, Map<String, Object> startEndMap) {
-        return session.selectOne("selectWeekOverTime", startEndMap);
-    }
-
-    @Override
-    public int monthOverTime(SqlSession session, Map<String, Object> startEndMap) {
-        return session.selectOne("monthOverTime", startEndMap);
-    }
-
-    @Override
     public int insertRegDateState(SqlSession session, Commute commute) {
         return session.insert("insertRegDateState", commute);
     }
