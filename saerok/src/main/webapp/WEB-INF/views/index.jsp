@@ -4,7 +4,15 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
-<jsp:include page="/WEB-INF/views/common/header.jsp" />
+<jsp:include page="/WEB-INF/views/common/header.jsp">
+<jsp:param value="MainPage" name="ATO"/> 
+</jsp:include>
+     <link href="${pageContext.request.contextPath }/resources/css/app.css" rel="stylesheet" />
+    <link href="${pageContext.request.contextPath }/resources/css/foundation.css" rel="stylesheet"/>
+    <link href="${pageContext.request.contextPath }/resources/css/emp.css" rel="stylesheet" class="commute"/>
+    <script src="https://kit.fontawesome.com/cbe4aa3844.js" crossorigin="anonymous"></script>
+			<link rel="stylesheet"
+				href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css" />
 <section>
 	<div>
 		<div class="home-content">
@@ -209,6 +217,12 @@ const updateDayWorkTime = (daytimes) =>{
 				<!-- 본문 가운데 -->
 				<div>
 					<div id="home-center" class="div-padding div-margin">
+					</div>
+					</div>
+					<!-- 본문 오른쪽 -->
+					<div>
+						<div id="home-right-div" class="div-padding div-margin">
+						</div>
 					</div>
 </section>
 
