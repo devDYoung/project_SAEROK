@@ -1,9 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE configuration PUBLIC "-//mybatis.org//DTD Config 3.0//EN" "http://mybatis.org/dtd/mybatis-3-config.dtd" >
 <configuration>
-	<!-- 지혜 -->
 	<typeAliases>
-		<typeAlias alias="emp" type="com.saerok.jh.employee.model.dto"/>
+		<!-- 지혜 -->
+		<typeAlias alias="emp" type="com.saerok.jh.employee.model.dto.Employee" />
+		
+		
+		<!-- 지영  -->
+		<typeAlias alias="schedule" type="com.saerok.jy.schedule.dto.Schedule"/>
+		<typeAlias alias="commute" type="com.saerok.jy.commute.dto.Commute"/>
+	
 	</typeAliases>
+
 
 </configuration>

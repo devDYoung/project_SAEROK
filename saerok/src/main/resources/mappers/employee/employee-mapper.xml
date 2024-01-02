@@ -2,6 +2,13 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <!-- 지혜 -->
 <mapper namespace="emp">
+	  <!-- 로그인 mapper -->
+  <resultMap type="emp" id="loginMap">
+  	<id column="EMP_NO" property="empNo"/>
+  	<result column="EMP_PW" property="empPw"/>
+  	<result column="EMP_NAME" property="empName"/>
+  </resultMap>
+
   <resultMap type="emp" id="empMap">
   	<id column="EMP_NO" property="empNo"/>
   	<result column="EMP_PW" property="empPw"/>
@@ -21,7 +28,5 @@
   	<result column="JOB_CODE" property="jobCode"/>
   	<result column="JOB_NAME" property="jobName"/>
   </resultMap>
-  
-  
-  
+
 </mapper>
