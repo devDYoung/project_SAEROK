@@ -3,6 +3,7 @@ package com.saerok.jh.login.controller;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.saerok.jh.login.model.service.LoginService;
 
@@ -21,9 +22,17 @@ public class LoginController {
         return "login/loginPage";
     }
 
-	
+	//마이페이지
+	@RequestMapping("/mypage")
+	public String myPage() {
+	    return "login/mypage";
+	}
 
-	
+	//메인페이지
+	@GetMapping("/index")
+	public String m() {
+	    return "index";
+	}
 	
 
 
