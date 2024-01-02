@@ -5,16 +5,18 @@
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 
 <c:set var="path" value="${pageContext.request.contextPath}" />
+
 <!-- 전체 틀 -->
 <div id="container">
 	<div id="drag_wrap">
 		<div id="drag" class="ui-draggable ui-draggable-handle"
 			style="left: 0px; width: 15px; right: auto; top: 0px;"></div>
 	</div>
+	
 	<!-- header 추가하기 -->
 	<div class="new-split-item left" style="width: inherit">
 		<div class="new-sidebar">
-			<a class="main-btn" href="/gabia.biz/mail/webmail/m_write"> <span>편지쓰기</span>
+			<a class="main-btn" href="/gabia.biz/mail/webmail/m_write"> <span>쪽지쓰기</span>
 			</a>
 			<!-- 메뉴 활성바 내리기 추가할 것 -->
 
@@ -26,7 +28,7 @@
 
 					<!-- 받는 사람 목록 표시 부분 추가 -->
 					<div class="write_input">
-						<label for="write_txt3">받는 사람 목록</label>
+						<label for="write_txt3">받는 사원 주소록</label>
 						<div class="txt to-list">
 							<div class="position">
 								<ul id="to_list" class="recipient-list"></ul>
@@ -42,7 +44,7 @@
 
 					<!-- 쪽지 내용 입력 부분 추가 -->
 					<div class="write_input">
-						<label for="write_txt3">쪽지 내용</label>
+						<label for="write_txt3">쪽지 내용 작성</label>
 						<div class="txt message">
 							<div class="position">
 								<textarea name="message_content" id="message_content"
