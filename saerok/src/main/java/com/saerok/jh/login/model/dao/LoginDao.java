@@ -8,6 +8,6 @@ public interface LoginDao {
 	
 	Employee selectEmployeeByEmpNo(SqlSession session, String empNo);
 	
-	
+	int updateMyPage(SqlSession session, Employee e);
 	
 }

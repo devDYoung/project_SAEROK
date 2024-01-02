@@ -45,7 +45,7 @@
                 height: auto; 
                 margin-top: 100px; 
                 margin-bottom: 70px;
-                margin-left: 780px; 
+                margin-left: 710px; 
             }
             
         </style>
@@ -56,8 +56,8 @@
  <section class="mypage-section">
    <div class="myPage-container">
     <!-- <h2 id="profile-comment">내 프로필</h2> -->
-    <img id="profile-img" class="img-profile rounded-circle"src="img/undraw_profile.svg"></a>
-    <form action="${path }/" method="post">
+    <img id="profile-img" class="img-profile rounded-circle"src="${pageContext.request.contextPath }/resources/img/ato100px.png"></a>
+    <form  id="mypageForm" action="${path }/updatemypage" method="post">
         <div class="mypage-simple-info">
             <div class="col-md-6">
                 <label for="inputName" class="form-label">이름</label>
@@ -103,7 +103,7 @@
         </form>
     </div><!-- myPage-container -->
             <div class="d-grid gap-2 d-md-block" id="button">
-                <button type="submit" class="btn btn-outline-primary">수정</button>
+                <button id="mypageButton type="submit" class="btn btn-outline-primary" >수정</button>
                 <button type="reset" class="btn btn-outline-primary">취소</button>
             </div>
     </section>
@@ -127,9 +127,29 @@
   <script src="js/demo/chart-pie-demo.js"></script>
 
 	<script>
-	
-	
-	</script>
+    $(document).ready(function () {
+        $("#mypageButton").click(function (event) {
+            event.preventDefault(); // 기본 폼 제출 방지
+
+            // 프로필 업데이트를 위한 AJAX 요청
+            $.ajax({
+                type: "POST",
+                url: "${path}/updatemypage", // 실제 서버 측 엔드포인트로 대체
+                data: $("#mypageForm").serialize(), // 폼 데이터 직렬화
+                success: function (data) {
+                    // 성공 응답 처리
+                    console.log("수정성공!!");
+                    // 성공 메시지를 표시하거나 사용자를 리디렉션
+                },
+                error: function (error) {
+                    // 오류 응답 처리
+                    console.error("수정 중 에러발생!!:", error);
+                    // 사용자에게 오류 메시지를 표시
+                }
+            });
+        });
+    });
+</script>
 
 
 

@@ -18,11 +18,19 @@ public class LoginServiceImpl implements LoginService {
 	//private final BCryptPasswordEncoder encoder;
 	
 	
-
+	//로그인
 	@Override
 	public Employee selectEmployeeByEmpNo(String employeeNo) {
 		
 		return dao.selectEmployeeByEmpNo(session,employeeNo);
 	}
+	
+	
+	//마이페이지
+	
+	public int updateMyPage(Employee e) {
+		return dao.updateMyPage(session,e);
+	}
+	
 
 }
