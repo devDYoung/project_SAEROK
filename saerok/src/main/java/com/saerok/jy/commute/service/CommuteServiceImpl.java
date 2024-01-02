@@ -1,100 +1,107 @@
 //package com.saerok.jy.commute.service;
 //
+//import java.util.List;
+//import java.util.Map;
+//
+//import org.springframework.beans.factory.annotation.Autowired;
 //import org.springframework.stereotype.Service;
+//
+//import com.saerok.jy.commute.dao.CommuteDao;
+//import com.saerok.jy.commute.dto.Commute;
 //
 //@Service
 //public class CommuteServiceImpl implements CommuteService{
 //	
 //	@Autowired
-//	private WorkingManagementDao workingManagementDao;
+//	private CommuteDao commuteDao;
 //	
 //	@Override
-//	public int insertStartWork(String empId) {
-//		return workingManagementDao.insertStartWork(empId);
+//	public int insertStartWork(String empNo) {
+//		return CommuteDao.insertStartWork(empNo);
 //	}
 //	
 //	@Override
 //	public int updateStartWork(Map<String, Object> param) {
-//		return workingManagementDao.updateStartWork(param);
+//		return CommuteDao.updateStartWork(param);
 //	}
 //	
 //	@Override
-//	public WorkingManagement selectStartwork(String no) {
-//		return workingManagementDao.selectStartwork(no);
+//	public Commute selectStartwork(String commuteNo) {
+//		return CommuteDao.selectStartwork(commuteNo);
 //	}
 //	
 //	@Override
 //	public int checkStartwork(Map<String, Object> param) {
-//		return workingManagementDao.checkStartwork(param);
+//		return CommuteDao.checkStartwork(param);
 //	}
 //	
 //	@Override
-//	public WorkingManagement checkWorkTime(Map<String, Object> param) {
-//		return workingManagementDao.checkWorkTime(param);
+//	public Commute checkWorkTime(Map<String, Object> param) {
+//		return CommuteDao.checkWorkTime(param);
 //	}
 //	
 //	@Override
 //	public int updateEndWok(Map<String, Object> param) {
-//		return workingManagementDao.updateEndWork(param);
+//		return CommuteDao.updateEndWork(param);
 //	}
 //	
 //	@Override
 //	public int updateDayWorkTime(Map<String, Object> param) {
-//		return workingManagementDao.updateDayWorkTime(param);
+//		return CommuteDao.updateDayWorkTime(param);
 //	}
 //	
 //	@Override
 //	public int updateDayWorkTimeHalf(Map<String, Object> param) {
-//		return workingManagementDao.updateDayWorkTimeHalf(param);
+//		return CommuteDao.updateDayWorkTimeHalf(param);
 //	}
 //	
 //	@Override
-//	public List<WorkingManagement> selectMonthWork(Map<String, Object> param) {
-//		return workingManagementDao.selectMonthWok(param);
+//	public List<Commute> selectMonthWork(Map<String, Object> param) {
+//		return CommuteDao.selectMonthWok(param);
 //	}
 //	
 //	@Override
 //	public int totalMonthTime(Map<String, Object> param) {
-//		return workingManagementDao.totalMonthTime(param);
+//		return CommuteDao.totalMonthTime(param);
 //	}
 //	
 //	@Override
-//	public List<WorkingManagement> selectWeekDatas(Map<String, Object> param) {
-//		return workingManagementDao.selectWeekDatas(param);
+//	public List<Commute> selectWeekDatas(Map<String, Object> param) {
+//		return CommuteDao.selectWeekDatas(param);
 //	}
 //	
 //	@Override
 //	public int weekTotalTime(Map<String, Object> param) {
-//		return workingManagementDao.weekTotalTime(param);
+//		return CommuteDao.weekTotalTime(param);
 //	}
 //	
 //	//주간 기본근무시간 가져오기
 //	@Override
 //	public int selectWeekWorkTime(Map<String, Object> startEndMap) {
-//		return workingManagementDao.selectWeekWorkTime(startEndMap);
+//		return CommuteDao.selectWeekWorkTime(startEndMap);
 //	}
 //	
 //	//주간 연장근무시간 가져오기
 //	@Override
 //	public int selectWeekOverTime(Map<String, Object> startEndMap) {
-//		return workingManagementDao.selectWeekOverTime(startEndMap);
+//		return CommuteDao.selectWeekOverTime(startEndMap);
 //	}
 //	
 //	//월 연장근무시간 가져오기
 //	@Override
 //	public int monthOverTime(Map<String, Object> startEndMap) {
-//		return workingManagementDao.monthOverTime(startEndMap);
+//		return CommuteDao.monthOverTime(startEndMap);
 //	}
 //	
 //	@Override
 //	public int insertRegDateState(WorkingManagement working) {
-//		return workingManagementDao.insertRegDateState(working);
+//		return CommuteDao.insertRegDateState(working);
 //	} // insertRegDateState() end
 //	
 //	
 //	@Override
-//	public List<Map<String, Object>> findByEmpIdNoDate(String empId) {
-//		return workingManagementDao.findByEmpIdNoDate(empId);
+//	public List<Map<String, Object>> findByEmpIdNoDate(String empNo) {
+//		return CommuteDao.findByEmpIdNoDate(empNo);
 //	} // findByEmpIdNoDate() end
 //
 //}

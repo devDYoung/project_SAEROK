@@ -15,8 +15,9 @@ public class Commute {
 	private int commuteNo;
 	private LocalDateTime inDtime;
 	private LocalDateTime outDtime;
-	private LocalDateTime lateYN;
+	private String lateYN;
 	private String status;
+	private long overtime;
 	private String empNo;
 
 }
