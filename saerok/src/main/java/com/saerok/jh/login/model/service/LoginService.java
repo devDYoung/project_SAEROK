@@ -8,6 +8,5 @@ public interface LoginService {
 	Employee selectEmployeeByEmpNo(String employeeNo);
 	
 	//마이페이지
-	
 	int updateMyPage(Employee e); 
 }
