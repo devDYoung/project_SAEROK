@@ -34,12 +34,12 @@
                             <div class="col-lg-10"> <!-- Adjusted column size -->
                                 <div class="p-5">
                                     <div class="text-center">
-                                        <img src="${pageContext.request.contextPath }/resources/img/ato.jpg"  alt="아토 logo">
+                                        <img src="${pageContext.request.contextPath }/resources/img/ato100px.png"  alt="아토 logo">
                                         <br><br>
                                         <p>아토에 오신 것을 환영합니다!</p>
                                     </div>
                                     <!-- 로그인 form -->
-                                    <form action="${path}/login" method="post" id="login-form">
+                                    <form action="${path}/loginPage" method="post" id="login-form">
                                         <div class="form-group">
                                             <input type="text" name="empNo" id="no"
                                                 class="form-control form-control-user" placeholder="사원번호 입력">

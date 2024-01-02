@@ -8,16 +8,19 @@ import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Component;
 
-import com.saerok.jh.common.mapper.EmployeeMapper;
 import com.saerok.jh.employee.model.dto.Employee;
+import com.saerok.jh.login.model.service.LoginServiceImpl;
 
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 
 @Component
 @RequiredArgsConstructor
+@Slf4j
 public class DBConnectionProvider implements AuthenticationProvider {
 
-	private final EmployeeMapper dao;
+//	private final EmployeeMapper dao;
+	private final LoginServiceImpl service;
 
 	// 비밀번호 암호화 처리
 	private BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
@@ -27,8 +30,12 @@ public class DBConnectionProvider implements AuthenticationProvider {
 	public Authentication authenticate(Authentication authentication) throws AuthenticationException {
 		String empNo = authentication.getName(); // 아이디를 가져옴
 		String empPw = (String) authentication.getCredentials(); // 비밀번호 가져옴
-
-		Employee loginEmployee = dao.selectEmployeeByEmpNo(empNo);
+		
+		log.info("아이디 {}",empNo);
+		log.info("비번 {}",empPw);
+		log.info("인코더{}",encoder.encode(empPw));
+		Employee loginEmployee = service.selectEmployeeByEmpNo(empNo);
+		log.info("직원정보 {}",loginEmployee);
 		// EmployeeMapper를 사용하여 데이터베이스에서 사용자 정보를 조회한 결과
 		// 이 부분은 사용자가 입력한 사원번호(empNo)에 대응하는 데이터베이스의 회원 정보를 가져와서 loginEmployee에 저장하는 부분
 
