@@ -1,7 +1,13 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ page import="java.util.Arrays" %>    
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>    
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+<c:set var="path" value="${pageContext.request.contextPath}"/>    
+<c:set var="loginEmployee" value="${sessionScope.SPRING_SECURITY_CONTEXT.authentication.principal }"/>
+    
 <!DOCTYPE html>
-<html lang="en">
+<html lang="utf-8">
 
 <head>
 
@@ -21,10 +27,6 @@
 
     <!-- Custom styles for this template-->
     <link href="${pageContext.request.contextPath }/resources/css/sb-admin-2.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/foundation.css">
-	<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/app.css">
-	<script src="https://kit.fontawesome.com/cbe4aa3844.js" crossorigin="anonymous"></script>
-	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css" />
 
 </head>
 
@@ -87,10 +89,10 @@
                 </a>
                 <div id="collapseMsg" class="collapse" aria-labelledby="headingMsg" data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
-                        <a class="collapse-item" href="">받은쪽지함</a>
                         <a class="collapse-item" href="">쪽지쓰기</a>
+                        <a class="collapse-item" href="">받은쪽지함</a>
                         <a class="collapse-item" href="">보낸쪽지함</a>
-                        <a class="collapse-item" href="">중요쪽지함</a>
+                        <!-- <a class="collapse-item" href="">중요쪽지함</a> -->
                         <a class="collapse-item" href="">임시보관함</a>
                         <a class="collapse-item" href="">휴지통</a>
                     </div>
@@ -152,7 +154,8 @@
 
             <!-- Sidebar Toggler (Sidebar) -->
             <div class="text-center d-none d-md-inline">
-                <button class="rounded-circle border-0" id="sidebarToggle"></button>
+                <button class="rounded-circle border-0" id="sidebarToggle">
+                </button>
             </div>
         </ul>
         <!-- End of Sidebar -->
@@ -329,7 +332,7 @@
                         <li class="nav-item dropdown no-arrow">
                             <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button"
                                 data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                <span class="mr-2 d-none d-lg-inline text-gray-600 small">김새록</span>
+                                <span class="mr-2 d-none d-lg-inline text-gray-600 small">${loginEmployee.empName }</span>
                                 <img class="img-profile rounded-circle"
                                     src="img/undraw_profile.svg">
                             </a>
@@ -345,8 +348,8 @@
                                     Activity Log
                                 </a> -->
                                 <div class="dropdown-divider"></div>
-                                <a class="dropdown-item" href="#" data-toggle="modal" data-target="#logoutModal">
-                                    <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
+                                <a class="dropdown-item" href="${path}/logoutpage " data-toggle="modal" data-target="#logoutModal">
+                                    <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400" ></i>
                                     로그아웃
                                 </a>
                             </div>
@@ -356,4 +359,38 @@
 
                 </nav>
                 <!-- End of Topbar -->
-               <!-- 본문 -->
+
+    <!-- Scroll to Top Button-->
+    <a class="scroll-to-top rounded" href="#page-top">
+        <i class="fas fa-angle-up"></i>
+    </a>
+
+     <!-- Logout Modal -->
+    <div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">ATO 로그아웃</h5>
+                    <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">×</span>
+                    </button>
+                </div>
+                <div class="modal-body">로그아웃 하시겠습니까?</div>
+                <div class="modal-footer">
+                    <button class="btn btn-secondary" type="button" data-dismiss="modal">취소</button>
+                    <a class="btn btn-primary" href="${pageContext.request.contextPath}/logoutpage">로그아웃</a>
+                </div>
+            </div>
+        </div>
+    </div> 
+
+    <!-- Bootstrap core JavaScript-->
+    <script src="${pageContext.request.contextPath }/resources/vendor/jquery/jquery.min.js"></script>
+    <script src="${pageContext.request.contextPath }/resources/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+
+    <!-- Core plugin JavaScript-->
+    <script src="${pageContext.request.contextPath }/resources/vendor/jquery-easing/jquery.easing.min.js"></script>
+
+    <!-- Custom scripts for all pages-->
+    <script src="${pageContext.request.contextPath }/resources/js/sb-admin-2.min.js"></script>

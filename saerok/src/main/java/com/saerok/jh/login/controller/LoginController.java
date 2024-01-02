@@ -14,13 +14,15 @@ public class LoginController {
 	@Autowired
 	private final LoginService service;
 
-	//로그인 
+	//로그인 화면전환 
 	@GetMapping("/loginPage")
     public String selectEmployeeByEmpNo() {
 //        Employee e = service.selectEmployeeByEmpNo(empNo);
         return "login/loginPage";
     }
+
 	
+
 	
 	
 

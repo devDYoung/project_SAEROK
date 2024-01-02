@@ -32,26 +32,16 @@ public class SecurityConfig {
 				}).formLogin(formlogin->{
 					formlogin
 					.loginPage("/loginPage")
-							/* .loginProcessingUrl("/login") */
+							/* .loginProcessingUrl("/loginPage") */
 					.failureForwardUrl("/loginfail")
-					.successForwardUrl("/loginsuccess")
+					//.successForwardUrl("/")
 					.usernameParameter("empNo")
 					.passwordParameter("empPw");
 				})
-				.logout(logout->logout.logoutUrl("/logout"))
-				
-				// 인증 제공자(DB 연동)
-				.authenticationProvider(dbprovider)// 인증하는 거를 처리함, 매개변수에는 dbprovider가 들어감, DB와 연동하여 인증 처리
-					
-				.build();   // SecurityFilterChain 빌드 및 반환
-
-	}
-	
-	
-}
-
-
-
-
-
-
+				.logout(logout -> logout
+						.logoutUrl("/logoutpage")
+				)
+				.authenticationProvider(dbprovider) // DB와 연동하여 인증 처리
+				.build(); // SecurityFilterChain 빌드 및 반환
+			}
+		}

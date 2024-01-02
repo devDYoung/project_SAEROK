@@ -8,6 +8,10 @@
   	<result column="EMP_PW" property="empPw"/>
   	<result column="EMP_NAME" property="empName"/>
   </resultMap>
+  
+  <select id="selectEmployeeByEmpNo" parameterType="String" resultMap="empMap">
+  	SELECT * FROM EMPLOYEE WHERE EMP_NO=#{empNo}
+  </select>
 
   <resultMap type="emp" id="empMap">
   	<id column="EMP_NO" property="empNo"/>
