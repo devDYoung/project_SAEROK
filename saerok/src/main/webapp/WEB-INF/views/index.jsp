@@ -16,11 +16,11 @@
 						<table id="home-my-tbl">
 							<tbody>
 								<tr>
-									<td id="year" colspan="2" class="font-14">clock</td>
+									<td id="year" colspan="2" class="font-14">시계</td>
 								</tr>
 								<tr>
 									<td colspan="2"><c:if
-											test="${!empty sessionScope.loginMember.attachment}">
+											test="">
 											<img src="<!-- 프로필 -->" alt="" class="img">
 										</c:if> <c:if test="">
 											<img src="" alt="" class="img">
@@ -34,7 +34,7 @@
 								</tr>
 
 								<tr>
-									<td colspan="2" id="clock" style="color: black;">clock</td>
+									<td colspan="2" id="clock" style="color: black;">시계</td>
 								</tr>
 								<tr>
 									<td class="font-14 font-bold">업무상태</td>
