@@ -22,6 +22,7 @@ public class LoginController {
 	@GetMapping("/loginPage")
     public String selectEmployeeByEmpNo() {
 //        Employee e = service.selectEmployeeByEmpNo(empNo);
+		//todo 수정
         return "login/loginPage";
     }
 
