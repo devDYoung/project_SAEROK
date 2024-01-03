@@ -59,9 +59,9 @@
                                             class="btn btn-primary btn-user btn-block"
                                             onclick="fn_login();">Log in</button>
                                         <hr>
-                                        <div class="text-center">
+                                        <!-- <div class="text-center">
                                             <a class="small" href="forgot-password.html">비밀번호 찾기</a>
-                                        </div>
+                                        </div> -->
                                     </form>
                                 </div>
                             </div>
