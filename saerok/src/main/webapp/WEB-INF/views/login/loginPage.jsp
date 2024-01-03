@@ -38,6 +38,7 @@
                                         <br><br>
                                         <p>아토에 오신 것을 환영합니다!</p>
                                     </div>
+                                    <% %>
                                     <!-- 로그인 form -->
                                     <form action="${path}/loginPage" method="post" id="login-form">
                                         <div class="form-group">
