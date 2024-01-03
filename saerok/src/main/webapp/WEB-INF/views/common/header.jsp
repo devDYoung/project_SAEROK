@@ -44,7 +44,7 @@
                 </div>
                 <div class="sidebar-brand-text mx-3">아토</div>
             </a>
-            <!-- 아토 누르면 메인페이지로 넘어가도록!!  -->
+            <!-- 아토 누르면 메인페이지로 넘어가도록!! : 완료!! 화면전환 메소드는 loginController에 있음-->
             <!-- Divider -->
             <hr class="sidebar-divider my-0">
             <!-- Divider -->
@@ -331,7 +331,7 @@
                         <li class="nav-item dropdown no-arrow">
                             <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button"
                                 data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                <span class="mr-2 d-none d-lg-inline text-gray-600 small">${loginEmployee.empName }</span>
+                                <span class="mr-2 d-none d-lg-inline text-gray-600 small">${employee.empName }</span>
                                 <img class="img-profile rounded-circle"
                                     src="img/undraw_profile.svg">
                             </a>
