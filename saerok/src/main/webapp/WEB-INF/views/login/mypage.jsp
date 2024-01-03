@@ -56,7 +56,6 @@
 <body>
 
  <section class="mypage-section">
- ${loginEmployee }
    <div class="myPage-container">
     <!-- <h2 id="profile-comment">내 프로필</h2> -->
     <img id="profile-img" class="img-profile rounded-circle"src="${pageContext.request.contextPath }/resources/img/ato100px.png"></a>
@@ -103,7 +102,7 @@
               </div><br>
               <div class="col-md-6">
                 <label for="inputDate" class="form-label">입사일</label>
-                <input type="text" class="form-control" value="${employee.empDate}" name="date" disabled>
+                <input type="text" class="form-control" value="${loginEmployee.empDate}" name="date" disabled>
               </div>
             </div>
         </form>

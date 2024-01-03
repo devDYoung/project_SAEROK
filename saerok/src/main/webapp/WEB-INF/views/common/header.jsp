@@ -338,7 +338,7 @@
                             <!-- Dropdown - User Information -->
                             <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in"
                                 aria-labelledby="userDropdown">
-                                <a class="dropdown-item" href="${path }/mypage?empNo=${loginEmployee.empNo }">
+                                <a class="dropdown-item" href="${path }/mypage">
                                     <i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
                                     마이페이지
                                 </a>
