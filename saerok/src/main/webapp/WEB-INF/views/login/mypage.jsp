@@ -60,50 +60,53 @@
     <form  id="mypageForm" action="${path }/updatemypage" method="post">
         <div class="mypage-simple-info">
             <div class="col-md-6">
-                <label for="inputName" class="form-label">이름</label>
-                <input type="text" class="form-control" value="${loginEmployee.empName }" name="empName">
+                <input type="hidden" value="${employee.empNo }" name="empNo">
+               	<label for="inputName" class="form-label">이름</label>
+                <input type="text" class="form-contr	ol" value="${employee.empName }" name="empName">
               </div><br>
               <div class="col-md-6">
                 <label for="inputPw" class="form-label">비밀번호</label>
-                <input type="password" class="form-control" value="${loginEmployee.empPw }" name="empPw">
+                <input type="password" class="form-control" value="${employee.empPw }" name="empPw">
               </div><br>
               <div class="col-md-6">
                 <label for="inputNo" class="form-label">사번</label>
-                <input type="text" class="form-control" value="${loginEmployee.empNo }" name="empNo" disabled>
+                <input type="text" class="form-control" value="${employee.empNo }" name="empNo" disabled>
               </div><br>
               <div class="col-md-6">
                 <label for="inputPhone" class="form-label">전화번호</label>
-                <input type="text" class="form-control" value="${loginEmployee.empPhone }" name="phone">
+                <input type="text" class="form-control" value="${employee.empPhone }" name="empPhone">
               </div><br>
               <div class="col-md-6">
                 <label for="inputEmail" class="form-label">이메일</label>
-                <input type="email" class="form-control" value="${loginEmployee.empEmail}" name="email">
+                <input type="email" class="form-control" value="${employee.empEmail}" name="empEmail">
               </div><br>
               <div class="col-md-6">
                 <label for="inputAddr" class="form-label">주소</label>
-                <input type="text" class="form-control" value="${loginEmployee.empAddr}" name="addr">
+                <input type="text" class="form-control" value="${employee.empAddr}" name="empAddr">
               </div><br>
               <div class="col-md-6">
                 <label for="inputAddr" class="form-label">상세주소</label>
-                <input type="text" class="form-control" value="${loginEmployee.empDetailAddr}" name="detailAddr">
+                <input type="text" class="form-control" value="${employee.empDetailAddr}" name="empDetailAddr">
               </div><br>
               <div class="col-md-6">
                 <label for="inputDept" class="form-label">부서</label>
-                <input type="text" class="form-control" value="${loginEmployee.deptName}" name="deptName" disabled>
+                <input type="hidden" value="${employee.deptCode}" name="deptCode">
+                <input type="text" class="form-control" value="${employee.deptName}" name="deptName" disabled>
               </div><br>
               <div class="col-md-6">
                 <label for="inputJob" class="form-label">직책</label>
-                <input type="text" class="form-control" value="${loginEmployee.jobName}" name="jobName" disabled>
+                <input type="hidden" value="${employee.jobCode}" name="jobCode">
+                <input type="text" class="form-control" value="${employee.jobName}" name="jobName" disabled>
               </div><br>
               <div class="col-md-6">
                 <label for="inputDate" class="form-label">입사일</label>
-                <input type="text" class="form-control" value="${loginEmployee.empDate}" name="date" disabled>
+                <input type="text" class="form-control" value="${employee.empDate}" name="date" disabled>
               </div>
             </div>
         </form>
     </div><!-- myPage-container -->
             <div class="d-grid gap-2 d-md-block" id="button">
-                <button id="mypageButton type="submit" class="btn btn-outline-primary" >수정</button>
+                <button id="mypageButton" type="submit" class="btn btn-outline-primary" >수정</button>
                 <button type="reset" class="btn btn-outline-primary">취소</button>
             </div>
     </section>
@@ -128,6 +131,7 @@
 
 	<script>
     $(document).ready(function () {
+    	console.log("aaa", "${employee.empEmail}");
         $("#mypageButton").click(function (event) {
             event.preventDefault(); // 기본 폼 제출 방지
 
@@ -137,8 +141,12 @@
                 url: "${path}/updatemypage", // 실제 서버 측 엔드포인트로 대체
                 data: $("#mypageForm").serialize(), // 폼 데이터 직렬화
                 success: function (data) {
+                	if(successYn == "Y"){
+                        alert("수정완료!!");
+                	}else{
+                        alert("수정실패!!");
+                	}
                     // 성공 응답 처리
-                    console.log("수정성공!!");
                     // 성공 메시지를 표시하거나 사용자를 리디렉션
                 },
                 error: function (error) {
