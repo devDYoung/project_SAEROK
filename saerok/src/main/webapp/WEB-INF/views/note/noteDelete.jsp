@@ -1,12 +1,18 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8">
-<title>Insert title here</title>
-</head>
-<body>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>    
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
+<%@ taglib prefix="springform" uri="http://www.springframework.org/tags/form" %>
+<c:set var="path" value="${pageContext.request.contextPath}"/>
+<jsp:include page="/WEB-INF/views/common/header.jsp">
+   <jsp:param name="title" value="쪽지작성"/>
+</jsp:include>
 
-</body>
-</html>
+
+<!-- 나 김도영은 테스트중... -->
+
+
+
+
+<jsp:include page="/WEB-INF/views/common/footer.jsp"/>
