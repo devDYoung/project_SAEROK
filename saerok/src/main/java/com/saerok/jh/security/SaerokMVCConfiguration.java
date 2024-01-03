@@ -10,8 +10,7 @@ public class SaerokMVCConfiguration implements WebMvcConfigurer {
 		@Override
 		public void addViewControllers(ViewControllerRegistry registry) {
 			registry.addViewController("/").setViewName("index");
-			
-			
+			registry.addViewController("/mypage").setViewName("login/mypage");
 			
 		}
 	

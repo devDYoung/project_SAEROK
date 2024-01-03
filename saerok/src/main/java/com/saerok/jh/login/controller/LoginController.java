@@ -6,7 +6,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.saerok.jh.employee.model.dto.Employee;
 import com.saerok.jh.login.model.service.LoginService;
@@ -27,16 +26,16 @@ public class LoginController {
     }
 
 	//마이페이지 화면전환
-	@RequestMapping("/mypage")
-	public String myPage(Model model,  String empNo) {
-		//todo 로그인한 사원의 정보를 select
-		
-		Employee mypageEmp = service.selectEmployeeByEmpNo(empNo);
-		
-		model.addAttribute("employee", mypageEmp);
-		//login/mypage 페이지에 전달
-		return "login/mypage";
-	}
+//	@RequestMapping("/mypage")
+//	public String myPage(Model model,  String empNo) {
+//		//todo 로그인한 사원의 정보를 select
+//		
+//		Employee mypageEmp = service.selectEmployeeByEmpNo(empNo);
+//		
+//		model.addAttribute("employee", mypageEmp);
+//		//login/mypage 페이지에 전달
+//		return "login/mypage";
+//	}
 	
 	//마이페이지 수정
 	@PostMapping("/updatemypage")

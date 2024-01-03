@@ -4,6 +4,8 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <c:set var="path" value="${pageContext.request.contextPath}"/>
+<c:set var="loginEmployee" value="${sessionScope.SPRING_SECURITY_CONTEXT.authentication.principal }"/> 
+
 <jsp:include page="/WEB-INF/views/common/header.jsp"/>
 <head>
     <meta charset="utf-8">
@@ -54,6 +56,7 @@
 <body>
 
  <section class="mypage-section">
+ ${loginEmployee }
    <div class="myPage-container">
     <!-- <h2 id="profile-comment">내 프로필</h2> -->
     <img id="profile-img" class="img-profile rounded-circle"src="${pageContext.request.contextPath }/resources/img/ato100px.png"></a>
@@ -61,42 +64,42 @@
         <div class="mypage-simple-info">
             <div class="col-md-6">
                	<label for="inputName" class="form-label">이름</label>
-               	<input type="hidden" value="${employee.empNo }" name="empNo">
-                <input type="text" class="form-control" value="${employee.empName }" name="empName">
+               	<input type="hidden" value="${loginEmployee.empNo }" name="empNo">
+                <input type="text" class="form-control" value="${loginEmployee.empName }" name="empName">
               </div><br>
               <div class="col-md-6">
                 <label for="inputPw" class="form-label">비밀번호</label>
-                <input type="password" class="form-control" value="${employee.empPw }" name="empPw">
+                <input type="password" class="form-control" value="${loginEmployee.empPw }" name="empPw">
               </div><br>
               <div class="col-md-6">
                 <label for="inputNo" class="form-label">사번</label>
-                <input type="text" class="form-control" value="${employee.empNo }" name="empNo" disabled>
+                <input type="text" class="form-control" value="${loginEmployee.empNo }" name="empNo" disabled>
               </div><br>
               <div class="col-md-6">
                 <label for="inputPhone" class="form-label">전화번호</label>
-                <input type="text" class="form-control" value="${employee.empPhone }" name="empPhone">
+                <input type="text" class="form-control" value="${loginEmployee.empPhone }" name="empPhone">
               </div><br>
               <div class="col-md-6">
                 <label for="inputEmail" class="form-label">이메일</label>
-                <input type="email" class="form-control" value="${employee.empEmail}" name="empEmail">
+                <input type="email" class="form-control" value="${loginEmployee.empEmail}" name="empEmail">
               </div><br>
               <div class="col-md-6">
                 <label for="inputAddr" class="form-label">주소</label>
-                <input type="text" class="form-control" value="${employee.empAddr}" name="empAddr">
+                <input type="text" class="form-control" value="${loginEmployee.empAddr}" name="empAddr">
               </div><br>
               <div class="col-md-6">
                 <label for="inputAddr" class="form-label">상세주소</label>
-                <input type="text" class="form-control" value="${employee.empDetailAddr}" name="empDetailAddr">
+                <input type="text" class="form-control" value="${loginEmployee.empDetailAddr}" name="empDetailAddr">
               </div><br>
               <div class="col-md-6">
                 <label for="inputDept" class="form-label">부서</label>
-                <input type="hidden" value="${employee.deptCode}" name="deptCode">
-                <input type="text" class="form-control" value="${employee.deptName}" name="deptName" disabled>
+                <input type="hidden" value="${loginEmployee.deptCode}" name="deptCode">
+                <input type="text" class="form-control" value="${loginEmployee.deptName}" name="deptName" disabled>
               </div><br>
               <div class="col-md-6">
                 <label for="inputJob" class="form-label">직책</label>
-                <input type="hidden" value="${employee.jobCode}" name="jobCode">
-                <input type="text" class="form-control" value="${employee.jobName}" name="jobName" disabled>
+                <input type="hidden" value="${loginEmployee.jobCode}" name="jobCode">
+                <input type="text" class="form-control" value="${loginEmployee.jobName}" name="jobName" disabled>
               </div><br>
               <div class="col-md-6">
                 <label for="inputDate" class="form-label">입사일</label>
