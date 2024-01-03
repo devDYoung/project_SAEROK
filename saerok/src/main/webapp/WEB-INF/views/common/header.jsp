@@ -44,7 +44,7 @@
                 </div>
                 <div class="sidebar-brand-text mx-3">아토</div>
             </a>
-            <!-- 아토 누르면 메인페이지로 넘어가도록!!  -->
+            <!-- 아토 누르면 메인페이지로 넘어가도록!! : 완료!! 화면전환 메소드는 loginController에 있음-->
             <!-- Divider -->
             <hr class="sidebar-divider my-0">
             <!-- Divider -->
