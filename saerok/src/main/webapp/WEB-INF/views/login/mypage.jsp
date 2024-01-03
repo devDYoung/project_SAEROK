@@ -60,9 +60,9 @@
     <form  id="mypageForm" action="${path }/updatemypage" method="post">
         <div class="mypage-simple-info">
             <div class="col-md-6">
-                <input type="hidden" value="${employee.empNo }" name="empNo">
                	<label for="inputName" class="form-label">이름</label>
-                <input type="text" class="form-contr	ol" value="${employee.empName }" name="empName">
+               	<input type="hidden" value="${employee.empNo }" name="empNo">
+                <input type="text" class="form-control" value="${employee.empName }" name="empName">
               </div><br>
               <div class="col-md-6">
                 <label for="inputPw" class="form-label">비밀번호</label>
