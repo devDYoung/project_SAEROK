@@ -15,4 +15,5 @@
 		<typeAlias alias="commute" type="com.saerok.jy.commute.dto.Commute"/>
 	
 	</typeAliases>
+
 </configuration>

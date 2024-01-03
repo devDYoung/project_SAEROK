@@ -7,43 +7,39 @@
 <jsp:include page="/WEB-INF/views/common/header.jsp">
 <jsp:param value="MainPage" name="ATO"/> 
 </jsp:include>
-   <%--   <link href="${pageContext.request.contextPath }/resources/css/app.css" rel="stylesheet" />
-    <link href="${pageContext.request.contextPath }/resources/css/foundation.css" rel="stylesheet"/>
-    <link href="${pageContext.request.contextPath }/resources/css/emp.css" rel="stylesheet" class="commute"/>
-    <script src="https://kit.fontawesome.com/cbe4aa3844.js" crossorigin="anonymous"></script>
-	<link rel="stylesheet"
-				href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css" /> --%>
 <section>
-	<div>
-		<div class="home-content">
-			<div style="display: flex;">
-				<!-- 본문 왼쪽 -->
-				<div class="home-content-div">
-					<div id="home-left" class="div-padding div-margin">
-						<div style="height: 50px;"></div>
-						<table id="home-my-tbl">
-							<tbody>
-								<tr>
-									<td id="year" colspan="2" class="font-14">시계</td>
-								</tr>
-								<tr>
-									<td colspan="2"><c:if
-											test="">
-											<img src="<!-- 프로필 -->" alt="" class="img">
-										</c:if> <c:if test="">
-											<img src="" alt="" class="img">
-										</c:if></td>
-								</tr>
-								<tr>
-									<td colspan="2">사원이름 직급</td>
-								</tr>
-								<tr>
-									<td colspan="2">부서명</td>
-								</tr>
+<div class="col-xl-3 col-md-6 mb-4">
+    <div class="card border-left-info shadow h-100 py-2">
+        <div class="card-body">
+            <div class="row no-gutters align-items-center">
+                <div class="col mr-2 text-center">
+                    <div class="text-xs font-weight-bold text-info text-uppercase mb-1">
+                        <div style="height: 50px;"></div>
+                        <table id="home-my-tbl">
+                            <tbody>
+                                <tr>
+                                    <td id="year" colspan="2" class="font-14 text-center">시계</td>
+                                </tr>
+                                <tr>
+                                    <td colspan="2">
+                                        <c:if test="">
+                                            <img src="<!-- 프로필 -->" alt="" class="img">
+                                        </c:if>
+                                        <c:if test="">
+                                            <img src="" alt="" class="img">
+                                        </c:if>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td colspan="2" class="text-center">사원이름 직급</td>
+                                </tr>
+                                <tr>
+                                    <td colspan="2" class="text-center">부서명</td>
+                                </tr>
 
-								<tr>
-									<td colspan="2" id="clock" style="color: black;">시계</td>
-								</tr>
+                                <tr>
+                                    <td colspan="2" id="clock" style="color: black;" class="text-center">시계</td>
+                                </tr>
 								<tr>
 									<td class="font-14 font-bold">업무상태</td>
 									<td class="text-right font-14 color-red font-bold"
@@ -58,17 +54,25 @@
 									<td class="text-right font-14" id="endwork-time">미등록</td>
 								</tr>
 								<tr class="btn-tr">
-									<td><button class="font-bold" id="btn-startwork">출근하기</button></td>
-									<td class="text-right"><button class="font-bold"
-											id="btn-endwork">퇴근하기</button></td>
+										<td> <button class="btn btn-info btn-icon-split" id="btn-startwork">
+                                        <span class="text">출근하기</span></button>
+                                    </td>
+                                   <td> <button class="btn btn-info btn-icon-split" id="btn-endwork">
+                                        <span class="text">퇴근하기</span></button>
+                                    </td>
 								</tr>
 							</tbody>
 						</table>
-					</div>
-				</div>
-				</div>
-				</div>
-				</div>
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div>
+                        </div>
+
 				<script>
 window.addEventListener('load', function(){
 	
@@ -78,7 +82,7 @@ window.addEventListener('load', function(){
    headers[csrfHeader] = csrfToken;
    
    $.ajax({
-	   url : '${pageContext.request.contextPath}/workingManagement/checkWorkTime.do',
+	   url : '${pageContext.request.contextPath}/commute/checkWorkTime.do',
 	   contentType : "application/json; charset=utf-8",
 	   success(data){
 		   console.log(data);
