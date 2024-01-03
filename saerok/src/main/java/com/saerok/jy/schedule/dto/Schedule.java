@@ -1,16 +1,27 @@
 package com.saerok.jy.schedule.dto;
 
+
 import java.sql.Date;
 
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
+
+@Data
+@AllArgsConstructor
+@NoArgsConstructor
+@Builder
 public class Schedule {
 	
-	private int schedule_No;
-	private String skd_Title;
-	private String skd_Content;
-	private Date skd_Start;
-	private Date skd_End;
-	private String skd_Type_Cd;
-	private String dept_Code;
+	private int scheduleNo;
+	private String skdTitle;
+	private String skdContent;
+	private Date skdStart;
+	private Date skdEnd;
+	private String skdTypeCd;
+	private String deptCode;
 	private String category;
 
 }
