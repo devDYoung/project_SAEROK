@@ -4,6 +4,8 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <c:set var="path" value="${pageContext.request.contextPath}"/>
+<c:set var="loginEmployee" value="${sessionScope.SPRING_SECURITY_CONTEXT.authentication.principal }"/> 
+
 <jsp:include page="/WEB-INF/views/common/header.jsp"/>
 <head>
     <meta charset="utf-8">
@@ -60,7 +62,8 @@
     <form  id="mypageForm" action="${path }/updatemypage" method="post">
         <div class="mypage-simple-info">
             <div class="col-md-6">
-                <label for="inputName" class="form-label">이름</label>
+               	<label for="inputName" class="form-label">이름</label>
+               	<input type="hidden" value="${loginEmployee.empNo }" name="empNo">
                 <input type="text" class="form-control" value="${loginEmployee.empName }" name="empName">
               </div><br>
               <div class="col-md-6">
@@ -73,26 +76,28 @@
               </div><br>
               <div class="col-md-6">
                 <label for="inputPhone" class="form-label">전화번호</label>
-                <input type="text" class="form-control" value="${loginEmployee.empPhone }" name="phone">
+                <input type="text" class="form-control" value="${loginEmployee.empPhone }" name="empPhone">
               </div><br>
               <div class="col-md-6">
                 <label for="inputEmail" class="form-label">이메일</label>
-                <input type="email" class="form-control" value="${loginEmployee.empEmail}" name="email">
+                <input type="email" class="form-control" value="${loginEmployee.empEmail}" name="empEmail">
               </div><br>
               <div class="col-md-6">
                 <label for="inputAddr" class="form-label">주소</label>
-                <input type="text" class="form-control" value="${loginEmployee.empAddr}" name="addr">
+                <input type="text" class="form-control" value="${loginEmployee.empAddr}" name="empAddr">
               </div><br>
               <div class="col-md-6">
                 <label for="inputAddr" class="form-label">상세주소</label>
-                <input type="text" class="form-control" value="${loginEmployee.empDetailAddr}" name="detailAddr">
+                <input type="text" class="form-control" value="${loginEmployee.empDetailAddr}" name="empDetailAddr">
               </div><br>
               <div class="col-md-6">
                 <label for="inputDept" class="form-label">부서</label>
+                <input type="hidden" value="${loginEmployee.deptCode}" name="deptCode">
                 <input type="text" class="form-control" value="${loginEmployee.deptName}" name="deptName" disabled>
               </div><br>
               <div class="col-md-6">
                 <label for="inputJob" class="form-label">직책</label>
+                <input type="hidden" value="${loginEmployee.jobCode}" name="jobCode">
                 <input type="text" class="form-control" value="${loginEmployee.jobName}" name="jobName" disabled>
               </div><br>
               <div class="col-md-6">
@@ -103,7 +108,7 @@
         </form>
     </div><!-- myPage-container -->
             <div class="d-grid gap-2 d-md-block" id="button">
-                <button id="mypageButton type="submit" class="btn btn-outline-primary" >수정</button>
+                <button id="mypageButton" type="submit" class="btn btn-outline-primary" >수정</button>
                 <button type="reset" class="btn btn-outline-primary">취소</button>
             </div>
     </section>
@@ -128,6 +133,7 @@
 
 	<script>
     $(document).ready(function () {
+    	console.log("aaa", "${employee.empEmail}");
         $("#mypageButton").click(function (event) {
             event.preventDefault(); // 기본 폼 제출 방지
 
@@ -137,8 +143,12 @@
                 url: "${path}/updatemypage", // 실제 서버 측 엔드포인트로 대체
                 data: $("#mypageForm").serialize(), // 폼 데이터 직렬화
                 success: function (data) {
+                	if(successYn == "Y"){
+                        alert("수정완료!!");
+                	}else{
+                        alert("수정실패!!");
+                	}
                     // 성공 응답 처리
-                    console.log("수정성공!!");
                     // 성공 메시지를 표시하거나 사용자를 리디렉션
                 },
                 error: function (error) {
@@ -149,6 +159,7 @@
             });
         });
     });
+    /* 잔디테스트  */
 </script>
 
 
