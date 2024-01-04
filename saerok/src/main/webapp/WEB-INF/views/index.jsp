@@ -89,7 +89,6 @@
 					</div>
 					</div>
 				<script>
-				
 				$(function(){
 					//출퇴근 버튼 설정
 					var start = "${w.startTime}";
@@ -175,8 +174,6 @@
 					  	return zero + num;
 					}
 				}
-			   
-			    //////////////////////////////////////////////
 			    
 			   function setCookie(name,value,expiredDate){
 					var today = new Date();
