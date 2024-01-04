@@ -1,79 +1,97 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>    
+	pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
-<%@ taglib prefix="springform" uri="http://www.springframework.org/tags/form" %>
-<c:set var="path" value="${pageContext.request.contextPath}"/>
+<%@ taglib prefix="springform"
+	uri="http://www.springframework.org/tags/form"%>
+<c:set var="path" value="${pageContext.request.contextPath}" />
 <jsp:include page="/WEB-INF/views/common/header.jsp">
-   <jsp:param name="title" value="쪽지작성"/>
+	<jsp:param name="title" value="쪽지작성" />
 </jsp:include>
+<style>
+.dy {
+	margin-left: 200px;
+}
+</style>
+<div class="content">
 
 
-<div class="content_title" id="content_title">
-<fieldset>
-<span class="detail_select">
-	<a href="#" onclick="NoteWrite.Send();">보내기</a>
+	<div class="row gx-5 justify-content-center">
+		<div class="col-lg-8 col-xl-6">
+			<!-- * * * * * * * * * * * * * * *-->
+			<!-- * * SB Forms Contact Form * *-->
+			<!-- * * * * * * * * * * * * * * *-->
+			<!-- This form is pre-integrated with SB Forms.-->
+			<!-- To make this form functional, sign up at-->
+			<!-- https://startbootstrap.com/solution/contact-forms-->
+			<!-- to get an API token!-->
+			<form id="contactForm" data-sb-form-api-token="API_TOKEN">
+				<!-- 사원 입력-->
+				<div class="form-floating mb-3">
+					<h>받는 사원</h>
+					<input class="form-control" id="email" type="email"
+						placeholder="name@example.com"
+						data-sb-validations="required,email" /> <label for="email">Email
+						address</label>
+					<div class="invalid-feedback" data-sb-feedback="email:required">An
+						email is required.</div>
+					<div class="invalid-feedback" data-sb-feedback="email:email">Email
+						is not valid.</div>
+					<div class="d-grid">
+						<button class="btn btn-primary btn-lg disabled" id="submitButton"
+							type="submit">사원 조회</button>
+					</div>
+				</div>
+				<!-- 쪽지 제목 입력-->
+				<div class="form-floating mb-3">
+					<h>제목</h>
+					<input class="form-control" id="name" type="text"
+						placeholder="쪽지 제목을 입력하세요." data-sb-validations="required" />
+					<!-- <label for="name">Full name</label>
+						<div class="invalid-feedback" data-sb-feedback="name:required">A
+							name is required.</div>
+					</div> -->
 
-	<a href="#" onclick="NoteWrite.Save();">임시저장</a>
-</span>
-</fieldset>
+
+					<!-- Message input-->
+					<div class="form-floating mb-3">
+						<textarea class="form-control" id="message" type="text"
+							placeholder="Enter your message here..." style="height: 10rem"
+							data-sb-validations="required"></textarea>
+						<label for="message">Message</label>
+						<div class="invalid-feedback" data-sb-feedback="message:required">A
+							message is required.</div>
+					</div>
+					<!-- Submit success message-->
+					<!---->
+					<!-- This is what your users will see when the form-->
+					<!-- has successfully submitted-->
+					<div class="d-none" id="submitSuccessMessage">
+						<div class="text-center mb-3">
+							<div class="fw-bolder">Form submission successful!</div>
+							To activate this form, sign up at <br /> <a
+								href="https://startbootstrap.com/solution/contact-forms">https://startbootstrap.com/solution/contact-forms</a>
+						</div>
+					</div>
+					<!-- Submit error message-->
+					<!---->
+					<!-- This is what your users will see when there is-->
+					<!-- an error submitting the form-->
+					<div class="d-none" id="submitErrorMessage">
+						<div class="text-center text-danger mb-3">Error sending
+							message!</div>
+					</div>
+					<!-- Submit Button-->
+					<div class="d-grid">
+						<button class="btn btn-primary btn-lg disabled" id="submitButton"
+							type="submit">보내기</button>
+					</div>
+			</form>
+		</div>
+	</div>
 </div>
 
 
-<div class="content_inbox" style>
-<div class="cont_box">
-<fieldset>
-<div class="write_field">
-<div class="write_input">
-<p>받는 사원</p>
-<div class="txt">
-<div class="position">
-<textarea class="cc_addr" name="to_addr" id="to_addr" onkeydown="if(event.keyCode==13)return false;" placeholder="메일 주소 사이에 ,(콤마) 또는 ;(세미콜론)으로 구분하여 입력하세요." autocomplete="off" tabindex="1"></textarea>
-<a href="#" class="addaddr icon" onclick=";addressbook.getAddressbook(FROM_MAIL, 'MW_Address.EnterInitialAddress', 'MW_Address.applyAddress');"></a>
 
-</div>
-<div class="write_input">
-<label for="write_txt3">제목</label>
-<div class="txt title">
-<div class="position">
-<input name="subject" type="text" value tabindex="4" maxlength="180">
-</div>
-</div>
-</div>
-<div class="write_input" id="m_file_attach_area" style="display:block">
-<div class="txt file">
-<div class="position">
-
-<div class="file-list" id="m_file_upload_holder">
-<div class="top">
-<div class="left">
-<a href="#" class="addfile" onclick="HiworksMailUploader.selectFiles()">파일 첨부</a>
-<a href="#" class="icon hidecont hide" style="background-position: -258px -38px;" id="m_write_attach_file"></a>
-</div>
-</div>
-</div>
-
-<jsp:include page="/WEB-INF/views/common/footer.jsp"/>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+<jsp:include page="/WEB-INF/views/common/footer.jsp" />

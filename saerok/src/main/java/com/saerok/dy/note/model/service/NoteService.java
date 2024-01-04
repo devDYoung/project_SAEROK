@@ -1,5 +1,7 @@
 package com.saerok.dy.note.model.service;
 
-public interface NoteService {
+import com.saerok.dy.note.model.dto.NoteDTO;
 
+public interface NoteService {
+    void writeNote(NoteDTO note);
 }
