@@ -126,6 +126,10 @@
 	<script src="js/demo/chart-area-demo.js"></script>
 	<script src="js/demo/chart-pie-demo.js"></script>
 
+
+
+
+<jsp:include page="/WEB-INF/views/common/footer.jsp" />
 	<script>
 		$(document).ready(function() {
 			console.log("aaa", "${employee.empEmail}");
@@ -158,7 +162,3 @@
 		});
 		/* 잔디테스트  */
 	</script>
-
-
-
-<jsp:include page="/WEB-INF/views/common/footer.jsp" />
