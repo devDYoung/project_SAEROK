@@ -3,7 +3,6 @@ package com.saerok.jh.login.controller;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -48,8 +47,8 @@ public class LoginController {
 		//비밀번호 암호화
 
 		// 비밀번호 암호화 처리
-		BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
-		e.setEmpPw(encoder.encode(e.getEmpPw()));
+//		BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
+//		e.setEmpPw(encoder.encode(e.getEmpPw()));
 		
 		int result = service.updateMyPage(e);
 		
