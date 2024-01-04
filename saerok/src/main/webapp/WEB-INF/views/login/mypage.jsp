@@ -33,13 +33,25 @@
 	margin-bottom: 70px;
 	margin-left: 670px;
 }
+#profile-img {
+    width: 5%;
+    height: auto;
+    margin-top: 50px;
+    margin-left: 370px; /* Adjust this value to move the image to the left */
+}
+
+.mypage-section{
+	margin-top: 1px;
+
+}
+
+
 </style>
 </head>
 <body>
 	<section class="mypage-section">
 		<div class="myPage-container">
 			<!-- <h2 id="profile-comment">내 프로필</h2> -->
-			
 			<img id="profile-img" class="img-profile rounded-circle"
 				src="${pageContext.request.contextPath }/resources/img/ato100px.png"></a> 
 				
@@ -123,8 +135,9 @@
 				// 프로필 업데이트를 위한 AJAX 요청
 				$.ajax({
 					type : "POST",
-					url : "${path}/updatemypage", // 실제 서버 측 엔드포인트로 대체
+					url : "/updatemypage", // 실제 서버 측 엔드포인트로 대체
 					data : $("#mypageForm").serialize(), // 폼 데이터 직렬화
+					dataType:'JSON',					
 					success : function(data) {
 						if (data.successYn == "Y") {
 							alert("수정완료!!");
