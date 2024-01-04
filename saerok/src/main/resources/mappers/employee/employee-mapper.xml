@@ -37,7 +37,7 @@
 	<update id="updateMyPage" parameterType="emp" > 
 	UPDATE EMPLOYEE 
 	   SET EMP_NAME=#{empName}
-	     , EMP_PW=#{empPw}
+	     <!--,  EMP_PW=#{empPw} -->
 	     , EMP_NO=#{empNo}
 	     , EMP_PHONE=#{empPhone}
 	     , EMP_EMAIL=#{empEmail}

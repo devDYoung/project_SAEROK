@@ -52,6 +52,7 @@ public class LoginController {
 		e.setEmpPw(encoder.encode(e.getEmpPw()));
 		
 		int result = service.updateMyPage(e);
+		
 		return Map.of("successYn",result==1?"Y":"N");
 	}
 

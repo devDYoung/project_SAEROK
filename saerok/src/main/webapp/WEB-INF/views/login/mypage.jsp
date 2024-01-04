@@ -72,10 +72,10 @@
 							<label for="inputNo" class="form-label">사번</label> 
 							<input type="text" class="form-control" value="${loginEmployee.empNo }" name="empNo" disabled>
 						</div>
-						<div class="col-md-6">
+						<%-- <div class="col-md-6">
 							<label for="inputPw" class="form-label">비밀번호</label> 
 							<input type="password" class="form-control" value="${loginEmployee.empPw }" name="empPw">
-						</div>
+						</div> --%>
 						<br><br><br><br>
 						<div class="col-md-6">
 							<label for="inputPhone" class="form-label">전화번호</label> 
@@ -141,6 +141,7 @@
 					success : function(data) {
 						if (data.successYn == "Y") {
 							alert("수정완료!!");
+							location.replace("${path}/logoutpage");
 						} else {
 							alert("수정실패!!");
 						}
