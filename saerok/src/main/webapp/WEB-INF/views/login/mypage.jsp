@@ -1,35 +1,13 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+    pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>    
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
-<c:set var="path" value="${pageContext.request.contextPath}" />
-<c:set var="loginEmployee"
-	value="${sessionScope.SPRING_SECURITY_CONTEXT.authentication.principal }" />
+<c:set var="path" value="${pageContext.request.contextPath}"/>
+<c:set var="loginEmployee" value="${sessionScope.SPRING_SECURITY_CONTEXT.authentication.principal }"/> 
 
-<jsp:include page="/WEB-INF/views/common/header.jsp" />
-<head>
-<meta charset="utf-8">
-<meta http-equiv="X-UA-Compatible" content="IE=edge">
-<meta name="viewport"
-	content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<meta name="description" content="">
-<meta name="author" content="">
+<jsp:include page="/WEB-INF/views/common/header.jsp"/>
 
-<title>mypage</title>
-
-<!-- Custom fonts for this template -->
-<link
-	href="${pageContext.request.contextPath }/resources/vendor/fontawesome-free/css/all.min.css"
-	rel="stylesheet" type="text/css">
-<link
-	href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
-	rel="stylesheet">
-
-<!-- Custom styles for this template -->
-<link
-	href="${pageContext.request.contextPath }/resources/css/sb-admin-2.min.css"
-	rel="stylesheet">
 <style>
 #profile-img {
 	width: 5%;
@@ -61,11 +39,11 @@
 	<section class="mypage-section">
 		<div class="myPage-container">
 			<!-- <h2 id="profile-comment">내 프로필</h2> -->
-			<form id="mypageForm" action="${path }/updatemypage" method="post">
-			<dev class="col-xl-3 col-md-6 mb-4">
+			
 			<img id="profile-img" class="img-profile rounded-circle"
 				src="${pageContext.request.contextPath }/resources/img/ato100px.png"></a> 
-				</dev>
+				
+			<form id="mypageForm" action="${path }/updatemypage" method="post">
 				<div class="mypage-simple-info">
 					<div class="form-group row">
 						<div class="col-md-6">
@@ -132,23 +110,6 @@
 	</section>
 
 
-	<!-- Bootstrap core JavaScript-->
-	<script
-		src="${pageContext.request.contextPath }/resources/vendor/jquery/jquery.min.js"></script>
-	<script
-		src="${pageContext.request.contextPath }/resources/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
-
-	<!-- Core plugin JavaScript -->
-	<script
-		src="${pageContext.request.contextPath }/resources/vendor/jquery-easing/jquery.easing.min.js"></script>
-
-	<!-- Custom scripts for all pages-->
-	<script src="js/sb-admin-2.min.js"></script>
-
-	<!-- Page level plugins -->
-	<script
-		src="${pageContext.request.contextPath }/resourcesvendor/chart.js/Chart.min.js"></script>
-
 	<!-- Page level custom scripts -->
 	<script src="js/demo/chart-area-demo.js"></script>
 	<script src="js/demo/chart-pie-demo.js"></script>
@@ -186,6 +147,4 @@
 
 
 
-	<jsp:include page="/WEB-INF/views/common/footer.jsp" />
-</body>
-</html>
+<jsp:include page="/WEB-INF/views/common/footer.jsp" />
