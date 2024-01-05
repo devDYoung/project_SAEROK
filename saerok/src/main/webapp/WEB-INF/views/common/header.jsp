@@ -73,8 +73,8 @@
                 <div id="collapseSKD" class="collapse" aria-labelledby="headingSKD"
                     data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
-                        <a class="collapse-item" href="">근태등록</a>
-                        <a class="collapse-item" href="">근태조회</a>
+                        <a class="collapse-item" href="">근태</a>
+                        <a class="collapse-item" href="${path}/commuteList">근태조회</a>
                         <a class="collapse-item" href="">개인일정</a>
                         <a class="collapse-item" href="">부서일정</a>
                     </div>
