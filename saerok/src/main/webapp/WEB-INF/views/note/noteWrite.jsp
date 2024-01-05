@@ -13,6 +13,7 @@
 .dy {
 	margin-left: 200px;
 }
+
 </style>
 <div class="content">
 
@@ -29,17 +30,17 @@
 			<form id="contactForm" data-sb-form-api-token="API_TOKEN">
 				<!-- 사원 입력-->
 				<div class="form-floating mb-3">
-					<h>받는 사원</h>
+					<h>받는 사람</h>
 					<input class="form-control" id="email" type="email"
 						placeholder="name@example.com"
-						data-sb-validations="required,email" /> <label for="email">Email
-						address</label>
+						data-sb-validations="required,email" /> <!-- <label for="email">Email
+						address</label> -->
 					<div class="invalid-feedback" data-sb-feedback="email:required">An
 						email is required.</div>
 					<div class="invalid-feedback" data-sb-feedback="email:email">Email
 						is not valid.</div>
-					<div class="d-grid">
-						<button class="btn btn-primary btn-lg disabled" id="submitButton"
+					<div class="d-grid text-right">
+						<button class="btn-sm btn btn-primary btn-lg disabled" id="submitButton"
 							type="submit">사원 조회</button>
 					</div>
 				</div>
@@ -83,8 +84,8 @@
 							message!</div>
 					</div>
 					<!-- Submit Button-->
-					<div class="d-grid">
-						<button class="btn btn-primary btn-lg disabled" id="submitButton"
+					<div class="d-grid text-right">
+						<button class="btn-sm btn btn-primary btn-lg disabled btn" id="submitButton"
 							type="submit">보내기</button>
 					</div>
 			</form>
