@@ -27,8 +27,8 @@ public class CommuteController {
 	public ModelAndView selectWorkList(HttpSession session, ModelAndView mv) {
 
 		// 현재 로그인 중인 사원의 사원번호
-		Employee loginUser = (Employee) session.getAttribute("loginUser");
-		int empNo = Integer.parseInt(loginUser.getEmpNo());
+		Employee loginEmployee = (Employee) session.getAttribute("loginUser");
+		int empNo = Integer.parseInt(loginEmployee.getEmpNo());
 
 		// 사원의 오늘 근무정보 가져오기
 		Commute c = commuteService.selectWork(empNo);
@@ -76,8 +76,8 @@ public class CommuteController {
 	public void changeWorkStatus(Model model, HttpSession session, HttpServletRequest request) {
 		
 		//사원번호
-		Employee loginUser = (Employee)session.getAttribute("loginUser");
-		int empNo = Integer.parseInt(loginUser.getEmpNo());
+		Employee loginEmployee = (Employee)session.getAttribute("loginUser");
+		int empNo = Integer.parseInt(loginEmployee.getEmpNo());
 		
 		//상태코드
 		int sCode = Integer.parseInt(request.getParameter("status"));

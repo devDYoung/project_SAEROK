@@ -697,11 +697,11 @@
 			}
 		}
 
-		var empNo = "${sessionScope.loginUser.empNo}";	//로그인유저 사번
+		var empNo = "${sessionScope.loginEmployee.empNo}";	//로그인유저 사번
 		
 		$.ajax({
 			type: "POST", 
-			url:"selectWorkList.hr",
+			url:"/selectWorkList",
 			dataType:"html",	//html 방식
 			data: { 
 					year:year, 
