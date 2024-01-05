@@ -87,14 +87,17 @@
 							<input type="email" class="form-control" value="${loginEmployee.empEmail}" name="empEmail">
 						</div>
 						<br><br><br><br>
-						<div class="col-md-6">
-							<label for="inputAddr" class="form-label" id="">주소</label> 
-							<input type="text" class="form-control" value="${loginEmployee.empAddr}" name="empAddr">
-						</div>
+						<div class="col-md-5">
+    						<label for="inputAddr" class="form-label">주소</label> 
+   						<div class="input-group">
+       						<input type="text" class="form-control" value="${loginEmployee.empAddr}" name="empAddr" id="empAddr">
+        					<button type="button"  class="btn btn-outline-primary" onclick="addrBtnAction();">주소찾기</button>
+   						 </div>
+							</div>
 						<br><br><br><br>
 						<div class="col-md-6">
 							<label for="inputAddr" class="form-label">상세주소</label> 
-							<input type="text" class="form-control" value="${loginEmployee.empDetailAddr}" name="empDetailAddr">
+							<input type="text" class="form-control" value="${loginEmployee.empDetailAddr}" name="empDetailAddr" id="empDetailAddr">
 						</div>
 						<br><br><br><br>
 						<div class="col-md-6">
@@ -162,7 +165,8 @@
 		});
 		/* 잔디테스트  */
 	</script>
-	
+	<!-- daum address api -->
+<script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 	<script>
 	 function addrBtnAction() {
          new daum.Postcode({
@@ -205,9 +209,9 @@
 
                  // 우편번호와 주소 정보를 해당 필드에 넣는다.
                  document.getElementById("zipcode").value = data.zonecode;
-                 document.getElementById("addr").value = addr;
+                 document.getElementById("empAddr").value = addr;
                  // 커서를 상세주소 필드로 이동한다.
-                 document.getElementById("detailAddr").focus();
+                 document.getElementById("empDetailAddr").focus();
              }
          }).open();
      }
