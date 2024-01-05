@@ -30,5 +30,25 @@ public interface CommuteService {
 	int updateDayWorkTimeHalf(Map<String, Object> param);
 
 	int updateStartWork(Map<String, Object> param);
+	////////////////////////////////////////////////////
+//	ArrayList<Work> selectWorkList(Work work);
+//
+//	Work selectWork(int empNo);
+//	
+//	void insertWork(int empNo);
+//
+//	void updateWork(String wNo);
+//
+//	void insertWorkStatus(WorkSInfo wsi);
+//
+//	VacationInfo selectVacationInfo(int empNo);
+//
+//	ArrayList<VRequest> selectVRequestList(int empNo);
+//
+//	ArrayList<VOccur> selectVOccurList(int empNo);
+//
+//	EmpInfo selectEmpInfo(int empNo);
+//
+//	ArrayList<WorkSInfo> selectWorkSInfoList(String wNo);
 
 }
