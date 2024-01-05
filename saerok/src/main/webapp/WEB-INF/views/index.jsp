@@ -39,7 +39,7 @@
 										<p class="col-6 text-right" style="padding: 0px;" id="endTime"></p>
 									</div>
 								</div>
-								<form method="get" action="change.hr">
+								<form method="get" action="${path}/changeWorkStatus">
 									<!-- 출퇴근 버튼 -->
 									<div class="d-flex align-items-center">
 										<button type="submit" id="startBtn"
@@ -203,7 +203,7 @@
 				<!-- 본문 가운데 -->
 				<div>
 					<div id="home-center" class="div-padding div-margin"></div>
-					<h5>전체게시판</h5>
+					<!-- <h5>전체게시판</h5> -->
 				</div>
 				<!-- 본문 오른쪽 -->
 				<div>
