@@ -5,231 +5,213 @@
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <jsp:include page="/WEB-INF/views/common/header.jsp">
-<jsp:param value="MainPage" name="ATO"/> 
+	<jsp:param value="MainPage" name="ATO" />
 </jsp:include>
 <section>
-<div class="col-xl-3 col-md-6 mb-4">
-    <div class="card border-left-info shadow h-100 py-2">
-        <div class="card-body">
-            <div class="row no-gutters align-items-center">
-                <div class="col mr-2 text-center">
-                    <div class="text-xs font-weight-bold text-info text-uppercase mb-1">
-                        <div style="height: 50px;"></div>
-                        <table id="home-my-tbl">
-                            <tbody>
-                                <tr>
-                                    <td id="year" colspan="2" class="font-14 text-center">시계</td>
-                                </tr>
-                                <tr>
-                                    <td colspan="2">
-                                        <c:if test="">
-                                            <img src="<!-- 프로필 -->" alt="" class="img">
-                                        </c:if>
-                                        <c:if test="">
-                                            <img src="" alt="" class="img">
-                                        </c:if>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td colspan="2" class="text-center">사원이름 직급</td>
-                                </tr>
-                                <tr>
-                                    <td colspan="2" class="text-center">부서명</td>
-                                </tr>
+	<div class="home-content">
+		<div style="display: flex;">
+			<!-- 본문 왼쪽 -->
+			<div class="home-content-div">
+				<div id="home-left" class="div-padding div-margin">
+					<div style="height: 50px;"></div>
+					<!-- <div class="col-lg-5 col-md-12"> -->
+						<div class="card" style="padding: 0px 15px 10px;">
+							<div class="card-body">
+<%-- 								<div id="profileImg"
+									style="position:absolute; right:0; height:140px; width:130px; 
+                            margin-right:15px;
+                            background-image:url(${ pageContext.servletContext.contextPath }/resources/assets/images/${ profileImg });
+                            background-size:cover;
+                            ">
+								</div> --%>
+								<h4 class="card-title mb-3 font-weight-bold">출퇴근</h4>
+								<h4 id="todate" class="card-title mb-3 font-weight-bold"></h4>
+								<p id="clock" style="font-size: 40px"></p>
+								<div>
+									<br>
+									<div class="d-flex" style="font-size: 16px;">
+										<p class="col-6" style="padding: 0px;">출근시간</p>
+										<p class="col-6 text-right" style="padding: 0px;"
+											id="startTime"></p>
+									</div>
+									<div class="d-flex" style="font-size: 16px">
+										<p class="col-6" style="padding: 0px;">퇴근시간</p>
+										<p class="col-6 text-right" style="padding: 0px;" id="endTime"></p>
+									</div>
+								</div>
+								<form method="get" action="change.hr">
+									<!-- 출퇴근 버튼 -->
+									<div class="d-flex align-items-center">
+										<button type="submit" id="startBtn"
+											class="btn btn-rounded btn-outline-primary col-6"
+											style="margin: 2px" value="1" name="status">출근하기</button>
+										<button type="submit" id="endBtn"
+											class="btn btn-rounded btn-outline-primary col-6"
+											style="margin: 2px" value="2" name="status">퇴근하기</button>
+									</div>
 
-                                <tr>
-                                    <td colspan="2" id="clock" style="color: black;" class="text-center">시계</td>
-                                </tr>
-								<tr>
-									<td class="font-14 font-bold">업무상태</td>
-									<td class="text-right font-14 color-red font-bold"
-										id="work-state">출근전</td>
-								</tr>
-								<tr>
-									<td class="font-14 font-bold">출근시간</td>
-									<td class="text-right font-14" id="startwork-time">미등록</td>
-								</tr>
-								<tr>
-									<td class="font-14 font-bold">퇴근시간</td>
-									<td class="text-right font-14" id="endwork-time">미등록</td>
-								</tr>
-								<tr class="btn-tr">
-										<td> <button class="btn btn-info btn-icon-split" id="btn-startwork">
-                                        <span class="text">출근하기</span></button>
-                                    </td>
-                                   <td> <button class="btn btn-info btn-icon-split" id="btn-endwork">
-                                        <span class="text">퇴근하기</span></button>
-                                    </td>
-								</tr>
-							</tbody>
-						</table>
-                                            </div>
-
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div>
-                        </div>
-
+									<!-- 상태 설정버튼 -->
+									<div class="d-flex align-items-center"
+										style="margin-top: 15px;">
+										<button type="button" id="selectStatus"
+											class="btn btn-rounded btn-outline-primary col-12"
+											style="margin: 2px 2px 0px 2px;">
+											근무상태변경<i data-feather="chevron-down" class="feather-icon"></i>
+										</button>
+									</div>
+									<div id="status" class="align-items-center"
+										style="border: 1px solid rgb(95, 118, 232); border-radius: 10px; background-color: white;">
+										<button type="submit"
+											class="d-flex col-12 btn btn-outline-primary"
+											style="border: none; border-top-left-radius: 9px; border-top-right-radius: 9px;"
+											value="3" name="status">출근</button>
+										<button type="submit"
+											class="d-flex col-12 btn btn-outline-primary"
+											style="border: none;" value="4" name="status">퇴근</button>
+										<button type="submit"
+											class="d-flex col-12 btn btn-outline-primary"
+											style="border: none;" value="5" name="status">외근</button>
+										<button type="submit"
+											class="d-flex col-12 btn btn-outline-primary"
+											style="border: none;" value="6" name="status">출장</button>
+										<button type="submit"
+											class="d-flex col-12 btn btn-outline-primary"
+											style="border: none; border-bottom-left-radius: 9px; border-bottom-right-radius: 9px;"
+											value="7" name="status">반차</button>
+									</div>
+									<input type="hidden" name="wNo" value="$"> <input
+										type="hidden" name="main" value="1">
+								</form>
+							</div>
+						</div>
+					</div>
+					</div>
+					</div>
+					</div>
 				<script>
-window.addEventListener('load', function(){
-	
-	const csrfHeader = "${_csrf.headerName}";
-   const csrfToken = "${_csrf.token}";
-   const headers = {};
-   headers[csrfHeader] = csrfToken;
-   
-   $.ajax({
-	   url : '${pageContext.request.contextPath}/commute/checkWorkTime.do',
-	   contentType : "application/json; charset=utf-8",
-	   success(data){
-		   console.log(data);
-		   if(data){
-			   const {commuteno,inDtime,outDtime,lateYN,status,overtime,empNo} = data;
-			   var starttime = new Date(inDtime);
-			   var endtime = new Date(outDtime);
+				
+				$(function(){
+					//출퇴근 버튼 설정
+					var start = "${w.startTime}";
+					var end = "${w.endTime}";
+					console.log(start)
+					console.log(end)
+				  	//null이면 출근x, 퇴근x
+					//null이 아니면 - 출근o, 퇴근x
+					//			 - 출근o, 퇴근o
+					if(start == ""){
+						console.log("없음")
+						
+						$('#startBtn').attr('disabled', false);
+					  	$('#endBtn').attr('disabled', false);
+					  	
+					  	$('#startTime').text("미등록")
+						$('#endTime').text("미등록")
+					}
+				 	if(start != "" && end == ""){
+				 		$('#startBtn').attr('disabled', true)	//출근버튼 비활성화
+				 			
+				 		$('#startTime').text(start)	//출근시간 표시
+				 		$('#endTime').text("미등록")
+				 	}
+				 	else if(start != "" && end != ""){
+				 		$('#startBtn').attr('disabled', true)	//출근버튼 비활성화
+				 		$('#endBtn').attr('disabled', true)		//퇴근버튼 비활성화
+				 			
+				 		$('#startTime').text(start)	//출근시간 표시
+				 		$('#endTime').text(end)		//퇴근시간 표시
+				 	}
+				 		
+				 	//근무상태 선택버튼 css설정
+				 	$("#status").css("z-index","1")
+					$(".list-group").css("z-index","0")
+					$(".card-title").css("z-index","0")
+					
+					$("#status").css("display","none")
+					$("#status").css("position","absolute")
+					
+					$("#selectStatus").click(function(){
+						if($("#status").css("display") == "none") {
+							$("#status").show();
+							
+							var width = $("#selectStatus").css("width");
+							
+							$("#status").css("width", width)
+						}
+						
+						else {
+							$("#status").hide();
+						}
+					})
+				})
+				
+			    //시간표시 기능
+			    function printClock() {
+			    
+				    var clock = document.getElementById("clock");	// 출력할 장소 선택
+				    var todate = document.getElementById("todate");
+				    var currentDate = new Date();	// 현재시간
+				    var day = new Array('일', '월', '화', '수', '목', '금', '토')
+				    var today = day[currentDate.getDay()];
+				    var calendar = currentDate.getFullYear() + "-" + (currentDate.getMonth()+1) + "-" + currentDate.getDate() + " (" + today + ")"// 현재 날짜
+				    var currentHours = addZeros(currentDate.getHours(),2); 
+				    var currentMinute = addZeros(currentDate.getMinutes() ,2);
+				    var currentSeconds =  addZeros(currentDate.getSeconds(),2);
+				    
+				    clock.innerHTML = currentHours+":"+currentMinute+":"+currentSeconds; //날짜를 출력해 줌
+				    todate.innerHTML = calendar; //날짜를 출력해 줌
+				    
+				    setTimeout("printClock()",1000);         // 1초마다 printClock() 함수 호출
+				    
+				    
+				    function addZeros(num, digit) { // 자릿수 맞춰주기
+					  	var zero = '';
+					  	num = num.toString();
+					  	if (num.length < digit) {
+						  	for (i = 0; i < digit - num.length; i++) {
+						  		zero += '0';
+						  	}
+					  	}
+					  	return zero + num;
+					}
+				}
 			   
-			   //하루 근무시간 계산
-			   const daytimes = endtime - starttime;
-			   console.log(daytimes);
-			   
-			   const workStatus = document.querySelector("#work-status");
-			   workStworkStatusate.textContent = status;
-			   
-			   
-			   if(inDtime){
-				 var hours = (starttime.getHours()); 
-                var minutes = starttime.getMinutes();
-                var seconds = starttime.getSeconds();
-                var startWorkTime = `\${hours < 10 ? '0' + hours : hours}:\${minutes < 10 ? '0'+minutes : minutes}:\${seconds < 10 ? '0'+seconds : seconds}`;
-                // 출근시간 정보 출력
-                document.querySelector('#startwork-time').textContent = startWorkTime;
-			   }
-			   
-			   if(outDtime){
- 				  var hours = (endtime.getHours()); 
-                 var minutes = endtime.getMinutes();
-                 var seconds = endtime.getSeconds();
-                 var endWorkTime = `\${hours < 10 ? '0' + hours : hours}:\${minutes < 10 ? '0'+minutes : minutes}:\${seconds < 10 ? '0'+seconds : seconds}`;
-                 // 퇴근시간 정보 출력
-				  document.querySelector('#endwork-time').textContent = endWorkTime;
-			   }
-			   
-			   if(daytimes > 0){
-				   //하루 근무시간 update
-				  updateDayWorkTime(daytimes);
-			   }
-		   }
-	   },
-	   error : console.log
-   });
-  
-});
-
-
-
-//출근 버튼 클릭 시
-document.querySelector('#btn-startwork').addEventListener('click', function () {
-	
-	const csrfHeader = "${_csrf.headerName}";
-   const csrfToken = "${_csrf.token}";
-   const headers = {};
-   headers[csrfHeader] = csrfToken;
-	
-	$.ajax({
-	   url : '${pageContext.request.contextPath}/commute/insertStartWork.do',
-	   method : 'POST',
-	   headers,
-	   contentType : "application/json; charset=utf-8",
-	   success(data){
-			console.log(data);
-	       if(data.state === "성공"){
-	           alert("출근이 성공적으로 등록됬습니다.");
-	           location.reload();
-	       }else if(data.state === '출장'){
-	    	   alert("출장시에는 자동적으로 출근처리가 완료됩니다.");
-	    	  return;
-	       }else if(data.state === '연차'){
-	    	   alert("연차중입니다.");
-	    	   return;
-	       }
-	       else{
-	           alert("이미 출근하셨습니다.");
-	       }
-	   },
-	   error : console.log
-  });
-});
-
-//퇴근하기 버튼 누를시
-document.querySelector('#btn-endwork').addEventListener('click', function () {
-	
-	const csrfHeader = "${_csrf.headerName}";
-   const csrfToken = "${_csrf.token}";
-   const headers = {};
-   headers[csrfHeader] = csrfToken;
-	
-	$.ajax({
-	   url : '${pageContext.request.contextPath}/commute/updateEndWork.do',
-	   method : 'POST',
-	   headers,
-	   contentType : "application/json; charset=utf-8",
-	   success(data){
-		   console.log(data);
-		   
-		   if(data.status === "성공"){
-	           alert("퇴근이 성공적으로 등록됬습니다.");
-	           location.reload();
-	       }else if(data.status === '출근전'){
-	    	   alert("출근전입니다.");
-	    	   return;
-	       }else if(data.status === '출장'){
-	    	   alert("출장시에는 자동적으로 퇴근처리가 완료됩니다.");
-	    	  return;
-	       }else if(data.status === '연차'){
-	    	   alert("연차중입니다.");
-	    	   return;
-	       }
-	       else{
-	           alert("이미 퇴근하셨습니다.");
-	           return;
-	       }
-		},
-	   error : console.log
-  });
-});
-
-const updateDayWorkTime = (daytimes) =>{
-	
-	const csrfHeader = "${_csrf.headerName}";
-   const csrfToken = "${_csrf.token}";
-   const headers = {};
-   headers[csrfHeader] = csrfToken;
-	
-   $.ajax({
-       url: '${pageContext.request.contextPath}/commute/updateDayWorkTime.do',
-       method: 'POST',
-       headers,
-       data: {daytimes},
-       success(data) {
-         console.log(data);
-       },
-       error: console.log
-     });
-	};
+			    //////////////////////////////////////////////
+			    
+			   function setCookie(name,value,expiredDate){
+					var today = new Date();
+					
+					today.setDate(today.getDate() + expiredDate);
+					
+					document.cookie = name + '=' + escape(value) + '; expires=' + today.toGMTString();
+				}
+				
+				function getCookie(name){
+					
+					var cookie = document.cookie;
+					
+					if ( cookie != "") {
+						var cookie_arr = cookie.split(";");
+						for ( var index in cookie_array) {
+							var cookie_name = cookie_arr[index].split("=");
+							if (cookie_name[0] == "mycookie") {
+								return cookie_name[1];
+								}
+						
+						} 
+					
+					}
+				}
 </script>
 				<!-- 본문 가운데 -->
 				<div>
-					<div id="home-center" class="div-padding div-margin">
-					</div>
-					</div>
-					<!-- 본문 오른쪽 -->
-					<div>
-						<div id="home-right-div" class="div-padding div-margin">
-						</div>
-					</div>
+					<div id="home-center" class="div-padding div-margin"></div>
+					<h5>전체게시판</h5>
+				</div>
+				<!-- 본문 오른쪽 -->
+				<div>
+					<div id="home-right-div" class="div-padding div-margin"></div>
+				</div>
 </section>
 
 <jsp:include page="/WEB-INF/views/common/footer.jsp" />
