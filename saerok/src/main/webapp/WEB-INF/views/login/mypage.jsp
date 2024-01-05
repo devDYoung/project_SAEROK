@@ -34,8 +34,8 @@
 	margin-left: 670px;
 }
 #profile-img {
-    width: 5%;
-    height: auto;
+    width: 120px;
+    height: 90px;
     margin-top: 50px;
     margin-left: 370px; /* Adjust this value to move the image to the left */
 }
@@ -88,7 +88,7 @@
 						</div>
 						<br><br><br><br>
 						<div class="col-md-6">
-							<label for="inputAddr" class="form-label">주소</label> 
+							<label for="inputAddr" class="form-label" id="">주소</label> 
 							<input type="text" class="form-control" value="${loginEmployee.empAddr}" name="empAddr">
 						</div>
 						<br><br><br><br>
