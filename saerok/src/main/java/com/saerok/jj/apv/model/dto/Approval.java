@@ -14,7 +14,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @Builder
 public class Approval {
-	private int apvNo;
+	private long apvNo;
 	private String apvDocNo;
 	private String apvName;
 	private String apvCheck;
@@ -22,4 +22,8 @@ public class Approval {
 	private String modId;
 	private Date modTime;
 	private Employee empNo;
+	private ApvWriter apvEmpNo;
+	private ApvRef refCc;
+
+	
 }
