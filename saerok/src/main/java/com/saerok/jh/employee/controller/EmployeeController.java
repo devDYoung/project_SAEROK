@@ -3,10 +3,8 @@ package com.saerok.jh.employee.controller;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 
-import lombok.RequiredArgsConstructor;
-
 @Controller
-@RequiredArgsConstructor
+
 public class EmployeeController {
 //	@Autowired
 //	private final EmployeeService service;
@@ -17,5 +15,17 @@ public class EmployeeController {
 		return "employee/insertemployee";
 		
 	}
+	//사원생성
+//	 @PostMapping("/enrollemp")
+//	    public String insertEmployee(MultipartFile[] upFile,Employee e , Model model) {
+//		
+//	}
+	
+	
+	
+	
+	
+	
+	
 	
 }

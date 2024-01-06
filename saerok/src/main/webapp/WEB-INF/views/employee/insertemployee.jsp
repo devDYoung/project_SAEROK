@@ -25,7 +25,15 @@
 
   .ato-insertimg {
     width: 460px;
-    height: 700px;
+    height: 770px;
+    float: left; /* 이미지를 왼쪽으로 정렬합니다. */
+  }
+
+  #profile-img {
+    width: 80px;
+    height: 60px;
+    margin-top: 10px;
+    margin-left: 10px; /* 이미지를 왼쪽으로 이동시키기 위해 수정 */
   }
 </style>
 </head>
@@ -43,6 +51,8 @@
               <div class="p-5">
                 <div class="text-center">
                   <h1 class="h4 text-gray-900 mb-4">ATO 사원등록</h1>
+                  <img id="profile-img" class="img-profile rounded-circle"
+				src="${pageContext.request.contextPath }/resources/img/ato100px.png"></a>
                 </div>
                 <br>
                 <form class="user">
