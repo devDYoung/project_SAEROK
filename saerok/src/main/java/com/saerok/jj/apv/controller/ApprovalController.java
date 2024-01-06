@@ -30,6 +30,7 @@ public class ApprovalController {
 				service.selectApproval(Map.of("cPage",cPage,"numPerpage",numPerpage)));
 		model.addAttribute("pageBar",pageFactory.getPage(cPage, numPerpage, 0, "approvalList.do"));
 	//return "approval/approvalList";
+		//작업중
 	}
 	
 	@RequestMapping("/approvalView.do")

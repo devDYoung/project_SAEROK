@@ -10,7 +10,7 @@
 <section id=content>
 	<div class="card shadow mb-4">
 			<div class="card-header py-3">
-				<h6 class="m-0 font-weight-bold text-primary">Message</h6>
+				<h6 class="m-0 font-weight-bold text-primary">전자결재</h6>
 			</div>
 			<div class="card-body">
 				<div class="table-responsive">
@@ -27,8 +27,6 @@
 						</thead>
 						<tbody>
 							<tr>
-								<td><input type="checkbox" name="yourCheckboxName"
-									value="yourCheckboxValue"></td>
 								<td></td>
 								<td></td>
 								<td></td>
@@ -53,8 +51,6 @@
 								<td></td>
 							</tr>
 							<tr>
-								<td><input type="checkbox" name="yourCheckboxName"
-									value="yourCheckboxValue"></td>
 								<td></td>
 								<td></td>
 								<td></td>
