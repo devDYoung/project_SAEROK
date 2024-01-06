@@ -55,13 +55,13 @@
 		,#{empName}
 		,#{empPhone}
 		,#{empEmail}
-		,#{empAddr}
-		,#{empDetailAddr}
+		,null 
+		,null
 		,EMP_DATE=(select emp_date from employee where EMP_NO=#{empNo})
 		,#{oriFileName}
 		,#{destFileName}
 		,#{issueAnnu}
-		,#{useAnnu}
+		,null
 		,#{depeCode}
 		,#{jobCode})
 								
