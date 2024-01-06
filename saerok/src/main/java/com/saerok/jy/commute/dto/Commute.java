@@ -1,7 +1,7 @@
  package com.saerok.jy.commute.dto;
 
-import java.sql.Date;
 import java.time.LocalDateTime;
+import java.util.Date;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -19,10 +19,8 @@ public class Commute {
 	private String lateYN;
 	private String status;
 	private long overtime;
-	private Date workingDay;
+	private String workingDay;
 	private String empNo;
-	
-	//test
-	//test111
+
 
 }

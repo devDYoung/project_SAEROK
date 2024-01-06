@@ -13,7 +13,14 @@
 		<!-- 지영  -->
 		<typeAlias alias="schedule" type="com.saerok.jy.schedule.dto.Schedule"/>
 		<typeAlias alias="commute" type="com.saerok.jy.commute.dto.Commute"/>
-	
+		
+		
+		<!-- 정재  -->
+		<typeAlias alias="approval" type="com.saerok.jj.apv.model.dto.Approval"/>
+
+
+
+
 	</typeAliases>
 
 </configuration>
