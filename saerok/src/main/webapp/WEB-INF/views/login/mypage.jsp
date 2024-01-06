@@ -122,6 +122,7 @@
 				class="btn btn-outline-primary">수정</button>
 			<button type="reset" class="btn btn-outline-primary">취소</button>
 		</div>
+		 
 	</section>
 
 

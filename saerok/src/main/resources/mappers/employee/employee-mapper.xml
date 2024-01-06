@@ -49,6 +49,28 @@
  	 WHERE EMP_NO=#{empNo}
 	</update>
 	
+	<insert id="insertEmployee" parameterType="emp" >
+		INSERT INTO EMPLOYEE VALUES(
+		 SEQ_EMP_NO.NEXTVAL
+		,#{empName}
+		,#{empPhone}
+		,#{empEmail}
+		,#{empAddr}
+		,#{empDetailAddr}
+		,EMP_DATE=(select emp_date from employee where EMP_NO=#{empNo})
+		,#{oriFileName}
+		,#{destFileName}
+		,#{issueAnnu}
+		,#{useAnnu}
+		,#{depeCode}
+		,#{jobCode})
+								
+	
+	</insert>
+	
+
+	
+	
 	
   
 
