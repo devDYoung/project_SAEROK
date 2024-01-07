@@ -19,6 +19,6 @@ Commute selectWork(SqlSession session, int empNo);
 
 int updateWork(SqlSession session, int commuteNo);
 
-
+public int insertWorkStatus(SqlSession session, String status);
 
 }

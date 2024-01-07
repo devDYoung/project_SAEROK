@@ -41,8 +41,8 @@ public class CommuteController {
 	}
 
 	@ResponseBody
-	@RequestMapping("/selectWorkList")
-	public ModelAndView selectWorkList2(HttpSession session, ModelAndView mv, @RequestParam("year") int year,
+	@GetMapping("/selectWorkList")
+	public ModelAndView selectWorkList(HttpSession session, ModelAndView mv, @RequestParam("year") int year,
 			@RequestParam("month") int month, @RequestParam("empNo") int empNo) {
 
 		String strYear = Integer.toString(year).substring(2);
@@ -73,15 +73,15 @@ public class CommuteController {
 
 	}
 
-	@RequestMapping("/changeWorkStatus")
-	public void changeWorkStatus(Model model, HttpSession session, HttpServletRequest request) {
+	@GetMapping("/changeStatus")
+	public String changeWorkStatus(Model model, HttpSession session, HttpServletRequest request) {
 		
 		//사원번호
 		Employee loginEmployee = (Employee)session.getAttribute("loginUser");
 		int empNo = Integer.parseInt(loginEmployee.getEmpNo());
 		
-		//상태코드
-		int sCode = Integer.parseInt(request.getParameter("status"));
+		//상태
+		String status = request.getParameter("status");
 
 		//근무번호
 		int commuteNo = Integer.parseInt(request.getParameter(" commuteNo"));
@@ -90,14 +90,28 @@ public class CommuteController {
 		}
 		
 		//출근 일때,
-		if(sCode==1) {
+		if(status.equals("y")) {
 			commuteService.insertWork(empNo);
 			
 		}
 		//퇴근 일때
-		else if(sCode==2) {
-			
+		else if(status.equals("n")) {
 			commuteService.updateWork(commuteNo);
+		}
+		
+		
+		//모든 상태 추가
+//		Commute c = new Commute(commuteNo, null, null, status, status, commuteNo, status, status);
+		commuteService.insertWorkStatus(status);
+		
+		if(request.getParameter("index").equals("1")) {
+			Commute c= commuteService.selectWork(empNo);
+			
+			model.addAttribute("c", c);
+			return "index";
+		}
+		else {
+			return "redirect:/commuteCheck";
 		}
 
 	}

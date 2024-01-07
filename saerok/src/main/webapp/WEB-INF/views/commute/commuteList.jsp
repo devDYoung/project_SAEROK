@@ -4,6 +4,7 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
+<c:set var="path" value="${pageContext.request.contextPath}"/>
 <jsp:include page="/WEB-INF/views/common/header.jsp">
 	<jsp:param value="CommuteList" name="" />
 </jsp:include>
@@ -547,8 +548,6 @@
 		border: 1px solid rgb(95,118,232);
 	}
 </style>
-</head>
-<body>
 	<h3>근태 현황</h3>
 	<div class="row">
 		<div class="m-auto">
@@ -577,15 +576,15 @@
 	</div>
 	<br><br>
 	
-	<!-- 이번달 wlist 출력  -->
+	<!-- 이번달 clist 출력  -->
 	<c:set var="begin" value="0"/>
 	<c:set var="end" value="6"/>
 	
 	<!-- 이번달이 4주인지 5주인지 구분 -->
-	<!-- wlist의 크기를 7로 나눠서 몫이 4이고, 나머지가 0이면 : 4주-->
+	<!-- clist의 크기를 7로 나눠서 몫이 4이고, 나머지가 0이면 : 4주-->
 	<!-- 그 외에는 5주-->
 	<c:choose>
-		<c:when test="${wlist.size() / 7 == 4 && wlist.size() % 7 == 0}">
+		<c:when test="${clist.size() / 7 == 4 && clist.size() % 7 == 0}">
 			<c:set var="weekNum" value="4"/>
 		</c:when>
 		<c:otherwise>
@@ -621,37 +620,37 @@
 			</div>
 			
 			<!-- 일자 표시 (7일) -->
-			<c:forEach var="date" items="${wlist }" begin ="${begin }" end ="${end }" varStatus ="status">
-			<div class="col-12 select week${week }" id="${date.WNo }">
+			<c:forEach var="date" items="${clist }" begin ="${begin }" end ="${end }" varStatus ="status">
+			<div class="col-12 select week${week }" id="${date.commuteNo }">
 				<div class="col-1 text-center">
-					<span class="date" id="<fmt:formatDate value="${date.WDate}" type="date" pattern="YYYY/MM/dd"/>"><fmt:formatDate value="${date.WDate}" type="date" pattern="dd"/></span>
-					<span class="day"><fmt:formatDate value="${date.WDate}" type="date" pattern="E"/></span>
+					<span class="date" id="<fmt:formatDate value="${date.cDate}" type="date" pattern="YYYY/MM/dd"/>"><fmt:formatDate value="${date.cDate}" type="date" pattern="dd"/></span>
+					<span class="day"><fmt:formatDate value="${date.cDate}" type="date" pattern="E"/></span>
 				</div>
 				<div class="col-2">
-					<c:set var="st" value="${date.startTime }"/>
+					<c:set var="it" value="${date.inDtime }"/>
 					<c:choose>
 						<c:when test="${empty st }">
-							<span class="startTime"></span>
+							<span class="inDtime"></span>
 						</c:when>
 						<c:otherwise>
-							<span class="startTime">${st }</span>
+							<span class="inDtime">${it }</span>
 						</c:otherwise>
 					</c:choose>
 				</div>
 				<div class="col-2">
-					<c:set var="et" value="${date.endTime }"/>
+					<c:set var="ot" value="${date.endTime }"/>
 					<c:choose>
-						<c:when test="${empty et }">
-							<span class="endTime"></span>
+						<c:when test="${empty ot }">
+							<span class="outDtime"></span>
 						</c:when>
 						<c:otherwise>
-							<span class="endTime">${et }</span>
+							<span class="outDtime">${ot }</span>
 						</c:otherwise>
 					</c:choose>
 				</div>
 				<div class="col-2">
 					<c:choose>
-						<c:when test="${empty st or empty et }">
+						<c:when test="${empty it or empty ot }">
 							<span class="totalTime totalTime1">00h 00m 00s</span>
 						</c:when>
 						<c:otherwise>
