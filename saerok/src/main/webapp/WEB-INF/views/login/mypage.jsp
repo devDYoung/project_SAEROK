@@ -17,7 +17,7 @@
 }
 
 .mypage-simple-info {
-	margin-top: 100px;
+	margin-top: 70px;
 	margin-left: 370px;
 }
 
@@ -59,6 +59,13 @@
 				<div class="mypage-simple-info">
 					<div class="form-group row">
 						<div class="col-md-6">
+							<label for="inputNo" class="form-label">사번</label> 
+							<input type="text" class="form-control" value="${loginEmployee.empNo }" name="empNo" disabled>
+						</div>
+						<br><br><br><br>
+						<div class="col-md-6">
+						</div>
+						<div class="col-md-6">
 							<label for="inputName" class="form-label">이름</label> 
 							<input type="hidden" value="${loginEmployee.empNo }" name="empNo">
 							<input type="text" class="form-control" value="${loginEmployee.empName }" name="empName">
@@ -68,15 +75,11 @@
 							<input type="text" class="form-control" value="${loginEmployee.empDate}" name="date" disabled>
 						</div>
 						<br><br><br><br>
-						<div class="col-md-6">
-							<label for="inputNo" class="form-label">사번</label> 
-							<input type="text" class="form-control" value="${loginEmployee.empNo }" name="empNo" disabled>
-						</div>
+
 						<%-- <div class="col-md-6">
 							<label for="inputPw" class="form-label">비밀번호</label> 
 							<input type="password" class="form-control" value="${loginEmployee.empPw }" name="empPw">
 						</div> --%>
-						<br><br><br><br>
 						<div class="col-md-6">
 							<label for="inputPhone" class="form-label">전화번호</label> 
 							<input type="text" class="form-control" value="${loginEmployee.empPhone }" name="empPhone">
@@ -87,7 +90,7 @@
 							<input type="email" class="form-control" value="${loginEmployee.empEmail}" name="empEmail">
 						</div>
 						<br><br><br><br>
-						<div class="col-md-5">
+						<div class="col-md-6">
     						<label for="inputAddr" class="form-label">주소</label> 
    						<div class="input-group">
        						<input type="text" class="form-control" value="${loginEmployee.empAddr}" name="empAddr" id="empAddr">
@@ -119,7 +122,7 @@
 		<!-- myPage-container -->
 		<div class="d-grid gap-2 d-md-block" id="button">
 			<button id="mypageButton" type="submit"
-				class="btn btn-outline-primary">수정</button>
+				class="btn btn-outline-primary">저장하기</button>
 		</div>
 		 
 	</section>
