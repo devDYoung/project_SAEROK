@@ -1,10 +1,10 @@
 package com.saerok.jh.employee.model.service;
 
-import com.saerok.jh.employee.model.dto.Employee;
+import java.util.Map;
 
 public interface EmployeeService {
 
-	int insertEmployee(Employee e);
+	 int insertEmployeeEnd(Map<String,Object> param);
 	
 	
 }

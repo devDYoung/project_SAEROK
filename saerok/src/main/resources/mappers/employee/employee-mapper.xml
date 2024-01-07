@@ -49,7 +49,7 @@
  	 WHERE EMP_NO=#{empNo}
 	</update>
 	
-	<insert id="insertEmployee" parameterType="emp" >
+	<insert id="insertEmployeeEnd" parameterType="map" >
 		INSERT INTO EMPLOYEE VALUES(
 		 SEQ_EMP_NO.NEXTVAL
 		,#{empName}
@@ -57,15 +57,14 @@
 		,#{empEmail}
 		,null 
 		,null
-		,EMP_DATE=(select emp_date from employee where EMP_NO=#{empNo})
+		,SYSDATE
 		,#{oriFileName}
 		,#{destFileName}
 		,#{issueAnnu}
 		,null
 		,#{depeCode}
 		,#{jobCode})
-								
-	
+
 	</insert>
 	
 
