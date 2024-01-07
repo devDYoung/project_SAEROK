@@ -16,7 +16,7 @@ import com.saerok.jy.commute.dto.Commute;
 @Service
 public class CommuteServiceImpl implements CommuteService{
 	@Autowired
-	private SqlSessionTemplate sqlSession;
+	private SqlSession session;
 	
 	@Autowired
 	private CommuteDao commuteDao;
@@ -24,7 +24,7 @@ public class CommuteServiceImpl implements CommuteService{
 	@Override
 	public ArrayList<Commute> selectWorkList(Commute work) {
 
-		ArrayList<Commute> list = commuteDao.selectWorkList(sqlSession, work);
+		ArrayList<Commute> list = commuteDao.selectWorkList(session, work);
 		
 		return list;
 	}
@@ -32,7 +32,7 @@ public class CommuteServiceImpl implements CommuteService{
 	@Override
 	public Commute selectWork(int empNo) {
 		
-		Commute c = commuteDao.selectWork(sqlSession, empNo);
+		Commute c = commuteDao.selectWork(session, empNo);
 		
 		return c;
 	}
@@ -40,7 +40,7 @@ public class CommuteServiceImpl implements CommuteService{
 	@Override
 	public void insertWork(int empNo) {
 		
-		int result = commuteDao.insertWork(sqlSession, empNo);
+		int result = commuteDao.insertWork(session, empNo);
 		
 		if(result < 0) {
 			throw new CommuteException("출근 확인 실패");
@@ -50,10 +50,20 @@ public class CommuteServiceImpl implements CommuteService{
 
 	@Override
 	public void updateWork(int commuteNo) {
-		int result = commuteDao.updateWork(sqlSession, commuteNo);
+		int result = commuteDao.updateWork(session, commuteNo);
 		
 		if(result < 0) {
 			throw new CommuteException("퇴근 확인 실패");
 		}
+	}
+	
+	@Override
+	public void insertWorkStatus(String status) {
+		int result = commuteDao.insertWorkStatus(session, status);
+		
+		if(result < 0) {
+			throw new CommuteException("근무상태변경 실패");
+		}
+		
 	}
 }

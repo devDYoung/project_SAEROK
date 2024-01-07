@@ -21,6 +21,5 @@ public class Commute {
 	private long overtime;
 	private String workingDay;
 	private String empNo;
-
-
+	
 }

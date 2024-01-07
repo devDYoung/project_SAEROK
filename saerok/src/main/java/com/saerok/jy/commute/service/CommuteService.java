@@ -15,7 +15,7 @@ public interface CommuteService {
 
 	void updateWork(int commuteNo);
 	
-	
+	void insertWorkStatus(String status);
 
 
 }
