@@ -105,10 +105,10 @@
                 </a>
                     <div id="collapseCharts" class="collapse" aria-labelledby="headingCharts" data-parent="#accordionSidebar">
                         <div class="bg-white py-2 collapse-inner rounded">
-                            <a class="collapse-item" href="">매출현황</a>
-                            <a class="collapse-item" href="">지점별매출</a>
+                            <a class="collapse-item" href="/sales/all">매출현황</a>
+                            <a class="collapse-item" href="/sales/branch">지점별매출</a>
                             <a class="collapse-item" href="">발주목록</a>
-                            <a class="collapse-item" href="">지점조회</a>
+                            <a class="collapse-item" href="/branch/">지점조회</a>
                         </div>
                     </div>
             </li>
