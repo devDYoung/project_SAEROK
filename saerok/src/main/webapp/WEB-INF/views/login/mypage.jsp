@@ -120,7 +120,6 @@
 		<div class="d-grid gap-2 d-md-block" id="button">
 			<button id="mypageButton" type="submit"
 				class="btn btn-outline-primary">수정</button>
-			<button type="reset" class="btn btn-outline-primary">취소</button>
 		</div>
 		 
 	</section>
@@ -164,7 +163,7 @@
 				});
 			});
 		});
-		/* 잔디테스트  */
+		
 	</script>
 	<!-- daum address api -->
    <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
@@ -197,6 +196,7 @@
                     document.getElementById("empDetailAddr").value = extraAddr;
                     document.getElementById("zipcode").value = data.zonecode;
 
+                    $('#myModal').modal('hide');
                 }
             }).open();
         }
