@@ -74,9 +74,23 @@
                     data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
                         <a class="collapse-item" href="">근태</a>
-                        <a class="collapse-item" href="${path}/commuteList">근태조회</a>
+                        <a class="collapse-item" href="${path}/workList">근태조회</a>
                         <a class="collapse-item" href="">개인일정</a>
                         <a class="collapse-item" href="">부서일정</a>
+                    </div>
+                </div>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseBoard"
+                    aria-expanded="true" aria-controls="collapseBoard">
+                    <i class="fas fa-th-list"></i>
+                    <span>게시판</span>
+                </a>
+                <div id="collapseBoard" class="collapse" aria-labelledby="headingBoard" data-parent="#accordionSidebar">
+                    <div class="bg-white py-2 collapse-inner rounded">
+                    <a class="collapse-item" href="">공지사항</a>
+                        <a class="collapse-item" href="">전체게시판</a>
+                        <a class="collapse-item" href="">부서별게시판</a>
                     </div>
                 </div>
             </li>
@@ -91,8 +105,6 @@
                         <a class="collapse-item" href="${path }/noteWrite">쪽지쓰기</a>
                         <a class="collapse-item" href="${path }/noteRead">받은쪽지함</a>
                         <a class="collapse-item" href="${path }/noteSend">보낸쪽지함</a>
-                        <!-- <a class="collapse-item" href="">중요쪽지함</a> -->
-                        <!-- <a class="collapse-item" href="">임시보관함</a> -->
                         <a class="collapse-item" href="${path }/noteDelete">휴지통</a>
                     </div>
                 </div>
