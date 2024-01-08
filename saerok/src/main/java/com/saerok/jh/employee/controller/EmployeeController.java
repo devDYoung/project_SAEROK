@@ -71,7 +71,7 @@ public class EmployeeController {
                String msg, loc;
                if (result > 0) {
                    msg = "사원등록성공";
-                   loc = "employee/successEmp";
+                   loc = "employee/empList";
                } else {
                    msg = "사원등록실패";
                    loc = "/index";
@@ -89,5 +89,20 @@ public class EmployeeController {
            return "common/msg";
        }
 
+     // 사원리스트 화면전환
+     @GetMapping("/selectemp")
+     public String selectEmployee() {
+        return "employee/empList";
+
+     }
+     
+     
+     
+     
+     
+     
+     
+     
+     
 
 }
