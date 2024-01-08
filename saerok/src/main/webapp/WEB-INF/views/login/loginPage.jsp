@@ -49,7 +49,7 @@
                                             <input type="password" name="empPw" id="pw"
                                                 class="form-control form-control-user" placeholder="비밀번호">
                                         </div>
-                                        <!-- 아이디 저장여부 -->
+                                        <!-- 아이디 저장여부 실행안됨-->
                                         <div class="form-group" style="font-size: 13px;">
                                             <div>
                                                 <input type="checkbox" id="remember-id"><label
@@ -81,7 +81,7 @@
     <!-- Core plugin JavaScript -->
     <script src="${pageContext.request.contextPath }/resources/vendor/jquery-easing/jquery.easing.min.js"></script>
     <script>
-        // 값 확인 후 로그인 실행
+        //로그인 실행 script
          function fn_login() {
         console.log($("#no").val());
         if ($("#no").val() != "" && $("#pw").val() != "") {
