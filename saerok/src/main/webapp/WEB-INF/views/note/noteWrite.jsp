@@ -29,7 +29,7 @@
 				<div class="form-floating mb-3">
 					<h>받는 사람</h>
 					<input class="form-control" id="email" type="email"
-						placeholder="이름, 사번을 입력해 주세요."
+						placeholder="부서, 사원을 검색해 주세요."
 						data-sb-validations="required,email" />
 					<div class="invalid-feedback" data-sb-feedback="email:required">An
 						email is required.</div>
