@@ -13,9 +13,9 @@ public interface CommuteDao {
    
 ArrayList<Commute> selectWorkList(SqlSession session, Commute commute);
 
-int insertWork(SqlSession sessoin, int empNo);
+int insertWork(SqlSession sessoin, String empNo);
 
-Commute selectWork(SqlSession session, int empNo);
+Commute selectWork(SqlSession session, String empNo);
 
 int updateWork(SqlSession session, int commuteNo);
 
