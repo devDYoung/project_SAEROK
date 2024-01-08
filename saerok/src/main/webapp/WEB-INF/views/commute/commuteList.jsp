@@ -5,6 +5,7 @@
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <c:set var="path" value="${pageContext.request.contextPath}"/>
+<c:set var="loginEmployee" value="${sessionScope.SPRING_SECURITY_CONTEXT.authentication.principal }"/> 
 <jsp:include page="/WEB-INF/views/common/header.jsp">
 	<jsp:param value="CommuteList" name="" />
 </jsp:include>
@@ -696,7 +697,7 @@
 			}
 		}
 
-		var empNo = "${sessionScope.loginEmployee.empNo}";	//로그인유저 사번
+		var empNo = "${loginEmployee.empNo}";	//로그인유저 사번
 		
 		$.ajax({
 			type: "POST", 

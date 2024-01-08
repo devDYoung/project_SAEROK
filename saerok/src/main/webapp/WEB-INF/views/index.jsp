@@ -165,6 +165,7 @@
 							<div class="card-body">
 								<div id="carouselExampleIndicators" class="carousel slide"
 									data-ride="carousel">
+									<h4 class="card-title mb-0 font-weight-bold">이번 주 신제품</h4>
 									<div class="carousel-inner" role="listbox">
 										<div class="carousel-item">
 											<img class="img-fluid" src="" alt="First slide">
