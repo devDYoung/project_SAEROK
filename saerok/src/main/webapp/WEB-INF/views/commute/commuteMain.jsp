@@ -9,4 +9,5 @@
 <jsp:include page="/WEB-INF/views/common/header.jsp">
 	<jsp:param value="CommuteMain" name="" />
 </jsp:include>
+
 <jsp:include page="/WEB-INF/views/common/footer.jsp" />

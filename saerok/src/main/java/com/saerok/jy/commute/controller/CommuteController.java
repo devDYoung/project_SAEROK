@@ -1,5 +1,6 @@
 package com.saerok.jy.commute.controller;
 
+
 import java.util.ArrayList;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -7,7 +8,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
@@ -18,15 +18,16 @@ import com.saerok.jy.commute.service.CommuteService;
 
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
+import lombok.RequiredArgsConstructor;
 
 @Controller
-@RequestMapping("/commute")
+@RequiredArgsConstructor
 public class CommuteController {
 
 	@Autowired
 	private CommuteService commuteService;
 
-	@GetMapping("/check")
+	@GetMapping("/commuteCheck")
 	public ModelAndView selectWorkList(HttpSession session, ModelAndView mv) {
 
 		// 현재 로그인 중인 사원의 사원번호
@@ -37,14 +38,14 @@ public class CommuteController {
 		Commute c = commuteService.selectWork(empNo);
 
 		mv.addObject("c", c);
-		mv.setViewName("/commute");
+		mv.setViewName("/commute/commuteMain");
 
 		return mv;
 	}
 
 	@ResponseBody
-	@PostMapping("/workList")
-	public ModelAndView selectWorkList(HttpSession session, ModelAndView mv, @RequestParam("year") int year,
+	@PostMapping("/selectCommuteList")
+	public ModelAndView selectWorkList2(HttpSession session, ModelAndView mv, @RequestParam("year") int year,
 			@RequestParam("month") int month, @RequestParam("empNo") int empNo) {
 
 		String strYear = String.valueOf(year).substring(2);
@@ -62,7 +63,7 @@ public class CommuteController {
 		mv.addObject("clist", clist);
 		mv.addObject("year", year);
 		mv.addObject("month", month);
-		mv.setViewName("/commuteList");
+		mv.setViewName("/commute/commuteList");
 
 		return mv;
 
@@ -85,12 +86,12 @@ public class CommuteController {
 		}
 
 		// 출근 일때,
-		if (status.equals("y")) {
+		if (status.equals("Y")) {
 			commuteService.insertWork(empNo);
 
 		}
 		// 퇴근 일때
-		else if (status.equals("n")) {
+		else if (status.equals("N")) {
 			commuteService.updateWork(commuteNo);
 		}
 
@@ -103,7 +104,7 @@ public class CommuteController {
 			model.addAttribute("c", c);
 			return "index";
 		} else {
-			return "redirect:/commute/commuteMain";
+			return "redirect:/commuteCheck";
 		}
 
 	}
