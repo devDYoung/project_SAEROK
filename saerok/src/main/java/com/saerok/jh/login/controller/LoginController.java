@@ -45,11 +45,10 @@ public class LoginController {
 	@ResponseBody
 	public Map<String,String> updateMyPage(Employee e, Model model) {
 		//비밀번호 암호화
-
+		
 		// 비밀번호 암호화 처리
 //		BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
 //		e.setEmpPw(encoder.encode(e.getEmpPw()));
-		
 		int result = service.updateMyPage(e);
 		
 		return Map.of("successYn",result==1?"Y":"N");
