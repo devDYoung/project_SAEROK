@@ -1,5 +1,7 @@
 package com.saerok.jh.employee.controller;
 
+import java.io.File;
+import java.io.IOException;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -8,55 +10,74 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.saerok.jh.employee.model.service.EmployeeService;
 
+import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 
 @Controller
 @RequiredArgsConstructor
+@Slf4j
 public class EmployeeController {
 	@Autowired
 	private final EmployeeService service;
-	
-	//사원등록 화면전환 
+
+	// 사원등록 화면전환
 	@GetMapping("/insertemp")
 	public String insertEmployee() {
 		return "employee/insertemployee";
-		
-	}
-	
-	//사원등록
-	@PostMapping("/insertempEnd")
-	public String insertEmployeeEnd(@RequestParam Map<String,Object> param, Model model) {
-		int result = 0;	
-		System.out.println(param);
-		
-		result=service.insertEmployeeEnd(param);
-		
-		String msg, loc;
-	      if(result>0) {
-	         msg="사원등록성공";
-	         loc="employee/successemp"; 
-	      }else {
-	         msg="사원등록실패";
-	         loc="/index";
-	      }
-	      
-	      model.addAttribute("msg",msg);
-	      model.addAttribute("loc",loc);
-	      
-	      
-	      return "common/msg";
 
-		
 	}
-	
-	
-	
-	
-	
-	
-	
-	
+
+	// 사원등록 
+	  @PostMapping("/insertempEnd")
+	    public String insertEmployeeEnd(MultipartFile oriFileName,
+	                                    @RequestParam Map<String, Object> param,
+	                                    Model model, HttpSession session) {
+	        int result = 0;
+	        log.debug("{}",oriFileName.getOriginalFilename());
+	        log.debug("{}",param);
+	        try {
+	            if (!oriFileName.isEmpty()) {
+	                // 원본 파일명
+	                String originalFileName = oriFileName.getOriginalFilename();
+
+	                // 서버에 저장할 파일명 생성 (현재 시간을 사용)
+	                String destFileName = System.currentTimeMillis() + "_" + originalFileName;
+
+	                // 파일을 서버에 저장하는 로직
+	                String path = session.getServletContext().getRealPath("/resources/upload/employee"); 
+	                File destFile = new File(path);
+	                oriFileName.transferTo(destFile);
+
+	                param.put("destFileName", destFileName);
+
+	                result = service.insertEmployeeEnd(param);
+	            }
+
+	            String msg, loc;
+	            if (result > 0) {
+	                msg = "사원등록성공";
+	                loc = "employee/successEmp";
+	            } else {
+	                msg = "사원등록실패";
+	                loc = "/index";
+	            }
+
+	            model.addAttribute("msg", msg);
+	            model.addAttribute("loc", loc);
+
+	        } catch (IOException e) {
+	            e.printStackTrace();
+	            model.addAttribute("msg", "파일 업로드 실패!!!");
+	            model.addAttribute("loc", "/index");
+	        }
+
+	        return "common/msg";
+	    }
+
+
 }
