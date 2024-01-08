@@ -52,21 +52,21 @@
 <insert id="insertEmployeeEnd" parameterType="map">
     INSERT INTO EMPLOYEE 
     VALUES (
-        SEQ_EMP_NO.NEXTVAL,
-        #{empName},
-        #{empPw},
-        #{empEmail},
-        #{empPhone},
-        (select emp_date from employee where EMP_NO=#{empNo}),
-        #{issueAnnu},
+        'ATO_'||SEQ_EMP_NO.NEXTVAL,
         #{deptCode},
         #{jobCode},
+        #{empPw},
+        #{empName},
+        #{empPhone},
+        #{empEmail},
         null,
         null,
-        null, 
+        sysdate,
+        'Y',
         #{oriFileName},
         #{destFileName},
-        null 
+        #{issueAnnu},
+        null
     )
 </insert>
 	
