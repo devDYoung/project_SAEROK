@@ -32,7 +32,7 @@ public class EmployeeController {
 
 	}
 
-	// 사원등록 +파일업로드 추가해야함
+	// 사원등록 
 	  @PostMapping("/insertempEnd")
 	    public String insertEmployeeEnd(MultipartFile oriFileName,
 	                                    @RequestParam Map<String, Object> param,
