@@ -83,23 +83,23 @@
 										<p class="col-6" style="padding: 0px;">${loginEmployee.empName }
 											${loginEmployee.jobName}</p>
 										<p class="col-6 text-right" style="padding: 0px;"
-											id="startTime"></p>
+											id="inDtime"></p>
 									</div>
 									<div class="d-flex" style="font-size: 16px">
 										<p class="col-6" style="padding: 0px;">${loginEmployee.deptName}</p>
-										<p class="col-6 text-right" style="padding: 0px;" id="endTime"></p>
+										<p class="col-6 text-right" style="padding: 0px;" id="outDtime"></p>
 									</div>
 									<div class="d-flex" style="font-size: 16px;">
 										<p class="col-6" style="padding: 0px;">출근시간</p>
 										<p class="col-6 text-right" style="padding: 0px;"
-											id="startTime"></p>
+											id="inDtime"></p>
 									</div>
 									<div class="d-flex" style="font-size: 16px">
 										<p class="col-6" style="padding: 0px;">퇴근시간</p>
-										<p class="col-6 text-right" style="padding: 0px;" id="endTime"></p>
+										<p class="col-6 text-right" style="padding: 0px;" id="outDtime"></p>
 									</div>
 								</div>
-								<form method="get" action="/changeStatus">
+								<form method="get" action="${path }/changeStatus">
 									<!-- 출퇴근 버튼 -->
 									<div class="d-flex align-items-center">
 										<button type="submit" id="startBtn"
@@ -165,15 +165,16 @@
 							<div class="card-body">
 								<div id="carouselExampleIndicators" class="carousel slide"
 									data-ride="carousel">
+									<h4 class="card-title mb-0 font-weight-bold">이번 주 신제품</h4><br>
 									<div class="carousel-inner" role="listbox">
 										<div class="carousel-item">
-											<img class="img-fluid" src="" alt="First slide">
+											<img class="img-fluid" src="${paht }/resources/upload/IMG_2341.jpg" alt="First slide">
 										</div>
 										<div class="carousel-item">
-											<img class="img-fluid" src="" alt="Second slide">
+											<img class="img-fluid" src="${path }/resources/upload/IMG_2342.jpg" alt="Second slide">
 										</div>
 										<div class="carousel-item active">
-											<img class="img-fluid" src="" alt="Third slide">
+											<img class="img-fluid" src="${path }/resources/upload/IMG_2343.jpg" alt="Third slide">
 										</div>
 									</div>
 									<a class="carousel-control-prev"
@@ -217,20 +218,20 @@
 				$('#startBtn').attr('disabled', false);
 				$('#endBtn').attr('disabled', false);
 
-				$('#startTime').text("미등록")
-				$('#endTime').text("미등록")
+				$('#inDtime').text("미등록")
+				$('#outDtime').text("미등록")
 			}
 			if (start != "" && end == "") {
 				$('#startBtn').attr('disabled', true) //출근버튼 비활성화
 
-				$('#startTime').text(start) //출근시간 표시
-				$('#endTime').text("미등록")
+				$('#inDtime').text(start) //출근시간 표시
+				$('#outDtime').text("미등록")
 			} else if (start != "" && end != "") {
 				$('#startBtn').attr('disabled', true) //출근버튼 비활성화
 				$('#endBtn').attr('disabled', true) //퇴근버튼 비활성화
 
-				$('#startTime').text(start) //출근시간 표시
-				$('#endTime').text(end) //퇴근시간 표시
+				$('#inDtime').text(start) //출근시간 표시
+				$('#outDtime').text(end) //퇴근시간 표시
 			}
 
 			//근무상태 선택버튼 css설정

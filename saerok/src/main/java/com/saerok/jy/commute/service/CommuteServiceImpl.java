@@ -30,7 +30,7 @@ public class CommuteServiceImpl implements CommuteService{
 	}
 	
 	@Override
-	public Commute selectWork(int empNo) {
+	public Commute selectWork(String empNo) {
 		
 		Commute c = commuteDao.selectWork(session, empNo);
 		
@@ -38,7 +38,7 @@ public class CommuteServiceImpl implements CommuteService{
 	}
 
 	@Override
-	public void insertWork(int empNo) {
+	public void insertWork(String empNo) {
 		
 		int result = commuteDao.insertWork(session, empNo);
 		
