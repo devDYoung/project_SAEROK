@@ -13,7 +13,6 @@
 .dy {
 	margin-left: 200px;
 }
-
 </style>
 <div class="content">
 	<div class="row gx-5 justify-content-center">
@@ -52,8 +51,8 @@
 				<!-- Message input-->
 				<div class="form-floating mb-3">
 					<h>내용</h>
-					<textarea class="form-control" id="message" type="text" style="height: 10rem"
-						data-sb-validations="required"></textarea>
+					<textarea class="form-control" id="message" type="text"
+						style="height: 10rem" data-sb-validations="required"></textarea>
 					<label for="message">Message</label>
 					<div class="invalid-feedback" data-sb-feedback="message:required">A
 						message is required.</div>
@@ -73,8 +72,8 @@
 				</div>
 				<!-- Submit Button-->
 				<div class="d-grid text-right">
-					<button class="btn-sm btn btn-primary btn-lg disabled btn" id="submitButton"
-						type="submit">보내기</button>
+					<button class="btn-sm btn btn-primary btn-lg disabled btn"
+						id="submitButton" type="submit">보내기</button>
 				</div>
 			</form>
 		</div>
@@ -82,29 +81,70 @@
 </div>
 
 <!-- Employee Modal -->
-<div class="modal fade" id="employeeModal" tabindex="-1" aria-labelledby="employeeModalLabel" aria-hidden="true">
+<div class="modal fade" id="employeeModal" tabindex="-1"
+	aria-labelledby="employeeModalLabel" aria-hidden="true">
 	<div class="modal-dialog">
 		<div class="modal-content">
 			<div class="modal-header">
-				<h5 class="modal-title" id="employeeModalLabel">사원 조회</h5>
-				<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+				<form
+					class="d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search">
+					<div class="input-group">
+						<input type="text" class="form-control bg-light border-0 small"
+							placeholder="Search for..." aria-label="Search"
+							aria-describedby="basic-addon2">
+						<div class="input-group-append">
+							<button class="btn btn-primary" type="button">
+								<i class="fas fa-search fa-sm"></i>
+							</button>
+						</div>
+					</div>
+				</form>
+				<button type="button" class="btn-close" data-bs-dismiss="modal"
+					aria-label="Close"></button>
 			</div>
 			<div class="modal-body">
 				<!-- 모달 창 내용 추가-->
-				<p>인사팀</p>
-				<p>홍보팀</p>
-				<p>관리팀</p>
+				<table class="table table-bordered">
+					<thead>
+						<tr>
+							<th scope="col">부서</th>
+							<th scope="col">사원</th>
+							<th scope="col">선택</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr>
+							<td></td>
+							<td></td>
+							<td><button class="btn btn-primary">선택</button></td>
+						</tr>
+						<tr>
+							<td></td>
+							<td></td>
+							<td><button class="btn btn-primary">선택</button></td>
+						</tr>
+						<tr>
+							<td></td>
+							<td></td>
+							<td><button class="btn btn-primary">선택</button></td>
+						</tr>
+					</tbody>
+				</table>
 			</div>
+
 		</div>
 	</div>
+</div>
 </div>
 
 <jsp:include page="/WEB-INF/views/common/footer.jsp" />
 
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+<script
+	src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 <script>
 	function openEmployeeModal() {
-		var employeeModal = new bootstrap.Modal(document.getElementById('employeeModal'));
+		var employeeModal = new bootstrap.Modal(document
+				.getElementById('employeeModal'));
 		employeeModal.show();
 	}
 </script>
