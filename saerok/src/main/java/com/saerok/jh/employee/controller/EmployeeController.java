@@ -37,7 +37,7 @@ public class EmployeeController {
 		String msg, loc;
 	      if(result>0) {
 	         msg="사원등록성공";
-	         loc="employee/successemp";
+	         loc="employee/successemp"; 
 	      }else {
 	         msg="사원등록실패";
 	         loc="/index";

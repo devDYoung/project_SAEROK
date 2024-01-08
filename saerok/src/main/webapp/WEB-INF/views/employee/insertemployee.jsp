@@ -61,11 +61,13 @@
             </div>
             <div class="col-lg-7">
               <div class="p-5">
-                <div class="text-center">
-                  <h1 class="h4 text-gray-900 mb-4">ATO 사원등록</h1>
-                  <img id="profile-img" class="img-profile rounded-circle"
-				src="${pageContext.request.contextPath }/resources/img/ato100px.png"></a>
-                </div>
+                 <div class="form-group">
+				    <label for="fileUploaderLabel" class="custom-file-upload">
+				        <img id="profile-img" class="img-profile rounded-circle" src="${pageContext.request.contextPath }/resources/img/ato100px.png"></a>
+				        업로드할 파일 선택
+				    </label>
+				    <input type="file" id="fileUploader" name="fileUploader" style="display: none;">
+				</div>
                 <br>
                 <form class="insertEmp" id="employeeForm" action="${path}/insertempEnd" method="post">
                   <div class="form-group row">

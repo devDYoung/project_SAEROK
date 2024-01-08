@@ -49,23 +49,26 @@
  	 WHERE EMP_NO=#{empNo}
 	</update>
 	
-	<insert id="insertEmployeeEnd" parameterType="map" >
-		INSERT INTO EMPLOYEE VALUES(
-		 SEQ_EMP_NO.NEXTVAL
-		,#{empName}
-		,#{empPhone}
-		,#{empEmail}
-		,null 
-		,null
-		,SYSDATE
-		,#{oriFileName}
-		,#{destFileName}
-		,#{issueAnnu}
-		,null
-		,#{depeCode}
-		,#{jobCode})
-
-	</insert>
+<insert id="insertEmployeeEnd" parameterType="map">
+    INSERT INTO EMPLOYEE 
+    VALUES (
+        SEQ_EMP_NO.NEXTVAL,
+        #{empName},
+        #{empPw},
+        #{empEmail},
+        #{empPhone},
+        (select emp_date from employee where EMP_NO=#{empNo}),
+        #{issueAnnu},
+        #{deptCode},
+        #{jobCode},
+        null,
+        null,
+        null, 
+        #{oriFileName},
+        #{destFileName},
+        null 
+    )
+</insert>
 	
 
 	
