@@ -5,6 +5,7 @@ import org.springframework.security.authentication.UsernamePasswordAuthenticatio
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.saerok.jh.employee.model.dto.Employee;
 import com.saerok.jh.login.model.dao.LoginDao;
@@ -31,7 +32,7 @@ public class LoginServiceImpl implements LoginService {
 	
 	
 	//마이페이지
-	
+	@Transactional
 	public int updateMyPage(Employee e) {
 		int result=dao.updateMyPage(session, e);
 		if(result>0) {
