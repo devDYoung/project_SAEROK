@@ -63,7 +63,7 @@ public class EmployeeController {
 	                File destFile = new File(path,destFileName);
 	                oriFileName.transferTo(destFile);
 
-	                param.put("oriFileName",oriFileName);
+	                param.put("oriFileName",oriFileName); 
 	                param.put("destFileName", destFileName); 
 	                result = service.insertEmployeeEnd(param);
 	            }
