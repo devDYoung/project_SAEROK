@@ -63,7 +63,8 @@
         null,
         sysdate,
         'Y',
-        #{oriFileName},
+        #{oriFileName.originalFilename},
+        <!-- #{oriFileName}, -->
         #{destFileName},
         #{issueAnnu},
         null
