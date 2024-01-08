@@ -74,7 +74,7 @@ public class EmployeeController {
 	                loc = "employee/successEmp";
 	            } else {
 	                msg = "사원등록실패";
-	                loc = "/main";
+	                loc = "/index";
 	            }
 
 	            model.addAttribute("msg", msg);
@@ -83,7 +83,7 @@ public class EmployeeController {
 	        } catch (IOException e) {
 	            e.printStackTrace();
 	            model.addAttribute("msg", "파일 업로드 실패!!!");
-	            model.addAttribute("loc", "/main");
+	            model.addAttribute("loc", "/index");
 	        }
 
 	        return "common/msg";
