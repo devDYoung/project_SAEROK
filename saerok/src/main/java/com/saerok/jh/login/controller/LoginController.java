@@ -56,9 +56,9 @@ public class LoginController {
 
 
 	//메인페이지
-	@GetMapping("/index")
+	@GetMapping("/main")
 	public String mainpage() {
-	    return "index";
+	    return "main";
 	}
 	
 
