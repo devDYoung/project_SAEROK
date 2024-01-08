@@ -48,7 +48,7 @@ public class LoginController {
 		
 		// 비밀번호 암호화 처리
 //		BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
-//		e.setEmpPw(encoder.encode(e.getEmpPw()));
+//		e.setEmpPw(encoder.encode(e.getEmpPw(1234)));
 		int result = service.updateMyPage(e);
 		
 		return Map.of("successYn",result==1?"Y":"N");
