@@ -10,7 +10,16 @@
 <jsp:include page="/WEB-INF/views/common/header.jsp">
 	<jsp:param value="MainPage" name="ATO" />
 </jsp:include>
-<!-- <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/fullcalendar-scheduler@5.9.0/main.min.css"> -->
+<!-- Calendar & Reservation JavaScript -->
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <!-- Axios CDN -->
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <!-- Moment CDN -->
+    <script src="https://cdn.jsdelivr.net/momentjs/latest/moment.min.js"></script>
+    <!-- fullcalendar-scheduler CDN -->
+    <script src="https://cdn.jsdelivr.net/npm/fullcalendar-scheduler@5.9.0/main.min.js"></script>
+    <!-- fullcalendar-scheduler 언어 CDN -->
+    <script src="https://cdn.jsdelivr.net/npm/fullcalendar-scheduler@5.9.0/locales-all.min.js"></script>
 <section>
 	<div id="main-wrapper" data-theme="light" data-layout="vertical"
 		data-navbarbg="skin6" data-sidebartype="full"
@@ -38,7 +47,8 @@
 										aria-expanded="true" class="nav-link"> <i
 											class="mdi mdi-account-circle d-lg-none d-block mr-1"></i> <span
 											class="d-none d-lg-block  font-weight-bold">매출현황</span>
-									</a></li>
+									</a>
+									</li>
 								</ul>
 
 								<div class="tab-content">
@@ -52,7 +62,17 @@
 									</div>
 									<div class="tab-pane" id="sales">
 										<!-- sales list -->
-										매출현황 리스트 넣기
+											<div class="card shadow mb-4">
+                                <div class="card-header py-3">
+                                    <h6 class="m-0 font-weight-bold text-primary">월별매출</h6>
+                                </div>
+                                <div class="card-body">
+                                    <div class="chart-area">
+                                        <canvas id="myAreaChart"></canvas>
+                                    </div>
+                                    <hr>
+                                </div>
+                            </div>
 									</div>
 								</div>
 							</div>
@@ -111,7 +131,7 @@
 									</div>
 
 									<!-- 상태 설정버튼 -->
-									<div class="d-flex align-items-center"
+									<!-- <div class="d-flex align-items-center"
 										style="margin-top: 15px;">
 										<button type="button" id="selectStatus"
 											class="btn btn-rounded btn-outline-primary col-12"
@@ -138,9 +158,9 @@
 											class="d-flex col-12 btn btn-outline-primary"
 											style="border: none; border-bottom-left-radius: 9px; border-bottom-right-radius: 9px;"
 											value="7" name="status">반차</button>
-									</div>
+									</div> -->
 									<input type="hidden" name="cNo" value="${c.commuteNo }">
-									<input type="hidden" name="main" value="1">
+									<input type="hidden" name="main" value="1"> 
 								</form>
 							</div>
 						</div>
@@ -154,8 +174,25 @@
 									<h4 class="card-title mb-0 font-weight-bold">결재함</h4>
 								</div>
 								<div class="col-md-12 col-sm-12" style="margin-top: 50px;">
-									<ul class="list-group" id="boardList">
-									</ul>
+									<ul class="list-group" id="boardList"> 
+									  <div class="index_section2">
+											<form action="">
+												<div id="e-pay-status">
+													<span> <a href="${path}"
+														style="color: rgb(59, 211, 39);">결재대기</a>
+														<div>${countYet}건</div>
+													</span> 
+													<span> <a href="${path}"
+														style="color: rgb(59, 211, 39);">결재중</a>
+														<div>${countUnder}건</div>
+													</span> 
+													<span> <a href="${path}"
+														style="color: rgb(59, 211, 39);">결재완료</a>
+														<div>${countDone}건</div>
+													</span>
+												</div>
+											</form>
+											</ul> 
 								</div>
 							</div>
 						</div>
@@ -316,6 +353,24 @@
 			}
 		}
 	</script>
+	
+    <!-- Bootstrap core JavaScript-->
+    <script src="vendor/jquery/jquery.min.js"></script>
+    <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+
+    <!-- Core plugin JavaScript-->
+    <script src="vendor/jquery-easing/jquery.easing.min.js"></script>
+
+    <!-- Custom scripts for all pages-->
+    <script src="js/sb-admin-2.min.js"></script>
+
+    <!-- Page level plugins -->
+    <script src="vendor/chart.js/Chart.min.js"></script>
+    
+    <!-- Page level custom scripts -->
+    <script src="js/demo/chart-area-demo.js"></script>
+    <script src="js/demo/chart-pie-demo.js"></script>
+    <script src="js/demo/chart-bar-demo.js"></script>
 </section>
 <br>
 <jsp:include page="/WEB-INF/views/common/footer.jsp" />

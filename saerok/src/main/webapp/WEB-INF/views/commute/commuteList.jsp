@@ -51,6 +51,48 @@
 			<span class="ab" id="after"><i data-feather="chevron-right" class="feather-icon"></i></span>
 		</div>
 	</div>
+		<script>
+	var year = ${year}
+	var month = ${month}
+	
+	$('.ab').click(function(){
+		if($(this).attr('id') == 'before'){
+			month = month - 1;
+			if(month < 1){
+				year = year - 1;
+				month = 12;
+			}
+		}
+		else{
+			month = month + 1;
+			if(month > 12){
+				year = year + 1;
+				month = 1;
+			}
+		}
+
+		var empNo = "${loginEmployee.empNo}";	//로그인유저 사번
+		
+		$.ajax({
+			type: "POST", 
+			url:"/selectCommuteList",
+			dataType:"html",	//html 방식
+			data: { 
+					year:year, 
+					month: month, 
+					empNo: empNo
+				},
+			success : function(result){
+				
+				$('#workList').html(result);	//html태그 넣기
+			},
+			error : function(){
+				
+				alert("근무정보를 조회할 수 없습니다. \n관리자에게 문의하세요.");
+			}
+		}); 
+	})
+	</script>
 	<div class="row">
 		<div class="col-md-12 m-auto">
 			<div id = "summary" class="d-flex col-12 m-auto" style="border: 1px solid rgba(0,0,0,.125); background-color: white">
@@ -133,7 +175,7 @@
 					</c:choose>
 				</div>
 				<div class="col-2">
-					<c:set var="ot" value="${date.endTime }"/>
+					<c:set var="ot" value="${date.outDtime }"/>
 					<c:choose>
 						<c:when test="${empty ot }">
 							<span class="outDtime"></span>
@@ -164,55 +206,10 @@
 		</div>
 		<br>
 	</c:forEach>
-	
-
-	
 </section>
 
 <jsp:include page="/WEB-INF/views/common/footer.jsp" />
 	<script>
-	<script>
-	var year = ${year}
-	var month = ${month}
-	
-	$('.ab').click(function(){
-		if($(this).attr('id') == 'before'){
-			month = month - 1;
-			if(month < 1){
-				year = year - 1;
-				month = 12;
-			}
-		}
-		else{
-			month = month + 1;
-			if(month > 12){
-				year = year + 1;
-				month = 1;
-			}
-		}
-
-		var empNo = "${loginEmployee.empNo}";	//로그인유저 사번
-		
-		$.ajax({
-			type: "POST", 
-			url:"/selectWorkList",
-			dataType:"html",	//html 방식
-			data: { 
-					year:year, 
-					month: month, 
-					empNo: empNo
-				},
-			success : function(result){
-				
-				$('#workList').html(result);	//html태그 넣기
-			},
-			error : function(){
-				
-				alert("근무정보를 조회할 수 없습니다. \n관리자에게 문의하세요.");
-			}
-		}); 
-	})
-	
 		$(function(){
 			
 			//총 근무시간 형식 맞추기

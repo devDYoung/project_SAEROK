@@ -29,8 +29,7 @@
 
 </head>
 
-<body id="page-top">
-
+<body id="page-top" onload="printClock()">
     <!-- Page Wrapper -->
     <div id="wrapper">
 
