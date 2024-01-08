@@ -29,8 +29,7 @@
 
 </head>
 
-<body id="page-top">
-
+<body id="page-top" onload="printClock()">
     <!-- Page Wrapper -->
     <div id="wrapper">
 
@@ -58,7 +57,7 @@
                 </a>
                 <div id="collapseHR" class="collapse" aria-labelledby="headingHR" data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
-                        <a class="collapse-item" href="">사원등록</a>
+                        <a class="collapse-item" href="${path }/insertemp">사원등록</a>
                         <a class="collapse-item" href="">사원조회</a>
                         <a class="collapse-item" href="">조직도</a>
                     </div>
@@ -74,9 +73,23 @@
                     data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
                         <a class="collapse-item" href="">근태</a>
-                        <a class="collapse-item" href="${path}/commuteList">근태조회</a>
+                        <a class="collapse-item" href="${path}/workList">근태조회</a>
                         <a class="collapse-item" href="">개인일정</a>
                         <a class="collapse-item" href="">부서일정</a>
+                    </div>
+                </div>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseBoard"
+                    aria-expanded="true" aria-controls="collapseBoard">
+                    <i class="fas fa-th-list"></i>
+                    <span>게시판</span>
+                </a>
+                <div id="collapseBoard" class="collapse" aria-labelledby="headingBoard" data-parent="#accordionSidebar">
+                    <div class="bg-white py-2 collapse-inner rounded">
+                    <a class="collapse-item" href="">공지사항</a>
+                        <a class="collapse-item" href="">전체게시판</a>
+                        <a class="collapse-item" href="">부서별게시판</a>
                     </div>
                 </div>
             </li>
@@ -91,8 +104,6 @@
                         <a class="collapse-item" href="${path }/noteWrite">쪽지쓰기</a>
                         <a class="collapse-item" href="${path }/noteRead">받은쪽지함</a>
                         <a class="collapse-item" href="${path }/noteSend">보낸쪽지함</a>
-                        <!-- <a class="collapse-item" href="">중요쪽지함</a> -->
-                        <!-- <a class="collapse-item" href="">임시보관함</a> -->
                         <a class="collapse-item" href="${path }/noteDelete">휴지통</a>
                     </div>
                 </div>
@@ -213,14 +224,14 @@
                         </li>
 
                         <!-- Nav Item - Alerts -->
-                        <li class="nav-item dropdown no-arrow mx-1">
+                        <!-- <li class="nav-item dropdown no-arrow mx-1">
                             <a class="nav-link dropdown-toggle" href="#" id="alertsDropdown" role="button"
                                 data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                 <i class="fas fa-bell fa-fw"></i>
-                                <!-- Counter - Alerts -->
+                                Counter - Alerts
                                 <span class="badge badge-danger badge-counter">3+</span>
                             </a>
-                            <!-- Dropdown - Alerts -->
+                            Dropdown - Alerts
                             <div class="dropdown-list dropdown-menu dropdown-menu-right shadow animated--grow-in"
                                 aria-labelledby="alertsDropdown">
                                 <h6 class="dropdown-header">
@@ -263,15 +274,15 @@
                             </div>
                         </li>
 
-                        <!-- Nav Item - Messages -->
+                        Nav Item - Messages
                         <li class="nav-item dropdown no-arrow mx-1">
                             <a class="nav-link dropdown-toggle" href="#" id="messagesDropdown" role="button"
                                 data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                 <i class="fas fa-envelope fa-fw"></i>
-                                <!-- Counter - Messages -->
+                                Counter - Messages
                                 <span class="badge badge-danger badge-counter">7</span>
                             </a>
-                            <!-- Dropdown - Messages -->
+                            Dropdown - Messages
                             <div class="dropdown-list dropdown-menu dropdown-menu-right shadow animated--grow-in"
                                 aria-labelledby="messagesDropdown">
                                 <h6 class="dropdown-header">
@@ -324,7 +335,7 @@
                                 <a class="dropdown-item text-center small text-gray-500" href="#">쪽지 더보기</a>
                             </div>
                         </li>
-
+ -->
                         <div class="topbar-divider d-none d-sm-block"></div>
 
                         <!-- Nav Item - User Information -->
@@ -332,8 +343,8 @@
                             <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button"
                                 data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                 <span class="mr-2 d-none d-lg-inline text-gray-600 small">${loginEmployee.empName }</span>
-                                <img class="img-profile rounded-circle"
-                                    src="img/undraw_profile.svg">
+                                <!-- <img class="img-profile rounded-circle"
+                                    src="img/undraw_profile.svg"> -->
                             </a>
                             <!-- Dropdown - User Information -->
                             <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in"

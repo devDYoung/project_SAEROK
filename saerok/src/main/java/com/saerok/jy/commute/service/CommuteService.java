@@ -9,13 +9,15 @@ import com.saerok.jy.commute.dto.Commute;
 public interface CommuteService {
 	ArrayList<Commute> selectWorkList(Commute commute);
 
-	Commute selectWork(int empNo);
+	Commute selectWork(String empNo);
 
-	void insertWork(int empNo);
+	void insertWork(String empNo);
 
 	void updateWork(int commuteNo);
 	
-	
+	void insertWorkStatus(String status);
+
+
 
 
 }
