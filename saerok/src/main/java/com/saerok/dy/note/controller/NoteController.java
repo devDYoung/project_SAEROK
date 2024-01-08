@@ -1,8 +1,5 @@
 package com.saerok.dy.note.controller;
 
-import com.saerok.dy.note.model.dto.NoteDTO;
-import com.saerok.dy.note.model.service.NoteService;
-
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,6 +7,9 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+
+import com.saerok.dy.note.model.dto.Note;
+import com.saerok.dy.note.model.service.NoteService;
 
 @Controller
 public class NoteController {
@@ -27,14 +27,14 @@ public class NoteController {
     }
 
     @PostMapping("/noteWrite")
-    public String writeNote(NoteDTO note) {
+    public String writeNote(Note note) {
         noteService.writeNote(note);
         return "redirect:/noteWrite";
     }
     
     @GetMapping("/noteRead")
     public String readNotePage(Model model) {
-        List<NoteDTO> receivedNotes = noteService.getReceivedNotes();
+        List<Note> receivedNotes = noteService.getReceivedNotes();
         model.addAttribute("receivedNotes", receivedNotes);
         return "note/noteRead";
     }
