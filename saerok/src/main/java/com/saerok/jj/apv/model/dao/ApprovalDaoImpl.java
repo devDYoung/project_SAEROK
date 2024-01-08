@@ -16,13 +16,13 @@ public class ApprovalDaoImpl implements ApprovalDao {
 		int cPage=page.get("cPage");
 		int numPerpage=page.get("numPerpage");
 		RowBounds rb=new RowBounds((cPage-1)*numPerpage,numPerpage);
-		
+
 		return session.selectList("approval.selectApproval",null,rb);
 	}
 
 	@Override
 	public Approval selectApprovalByNo(SqlSession session, long apvNo) {
-	
+
 		return session.selectOne("approval.selectApprovalByNo",apvNo);
 	}
 

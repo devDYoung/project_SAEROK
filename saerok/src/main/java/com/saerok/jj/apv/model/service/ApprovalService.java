@@ -6,10 +6,10 @@ import java.util.Map;
 import com.saerok.jj.apv.model.dto.Approval;
 
 public interface ApprovalService {
-	
+
 	List<Approval> selectApproval(Map<String, Integer> page);
-	
+
 	Approval selectApprovalByNo(long apvNo);
-	
+
 	int insertApproval(Approval a);
 }

@@ -18,10 +18,10 @@ import lombok.AllArgsConstructor;
 @AllArgsConstructor
 @RequestMapping("/approval")
 public class ApprovalController {
-	
+
 	private ApprovalService service;
 	private PageFactory pageFactory;
-	
+
 	@GetMapping("/approvalList.do")
 	public void selectApproval(@RequestParam(defaultValue="1") int cPage,
 								@RequestParam(defaultValue="5") int numPerpage,
@@ -29,17 +29,17 @@ public class ApprovalController {
 		model.addAttribute("approval",
 				service.selectApproval(Map.of("cPage",cPage,"numPerpage",numPerpage)));
 		model.addAttribute("pageBar",pageFactory.getPage(cPage, numPerpage, 0, "approvalList.do"));
-		
+
 	}
-	
+
 	@RequestMapping("/approvalView.do")
 	public void selectApprovalByNo(long apvNo, Model model) {
 		model.addAttribute("approval",service.selectApprovalByNo(apvNo));
 	}
-	
+
 	@RequestMapping("/approvalWrite.do")
 	public void approvalWrite() {}
-	
+
 	@RequestMapping("/insertApproval.do")
 	public String insertApproval(Approval a, Model model) {
 		int result=service.insertApproval(a);
@@ -53,9 +53,9 @@ public class ApprovalController {
 		}
 		model.addAttribute("msg",msg);
 		model.addAttribute("loc",loc);
-		
+
 		return "common/msg";
-		
+
 	}
-	
+
 }
