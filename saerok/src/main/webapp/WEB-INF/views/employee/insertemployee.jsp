@@ -35,8 +35,8 @@
   }
 
   #profile-img {
-    width: 80px;
-    height: 60px;
+    width: 100px;
+    height: 90px;
     margin-top: 10px;
     margin-left: 10px; /* 이미지를 왼쪽으로 이동시키기 위해 수정 */
   }
@@ -57,19 +57,20 @@
           <!-- Nested Row within Card Body -->
           <div class="row">
             <div class="col-lg-5">
-              <img class="ato-insertimg" src="${path}/resources/img/ato-cosmatic.jpg" alt="아토 logo">
+              <img class="ato-insertimg" src="${path}/resources/img/ato-cosmatic2.jpg" alt="아토 logo">
             </div>
             <div class="col-lg-7">
               <div class="p-5">
-                 <div class="form-group">
-				    <label for="fileUploaderLabel" class="custom-file-upload">
+                <form class="insertEmp" id="employeeForm" action="${path}/insertempEnd" method="post"
+                enctype="multipart/form-data">
+                 <div class="text-center">
+                  <h1 class="h4 text-gray-900 mb-4" style="text-align: center;">ATO 사원등록</h1>
+                  <label for="fileUploaderLabel" class="custom-file-upload">
 				        <img id="profile-img" class="img-profile rounded-circle" src="${pageContext.request.contextPath }/resources/img/ato100px.png"></a>
-				        업로드할 파일 선택
 				    </label>
-				    <input type="file" id="fileUploader" name="fileUploader" style="display: none;">
-				</div>
+				    <input type="file" id="oriFileName" name="oriFileName" style="display: none;">
+                </div> 
                 <br>
-                <form class="insertEmp" id="employeeForm" action="${path}/insertempEnd" method="post">
                   <div class="form-group row">
                     <div class="col-sm-6 mb-3 mb-sm-0">
                       <input type="text" class="form-control form-control-user" name="empName"
@@ -165,23 +166,53 @@
 </body>
 
 <script>
+	//사원등록 
     function submitForm() {
-        // Gather form data
         var empName = $("#empName").val();
         var empPw = $("#empPw").val();
         var empEmail = $("#empEmail").val();
-        // Add more fields as needed
 
-        // Construct URL with parameters
         var url = "${path}/insertempEnd?empName=" + encodeURIComponent(empName)
                   + "&empPw=" + encodeURIComponent(empPw)
                   + "&empEmail=" + encodeURIComponent(empEmail);
-        // Add more parameters as needed
-
-        // Redirect to the URL
         window.location.href = url;
     }
+    
+    //파일업로드 script
+    // 파일 선택 input의 변경 이벤트를 감지하여 동작하는 함수
+    document.getElementById('oriFileName').addEventListener('change', handleFileSelect);
+
+    // 파일 선택하면 동작함
+    function handleFileSelect(event) {
+        var selectedFile = event.target.files[0];
+
+        if (selectedFile) {
+            // 파일 미리보기
+            var reader = new FileReader();
+            reader.onload = function (e) {
+                document.getElementById('profile-img').src = e.target.result;
+            };
+            reader.readAsDataURL(selectedFile);
+
+            // 여기에서 선택한 파일 정보를 FormData에 추가
+            var formData = new FormData();
+            formData.append("oriFileName", selectedFile);
+
+
+            //formData를 서버로 전송 및 내가 원하는 동작 수행
+            alert("선택한 파일: " + selectedFile.name);
+        }
+    }
+
+    // 파일 선택 input 클릭하도록 설정
+    document.querySelector('.custom-file-upload').addEventListener('click', function () {
+        document.getElementById('oriFileName').click();
+    });
 </script>
+
+
+
+
 
 
 
