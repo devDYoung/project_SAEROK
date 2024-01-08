@@ -1,10 +1,12 @@
 package com.saerok.ch.branch.service;
 
+import java.util.List;
+
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+
 import com.saerok.ch.branch.mapper.BranchMapper;
 import com.saerok.ch.branch.model.dto.Branch;
-import org.springframework.stereotype.Service;
-
-import java.util.List;
 
 @Service
 public class BranchServiceImpl implements BranchService {
@@ -28,16 +30,19 @@ public class BranchServiceImpl implements BranchService {
     }
 
     @Override
+    @Transactional
     public void addBranch(Branch branch) {
         branchMapper.addBranch(branch);
     }
 
     @Override
+    @Transactional
     public void updateBranch(Branch branch) {
         branchMapper.updateBranch(branch);
     }
 
     @Override
+    @Transactional
     public void deleteBranch(int branchNo) {
         branchMapper.deleteBranch(branchNo); 
     }
