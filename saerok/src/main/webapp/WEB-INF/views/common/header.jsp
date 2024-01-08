@@ -81,6 +81,20 @@
                 </div>
             </li>
             <li class="nav-item">
+                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseBoard"
+                    aria-expanded="true" aria-controls="collapseBoard">
+                    <i class="fas fa-th-list"></i>
+                    <span>게시판</span>
+                </a>
+                <div id="collapseBoard" class="collapse" aria-labelledby="headingBoard" data-parent="#accordionSidebar">
+                    <div class="bg-white py-2 collapse-inner rounded">
+                    <a class="collapse-item" href="">공지사항</a>
+                        <a class="collapse-item" href="">전체게시판</a>
+                        <a class="collapse-item" href="">부서별게시판</a>
+                    </div>
+                </div>
+            </li>
+            <li class="nav-item">
                 <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseMsg"
                     aria-expanded="true" aria-controls="collapseMsg">
                     <i class="fas fa-fw fa-envelope"></i>

@@ -165,16 +165,16 @@
 							<div class="card-body">
 								<div id="carouselExampleIndicators" class="carousel slide"
 									data-ride="carousel">
-									<h4 class="card-title mb-0 font-weight-bold">이번 주 신제품</h4>
+									<h4 class="card-title mb-0 font-weight-bold">이번 주 신제품</h4><br>
 									<div class="carousel-inner" role="listbox">
 										<div class="carousel-item">
-											<img class="img-fluid" src="" alt="First slide">
+											<img class="img-fluid" src="${paht }/resources/upload/IMG_2341.jpg" alt="First slide">
 										</div>
 										<div class="carousel-item">
-											<img class="img-fluid" src="" alt="Second slide">
+											<img class="img-fluid" src="${path }/resources/upload/IMG_2342.jpg" alt="Second slide">
 										</div>
 										<div class="carousel-item active">
-											<img class="img-fluid" src="" alt="Third slide">
+											<img class="img-fluid" src="${path }/resources/upload/IMG_2343.jpg" alt="Third slide">
 										</div>
 									</div>
 									<a class="carousel-control-prev"
