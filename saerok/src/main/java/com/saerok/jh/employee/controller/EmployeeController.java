@@ -5,6 +5,7 @@ import java.io.IOException;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -37,24 +38,33 @@ public class EmployeeController {
 	    public String insertEmployeeEnd(MultipartFile oriFileName,
 	                                    @RequestParam Map<String, Object> param,
 	                                    Model model, HttpSession session) {
+		 
+		  	BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
+		  	String pwd = (String)param.get("empPw");
+		  	String  newpwd= encoder.encode(pwd);
+		  	System.out.println("기존비밀번호" + pwd);
+		  	System.out.println("암호화된 비밀번호" + newpwd);
+		  	param.put("empPw",newpwd);
+		  
 	        int result = 0;
 	        log.debug("{}",oriFileName.getOriginalFilename());
 	        log.debug("{}",param);
 	        try {
 	            if (!oriFileName.isEmpty()) {
 	                // 원본 파일명
+	            	
 	                String originalFileName = oriFileName.getOriginalFilename();
 
 	                // 서버에 저장할 파일명 생성 (현재 시간을 사용)
 	                String destFileName = System.currentTimeMillis() + "_" + originalFileName;
 
 	                // 파일을 서버에 저장하는 로직
-	                String path = session.getServletContext().getRealPath("/resources/upload/employee"); 
-	                File destFile = new File(path);
+	                String path = session.getServletContext().getRealPath("/resources/upload/employee/"); 
+	                File destFile = new File(path,destFileName);
 	                oriFileName.transferTo(destFile);
 
-	                param.put("destFileName", destFileName);
-
+	                param.put("oriFileName",oriFileName); 
+	                param.put("destFileName", destFileName); 
 	                result = service.insertEmployeeEnd(param);
 	            }
 
