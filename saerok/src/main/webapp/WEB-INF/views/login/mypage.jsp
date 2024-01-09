@@ -17,7 +17,7 @@
 }
 
 .mypage-simple-info {
-	margin-top: 100px;
+	margin-top: 70px;
 	margin-left: 370px;
 }
 
@@ -34,8 +34,8 @@
 	margin-left: 670px;
 }
 #profile-img {
-    width: 5%;
-    height: auto;
+    width: 120px;
+    height: 90px;
     margin-top: 50px;
     margin-left: 370px; /* Adjust this value to move the image to the left */
 }
@@ -59,6 +59,13 @@
 				<div class="mypage-simple-info">
 					<div class="form-group row">
 						<div class="col-md-6">
+							<label for="inputNo" class="form-label">사번</label> 
+							<input type="text" class="form-control" value="${loginEmployee.empNo }" name="empNo" disabled>
+						</div>
+						<br><br><br><br>
+						<div class="col-md-6">
+						</div>
+						<div class="col-md-6">
 							<label for="inputName" class="form-label">이름</label> 
 							<input type="hidden" value="${loginEmployee.empNo }" name="empNo">
 							<input type="text" class="form-control" value="${loginEmployee.empName }" name="empName">
@@ -68,15 +75,11 @@
 							<input type="text" class="form-control" value="${loginEmployee.empDate}" name="date" disabled>
 						</div>
 						<br><br><br><br>
-						<div class="col-md-6">
-							<label for="inputNo" class="form-label">사번</label> 
-							<input type="text" class="form-control" value="${loginEmployee.empNo }" name="empNo" disabled>
-						</div>
+
 						<%-- <div class="col-md-6">
 							<label for="inputPw" class="form-label">비밀번호</label> 
 							<input type="password" class="form-control" value="${loginEmployee.empPw }" name="empPw">
 						</div> --%>
-						<br><br><br><br>
 						<div class="col-md-6">
 							<label for="inputPhone" class="form-label">전화번호</label> 
 							<input type="text" class="form-control" value="${loginEmployee.empPhone }" name="empPhone">
@@ -88,13 +91,16 @@
 						</div>
 						<br><br><br><br>
 						<div class="col-md-6">
-							<label for="inputAddr" class="form-label">주소</label> 
-							<input type="text" class="form-control" value="${loginEmployee.empAddr}" name="empAddr">
-						</div>
+    						<label for="inputAddr" class="form-label">주소</label> 
+   						<div class="input-group">
+       						<input type="text" class="form-control" value="${loginEmployee.empAddr}" name="empAddr" id="empAddr">
+        					<button type="button"  class="btn btn-outline-primary" onclick="addrBtnAction();">주소찾기</button>
+   						 </div>
+							</div>
 						<br><br><br><br>
 						<div class="col-md-6">
 							<label for="inputAddr" class="form-label">상세주소</label> 
-							<input type="text" class="form-control" value="${loginEmployee.empDetailAddr}" name="empDetailAddr">
+							<input type="text" class="form-control" value="${loginEmployee.empDetailAddr}" name="empDetailAddr" id="empDetailAddr">
 						</div>
 						<br><br><br><br>
 						<div class="col-md-6">
@@ -116,9 +122,9 @@
 		<!-- myPage-container -->
 		<div class="d-grid gap-2 d-md-block" id="button">
 			<button id="mypageButton" type="submit"
-				class="btn btn-outline-primary">수정</button>
-			<button type="reset" class="btn btn-outline-primary">취소</button>
+				class="btn btn-outline-primary">저장하기</button>
 		</div>
+		 
 	</section>
 
 
@@ -132,7 +138,7 @@
 <jsp:include page="/WEB-INF/views/common/footer.jsp" />
 	<script>
 		$(document).ready(function() {
-			console.log("aaa", "${employee.empEmail}");
+		//	console.log("aaa", "${employee.empEmail}");
 			$("#mypageButton").click(function(event) {
 				event.preventDefault(); // 기본 폼 제출 방지
 
@@ -145,7 +151,7 @@
 					success : function(data) {
 						if (data.successYn == "Y") {
 							alert("수정완료!!");
-							location.replace("${path}/logoutpage");
+							location.reload();
 						} else {
 							alert("수정실패!!");
 						}
@@ -160,5 +166,45 @@
 				});
 			});
 		});
-		/* 잔디테스트  */
+		
 	</script>
+	<!-- daum address api -->
+   <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+    <script>
+        function addrBtnAction() {
+            new daum.Postcode({
+                oncomplete: function(data) {
+                    var addr = '';
+                    var extraAddr = '';
+
+                    if (data.userSelectedType === 'R') {
+                        addr = data.roadAddress;
+                    } else {
+                        addr = data.jibunAddress;
+                    }
+
+                    if (data.userSelectedType === 'R') {
+                        if (data.bname !== '' && /[동|로|가]$/g.test(data.bname)) {
+                            extraAddr += data.bname;
+                        }
+                        if (data.buildingName !== '' && data.apartment === 'Y') {
+                            extraAddr += (extraAddr !== '' ? ', ' + data.buildingName : data.buildingName);
+                        }
+                        if (extraAddr !== '') {
+                            extraAddr = ' (' + extraAddr + ')';
+                        }
+                    }
+
+                    document.getElementById("empAddr").value = addr;
+                    document.getElementById("empDetailAddr").value = extraAddr;
+                    document.getElementById("zipcode").value = data.zonecode;
+
+                    $('#myModal').modal('hide');
+                }
+            }).open();
+        }
+    </script>
+	
+	
+	
+	

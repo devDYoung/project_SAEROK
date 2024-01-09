@@ -10,11 +10,12 @@ import org.springframework.web.cors.CorsUtils;
 
 @Configuration
 @EnableWebSecurity
-public class SecurityConfig {
+public class SecurityConfig{
    
    //SecurityFilterChain클래스를 bean으로 등록
    @Autowired
    private DBConnectionProvider dbprovider;
+   
    
    @Bean 
    SecurityFilterChain authenticationPath(HttpSecurity http) 
@@ -45,3 +46,6 @@ public class SecurityConfig {
             .build(); // SecurityFilterChain 빌드 및 반환
          }
       }
+
+	
+
