@@ -1,5 +1,6 @@
 package com.saerok.jj.apv.controller;
 
+import java.util.List;
 import java.util.Map;
 
 import org.springframework.stereotype.Controller;
@@ -13,6 +14,7 @@ import com.saerok.jj.apv.model.dto.Approval;
 import com.saerok.jj.apv.model.service.ApprovalService;
 
 import lombok.AllArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 
 @Controller
 @AllArgsConstructor
@@ -26,35 +28,29 @@ public class ApprovalController {
 	public void selectApproval(@RequestParam(defaultValue="1") int cPage,
 								@RequestParam(defaultValue="5") int numPerpage,
 								Model model) {
-		model.addAttribute("approval",
-				service.selectApproval(Map.of("cPage",cPage,"numPerpage",numPerpage)));
+		List<Approval>approval=service.selectApproval(Map.of("cPage",cPage,"numPerpage",numPerpage));
+		
+		model.addAttribute("approval",approval
+				);
 		model.addAttribute("pageBar",pageFactory.getPage(cPage, numPerpage, 0, "approvalList.do"));
 	}
 	
-	@RequestMapping("/approvalView.do")
-	public void selectApprovalByNo(long apvNo, Model model) {
-		model.addAttribute("approval",service.selectApprovalByNo(apvNo));
-	}
-	
-	@RequestMapping("/approvalWrite.do")
-	public void approvalWrite() {}
-	
-	@RequestMapping("/insertApproval.do")
-	public String insertApproval(Approval a, Model model) {
-		int result=service.insertApproval(a);
-		String msg,loc;
-		if(result>0) {
-			msg="등록 성공";
-			loc="approval/approvalList.do";
-		}else {
-			msg="등록실패";
-			loc="approval/approvalWrite.do";
-		}
-		model.addAttribute("msg",msg);
-		model.addAttribute("loc",loc);
-		
-		return "common/msg";
-		
-	}
+	/*
+	 * @RequestMapping("/approvalView.do") public void selectApprovalByNo(long
+	 * apvNo, Model model) {
+	 * model.addAttribute("approval",service.selectApprovalByNo(apvNo)); }
+	 * 
+	 * @RequestMapping("/approvalWrite.do") public void approvalWrite() {}
+	 * 
+	 * @RequestMapping("/insertApproval.do") public String insertApproval(Approval
+	 * a, Model model) { int result=service.insertApproval(a); String msg,loc;
+	 * if(result>0) { msg="등록 성공"; loc="approval/approvalList.do"; }else {
+	 * msg="등록실패"; loc="approval/approvalWrite.do"; } model.addAttribute("msg",msg);
+	 * model.addAttribute("loc",loc);
+	 * 
+	 * return "common/msg";
+	 * 
+	 * }
+	 */
 	
 }
