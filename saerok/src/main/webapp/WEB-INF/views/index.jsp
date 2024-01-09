@@ -68,7 +68,7 @@
                                 </div>
                                 <div class="card-body">
                                     <div class="chart-area">
-                                        <canvas id="myAreaChart"></canvas>
+                                        <canvas id="monthlySalesChart"></canvas>
                                     </div>
                                     <hr>
                                 </div>
@@ -238,7 +238,11 @@
 				</div>
 			</div>
 		</div>
+		
 	</div>
+	
+    
+    
 	<script>
 		$(function() {
 			//출퇴근 버튼 설정
@@ -352,6 +356,9 @@
 
 			}
 		}
+		
+		
+			
 	</script>
 	
     <!-- Bootstrap core JavaScript-->
@@ -366,11 +373,94 @@
 
     <!-- Page level plugins -->
     <script src="vendor/chart.js/Chart.min.js"></script>
-    
+
     <!-- Page level custom scripts -->
     <script src="js/demo/chart-area-demo.js"></script>
     <script src="js/demo/chart-pie-demo.js"></script>
     <script src="js/demo/chart-bar-demo.js"></script>
+    
 </section>
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+
+<script>
+const monthlySalesData = {
+    labels: [],
+    sales: []
+};
+
+<c:forEach items="${monthlySalesTotals}" var="record">
+    monthlySalesData.labels.push("${record.SALESMONTH}");
+    monthlySalesData.sales.push(${record.TOTALSALES}); 
+</c:forEach>
+
+const ctx = document.getElementById('monthlySalesChart').getContext('2d');
+const gradient = ctx.createLinearGradient(0, 0, 0, 400);
+gradient.addColorStop(0, 'rgba(0, 123, 255, 0.5)');
+gradient.addColorStop(1, 'rgba(0, 123, 255, 0)');
+
+const monthlySalesChart = new Chart(ctx, {
+    type: 'line',
+    data: {
+        labels: monthlySalesData.labels,
+        datasets: [{
+            label: '월간 매출액',
+            backgroundColor: gradient,
+            borderColor: 'rgba(0, 123, 255, 1)',
+            data: monthlySalesData.sales,
+            fill: true,
+            pointBackgroundColor: 'white',
+            pointBorderColor: 'rgba(0, 123, 255, 1)',
+            pointHoverBackgroundColor: 'rgba(0, 123, 255, 1)',
+            pointHoverBorderColor: 'white'
+        }]
+    },
+    options: {
+        responsive: true,
+        title: {
+            display: true,
+            text: '월간 매출 추이',
+            fontColor: 'black',
+            fontSize: 20
+        },
+        scales: {
+            yAxes: [{
+                gridLines: {
+                    drawBorder: true,
+                    color: 'lightgrey'
+                },
+                ticks: {
+                    beginAtZero: true,
+                    fontColor: 'black'
+                }
+            }],
+            xAxes: [{
+                gridLines: {
+                    drawBorder: true,
+                    color: 'lightgrey'
+                },
+                ticks: {
+                    fontColor: 'black'
+                }
+            }]
+        },
+        legend: {
+            labels: {
+                fontColor: 'black'
+            }
+        },
+        hover: {
+            mode: 'nearest',
+            intersect: true
+        },
+        tooltips: {
+            mode: 'index',
+            intersect: false
+        }
+    }
+});
+</script>
+
 <br>
 <jsp:include page="/WEB-INF/views/common/footer.jsp" />
