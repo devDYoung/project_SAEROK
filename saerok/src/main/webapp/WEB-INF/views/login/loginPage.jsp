@@ -73,7 +73,7 @@
             </div>
         </div>
     </div>
-
+	</body>
     <!-- Bootstrap core JavaScript -->
     <script src="${pageContext.request.contextPath }/resources/vendor/jquery/jquery.min.js"></script>
     <script src="${pageContext.request.contextPath }/resources/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
@@ -89,6 +89,5 @@
         }
     }
     </script>
-</body>
 
-</html>
+<div id=pageBar>${pageBar}</div> 

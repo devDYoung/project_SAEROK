@@ -9,7 +9,20 @@
 <html lang="utf-8">
 
 <head>
+	
+<style>
 
+.dropdown-list-image img {
+    max-width: 50px; 
+    max-height: 50px; 
+    width: auto; 
+}
+
+.dropdown-list-image img {
+    border-radius: 50%;
+}
+	</style>
+	
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -58,7 +71,7 @@
                 <div id="collapseHR" class="collapse" aria-labelledby="headingHR" data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
                         <a class="collapse-item" href="${path }/insertemp">사원등록</a>
-                        <a class="collapse-item" href="">사원조회</a>
+                        <a class="collapse-item" href="${path }/selectemp">사원조회</a>
                         <a class="collapse-item" href="">조직도</a>
                     </div>
                 </div>
@@ -224,7 +237,7 @@
                         </li>
 
                         <!-- Nav Item - Alerts -->
-                        <!-- <li class="nav-item dropdown no-arrow mx-1">
+                        <!--  <li class="nav-item dropdown no-arrow mx-1">
                             <a class="nav-link dropdown-toggle" href="#" id="alertsDropdown" role="button"
                                 data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                 <i class="fas fa-bell fa-fw"></i>
@@ -272,9 +285,60 @@
                                 </a>
                                 <a class="dropdown-item text-center small text-gray-500" href="#">모든알림보기</a>
                             </div>
-                        </li>
+                        </li> -->
 
-                        Nav Item - Messages
+                       <!-- Nav Item - Alerts -->
+                   <!--       <li class="nav-item dropdown no-arrow mx-1">
+                            <a class="nav-link dropdown-toggle" href="#" id="alertsDropdown" role="button"
+                                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                <i class="fas fa-bell fa-fw"></i>
+                                Counter - Alerts
+                                <span class="badge badge-danger badge-counter">3+</span>
+                            </a>
+                            Dropdown - Alerts
+                            <div class="dropdown-list dropdown-menu dropdown-menu-right shadow animated--grow-in"
+                                aria-labelledby="alertsDropdown">
+                                <h6 class="dropdown-header">
+                                    알림
+                                </h6>
+                                <a class="dropdown-item d-flex align-items-center" href="#">
+                                    <div class="mr-3">
+                                        <div class="icon-circle bg-primary">
+                                            <i class="fas fa-file-alt text-white"></i>
+                                        </div>
+                                    </div>
+                                    <div>
+                                        <div class="small text-gray-500">알림날짜</div>
+                                        <span class="font-weight-bold">알림내용!</span>
+                                    </div>
+                                </a>
+                                <a class="dropdown-item d-flex align-items-center" href="#">
+                                    <div class="mr-3">
+                                        <div class="icon-circle bg-success">
+                                            <i class="fas fa-donate text-white"></i>
+                                        </div>
+                                    </div>
+                                    <div>
+                                        <div class="small text-gray-500">알림날짜</div>
+                                        알림내용!
+                                    </div>
+                                </a>
+                                <a class="dropdown-item d-flex align-items-center" href="#">
+                                    <div class="mr-3">
+                                        <div class="icon-circle bg-warning">
+                                            <i class="fas fa-exclamation-triangle text-white"></i>
+                                        </div>
+                                    </div>
+                                    <div>
+                                        <div class="small text-gray-500">알림날짜</div>
+                                        알림내용!
+                                    </div>
+                                </a>
+                                <a class="dropdown-item text-center small text-gray-500" href="#">모든알림보기</a>
+                            </div>
+                        </li> -->
+
+                        <!-- Nav Item - Messages
                         <li class="nav-item dropdown no-arrow mx-1">
                             <a class="nav-link dropdown-toggle" href="#" id="messagesDropdown" role="button"
                                 data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -320,22 +384,24 @@
                                         <div class="text-truncate">쪽지내용!</div>
                                         <div class="small text-gray-500">보낸사람 · 2d</div>
                                     </div>
-                                </a>
-                                <a class="dropdown-item d-flex align-items-center" href="#">
-                                    <div class="dropdown-list-image mr-3">
-                                        <img class="rounded-circle" src="https://source.unsplash.com/Mv9hjnEUHR4/60x60"
-                                            alt="...">
+                                </a> -->
+                                <!-- <a class="dropdown-item d-flex align-items-center" href="#"> -->
+                                    <div class="dropdown-list-image mr-3" name="oriFileName">
+                                        <a href="${path }/mypage">
+											<img src="${path}/resources/upload/profile/${loginEmployee.destFileName}" alt="ato-profile-img">
+											</a>
                                         <div class="status-indicator bg-success"></div>
                                     </div>
-                                    <div>
+                                    
+                                    <!-- <div>
                                         <div class="text-truncate">쪽지내용.</div>
                                         <div class="small text-gray-500">보낸사람 · 2w</div>
                                     </div>
                                 </a>
                                 <a class="dropdown-item text-center small text-gray-500" href="#">쪽지 더보기</a>
                             </div>
-                        </li>
- -->
+                        </li> -->
+ 
                         <div class="topbar-divider d-none d-sm-block"></div>
 
                         <!-- Nav Item - User Information -->
