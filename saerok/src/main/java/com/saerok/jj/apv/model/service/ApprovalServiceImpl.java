@@ -29,7 +29,7 @@ public class ApprovalServiceImpl implements ApprovalService {
 	}
 
 	@Override
-	public Approval selectApprovalByNo(long apvNo) {
+	public Approval selectApprovalByNo(int apvNo) {
 		// TODO Auto-generated method stub
 		return dao.selectApprovalByNo(session, apvNo);
 	}
