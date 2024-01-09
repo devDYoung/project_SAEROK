@@ -2,6 +2,8 @@ package com.saerok.jj.apv.model.dto;
 
 import java.sql.Date;
 
+import com.saerok.jh.employee.model.dto.Employee;
+
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -14,10 +16,7 @@ import lombok.NoArgsConstructor;
 public class ApvWriter {
 	private String apvState;
 	private Approval apvNo;
-	private int apvSeq;
-	private String apvEmpNo;
+	private Employee apvEmpNo;
 	private Date apvEmpTime;
-	private String returnEmpNo;
-	private Date returnTime;
 	private String returnReason;
 }

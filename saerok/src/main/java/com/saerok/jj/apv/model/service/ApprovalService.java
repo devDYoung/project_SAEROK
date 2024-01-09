@@ -9,7 +9,7 @@ public interface ApprovalService {
 	
 	List<Approval> selectApproval(Map<String, Integer> page);
 	
-	Approval selectApprovalByNo(long apvNo);
+	Approval selectApprovalByNo(int apvNo);
 	
 	int insertApproval(Approval a);
 }
