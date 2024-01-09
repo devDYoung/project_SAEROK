@@ -76,7 +76,28 @@ public class SalesServiceImpl implements SalesService {
         }
         return salesList;
     }
+    
+    
+    
+    //점주전용
+    @Override
+	public BigDecimal findOwnerTodaySalesTotal(String empNo) {
+		return salesMapper.findOwnerTodaySalesTotal(empNo);
+	}
 
+	@Override
+	public BigDecimal findOwnerCurrentMonthSalesTotal(String empNo) {
+		return salesMapper.findOwnerCurrentMonthSalesTotal(empNo);
+	}
+
+	@Override
+	public BigDecimal findOwnerCurrentYearSalesTotal(String empNo) {
+		return salesMapper.findOwnerCurrentYearSalesTotal(empNo);
+	}
+	
+	
+	
+	//일,월 변경
     private String getDayString(String dayNumber) {
         int day = Integer.parseInt(dayNumber);
         return String.valueOf(day); 
