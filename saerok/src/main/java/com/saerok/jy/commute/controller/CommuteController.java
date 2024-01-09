@@ -29,7 +29,7 @@ public class CommuteController {
 	@Autowired
 	private CommuteService commuteService;
 
-	@GetMapping("/commuteCheck")
+	@GetMapping("/Check")
 	public ModelAndView selectWorkList(HttpSession session, ModelAndView mv) {
 
 		// 현재 로그인 중인 사원의 사원번호

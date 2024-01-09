@@ -66,7 +66,7 @@
 	</div>
 	
 	<br>
-	<form method="get" action="${path } commute/changeStatus">
+	<form method="get" action="/changeStatus">
 		<div class="d-flex align-items-center">
 		<!-- 출근시간 없으면 출근가능, 퇴근 불가능 -->
 		<!-- 출근 시간이 있으면, 출근 불가능, 퇴근 가능 -->

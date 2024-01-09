@@ -21,7 +21,7 @@ public class ApprovalDaoImpl implements ApprovalDao {
 	}
 
 	@Override
-	public Approval selectApprovalByNo(SqlSession session, long apvNo) {
+	public Approval selectApprovalByNo(SqlSession session, int apvNo) {
 	
 		return session.selectOne("approval.selectApprovalByNo",apvNo);
 	}
