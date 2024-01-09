@@ -14,14 +14,14 @@ import lombok.RequiredArgsConstructor;
 @Service
 @RequiredArgsConstructor
 public class ApprovalServiceImpl implements ApprovalService {
-
+	
 	private final SqlSession session;
-
+	
 	private final ApprovalDao dao;
-
-
-
-
+	
+	
+	
+	
 	@Override
 	public List<Approval> selectApproval(Map<String, Integer> page) {
 		// TODO Auto-generated method stub
@@ -29,7 +29,7 @@ public class ApprovalServiceImpl implements ApprovalService {
 	}
 
 	@Override
-	public Approval selectApprovalByNo(long apvNo) {
+	public Approval selectApprovalByNo(int apvNo) {
 		// TODO Auto-generated method stub
 		return dao.selectApprovalByNo(session, apvNo);
 	}

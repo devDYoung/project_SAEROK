@@ -4,66 +4,46 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <c:set var="path" value="${pageContext.request.contextPath}"/>
+<%@ taglib prefix="springform" uri="http://www.springframework.org/tags/form"%>
+
+
 <jsp:include page="/WEB-INF/views/common/header.jsp">
 	<jsp:param name="" value="전자결재리스트"/>
 </jsp:include>
-<section id=content>
-	<div class="card shadow mb-4">
-			<div class="card-header py-3">
-				<h6 class="m-0 font-weight-bold text-primary">전자결재</h6>
-			</div>
-			<div class="card-body">
-				<div class="table-responsive">
-					<table class="table table-bordered" id="dataTable" width="100%"
-						cellspacing="0">
-						<thead>
-							<tr>
-								<th>선택</th>
-								<th>번호</th>
-								<th>보낸사람</th>
-								<th>제목</th>
-								<th>날짜</th>
-							</tr>
-						</thead>
-						<tbody>
-							<tr>
-								<td></td>
-								<td></td>
-								<td></td>
-								<td></td>
-							</tr>
-							<tr>
-								<td></td>
-								<td></td>
-								<td></td>
-								<td></td>
-							</tr>
-							<tr>
-								<td></td>
-								<td></td>
-								<td></td>
-								<td></td>
-							</tr>
-							<tr>
-								<td></td>
-								<td></td>
-								<td></td>
-								<td></td>
-							</tr>
-							<tr>
-								<td></td>
-								<td></td>
-								<td></td>
-								<td></td>
-							</tr>
-
-						</tbody>
-					</table>
-				</div>
-			</div>
-		</div>
 
 
-</section>
+	<h2>전자결재 리스트</h2>
+<table border="1">
+    <thead>
+        <tr>
+            <th>문서 구분</th>
+            <th>문서 이름</th>
+            <th>사원 번호</th>
+            <th>수정자 ID</th>
+            <th>담당자 번호</th>
+            <th>참조/참조 대상</th>
+            <th>결재 상태</th>
+        </tr>
+    </thead>
+    <tbody>
+        <c:forEach var="a" items="${approval}">
+            <tr>
+                <td><c:out value="${a.apvDocNo}"/></td>
+                <td><c:out value="${a.apvName}"/></td>
+                <td><c:out value="$"/></td>
+                <td><c:out value="$"/></td>
+                <td><c:out value="${a.apvState}"/></td>
+                
+                <!-- 나머지 필드 -->
+            </tr>
+        </c:forEach>
+    </tbody>
+</table>
+     <div id="pageBar">
+        ${pageBar }
+     </div> 
+
+
+
 
 <jsp:include page="/WEB-INF/views/common/footer.jsp"/>

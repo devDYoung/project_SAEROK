@@ -8,11 +8,11 @@ import com.saerok.jj.apv.model.dto.Approval;
 import org.apache.ibatis.session.SqlSession;
 
 public interface ApprovalDao {
-
-
+	
+	
 	List<Approval> selectApproval(SqlSession session, Map<String, Integer> page);
-
-	Approval selectApprovalByNo(SqlSession session, long apvNo);
-
+	
+	Approval selectApprovalByNo(SqlSession session, int apvNo);
+	
 	int insertApproval(SqlSession session, Approval a);
 }

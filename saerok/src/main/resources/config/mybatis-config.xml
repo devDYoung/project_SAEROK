@@ -17,6 +17,8 @@
 		
 		<!-- 정재  -->
 		<typeAlias alias="approval" type="com.saerok.jj.apv.model.dto.Approval"/>
+		<typeAlias alias="apvRef" type="com.saerok.jj.apv.model.dto.ApvRef"/>
+		<typeAlias alias="apvWriter" type="com.saerok.jj.apv.model.dto.ApvWriter"/>
 
 		<!-- 도영 -->
 		<typeAlias alias="note" type="com.saerok.dy.note.model.dto.Note" />
