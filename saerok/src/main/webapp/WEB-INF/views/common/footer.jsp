@@ -25,19 +25,19 @@
                 <div class="modal-body">로그아웃 하시겠습니까?</div>
                 <div class="modal-footer">
                     <button class="btn btn-secondary" type="button" data-dismiss="modal">취소</button>
-                    <a class="btn btn-primary" href="${pageContext.request.contextPath}/logoutpage">로그아웃</a>
+                    <a class="btn btn-primary" href="${path}/logoutpage">로그아웃</a>
                 </div>
             </div>
         </div>
     </div> 
-	<script src="${pageContext.request.contextPath }/resources/vendor/jquery/jquery.min.js"></script>
-    <script src="${pageContext.request.contextPath }/resources/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+	<script src="${path}/resources/vendor/jquery/jquery.min.js"></script>
+    <script src="${path }/resources/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
 
     <!-- Core plugin JavaScript-->
-    <script src="${pageContext.request.contextPath }/resources/vendor/jquery-easing/jquery.easing.min.js"></script>
+    <script src="${path }/resources/vendor/jquery-easing/jquery.easing.min.js"></script>
 
     <!-- Custom scripts for all pages-->
-    <script src="${pageContext.request.contextPath }/resources/js/sb-admin-2.min.js"></script> 
+    <script src="${path}/resources/js/sb-admin-2.min.js"></script> 
 	
 </body>
 </html>

@@ -66,7 +66,7 @@
 	</div>
 	
 	<br>
-	<form method="get" action="${path }/changeStatus">
+	<form method="get" action="${path } commute/changeStatus">
 		<div class="d-flex align-items-center">
 		<!-- 출근시간 없으면 출근가능, 퇴근 불가능 -->
 		<!-- 출근 시간이 있으면, 출근 불가능, 퇴근 가능 -->
@@ -105,9 +105,9 @@
             
     <h6 class="card-title">근태관리</h6>
     <div class="list-group"> 
-		<a href="${path }/commuteCheck" class="list-group-item">내 근태 현황</a>
-	    <a href="${path }/annualList" class="list-group-item">내 연차 내역</a> 
-	    <a href="${path }/mypage" class="list-group-item">내 인사정보</a> 
+		<a href="/commuteCheck" class="list-group-item">내 근태 현황</a>
+	    <a href="/annualList" class="list-group-item">내 연차 내역</a> 
+	    <a href="/mypage" class="list-group-item">내 인사정보</a> 
     </div>
     
     <script>

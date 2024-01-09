@@ -10,16 +10,24 @@
 <jsp:include page="/WEB-INF/views/common/header.jsp">
 	<jsp:param value="MainPage" name="ATO" />
 </jsp:include>
+<link rel="stylesheet"
+	href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<link rel="stylesheet"
+	href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css">
+<!-- 	
 <!-- Calendar & Reservation JavaScript -->
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-    <!-- Axios CDN -->
-    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
-    <!-- Moment CDN -->
-    <script src="https://cdn.jsdelivr.net/momentjs/latest/moment.min.js"></script>
-    <!-- fullcalendar-scheduler CDN -->
-    <script src="https://cdn.jsdelivr.net/npm/fullcalendar-scheduler@5.9.0/main.min.js"></script>
-    <!-- fullcalendar-scheduler 언어 CDN -->
-    <script src="https://cdn.jsdelivr.net/npm/fullcalendar-scheduler@5.9.0/locales-all.min.js"></script>
+<!-- Axios CDN -->
+<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+<!-- Moment CDN -->
+<script src="https://cdn.jsdelivr.net/momentjs/latest/moment.min.js"></script>
+<!-- fullcalendar-scheduler CDN -->
+<script
+	src="https://cdn.jsdelivr.net/npm/fullcalendar-scheduler@5.9.0/main.min.js"></script>
+<!-- fullcalendar-scheduler 언어 CDN -->
+<script
+	src="https://cdn.jsdelivr.net/npm/fullcalendar-scheduler@5.9.0/locales-all.min.js"></script>
 <section>
 	<div id="main-wrapper" data-theme="light" data-layout="vertical"
 		data-navbarbg="skin6" data-sidebartype="full"
@@ -47,8 +55,7 @@
 										aria-expanded="true" class="nav-link"> <i
 											class="mdi mdi-account-circle d-lg-none d-block mr-1"></i> <span
 											class="d-none d-lg-block  font-weight-bold">매출현황</span>
-									</a>
-									</li>
+									</a></li>
 								</ul>
 
 								<div class="tab-content">
@@ -62,17 +69,17 @@
 									</div>
 									<div class="tab-pane" id="sales">
 										<!-- sales list -->
-											<div class="card shadow mb-4">
-                                <div class="card-header py-3">
-                                    <h6 class="m-0 font-weight-bold text-primary">월별매출</h6>
-                                </div>
-                                <div class="card-body">
-                                    <div class="chart-area">
-                                        <canvas id="myAreaChart"></canvas>
-                                    </div>
-                                    <hr>
-                                </div>
-                            </div>
+										<div class="card shadow mb-4">
+											<div class="card-header py-3">
+												<h6 class="m-0 font-weight-bold text-primary">매출 추이</h6>
+											</div>
+											<div class="card-body">
+												<div class="chart-area">
+													<canvas id="monthlySalesChart"></canvas>
+												</div>
+												<hr>
+											</div>
+										</div>
 									</div>
 								</div>
 							</div>
@@ -81,13 +88,11 @@
 					<div class="col-lg-5 col-md-12">
 						<div class="card" style="padding: 0px 10px 15px 10px;">
 							<div class="card-body">
-								 <div id="profileImg"
-									style="position: absolute; right: 0; 
-									height: 140px; width: 130px; margin-right: 15px; 
-									background-image: url('/resources/upload/IMG_2281.JPG'); 
-									background-size: cover;">
-								</div> 
-							`<%-- <div id="profileImg"
+								<div id="profileImg"
+									style="position: absolute; right: 0; height: 140px; width: 130px; margin-right: 15px; background-image: url('/resources/upload/IMG_2281.JPG'); background-size: cover;">
+								</div>
+								`
+								<%-- <div id="profileImg"
 									style="position:absolute; right:0; height:140px; width:130px; 
                             		margin-right:15px;
                             		background-image:url(${ pageContext.servletContext.contextPath }/resources/assets/images/${ profileImg });
@@ -102,21 +107,21 @@
 									<div class="d-flex" style="font-size: 16px;">
 										<p class="col-6" style="padding: 0px;">${loginEmployee.empName }
 											${loginEmployee.jobName}</p>
-										<p class="col-6 text-right" style="padding: 0px;"
-											id="inDtime"></p>
+										<p class="col-6 text-right" style="padding: 0px;" id="inDtime"></p>
 									</div>
 									<div class="d-flex" style="font-size: 16px">
 										<p class="col-6" style="padding: 0px;">${loginEmployee.deptName}</p>
-										<p class="col-6 text-right" style="padding: 0px;" id="outDtime"></p>
+										<p class="col-6 text-right" style="padding: 0px;"
+											id="outDtime"></p>
 									</div>
 									<div class="d-flex" style="font-size: 16px;">
 										<p class="col-6" style="padding: 0px;">출근시간</p>
-										<p class="col-6 text-right" style="padding: 0px;"
-											id="inDtime"></p>
+										<p class="col-6 text-right" style="padding: 0px;" id="inDtime"></p>
 									</div>
 									<div class="d-flex" style="font-size: 16px">
 										<p class="col-6" style="padding: 0px;">퇴근시간</p>
-										<p class="col-6 text-right" style="padding: 0px;" id="outDtime"></p>
+										<p class="col-6 text-right" style="padding: 0px;"
+											id="outDtime"></p>
 									</div>
 								</div>
 								<form method="get" action="${path }/changeStatus">
@@ -160,7 +165,7 @@
 											value="7" name="status">반차</button>
 									</div> -->
 									<input type="hidden" name="cNo" value="${c.commuteNo }">
-									<input type="hidden" name="main" value="1"> 
+									<input type="hidden" name="main" value="1">
 								</form>
 							</div>
 						</div>
@@ -174,25 +179,23 @@
 									<h4 class="card-title mb-0 font-weight-bold">결재함</h4>
 								</div>
 								<div class="col-md-12 col-sm-12" style="margin-top: 50px;">
-									<ul class="list-group" id="boardList"> 
-									  <div class="index_section2">
+									<ul class="list-group" id="boardList">
+										<div class="index_section2">
 											<form action="">
 												<div id="e-pay-status">
 													<span> <a href="${path}"
 														style="color: rgb(59, 211, 39);">결재대기</a>
 														<div>${countYet}건</div>
-													</span> 
-													<span> <a href="${path}"
+													</span> <span> <a href="${path}"
 														style="color: rgb(59, 211, 39);">결재중</a>
 														<div>${countUnder}건</div>
-													</span> 
-													<span> <a href="${path}"
+													</span> <span> <a href="${path}"
 														style="color: rgb(59, 211, 39);">결재완료</a>
 														<div>${countDone}건</div>
 													</span>
 												</div>
 											</form>
-											</ul> 
+									</ul>
 								</div>
 							</div>
 						</div>
@@ -202,16 +205,23 @@
 							<div class="card-body">
 								<div id="carouselExampleIndicators" class="carousel slide"
 									data-ride="carousel">
-									<h4 class="card-title mb-0 font-weight-bold">이번 주 신제품</h4><br>
+									<h4 class="card-title mb-0 font-weight-bold">이번 주 신제품</h4>
+									<br>
 									<div class="carousel-inner" role="listbox">
 										<div class="carousel-item">
-											<img class="img-fluid" src="${paht }/resources/upload/IMG_2341.jpg" alt="First slide">
+											<img class="img-fluid"
+												src="${paht }/resources/upload/IMG_2341.jpg"
+												alt="First slide">
 										</div>
 										<div class="carousel-item">
-											<img class="img-fluid" src="${path }/resources/upload/IMG_2342.jpg" alt="Second slide">
+											<img class="img-fluid"
+												src="${path }/resources/upload/IMG_2342.jpg"
+												alt="Second slide">
 										</div>
 										<div class="carousel-item active">
-											<img class="img-fluid" src="${path }/resources/upload/IMG_2343.jpg" alt="Third slide">
+											<img class="img-fluid"
+												src="${path }/resources/upload/IMG_2343.jpg"
+												alt="Third slide">
 										</div>
 									</div>
 									<a class="carousel-control-prev"
@@ -239,6 +249,159 @@
 			</div>
 		</div>
 	</div>
+	
+	<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+	<script
+		src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+	<script
+		src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+
+	<script src="${path}/resources/vendor/jquery/jquery.min.js"></script>
+
+	<script src="${path}/resources/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+
+	<script src="${path}/resources/vendor/jquery-easing/jquery.easing.min.js"></script>
+
+	<script src="${path}/resources/js/sb-admin-2.min.js"></script>
+
+	<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+	<script>
+	const monthlySalesData = {
+		    labels: [],
+		    sales: []
+		};
+
+		<c:forEach items="${monthlySalesTotals}" var="record">
+		    monthlySalesData.labels.push("${record.SALESMONTH}");
+		    monthlySalesData.sales.push(${record.TOTALSALES}); 
+		</c:forEach>
+
+		const ctx = document.getElementById('monthlySalesChart').getContext('2d');
+		const gradient = ctx.createLinearGradient(0, 0, 0, 400);
+		gradient.addColorStop(0, 'rgba(0, 123, 255, 0.5)');
+		gradient.addColorStop(1, 'rgba(0, 123, 255, 0)');
+
+		const monthlySalesChart = new Chart(ctx, {
+		    type: 'line',
+		    data: {
+		        labels: monthlySalesData.labels,
+		        datasets: [{
+		            label: '월간 매출액',
+		            backgroundColor: gradient,
+		            borderColor: 'rgba(0, 123, 255, 1)',
+		            data: monthlySalesData.sales,
+		            fill: true,
+		            pointBackgroundColor: 'white',
+		            pointBorderColor: 'rgba(0, 123, 255, 1)',
+		            pointHoverBackgroundColor: 'rgba(0, 123, 255, 1)',
+		            pointHoverBorderColor: 'white'
+		        }]
+		    },
+		    options: {
+		        responsive: true,
+		        title: {
+		            display: true,
+		            text: '월간 매출 추이',
+		            fontColor: 'black',
+		            fontSize: 20
+		        },
+		        scales: {
+		            yAxes: [{
+		                gridLines: {
+		                    drawBorder: true,
+		                    color: 'lightgrey'
+		                },
+		                ticks: {
+		                    beginAtZero: true,
+		                    fontColor: 'black'
+		                }
+		            }],
+		            xAxes: [{
+		                gridLines: {
+		                    drawBorder: true,
+		                    color: 'lightgrey'
+		                },
+		                ticks: {
+		                    fontColor: 'black'
+		                }
+		            }]
+		        },
+		        legend: {
+		            labels: {
+		                fontColor: 'black'
+		            }
+		        },
+		        hover: {
+		            mode: 'nearest',
+		            intersect: true
+		        },
+		        tooltips: {
+		            mode: 'index',
+		            intersect: false
+		        }
+		    }
+		});
+
+		const ctxBar = document.getElementById('monthlySalesBarChart').getContext('2d');
+		const gradientBar = ctxBar.createLinearGradient(0, 0, 0, 400);
+		gradientBar.addColorStop(0, 'rgba(255, 99, 132, 0.5)');
+		gradientBar.addColorStop(1, 'rgba(255, 99, 132, 0)');
+
+		const monthlySalesBarChart = new Chart(ctxBar, {
+		    type: 'bar',
+		    data: {
+		        labels: monthlySalesData.labels,
+		        datasets: [{
+		            label: '월간 매출액',
+		            backgroundColor: gradientBar,
+		            borderColor: 'rgba(255, 99, 132, 1)',
+		            borderWidth: 1,
+		            data: monthlySalesData.sales
+		        }]
+		    },
+		    options: {
+		        responsive: true,
+		        legend: {
+		            position: 'top',
+		            labels: {
+		                fontColor: 'black'
+		            }
+		        },
+		        title: {
+		            display: true,
+		            text: '월간 매출 추이 (바 차트)',
+		            fontColor: 'black',
+		            fontSize: 20
+		        },
+		        scales: {
+		            yAxes: [{
+		                gridLines: {
+		                    drawBorder: true,
+		                    color: 'lightgrey'
+		                },
+		                ticks: {
+		                    beginAtZero: true,
+		                    fontColor: 'black'
+		                }
+		            }],
+		            xAxes: [{
+		                gridLines: {
+		                    drawBorder: true,
+		                    color: 'lightgrey'
+		                },
+		                ticks: {
+		                    fontColor: 'black'
+		                }
+		            }]
+		        },
+		        tooltips: {
+		            mode: 'index',
+		            intersect: false
+		        }
+		    }
+		});
+	</script>
+	
 	<script>
 		$(function() {
 			//출퇴근 버튼 설정
@@ -353,24 +516,6 @@
 			}
 		}
 	</script>
-	
-<!--     Bootstrap core JavaScript
-    <script src="vendor/jquery/jquery.min.js"></script>
-    <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
-
-    Core plugin JavaScript
-    <script src="vendor/jquery-easing/jquery.easing.min.js"></script>
-
-    Custom scripts for all pages
-    <script src="js/sb-admin-2.min.js"></script>
-
-    Page level plugins
-    <script src="vendor/chart.js/Chart.min.js"></script>
-    
-    Page level custom scripts
-    <script src="js/demo/chart-area-demo.js"></script>
-    <script src="js/demo/chart-pie-demo.js"></script>
-    <script src="js/demo/chart-bar-demo.js"></script> -->
 </section>
 <br>
 <jsp:include page="/WEB-INF/views/common/footer.jsp" />
