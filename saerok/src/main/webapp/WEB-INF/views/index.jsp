@@ -20,6 +20,16 @@
     <script src="https://cdn.jsdelivr.net/npm/fullcalendar-scheduler@5.9.0/main.min.js"></script>
     <!-- fullcalendar-scheduler 언어 CDN -->
     <script src="https://cdn.jsdelivr.net/npm/fullcalendar-scheduler@5.9.0/locales-all.min.js"></script>
+   <style>
+
+.ato-login-img {
+    max-width: 70%; 
+    max-height: 70%; 
+    width: auto; 
+}
+
+   </style> 
+    
 <section>
    <div id="main-wrapper" data-theme="light" data-layout="vertical"
       data-navbarbg="skin6" data-sidebartype="full"
@@ -80,14 +90,11 @@
                </div>
                <div class="col-lg-5 col-md-12">
                   <div class="card" style="padding: 0px 10px 15px 10px;">
-                     <div class="card-body">
-                         <div id="profileImg"
-                           style="position: absolute; right: 0; 
-                           height: 140px; width: 130px; margin-right: 15px; 
-                           background-image: url('/resources/upload/IMG_2281.JPG'); 
-                           background-size: cover;">
-                        </div> 
-                     `<%-- <div id="profileImg"
+                     <div class="ato-login-img" name="oriFileName">
+                           <img src="${path}/resources/upload/profile/${loginEmployee.destFileName}" alt="ato-profile-img" class="ato-login-img">
+                               </div>
+                              <br>
+                     <%-- <div id="profileImg"
                            style="position:absolute; right:0; height:140px; width:130px; 
                                   margin-right:15px;
                                   background-image:url(${ pageContext.servletContext.contextPath }/resources/assets/images/${ profileImg });
@@ -119,7 +126,7 @@
                               <p class="col-6 text-right" style="padding: 0px;" id="outDtime"></p>
                            </div>
                         </div>
-                        <form method="get" action="/changeStatus">
+                        <form method="get" action="${path }/changeStatus">
                            <!-- 출퇴근 버튼 -->
                            <div class="d-flex align-items-center">
                               <button type="submit" id="startBtn"
@@ -243,109 +250,6 @@
    
     
     
- 
-   
-    <!-- Bootstrap core JavaScript-->
-    <script src="vendor/jquery/jquery.min.js"></script>
-    <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
-
-    <!-- Core plugin JavaScript-->
-    <script src="vendor/jquery-easing/jquery.easing.min.js"></script>
-
-    <!-- Custom scripts for all pages-->
-    <script src="js/sb-admin-2.min.js"></script>
-
-    <!-- Page level plugins -->
-    <script src="vendor/chart.js/Chart.min.js"></script>
-
-    <!-- Page level custom scripts -->
-    <script src="js/demo/chart-area-demo.js"></script>
-    <script src="js/demo/chart-pie-demo.js"></script>
-    <script src="js/demo/chart-bar-demo.js"></script>
-    
-</section>
-
-<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-
-
-<script>
-const monthlySalesData = {
-    labels: [],
-    sales: []
-};
-
-<c:forEach items="${monthlySalesTotals}" var="record">
-    monthlySalesData.labels.push("${record.SALESMONTH}");
-    monthlySalesData.sales.push(${record.TOTALSALES}); 
-</c:forEach>
-
-const ctx = document.getElementById('monthlySalesChart').getContext('2d');
-const gradient = ctx.createLinearGradient(0, 0, 0, 400);
-gradient.addColorStop(0, 'rgba(0, 123, 255, 0.5)');
-gradient.addColorStop(1, 'rgba(0, 123, 255, 0)');
-
-const monthlySalesChart = new Chart(ctx, {
-    type: 'line',
-    data: {
-        labels: monthlySalesData.labels,
-        datasets: [{
-            label: '월간 매출액',
-            backgroundColor: gradient,
-            borderColor: 'rgba(0, 123, 255, 1)',
-            data: monthlySalesData.sales,
-            fill: true,
-            pointBackgroundColor: 'white',
-            pointBorderColor: 'rgba(0, 123, 255, 1)',
-            pointHoverBackgroundColor: 'rgba(0, 123, 255, 1)',
-            pointHoverBorderColor: 'white'
-        }]
-    },
-    options: {
-        responsive: true,
-        title: {
-            display: true,
-            text: '월간 매출 추이',
-            fontColor: 'black',
-            fontSize: 20
-        },
-        scales: {
-            yAxes: [{
-                gridLines: {
-                    drawBorder: true,
-                    color: 'lightgrey'
-                },
-                ticks: {
-                    beginAtZero: true,
-                    fontColor: 'black'
-                }
-            }],
-            xAxes: [{
-                gridLines: {
-                    drawBorder: true,
-                    color: 'lightgrey'
-                },
-                ticks: {
-                    fontColor: 'black'
-                }
-            }]
-        },
-        legend: {
-            labels: {
-                fontColor: 'black'
-            }
-        },
-        hover: {
-            mode: 'nearest',
-            intersect: true
-        },
-        tooltips: {
-            mode: 'index',
-            intersect: false
-        }
-    }
-});
-</script>
-
    <script>
       $(function() {
          //출퇴근 버튼 설정
@@ -463,6 +367,107 @@ const monthlySalesChart = new Chart(ctx, {
       
          
    </script>
+   
+    <!-- Bootstrap core JavaScript-->
+    <script src="vendor/jquery/jquery.min.js"></script>
+    <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+
+    <!-- Core plugin JavaScript-->
+    <script src="vendor/jquery-easing/jquery.easing.min.js"></script>
+
+    <!-- Custom scripts for all pages-->
+    <script src="js/sb-admin-2.min.js"></script>
+
+    <!-- Page level plugins -->
+    <script src="vendor/chart.js/Chart.min.js"></script>
+
+    <!-- Page level custom scripts -->
+    <script src="js/demo/chart-area-demo.js"></script>
+    <script src="js/demo/chart-pie-demo.js"></script>
+    <script src="js/demo/chart-bar-demo.js"></script>
+    
+</section>
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+
+<script>
+const monthlySalesData = {
+    labels: [],
+    sales: []
+};
+
+<c:forEach items="${monthlySalesTotals}" var="record">
+    monthlySalesData.labels.push("${record.SALESMONTH}");
+    monthlySalesData.sales.push(${record.TOTALSALES}); 
+</c:forEach>
+
+const ctx = document.getElementById('monthlySalesChart').getContext('2d');
+const gradient = ctx.createLinearGradient(0, 0, 0, 400);
+gradient.addColorStop(0, 'rgba(0, 123, 255, 0.5)');
+gradient.addColorStop(1, 'rgba(0, 123, 255, 0)');
+
+const monthlySalesChart = new Chart(ctx, {
+    type: 'line',
+    data: {
+        labels: monthlySalesData.labels,
+        datasets: [{
+            label: '월간 매출액',
+            backgroundColor: gradient,
+            borderColor: 'rgba(0, 123, 255, 1)',
+            data: monthlySalesData.sales,
+            fill: true,
+            pointBackgroundColor: 'white',
+            pointBorderColor: 'rgba(0, 123, 255, 1)',
+            pointHoverBackgroundColor: 'rgba(0, 123, 255, 1)',
+            pointHoverBorderColor: 'white'
+        }]
+    },
+    options: {
+        responsive: true,
+        title: {
+            display: true,
+            text: '월간 매출 추이',
+            fontColor: 'black',
+            fontSize: 20
+        },
+        scales: {
+            yAxes: [{
+                gridLines: {
+                    drawBorder: true,
+                    color: 'lightgrey'
+                },
+                ticks: {
+                    beginAtZero: true,
+                    fontColor: 'black'
+                }
+            }],
+            xAxes: [{
+                gridLines: {
+                    drawBorder: true,
+                    color: 'lightgrey'
+                },
+                ticks: {
+                    fontColor: 'black'
+                }
+            }]
+        },
+        legend: {
+            labels: {
+                fontColor: 'black'
+            }
+        },
+        hover: {
+            mode: 'nearest',
+            intersect: true
+        },
+        tooltips: {
+            mode: 'index',
+            intersect: false
+        }
+    }
+});
+</script>
 
 <br>
 <jsp:include page="/WEB-INF/views/common/footer.jsp" />
