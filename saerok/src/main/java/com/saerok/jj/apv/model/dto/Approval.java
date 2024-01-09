@@ -1,6 +1,7 @@
 package com.saerok.jj.apv.model.dto;
 
 import java.sql.Date;
+import java.util.List;
 
 import com.saerok.jh.employee.model.dto.Employee;
 
@@ -14,16 +15,18 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @Builder
 public class Approval {
-	private long apvNo;
+	private int apvNo;
 	private String apvDocNo;
 	private String apvName;
 	private String apvCheck;
 	private Date regTime;
 	private String modId;
 	private Date modTime;
-	private Employee empNo;
-	private ApvWriter apvEmpNo;
-	private ApvRef refCc;
+	private Employee appWriter;
+	private List<ApvWriter> apvEmps;
+	private List<Employee> refEmps;
+	private Employee empName;
 
+	
 	
 }
