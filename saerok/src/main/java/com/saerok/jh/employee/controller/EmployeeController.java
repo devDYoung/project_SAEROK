@@ -23,71 +23,71 @@ import lombok.extern.slf4j.Slf4j;
 @RequiredArgsConstructor
 @Slf4j
 public class EmployeeController {
-	@Autowired
-	private final EmployeeService service;
+   @Autowired
+   private final EmployeeService service;
 
-	// 사원등록 화면전환
-	@GetMapping("/insertemp")
-	public String insertEmployee() {
-		return "employee/insertemployee";
+   // 사원등록 화면전환
+   @GetMapping("/insertemp")
+   public String insertEmployee() {
+      return "employee/insertemployee";
 
-	}
+   }
 
-	// 사원등록 
-	  @PostMapping("/insertempEnd")
-	    public String insertEmployeeEnd(MultipartFile oriFileName,
-	                                    @RequestParam Map<String, Object> param,
-	                                    Model model, HttpSession session) {
-		 
-		  	BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
-		  	String pwd = (String)param.get("empPw");
-		  	String  newpwd= encoder.encode(pwd);
-		  	System.out.println("기존비밀번호" + pwd);
-		  	System.out.println("암호화된 비밀번호" + newpwd);
-		  	param.put("empPw",newpwd);
-		  
-	        int result = 0;
-	        log.debug("{}",oriFileName.getOriginalFilename());
-	        log.debug("{}",param);
-	        try {
-	            if (!oriFileName.isEmpty()) {
-	                // 원본 파일명
-	            	
-	                String originalFileName = oriFileName.getOriginalFilename();
+   // 사원등록 
+     @PostMapping("/insertempEnd")
+       public String insertEmployeeEnd(MultipartFile oriFileName,
+                                       @RequestParam Map<String, Object> param,
+                                       Model model, HttpSession session) {
+       
+           BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
+           String pwd = (String)param.get("empPw");
+           String  newpwd= encoder.encode(pwd);
+           System.out.println("기존비밀번호" + pwd);
+           System.out.println("암호화된 비밀번호" + newpwd);
+           param.put("empPw",newpwd);
+        
+           int result = 0;
+           log.debug("{}",oriFileName.getOriginalFilename());
+           log.debug("{}",param);
+           try {
+               if (!oriFileName.isEmpty()) {
+                   // 원본 파일명
+                  
+                   String originalFileName = oriFileName.getOriginalFilename();
 
-	                // 서버에 저장할 파일명 생성 (현재 시간을 사용)
-	                String destFileName = System.currentTimeMillis() + "_" + originalFileName;
+                   // 서버에 저장할 파일명 생성 (현재 시간을 사용)
+                   String destFileName = System.currentTimeMillis() + "_" + originalFileName;
 
-	                // 파일을 서버에 저장하는 로직
-	                String path = session.getServletContext().getRealPath("/resources/upload/employee/"); 
-	                File destFile = new File(path,destFileName);
-	                oriFileName.transferTo(destFile);
+                   // 파일을 서버에 저장하는 로직
+                   String path = session.getServletContext().getRealPath("/resources/upload/employee/"); 
+                   File destFile = new File(path,destFileName);
+                   oriFileName.transferTo(destFile);
 
-	                param.put("oriFileName",oriFileName); 
-	                param.put("destFileName", destFileName); 
-	                result = service.insertEmployeeEnd(param);
-	            }
+                   param.put("oriFileName",oriFileName); 
+                   param.put("destFileName", destFileName); 
+                   result = service.insertEmployeeEnd(param);
+               }
 
-	            String msg, loc;
-	            if (result > 0) {
-	                msg = "사원등록성공";
-	                loc = "employee/successEmp";
-	            } else {
-	                msg = "사원등록실패";
-	                loc = "/index";
-	            }
+               String msg, loc;
+               if (result > 0) {
+                   msg = "사원등록성공";
+                   loc = "employee/successEmp";
+               } else {
+                   msg = "사원등록실패";
+                   loc = "/index";
+               }
 
-	            model.addAttribute("msg", msg);
-	            model.addAttribute("loc", loc);
+               model.addAttribute("msg", msg);
+               model.addAttribute("loc", loc);
 
-	        } catch (IOException e) {
-	            e.printStackTrace();
-	            model.addAttribute("msg", "파일 업로드 실패!!!");
-	            model.addAttribute("loc", "/index");
-	        }
+           } catch (IOException e) {
+               e.printStackTrace();
+               model.addAttribute("msg", "파일 업로드 실패!!!");
+               model.addAttribute("loc", "/index");
+           }
 
-	        return "common/msg";
-	    }
+           return "common/msg";
+       }
 
 
 }

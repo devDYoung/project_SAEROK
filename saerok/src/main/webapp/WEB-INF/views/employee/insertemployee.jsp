@@ -145,7 +145,8 @@
                  	<br><br>
                      <button type="submit" class="btn btn-primary btn-user btn-block" onclick="submitForm()">사원등록</button>
                    <br><br>
-                    <a href="" class="btn btn-primary btn-user btn-block">취소</a>
+                   <button type="reset" class="btn btn-primary btn-user btn-block" onclick="resetForm()">등록취소</button>
+                    <!-- <a href="" class="btn btn-primary btn-user btn-block">취소</a> -->
                 </form>
 
               </div>
@@ -177,6 +178,8 @@
                   + "&empEmail=" + encodeURIComponent(empEmail);
         window.location.href = url;
     }
+	
+	//취소버튼
     
     //파일업로드 script
     // 파일 선택 input의 변경 이벤트를 감지하여 동작하는 함수

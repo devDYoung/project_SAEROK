@@ -31,7 +31,7 @@
 					<div class="col-lg-7 col-md-12">
 						<div class="card">
 							<div class="card-body">
-								<h4 class="card-title mb-3 font-weight-bold">전체게시판</h4>
+								<!-- <h4 class="card-title mb-3 font-weight-bold">전체게시판</h4> -->
 								<ul class="nav nav-tabs mb-3">
 									<li class="nav-item"><a href="#board" data-toggle="tab"
 										aria-expanded="false" class="nav-link"> <i
@@ -81,20 +81,20 @@
 					<div class="col-lg-5 col-md-12">
 						<div class="card" style="padding: 0px 10px 15px 10px;">
 							<div class="card-body">
-								<div id="profileImg"
+								 <div id="profileImg"
 									style="position: absolute; right: 0; 
 									height: 140px; width: 130px; margin-right: 15px; 
 									background-image: url('/resources/upload/IMG_2281.JPG'); 
 									background-size: cover;">
-								</div>
-								<%-- <div id="profileImg"
+								</div> 
+							`<%-- <div id="profileImg"
 									style="position:absolute; right:0; height:140px; width:130px; 
                             		margin-right:15px;
                             		background-image:url(${ pageContext.servletContext.contextPath }/resources/assets/images/${ profileImg });
                             		background-size:cover;">
-								</div> --%>
+								</div>  --%>
 								<!-- 이미지 경로 수정하기 -->
-								<h4 class="card-title mb-3 font-weight-bold">근태관리</h4>
+								<!-- <h4 class="card-title mb-3 font-weight-bold">근태관리</h4> -->
 								<h4 id="todate" class="card-title mb-3 font-weight-bold"></h4>
 								<p id="clock" style="font-size: 40px"></p>
 								<div>

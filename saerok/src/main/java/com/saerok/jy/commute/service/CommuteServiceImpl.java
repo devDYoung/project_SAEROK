@@ -8,6 +8,7 @@ import org.apache.ibatis.session.SqlSession;
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.saerok.jy.commute.common.CommuteException;
 import com.saerok.jy.commute.dao.CommuteDao;
@@ -38,6 +39,7 @@ public class CommuteServiceImpl implements CommuteService{
 	}
 
 	@Override
+	@Transactional
 	public void insertWork(String empNo) {
 		
 		int result = commuteDao.insertWork(session, empNo);
@@ -49,6 +51,7 @@ public class CommuteServiceImpl implements CommuteService{
 	}
 
 	@Override
+	@Transactional
 	public void updateWork(int commuteNo) {
 		int result = commuteDao.updateWork(session, commuteNo);
 		
@@ -58,6 +61,7 @@ public class CommuteServiceImpl implements CommuteService{
 	}
 	
 	@Override
+	@Transactional
 	public void insertWorkStatus(String status) {
 		int result = commuteDao.insertWorkStatus(session, status);
 		
@@ -67,3 +71,4 @@ public class CommuteServiceImpl implements CommuteService{
 		
 	}
 }
+// test
