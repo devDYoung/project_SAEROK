@@ -163,9 +163,9 @@
   <script src="js/demo/chart-pie-demo.js"></script> -->
 
 
-  <jsp:include page="/WEB-INF/views/common/footer.jsp" />
 </body>
 
+<jsp:include page="/WEB-INF/views/common/footer.jsp" />
 <script>
 	//사원등록 
     function submitForm() {
@@ -225,6 +225,6 @@
 
 
 
-
+<div id=pageBar>${pageBar}</div> 
 
 

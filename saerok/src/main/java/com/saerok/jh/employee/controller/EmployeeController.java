@@ -71,10 +71,10 @@ public class EmployeeController {
                String msg, loc;
                if (result > 0) {
                    msg = "사원등록성공";
-                   loc = "employee/empList";
+                   loc = "index";    //employee/empList 여기로 가게하고 싶은데 안되네유ㅠ
                } else {
                    msg = "사원등록실패";
-                   loc = "employee/empList";
+                   loc = "index";
                }
 
                model.addAttribute("msg", msg);
