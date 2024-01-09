@@ -9,7 +9,24 @@
 <html lang="utf-8">
 
 <head>
+	
+<style>
 
+.dropdown-list-image img {
+    max-width: 50px; 
+    max-height: 50px; 
+    width: auto; 
+}
+
+
+.dropdown-list-image img {
+    border-radius: 50%;
+}
+	
+	
+	</style>
+	
+	
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -373,11 +390,13 @@
                                     </div>
                                 </a> -->
                                 <!-- <a class="dropdown-item d-flex align-items-center" href="#"> -->
-                                    <div class="dropdown-list-image mr-3">
-                                        <img class="rounded-circle" src="https://source.unsplash.com/Mv9hjnEUHR4/60x60"
-                                            alt="...">
+                                    <div class="dropdown-list-image mr-3" name="oriFileName">
+                                        <a href="${path }/mypage">
+											<img src="${path}/resources/upload/profile/${loginEmployee.destFileName}" alt="ato-profile-img">
+											</a>
                                         <div class="status-indicator bg-success"></div>
                                     </div>
+                                    
                                     <!-- <div>
                                         <div class="text-truncate">쪽지내용.</div>
                                         <div class="small text-gray-500">보낸사람 · 2w</div>

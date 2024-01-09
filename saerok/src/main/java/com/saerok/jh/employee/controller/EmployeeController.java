@@ -59,7 +59,7 @@ public class EmployeeController {
                    String destFileName = System.currentTimeMillis() + "_" + originalFileName;
 
                    // 파일을 서버에 저장하는 로직
-                   String path = session.getServletContext().getRealPath("/resources/upload/employee/"); 
+                   String path = session.getServletContext().getRealPath("/resources/upload/profile/"); 
                    File destFile = new File(path,destFileName);
                    oriFileName.transferTo(destFile);
 
@@ -71,7 +71,7 @@ public class EmployeeController {
                String msg, loc;
                if (result > 0) {
                    msg = "사원등록성공";
-                   loc = "index";    //employee/empList 여기로 가게하고 싶은데 안되네유ㅠ
+                   loc = "index";    //employee/empList jsp 아니라 controller
                } else {
                    msg = "사원등록실패";
                    loc = "index";
