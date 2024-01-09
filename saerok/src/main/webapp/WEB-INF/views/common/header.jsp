@@ -155,7 +155,7 @@
                                 <a class="collapse-item" href="#">완료</a>
                                  </div>
                             </div>
-                            <a class="collapse-item" href="">내 문서함</a>
+                            <a class="collapse-item" href="/approval/approvalUpdate.do">+ 글쓰기 +</a>
                         </div>
                     </div>
             </li>
