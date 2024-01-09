@@ -59,7 +59,7 @@ public class EmployeeController {
                    String destFileName = System.currentTimeMillis() + "_" + originalFileName;
 
                    // 파일을 서버에 저장하는 로직
-                   String path = session.getServletContext().getRealPath("/resources/upload/employee/"); 
+                   String path = session.getServletContext().getRealPath("/resources/upload/profile/"); 
                    File destFile = new File(path,destFileName);
                    oriFileName.transferTo(destFile);
 
@@ -71,10 +71,10 @@ public class EmployeeController {
                String msg, loc;
                if (result > 0) {
                    msg = "사원등록성공";
-                   loc = "employee/successEmp";
+                   loc = "index";    //employee/empList jsp 아니라 controller
                } else {
                    msg = "사원등록실패";
-                   loc = "/index";
+                   loc = "index";
                }
 
                model.addAttribute("msg", msg);
@@ -83,11 +83,26 @@ public class EmployeeController {
            } catch (IOException e) {
                e.printStackTrace();
                model.addAttribute("msg", "파일 업로드 실패!!!");
-               model.addAttribute("loc", "/index");
+               model.addAttribute("loc", "index");
            }
 
            return "common/msg";
        }
 
+     // 사원리스트 화면전환
+     @GetMapping("/selectemp")
+     public String selectEmployee() {
+        return "employee/empList";
+
+     }
+     
+     
+     
+     
+     
+     
+     
+     
+     
 
 }
