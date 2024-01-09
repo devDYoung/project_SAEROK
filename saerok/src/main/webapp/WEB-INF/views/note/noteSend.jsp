@@ -92,5 +92,6 @@
 			</div>
 		</div>
 	</div>
+	<div id=pageBar>${pageBar}</div>
 
 	<jsp:include page="/WEB-INF/views/common/footer.jsp" />

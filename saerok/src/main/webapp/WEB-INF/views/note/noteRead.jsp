@@ -87,7 +87,7 @@
 			</div>
 		</div>
 	</div>
-
+	<div id=pageBar>${pageBar}</div>
 
 
 
