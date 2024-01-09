@@ -6,19 +6,29 @@
 <c:set var="path" value="${pageContext.request.contextPath}"/>
 <%@ taglib prefix="springform" uri="http://www.springframework.org/tags/form"%>
 
+<script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
 
 <jsp:include page="/WEB-INF/views/common/header.jsp">
 	<jsp:param name="" value="전자결재리스트"/>
 </jsp:include>
 
+<div id="contentContainer">
+    <select id="tagId" >
+        <option value="">양식을 선택하세요</option>
+        <option value="D1">일반 신청서</option>
+        <option value="D2">휴가 신청서</option>
+        <option value="D3">지출 결의서</option>
+    </select>
+    <!-- 버튼 추가 -->
+    <button onclick="handleButtonClick()">버튼 클릭</button>
+</div>
 
-	<h2>전자결재 리스트</h2>
 <table border="1">
     <thead>
         <tr>
             <th>문서 구분</th>
-            <th>문서 이름</th>
-            <th>사원 번호</th>
+            <th>제목</th>
+            <th>사원 이름</th>
             <th>수정자 ID</th>
             <th>담당자 번호</th>
             <th>참조/참조 대상</th>
@@ -32,8 +42,7 @@
                 <td><c:out value="${a.apvName}"/></td>
                 <td><c:out value="$"/></td>
                 <td><c:out value="$"/></td>
-                <td><c:out value="${a.apvState}"/></td>
-                
+        
                 <!-- 나머지 필드 -->
             </tr>
         </c:forEach>
@@ -42,6 +51,33 @@
      <div id="pageBar">
         ${pageBar }
      </div> 
+   
+   
+   
+<script>
+    function handleButtonClick() {
+        // 선택된 양식의 값을 가져오기
+        var selectedValue = document.getElementById("tagId").value;
+
+        // 선택된 양식에 따라 다른 동작 수행
+        switch (selectedValue) {
+            case "D1":
+                alert("일반 신청서를 처리합니다.");
+                
+                break;
+            case "D2":
+                alert("휴가 신청서를 처리합니다.");
+                break;
+            case "D3":
+                alert("지출 결의서를 처리합니다.");
+                break;
+            default:
+                alert("양식을 선택하세요.");
+                break;
+        }
+    }
+</script>
+     
 
 
 

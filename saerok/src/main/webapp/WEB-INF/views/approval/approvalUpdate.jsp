@@ -8,7 +8,7 @@
 	<jsp:param name="" value="전자결재 작성하기"/>
 </jsp:include>
 <section id="content">
-
+<p>아디오스</p>
 </section>
 
 <jsp:include page="/WEB-INF/views/common/footer.jsp"/>
