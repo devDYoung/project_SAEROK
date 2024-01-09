@@ -8,6 +8,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
@@ -22,12 +23,13 @@ import lombok.RequiredArgsConstructor;
 
 @Controller
 @RequiredArgsConstructor
+@RequestMapping("/commute")
 public class CommuteController {
 
 	@Autowired
 	private CommuteService commuteService;
 
-	@GetMapping("/commuteCheck")
+	@GetMapping("/Check")
 	public ModelAndView selectWorkList(HttpSession session, ModelAndView mv) {
 
 		// 현재 로그인 중인 사원의 사원번호

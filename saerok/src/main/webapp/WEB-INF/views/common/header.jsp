@@ -9,7 +9,7 @@
 <html lang="utf-8">
 
 <head>
-	
+   
 <style>
 
 .dropdown-list-image img {
@@ -21,8 +21,8 @@
 .dropdown-list-image img {
     border-radius: 50%;
 }
-	</style>
-	
+   </style>
+   
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -163,7 +163,7 @@
                             <a class="collapse-item" href="${path }/approval/approvalList.do">전체문서함</a>
                             <div id="collapseEDSM" class="collapse" aria-labelledby="headingEDSM"data-parent="#accordionSidebar" >
                                 <div class="bg-white py-2 collapse-inner rounded">
-                                <a class="collapse-item" href="">대기</a>
+                                <a class="collapse-item" href="#">대기</a>
                                 <a class="collapse-item" href="#">진행</a>
                                 <a class="collapse-item" href="#">완료</a>
                                  </div>
@@ -388,8 +388,8 @@
                                 <!-- <a class="dropdown-item d-flex align-items-center" href="#"> -->
                                     <div class="dropdown-list-image mr-3" name="oriFileName">
                                         <a href="${path }/mypage">
-											<img src="${path}/resources/upload/profile/${loginEmployee.destFileName}" alt="ato-profile-img">
-											</a>
+                                 <img src="${path}/resources/upload/profile/${loginEmployee.destFileName}" alt="ato-profile-img">
+                                 </a>
                                         <div class="status-indicator bg-success"></div>
                                     </div>
                                     
