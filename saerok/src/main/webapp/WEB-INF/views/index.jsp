@@ -20,6 +20,16 @@
     <script src="https://cdn.jsdelivr.net/npm/fullcalendar-scheduler@5.9.0/main.min.js"></script>
     <!-- fullcalendar-scheduler 언어 CDN -->
     <script src="https://cdn.jsdelivr.net/npm/fullcalendar-scheduler@5.9.0/locales-all.min.js"></script>
+   <style>
+
+.ato-login-img {
+    max-width: 70%; 
+    max-height: 70%; 
+    width: auto; 
+}
+
+	</style> 
+    
 <section>
 	<div id="main-wrapper" data-theme="light" data-layout="vertical"
 		data-navbarbg="skin6" data-sidebartype="full"
@@ -80,14 +90,11 @@
 					</div>
 					<div class="col-lg-5 col-md-12">
 						<div class="card" style="padding: 0px 10px 15px 10px;">
-							<div class="card-body">
-								 <div id="profileImg"
-									style="position: absolute; right: 0; 
-									height: 140px; width: 130px; margin-right: 15px; 
-									background-image: url('/resources/upload/IMG_2281.JPG'); 
-									background-size: cover;">
-								</div> 
-							`<%-- <div id="profileImg"
+							<div class="ato-login-img" name="oriFileName">
+									<img src="${path}/resources/upload/profile/${loginEmployee.destFileName}" alt="ato-profile-img" class="ato-login-img">
+                               </div>
+                              <br>
+							<%-- <div id="profileImg"
 									style="position:absolute; right:0; height:140px; width:130px; 
                             		margin-right:15px;
                             		background-image:url(${ pageContext.servletContext.contextPath }/resources/assets/images/${ profileImg });
