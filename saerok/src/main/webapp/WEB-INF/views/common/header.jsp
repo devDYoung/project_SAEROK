@@ -18,14 +18,10 @@
     width: auto; 
 }
 
-
 .dropdown-list-image img {
     border-radius: 50%;
 }
-	
-	
 	</style>
-	
 	
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
