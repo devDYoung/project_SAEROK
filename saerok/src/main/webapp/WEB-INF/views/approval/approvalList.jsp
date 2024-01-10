@@ -18,6 +18,7 @@
 </script>
 
 <jsp:include page="/WEB-INF/views/common/header.jsp">
+
 	<jsp:param name="" value="전자결재리스트" />
 </jsp:include>
 
