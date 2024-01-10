@@ -10,36 +10,42 @@ import com.saerok.dy.note.model.dto.Note;
 
 @Service
 public class NoteServiceImpl implements NoteService {
+	
+	private final NoteDao noteDao;
 
-    private final NoteDao noteDao;
+	@Autowired
+	public NoteServiceImpl(NoteDao noteDao) {
+		this.noteDao = noteDao;
+	}
 
-    @Autowired
-    public NoteServiceImpl(NoteDao noteDao) {
-        this.noteDao = noteDao;
-    }
+	@Override
+	public List<Note> getReceivedNotes(String revEmpNo) {
+		// TODO Auto-generated method stub
+		return noteDao.getReceivedNotes(revEmpNo);
+	}
 
-    @Override
-    public void writeNote(Note note) {
-        noteDao.insert(note);
-    }
+	@Override
+	public void writeNote(Note note) {
+		// TODO Auto-generated method stub
 
-    @Override
-    public List<Note> getReceivedNotes() {
-        return noteDao.getReceivedNotes();
-    }
+	}
 
-    @Override
-    public List<Note> getSentNotes() {
-        return noteDao.getSentNotes();
-    }
+	@Override
+	public List<Note> getSentNotes() {
+		// TODO Auto-generated method stub
+		return null;
+	}
 
-    @Override
-    public List<Note> getDeletedNotes() {
-        return noteDao.getDeletedNotes();
-    }
+	@Override
+	public List<Note> getDeletedNotes() {
+		// TODO Auto-generated method stub
+		return null;
+	}
 
-    @Override
-    public void deleteNote(int noteNo) {
-        noteDao.deleteNoteById(noteNo);
-    }
+	@Override
+	public void deleteNote(int noteNo) {
+		// TODO Auto-generated method stub
+
+	}
+
 }

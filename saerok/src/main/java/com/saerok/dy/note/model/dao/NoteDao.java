@@ -7,15 +7,7 @@ import com.saerok.dy.note.model.dto.Note;
 public interface NoteDao {
 	void insert(Note note);
 
-    // 받은 쪽지함
-    List<Note> getReceivedNotes();
+	// 어떤 사용자가 받은 쪽지함을 조회할 것인지
+	List<Note> getReceivedNotes(String revEmpNo);
 
-    // 보낸 쪽지함
-    List<Note> getSentNotes();
-
-    // 삭제된 쪽지함
-    List<Note> getDeletedNotes();
-
-    // 쪽지 삭제 처리
-    void deleteNoteById(int noteNo);
 }

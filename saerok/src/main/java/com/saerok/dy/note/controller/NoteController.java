@@ -34,9 +34,18 @@ public class NoteController {
      // 받은 쪽지함 페이지로 이동
     @GetMapping("/get")
     public String readNotePage(Model model) {
-    	
-        return "note/noteRead";
+    	List<Note> receivedNotes=noteService.getReceivedNotes("ATO_1");
+    	model.addAttribute("reseivedNotes",receivedNotes);
+        return "note/noteGet";
     }
+    
+	/*
+	 * // 받은 쪽지함 처리
+	 * 
+	 * @PostMapping("/get/{noteNo}") public String getReceivedNotes(@PathVariable
+	 * int sndEmpNo,String rcvEmpNo) {
+	 */
+    
 
     // 보낸 쪽지함 페이지로 이동
     @GetMapping("/send")
@@ -47,7 +56,7 @@ public class NoteController {
     // 휴지통 페이지로 이동
     @GetMapping("/basket")
     public String deleteNotePage(Model model) {
-        return "note/noteDelete";
+        return "note/noteBasket";
     }
 
     
