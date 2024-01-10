@@ -28,5 +28,8 @@ public interface SalesService {
 	BigDecimal findOwnerTodaySalesTotal(String empNo);
 	BigDecimal findOwnerCurrentMonthSalesTotal(String empNo);
 	BigDecimal findOwnerCurrentYearSalesTotal(String empNo);
+	
+	 List<Map<String, Object>> getBranchOwnerDetailSales(String empNo);
+	 List<Map<String, Object>> getBranchOwnerCurrentMonthSales(String empNo);
 
 }

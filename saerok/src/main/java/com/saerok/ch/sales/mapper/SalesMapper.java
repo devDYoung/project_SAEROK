@@ -32,5 +32,8 @@ public interface SalesMapper {
     BigDecimal findOwnerTodaySalesTotal(@Param("empNo") String empNo);
     BigDecimal findOwnerCurrentMonthSalesTotal(@Param("empNo") String empNo);
     BigDecimal findOwnerCurrentYearSalesTotal(@Param("empNo") String empNo);
+    
+    List<Map<String, Object>> findBranchOwnerDetailSales(@Param("empNo") String empNo);
+    List<Map<String, Object>> findBranchOwnerCurrentMonthSales(@Param("empNo") String empNo);
 
 }

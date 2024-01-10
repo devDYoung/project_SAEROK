@@ -41,4 +41,15 @@ public class OwnerSalesController {
 
         return "sales/ownerAllSales";
     }
+    
+    @GetMapping("/detail")
+    public String getSales(Model model) {
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        Employee loggedInEmployee = (Employee) authentication.getPrincipal();
+        String empNo = loggedInEmployee.getEmpNo();
+
+        model.addAttribute("detailSales", salesService.getBranchOwnerDetailSales(empNo));
+        model.addAttribute("monthlySales", salesService.getBranchOwnerCurrentMonthSales(empNo));
+        return "sales/branchOwnerDetail";
+    }
 }
