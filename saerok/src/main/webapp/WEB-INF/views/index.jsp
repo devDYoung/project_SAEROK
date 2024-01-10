@@ -29,6 +29,10 @@
 }
 
    </style> 
+<!--    
+    <script>
+    	const empNo = ${ loginEmployee.empNo };
+    </script> -->
     
 <section>
    <div id="main-wrapper" data-theme="light" data-layout="vertical"
@@ -125,7 +129,7 @@
                               <p class="col-6 text-right" style="padding: 0px;" id="outDtime"></p>
                            </div>
                         </div>
-                        <form method="get" action="${path }/changeStatus.do">
+                        <form method="get" action="changeStatus.do">
                            <!-- 출퇴근 버튼 -->
                            <div class="d-flex align-items-center">
                               <button type="submit" id="startBtn"
@@ -137,7 +141,7 @@
                            </div>
 
                            <!-- 상태 설정버튼 -->
-                           <!-- <div class="d-flex align-items-center"
+                           <div class="d-flex align-items-center"
                               style="margin-top: 15px;">
                               <button type="button" id="selectStatus"
                                  class="btn btn-rounded btn-outline-primary col-12"
@@ -145,7 +149,7 @@
                                  근무상태변경<i data-feather="chevron-down" class="feather-icon"></i>
                               </button>
                            </div>
-                           <div id="status" class="align-items-center"
+                          <div id="status" class="align-items-center"
                               style="border: 1px solid rgb(95, 118, 232); border-radius: 10px; background-color: white;">
                               <button type="submit"
                                  class="d-flex col-12 btn btn-outline-primary"
@@ -164,8 +168,8 @@
                                  class="d-flex col-12 btn btn-outline-primary"
                                  style="border: none; border-bottom-left-radius: 9px; border-bottom-right-radius: 9px;"
                                  value="7" name="status">반차</button>
-                           </div> -->
-                           <input type="hidden" name="cNo" value="${ loginEmployee.empNo}">
+                           </div>
+                           <input type="hidden" name="cNo" value="${c.commuteNo}">
                            <input type="hidden" name="main" value="1"> 
                         </form>
                      </div>
@@ -186,15 +190,15 @@
                                     <div id="e-pay-status">
                                        <span> <a href="${path}"
                                           style="color: rgb(59, 211, 39);">결재대기</a>
-                                          <div>${countYet}건</div>
+                                          <div>건</div>
                                        </span> 
                                        <span> <a href="${path}"
                                           style="color: rgb(59, 211, 39);">결재중</a>
-                                          <div>${countUnder}건</div>
+                                          <div>건</div>
                                        </span> 
                                        <span> <a href="${path}"
                                           style="color: rgb(59, 211, 39);">결재완료</a>
-                                          <div>${countDone}건</div>
+                                          <div>건</div>
                                        </span>
                                     </div>
                                  </form>
@@ -254,14 +258,10 @@
          //출퇴근 버튼 설정
          var start = "${c.inDtime}";
          var end = "${c.outDtime}";
-         console.log(start)
-         console.log(end)
          //null이면 출근x, 퇴근x
          //null이 아니면 - 출근o, 퇴근x
          //          - 출근o, 퇴근o
          if (start == "") {
-            console.log("없음")
-
             $('#startBtn').attr('disabled', false);
             $('#endBtn').attr('disabled', false);
 
@@ -280,29 +280,6 @@
             $('#inDtime').text(start) //출근시간 표시
             $('#outDtime').text(end) //퇴근시간 표시
          }
-
-         //근무상태 선택버튼 css설정
-         $("#status").css("z-index", "1")
-         $(".list-group").css("z-index", "0")
-         $(".card-title").css("z-index", "0")
-
-         $("#status").css("display", "none")
-         $("#status").css("position", "absolute")
-
-         $("#selectStatus").click(function() {
-            if ($("#status").css("display") == "none") {
-               $("#status").show();
-
-               var width = $("#selectStatus").css("width");
-
-               $("#status").css("width", width)
-            }
-
-            else {
-               $("#status").hide();
-            }
-         })
-      })
 
       //시간표시 기능
       function printClock() {
@@ -362,8 +339,6 @@
 
          }
       }
-      
-      
          
    </script>
    

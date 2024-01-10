@@ -1,6 +1,8 @@
  package com.saerok.jy.commute.dto;
 
-import java.security.Timestamp;
+
+
+import java.sql.Timestamp;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -20,6 +22,10 @@ public class Commute {
 	private long overtime; //연장근무시간
 	private String workingDay; //근무일
 	private String empNo; //사원번호
+	private String strDate;
+	
+	
+	
 	
 	
 }

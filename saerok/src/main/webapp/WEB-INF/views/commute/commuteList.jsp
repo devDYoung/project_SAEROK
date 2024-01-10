@@ -75,7 +75,7 @@
 		
 		$.ajax({
 			type: "POST", 
-			url:"/selectCommuteList.do",
+			url:"selectCommuteList.do",
 			dataType:"html",	//html 방식
 			data: { 
 					year:year, 
@@ -253,9 +253,6 @@
 					
 					var weekClass = ".week" + weekNum
 					var chevron = "#chevron" + weekNum;
-					
-					console.log(weekClass)
-					console.log(weekNum)
 					
 					//#chevron?선택 -> remove, addClass
 					$(chevron).removeClass('cl');
