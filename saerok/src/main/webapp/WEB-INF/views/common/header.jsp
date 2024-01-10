@@ -18,9 +18,20 @@
     width: auto; 
 }
 
+/* 부모 컨테이너에 대한 스타일 */
+.dropdown-list-image {
+    display: flex;
+    align-items: center; /* 수직 가운데 정렬 */
+}
+
 .dropdown-list-image img {
     border-radius: 50%;
+    max-width: 100%; /* 이미지가 부모 컨테이너를 넘지 않도록 설정 */
+    margin-right: 5px; /* 이미지와 텍스트 간격 조절 */
+
 }
+
+
    </style>
    
     <meta charset="utf-8">
@@ -86,7 +97,7 @@
                     data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
                         <a class="collapse-item" href="">근태</a>
-                        <a class="collapse-item" href="${path}/workList">근태조회</a>
+                        <a class="collapse-item" href="${path }/commute/commute.do">근태조회</a>
                         <a class="collapse-item" href="">개인일정</a>
                         <a class="collapse-item" href="">부서일정</a>
                     </div>
@@ -402,7 +413,7 @@
                             </div>
                         </li> -->
  
-                        <div class="topbar-divider d-none d-sm-block"></div>
+                        <div class="topbar-divider d-none d-sm-block"></div> 
 
                         <!-- Nav Item - User Information -->
                         <li class="nav-item dropdown no-arrow">

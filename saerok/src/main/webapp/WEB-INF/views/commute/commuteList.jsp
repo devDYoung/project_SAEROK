@@ -75,7 +75,7 @@
 		
 		$.ajax({
 			type: "POST", 
-			url:"/selectCommuteList",
+			url:"/selectCommuteList.do",
 			dataType:"html",	//html 방식
 			data: { 
 					year:year, 

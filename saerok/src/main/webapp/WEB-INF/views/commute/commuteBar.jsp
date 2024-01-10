@@ -66,7 +66,7 @@
 	</div>
 	
 	<br>
-	<form method="get" action="/changeStatus">
+	<form method="get" action="${path }/changeStatus.do">
 		<div class="d-flex align-items-center">
 		<!-- 출근시간 없으면 출근가능, 퇴근 불가능 -->
 		<!-- 출근 시간이 있으면, 출근 불가능, 퇴근 가능 -->
@@ -97,7 +97,7 @@
 			<button type="submit" class="d-flex col-12 btn btn-outline-primary" style="border:none;" value="6" name="status">연차</button>
 			<button type="submit" class="d-flex col-12 btn btn-outline-primary" style="border:none; border-bottom-left-radius: 9px; border-bottom-right-radius: 9px;" value="7" name="status">반차</button>
 		</div>
-		<input type="hidden" name="cNo" value="${c.commuteNo }">
+		<input type="hidden" name="cNo" value="${loginEmployee.empNo}">
 		<input type="hidden" name="main" value="0">
 	</form>
 	<br>
@@ -105,7 +105,7 @@
             
     <h6 class="card-title">근태관리</h6>
     <div class="list-group"> 
-		<a href="/commuteCheck" class="list-group-item">내 근태 현황</a>
+		<a href="${path }/commute.do" class="list-group-item">내 근태 현황</a>
 	    <a href="/annualList" class="list-group-item">내 연차 내역</a> 
 	    <a href="/mypage" class="list-group-item">내 인사정보</a> 
     </div>

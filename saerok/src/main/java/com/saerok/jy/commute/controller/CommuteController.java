@@ -1,12 +1,20 @@
 package com.saerok.jy.commute.controller;
 
-
+import java.io.IOException;
+import java.sql.Timestamp;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.GregorianCalendar;
+import java.util.HashMap;
+import java.util.Locale;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -18,36 +26,36 @@ import com.saerok.jy.commute.dto.Commute;
 import com.saerok.jy.commute.service.CommuteService;
 
 import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
-import lombok.RequiredArgsConstructor;
 
 @Controller
-@RequiredArgsConstructor
-@RequestMapping("/commute")
+//@RequiredArgsConstructor
+//@RequestMapping("/commute")
 public class CommuteController {
 
 	@Autowired
 	private CommuteService commuteService;
 
-	@GetMapping("/Check")
-	public ModelAndView selectWorkList(HttpSession session, ModelAndView mv) {
+	@GetMapping("/commute.do")
+	public ModelAndView selectCommuteList(HttpSession session, ModelAndView mv) {
 
 		// 현재 로그인 중인 사원의 사원번호
 		Employee loginEmployee = (Employee) session.getAttribute("loginEmployee");
 		String empNo = loginEmployee.getEmpNo();
 
 		// 사원의 오늘 근무정보 가져오기
-		Commute c = commuteService.selectWork(empNo);
+		Commute c = commuteService.selectCommute(empNo);
 
 		mv.addObject("c", c);
-		mv.setViewName("/commute/commuteMain");
+		mv.setViewName("/commuteMain");
 
 		return mv;
 	}
 
 	@ResponseBody
-	@PostMapping("/selectCommuteList")
-	public ModelAndView selectWorkList2(HttpSession session, ModelAndView mv, @RequestParam("year") int year,
+	@PostMapping("/selectCommuteList.do")
+	public ModelAndView selectCommuteList2(HttpSession session, ModelAndView mv, @RequestParam("year") int year,
 			@RequestParam("month") int month, @RequestParam("empNo") int empNo) {
 
 		String strYear = String.valueOf(year).substring(2);
@@ -60,19 +68,19 @@ public class CommuteController {
 		commute.setWorkingDay(strDate);
 
 		// 사원의 이번달 근무정보 가져오기
-		ArrayList<Commute> clist = commuteService.selectWorkList(commute);
+		ArrayList<Commute> clist = commuteService.selectCommuteList(commute);
 
 		mv.addObject("clist", clist);
 		mv.addObject("year", year);
 		mv.addObject("month", month);
-		mv.setViewName("/commute/commuteList");
+		mv.setViewName("/commuteList");
 
 		return mv;
 
 	}
 
-	@GetMapping("/changeStatus")
-	public String changeWorkStatus(Model model, HttpSession session, HttpServletRequest request) {
+	@GetMapping("/changeStatus.do")
+	public String changeCommuteStatus(Model model, HttpSession session, HttpServletRequest request) {
 
 		// 사원번호
 		Employee loginEmployee = (Employee) session.getAttribute("loginEmployee");
@@ -89,25 +97,35 @@ public class CommuteController {
 
 		// 출근 일때,
 		if (status.equals("Y")) {
-			commuteService.insertWork(empNo);
+			commuteService.insertCommute(empNo);
 
 		}
 		// 퇴근 일때
 		else if (status.equals("N")) {
-			commuteService.updateWork(commuteNo);
+			commuteService.updateCommute(commuteNo);
 		}
 
 		// 모든 상태 추가
-		commuteService.insertWorkStatus(status);
+		commuteService.insertCommuteStatus(status);
 
 		if (request.getParameter("index").equals("1")) {
-			Commute c = commuteService.selectWork(empNo);
+			Commute c = commuteService.selectCommute(empNo);
 
 			model.addAttribute("c", c);
 			return "index";
 		} else {
-			return "redirect:/commuteCheck";
+			return "redirect:/commute.do";
 		}
 
 	}
+
+	// 상태조회
+//		@ResponseBody
+//		@GetMapping(value = "selectCommuteStatus.do", produces = "application/json; charset=utf-8")
+//		public String selectCommuteStatusList(@RequestParam("commuteNo") int commuteNo) {
+//			
+//			ArrayList<Commute> list = commuteService.selectCommuteStatusList(commuteNo);
+//
+//			return new GsonBuilder().setDateFormat("yyyy년 MM월 dd일 HH:mm:ss").create().toJson(list);
+//	}
 }

@@ -1,23 +1,24 @@
 package com.saerok.jy.commute.service;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 import com.saerok.jy.commute.dto.Commute;
 
 public interface CommuteService {
-	ArrayList<Commute> selectWorkList(Commute commute);
 
-	Commute selectWork(String empNo);
+	ArrayList<Commute> selectCommuteList(Commute commute);
 
-	void insertWork(String empNo);
+	Commute selectCommute(String empNo);
 
-	void updateWork(int commuteNo);
-	
-	void insertWorkStatus(String status);
+	void insertCommute(String empNo);
 
+	void updateCommute(int commuteNo);
 
+	void insertCommuteStatus(String status);
 
+	ArrayList<Commute> selectCommuteStatusList(int commuteNo);
 
 }

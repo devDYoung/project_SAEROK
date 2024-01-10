@@ -11,16 +11,16 @@
    <jsp:param value="MainPage" name="ATO" />
 </jsp:include>
 <!-- Calendar & Reservation JavaScript -->
-<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-    <!-- Axios CDN -->
+<!-- <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    Axios CDN
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
-    <!-- Moment CDN -->
+    Moment CDN
     <script src="https://cdn.jsdelivr.net/momentjs/latest/moment.min.js"></script>
-    <!-- fullcalendar-scheduler CDN -->
+    fullcalendar-scheduler CDN
     <script src="https://cdn.jsdelivr.net/npm/fullcalendar-scheduler@5.9.0/main.min.js"></script>
-    <!-- fullcalendar-scheduler 언어 CDN -->
-    <script src="https://cdn.jsdelivr.net/npm/fullcalendar-scheduler@5.9.0/locales-all.min.js"></script>
-   <style>
+    fullcalendar-scheduler 언어 CDN
+    <script src="https://cdn.jsdelivr.net/npm/fullcalendar-scheduler@5.9.0/locales-all.min.js"></script>-->
+   <style> 
 
 .ato-login-img {
     max-width: 70%; 
@@ -101,7 +101,6 @@
                                   background-size:cover;">
                         </div>  --%>
                         <!-- 이미지 경로 수정하기 -->
-                        <!-- <h4 class="card-title mb-3 font-weight-bold">근태관리</h4> -->
                         <h4 id="todate" class="card-title mb-3 font-weight-bold"></h4>
                         <p id="clock" style="font-size: 40px"></p>
                         <div>
@@ -126,7 +125,7 @@
                               <p class="col-6 text-right" style="padding: 0px;" id="outDtime"></p>
                            </div>
                         </div>
-                        <form method="get" action="${path }/changeStatus">
+                        <form method="get" action="${path }/changeStatus.do">
                            <!-- 출퇴근 버튼 -->
                            <div class="d-flex align-items-center">
                               <button type="submit" id="startBtn"
@@ -166,7 +165,7 @@
                                  style="border: none; border-bottom-left-radius: 9px; border-bottom-right-radius: 9px;"
                                  value="7" name="status">반차</button>
                            </div> -->
-                           <input type="hidden" name="cNo" value="${c.commuteNo }">
+                           <input type="hidden" name="cNo" value="${ loginEmployee.empNo}">
                            <input type="hidden" name="main" value="1"> 
                         </form>
                      </div>
@@ -246,7 +245,7 @@
          </div>
       </div>
       
-   </div>
+    </div> 
    
     
     
