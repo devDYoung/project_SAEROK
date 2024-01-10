@@ -18,9 +18,20 @@
     width: auto; 
 }
 
+/* 부모 컨테이너에 대한 스타일 */
+.dropdown-list-image {
+    display: flex;
+    align-items: center; /* 수직 가운데 정렬 */
+}
+
 .dropdown-list-image img {
     border-radius: 50%;
+    max-width: 100%; /* 이미지가 부모 컨테이너를 넘지 않도록 설정 */
+    margin-right: 5px; /* 이미지와 텍스트 간격 조절 */
+
 }
+
+
    </style>
    
     <meta charset="utf-8">
@@ -402,7 +413,7 @@
                             </div>
                         </li> -->
  
-                        <div class="topbar-divider d-none d-sm-block"></div>
+                        <div class="topbar-divider d-none d-sm-block"></div> 
 
                         <!-- Nav Item - User Information -->
                         <li class="nav-item dropdown no-arrow">
