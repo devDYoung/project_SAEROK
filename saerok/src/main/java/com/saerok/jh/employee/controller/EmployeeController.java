@@ -2,6 +2,7 @@ package com.saerok.jh.employee.controller;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,6 +14,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.saerok.jh.employee.model.dto.Employee;
 import com.saerok.jh.employee.model.service.EmployeeService;
 
 import jakarta.servlet.http.HttpSession;
@@ -26,14 +28,14 @@ public class EmployeeController {
    @Autowired
    private final EmployeeService service;
 
-   // 사원등록 화면전환
+   //사원등록 화면전환
    @GetMapping("/insertemp")
    public String insertEmployee() {
       return "employee/insertemployee";
 
    }
 
-   // 사원등록 
+   //사원등록 
      @PostMapping("/insertempEnd")
        public String insertEmployeeEnd(MultipartFile oriFileName,
                                        @RequestParam Map<String, Object> param,
@@ -71,7 +73,7 @@ public class EmployeeController {
                String msg, loc;
                if (result > 0) {
                    msg = "사원등록성공";
-                   loc = "index";    //employee/empList jsp 아니라 controller
+                   loc = "redirect:/selectemp"; 
                } else {
                    msg = "사원등록실패";
                    loc = "index";
@@ -89,18 +91,15 @@ public class EmployeeController {
            return "common/msg";
        }
 
-     // 사원리스트 화면전환
+     //전체사원리스트
      @GetMapping("/selectemp")
-     public String selectEmployee() {
+     public String searchEmployee(Model model) {
+		 List<Employee> empList = service.selectEmployeeList();
+		 log.debug("{}",empList);
+		 model.addAttribute("empList",empList);
         return "employee/empList";
 
      }
-     
-     
-     
-     
-     
-     
      
      
      
