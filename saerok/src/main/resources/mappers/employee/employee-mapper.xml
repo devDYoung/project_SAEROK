@@ -49,30 +49,37 @@
  	 WHERE EMP_NO=#{empNo}
 	</update>
 	
-<insert id="insertEmployeeEnd" parameterType="map">
-    INSERT INTO EMPLOYEE 
-    VALUES (
-        'ATO_'||SEQ_EMP_NO.NEXTVAL,
-        #{deptCode},
-        #{jobCode},
-        #{empPw},
-        #{empName},
-        #{empPhone},
-        #{empEmail},
-        null,
-        null,
-        sysdate,
-        'Y',
-        #{oriFileName.originalFilename},
-        <!-- #{oriFileName}, -->
-        #{destFileName},
-        #{issueAnnu},
-        null
-    )
-</insert>
+	<!-- 사원등록 mapper -->
+	<insert id="insertEmployeeEnd" parameterType="map">
+	    INSERT INTO EMPLOYEE 
+	    VALUES (
+	        'ATO_'||SEQ_EMP_NO.NEXTVAL,
+	        #{deptCode},
+	        #{jobCode},
+	        #{empPw},
+	        #{empName},
+	        #{empPhone},
+	        #{empEmail},
+	        null,
+	        null,
+	        sysdate,
+	        'Y',
+	        #{oriFileName.originalFilename},
+	        <!-- #{oriFileName}, -->
+	        #{destFileName},
+	        #{issueAnnu},
+	        null
+	    )
+	</insert>
 	
-
-	
+	<!-- 전체사원조회 mapper -->
+	<select id="selectEmployeeList" resultMap="empMap">
+	    SELECT *
+	    FROM EMPLOYEE
+	    JOIN DEPARTMENT USING(dept_code) 
+	    JOIN ATO_JOB USING(job_code) 
+	    ORDER BY DEPT_NAME ASC, JOB_CODE ASC, EMP_NO ASC
+	</select>
 	
 	
   
