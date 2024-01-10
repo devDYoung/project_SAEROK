@@ -57,13 +57,12 @@
 <script>
     function handleButtonClick() {
         // 선택된 양식의 값을 가져오기
-        var selectedValue = document.getElementById("tagId").value;
+        var selectedUpdate = document.getElementById("tagId").value;
 
         // 선택된 양식에 따라 다른 동작 수행
-        switch (selectedValue) {
+        switch (selectedUpdate) {
             case "D1":
                 alert("일반 신청서를 처리합니다.");
-                
                 break;
             case "D2":
                 alert("휴가 신청서를 처리합니다.");
