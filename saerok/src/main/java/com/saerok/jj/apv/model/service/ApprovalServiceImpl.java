@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 
 import com.saerok.jj.apv.model.dao.ApprovalDao;
 import com.saerok.jj.apv.model.dto.Approval;
+import com.saerok.jj.apv.model.dto.CDocForm;
 
 import lombok.RequiredArgsConstructor;
 @Service
@@ -29,15 +30,16 @@ public class ApprovalServiceImpl implements ApprovalService {
 	}
 
 	@Override
-	public Approval selectApprovalByNo(int apvNo) {
+	public Approval selectApprovalByNo(String DocNo) {
 		// TODO Auto-generated method stub
-		return dao.selectApprovalByNo(session, apvNo);
+		return dao.selectApprovalByNo(session, DocNo);
 	}
 
 	@Override
 	public int insertApproval(Approval a) {
 		// TODO Auto-generated method stub
-		return dao.insertApproval(session, a);
+		return 0;
 	}
+
 
 }

@@ -57,7 +57,7 @@
           <!-- Nested Row within Card Body -->
           <div class="row">
             <div class="col-lg-5">
-              <img class="ato-insertimg" src="${path}/resources/img/ato-cosmatic2.jpg" alt="아토 logo">
+              <img class="ato-insertimg" src="${path}/resources/img/ato-img4.jpg" alt="아토 logo">
             </div>
             <div class="col-lg-7">
               <div class="p-5">
@@ -66,7 +66,7 @@
                  <div class="text-center">
                   <h1 class="h4 text-gray-900 mb-4" style="text-align: center;">ATO 사원등록</h1>
                   <label for="fileUploaderLabel" class="custom-file-upload">
-				        <img id="profile-img" class="img-profile rounded-circle" src="${pageContext.request.contextPath }/resources/img/ato100px.png"></a>
+				        <img id="profile-img" class="img-profile rounded-circle" src="${pageContext.request.contextPath }/resources/upload/profile/ato-imgg.png"></a>
 				    </label>
 				    <input type="file" id="oriFileName" name="oriFileName" style="display: none;">
                 </div> 
@@ -163,9 +163,9 @@
   <script src="js/demo/chart-pie-demo.js"></script> -->
 
 
-  <jsp:include page="/WEB-INF/views/common/footer.jsp" />
 </body>
 
+<jsp:include page="/WEB-INF/views/common/footer.jsp" />
 <script>
 	//사원등록 
     function submitForm() {
@@ -178,9 +178,8 @@
                   + "&empEmail=" + encodeURIComponent(empEmail);
         window.location.href = url;
     }
+
 	
-	//취소버튼
-    
     //파일업로드 script
     // 파일 선택 input의 변경 이벤트를 감지하여 동작하는 함수
     document.getElementById('oriFileName').addEventListener('change', handleFileSelect);
@@ -201,9 +200,6 @@
             var formData = new FormData();
             formData.append("oriFileName", selectedFile);
 
-
-            //formData를 서버로 전송 및 내가 원하는 동작 수행
-            alert("선택한 파일: " + selectedFile.name);
         }
     }
 
@@ -211,11 +207,24 @@
     document.querySelector('.custom-file-upload').addEventListener('click', function () {
         document.getElementById('oriFileName').click();
     });
+	
+	//취소버튼
+	 function cancelRegistration() {
+        // 이동할 경로 설정
+        var url = "${path}/selectemp";
+
+        // 지정된 경로로 이동
+        window.location.href = url;
+    }
+    
+    
+    
+    
 </script>
 
 
 
 
-
+<div id=pageBar>${pageBar}</div> 
 
 
