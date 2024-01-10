@@ -74,13 +74,12 @@
 	
 	<!-- 전체사원조회 mapper -->
 	<select id="selectEmployeeList" resultMap="empMap">
-    	SELECT *
-		FROM EMPLOYEE
-		JOIN DEPARTMENT USING(dept_code) 
-		JOIN ATO_JOB USING(job_code) 
-		ORDER BY JOB_CODE=#{jobCode}
+	    SELECT *
+	    FROM EMPLOYEE
+	    JOIN DEPARTMENT USING(dept_code) 
+	    JOIN ATO_JOB USING(job_code) 
+	    ORDER BY DEPT_NAME ASC, JOB_CODE ASC, EMP_NO ASC
 	</select>
-	
 	
 	
   
