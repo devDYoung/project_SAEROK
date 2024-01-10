@@ -46,11 +46,11 @@ public class CommuteServiceImpl implements CommuteService {
 	@Transactional
 	public void insertCommute(String empNo) {
 
-		int result = commuteDao.insertCommuteStatus(session, empNo);
+		//int result = commuteDao.insertCommuteStatus(session, empNo);
 
-		if (result < 0) {
-			throw new CommuteException("출근 확인 실패");
-		}
+//		if (result < 0) {
+//			throw new CommuteException("출근 확인 실패");
+//		}
 
 	}
 
@@ -66,7 +66,7 @@ public class CommuteServiceImpl implements CommuteService {
 
 	@Override
 	@Transactional
-	public void insertCommuteStatus(String status) {
+	public void insertCommuteStatus(Map status) {
 		int result = commuteDao.insertCommuteStatus(session, status);
 
 		if (result < 0) {

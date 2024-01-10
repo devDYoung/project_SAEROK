@@ -8,10 +8,8 @@
 <c:set var="loginEmployee" value="${sessionScope.SPRING_SECURITY_CONTEXT.authentication.principal }"/> 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 <jsp:include page="/WEB-INF/views/common/header.jsp">
-	<jsp:param value="CommuteMain" name="" />
+	<jsp:param value="CommuteMain" name="ATO" />
 </jsp:include>
-
-
 <div class="preloader">
 		<div class="lds-ripple">
 			<div class="lds-pos"></div>
@@ -36,33 +34,28 @@
 <div class="col-10" id="workList">
             
 						<script>
-							$(function(){
-								var currentDate = new Date();
-								
-								var year = currentDate.getFullYear();	//이번년도
-								var month = currentDate.getMonth() + 1;	//이번달
-								
-								var empNo = "${loginEmployee.empNo}";	//로그인유저 사번
-								
-								$.ajax({
-									type: "POST", 
-									url:"selectCommuteList.do",
-									dataType:"html",	//html 방식
-									data: { 
-											year:year, 
-											month:month, 
-											empNo:empNo
-										},
-									success : function(result){
-										
-										$('#workList').html(result);	//html태그 넣기
-									},
-									error : function(){
-										
-										alert("근무정보를 조회할 수 없습니다. \n관리자에게 문의하세요.");
-									}
-								});
-							})
+						$(function(){
+							const currentDate = new Date();
+							const year = currentDate.getFullYear(); // 이번년도
+							const month = currentDate.getMonth() + 1; // 이번달
+							const empNo = "${loginEmployee.empNo}"; // 로그인유저 사번
+							$.ajax({
+								type: "POST", 
+								url: "${path}/selectCommuteList.do", // CommuteController의 URL
+								dataType: "html", // HTML 방식
+								data: { 
+									year: year, 
+									month: month, 
+									empNo: empNo
+								},
+								success : function(result){
+									$('#workListContainer').html(result); // HTML 태그 넣기
+								},
+								error : function(){
+									alert("근무정보를 조회할 수 없습니다. \n관리자에게 문의하세요.");
+								}
+							});
+						})
 							
 						</script>
 					</div>

@@ -16,13 +16,13 @@ public interface CommuteDao {
    
 ArrayList<Commute> selectCommuteList(SqlSession session, Commute commute);
 
-int insertCommute(SqlSession sessoin, String empNo);
+int insertCommute(SqlSession sessoin, Map empNo);
 
 Commute selectCommute(SqlSession session, String empNo);
 
 int updateCommute(SqlSession session, int commuteNo);
 
-public int insertCommuteStatus(SqlSession session, String status);
+public int insertCommuteStatus(SqlSession session, Map status);
 
 public ArrayList<Commute> selectCommuteStatusList(SqlSession session,int commuteNo);
 

@@ -22,7 +22,7 @@ public class Commute {
 	private long overtime; //연장근무시간
 	private String workingDay; //근무일
 	private String empNo; //사원번호
-	private String strDate;
+	
 	
 	
 	

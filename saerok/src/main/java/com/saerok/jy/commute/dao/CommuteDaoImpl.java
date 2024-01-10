@@ -1,7 +1,7 @@
 package com.saerok.jy.commute.dao;
 
 import java.util.ArrayList;
-import java.util.HashMap;
+import java.util.Map;
 
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.stereotype.Repository;
@@ -17,7 +17,7 @@ public class CommuteDaoImpl implements CommuteDao {
 	}
 
 	@Override
-	public int insertCommute(SqlSession session, String empNo) {
+	public int insertCommute(SqlSession session, Map empNo) {
 		return session.insert("commute.insertCommute", empNo);
 	}
 
@@ -32,7 +32,7 @@ public class CommuteDaoImpl implements CommuteDao {
 	}
 
 	@Override
-	public int insertCommuteStatus(SqlSession session, String status) {
+	public int insertCommuteStatus(SqlSession session, Map status) {
 
 		return session.insert("commute.insertCommuteStatus", status);
 	}

@@ -52,46 +52,45 @@
 		</div>
 	</div>
 		<script>
-	var year = ${year}
-	var month = ${month}
-	
-	$('.ab').click(function(){
-		if($(this).attr('id') == 'before'){
-			month = month - 1;
-			if(month < 1){
-				year = year - 1;
-				month = 12;
+		let year = ${year};
+		let month = ${month};
+		
+		$('.ab').click(function(){
+			if($(this).attr('id') == 'before'){
+				month = month - 1;
+				if(month < 1){
+					year = year - 1;
+					month = 12;
+				}
 			}
-		}
-		else{
-			month = month + 1;
-			if(month > 12){
-				year = year + 1;
-				month = 1;
+			else{
+				month = month + 1;
+				if(month > 12){
+					year = year + 1;
+					month = 1;
+				}
 			}
-		}
 
-		var empNo = "${loginEmployee.empNo}";	//로그인유저 사번
+
+		const empNo = "${loginEmployee.empNo}";	//로그인유저 사번
 		
 		$.ajax({
 			type: "POST", 
-			url:"selectCommuteList.do",
+			url:"${path}/selectCommuteList.do",
 			dataType:"html",	//html 방식
 			data: { 
-					year:year, 
-					month: month, 
-					empNo: empNo
-				},
+				year: year, 
+				month: month, 
+				empNo: empNo
+			},
 			success : function(result){
-				
 				$('#workList').html(result);	//html태그 넣기
 			},
 			error : function(){
-				
 				alert("근무정보를 조회할 수 없습니다. \n관리자에게 문의하세요.");
 			}
 		}); 
-	})
+	});
 	</script>
 	<div class="row">
 		<div class="col-md-12 m-auto">
@@ -213,17 +212,17 @@
 		$(function(){
 			
 			//총 근무시간 형식 맞추기
-			var length = $('.date').length;
-			var totalTime = null;
-			var totalTimeArr = null;
+			const length = $('.date').length;
+			const totalTime = null;
+			const totalTimeArr = null;
 			
-			for(var i = 0; i < length; i++){
+			for(const i = 0; i < length; i++){
 				totalTime = $('.totalTime').eq(i).text()
 				totalTimeArr = totalTime.split(" ");
 				
-				var h = Number(totalTimeArr[0].substr(0, totalTimeArr[0].length-1))
-				var m = Number(totalTimeArr[1].substr(0, totalTimeArr[1].length-1))
-				var s = Number(totalTimeArr[2].substr(0, totalTimeArr[2].length-1))
+				const h = Number(totalTimeArr[0].substr(0, totalTimeArr[0].length-1))
+				const m = Number(totalTimeArr[1].substr(0, totalTimeArr[1].length-1))
+				const s = Number(totalTimeArr[2].substr(0, totalTimeArr[2].length-1))
 				
 				h = zero(h)
 				m = zero(m)
@@ -235,24 +234,24 @@
 			}			
 			
 			//오늘 날짜 찾기
-			var currentDate = new Date();	// 현재시간
+			const currentDate = new Date();	// 현재시간
 			
-			var toDate = currentDate.getFullYear() + "/" + (currentDate.getMonth() + 1) + "/" + currentDate.getDate()
+			const toDate = currentDate.getFullYear() + "/" + (currentDate.getMonth() + 1) + "/" + currentDate.getDate()
 			
 			//리스트
-			var classDate;
+			const classDate;
 			
-			for(var i = 0; i < length; i++){
+			for(const i = 0; i < length; i++){
 				classDate = $('.date').eq(i).attr('id');
 				
 				//오늘 날짜가 있는 주차 펼치기
 				if(toDate == classDate){
 					$('.date').eq(i).addClass('today')
 					
-					var weekNum = $('.today').parent().parent().attr('class').substr(18, 1);
+					const weekNum = $('.today').parent().parent().attr('class').substr(18, 1);
 					
-					var weekClass = ".week" + weekNum
-					var chevron = "#chevron" + weekNum;
+					const weekClass = ".week" + weekNum
+					const chevron = "#chevron" + weekNum;
 					
 					//#chevron?선택 -> remove, addClass
 					$(chevron).removeClass('cl');
@@ -262,37 +261,37 @@
 			}
 			
 			//주별, 일별 누적 근무시간
-			var weekNum = "${weekNum}";
-			var num = 0;
+			const weekNum = "${weekNum}";
+			const num = 0;
 			
-			for(var i = 1; i <= weekNum; i++){
+			for(const i = 1; i <= weekNum; i++){
 				
-				var accumulation = "00h 00m 00s"; //누적시간
-				var overtime = "00h 00m 00s"; //초과시간(누적시간 - 주 52시간)
-				var leftTime = "52h 00m 00s";	//잔여시간
+				const accumulation = "00h 00m 00s"; //누적시간
+				const overtime = "00h 00m 00s"; //초과시간(누적시간 - 주 52시간)
+				const leftTime = "52h 00m 00s";	//잔여시간
 				
-				for(var j = 0; j < 7; j++){
-					var accumulation2 = accumulation;
-					var overtime2 = overtime
-					var leftTime2 = leftTime;
+				for(const j = 0; j < 7; j++){
+					const accumulation2 = accumulation;
+					const overtime2 = overtime
+					const leftTime2 = leftTime;
 					
-					var total = $('.totalTime').eq(num); //totalTime
-					var workDetail = $('.workDetail').eq(num); //workDetail
+					const total = $('.totalTime').eq(num); //totalTime
+					const workDetail = $('.workDetail').eq(num); //workDetail
 					
 					//accumulation
-					var h1 = Number(accumulation.substr(0,2));
-					var m1 = Number(accumulation.substr(4,2));
-					var s1 = Number(accumulation.substr(8,2));
+					const h1 = Number(accumulation.substr(0,2));
+					const m1 = Number(accumulation.substr(4,2));
+					const s1 = Number(accumulation.substr(8,2));
 					
 					//total
-					var h2 = Number(total.text().substr(0,2));
-					var m2 = Number(total.text().substr(4,2));
-					var s2 = Number(total.text().substr(8,2));
+					const h2 = Number(total.text().substr(0,2));
+					const m2 = Number(total.text().substr(4,2));
+					const s2 = Number(total.text().substr(8,2));
 					
 					//누적시간 = 전날누적시간 + 하루 근무시간
-					var h = h1 + h2
-					var m = m1 + m2
-					var s = s1 + s2
+					const h = h1 + h2
+					const m = m1 + m2
+					const s = s1 + s2
 					
 					if(s >= 60) {
 						m = m + 1; //분 +1
@@ -307,9 +306,9 @@
 					//누적시간이 52시간을 넘었을 때 -> 초과시간 계산
 					if(h>= 52 && m > 0 && s > 0){
 						//overtime
-						var h3 = h - 52;
-						var m3 = m;
-						var s3 = s;
+						const h3 = h - 52;
+						const m3 = m;
+						const s3 = s;
 						
 						h3 = zero(h3)
 						m3 = zero(m3)
@@ -319,9 +318,9 @@
 					}
 					
 					//이번주 잔여 (52시간 - 누적시간)
-					var s4 = 60;
-					var m4 = 60;
-					var h4 = 52;
+					const s4 = 60;
+					const m4 = 60;
+					const h4 = 52;
 					
 					if(s4 - s < 60){
 						s4 = s4-s;
@@ -383,7 +382,7 @@
 			//주차 클릭시 아래 리스트 펼침, 닫힘
 			$(".chevron").click(function(){
 				
-				var week = $(this).attr('id').substr(7, 1);
+				const week = $(this).attr('id').substr(7, 1);
 				
 				if($(this).attr('class').includes('cl') == true) {
 					$(this).removeClass('cl');
