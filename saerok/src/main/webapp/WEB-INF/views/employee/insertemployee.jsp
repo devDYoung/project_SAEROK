@@ -31,7 +31,7 @@
   .ato-insertimg {
     width: 460px;
     height: 825px;
-    float: left; /* 이미지를 왼쪽으로 정렬합니다. */
+    float: left; /* 이미지를 왼쪽으로 정렬 */
   }
 
   #profile-img {
