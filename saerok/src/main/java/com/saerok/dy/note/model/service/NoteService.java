@@ -5,10 +5,12 @@ import java.util.List;
 import com.saerok.dy.note.model.dto.Note;
 
 public interface NoteService {
-    void writeNote(Note note);
+   
 
     // 받은 쪽지함 가져오기
     List<Note> getReceivedNotes(String rcvEmpNo);
+    
+    void writeNote(Note note);
 
     // 보낸 쪽지함 가져오기
     List<Note> getSentNotes();
