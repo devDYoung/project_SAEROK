@@ -43,42 +43,42 @@
 							<tr>
 								<td><input type="checkbox" name="yourCheckboxName"
 									value="yourCheckboxValue"></td>
-								<td>1</td>
-								<td>김도영</td>
-								<td>오늘 점심 베이글 드시러 가시죠.</td>
-								<td>2024/01/04</td>
+								<td></td>
+								<td></td>
+								<td></td>
+								<td></td>
 							</tr>
 							<tr>
 								<td><input type="checkbox" name="yourCheckboxName"
 									value="yourCheckboxValue"></td>
-								<td>2</td>
-								<td>이도영</td>
-								<td>새해 복 많이 받으세요.</td>
-								<td>2024/01/04</td>
+								<td></td>
+								<td></td>
+								<td></td>
+								<td></td>
 							</tr>
 							<tr>
 								<td><input type="checkbox" name="yourCheckboxName"
 									value="yourCheckboxValue"></td>
-								<td>3</td>
-								<td>박도영</td>
-								<td>오늘 회식 오시나요~?</td>
-								<td>2024/01/05</td>
+								<td></td>
+								<td></td>
+								<td></td>
+								<td></td>
 							</tr>
 							<tr>
 								<td><input type="checkbox" name="yourCheckboxName"
 									value="yourCheckboxValue"></td>
-								<td>4</td>
-								<td>장도영</td>
-								<td>어느덧 2024년, 저희 회사를. . . </td>
-								<td>2024/01/05</td>
+								<td></td>
+								<td></td>
+								<td></td>
+								<td></td>
 							</tr>
 							<tr>
 								<td><input type="checkbox" name="yourCheckboxName"
 									value="yourCheckboxValue"></td>
-								<td>5</td>
-								<td>김도영</td>
-								<td>쪽지 구현 얼른해주세요.</td>
-								<td>2024/01/05</td>
+								<td></td>
+								<td></td>
+								<td></td>
+								<td></td>
 							</tr>
 
 						</tbody>

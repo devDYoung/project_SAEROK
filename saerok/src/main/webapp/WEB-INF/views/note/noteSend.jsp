@@ -19,7 +19,7 @@
 
 		<!-- Page Heading -->
 		<h1 class="h3 mb-2 text-gray-800">보낸 쪽지함</h1>
-		<p class="mb-4">쪽지를 보내보아요 ~~</p>
+		<p class="mb-4">누구에게 쪽지를 보냈을까나~</p>
 
 		<!-- DataTales Example -->
 		<div class="card shadow mb-4">
