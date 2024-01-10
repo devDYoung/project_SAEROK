@@ -6,6 +6,7 @@ import java.util.Map;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -37,12 +38,12 @@ public class ApprovalController {
 		model.addAttribute("pageBar",pageFactory.getPage(cPage, numPerpage, 0, "approvalList.do"));
 	}
 	
+	@GetMapping("/CDocForm") 
+	public void CDocForm() {
+		
+	} 
 	
-	
-	
-	
-	
-	
+}
 	
 	
 	/*
@@ -51,7 +52,7 @@ public class ApprovalController {
 	 * model.addAttribute("approval",service.selectApprovalByNo(apvNo)); }
 	 */
 	  
-	/* @RequestMapping("/approvalWrite.do") public void approvalWrite() {} */
+	
 	 
 	/*
 	 * @RequestMapping("/insertApproval.do") public String insertApproval(Approval
@@ -66,4 +67,4 @@ public class ApprovalController {
 	 */
 	
 	
-}
+
