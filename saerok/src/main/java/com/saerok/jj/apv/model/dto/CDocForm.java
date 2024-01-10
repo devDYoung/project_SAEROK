@@ -12,9 +12,9 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @Builder
 public class CDocForm {
-	private String cNo;
-	private ApvForm DoNo;
-	private String cTitle;
-	private String cDetail;
-	private Date cDate;
+	private String cNo; //품의서 고유번호
+	private ApvForm DoNo; //보고서양식번호
+	private String cTitle; //제목
+	private String cDetail; //상세내용
+	private Date cDate; //기간
 }

@@ -27,6 +27,7 @@ public class SecurityConfig{
                .requestMatchers("/resources/**").permitAll()
                .requestMatchers(req->CorsUtils.isPreFlightRequest(req)).permitAll()
                .requestMatchers("/WEB-INF/views/**").permitAll() // "/WEB-INF/views/**" 경로에 대한 모든 사용자 허용
+           //    .requestMatchers("/WEB-INF/views/employee/insertemployee").hasAnyAuthority(MyAuthority.HR_MASTER.name())
                //메소드 방식으로 선언할 수도 있다. 
                .anyRequest().authenticated(); //권한이 있어야 해!  // 나머지 모든 요청에 대해 인증이 필요함
                // 폼 로그인 설정

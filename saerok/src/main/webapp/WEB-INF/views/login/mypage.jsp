@@ -10,9 +10,9 @@
 <jsp:include page="/WEB-INF/views/common/header.jsp" />
 
 <style>
-#profile-img {
+#ato-myimg {
 	width: 5%;
-	height: auto;
+	height: 5%;
 	margin-top: 100px;
 	margin-left: 600px;
 }
@@ -36,8 +36,8 @@
 }
 
 #profile-img {
-	width: 120px;
-	height: 90px;
+	width: 130px;
+	height: 110px;
 	margin-top: 50px;
 	margin-left: 370px;
 	/* Adjust this value to move the image to the left */
@@ -52,8 +52,14 @@
 	<section class="mypage-section">
 		<div class="myPage-container">
 			<!-- <h2 id="profile-comment">내 프로필</h2> -->
-			<img id="profile-img" class="img-profile rounded-circle"
-				src="${pageContext.request.contextPath }/resources/img/ato100px.png"></a>
+			<%-- <img id="profile-img" class="img-profile rounded-circle"
+				src="${pageContext.request.contextPath }/resources/img/ato100px.png"></a> --%>	
+				<div class="ato-myimg" name="oriFileName">
+                	<a href="${path }/mypage">
+                    	<img src="${path}/resources/upload/profile/${loginEmployee.destFileName}" id="profile-img" class="img-profile rounded-circle" alt="ato-profile-img">
+                    </a>
+                      <div class="status-indicator bg-success"></div>
+               </div>
 
 			<form id="mypageForm" action="${path }/updatemypage" method="post">
 				<div class="mypage-simple-info">
