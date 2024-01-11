@@ -66,13 +66,14 @@ public class CommuteServiceImpl implements CommuteService {
 
 	@Override
 	@Transactional
-	public void insertCommuteStatus(Map status) {
+	public int insertCommuteStatus(Map status) {
 		int result = commuteDao.insertCommuteStatus(session, status);
 
 		if (result < 0) {
 			throw new CommuteException("근무상태변경 실패");
 		}
 
+		return result;
 	}
 
 	@Override

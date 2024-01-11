@@ -12,26 +12,6 @@
 </jsp:include>
 <script
 	src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-<style>
-.inner:hover {
-	color: rgb(95, 118, 232);
-	cursor: pointer;
-}
-
-#status {
-	display: none;
-	position: absolute;
-}
-
-.selects1:hover, .selects2:hover, .selects3:hover, .selects4:hover,
-	.selects5:hover {
-	background-color: rgba(95, 118, 232, 0.1);
-}
-
-.week, .selects1, .selects2, .selects3, .selects4, .selects5 {
-	display: none;
-}
-</style>
 <section>
 	<h3>근태관리</h3>
 	<div>
@@ -71,70 +51,65 @@
 	</div>
 
 	<br>
-	<form method="get" action="changeStatus.do">
+	<%-- <form> --%>
 		<div class="d-flex align-items-center">
 			<!-- 출근시간 없으면 출근가능, 퇴근 불가능 -->
 			<!-- 출근 시간이 있으면, 출근 불가능, 퇴근 가능 -->
 			<!-- 출근시간, 퇴근시간이 있으면, 출근 불가능, 퇴근 불가능 -->
-			<!-- 버튼 속성 disable 주기 -->
 			<c:choose>
 				<c:when test="${empty c.inDtime }">
-					<button type="submit"
-						class="btn btn-rounded btn-outline-primary col-6"
-						style="margin: 2px" value="Y" name="status">출근하기</button>
-					<button type="submit"
-						class="btn btn-rounded btn-outline-primary col-6"
-						style="margin: 2px" value="N" name="status" disabled>퇴근하기</button>
+					<input type="button" id="startBtn"
+										class="btn btn-rounded btn-outline-primary col-6"
+										style="margin: 2px" value="출근하기" name="status">
+									<input type="button" id="endBtn"
+										class="btn btn-rounded btn-outline-primary col-6"
+										style="margin: 2px" value="퇴근하기" name="status">
 				</c:when>
 				<c:when test="${not empty c.inDtime && empty c.outDtime}">
-					<button type="submit"
-						class="btn btn-rounded btn-outline-primary col-6"
-						style="margin: 2px" value="Y" name="status" disabled>출근하기</button>
-					<button type="submit"
-						class="btn btn-rounded btn-outline-primary col-6"
-						style="margin: 2px" value="N" name="status">퇴근하기</button>
+					<input type="button" id="startBtn"
+										class="btn btn-rounded btn-outline-primary col-6"
+										style="margin: 2px" value="출근하기" name="status">
+									<input type="button" id="endBtn"
+										class="btn btn-rounded btn-outline-primary col-6"
+										style="margin: 2px" value="퇴근하기" name="status">
 				</c:when>
 				<c:otherwise>
-					<button type="submit"
-						class="btn btn-rounded btn-outline-primary col-6"
-						style="margin: 2px" value="Y" name="status" disabled>출근하기</button>
-					<button type="submit"
-						class="btn btn-rounded btn-outline-primary col-6"
-						style="margin: 2px" value="N" name="status" disabled>퇴근하기</button>
+					<input type="button" id="startBtn"
+										class="btn btn-rounded btn-outline-primary col-6"
+										style="margin: 2px" value="출근하기" name="status">
+									<input type="button" id="endBtn"
+										class="btn btn-rounded btn-outline-primary col-6"
+										style="margin: 2px" value="퇴근하기" name="status">
 				</c:otherwise>
 			</c:choose>
 		</div>
-		<div class="d-flex align-items-center">
+<!-- 		<div class="d-flex align-items-center">
 			<button type="button" id="selectStatus"
 				class="btn btn-rounded btn-outline-primary col-12"
 				style="margin: 2px 2px 0px 2px;">
 				근무상태변경<i data-feather="chevron-down" class="feather-icon"></i>
 			</button>
-		</div>
+		</div> -->
 		<div id="status" class="align-items-center"
 			style="border: 1px solid rgb(95, 118, 232); border-radius: 10px; background-color: white;">
-			<button type="submit" class="d-flex col-12 btn btn-outline-primary"
+			<input type="button"  id="workIn" class="d-flex col-12 btn btn-outline-primary"
 				style="border: none; border-top-left-radius: 9px; border-top-right-radius: 9px;"
-				value="10" name="status">출근</button>
-			<button type="submit" class="d-flex col-12 btn btn-outline-primary"
-				style="border: none;" value="20" name="status">퇴근</button>
-			<button type="submit" class="d-flex col-12 btn btn-outline-primary"
-				style="border: none;" value="30" name="status">연차</button>
-			<button type="submit" class="d-flex col-12 btn btn-outline-primary"
-				style="border: none;" value="40" name="status">반차</button>
+				value="출근" name="status">
+			<input type="button" class="d-flex col-12 btn btn-outline-primary"
+				style="border: none;" value="퇴근" name="status">
 		</div>
-		<input type="hidden" name="cNo" value="${c.commuteNo}"> <input
+		<input type="hidden" name="cNo" value="${c.commuteNo}"> <input>
 			type="hidden" name="main" value="1">
-	</form>
+	<%-- </form> --%>
 	<br>
 	<!-- 근태관리, 내 근태 현황, 내 연차 내역, 내 인사정보 -->
-
+<!-- 
 	<h6 class="card-title">근태관리</h6>
 	<div class="list-group">
-		<a href="/commute.do" class="list-group-item">내 근태 현황</a> <a
-			href="/annualList" class="list-group-item">내 연차 내역</a> <a
-			href="/mypage" class="list-group-item">내 인사정보</a>
-	</div>
+		<a href="" class="list-group-item">내 근태 현황</a> <a
+			href="" class="list-group-item">내 연차 내역</a> <a
+			href="" class="list-group-item">내 인사정보</a>
+	</div> -->
 
 	<script>
 		$(function() {
@@ -158,6 +133,27 @@
 
 		})
 
+		$("#workIn").click(function(){
+			debugger;
+			$.ajax({
+				type: "POST", 
+				url: "${path}/workIn.do",
+				data: { 
+					empNo: "${loginEmployee.empNo}"
+				},
+				success : function(result){
+					if(result == "success"){
+						//todo 버튼 활성화
+					}else{
+						alert("출근 실패");
+					}
+				},
+				error : function(){
+					alert("근무정보를 조회할 수 없습니다. \n관리자에게 문의하세요.");
+				}
+			});
+		});
+		
 		function printClock() {
 
 			const clock = document.getElementById("clock"); // 출력할 장소 선택

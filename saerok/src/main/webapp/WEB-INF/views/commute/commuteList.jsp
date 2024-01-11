@@ -9,39 +9,6 @@
 <jsp:include page="/WEB-INF/views/common/header.jsp">
 	<jsp:param value="CommuteList" name="" />
 </jsp:include>
-<style>
-	.inner:hover, .ab:hover{
-		color: rgb(95,118,232);
-		cursor: pointer;
-	}
-	
-	#status{
-		display:none;
-		position:absolute;
-	}
-	
-	.week1:hover, .week2:hover, .week3:hover, .week4:hover, .week5:hover{
-		background-color: rgba(95,118,232, 0.1);
-	}
-	
-	.header:hover{
-		background-color: white;
-	}
-	.week, .week1, .week2, .week3, .week4, .week5{
-		display:none;
-	}
-	
-	.today{
-		background-color: rgba(95,118,232);
-		color : white;
-		border-radius : 8px;
-		padding: 1px;
-	}
-	
-	.selectDetail{
-		border: 1px solid rgb(95,118,232);
-	}
-</style>
 <section>
 	<h3>근태 현황</h3>
 	<div class="row">
@@ -339,7 +306,7 @@
 					//이번주 잔여
 					leftTime = h4 + "h " + m4 + "m " + s4 + "s"
 					
-					////////////////
+
 					h = zero(h)
 					m = zero(m)
 					s = zero(s)
