@@ -83,13 +83,6 @@
 				</c:otherwise>
 			</c:choose>
 		</div>
-<!-- 		<div class="d-flex align-items-center">
-			<button type="button" id="selectStatus"
-				class="btn btn-rounded btn-outline-primary col-12"
-				style="margin: 2px 2px 0px 2px;">
-				근무상태변경<i data-feather="chevron-down" class="feather-icon"></i>
-			</button>
-		</div> -->
 		<div id="status" class="align-items-center"
 			style="border: 1px solid rgb(95, 118, 232); border-radius: 10px; background-color: white;">
 			<input type="button"  id="workIn" class="d-flex col-12 btn btn-outline-primary"

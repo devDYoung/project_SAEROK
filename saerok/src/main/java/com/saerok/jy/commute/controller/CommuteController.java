@@ -36,7 +36,7 @@ public class CommuteController {
 		// 현재 로그인 중인 사원의 사원번호
 		String empNo = loginSession.getName();
 		// 사원의 오늘 근무정보 가져오기
-		Commute c = commuteService.selectCommute(empNo);
+	Commute c = commuteService.selectCommute(empNo);
 
 		mv.addObject("c", c);
 		mv.setViewName("commute/commuteMain"); // 보여줄 화면 : commuteMain.jsp
@@ -63,33 +63,33 @@ public class CommuteController {
 
 	}
 
-	// 출퇴근버튼 눌렀을 때
-	@GetMapping("/changeStatus.do")
-	public String changeCommuteStatus(Model model, HttpSession session, HttpServletRequest request,
-			Principal loginSession) {
-		// 사원번호
-		String empNo = loginSession.getName();
-
-		// 상태
-		String status = request.getParameter("status");
-		LocalDateTime checkDate = LocalDateTime.now();
-		Map param = new HashMap();
-		param.put("status", status);
-		param.put("empNo", empNo);
-		if (checkDate.getHour() > 9) {
-			param.put("lateYN", "Y");
-		} else {
-			param.put("lateYN", "N");
-		}
-
-		commuteService.insertCommuteStatus(param);
-
-		return "index";
-	}
+//	// 출퇴근버튼 눌렀을 때
+//	@GetMapping("/changeStatus.do")
+//	public String changeCommuteStatus(Model model, HttpSession session, HttpServletRequest request,
+//			Principal loginSession) {
+//		// 사원번호
+//		String empNo = loginSession.getName();
+//
+//		// 상태
+//		String status = request.getParameter("status");
+//		LocalDateTime checkDate = LocalDateTime.now();
+//		Map param = new HashMap();
+//		param.put("status", status);
+//		param.put("empNo", empNo);
+//		if (checkDate.getHour() > 9) {
+//			param.put("lateYN", "Y");
+//		} else {
+//			param.put("lateYN", "N");
+//		}
+//
+//		commuteService.insertCommuteStatus(param);
+//
+//		return "index";
+//	}
 
 	// 출퇴근버튼 눌렀을 때
 	@PostMapping("/workIn.do")
-   @ResponseBody
+    @ResponseBody
 	public Map<String, String> workIn(Model model, HttpSession session, HttpServletRequest request, Principal loginSession) {
 		// 사원번호
 		String empNo = loginSession.getName();
@@ -111,8 +111,10 @@ public class CommuteController {
 		returnResult.put("lateYN", lateYN);
 		if(result > 0) {
 			returnResult.put("successYn", "Y");
+			returnResult.put("checkDate", checkDate.toString());
 		}else {
 			returnResult.put("successYn", "N");
+			returnResult.put("checkDate", "미등록");
 		}
 		
 		return returnResult;

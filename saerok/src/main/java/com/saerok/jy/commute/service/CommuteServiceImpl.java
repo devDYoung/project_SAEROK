@@ -27,9 +27,9 @@ public class CommuteServiceImpl implements CommuteService {
 	private CommuteDao commuteDao;
 
 	@Override
-	public ArrayList<Commute> selectCommuteList(Commute work) {
+	public ArrayList<Commute> selectCommuteList(Commute commute) {
 
-		ArrayList<Commute> list = commuteDao.selectCommuteList(session, work);
+		ArrayList<Commute> list = commuteDao.selectCommuteList(session, commute);
 
 		return list;
 	}
