@@ -55,9 +55,11 @@
 			<%-- <img id="profile-img" class="img-profile rounded-circle"
 				src="${pageContext.request.contextPath }/resources/img/ato100px.png"></a> --%>	
 				<div class="ato-myimg">
-                    <img src="${path}/resources/upload/profile/${loginEmployee.destFileName}" 
-                    id="profile-img" class="img-profile rounded-circle" alt="ato-profile-img" onclick="changeImg();">
-                    <input type="file" name="profile" style="display: none;" >
+					<label for="fileUploaderLabel" class="custom-file-upload">
+                    	<img src="${path}/resources/upload/profile/${loginEmployee.destFileName}" 
+                    		id="profile-img" class="img-profile rounded-circle" alt="ato-profile-img" onclick="changeImg();">
+                    	</label>
+                    	<input type="file" name="profile" style="display: none;" >
                </div>
 
 			<form id="mypageForm" action="${path }/updatemypage" method="post" enctype="multipart/form-data">
@@ -70,15 +72,14 @@
 						<br><br><br><br>
 						<div class="col-md-6"></div>
 						<div class="col-md-6">
-							<label for="inputName" class="form-label">이름</label> <input
-								type="hidden" value="${loginEmployee.empNo }" name="empNo">
+							<label for="inputName" class="form-label">이름</label> 
+							<input type="hidden" value="${loginEmployee.empNo }" name="empNo">
 							<input type="text" class="form-control"
 								value="${loginEmployee.empName }" name="empName">
 						</div>
 						<div class="col-md-6">
-							<label for="inputDate" class="form-label">입사일</label> <input
-								type="text" class="form-control"
-								value="${loginEmployee.empDate}" name="date" disabled>
+							<label for="inputDate" class="form-label">입사일</label> 
+							<input type="text" class="form-control" value="${loginEmployee.empDate}" name="date" disabled>
 						</div><br><br><br><br>
 
 						<%-- <div class="col-md-6">
@@ -92,40 +93,33 @@
 						</div>
 						<br><br><br><br>
 						<div class="col-md-6">
-							<label for="inputEmail" class="form-label">이메일</label> <input
-								type="email" class="form-control"
-								value="${loginEmployee.empEmail}" name="empEmail">
+							<label for="inputEmail" class="form-label">이메일</label> 
+							<input type="email" class="form-control" value="${loginEmployee.empEmail}" name="empEmail">
 						</div>
 						<br><br><br><br>
 						<div class="col-md-6">
 							<label for="inputAddr" class="form-label">주소</label>
 							<div class="input-group">
-								<input type="text" class="form-control"
-									value="${loginEmployee.empAddr}" name="empAddr" id="empAddr">
-								<button type="button" class="btn btn-outline-primary"
-									onclick="addrBtnAction();">주소찾기</button>
+								<input type="text" class="form-control" value="${loginEmployee.empAddr}" name="empAddr" id="empAddr">
+								<button type="button" class="btn btn-outline-primary" onclick="addrBtnAction();">주소찾기</button>
 							</div>
 						</div>
 						<br><br><br><br>
 						<div class="col-md-6">
-							<label for="inputAddr" class="form-label">상세주소</label> <input
-								type="text" class="form-control"
-								value="${loginEmployee.empDetailAddr}" name="empDetailAddr"
-								id="empDetailAddr">
+							<label for="inputAddr" class="form-label">상세주소</label> 
+							<input type="text" class="form-control" value="${loginEmployee.empDetailAddr}" name="empDetailAddr" id="empDetailAddr">
 						</div>
 						<br><br><br><br>
 						<div class="col-md-6">
-							<label for="inputDept" class="form-label">부서</label> <input
-								type="hidden" value="${loginEmployee.deptCode}" name="deptCode">
-							<input type="text" class="form-control"
-								value="${loginEmployee.deptName}" name="deptName" disabled>
+							<label for="inputDept" class="form-label">부서</label>
+							<input type="hidden" value="${loginEmployee.deptCode}" name="deptCode">
+							<input type="text" class="form-control" value="${loginEmployee.deptName}" name="deptName" disabled>
 						</div>
 						<br><br><br><br>
 						<div class="col-md-6">
-							<label for="inputJob" class="form-label">직책</label> <input
-								type="hidden" value="${loginEmployee.jobCode}" name="jobCode">
-							<input type="text" class="form-control"
-								value="${loginEmployee.jobName}" name="jobName" disabled>
+							<label for="inputJob" class="form-label">직책</label> 
+							<input type="hidden" value="${loginEmployee.jobCode}" name="jobCode">
+							<input type="text" class="form-control" value="${loginEmployee.jobName}" name="jobName" disabled>
 						</div>
 						<br><br><br><br>
 					</div>
@@ -150,6 +144,35 @@
 
 
 	<script>
+/* 	//파일업로드 script
+    // 파일 선택 input의 변경 이벤트를 감지하여 동작하는 함수
+    document.getElementById('profile').addEventListener('change', handleFileSelect);
+
+    // 파일 선택하면 동작함
+    function handleFileSelect(event) {
+        var selectedFile = event.target.files[0];
+
+        if (selectedFile) {
+            // 파일 미리보기
+            var reader = new FileReader();
+            reader.onload = function (e) {
+                document.getElementById('profile-img').src = e.target.result;
+            };
+            reader.readAsDataURL(selectedFile);
+
+            // 여기에서 선택한 파일 정보를 FormData에 추가
+            var formData = new FormData();
+            formData.append("profile", selectedFile);
+
+        }
+    } */
+
+    // 파일 선택 input 클릭하도록 설정
+    document.querySelector('.custom-file-upload').addEventListener('click', function () {
+        document.getElementById('profile').click();
+    });
+	
+	
 		$(document).ready(function() {
 			//	console.log("aaa", "${employee.empEmail}");
 			$("#mypageButton").click(function(event) {

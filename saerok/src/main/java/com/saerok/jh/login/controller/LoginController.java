@@ -36,6 +36,9 @@ public class LoginController {
 		// todo 수정333
 		return "login/loginPage";
 	}
+	
+	
+
 
 	// 마이페이지 화면전환
 //	@RequestMapping("/mypage")
