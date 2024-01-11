@@ -54,25 +54,21 @@
 			<!-- <h2 id="profile-comment">내 프로필</h2> -->
 			<%-- <img id="profile-img" class="img-profile rounded-circle"
 				src="${pageContext.request.contextPath }/resources/img/ato100px.png"></a> --%>	
-				<div class="ato-myimg" name="oriFileName">
-                	<a href="${path }/mypage">
-                    	<img src="${path}/resources/upload/profile/${loginEmployee.destFileName}" id="profile-img" class="img-profile rounded-circle" alt="ato-profile-img">
-                    </a>
-                      <div class="status-indicator bg-success"></div>
+				<div class="ato-myimg">
+                    <img src="${path}/resources/upload/profile/${loginEmployee.destFileName}" 
+                    id="profile-img" class="img-profile rounded-circle" alt="ato-profile-img" onclick="changeImg();">
+                    <input type="file" name="profile">
+                    <div class="status-indicator bg-success"></div>
                </div>
 
-			<form id="mypageForm" action="${path }/updatemypage" method="post">
+			<form id="mypageForm" action="${path }/updatemypage" method="post" enctype="multipart/form-data">
 				<div class="mypage-simple-info">
 					<div class="form-group row">
 						<div class="col-md-6">
 							<label for="inputNo" class="form-label">사번</label> <input
-								type="text" class="form-control" value="${loginEmployee.empNo }"
-								name="empNo" disabled>
+								type="text" class="form-control" value="${loginEmployee.empNo }" name="empNo" disabled>
 						</div>
-						<br>
-						<br>
-						<br>
-						<br>
+						<br><br><br><br>
 						<div class="col-md-6"></div>
 						<div class="col-md-6">
 							<label for="inputName" class="form-label">이름</label> <input
@@ -84,11 +80,7 @@
 							<label for="inputDate" class="form-label">입사일</label> <input
 								type="text" class="form-control"
 								value="${loginEmployee.empDate}" name="date" disabled>
-						</div>
-						<br>
-						<br>
-						<br>
-						<br>
+						</div><br><br><br><br>
 
 						<%-- <div class="col-md-6">
 							<label for="inputPw" class="form-label">비밀번호</label> 
@@ -99,19 +91,13 @@
 								type="text" class="form-control"
 								value="${loginEmployee.empPhone }" name="empPhone">
 						</div>
-						<br>
-						<br>
-						<br>
-						<br>
+						<br><br><br><br>
 						<div class="col-md-6">
 							<label for="inputEmail" class="form-label">이메일</label> <input
 								type="email" class="form-control"
 								value="${loginEmployee.empEmail}" name="empEmail">
 						</div>
-						<br>
-						<br>
-						<br>
-						<br>
+						<br><br><br><br>
 						<div class="col-md-6">
 							<label for="inputAddr" class="form-label">주소</label>
 							<div class="input-group">
@@ -121,47 +107,35 @@
 									onclick="addrBtnAction();">주소찾기</button>
 							</div>
 						</div>
-						<br>
-						<br>
-						<br>
-						<br>
+						<br><br><br><br>
 						<div class="col-md-6">
 							<label for="inputAddr" class="form-label">상세주소</label> <input
 								type="text" class="form-control"
 								value="${loginEmployee.empDetailAddr}" name="empDetailAddr"
 								id="empDetailAddr">
 						</div>
-						<br>
-						<br>
-						<br>
-						<br>
+						<br><br><br><br>
 						<div class="col-md-6">
 							<label for="inputDept" class="form-label">부서</label> <input
 								type="hidden" value="${loginEmployee.deptCode}" name="deptCode">
 							<input type="text" class="form-control"
 								value="${loginEmployee.deptName}" name="deptName" disabled>
 						</div>
-						<br>
-						<br>
-						<br>
-						<br>
+						<br><br><br><br>
 						<div class="col-md-6">
 							<label for="inputJob" class="form-label">직책</label> <input
 								type="hidden" value="${loginEmployee.jobCode}" name="jobCode">
 							<input type="text" class="form-control"
 								value="${loginEmployee.jobName}" name="jobName" disabled>
 						</div>
-						<br>
-						<br>
-						<br>
-						<br>
+						<br><br><br><br>
 					</div>
 				</div>
 			</form>
 		</div>
 		<!-- myPage-container -->
 		<div class="d-grid gap-2 d-md-block" id="button">
-			<button id="mypageButton" type="submit"
+			<button id="mypageButton" type="button"
 				class="btn btn-outline-primary">저장하기</button>
 		</div>
 
@@ -177,17 +151,39 @@
 
 
 	<script>
+	
+	
+	
+	
+	
+	
+	
+	
 		$(document).ready(function() {
 			//	console.log("aaa", "${employee.empEmail}");
 			$("#mypageButton").click(function(event) {
 				event.preventDefault(); // 기본 폼 제출 방지
+				const formData=new FormData();
+				document.querySelectorAll("#mypageForm input:not(input[type=hidden])").forEach(e=>{
+					if(!e.disabled||e.name=="empNo"){
+						formData.append(e.name,e.value);
+					}
+				});
+				//formData("empNo",'${loginEmployee.empNo }');
+				//console.log(document.querySelector("input[type=file]").files[0]);
 
+				formData.append("profile",document.querySelector("input[type=file]").files[0]);//.files[0];
+				
+				//formData.add("","")
 				// 프로필 업데이트를 위한 AJAX 요청
 				$.ajax({
 					type : "POST",
 					url : "/updatemypage", // 실제 서버 측 엔드포인트로 대체
-					data : $("#mypageForm").serialize(), // 폼 데이터 직렬화
-					dataType : 'JSON',
+					//data : $("#mypageForm").serialize(), // 폼 데이터 직렬화
+// 					dataType : 'JSON',
+					data : formData,
+					processData:false,
+					contentType:false,
 					success : function(data) {
 						if (data.successYn == "Y") {
 							alert("수정완료!!");
