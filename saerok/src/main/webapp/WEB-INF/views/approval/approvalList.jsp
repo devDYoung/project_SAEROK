@@ -11,10 +11,11 @@
 
 <link
 	href="https://cdn.datatables.net/v/dt/dt-1.13.8/datatables.min.css"
-	rel="stylesheet"/>
+	rel="stylesheet" />
 
 <script
 	src="https://cdn.datatables.net/v/dt/dt-1.13.8/datatables.min.js">
+	
 </script>
 
 <jsp:include page="/WEB-INF/views/common/header.jsp">
@@ -32,6 +33,10 @@
 	<div class="card shadow mb-4">
 		<div class="card-header py-3">
 			<h6 class="m-0 font-weight-bold text-primary">전체 리스트</h6>
+			<div class="d-flex justify-content-end">
+				<button class="btn btn-rounded btn-outline-primary col-1"
+					onclick="location.assign('${path}/approval/basicForm');">작성하기</button>
+			</div>
 		</div>
 		<div class="card-body">
 			<div class="table-responsive">
@@ -39,33 +44,23 @@
 					cellspacing="0">
 
 					<thead>
+
 						<tr>
-							<div>
-								<button class="btn btn-rounded btn-outline-primary col-1"
-									onclick="location.assign('${path}/approval/CDocForm');">작성하기</button>
-							</div>
-						</tr>
-						<tr>
-							<th>문서 구분</th>
+							<th>결재번호</th>
 							<th>제목</th>
-							<th>사원 이름</th>
-							<th>수정자 ID</th>
-							<th>담당자 번호</th>
-							<th>참조/참조 대상</th>
-							<th>결재 상태</th>
+							<th>기안자</th>
+							<th>문서구분종류</th>
+							<th>진행상태</th>
 						</tr>
 					</thead>
 					<tbody>
 						<c:forEach var="a" items="${approval}">
 							<tr>
-								<td><c:out value="${a.apvDocNo}" /></td>
+								<td><c:out value="${a.apvNo}" /></td>
 								<td><c:out value="${a.apvName}" /></td>
-								<td><c:out value="$" /></td>
-								<td><c:out value="$" /></td>
-								<td><c:out value="$" /></td>
-								<td><c:out value="$" /></td>
-								<td><c:out value="$" /></td>
-								<!-- 나머지 필드 -->
+								<td><c:out value="${loginEmployee.empName }" /></td>
+								<td><c:out value="${a.apvDocNo}" /></td>
+								<td><c:out value="${a.apvCheck }" /></td>
 							</tr>
 						</c:forEach>
 					</tbody>

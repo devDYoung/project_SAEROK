@@ -2,34 +2,33 @@ package com.saerok.dy.note.model.service;
 
 import java.util.List;
 
-import org.springframework.beans.factory.annotation.Autowired;
+import org.apache.ibatis.session.SqlSession;
 import org.springframework.stereotype.Service;
 
 import com.saerok.dy.note.model.dao.NoteDao;
-import com.saerok.dy.note.model.dto.NoteDTO;
+import com.saerok.dy.note.model.dto.Note;
+import com.saerok.jh.employee.model.dto.Employee;
+
+import lombok.RequiredArgsConstructor;
 
 @Service
+@RequiredArgsConstructor
 public class NoteServiceImpl implements NoteService {
 
-    private final NoteDao noteDao;
+	private final NoteDao dao;
+	private final SqlSession session;
 
-    @Autowired
-    public NoteServiceImpl(NoteDao noteDao) {
-        this.noteDao = noteDao;
-    }
+	// 받은 쪽지 조회
+	@Override
+	public List<Note> getReceivedNotes(String revEmpNo) {
+		// TODO Auto-generated method stub
+		return dao.getReceivedNotes(session);
+	}
 
-    @Override
-    public void writeNote(NoteDTO note) {
-        noteDao.insert(note);
-    }
-    
-    @Override
-    public List<NoteDTO> getReceivedNotes() {
-        // 여기서 적절한 DAO 메서드를 호출하여 받은 쪽지함을 가져옵니다.
-        // 예를 들어, NoteDao의 getReceivedNotes 메서드를 호출할 수 있습니다.
-        return noteDao.getReceivedNotes();
-    }
-    
-    
-    
+	// 이름으로 사원 조회
+	@Override
+	public List<Employee> selectEmpByName(String empName) {
+		// TODO Auto-generated method stub
+		return dao.selectEmpByName(session);
+	}
 }
