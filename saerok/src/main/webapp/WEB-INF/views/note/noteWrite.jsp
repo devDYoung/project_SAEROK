@@ -6,6 +6,9 @@
 <%@ taglib prefix="springform"
 	uri="http://www.springframework.org/tags/form"%>
 <c:set var="path" value="${pageContext.request.contextPath}" />
+
+<script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+
 <jsp:include page="/WEB-INF/views/common/header.jsp">
 	<jsp:param name="title" value="쪽지작성" />
 </jsp:include>
@@ -118,16 +121,6 @@
 							<td></td>
 							<td><button class="btn btn-primary">선택</button></td>
 						</tr>
-						<tr>
-							<td></td>
-							<td></td>
-							<td><button class="btn btn-primary">선택</button></td>
-						</tr>
-						<tr>
-							<td></td>
-							<td></td>
-							<td><button class="btn btn-primary">선택</button></td>
-						</tr>
 					</tbody>
 				</table>
 			</div>
@@ -135,16 +128,61 @@
 		</div>
 	</div>
 </div>
+<div id="searchList">
+	<span id="empNo"></span>
+	<span id="empName"></span>
 </div>
+<script type="text/javascript">
+	$(function(){
+		$("#email").keypress(function(e){
+			var empNameVal = $("#email").val();
+			alert(empNameVal);
+			$.ajax({
+				type: "GET", 
+				url:"/note/selectEmpByName",
+				data: { 
+						empName: empNameVal
+				},
+				success : function(result){
+					//todo 이름으로 검색한 결과들을 노출하는 로직을 짜야되요
+					//결과가 있든 없든 여기다가 짜야됨
+					console.log(result.empList);
+					var result0 = result.empList[0];
+					$("#searchList #empNo").text(result0?.empNo);
+					$("#searchList #empName").text(result0?.empName);				
+				},
+				error : function(){
+					//통신실패
+					alert("실패");
+				}
+			}); 
+			
+		});
+	});
+</script>
 
 <jsp:include page="/WEB-INF/views/common/footer.jsp" />
 
-<script
-	src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+<!-- 이건 플랜B
+ <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 <script>
 	function openEmployeeModal() {
 		var employeeModal = new bootstrap.Modal(document
 				.getElementById('employeeModal'));
 		employeeModal.show();
+		// 사원 조회 함수 호출
+		employeeSearch();
 	}
+	function employeeSearch(){
+		// ajax요청
+		fetch('${path}/employeeSearch').then(response=>response.json()).the(data=>{
+			// 테이블에 추가하기
+			updateEmployeeTable(data);
+			})
+			.catch(error=>console.error('검색하신 사원이 존재하지 않습니다.',error));
+			
+		}
+	
+	
 </script>
+ -->

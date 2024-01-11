@@ -53,7 +53,7 @@
 
 </head>
 
-<body id="page-top" onload="printClock()">
+<body id="page-top">
     <!-- Page Wrapper -->
     <div id="wrapper">
 

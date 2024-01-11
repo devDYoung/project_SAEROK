@@ -3,21 +3,15 @@ package com.saerok.dy.note.model.service;
 import java.util.List;
 
 import com.saerok.dy.note.model.dto.Note;
+import com.saerok.jh.employee.model.dto.Employee;
 
 public interface NoteService {
    
 
-    // 받은 쪽지함 가져오기
+    // 받은 쪽지함 조회
     List<Note> getReceivedNotes(String rcvEmpNo);
-    
-    void writeNote(Note note);
+ 
 
-    // 보낸 쪽지함 가져오기
-    List<Note> getSentNotes();
-
-    // 삭제된 쪽지함 가져오기
-    List<Note> getDeletedNotes();
-
-    // 쪽지 삭제 처리
-    void deleteNote(int noteNo);
+    // 이름으로 사원 조회
+    List<Employee> selectEmpByName(String empName);
 }

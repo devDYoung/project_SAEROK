@@ -15,6 +15,7 @@
 
 <script
 	src="https://cdn.datatables.net/v/dt/dt-1.13.8/datatables.min.js">
+	
 </script>
 
 <jsp:include page="/WEB-INF/views/common/header.jsp">
@@ -46,23 +47,19 @@
 							<th>보낸사람</th>
 							<th>제목</th>
 							<th>날짜</th>
-							<th>관리</th>
 						</tr>
 					</thead>
 					<tbody>
-					<c:if test="${not empty receivedNotes}">
-						<c:forEach items="${receivedNotes}" var="note">
-							<tr>
-								<td><c:out value="${note.noteNo}"/></td>
-								<td><c:out value="${note.sndEmpNo}"/></td>
-								<td><c:out value="${note.noteTitle}"/></td>
-								<td><c:out value="${note.regDtime}"/></td>
-								<td class="text-right">
-									<button onclick="deleteNote(${note.noteNo})"
-										class="btn btn-danger btn-sm">삭제</button>
-								</td>
-							</tr>
-						</c:forEach>
+						<c:if test="${not empty receivedNotes}">
+							<c:forEach var="note" items="${receivedNotes}">
+								<tr>
+									<td><c:out value="${note.noteNo}" /></td>
+									<td><c:out value="${note.sndEmpNo}" /></td>
+									<td><c:out value="${note.noteTitle}" /></td>
+									<td><c:out value="${note.regDtime}" /></td>
+
+								</tr>
+							</c:forEach>
 						</c:if>
 					</tbody>
 				</table>
