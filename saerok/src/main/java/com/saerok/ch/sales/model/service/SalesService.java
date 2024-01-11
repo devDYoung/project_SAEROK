@@ -21,5 +21,15 @@ public interface SalesService {
 	Map<String, Object> getBranchDetailSales(Integer branchNo);
 
 	List<Map<String, Object>> getCurrentMonthSalesByDay(Integer branchNo);
+	
+	
+	
+	//점주전용
+	BigDecimal findOwnerTodaySalesTotal(String empNo);
+	BigDecimal findOwnerCurrentMonthSalesTotal(String empNo);
+	BigDecimal findOwnerCurrentYearSalesTotal(String empNo);
+	
+	 List<Map<String, Object>> getBranchOwnerDetailSales(String empNo);
+	 List<Map<String, Object>> getBranchOwnerCurrentMonthSales(String empNo);
 
 }

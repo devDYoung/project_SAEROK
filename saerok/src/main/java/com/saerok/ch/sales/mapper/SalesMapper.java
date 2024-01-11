@@ -25,5 +25,15 @@ public interface SalesMapper {
     Map<String, Object> findBranchDetailSales(@Param("branchNo") Integer branchNo);
     
     List<Map<String, Object>> findCurrentMonthSalesByDay(@Param("branchNo") Integer branchNo);
+    
+    
+    
+    //점주전용
+    BigDecimal findOwnerTodaySalesTotal(@Param("empNo") String empNo);
+    BigDecimal findOwnerCurrentMonthSalesTotal(@Param("empNo") String empNo);
+    BigDecimal findOwnerCurrentYearSalesTotal(@Param("empNo") String empNo);
+    
+    List<Map<String, Object>> findBranchOwnerDetailSales(@Param("empNo") String empNo);
+    List<Map<String, Object>> findBranchOwnerCurrentMonthSales(@Param("empNo") String empNo);
 
 }
