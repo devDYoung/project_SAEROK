@@ -66,13 +66,9 @@
 					<div class="form-group row">
 						<div class="col-md-6">
 							<label for="inputNo" class="form-label">사번</label> <input
-								type="text" class="form-control" value="${loginEmployee.empNo }"
-								name="empNo" disabled>
+								type="text" class="form-control" value="${loginEmployee.empNo }" name="empNo" disabled>
 						</div>
-						<br>
-						<br>
-						<br>
-						<br>
+						<br><br><br><br>
 						<div class="col-md-6"></div>
 						<div class="col-md-6">
 							<label for="inputName" class="form-label">이름</label> <input
@@ -84,11 +80,7 @@
 							<label for="inputDate" class="form-label">입사일</label> <input
 								type="text" class="form-control"
 								value="${loginEmployee.empDate}" name="date" disabled>
-						</div>
-						<br>
-						<br>
-						<br>
-						<br>
+						</div><br><br><br><br>
 
 						<%-- <div class="col-md-6">
 							<label for="inputPw" class="form-label">비밀번호</label> 
@@ -99,19 +91,13 @@
 								type="text" class="form-control"
 								value="${loginEmployee.empPhone }" name="empPhone">
 						</div>
-						<br>
-						<br>
-						<br>
-						<br>
+						<br><br><br><br>
 						<div class="col-md-6">
 							<label for="inputEmail" class="form-label">이메일</label> <input
 								type="email" class="form-control"
 								value="${loginEmployee.empEmail}" name="empEmail">
 						</div>
-						<br>
-						<br>
-						<br>
-						<br>
+						<br><br><br><br>
 						<div class="col-md-6">
 							<label for="inputAddr" class="form-label">주소</label>
 							<div class="input-group">
@@ -121,40 +107,28 @@
 									onclick="addrBtnAction();">주소찾기</button>
 							</div>
 						</div>
-						<br>
-						<br>
-						<br>
-						<br>
+						<br><br><br><br>
 						<div class="col-md-6">
 							<label for="inputAddr" class="form-label">상세주소</label> <input
 								type="text" class="form-control"
 								value="${loginEmployee.empDetailAddr}" name="empDetailAddr"
 								id="empDetailAddr">
 						</div>
-						<br>
-						<br>
-						<br>
-						<br>
+						<br><br><br><br>
 						<div class="col-md-6">
 							<label for="inputDept" class="form-label">부서</label> <input
 								type="hidden" value="${loginEmployee.deptCode}" name="deptCode">
 							<input type="text" class="form-control"
 								value="${loginEmployee.deptName}" name="deptName" disabled>
 						</div>
-						<br>
-						<br>
-						<br>
-						<br>
+						<br><br><br><br>
 						<div class="col-md-6">
 							<label for="inputJob" class="form-label">직책</label> <input
 								type="hidden" value="${loginEmployee.jobCode}" name="jobCode">
 							<input type="text" class="form-control"
 								value="${loginEmployee.jobName}" name="jobName" disabled>
 						</div>
-						<br>
-						<br>
-						<br>
-						<br>
+						<br><br><br><br>
 					</div>
 				</div>
 			</form>
@@ -177,6 +151,14 @@
 
 
 	<script>
+	
+	
+	
+	
+	
+	
+	
+	
 		$(document).ready(function() {
 			//	console.log("aaa", "${employee.empEmail}");
 			$("#mypageButton").click(function(event) {
