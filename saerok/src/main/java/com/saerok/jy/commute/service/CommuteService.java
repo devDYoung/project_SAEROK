@@ -17,7 +17,7 @@ public interface CommuteService {
 
 	void updateCommute(int commuteNo);
 
-	void insertCommuteStatus(Map status);
+	int insertCommuteStatus(Map status);
 
 	ArrayList<Commute> selectCommuteStatusList(int commuteNo);
 

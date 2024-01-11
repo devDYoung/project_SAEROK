@@ -23,7 +23,7 @@ public class CommuteDaoImpl implements CommuteDao {
 
 	@Override
 	public Commute selectCommute(SqlSession session, String empNo) {
-		return (Commute) session.selectOne("commute.selectCommute", empNo);
+		return (Commute) session.selectList("commute.selectCommute", empNo);
 	}
 
 	@Override
