@@ -134,18 +134,25 @@
 			</c:forEach>
 		</c:if>
 
+
 		<!-- 당월 매출 -->
 		<c:if test="${!empty monthlySales}">
 			<div class="row justify-content-center">
 				<div class="col-xl-12">
 					<div class="card shadow mb-4">
-						<div class="card-header py-3">
+						<div
+							class="card-header py-3 d-flex justify-content-between align-items-center">
 							<c:forEach items="${monthlySales}" var="sale" varStatus="status">
 								<c:if test="${status.first}">
 									<h6 class="m-0 font-weight-bold text-primary">${sale.currentMonth}
 										매출</h6>
 								</c:if>
 							</c:forEach>
+							<div>
+								<button type="button" class="btn btn-primary">
+									<i class="bi bi-plus"></i> 매출 등록
+								</button>
+							</div>
 						</div>
 						<div class="card-body">
 							<div class="table-responsive">
