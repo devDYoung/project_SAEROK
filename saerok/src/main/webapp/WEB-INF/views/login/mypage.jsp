@@ -57,8 +57,7 @@
 				<div class="ato-myimg">
                     <img src="${path}/resources/upload/profile/${loginEmployee.destFileName}" 
                     id="profile-img" class="img-profile rounded-circle" alt="ato-profile-img" onclick="changeImg();">
-                    <input type="file" name="profile">
-                    <div class="status-indicator bg-success"></div>
+                    <input type="file" name="profile" style="display: none;" >
                </div>
 
 			<form id="mypageForm" action="${path }/updatemypage" method="post" enctype="multipart/form-data">
@@ -151,14 +150,6 @@
 
 
 	<script>
-	
-	
-	
-	
-	
-	
-	
-	
 		$(document).ready(function() {
 			//	console.log("aaa", "${employee.empEmail}");
 			$("#mypageButton").click(function(event) {
