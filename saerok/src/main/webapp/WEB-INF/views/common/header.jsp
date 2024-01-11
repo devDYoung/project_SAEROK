@@ -53,7 +53,7 @@
 
 </head>
 
-<body id="page-top" onload="printClock()">
+<body id="page-top">
     <!-- Page Wrapper -->
     <div id="wrapper">
 
@@ -125,10 +125,10 @@
                 </a>
                 <div id="collapseMsg" class="collapse" aria-labelledby="headingMsg" data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
-                        <a class="collapse-item" href="${path }/noteWrite">쪽지쓰기</a>
-                        <a class="collapse-item" href="${path }/noteRead">받은쪽지함</a>
-                        <a class="collapse-item" href="${path }/noteSend">보낸쪽지함</a>
-                        <a class="collapse-item" href="${path }/noteDelete">휴지통</a>
+                        <a class="collapse-item" href="${path }/note/write">쪽지쓰기</a>
+                        <a class="collapse-item" href="${path }/note/get">받은쪽지함</a>
+                        <a class="collapse-item" href="${path }/note/send">보낸쪽지함</a>
+                        <a class="collapse-item" href="${path }/note/basket">휴지통</a>
                     </div>
                 </div>
             </li>
