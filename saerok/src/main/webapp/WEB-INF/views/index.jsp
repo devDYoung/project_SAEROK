@@ -20,6 +20,10 @@
     <script src="https://cdn.jsdelivr.net/npm/fullcalendar-scheduler@5.9.0/main.min.js"></script>
     fullcalendar-scheduler 언어 CDN
     <script src="https://cdn.jsdelivr.net/npm/fullcalendar-scheduler@5.9.0/locales-all.min.js"></script>-->
+
+<!-- Bootstrap core JavaScript-->
+<script src="/resources/vendor/jquery/jquery.min.js"></script>
+<script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
 <style>
 .ato-login-img {
 	max-width: 70%;
@@ -28,9 +32,8 @@
 }
 </style>
 <script>
-    	const empNo = ${ loginEmployee.empNo };
+    	const empNo = "${ loginEmployee.empNo }";
     </script>
-
 <section>
 	<div id="main-wrapper" data-theme="light" data-layout="vertical"
 		data-navbarbg="skin6" data-sidebartype="full"
@@ -110,11 +113,11 @@
 								<div class="d-flex" style="font-size: 16px;">
 									<p class="col-6" style="padding: 0px;">${loginEmployee.empName }
 										${loginEmployee.jobName}</p>
-									<p class="col-6 text-right" style="padding: 0px;" id="inDtime"></p>
+									<!-- <p class="col-6 text-right" style="padding: 0px;" id="inDtime"></p> -->
 								</div>
 								<div class="d-flex" style="font-size: 16px">
 									<p class="col-6" style="padding: 0px;">${loginEmployee.deptName}</p>
-									<p class="col-6 text-right" style="padding: 0px;" id="outDtime"></p>
+									<!-- <p class="col-6 text-right" style="padding: 0px;" id="outDtime"></p> -->
 								</div>
 								<div class="d-flex" style="font-size: 16px;">
 									<p class="col-6" style="padding: 0px;">출근시간</p>
@@ -124,33 +127,25 @@
 									<p class="col-6" style="padding: 0px;">퇴근시간</p>
 									<p class="col-6 text-right" style="padding: 0px;" id="outDtime"></p>
 								</div>
+								<div class="d-flex" style="font-size: 16px">
+									<p class="col-6" style="padding: 0px;">근무상태</p>
+									<p class="col-6 text-right" style="padding: 0px;" id="status"></p>
+								</div>
 							</div>
-							<form method="get" action="${path}/changeStatus.do">
-								<!-- 출퇴근 버튼 -->
-								<div class="d-flex align-items-center">
-									<button type="submit" id="startBtn"
-										class="btn btn-rounded btn-outline-primary col-6"
-										style="margin: 2px" value="Y" name="status">출근하기</button>
-									<button type="submit" id="endBtn"
-										class="btn btn-rounded btn-outline-primary col-6"
-										style="margin: 2px" value="N" name="status">퇴근하기</button>
-								</div>
-
-								<!-- 상태 설정버튼 -->
-								<div class="d-flex align-items-center" style="margin-top: 15px;">
-									<button type="button" id="selectStatus"
-										class="btn btn-rounded btn-outline-primary col-12"
-										style="margin: 2px 2px 0px 2px;">
-										근무상태변경<i data-feather="chevron-down" class="feather-icon"></i>
-									</button>
-								</div>
-								<div id="status" class="align-items-center"
-									style="border: 1px solid rgb(95, 118, 232); border-radius: 10px; background-color: white;">
-									
-								</div>
-								<input type="hidden" name="commuteNo" value="${c.commuteNo}">
-								<input type="hidden" name="index" value="1">
-							</form>
+							<%-- <form method="get" action="${path}/changeStatus.do"> --%>
+							<!-- 출퇴근 버튼 -->
+							<div class="d-flex align-items-center">
+								<input type="button" id="startBtn"
+									class="btn btn-rounded btn-outline-primary col-6"
+									style="margin: 2px" value="출근하기" name="status"/> 
+									<input
+									type="button" id="endBtn"
+									class="btn btn-rounded btn-outline-primary col-6"
+									style="margin: 2px" value="퇴근하기" name="status"/>
+							</div>
+							<input type="hidden" name="commuteNo" value="${c.commuteNo}">
+							<input type="hidden" name="index" value="1">
+							<%-- </form> --%>
 						</div>
 					</div>
 				</div>
@@ -264,13 +259,38 @@
          }
          
          // loginEmployee가 null이 아닌 경우에만 속성에 액세스하기 전에 null 체크
-         var empNo = ${loginEmployee != null ? loginEmployee.empNo : 'null'};
-         console.log("직원 번호: " + empNo);
+         var empNo = "${loginEmployee != null ? loginEmployee.empNo : 'null'}";
+         //console.log("직원 번호: " + empNo);
+         
+         $("#startBtn").click(function(e){
+        	 $.ajax({
+ 				type: "POST", 
+ 				url: "${path}/workIn.do",
+ 				data: { 
+ 					status: "10" // 10: 출근, 20: 퇴근
+ 				},
+ 				success : function(result){
+ 					if(result.successYn == "Y"){
+ 						//todo 버튼 활성화
+ 						alert("출근 성공");
+ 					}else{
+ 						alert("출근 실패");
+ 					}
+ 				},
+ 				error : function(){
+ 					alert("근무정보를 조회할 수 없습니다. \n관리자에게 문의하세요.");
+ 				}
+ 			});
+         });
      });
 
 
       //시간표시 기능
-      function printClock() {
+      
+     	 window.onload = function() {
+    		printClock();
+		}	
+    	function printClock() {
 
          var clock = document.getElementById("clock"); // 출력할 장소 선택
          var todate = document.getElementById("todate");
@@ -287,6 +307,8 @@
          clock.innerHTML = currentHours + ":" + currentMinute + ":"
                + currentSeconds; //날짜를 출력해 줌
          todate.innerHTML = calendar; //날짜를 출력해 줌
+         
+        
 
          setTimeout("printClock()", 1000); // 1초마다 printClock() 함수 호출
 
@@ -301,6 +323,7 @@
             return zero + num;
          }
       }
+      
 
       function setCookie(name, value, expiredDate) {
          var today = new Date();
@@ -330,9 +353,6 @@
          
    </script>
 
-	<!-- Bootstrap core JavaScript-->
-	<script src="vendor/jquery/jquery.min.js"></script>
-	<script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
 
 	<!-- Core plugin JavaScript-->
 	<script src="vendor/jquery-easing/jquery.easing.min.js"></script>

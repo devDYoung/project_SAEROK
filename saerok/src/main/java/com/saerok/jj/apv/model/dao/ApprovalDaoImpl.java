@@ -1,6 +1,7 @@
 package com.saerok.jj.apv.model.dao;
 
 import java.util.List;
+
 import java.util.Map;
 
 import org.apache.ibatis.session.RowBounds;
@@ -8,7 +9,8 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.stereotype.Repository;
 
 import com.saerok.jj.apv.model.dto.Approval;
-import com.saerok.jj.apv.model.dto.CDocForm;
+
+
 @Repository
 public class ApprovalDaoImpl implements ApprovalDao {
 
@@ -29,6 +31,11 @@ public class ApprovalDaoImpl implements ApprovalDao {
 		return session.selectOne("approval.selectApprovalByNo",DocNo);
 	}
 
-	
-	
+	@Override
+	public int insertApproval(SqlSession session, Approval a) {
+		// TODO Auto-generated method stub
+		return session.insert("approval.insertApproval",a);
+	}
+
 }
+

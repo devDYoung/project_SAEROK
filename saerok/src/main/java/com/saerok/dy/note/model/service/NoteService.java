@@ -2,10 +2,16 @@ package com.saerok.dy.note.model.service;
 
 import java.util.List;
 
-import com.saerok.dy.note.model.dto.NoteDTO;
+import com.saerok.dy.note.model.dto.Note;
+import com.saerok.jh.employee.model.dto.Employee;
 
 public interface NoteService {
-    void writeNote(NoteDTO note);
-    
-    List<NoteDTO> getReceivedNotes();
+   
+
+    // 받은 쪽지함 조회
+    List<Note> getReceivedNotes(String rcvEmpNo);
+ 
+
+    // 이름으로 사원 조회
+    List<Employee> selectEmpByName(String empName);
 }

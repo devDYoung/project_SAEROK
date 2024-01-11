@@ -35,6 +35,11 @@ public class ApprovalServiceImpl implements ApprovalService {
 		return dao.selectApprovalByNo(session, DocNo);
 	}
 
-	
+	@Override
+	public int insertApproval(Approval a) {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
 
 }
