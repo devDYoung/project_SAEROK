@@ -53,7 +53,7 @@
 
 </head>
 
-<body id="page-top" onload="printClock()">
+<body id="page-top">
     <!-- Page Wrapper -->
     <div id="wrapper">
 
@@ -97,7 +97,7 @@
                     data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
                         <a class="collapse-item" href="">근태</a>
-                        <a class="collapse-item" href="${path}/workList">근태조회</a>
+                        <a class="collapse-item" href="commute.do">근태조회</a>
                         <a class="collapse-item" href="">개인일정</a>
                         <a class="collapse-item" href="">부서일정</a>
                     </div>
@@ -125,10 +125,10 @@
                 </a>
                 <div id="collapseMsg" class="collapse" aria-labelledby="headingMsg" data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
-                        <a class="collapse-item" href="${path }/noteWrite">쪽지쓰기</a>
-                        <a class="collapse-item" href="${path }/noteRead">받은쪽지함</a>
-                        <a class="collapse-item" href="${path }/noteSend">보낸쪽지함</a>
-                        <a class="collapse-item" href="${path }/noteDelete">휴지통</a>
+                        <a class="collapse-item" href="${path }/note/write">쪽지쓰기</a>
+                        <a class="collapse-item" href="${path }/note/get">받은쪽지함</a>
+                        <a class="collapse-item" href="${path }/note/send">보낸쪽지함</a>
+                        <a class="collapse-item" href="${path }/note/basket">휴지통</a>
                     </div>
                 </div>
             </li>
@@ -155,8 +155,8 @@
                 </a>
                     <div id="collapseStore" class="collapse" aria-labelledby="headingStore" data-parent="#accordionSidebar">
                         <div class="bg-white py-2 collapse-inner rounded">
-                            <a class="collapse-item" href="">매출현황</a>
-                            <a class="collapse-item" href="">매출관리</a>
+                            <a class="collapse-item" href="/owner/sales">매출현황</a>
+                            <a class="collapse-item" href="/owner/detail">매출관리</a>
                             <a class="collapse-item" href="">재고목록</a>
                             <a class="collapse-item" href="">물품발주</a>
                             <a class="collapse-item" href="">발주목록</a>

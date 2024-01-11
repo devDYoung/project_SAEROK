@@ -31,7 +31,7 @@
   .ato-insertimg {
     width: 460px;
     height: 825px;
-    float: left; /* 이미지를 왼쪽으로 정렬합니다. */
+    float: left; /* 이미지를 왼쪽으로 정렬 */
   }
 
   #profile-img {
@@ -208,14 +208,13 @@
         document.getElementById('oriFileName').click();
     });
 	
-	//취소버튼
-	 function cancelRegistration() {
-        // 이동할 경로 설정
-        var url = "${path}/selectemp";
-
-        // 지정된 경로로 이동
-        window.location.href = url;
+    //취소버튼 누르면 index 화면으로 이동
+    const resetForm = () => {
+        location.replace("${path}/index");
     }
+	
+	
+
     
     
     

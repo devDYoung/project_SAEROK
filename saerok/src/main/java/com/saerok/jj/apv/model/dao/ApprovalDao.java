@@ -17,5 +17,9 @@ public interface ApprovalDao {
 	Approval selectApprovalByNo(SqlSession session, String DocNo);
 
 	
-	
+
+	int insertApproval(SqlSession session, Approval a);
 }
+
+	
+

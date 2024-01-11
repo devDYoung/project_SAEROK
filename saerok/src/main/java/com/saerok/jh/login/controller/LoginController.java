@@ -8,16 +8,20 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.saerok.ch.sales.model.service.SalesService;
 import com.saerok.jh.employee.model.dto.Employee;
 import com.saerok.jh.login.model.service.LoginService;
 
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 
 @Controller
 @RequiredArgsConstructor
+@Slf4j
 public class LoginController {
 
 	@Autowired
@@ -48,12 +52,16 @@ public class LoginController {
 	//마이페이지 수정
 	   @PostMapping("/updatemypage")
 	   @ResponseBody
-	   public Map<String,String> updateMyPage(Employee e, Model model) {
-	      //비밀번호 암호화
-	      
+	   public Map<String,String> updateMyPage(@RequestParam(required = false) MultipartFile profile,
+			   Employee e, Model model) {
 	      // 비밀번호 암호화 처리
 //	      BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
 //	      e.setEmpPw(encoder.encode(e.getEmpPw(1234)));
+		   
+		  log.debug("{}",profile.getSize());
+		  log.debug("{}",profile.getName());
+		  log.debug("{}",profile.getOriginalFilename());
+		  log.debug("{}",e);
 	      int result = service.updateMyPage(e);
 	      
 	      return Map.of("successYn",result==1?"Y":"N");

@@ -6,6 +6,9 @@
 <%@ taglib prefix="springform"
 	uri="http://www.springframework.org/tags/form"%>
 <c:set var="path" value="${pageContext.request.contextPath}" />
+
+<script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+
 <jsp:include page="/WEB-INF/views/common/header.jsp">
 	<jsp:param name="title" value="쪽지작성" />
 </jsp:include>
@@ -13,11 +16,8 @@
 .dy {
 	margin-left: 200px;
 }
-
 </style>
 <div class="content">
-
-
 	<div class="row gx-5 justify-content-center">
 		<div class="col-lg-8 col-xl-6">
 			<!-- * * * * * * * * * * * * * * *-->
@@ -32,67 +32,157 @@
 				<div class="form-floating mb-3">
 					<h>받는 사람</h>
 					<input class="form-control" id="email" type="email"
-						placeholder="name@example.com"
-						data-sb-validations="required,email" /> <!-- <label for="email">Email
-						address</label> -->
+						placeholder="부서, 사원을 검색해 주세요."
+						data-sb-validations="required,email" />
 					<div class="invalid-feedback" data-sb-feedback="email:required">An
 						email is required.</div>
 					<div class="invalid-feedback" data-sb-feedback="email:email">Email
 						is not valid.</div>
 					<div class="d-grid text-right">
-						<button class="btn-sm btn btn-primary btn-lg disabled" id="submitButton"
-							type="submit">사원 조회</button>
+						<button class="btn-sm btn btn-primary btn-lg" id="submitButton"
+							type="button" onclick="openEmployeeModal()">사원 조회</button>
 					</div>
 				</div>
 				<!-- 쪽지 제목 입력-->
 				<div class="form-floating mb-3">
 					<h>제목</h>
 					<input class="form-control" id="name" type="text"
-						placeholder="쪽지 제목을 입력하세요." data-sb-validations="required" />
-					<!-- <label for="name">Full name</label>
-						<div class="invalid-feedback" data-sb-feedback="name:required">A
-							name is required.</div>
-					</div> -->
-
-
-					<!-- Message input-->
-					<div class="form-floating mb-3">
-						<textarea class="form-control" id="message" type="text"
-							placeholder="Enter your message here..." style="height: 10rem"
-							data-sb-validations="required"></textarea>
-						<label for="message">Message</label>
-						<div class="invalid-feedback" data-sb-feedback="message:required">A
-							message is required.</div>
+						placeholder="제목을 입력해 주세요." data-sb-validations="required" />
+					<div class="invalid-feedback" data-sb-feedback="name:required">A
+						name is required.</div>
+				</div>
+				<!-- Message input-->
+				<div class="form-floating mb-3">
+					<h>내용</h>
+					<textarea class="form-control" id="message" type="text"
+						style="height: 10rem" data-sb-validations="required"></textarea>
+					<label for="message">Message</label>
+					<div class="invalid-feedback" data-sb-feedback="message:required">A
+						message is required.</div>
+				</div>
+				<!-- Submit success message-->
+				<div class="d-none" id="submitSuccessMessage">
+					<div class="text-center mb-3">
+						<div class="fw-bolder">Form submission successful!</div>
+						To activate this form, sign up at <br /> <a
+							href="https://startbootstrap.com/solution/contact-forms">https://startbootstrap.com/solution/contact-forms</a>
 					</div>
-					<!-- Submit success message-->
-					<!---->
-					<!-- This is what your users will see when the form-->
-					<!-- has successfully submitted-->
-					<div class="d-none" id="submitSuccessMessage">
-						<div class="text-center mb-3">
-							<div class="fw-bolder">Form submission successful!</div>
-							To activate this form, sign up at <br /> <a
-								href="https://startbootstrap.com/solution/contact-forms">https://startbootstrap.com/solution/contact-forms</a>
-						</div>
-					</div>
-					<!-- Submit error message-->
-					<!---->
-					<!-- This is what your users will see when there is-->
-					<!-- an error submitting the form-->
-					<div class="d-none" id="submitErrorMessage">
-						<div class="text-center text-danger mb-3">Error sending
-							message!</div>
-					</div>
-					<!-- Submit Button-->
-					<div class="d-grid text-right">
-						<button class="btn-sm btn btn-primary btn-lg disabled btn" id="submitButton"
-							type="submit">보내기</button>
-					</div>
+				</div>
+				<!-- Submit error message-->
+				<div class="d-none" id="submitErrorMessage">
+					<div class="text-center text-danger mb-3">Error sending
+						message!</div>
+				</div>
+				<!-- Submit Button-->
+				<div class="d-grid text-right">
+					<button class="btn-sm btn btn-primary btn-lg disabled btn"
+						id="submitButton" type="submit">보내기</button>
+				</div>
 			</form>
 		</div>
 	</div>
 </div>
 
+<!-- Employee Modal -->
+<div class="modal fade" id="employeeModal" tabindex="-1"
+	aria-labelledby="employeeModalLabel" aria-hidden="true">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-header">
+				<form
+					class="d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search">
+					<div class="input-group">
+						<input type="text" class="form-control bg-light border-0 small"
+							placeholder="Search for..." aria-label="Search"
+							aria-describedby="basic-addon2">
+						<div class="input-group-append">
+							<button class="btn btn-primary" type="button">
+								<i class="fas fa-search fa-sm"></i>
+							</button>
+						</div>
+					</div>
+				</form>
+				<button type="button" class="btn-close" data-bs-dismiss="modal"
+					aria-label="Close"></button>
+			</div>
+			<div class="modal-body">
+				<!-- 모달 창 내용 추가-->
+				<table class="table table-bordered">
+					<thead>
+						<tr>
+							<th scope="col">부서</th>
+							<th scope="col">사원</th>
+							<th scope="col">선택</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr>
+							<td></td>
+							<td></td>
+							<td><button class="btn btn-primary">선택</button></td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
 
+		</div>
+	</div>
+</div>
+<div id="searchList">
+	<span id="empNo"></span>
+	<span id="empName"></span>
+</div>
+<script type="text/javascript">
+	$(function(){
+		$("#email").keypress(function(e){
+			var empNameVal = $("#email").val();
+			alert(empNameVal);
+			$.ajax({
+				type: "GET", 
+				url:"/note/selectEmpByName",
+				data: { 
+						empName: empNameVal
+				},
+				success : function(result){
+					//todo 이름으로 검색한 결과들을 노출하는 로직을 짜야되요
+					//결과가 있든 없든 여기다가 짜야됨
+					console.log(result.empList);
+					var result0 = result.empList[0];
+					$("#searchList #empNo").text(result0?.empNo);
+					$("#searchList #empName").text(result0?.empName);				
+				},
+				error : function(){
+					//통신실패
+					alert("실패");
+				}
+			}); 
+			
+		});
+	});
+</script>
 
 <jsp:include page="/WEB-INF/views/common/footer.jsp" />
+
+<!-- 이건 플랜B
+ <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+<script>
+	function openEmployeeModal() {
+		var employeeModal = new bootstrap.Modal(document
+				.getElementById('employeeModal'));
+		employeeModal.show();
+		// 사원 조회 함수 호출
+		employeeSearch();
+	}
+	function employeeSearch(){
+		// ajax요청
+		fetch('${path}/employeeSearch').then(response=>response.json()).the(data=>{
+			// 테이블에 추가하기
+			updateEmployeeTable(data);
+			})
+			.catch(error=>console.error('검색하신 사원이 존재하지 않습니다.',error));
+			
+		}
+	
+	
+</script>
+ -->

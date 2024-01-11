@@ -31,6 +31,11 @@ public class ApprovalDaoImpl implements ApprovalDao {
 		return session.selectOne("approval.selectApprovalByNo",DocNo);
 	}
 
-	
-	
+	@Override
+	public int insertApproval(SqlSession session, Approval a) {
+		// TODO Auto-generated method stub
+		return session.insert("approval.insertApproval",a);
+	}
+
 }
+
