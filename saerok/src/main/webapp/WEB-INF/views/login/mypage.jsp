@@ -57,7 +57,8 @@
 				<div class="ato-myimg">
 					<label for="fileUploaderLabel" class="custom-file-upload">
                     	<img src="${path}/resources/upload/profile/${loginEmployee.destFileName}" 
-                    		id="profile-img" class="img-profile rounded-circle" alt="ato-profile-img" onclick="changeImg();">
+                    		id="profile-img" class="img-profile rounded-circle" alt="ato-profile-img" 
+                    		onclick="changeImg();">
                     	</label>
                     	<input type="file" name="profile" style="display: none;" >
                </div>
@@ -144,10 +145,14 @@
 
 
 	<script>
-/* 	//파일업로드 script
+ 	//파일업로드 script
     // 파일 선택 input의 변경 이벤트를 감지하여 동작하는 함수
-    document.getElementById('profile').addEventListener('change', handleFileSelect);
+    document.querySelector('input[type=file]').addEventListener('change', handleFileSelect);
 
+ 	function changeImg(){
+ 		document.querySelector("input[type=file]").click();
+ 	}
+ 	
     // 파일 선택하면 동작함
     function handleFileSelect(event) {
         var selectedFile = event.target.files[0];
@@ -159,13 +164,8 @@
                 document.getElementById('profile-img').src = e.target.result;
             };
             reader.readAsDataURL(selectedFile);
-
-            // 여기에서 선택한 파일 정보를 FormData에 추가
-            var formData = new FormData();
-            formData.append("profile", selectedFile);
-
         }
-    } */
+    } 
 
     // 파일 선택 input 클릭하도록 설정
     document.querySelector('.custom-file-upload').addEventListener('click', function () {

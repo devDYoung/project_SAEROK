@@ -35,8 +35,10 @@ public class LoginServiceImpl implements LoginService {
 	@Transactional
 	public int updateMyPage(Employee e) {
 		int result=dao.updateMyPage(session, e);
+		System.out.println(e);
 		if(result>0) {
 			Employee loginEmployee=dao.selectEmployeeByEmpNo(session, e.getEmpNo());
+			System.out.println(loginEmployee);
 			DBConnectionProvider authManager=new DBConnectionProvider(this);
 			Authentication auth=authManager.authenticate(new UsernamePasswordAuthenticationToken(loginEmployee, 
 					"updateData",
