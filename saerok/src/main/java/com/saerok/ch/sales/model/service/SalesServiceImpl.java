@@ -76,7 +76,50 @@ public class SalesServiceImpl implements SalesService {
         }
         return salesList;
     }
+    
+    
+    
+    //점주전용
+    @Override
+	public BigDecimal findOwnerTodaySalesTotal(String empNo) {
+		return salesMapper.findOwnerTodaySalesTotal(empNo);
+	}
 
+	@Override
+	public BigDecimal findOwnerCurrentMonthSalesTotal(String empNo) {
+		return salesMapper.findOwnerCurrentMonthSalesTotal(empNo);
+	}
+
+	@Override
+	public BigDecimal findOwnerCurrentYearSalesTotal(String empNo) {
+		return salesMapper.findOwnerCurrentYearSalesTotal(empNo);
+	}
+	
+
+    @Override
+    public List<Map<String, Object>> getBranchOwnerDetailSales(String empNo) {
+        return salesMapper.findBranchOwnerDetailSales(empNo);
+    }
+
+    @Override
+    public List<Map<String, Object>> getBranchOwnerCurrentMonthSales(String empNo) {
+        List<Map<String, Object>> salesList = salesMapper.findBranchOwnerCurrentMonthSales(empNo);
+        for (Map<String, Object> sale : salesList) {
+            String monthNumber = sale.get("currentMonth").toString();
+            String monthString = getMonthString(monthNumber);
+            sale.put("currentMonth", monthString);
+
+            String salesDay = sale.get("salesDay").toString();
+            String dayString = getDayString(salesDay); 
+            sale.put("salesDay", dayString);
+        }
+        return salesList;
+    }
+	
+	
+	
+	
+	//일,월 변경
     private String getDayString(String dayNumber) {
         int day = Integer.parseInt(dayNumber);
         return String.valueOf(day); 
