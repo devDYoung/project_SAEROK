@@ -9,7 +9,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Component;
 
 import com.saerok.jh.employee.model.dto.Employee;
-import com.saerok.jh.login.model.service.LoginServiceImpl;
+import com.saerok.jh.login.model.service.LoginService;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -20,7 +20,7 @@ import lombok.extern.slf4j.Slf4j;
 public class DBConnectionProvider implements AuthenticationProvider {
 
 //	private final EmployeeMapper dao;
-	private final LoginServiceImpl service;
+	private final LoginService service;
 
 	// 비밀번호 암호화 처리
 	private BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();

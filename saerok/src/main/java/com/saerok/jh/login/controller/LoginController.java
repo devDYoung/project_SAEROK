@@ -80,6 +80,7 @@ public class LoginController {
                    e.setDestFileName(destFileName); 
                    
                    result = service.updateMyPage(e);
+	           		
                    return Map.of("successYn",result==1?"Y":"N");
                }
 
