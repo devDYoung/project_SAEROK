@@ -12,6 +12,6 @@ public interface ApprovalService {
 	
 	Approval selectApprovalByNo(String apvDocNo);
 	
-
-   
+	int insertApproval(Approval a);
 }
+
