@@ -5,6 +5,9 @@ import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Component;
 
@@ -17,7 +20,7 @@ import lombok.extern.slf4j.Slf4j;
 @Component
 @RequiredArgsConstructor
 @Slf4j
-public class DBConnectionProvider implements AuthenticationProvider {
+public class DBConnectionProvider implements AuthenticationProvider,UserDetailsService {
 
 //	private final EmployeeMapper dao;
 	private final LoginService service;
@@ -53,5 +56,18 @@ public class DBConnectionProvider implements AuthenticationProvider {
 		// TODO Auto-generated method stub
 		return UsernamePasswordAuthenticationToken.class.isAssignableFrom(authentication);
 	}
+
+	@Override
+	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+		// TODO Auto-generated method stub
+		Employee loginEmployee=service.selectEmployeeByEmpNo(username);
+		if(loginEmployee==null) {
+			throw new BadCredentialsException("인증실패");
+		}
+		return loginEmployee;
+	}
+	
+	
+	
 
 }

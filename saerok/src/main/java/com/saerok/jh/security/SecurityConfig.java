@@ -37,13 +37,19 @@ public class SecurityConfig{
                .loginPage("/loginPage")
                      /* .loginProcessingUrl("/loginPage") */
                //.failureForwardUrl("/loginfail")
-               //.successForwardUrl("/")
+               .successForwardUrl("/")
                .usernameParameter("empNo")
                .passwordParameter("empPw");
             })
             .logout(logout -> logout
                   .logoutUrl("/logoutpage")
-            )
+            ).rememberMe(remember->{
+            	remember
+            	.rememberMeParameter("remember-id")
+            	.tokenValiditySeconds(60*60*24)
+            	.userDetailsService(dbprovider)
+            	;
+            })
             .authenticationProvider(dbprovider) // DB와 연동하여 인증 처리
             .build(); // SecurityFilterChain 빌드 및 반환
          }
