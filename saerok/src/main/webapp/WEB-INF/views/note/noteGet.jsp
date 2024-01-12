@@ -18,10 +18,6 @@
 	
 </script>
 
-<jsp:include page="/WEB-INF/views/common/header.jsp">
-	<jsp:param name="" value="받은쪽지함" />
-</jsp:include>
-
 <!-- 전체 리스트 출력 -->
 <div class="container-fluid">
 
@@ -39,7 +35,7 @@
 						<tr>
 							<div>
 								<button class="btn btn-rounded btn-outline-primary col-1"
-									onclick="location.assign('${path}/note/write');">쪽지쓰기</button>
+									onclick="requestNote('${path}/note/write');">쪽지쓰기</button>
 							</div>
 						</tr>
 						<tr>
@@ -82,5 +78,3 @@
 
 
 
-
-<jsp:include page="/WEB-INF/views/common/footer.jsp" />

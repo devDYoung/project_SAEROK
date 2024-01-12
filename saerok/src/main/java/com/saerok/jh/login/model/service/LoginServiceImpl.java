@@ -16,35 +16,36 @@ import lombok.RequiredArgsConstructor;
 @Service
 @RequiredArgsConstructor
 public class LoginServiceImpl implements LoginService {
-	
+   
 
-	private final LoginDao dao;
-	private final SqlSession session;
-	//private final DBConnectionProvider authManager;
-	//private final BCryptPasswordEncoder encoder;
-	
-	//로그인
-	@Override
-	public Employee selectEmployeeByEmpNo(String employeeNo) {
-		
-		return dao.selectEmployeeByEmpNo(session,employeeNo);
-	}
-	
-	
-	//마이페이지
-	@Transactional
-	public int updateMyPage(Employee e) {
-		int result=dao.updateMyPage(session, e);
-		if(result>0) {
-			Employee loginEmployee=dao.selectEmployeeByEmpNo(session, e.getEmpNo());
-			DBConnectionProvider authManager=new DBConnectionProvider(this);
-			Authentication auth=authManager.authenticate(new UsernamePasswordAuthenticationToken(loginEmployee, 
-					"updateData",
-				loginEmployee.getAuthorities()));
-			SecurityContextHolder.getContext().setAuthentication(auth);
-		}
-		return result;
-	}
-	
+   private final LoginDao dao;
+   private final SqlSession session;
+   //private final DBConnectionProvider authManager;
+   //private final BCryptPasswordEncoder encoder;
+   
+   //로그인
+   @Override
+   public Employee selectEmployeeByEmpNo(String employeeNo) {
+      
+      return dao.selectEmployeeByEmpNo(session,employeeNo);
+   }
+   
+   
+   //마이페이지
+   @Transactional
+   public int updateMyPage(Employee e) {
+      int result=dao.updateMyPage(session, e);
+      System.out.println(e);
+      if(result>0) {
+         
+         Employee loginEmployee=dao.selectEmployeeByEmpNo(session,e.getEmpNo());
+         
+         Authentication auth=new DBConnectionProvider(this).authenticate(new UsernamePasswordAuthenticationToken(loginEmployee, 
+               "updateData",loginEmployee.getAuthorities()));
+         SecurityContextHolder.getContext().setAuthentication(auth);
+      }
+      return result;
+   }
+   
 
 }

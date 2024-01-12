@@ -22,6 +22,7 @@ import lombok.NoArgsConstructor;
 @Builder
 
 public class Employee implements UserDetails {
+	private static final long serialVersionUID = 2435809537311076622L;
 	private String empNo;
 	private String empPw;
 	private String empName;
@@ -43,16 +44,18 @@ public class Employee implements UserDetails {
 
 	@Override
 	public Collection<? extends GrantedAuthority> getAuthorities() {
-		// 권한 정보를 담을 리스트를 생성
-		List<GrantedAuthority> auth = new ArrayList<>();
-		if (deptCode.equals("100") && (jobCode.equals("10") || jobCode.equals("20") || jobCode.equals("30"))) {
-			auth.add(new SimpleGrantedAuthority(MyAuthority.HR.name())); //인사팀 -> HR
-		} else if (deptCode.equals("100") && jobCode.equals("10")) {
-			auth.add(new SimpleGrantedAuthority(MyAuthority.HR_MASTER.name())); // 인사부장 -> HR_MASTER
-		}
-		return auth;
-
+	   // 권한 정보를 담을 리스트를 생성
+	   List<GrantedAuthority> auth = new ArrayList<>();
+	   if (deptCode.equals("100") && (jobCode.equals("10") || jobCode.equals("20") || jobCode.equals("30"))) {
+	      auth.add(new SimpleGrantedAuthority(MyAuthority.HR.name())); //인사팀 -> HR
+	   } else if (deptCode.equals("100") && jobCode.equals("10")) {
+	      auth.add(new SimpleGrantedAuthority(MyAuthority.HR_MASTER.name())); // 인사부장 -> HR_MASTER
+	   } else if (deptCode.equals("400") && jobCode.equals("40")) {
+	      auth.add(new SimpleGrantedAuthority(MyAuthority.BRANCHER.name())); // 지점장 -> BRANCHER
+	   }
+	   return auth;
 	}
+
 
 	@Override
 	public String getUsername() {

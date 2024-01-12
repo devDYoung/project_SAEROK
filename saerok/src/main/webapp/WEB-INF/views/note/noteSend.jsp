@@ -6,11 +6,7 @@
 <%@ taglib prefix="springform"
 	uri="http://www.springframework.org/tags/form"%>
 <c:set var="path" value="${pageContext.request.contextPath}" />
-<jsp:include page="/WEB-INF/views/common/header.jsp">
-	<jsp:param name="title" value="보낸쪽지함" />
-</jsp:include>
 
-<body id="page-top">
 	<!-- 받은 쪽지함 페이지 내용 작성 -->
 	<c:forEach var="note" items="${noteSend}">
 		<p>${note.sender}님으로부터:${note.subject}</p>
@@ -94,4 +90,3 @@
 	</div>
 	<div id=pageBar>${pageBar}</div>
 
-	<jsp:include page="/WEB-INF/views/common/footer.jsp" />
