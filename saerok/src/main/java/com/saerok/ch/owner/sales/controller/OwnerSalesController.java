@@ -59,7 +59,6 @@ public class OwnerSalesController {
     // 매출 등록 폼 페이지
     @GetMapping("/sales/entry")
     public String showSalesEntryPage() {
-    	 System.out.println("ㅎㅎ");
         return "sales/salesEntry"; // 매출 등록 폼 JSP 페이지
        
     }
