@@ -67,7 +67,7 @@ public class NoteController {
     	 String empName = request.getParameter("empName");
 		 List<Employee> empList = noteService.selectEmpByName(empName);
 		 //log.debug("{}",empList);
-		 model.addAttribute("empList",empList);
+		 //model.addAttribute("empList",empList);
 		 
 		 Map result = new HashMap();
 		 result.put("empList", empList);

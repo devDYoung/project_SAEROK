@@ -61,7 +61,7 @@
         <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
 
             <!-- Sidebar - Brand -->
-            <a class="sidebar-brand d-flex align-items-center justify-content-center" href="${path}/index">
+            <a class="sidebar-brand d-flex align-items-center justify-content-center" href="${path}/">
                 <div class="sidebar-brand-icon rotate-n-15">
                     <i class="fas fa-gift"></i>
                 </div>
@@ -449,6 +449,37 @@
 			.then(data=>{
 				document.querySelector(".page-wrapper").innerHTML=data;
 				});
+		}
+		function searchEmp(){
+			var empNameVal = $("#email").val();
+			/* alert(empNameVal); */
+			$.ajax({
+				type: "GET", 
+				url:"/note/selectEmpByName",
+				data: { 
+						empName: empNameVal
+				},
+				success : function(result){
+					//todo 이름으로 검색한 결과들을 노출하는 로직을 짜야되요
+					//결과가 있든 없든 여기다가 짜야됨
+					//console.log(result.empList);
+					var result0 = result.empList[0];
+					console.log(result);
+					$("#searchResult").html('');
+					result.empList.forEach(e=>{
+						const $op=document.createElement("option");
+						$op.value=e.empNo+" "+e.empName;
+						
+						$("#searchResult").append($op);
+					})
+					
+				},
+				error : function(){
+					//통신실패
+					alert("실패");
+				}
+			}); 
+			
 		}
 	</script>
     <!-- Scroll to Top Button-->
