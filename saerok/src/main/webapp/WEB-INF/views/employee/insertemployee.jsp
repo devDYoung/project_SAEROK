@@ -208,7 +208,7 @@
 	
     //취소버튼 누르면 index 화면으로 이동
     const resetForm = () => {
-        location.replace("${path}/index");
+        location.replace("${path}/");
     }
 	
 	
