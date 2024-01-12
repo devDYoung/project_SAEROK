@@ -6,12 +6,6 @@
 <%@ taglib prefix="springform"
 	uri="http://www.springframework.org/tags/form"%>
 <c:set var="path" value="${pageContext.request.contextPath}" />
-
-<script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
-
-<jsp:include page="/WEB-INF/views/common/header.jsp">
-	<jsp:param name="title" value="쪽지작성" />
-</jsp:include>
 <style>
 .dy {
 	margin-left: 200px;
@@ -32,7 +26,7 @@
 				<div class="form-floating mb-3">
 					<h>받는 사람</h>
 					<input class="form-control" id="email" type="text"
-						placeholder="사원 이름을 입력해 주세요."
+						placeholder="사원 이름을 검색해주세요."
 						data-sb-validations="required,email" />
 					<div class="invalid-feedback" data-sb-feedback="email:required">An
 						email is required.</div>
@@ -161,8 +155,6 @@
 		});
 	});
 </script>
-
-<jsp:include page="/WEB-INF/views/common/footer.jsp" />
 
 <!-- 이건 플랜B
  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
