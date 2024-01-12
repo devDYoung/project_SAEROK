@@ -6,12 +6,6 @@
 <%@ taglib prefix="springform"
 	uri="http://www.springframework.org/tags/form"%>
 <c:set var="path" value="${pageContext.request.contextPath}" />
-
-<script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
-
-<jsp:include page="/WEB-INF/views/common/header.jsp">
-	<jsp:param name="title" value="쪽지작성" />
-</jsp:include>
 <style>
 .dy {
 	margin-left: 200px;
@@ -31,8 +25,8 @@
 				<!-- 사원 입력-->
 				<div class="form-floating mb-3">
 					<h>받는 사람</h>
-					<input class="form-control" id="email" type="email"
-						placeholder="부서, 사원을 검색해 주세요."
+					<input class="form-control" id="email" type="text"
+						placeholder="사원 이름을 검색해주세요."
 						data-sb-validations="required,email" />
 					<div class="invalid-feedback" data-sb-feedback="email:required">An
 						email is required.</div>
@@ -136,7 +130,7 @@
 	$(function(){
 		$("#email").keypress(function(e){
 			var empNameVal = $("#email").val();
-			alert(empNameVal);
+			/* alert(empNameVal); */
 			$.ajax({
 				type: "GET", 
 				url:"/note/selectEmpByName",
@@ -146,10 +140,11 @@
 				success : function(result){
 					//todo 이름으로 검색한 결과들을 노출하는 로직을 짜야되요
 					//결과가 있든 없든 여기다가 짜야됨
-					console.log(result.empList);
+					//console.log(result.empList);
 					var result0 = result.empList[0];
-					$("#searchList #empNo").text(result0?.empNo);
-					$("#searchList #empName").text(result0?.empName);				
+					console.log(result.empList[0].empNo);
+					$("#searchList #empNo").text(result.empList[0].empNo);
+					$("#searchList #empName").text(result.empList[0].empName);				
 				},
 				error : function(){
 					//통신실패
@@ -160,8 +155,6 @@
 		});
 	});
 </script>
-
-<jsp:include page="/WEB-INF/views/common/footer.jsp" />
 
 <!-- 이건 플랜B
  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
