@@ -171,6 +171,7 @@
 	}
 </script>
 
+<<<<<<< HEAD
 <!-- 서명 클릭 스크립트  -->
 <script>
 	$(document).ready(function() {
@@ -237,3 +238,4 @@ $(document).ready(function() {
     });
 });
 </script>
+<jsp:include page="/WEB-INF/views/common/footer.jsp" />

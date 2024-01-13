@@ -9,7 +9,9 @@ import com.saerok.jy.commute.dto.Commute;
 
 public interface CommuteService {
 
-	ArrayList<Commute> selectCommuteList(Commute commute);
+	//ArrayList<Commute> selectCommuteList(Commute commute);
+	
+	Commute selectCommuteList (Map<String, Object> param);
 
 	Commute selectCommute(String empNo);
 

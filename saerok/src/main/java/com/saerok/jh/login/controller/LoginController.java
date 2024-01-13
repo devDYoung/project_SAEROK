@@ -101,5 +101,10 @@ public class LoginController {
 		model.addAttribute("monthlySalesTotals", monthlySalesTotals);
 		return "index";
 	}
+	
+	// 내 근태 조회
+	@GetMapping("/commute/commuteMain.do")
+	public void commuteMain() {}
+	
 
 }

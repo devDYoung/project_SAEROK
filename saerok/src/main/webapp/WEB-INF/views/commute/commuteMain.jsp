@@ -10,58 +10,84 @@
 <jsp:include page="/WEB-INF/views/common/header.jsp">
 	<jsp:param value="CommuteMain" name="ATO" />
 </jsp:include>
-<div class="preloader">
-		<div class="lds-ripple">
-			<div class="lds-pos"></div>
-			<div class="lds-pos"></div>
-		</div>
-	</div>
-<div id="main-wrapper" data-theme="light" data-layout="vertical"
-		data-navbarbg="skin6" data-sidebartype="full"
-		data-sidebar-position="fixed" data-header-position="fixed"
-		data-boxed-layout="full">
-<div class="page-wrapper" style=" background-color: white;">
-				<div class="row" style="height: 100%;">
-						<!-- 근태관리 사이드바 -->
-					<div class="col-2" style="border-right: 1px solid rgba(0,0,0,.125);">
-						<jsp:include page="/WEB-INF/views/commute/commuteBar.jsp" >
-							<jsp:param value="${c}" name="c"/>
-						</jsp:include>
-					</div>
-<div class="container-fluid" style="height: 100%">
-				
-				
-<div class="col-10" id="workList">
-            
-						<script>
-						$(function(){
-							const currentDate = new Date();
-							const year = currentDate.getFullYear(); // 이번년도
-							const month = currentDate.getMonth() + 1; // 이번달
-							const empNo = "${loginEmployee.empNo}"; // 로그인유저 사번
-							$.ajax({
-								type: "POST", 
-								url: "${path}/selectCommuteList.do", // CommuteController의 URL
-								dataType: "html", // HTML 방식
-								data: { 
-									year: year, 
-									month: month, 
-									empNo: empNo
-								},
-								success : function(result){
-									$('#workListContainer').html(result); // HTML 태그 넣기
-								},
-								error : function(){
-									alert("근무정보를 조회할 수 없습니다. \n관리자에게 문의하세요.");
-								}
-							});
-						})
-							
-						</script>
-					</div>
-				</div>
-			</div>
-		</div>
-	</div>
+<%-- <jsp:include page="/WEB-INF/views/commute/commuteBar.jsp" /> --%>
+<link rel="stylesheet" href="${path }/resources/css/emp.css">
+                <div class="home-container">
 
-<jsp:include page="/WEB-INF/views/common/footer.jsp" />
+                    <!-- 본문 -->
+                    <div class="div-padding">
+                        <div id="date-box">
+                            <h4>
+                                <button id="prev-btn"><i class="fa-solid fa-chevron-left"></i></button>
+                                <span id="date-text">2023.03</span>
+                                <button id="next-btn"><i class="fa-solid fa-chevron-right"></i></button>
+                            </h4>
+                        </div>
+
+                        <div id="work-week-container">
+                            <div id="work-week-time">
+                                <div>
+                                    <p class="font-14">이번주 누적</p>
+                                    <h4 class="main-color" id="main-totalwork-time">0h 0m 0s</h4>
+                                </div>
+                                <div>
+                                    <p class="font-14">이번주 초과</p>
+                                    <h4 class="main-color" id="main-week-over-time">0h 0m 0s</h4>
+                                </div>
+                                <div>
+                                    <p class="font-14">이번주 잔여</p>
+                                    <h4 class="main-color" id="main-work-time">40h 0m 0s</h4>
+                                </div>
+                                <div>
+                                    <p class="font-14">이번달 누적</p>
+                                    <h4 class="color-gray" id="main-month-work-time">0h 0m 0s</h4>
+                                </div>
+                                <div>
+                                    <p class="font-14">이번달 연장</p>
+                                    <h4 class="color-gray" id="main-month-over-time">0h 0m 0s</h4>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div id="work-info-container"></div>
+
+                    </div>
+                    <!-- 본문 end -->
+                </div>
+            </div>
+     
+	<script>
+        window.addEventListener('load',()=>{
+                sendData();
+                weekTimes();
+        });
+        
+        let currentDate = new Date();
+
+            function setCurrentDate() {
+                const dateText = document.getElementById("date-text");
+                const year = currentDate.getFullYear();
+                const month = currentDate.getMonth() + 1;
+                const monthText = month < 10 ? `0\${month}` : month;
+                dateText.textContent = `\${year}.\${monthText}`;
+            }
+
+            setCurrentDate();
+
+            document.getElementById("prev-btn").addEventListener("click", () => {
+                    currentDate.setMonth(currentDate.getMonth() - 1);
+                    setCurrentDate();
+                     sendData();
+                    
+            });
+
+                document.getElementById("next-btn").addEventListener("click", () => {
+                    currentDate.setMonth(currentDate.getMonth() + 1);
+                    setCurrentDate();
+                    sendData();
+            });
+
+         
+        	
+    </script>
+	<jsp:include page="/WEB-INF/views/common/footer.jsp"/>
