@@ -151,7 +151,7 @@
 						</div>
 					</div>
 					<input type="button" id="savebutton"
-						class="pd-20 btn btn-primary btn-lg" style="float: right;"
+						class="btn btn-facebook btn-block col-1" style="float: right;"
 						value="결재작성" />
 				</form>
 			</div>
