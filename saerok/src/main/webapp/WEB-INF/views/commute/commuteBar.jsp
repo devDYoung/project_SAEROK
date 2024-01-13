@@ -7,13 +7,9 @@
 <c:set var="path" value="${pageContext.request.contextPath}" />
 <c:set var="loginEmployee"
 	value="${sessionScope.SPRING_SECURITY_CONTEXT.authentication.principal }" />
-<jsp:include page="/WEB-INF/views/common/header.jsp">
-	<jsp:param value="CommuteSideBar" name="" />
-</jsp:include>
 <script
 	src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-<section>
-	<h3>근태관리</h3>
+<section><h3>근태관리</h3>
 	<div>
 		<c:set var="today" value="<%=new java.util.Date()%>" />
 		<p style="font-size: 14px">
@@ -51,7 +47,7 @@
 	</div>
 
 	<br>
-	<%-- <form> --%>
+	<form>
 		<div class="d-flex align-items-center">
 			<!-- 출근시간 없으면 출근가능, 퇴근 불가능 -->
 			<!-- 출근 시간이 있으면, 출근 불가능, 퇴근 가능 -->
@@ -91,19 +87,94 @@
 			<input type="button" class="d-flex col-12 btn btn-outline-primary"
 				style="border: none;" value="퇴근" name="status">
 		</div>
-		<input type="hidden" name="cNo" value="${c.commuteNo}"> <input>
+		<input type="hidden" name="cNo" value="${c.commuteNo}"> <input
 			type="hidden" name="main" value="1">
-	<%-- </form> --%>
+	</form>
 	<br>
 	<!-- 근태관리, 내 근태 현황, 내 연차 내역, 내 인사정보 -->
-<!-- 
+
 	<h6 class="card-title">근태관리</h6>
 	<div class="list-group">
 		<a href="" class="list-group-item">내 근태 현황</a> <a
 			href="" class="list-group-item">내 연차 내역</a> <a
 			href="" class="list-group-item">내 인사정보</a>
-	</div> -->
-
+	</div>  
+ 
+<%--  <div class="all-container app-dashboard-body-content off-canvas-content" data-off-canvas-content>
+                <!-- 왼쪽 추가 메뉴 -->
+                <div class="left-container">
+                    <div id="home-left-work" class="div-padding div-margin">
+                        <table id="home-work-tbl">
+                            <thead>
+                                <tr>
+                                    <th colspan="2">
+                                        <h4 class="text-left font-bold">근태관리</h4>
+                                    </th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td id="year" colspan="2" class="font-14">clock</td>
+                                </tr>
+                                <tr>
+                                    <td colspan="2" id="clock" style="color:black;">clock</td>
+                                </tr>
+                                <tr>
+                                    <td class="font-14 font-bold">업무상태</td>
+                                    <td class="text-right font-14 color-red font-bold" id="work-state">출근전</td>
+                                </tr>            
+                                <tr>
+                                    <td class="font-14 font-bold">출근시간</td>
+                                    <td class="text-right font-14" id="startwork-time">미등록</td>
+                                </tr>
+                                <tr>
+                                    <td class="font-14 font-bold">퇴근시간</td>
+                                    <td class="text-right font-14" id="endwork-time">미등록</td>
+                                </tr>
+                                <tr>
+                                    <td class="font-14 font-bold">주간 누적 근무시간</td>
+                                    <td class="text-right font-14" id="totalwork-time">0h 0m 0s</td>
+                                </tr>
+                                <tr class="btn-tr">
+                                    <td><button class="font-bold" id="btn-startwork">출근하기</button></td>
+                                    <td class="text-right"><button class="font-bold" id="btn-endwork">퇴근하기</button></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    
+                    </div>
+                    <div class="accordion-box">
+                        <ul class="container-list">
+                            <li>
+                                <p class="title font-medium font-bold">근태관리</p>
+                                <div class="con">
+                                    <ul class="container-detail font-small">
+                                        <li><a class="container-a" href="${path}/commute/commuteMain.do">내 근태 현황</a></li>
+                                        <li><a class="container-a" href="${pageContext.request.contextPath}/emp/empAnnual.do">내 연차 내역</a></li>
+                                        <li><a class="container-a" href="${pageContext.request.contextPath }/emp/empInfo.do">내 인사정보</a></li>
+                                    </ul>
+                                </div>
+                            </li>
+                            <li>
+                                <p class="title font-medium font-bold">부서 근태현황</p>
+                                <div class="con">
+                                    <ul class="container-detail font-small">
+                                    	<sec:authorize access="hasRole('ROLE_PERSONNEL')">
+	                                    	<c:forEach items="${sessionScope.deptList}" var="dept">
+												<li><a class="container-a" href="${pageContext.request.contextPath}/workingManagement/empDeptView.do?code=${dept.deptCode}">${dept.deptTitle}</a></li>
+											</c:forEach>
+										</sec:authorize>
+										<sec:authorize access="!hasRole('ROLE_PERSONNEL')">
+												<li><a class="container-a" href="${pageContext.request.contextPath}/workingManagement/empDeptView.do?code=${sessionScope.loginMember.deptCode}">${sessionScope.loginMember.deptTitle}</a></li>
+										</sec:authorize>
+                                    </ul>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <!-- 왼쪽 추가 메뉴 end -->
+                </div> --%>
 	<script>
 		$(function() {
 			$("#status").css("z-index", "1")
@@ -176,5 +247,3 @@
 		}
 	</script>
 </section>
-
-<jsp:include page="/WEB-INF/views/common/footer.jsp" />

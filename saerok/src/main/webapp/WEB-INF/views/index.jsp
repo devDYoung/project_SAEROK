@@ -10,6 +10,7 @@
 <jsp:include page="/WEB-INF/views/common/header.jsp">
 	<jsp:param value="MainPage" name="ATO" />
 </jsp:include>
+
 <!-- Calendar & Reservation JavaScript -->
 <!-- <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     Axios CDN
@@ -130,18 +131,18 @@
 								</div>
 								<div class="d-flex" style="font-size: 16px">
 									<p class="col-6" style="padding: 0px;">근무상태</p>
-									<p class="col-6 text-right" style="padding: 0px;" id="status"></p>
+									<p class="col-6 text-right" style="padding: 0px;" id="work-status"></p>
 								</div>
 							</div>
 							<!-- 출퇴근 버튼 -->
 							<div class="d-flex align-items-center">
 								<input type="button" id="startBtn"
 									class="btn btn-rounded btn-outline-primary col-6"
-									style="margin: 2px" value="출근하기" name="status"/> 
+									style="margin: 2px" value="출근하기" name="work-status"/> 
 									<input
 									type="button" id="endBtn"
 									class="btn btn-rounded btn-outline-primary col-6"
-									style="margin: 2px" value="퇴근하기" name="status"/>
+									style="margin: 2px" value="퇴근하기" name="work-status"/>
 							</div>
 							<input type="hidden" name="commuteNo" value="${c.commuteNo}">
 							<input type="hidden" name="index" value="1">
@@ -230,7 +231,7 @@
 
 
 	<script>
-      $(function() {
+       $(function() {
          //출퇴근 버튼 설정
          var start = "${c.inDtime}";
          var end = "${c.outDtime}";
@@ -256,33 +257,88 @@
             $('#inDtime').text(start) //출근시간 표시
             $('#outDtime').text(end) //퇴근시간 표시
             
-         }
+         } 
+         
+         
+         window.addEventListener('load', function(){
+         $.ajax({
+      	   url : "${path}/commute/commute.do",
+      	   contentType : "application/json; charset=utf-8",
+      	   success(data){
+      		   console.log(data);
+      		   if(data){
+      			   const {commuteNo,inDtime,outDtime,overtime,workingDay,status,lateYN,empNo,inTime,outTime} = data;
+      			   var starttime = new Date(inDtime);
+      			   var endtime = new Date(outDtime);
+      			   
+      			   //하루 근무시간 계산
+      			   const daytimes = endtime - starttime;
+      			   console.log(daytimes);
+      			   
+      			   const workStatus = document.querySelector("#work-status")
+      			   workStatus.textContent = status;
+      			   
+      			   
+      			   if(inDtime){
+      				 var hours = (starttime.getHours()); 
+                      var minutes = starttime.getMinutes();
+                      var seconds = starttime.getSeconds();
+                      var startWorkTime = `\${hours < 10 ? '0' + hours : hours}:\${minutes < 10 ? '0'+minutes : minutes}:\${seconds < 10 ? '0'+seconds : seconds}`;
+                      // 출근시간 정보 출력
+                      document.querySelector('#inDtime').textContent = startWorkTime;
+      			   }
+      			   
+      			   if(outDtime){
+       				  var hours = (endtime.getHours()); 
+                       var minutes = endtime.getMinutes();
+                       var seconds = endtime.getSeconds();
+                       var endWorkTime = `\${hours < 10 ? '0' + hours : hours}:\${minutes < 10 ? '0'+minutes : minutes}:\${seconds < 10 ? '0'+seconds : seconds}`;
+                       // 퇴근시간 정보 출력
+      				  document.querySelector('#outDtime').textContent = endWorkTime;
+      			   }
+      			   
+      			   if(daytimes > 0){
+      				   //하루 근무시간 update
+      				  updateDayWorkTime(daytimes);
+      			   }
+      		   }
+      	   },
+      	   error : console.log
+         });
+        
+      });
          
          
          // loginEmployee가 null이 아닌 경우에만 속성에 액세스하기 전에 null 체크
          var empNo = "${loginEmployee != null ? loginEmployee.empNo : 'null'}";
          //console.log("직원 번호: " + empNo);
          
+         //출근 버튼 클릭시
+
          $("#startBtn").click(function(e){
         	 $.ajax({
  				type: "POST", 
- 				url: "${path}/workIn.do",
+ 				url: "${path}/commute/workIn.do",
  				data: { 
- 					status: "10" // 20: 퇴근
+ 					status: "10" // 10: 출근
  				},
  				success : function(result){
  					console.log(result);
  					if(result.successYn == "Y"){
  						//todo 버튼 활성화
  						alert("출근 성공 \n출근 시간: " + result.indtime);
+ 						
  						const indtime=new Date(result.indtime);
  						
  						document.querySelector("#inDtime").innerText=
  							indtime.getHours()+":"+
  							(indtime.getMinutes()<10?"0"+indtime.getMinutes():indtime.getMinutes());
+ 							
+ 						
  					}else{
  						alert("출근 실패");
  					}
+
  				},
  				error : function(){
  					alert("근무정보를 조회할 수 없습니다. \n관리자에게 문의하세요.");
@@ -291,10 +347,12 @@
          });
      });
       
+      
+      // 퇴근버튼 클릭시
       $("#endBtn").click(function(e){
     	    $.ajax({
     	        type: "POST", 
-    	        url: "${path}/workOut.do",
+    	        url: "${path}/commute/workOut.do",
     	        data: { 
     	            status: "20" // 20: 퇴근
     	        },
@@ -303,15 +361,19 @@
     	            if(result.successYn == "Y"){
     	                // 퇴근 성공
     	                alert("퇴근 성공\n퇴근 시간: " + result.outdtime);
+    	    
     	                const outdtime=new Date(result.outdtime);
     	                
     	                document.querySelector("#outDtime").innerText=
  							outdtime.getHours()+":"+
  							(outdtime.getMinutes()<10?"0"+outdtime.getMinutes():outdtime.getMinutes());
     	                
+    	                
     	            } else {
     	                alert("퇴근 실패");
     	            }
+    	            
+    	           
     	        },
     	        error : function(){
     	            alert("근무정보를 조회할 수 없습니다. \n관리자에게 문의하세요.");
