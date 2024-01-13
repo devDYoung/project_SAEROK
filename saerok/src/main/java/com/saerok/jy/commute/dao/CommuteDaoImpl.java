@@ -36,6 +36,13 @@ public class CommuteDaoImpl implements CommuteDao {
 
 		return session.insert("commute.insertCommuteStatus", status);
 	}
+	
+	
+	@Override
+	public int updateCommuteEndTime(SqlSession session, Map status) {
+
+		return session.update("commute.updateCommuteEndTime", status);
+	}
 
 	@Override
 	public ArrayList<Commute> selectCommuteStatusList(SqlSession session, int commuteNo) {

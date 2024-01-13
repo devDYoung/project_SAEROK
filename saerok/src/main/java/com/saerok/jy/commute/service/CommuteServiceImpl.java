@@ -72,10 +72,23 @@ public class CommuteServiceImpl implements CommuteService {
 		if (result < 0) {
 			throw new CommuteException("근무상태변경 실패");
 		}
-
 		return result;
 	}
-
+	
+	
+	
+	@Override
+	@Transactional
+	public int updateCommuteEndTime(Map status) {
+		int result = commuteDao.updateCommuteEndTime(session, status);
+		
+		if (result < 0) {
+			throw new CommuteException("근무상태변경 실패");
+		}
+		return result;
+	}
+	
+	
 	@Override
 	public ArrayList<Commute> selectCommuteStatusList(int commuteNo) {
 
