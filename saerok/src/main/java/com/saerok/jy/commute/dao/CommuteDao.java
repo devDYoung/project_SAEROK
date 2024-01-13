@@ -14,7 +14,9 @@ import com.saerok.jy.commute.dto.Commute;
 public interface CommuteDao {
 
    
-ArrayList<Commute> selectCommuteList(SqlSession session, Commute commute);
+//ArrayList<Commute> selectCommuteList(SqlSession session, Commute commute);
+
+Commute selectCommuteList(SqlSession session, Map<String, Object> param);
 
 int insertCommute(SqlSession sessoin, Map empNo);
 

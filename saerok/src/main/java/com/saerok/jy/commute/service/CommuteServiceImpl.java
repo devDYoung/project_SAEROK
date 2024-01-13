@@ -26,12 +26,18 @@ public class CommuteServiceImpl implements CommuteService {
 	@Autowired
 	private CommuteDao commuteDao;
 
+//	@Override
+//	public ArrayList<Commute> selectCommuteList(Commute commute) {
+//
+//		ArrayList<Commute> list = commuteDao.selectCommuteList(session, commute);
+//
+//		return list;
+//	}
+//	
+
 	@Override
-	public ArrayList<Commute> selectCommuteList(Commute commute) {
-
-		ArrayList<Commute> list = commuteDao.selectCommuteList(session, commute);
-
-		return list;
+	public Commute selectCommuteList(Map<String, Object> param) {
+		return commuteDao.selectCommuteList(session, param);
 	}
 
 	@Override
