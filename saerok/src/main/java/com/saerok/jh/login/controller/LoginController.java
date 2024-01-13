@@ -1,5 +1,7 @@
 package com.saerok.jh.login.controller;
 
+import java.io.File;
+import java.io.IOException;
 import java.util.List;
 import java.util.Map;
 
@@ -8,6 +10,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
@@ -16,6 +19,7 @@ import com.saerok.ch.sales.model.service.SalesService;
 import com.saerok.jh.employee.model.dto.Employee;
 import com.saerok.jh.login.model.service.LoginService;
 
+import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 
@@ -36,6 +40,9 @@ public class LoginController {
 		// todo 수정333
 		return "login/loginPage";
 	}
+	
+	
+
 
 	// 마이페이지 화면전환
 //	@RequestMapping("/mypage")
@@ -53,23 +60,42 @@ public class LoginController {
 	   @PostMapping("/updatemypage")
 	   @ResponseBody
 	   public Map<String,String> updateMyPage(@RequestParam(required = false) MultipartFile profile,
-			   Employee e, Model model) {
+			   Employee e,HttpSession session) {
 	      // 비밀번호 암호화 처리
-//	      BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
-//	      e.setEmpPw(encoder.encode(e.getEmpPw(1234)));
-		   
-		  log.debug("{}",profile.getSize());
-		  log.debug("{}",profile.getName());
-		  log.debug("{}",profile.getOriginalFilename());
-		  log.debug("{}",e);
-	      int result = service.updateMyPage(e);
+		   int result=0;
+		   try {
+               if (!profile.isEmpty()) {
+                   // 원본 파일명
+                  
+                   String originalFileName = profile.getOriginalFilename();
+
+                   // 서버에 저장할 파일명 생성 (현재 시간을 사용)
+                   String destFileName = System.currentTimeMillis() + "_" + originalFileName;
+
+                   // 파일을 서버에 저장하는 로직
+                   String path = session.getServletContext().getRealPath("/resources/upload/profile/"); 
+                   File destFile = new File(path,destFileName);
+                   profile.transferTo(destFile);
+
+                   e.setOriFileName(originalFileName); 
+                   e.setDestFileName(destFileName); 
+                   
+                   result = service.updateMyPage(e);
+	           		
+                   return Map.of("successYn",result==1?"Y":"N");
+               }
+
+           } catch (IOException exception) {
+        	   exception.printStackTrace();
+           }
+		   return Map.of("successYn",result==1?"Y":"N");
 	      
-	      return Map.of("successYn",result==1?"Y":"N");
+	      
 	   }
 
 
 	// 메인페이지
-	@GetMapping("/index")
+	@RequestMapping("/")
 	public String mainpage(Model model) {
 		List<Map<String, Object>> monthlySalesTotals = salesService.findMonthlySalesTotals();
 		model.addAttribute("monthlySalesTotals", monthlySalesTotals);

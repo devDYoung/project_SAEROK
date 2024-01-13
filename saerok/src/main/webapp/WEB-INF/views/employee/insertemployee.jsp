@@ -99,8 +99,7 @@
                         name="issueAnnu" placeholder="발급연차">
                     </div>
                   </div>
-                   <div class="col-sm-6 mb-3 mb-sm-0">
-			      <div class="col-sm-24">
+                   <div class="col-sm-6">
 				    <select name="deptCode" class="form-select form-select-sm rounded" aria-label="Small select example" style="height: 40px;">
 				        <option selected>부서</option>
 				        <option value="100">인사팀</option>
@@ -108,7 +107,6 @@
 				        <option value="300">영업팀</option>
 				        <option value="400">지점</option>
 				    </select>
-				 </div>
 				 </div>
 				 <br>
 				 <div class="row">

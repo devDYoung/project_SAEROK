@@ -1,8 +1,10 @@
 package com.saerok.jy.commute.controller;
 
 import java.security.Principal;
+import java.text.SimpleDateFormat;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -63,34 +65,10 @@ public class CommuteController {
 
 	}
 
-//	// 출퇴근버튼 눌렀을 때
-//	@GetMapping("/changeStatus.do")
-//	public String changeCommuteStatus(Model model, HttpSession session, HttpServletRequest request,
-//			Principal loginSession) {
-//		// 사원번호
-//		String empNo = loginSession.getName();
-//
-//		// 상태
-//		String status = request.getParameter("status");
-//		LocalDateTime checkDate = LocalDateTime.now();
-//		Map param = new HashMap();
-//		param.put("status", status);
-//		param.put("empNo", empNo);
-//		if (checkDate.getHour() > 9) {
-//			param.put("lateYN", "Y");
-//		} else {
-//			param.put("lateYN", "N");
-//		}
-//
-//		commuteService.insertCommuteStatus(param);
-//
-//		return "index";
-//	}
-
 	// 출퇴근버튼 눌렀을 때
 	@PostMapping("/workIn.do")
     @ResponseBody
-	public Map<String, String> workIn(Model model, HttpSession session, HttpServletRequest request, Principal loginSession) {
+	public Map<String, Object> workIn(Model model, HttpSession session, HttpServletRequest request, Principal loginSession) {
 		// 사원번호
 		String empNo = loginSession.getName();
 
@@ -100,6 +78,7 @@ public class CommuteController {
 		Map param = new HashMap();
 		param.put("status", status);
 		param.put("empNo", empNo);
+		
 		String lateYN = "N";
 		if (checkDate.getHour() > 9) {
 			lateYN = "Y";
@@ -107,25 +86,48 @@ public class CommuteController {
 		param.put(lateYN, lateYN);
 
 		int result = commuteService.insertCommuteStatus(param);
-		Map<String, String> returnResult =  new HashMap<>();
+		Map<String, Object> returnResult =  new HashMap<>();
 		returnResult.put("lateYN", lateYN);
 		if(result > 0) {
 			returnResult.put("successYn", "Y");
-			returnResult.put("checkDate", checkDate.toString());
+			returnResult.put("indtime",
+					new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss")
+					.format((Date)param.get("indtime")));
 		}else {
 			returnResult.put("successYn", "N");
-			returnResult.put("checkDate", "미등록");
 		}
 		
 		return returnResult;
 		
 	}
-	// 근무상태조회
-	// commuteNo를 전달하면 해당하는 근무 상태 리스트로 반환
-//	@GetMapping(value = "selectCommuteStatus.do", produces = "application/json; charset=utf-8")
-//	public String selectCommuteStatusList(@RequestParam("commuteNo") int commuteNo) {
-//		
-//	}
-//
+	
+	@PostMapping("/workOut.do")
+	@ResponseBody
+	public Map<String, Object> workOut(Model model, HttpSession session, HttpServletRequest request, Principal loginSession) {
+	    // 사원번호
+	    String empNo = loginSession.getName();
+	    
+	    // 퇴근 시간 설정
+	    String status = request.getParameter("status");
+	    LocalDateTime checkDate = LocalDateTime.now();
+	    Map param = new HashMap();
+	    param.put("status", "20"); 
+	    param.put("empNo", empNo);
+	   
+	    int result = commuteService.updateCommuteEndTime(param); // 퇴근 시간 업데이트
+	    
+	    Map<String, Object> returnResult =  new HashMap<>();
+	    if (result > 0) {
+	        returnResult.put("successYn", "Y");
+	       // returnResult.put("outTime", checkDate.toString()); // 퇴근 시간 반환
+	        returnResult.put("outdtime", new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss")
+					.format((Date)param.get("outdtime")));
+	    } else {
+	        returnResult.put("successYn", "N");
+	    }
+
+	    return returnResult;
+	}
+	
 
 }

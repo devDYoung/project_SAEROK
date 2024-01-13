@@ -52,8 +52,8 @@
                                         <!-- 아이디 저장여부 실행안됨-->
                                         <div class="form-group" style="font-size: 13px;">
                                             <div>
-                                                <input type="checkbox" id="remember-id"><label
-                                                    for="remember-id">아이디 저장</label>
+                                                <input type="checkbox" id="remember-id" name="remember-id"><label
+                                                    for="remember-id">자동로그인</label>
                                             </div>
                                         </div>
                                         <button type="button"

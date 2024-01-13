@@ -28,6 +28,7 @@ public class SecurityConfig{
                .requestMatchers(req->CorsUtils.isPreFlightRequest(req)).permitAll()
                .requestMatchers("/WEB-INF/views/**").permitAll() // "/WEB-INF/views/**" 경로에 대한 모든 사용자 허용
                .requestMatchers("/insertemp").hasAnyAuthority(MyAuthority.HR.name())
+               .requestMatchers("/selectemp").hasAnyAuthority(MyAuthority.HR.name())
                //메소드 방식으로 선언할 수도 있다. 
                .anyRequest().authenticated(); //권한이 있어야 해!  // 나머지 모든 요청에 대해 인증이 필요함
                // 폼 로그인 설정
@@ -36,17 +37,22 @@ public class SecurityConfig{
                .loginPage("/loginPage")
                      /* .loginProcessingUrl("/loginPage") */
                //.failureForwardUrl("/loginfail")
-               //.successForwardUrl("/")
+               .successForwardUrl("/")
                .usernameParameter("empNo")
                .passwordParameter("empPw");
             })
             .logout(logout -> logout
                   .logoutUrl("/logoutpage")
-            )
+            ).rememberMe(remember->{
+            	remember
+            	.rememberMeParameter("remember-id")
+            	.tokenValiditySeconds(60*60*24)
+            	.userDetailsService(dbprovider)
+            	;
+            })
             .authenticationProvider(dbprovider) // DB와 연동하여 인증 처리
             .build(); // SecurityFilterChain 빌드 및 반환
          }
       }
 
 	
-

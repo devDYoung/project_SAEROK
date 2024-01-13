@@ -24,6 +24,7 @@
 <!-- Bootstrap core JavaScript-->
 <script src="/resources/vendor/jquery/jquery.min.js"></script>
 <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+<!-- <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script> -->
 <style>
 .ato-login-img {
 	max-width: 70%;
@@ -132,7 +133,6 @@
 									<p class="col-6 text-right" style="padding: 0px;" id="status"></p>
 								</div>
 							</div>
-							<%-- <form method="get" action="${path}/changeStatus.do"> --%>
 							<!-- 출퇴근 버튼 -->
 							<div class="d-flex align-items-center">
 								<input type="button" id="startBtn"
@@ -145,7 +145,6 @@
 							</div>
 							<input type="hidden" name="commuteNo" value="${c.commuteNo}">
 							<input type="hidden" name="index" value="1">
-							<%-- </form> --%>
 						</div>
 					</div>
 				</div>
@@ -256,7 +255,9 @@
 
             $('#inDtime').text(start) //출근시간 표시
             $('#outDtime').text(end) //퇴근시간 표시
+            
          }
+         
          
          // loginEmployee가 null이 아닌 경우에만 속성에 액세스하기 전에 null 체크
          var empNo = "${loginEmployee != null ? loginEmployee.empNo : 'null'}";
@@ -267,12 +268,18 @@
  				type: "POST", 
  				url: "${path}/workIn.do",
  				data: { 
- 					status: "10" // 10: 출근, 20: 퇴근
+ 					status: "10" // 20: 퇴근
  				},
  				success : function(result){
+ 					console.log(result);
  					if(result.successYn == "Y"){
  						//todo 버튼 활성화
- 						alert("출근 성공");
+ 						alert("출근 성공 \n출근 시간: " + result.indtime);
+ 						const indtime=new Date(result.indtime);
+ 						
+ 						document.querySelector("#inDtime").innerText=
+ 							indtime.getHours()+":"+
+ 							(indtime.getMinutes()<10?"0"+indtime.getMinutes():indtime.getMinutes());
  					}else{
  						alert("출근 실패");
  					}
@@ -283,6 +290,35 @@
  			});
          });
      });
+      
+      $("#endBtn").click(function(e){
+    	    $.ajax({
+    	        type: "POST", 
+    	        url: "${path}/workOut.do",
+    	        data: { 
+    	            status: "20" // 20: 퇴근
+    	        },
+    	        success : function(result){
+    	        	console.log(result);
+    	            if(result.successYn == "Y"){
+    	                // 퇴근 성공
+    	                alert("퇴근 성공\n퇴근 시간: " + result.outdtime);
+    	                const outdtime=new Date(result.outdtime);
+    	                
+    	                document.querySelector("#outDtime").innerText=
+ 							outdtime.getHours()+":"+
+ 							(outdtime.getMinutes()<10?"0"+outdtime.getMinutes():outdtime.getMinutes());
+    	                
+    	            } else {
+    	                alert("퇴근 실패");
+    	            }
+    	        },
+    	        error : function(){
+    	            alert("근무정보를 조회할 수 없습니다. \n관리자에게 문의하세요.");
+    	        }
+    	    });
+    	});
+      
 
 
       //시간표시 기능
@@ -355,18 +391,18 @@
 
 
 	<!-- Core plugin JavaScript-->
-	<script src="vendor/jquery-easing/jquery.easing.min.js"></script>
+	<script src="${path}/resources/vendor/jquery-easing/jquery.easing.min.js"></script>
 
 	<!-- Custom scripts for all pages-->
-	<script src="js/sb-admin-2.min.js"></script>
+	<script src="${path}/resources/js/sb-admin-2.min.js"></script>
 
 	<!-- Page level plugins -->
-	<script src="vendor/chart.js/Chart.min.js"></script>
+	<script src="${path}/resources/vendor/chart.js/Chart.min.js"></script>
 
 	<!-- Page level custom scripts -->
-	<script src="js/demo/chart-area-demo.js"></script>
-	<script src="js/demo/chart-pie-demo.js"></script>
-	<script src="js/demo/chart-bar-demo.js"></script>
+	<script src="${path}/resources/js/demo/chart-area-demo.js"></script>
+	<script src="${path}/resources/js/demo/chart-pie-demo.js"></script>
+	<script src="${path}/resources/js/demo/chart-bar-demo.js"></script>
 
 </section>
 

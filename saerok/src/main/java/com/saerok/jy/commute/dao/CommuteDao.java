@@ -22,7 +22,9 @@ Commute selectCommute(SqlSession session, String empNo);
 
 int updateCommute(SqlSession session, int commuteNo);
 
-public int insertCommuteStatus(SqlSession session, Map status);
+int insertCommuteStatus(SqlSession session, Map status);
+
+int updateCommuteEndTime(SqlSession session, Map status);
 
 public ArrayList<Commute> selectCommuteStatusList(SqlSession session,int commuteNo);
 
