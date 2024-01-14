@@ -40,15 +40,24 @@ public class ApprovalController {
 		model.addAttribute("pageBar",pageFactory.getPage(cPage, numPerpage, 0, "approvalList.do"));
 	}
 	
+	
+	
+	
+	
+	
+	
+	//기본 폼양식
 	@GetMapping("/basicForm")
 	public void basicForm() {}
 	
+	//폼양식
 	@GetMapping("/docForms")
     public String loadDocumentForm(@RequestParam(value = "docType", defaultValue = "D1") String docType,
                                    Model model) {
         switch(docType) {
-        	case "D1" : return "approval/docForms";
-        	case "D3" : return "approval/cashForm";
+        	case "D1" : return "approval/docForms";// 일반
+        	case "D2" : return "approval/vacationForm"; //휴가
+        	case "D3" : return "approval/cashForm"; //지출
         	default : throw new IllegalArgumentException("지정된 양식이 없습니다.");
         }
     }

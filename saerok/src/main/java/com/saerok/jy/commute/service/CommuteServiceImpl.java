@@ -26,12 +26,18 @@ public class CommuteServiceImpl implements CommuteService {
 	@Autowired
 	private CommuteDao commuteDao;
 
+//	@Override
+//	public ArrayList<Commute> selectCommuteList(Commute commute) {
+//
+//		ArrayList<Commute> list = commuteDao.selectCommuteList(session, commute);
+//
+//		return list;
+//	}
+//	
+
 	@Override
-	public ArrayList<Commute> selectCommuteList(Commute commute) {
-
-		ArrayList<Commute> list = commuteDao.selectCommuteList(session, commute);
-
-		return list;
+	public Commute selectCommuteList(Map<String, Object> param) {
+		return commuteDao.selectCommuteList(session, param);
 	}
 
 	@Override
@@ -72,10 +78,23 @@ public class CommuteServiceImpl implements CommuteService {
 		if (result < 0) {
 			throw new CommuteException("근무상태변경 실패");
 		}
-
 		return result;
 	}
-
+	
+	
+	
+	@Override
+	@Transactional
+	public int updateCommuteEndTime(Map status) {
+		int result = commuteDao.updateCommuteEndTime(session, status);
+		
+		if (result < 0) {
+			throw new CommuteException("근무상태변경 실패");
+		}
+		return result;
+	}
+	
+	
 	@Override
 	public ArrayList<Commute> selectCommuteStatusList(int commuteNo) {
 

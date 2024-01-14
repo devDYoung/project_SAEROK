@@ -96,8 +96,8 @@
                 <div id="collapseSKD" class="collapse" aria-labelledby="headingSKD"
                     data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
-                        <a class="collapse-item" href="">근태</a>
-                        <a class="collapse-item" href="commute.do">근태조회</a>
+                        <a class="collapse-item" href="${path }/commute/commuteMain.do">근태</a>
+                        <a class="collapse-item" href="">근태조회</a>
                         <a class="collapse-item" href="">개인일정</a>
                         <a class="collapse-item" href="">부서일정</a>
                     </div>
@@ -442,45 +442,45 @@
 
                 </nav>
                 <!-- End of Topbar -->
-	<script>
-		function requestNote(url){
-			fetch(url)
-			.then(response=>response.text())
-			.then(data=>{
-				document.querySelector(".page-wrapper").innerHTML=data;
-				});
-		}
-		function searchEmp(){
-			var empNameVal = $("#email").val();
-			/* alert(empNameVal); */
-			$.ajax({
-				type: "GET", 
-				url:"/note/selectEmpByName",
-				data: { 
-						empName: empNameVal
-				},
-				success : function(result){
-					//todo 이름으로 검색한 결과들을 노출하는 로직을 짜야되요
-					//결과가 있든 없든 여기다가 짜야됨
-					//console.log(result.empList);
-					var result0 = result.empList[0];
-					console.log(result);
-					$("#searchResult").html('');
-					result.empList.forEach(e=>{
-						const $op=document.createElement("option");
-						$op.value=e.empNo+" "+e.empName;
-						
-						$("#searchResult").append($op);
-					})
-					
-				},
-				error : function(){
-					//통신실패
-					alert("실패");
-				}
-			}); 
-			
-		}
-	</script>
+   <script>
+      function requestNote(url){
+         fetch(url)
+         .then(response=>response.text())
+         .then(data=>{
+            document.querySelector(".page-wrapper").innerHTML=data;
+            });
+      }
+      function searchEmp(){
+         var empNameVal = $("#email").val();
+         /* alert(empNameVal); */
+         $.ajax({
+            type: "GET", 
+            url:"/note/selectEmpByName",
+            data: { 
+                  empName: empNameVal
+            },
+            success : function(result){
+               //todo 이름으로 검색한 결과들을 노출하는 로직을 짜야되요
+               //결과가 있든 없든 여기다가 짜야됨
+               //console.log(result.empList);
+               var result0 = result.empList[0];
+               console.log(result);
+               $("#searchResult").html('');
+               result.empList.forEach(e=>{
+                  const $op=document.createElement("option");
+                  $op.value=e.empNo+" "+e.empName;
+                  
+                  $("#searchResult").append($op);
+               })
+               
+            },
+            error : function(){
+               //통신실패
+               alert("실패");
+            }
+         }); 
+         
+      }
+   </script>
     <!-- Scroll to Top Button-->
  

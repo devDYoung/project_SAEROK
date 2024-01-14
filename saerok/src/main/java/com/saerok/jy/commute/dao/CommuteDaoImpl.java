@@ -10,11 +10,17 @@ import com.saerok.jy.commute.dto.Commute;
 
 @Repository
 public class CommuteDaoImpl implements CommuteDao {
-
+//
+//	@Override
+//	public ArrayList<Commute> selectCommuteList(SqlSession session, Commute commute) {
+//		return (ArrayList) session.selectList("commute.selectCommuteList", commute);
+//	}
+	
 	@Override
-	public ArrayList<Commute> selectCommuteList(SqlSession session, Commute commute) {
-		return (ArrayList) session.selectList("commute.selectCommuteList", commute);
+	public Commute selectCommuteList(SqlSession session, Map<String, Object> param) {
+		return (Commute) session.selectList("commute.selectCommuteList", param);
 	}
+
 
 	@Override
 	public int insertCommute(SqlSession session, Map empNo) {
@@ -35,6 +41,13 @@ public class CommuteDaoImpl implements CommuteDao {
 	public int insertCommuteStatus(SqlSession session, Map status) {
 
 		return session.insert("commute.insertCommuteStatus", status);
+	}
+	
+	
+	@Override
+	public int updateCommuteEndTime(SqlSession session, Map status) {
+
+		return session.update("commute.updateCommuteEndTime", status);
 	}
 
 	@Override
