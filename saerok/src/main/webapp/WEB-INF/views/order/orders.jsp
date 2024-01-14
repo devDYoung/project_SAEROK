@@ -169,58 +169,57 @@
 	<script
 		src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
 	<script>
-document.addEventListener('DOMContentLoaded', () => {
-    const rows = document.querySelectorAll('.custom-table tbody tr');
-    rows.forEach(row => {
-        row.addEventListener('click', () => {
-            const orderId = row.querySelector('.order-id').textContent;
-            window.open('/orders/' + orderId, '_blank', 'height=600,width=800');
-        });
-    });
-});
+	
+	$(document).ready(function() {
+	    $('#ordersTable').DataTable({
+	        "paging": true,
+	        "lengthChange": false, // 행 고정
+	        "pageLength": 10,      // 10개 행 고정
+	        "searching": false,    // 검색 기능
+	        "ordering": false,
+	        "info": true,
+	        "autoWidth": false,
+	        "language": {
+	            "url": "//cdn.datatables.net/plug-ins/1.10.20/i18n/Korean.json"
+	        }
+	    });
+	});
 
-$(document).ready(function() {
-    $('#ordersTable').DataTable({
-        "paging": true, // 페이지 기능 쓸건지
-        "lengthChange": false, // 행10개 25개 정할수있는거 쓸건지
-        "pageLength": 10,      // 위에꺼 안쓰고 10개로 행고정
-        "searching": false,    // 검색 기능 쓸건지
-        "ordering": false, // 정렬 기능 쓸건지
-        "info": true,
-        "autoWidth": false, // 가로 자동정렬기능 쓸건지
-        "language": {
-            "url": "//cdn.datatables.net/plug-ins/1.10.20/i18n/Korean.json"
-        }
-    });
-});
+	
+	document.addEventListener('DOMContentLoaded', () => {
+		 const rows = document.querySelectorAll('.custom-table tbody tr');
+		    
+		    rows.forEach(row => {
+		        // 상태 셀에 따라 클래스 추가
+		        const statusCell = row.querySelector('.order-status');
+		        if (statusCell) {
+		            const status = statusCell.textContent.trim();
+		            switch (status) {
+		                case '대기중':
+		                    statusCell.classList.add('status-pending');
+		                    break;
+		                case '승인':
+		                    statusCell.classList.add('status-approved');
+		                    break;
+		                case '반려':
+		                    statusCell.classList.add('status-rejected');
+		                    break;
+		            }
+		        }
 
+		        // 클릭 이벤트 리스너 추가
+		        row.addEventListener('click', () => {
+		            const orderId = row.querySelector('.order-id').textContent;
 
-document.addEventListener('DOMContentLoaded', () => {
-    const rows = document.querySelectorAll('.custom-table tbody tr');
-    
-    rows.forEach(row => {
-        const statusCell = row.querySelector('.order-status'); // 상태 셀 선택
-        if (statusCell) {
-            const status = statusCell.textContent.trim();
-            switch (status) {
-                case '대기중':
-                    statusCell.classList.add('status-pending');
-                    break;
-                case '승인':
-                    statusCell.classList.add('status-approved');
-                    break;
-                case '반려':
-                    statusCell.classList.add('status-rejected');
-                    break;
-            }
-        }
+		            const width = 800;
+		            const height = 600;
+		            const left = (window.screen.width / 2) - (width / 2);
+		            const top = (window.screen.height / 2) - (height / 2);
 
-        row.addEventListener('click', () => {
-            const orderId = row.querySelector('.order-id').textContent;
-            window.open('/orders/' + orderId, '_blank', 'height=600,width=800');
-        });
-    });
-});
+		            window.open('/orders/' + orderId, '_blank', 'width=' + width + ',height=' + height + ',top=' + top + ',left=' + left);
+		        });
+		    });
+		});
 
 </script>
 
