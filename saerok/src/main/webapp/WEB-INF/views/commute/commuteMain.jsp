@@ -4,17 +4,27 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
-<c:set var="path" value="${pageContext.request.contextPath}"/>
-<c:set var="loginEmployee" value="${sessionScope.SPRING_SECURITY_CONTEXT.authentication.principal }"/> 
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+<c:set var="path" value="${pageContext.request.contextPath}" />
+<c:set var="loginEmployee"
+	value="${sessionScope.SPRING_SECURITY_CONTEXT.authentication.principal }" />
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 <jsp:include page="/WEB-INF/views/common/header.jsp">
 	<jsp:param value="CommuteMain" name="ATO" />
 </jsp:include>
 <%-- <jsp:include page="/WEB-INF/views/commute/commuteBar.jsp" /> --%>
-<link rel="stylesheet" href="${path }/resources/css/emp.css">
-                <div class="home-container">
-
-                    <!-- 본문 -->
+ <link rel="stylesheet" href="${path }/resources/css/emp.css">
+ <style>
+    #work-week-container {
+        text-align: center;
+        width: 900px; /* 원하는 너비 값으로 조절 */
+        margin: 0 auto; /* 가운데 정렬을 위해 필요한 부분 */
+    }
+    #work-week-container > div {
+        margin: 0 10px;
+    }
+</style>
+  <div class="home-container">
                     <div class="div-padding">
                         <div id="date-box">
                             <h4>
@@ -52,9 +62,8 @@
                         <div id="work-info-container"></div>
 
                     </div>
-                    <!-- 본문 end -->
                 </div>
-            </div>
+     
      
 	<script>
         window.addEventListener('load',()=>{
@@ -87,7 +96,7 @@
                     sendData();
             });
 
-         
-        	
+
     </script>
-	<jsp:include page="/WEB-INF/views/common/footer.jsp"/>
+
+<jsp:include page="/WEB-INF/views/common/footer.jsp" />
