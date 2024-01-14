@@ -25,10 +25,8 @@ public class OrderController {
     @GetMapping("/orders")
     public String listOrders(Model model) {
         List<OrderList> orders = orderService.findAllOrderLists();
-        System.out.println("Orders: " + orders); // 콘솔에 주문 목록 출력
-
         model.addAttribute("orders", orders);
-        return "order/orders"; // 발주 목록을 보여주는 JSP 페이지
+        return "order/orders"; 
     }
     
     @GetMapping("/orders/{orderId}")
@@ -38,7 +36,7 @@ public class OrderController {
 
         model.addAttribute("orderDetails", orderDetails);
         model.addAttribute("orderStatus", orderStatus); // 주문 상태를 모델에 추가
-        return "order/orderDetails"; // 발주 상세 목록을 보여주는 JSP 페이지
+        return "order/orderDetails"; 
     }
     
     @PostMapping("/orders/{orderId}/approve")
