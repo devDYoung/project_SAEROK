@@ -66,7 +66,7 @@
                  <div class="text-center">
                   <h1 class="h4 text-gray-900 mb-4" style="text-align: center;">ATO 사원등록</h1>
                   <label for="fileUploaderLabel" class="custom-file-upload">
-				        <img id="profile-img" class="img-profile rounded-circle" src="${pageContext.request.contextPath }/resources/upload/profile/ato-imgg.png"></a>
+				        <img id="profile-img" class="img-profile rounded-circle" src="${pageContext.request.contextPath }/resources/upload/profile/ato-profile-img.png"></a>
 				    </label>
 				    <input type="file" id="oriFileName" name="oriFileName" style="display: none;">
                 </div> 
@@ -111,7 +111,7 @@
 				 <br>
 				 <div class="row">
 				    <div class="col-12">
-				        <p>직급</p>
+				        <p>직책</p>
 				    </div>
 				 	<div class="row">
 					    <div class="col-6">

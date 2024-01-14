@@ -12,6 +12,9 @@ public interface EmployeeService {
 	 
 	//전체사원조회 
 	 List<Employee> selectEmployeeList();
+	 
+	//사원수정
+	 Employee updateEmployee();
 	
 	
 }
