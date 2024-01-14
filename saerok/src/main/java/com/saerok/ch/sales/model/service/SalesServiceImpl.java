@@ -115,6 +115,11 @@ public class SalesServiceImpl implements SalesService {
         }
         return salesList;
     }
+    
+    @Override
+    public void addBranchSales(Map<String, Object> salesData) {
+        salesMapper.insertBranchSales(salesData);
+    }
 	
 	
 	
