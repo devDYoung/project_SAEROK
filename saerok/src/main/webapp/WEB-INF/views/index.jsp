@@ -10,7 +10,7 @@
 <jsp:include page="/WEB-INF/views/common/header.jsp">
 	<jsp:param value="MainPage" name="ATO" />
 </jsp:include>
-
+<link rel="stylesheet" href="${path }/resources/css/emp/emp.css">
 <!-- Calendar & Reservation JavaScript -->
 <!-- <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     Axios CDN
@@ -258,8 +258,7 @@
             $('#outDtime').text(end) //퇴근시간 표시
             
          } 
-         
-         
+ 
          window.addEventListener('load', function(){
          $.ajax({
       	   url : "${path}/commute/commute.do",
@@ -307,7 +306,7 @@
          });
         
       });
-         
+
          
          // loginEmployee가 null이 아닌 경우에만 속성에 액세스하기 전에 null 체크
          var empNo = "${loginEmployee != null ? loginEmployee.empNo : 'null'}";
@@ -548,6 +547,6 @@ const monthlySalesChart = new Chart(ctx, {
     }
 });
 </script>
-
+<script src="${pageContext.request.contextPath}/resources/js/emp/emp.js"></script>
 <br>
 <jsp:include page="/WEB-INF/views/common/footer.jsp" />

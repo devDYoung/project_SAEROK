@@ -87,18 +87,31 @@
                     </div>
                 </div>
             </li>
-            <li class="nav-item">
+                 <li class="nav-item">
+                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseWORK"
+                    aria-expanded="true" aria-controls="collapseWORK">
+                    <i class="fas fa-fw fa-clock"></i>
+                    <span>근태관리</span>
+                </a>
+                <div id="collapseWORK" class="collapse" aria-labelledby="headingWORK"
+                    data-parent="#accordionSidebar">
+                    <div class="bg-white py-2 collapse-inner rounded">
+                        <a class="collapse-item" href="${path }/commute/commuteMain.do">내 근태현황</a>
+                        <a class="collapse-item" href="">부서별 근태현황</a>
+                        <a class="collapse-item" href="">연차현황</a>
+                    </div>
+                </div>
+            </li>
+                 <li class="nav-item">
                 <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseSKD"
                     aria-expanded="true" aria-controls="collapseSKD">
                     <i class="fas fa-fw fa-calendar-alt"></i>
-                    <span>근태/일정</span>
+                    <span>일정관리</span>
                 </a>
                 <div id="collapseSKD" class="collapse" aria-labelledby="headingSKD"
                     data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
-                        <a class="collapse-item" href="${path }/commute/commuteMain.do">근태</a>
-                        <a class="collapse-item" href="">근태조회</a>
-                        <a class="collapse-item" href="">개인일정</a>
+                        <a class="collapse-item" href="">일정조회</a>
                         <a class="collapse-item" href="">부서일정</a>
                     </div>
                 </div>

@@ -13,16 +13,28 @@ public interface CommuteService {
 	
 	Commute selectCommuteList (Map<String, Object> param);
 
-	Commute selectCommute(String empNo);
-
-	void insertCommute(String empNo);
-
-	void updateCommute(int commuteNo);
+	//Commute selectCommute(String empNo);
+//
+//	void insertCommute(String empNo);
+//
+//	void updateCommute(int commuteNo);
 
 	int insertCommuteStatus(Map status);
 	
 	int updateCommuteEndTime(Map status);
+	
+	int updateWorkTime(Map<String, Object> param);
+	
+	int updateHalfDayOff(Map<String, Object> param);
+	
+	List<Commute> selectMonthWork(Map<String, Object> param);
+	
+	int selectWeekWorkTime(Map<String, Object> startEndMap);
+	
+	int selectWeekOverTime(Map<String, Object> startEndMap);
+	
+	List<Commute> selectWeekDatas(Map<String, Object> param);
 
-	ArrayList<Commute> selectCommuteStatusList(int commuteNo);
+//	ArrayList<Commute> selectCommuteStatusList(int commuteNo);
 
 }
