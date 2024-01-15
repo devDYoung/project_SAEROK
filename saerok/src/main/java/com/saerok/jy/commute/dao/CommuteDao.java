@@ -40,6 +40,12 @@ int selectWeekOverTime(SqlSession session, Map<String, Object> startEndMap);
 
 List<Commute> selectWeekDatas(SqlSession session, Map<String, Object> param);
 
+int weekTotalTime(SqlSession session, Map<String, Object> param);
+
+int totalMonthTime(SqlSession session, Map<String, Object> param);
+
+int monthOverTime(SqlSession session, Map<String, Object> startEndMap);
+
 //public ArrayList<Commute> selectCommuteStatusList(SqlSession session,int commuteNo);
 
 }
