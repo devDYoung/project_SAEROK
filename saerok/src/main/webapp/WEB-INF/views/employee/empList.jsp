@@ -19,7 +19,7 @@
 
 <section id="ato-success">
 	<div class="container-fluid">
-		<form class="updateemp" id="employeeForm" action="${path}/selectemp" method="post">
+		<form class="insertEmp" id="employeeForm" action="${path}/selectemp">
 			<div class="card shadow mb-4">
 				<div class="card-header py-3">
 					<h6 class="m-0 font-weight-bold text-primary">ATO 사원리스트</h6>
@@ -57,7 +57,7 @@
 											<td><c:out value="${loginEmployee.empDetailAddr}" /></td>
 											<td><c:out value="${loginEmployee.workYn}" /></td>
 											<td>
-												<button class="btn btn-outline-primary" type="submit"
+												<button class="btn btn-outline-primary" type="button"
 													data-toggle="modal" data-target="#updateModal">수정하기</button>
 											</td>
 										</tr>
@@ -138,25 +138,21 @@
 							</div>
 							<br>
 							<div class="col-6">
-								<label for="inputdeptCode" class="form-label">재직여부</label> 
-								<br>
+								<label for="inputdeptCode" class="form-label">재직여부</label> <br>
 								<div class="form-check form-check-inline">
 									<input class="form-check-input" type="radio" name="workYn" value="Y"> 
 									<label class="form-check-label" for="flexRadioDefault3">Y</label>
 								</div>
 								<div class="form-check form-check-inline">
-									<input class="form-check-input" type="radio" name="workYn" value="N"> 
+									<input class="form-check-input" type="radio" name="workYn" value="N">
 									<label class="form-check-label" for="flexRadioDefault3">N</label>
 								</div>
 							</div>
 							<div class="modal-footer">
-								<button class="btn btn-outline-primary" type="button"
-  									data-toggle="modal" data-target="#updateModal"
-  									data-empno="${loginEmployee.empNo}" 
-  									onclick="loadEmployeeInfo(this)">수정하기</button>
+								<button class="btn btn-outline-primary" type="submit"
+									data-dismiss="modal">수정하기</button>
 								<a class="btn btn-outline-danger" href="login.html">삭제하기</a>
 							</div>
-							
 						</div>
 					</div>
 				</div>
@@ -181,30 +177,31 @@
 </script>
 
 
-
 <script>
-  function loadEmployeeInfo(button) {
-    var empNo = button.getAttribute('data-empno');
+	//파일업로드 script
+	// 파일 선택 input의 변경 이벤트를 감지하여 동작하는 함수
+	document.querySelector('input[type=file]').addEventListener('change',
+			handleFileSelect);
 
-    // Ajax를 사용하여 서버로 해당 사원의 정보 요청
-    $.ajax({
-      url: '${path}/updateemp', 
-      type: 'POST',
-      data: { empNo: empNo },
-      success : function(data) {
-			if (data.successYn == "Y") {
-				alert("사원수정완료!!");
-				location.reload();
-			} else {
-				alert("사원수정실패!!");
-			}
-		},
-      error: function (error) {
-        console.error('Error loading employee info', error);
-      }
-    });
-  }
+	function changeImg() {
+		document.querySelector("input[type=file]").click();
+	}
+
+	// 파일 선택하면 동작함
+	function handleFileSelect(event) {
+		var selectedFile = event.target.files[0];
+
+		if (selectedFile) {
+			// 파일 미리보기
+			var reader = new FileReader();
+			reader.onload = function(e) {
+				document.getElementById('profile-img').src = e.target.result;
+			};
+			reader.readAsDataURL(selectedFile);
+		}
+	}
 </script>
+
 
 
 
