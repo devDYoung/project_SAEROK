@@ -103,11 +103,25 @@ public class EmployeeController {
      }
       
   // 사원수정
-//     @PostMapping("/updateemp")
-//     public String updateEmployee(@RequestParam("empNo") String empNo, Model model) {
-//        
-//         return "employee/empList";
-//     }
+    @PostMapping("/updateemp")
+     public String updateEmployee(Employee e, Model model) {
+    	
+    	int result = service.updateEmployee(e);
+        
+		String msg, loc, successYn;
+		if (result > 0) {
+			successYn = "Y";
+			msg = "사원수정성공!!";
+			loc = "/selectemp";
+		} else {
+			successYn = "N";
+			msg = "사원수정실패!!";
+			loc = "employee/empList?empNo=" + e.getEmpNo();
+		}
+		model.addAttribute("successYn", "Y");
+		model.addAttribute("msg", msg);
+        return "employee/empList";
+     }
 
      
      

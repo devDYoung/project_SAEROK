@@ -19,7 +19,7 @@
 
 <section id="ato-success">
 	<div class="container-fluid">
-		<form class="insertEmp" id="employeeForm" action="${path}/selectemp">
+		<form class="selectempList" id="updateempForm" action="${path}/selectemp" method="post">
 			<div class="card shadow mb-4">
 				<div class="card-header py-3">
 					<h6 class="m-0 font-weight-bold text-primary">ATO 사원리스트</h6>
@@ -68,6 +68,8 @@
 					</div>
 				</div>
 			</div>
+		</form>
+	</div>
 			<!-- 수정하기 Modal-->
 			<div class="modal fade" id="updateModal" tabindex="-1" role="dialog"
 				aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -81,6 +83,7 @@
 							</button>
 						</div>
 						<div class="modal-body">
+							<form class="updateemp" id="updateempForm" action="${path}/updateemp" method="post">
 							<div class="ato-login-img" name="oriFileName">
 								<img src="${path}/resources/upload/profile/${loginEmployee.destFileName}" alt="ato-profile-img" class="ato-login-img">
 							</div>
@@ -149,16 +152,16 @@
 								</div>
 							</div>
 							<div class="modal-footer">
-								<button class="btn btn-outline-primary" type="submit"
+								<button class="btn btn-outline-primary" id="updatebtn" type="submit"
 									data-dismiss="modal">수정하기</button>
-								<a class="btn btn-outline-danger" href="login.html">삭제하기</a>
+								<a class="btn btn-outline-danger" href="">삭제하기</a>
 							</div>
+							</form>
 						</div>
 					</div>
 				</div>
 			</div>
-		</form>
-	</div>
+	
 
 </section>
 
@@ -201,6 +204,36 @@
 		}
 	}
 </script>
+
+<!-- 수정하기 ajax로 보내기 -->
+<script>
+	$("#updatebtn").click(function (event) {
+	    event.preventDefault(); 
+	    $.ajax({
+	        type: "POST",
+	        url: "${path}/updateemp", 
+	        data: $("#updateempForm").serialize(), 
+	        dataType: "json", 
+	        success: function (data) {
+	            if (data.successYn == "Y") {
+	                alert("수정완료!!");
+	            } else {
+	                alert("수정실패!!");
+	            }
+	        },
+	        error: function (error) {
+	            console.error("수정 중 에러발생!!:", error);
+	            alert("수정 중 에러가 발생했습니다.");
+	        }
+	    });
+	});
+
+</script>
+
+
+
+
+
 
 
 
