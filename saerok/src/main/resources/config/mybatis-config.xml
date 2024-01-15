@@ -22,7 +22,7 @@
 
 		<!-- 도영 -->
 		<typeAlias alias="note" type="com.saerok.dy.note.model.dto.Note" />
-		<typeAlias alias="board" type="com.saerok.dy.board.model.dto.Board" />
+		<!--<typeAlias alias="board" type="com.saerok.dy.board.model.dto.Board" />-->
 
 
 
