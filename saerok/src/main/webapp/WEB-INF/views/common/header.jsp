@@ -124,7 +124,8 @@
                 </a>
                 <div id="collapseBoard" class="collapse" aria-labelledby="headingBoard" data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
-                    <a class="collapse-item" href="">공지사항</a>
+                    	<a class="collapse-item" href="${path }/boardWrite">게시판 작성</a>
+                   		<a class="collapse-item" href="">공지사항</a>
                         <a class="collapse-item" href="">전체게시판</a>
                         <a class="collapse-item" href="">부서별게시판</a>
                     </div>

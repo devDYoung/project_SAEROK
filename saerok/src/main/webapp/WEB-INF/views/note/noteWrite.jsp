@@ -21,11 +21,11 @@
 			<!-- To make this form functional, sign up at-->
 			<!-- https://startbootstrap.com/solution/contact-forms-->
 			<!-- to get an API token!-->
-			<form id="contactForm" data-sb-form-api-token="API_TOKEN">
+			<form id="contactForm" data-sb-form-api-token="API_TOKEN" autocomplete="off">
 				<!-- 사원 입력-->
 				<div class="form-floating mb-3">
 					<h>받는 사람</h>
-					<input class="form-control" id="email" type="text"
+					<input class="form-control" id="email" type="text" autocomplete="off"
 						placeholder="사원 이름을 검색해주세요."
 						data-sb-validations="required,email" onkeyup="searchEmp();" list="searchResult"/>
 						<datalist id="searchResult"></datalist>
