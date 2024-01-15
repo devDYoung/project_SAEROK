@@ -15,6 +15,7 @@ public class LoginDaoImpl implements LoginDao {
 		return session.selectOne("emp.selectEmployeeByEmpNo",empNo);
 	}
 	
+	//마이페이지
 	@Override
 	public int updateMyPage(SqlSession session ,Employee e) {
 
