@@ -34,7 +34,7 @@
 		<div class="card-header py-3">
 			<h6 class="m-0 font-weight-bold text-primary">전체 리스트</h6>
 			<div class="d-flex justify-content-end">
-				<button class="btn btn-rounded btn-outline-primary col-1"
+				<button class="btn btn-facebook btn-block col-1"
 					onclick="location.assign('${path}/approval/basicForm');">작성하기</button>
 			</div>
 		</div>

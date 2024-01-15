@@ -15,13 +15,14 @@ import lombok.NoArgsConstructor;
 @Builder
 public class Schedule {
 	
-	private int scheduleNo;
-	private String skdTitle;
-	private String skdContent;
-	private Date skdStart;
-	private Date skdEnd;
-	private String skdTypeCd;
-	private String deptCode;
-	private String category;
+	private int scheduleNo; // 일정번호
+	private String skdTitle; // 제목
+	private String skdContent; // 내용
+	private Date skdStart; // 시작일
+	private Date skdEnd; // 종료일
+	private String skdTypeCd; // 일정관리구분 01: 개인일정, 02: 부서일정
+	private String deptCode; // 부서번호
+	private String empNo; // 사원번호 일정 등록한 사람
+	private String category; // 일정카테고리 10: 정해진 카테고리1 20: 카테고리2 99: default 카테고리
 
 }
