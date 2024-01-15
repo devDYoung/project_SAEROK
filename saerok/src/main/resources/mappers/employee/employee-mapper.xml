@@ -81,7 +81,7 @@
 		        DEPT_CODE=#{deptCode},
 		        JOB_CODE=#{jobCode},
 		        WORK_YN=#{workYn}
-		    WHERE EMP_NO=#{empNo} AND WORK_YN IN ('Y', 'N');
+
 		</update>
 	   
    

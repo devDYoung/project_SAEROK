@@ -56,9 +56,10 @@
 											<td><c:out value="${loginEmployee.empAddr}" /></td>
 											<td><c:out value="${loginEmployee.empDetailAddr}" /></td>
 											<td><c:out value="${loginEmployee.workYn}" /></td>
-											<td>
-												<button class="btn btn-outline-primary" type="button"
-													data-toggle="modal" data-target="#updateModal">수정하기</button>
+											<td> 
+												<button class="btn btn-outline-primary listupdatebtn" type="button"
+													 data-toggle="modal" 
+													 >수정하기</button>
 											</td>
 										</tr>
 									</c:forEach>
@@ -82,12 +83,7 @@
 								<span aria-hidden="true">×</span>
 							</button>
 						</div>
-						<div class="modal-body">
-							<form class="updateemp" id="updateempForm" action="${path}/updateemp" method="post">
-							<div class="ato-login-img" name="oriFileName">
-								<img src="${path}/resources/upload/profile/${loginEmployee.destFileName}" alt="ato-profile-img" class="ato-login-img">
-							</div>
-							<br>
+						<br>
 							<div class="col-md-8">
 								<label for="inputNo" class="form-label">사번</label> 
 								<input type="text" class="form-control" value="${loginEmployee.empNo }" name="empNo" disabled>
@@ -116,13 +112,13 @@
 								</div>
 								<div class="col-6">
 									<div class="form-check form-check-inline">
-										<input class="form-check-input" type="radio" name="jobCode" value="10"> 
+										<input class="form-check-input" type="radio" name="jobCode" value="10" checked> 
 										<label class="form-check-label" for="flexRadioDefault1">부장</label>
 									</div>
 								</div>
 								<div class="col-6">
 									<div class="form-check form-check-inline">
-										<input class="form-check-input" type="radio" name="jobCode" value="20" checked> 
+										<input class="form-check-input" type="radio" name="jobCode" value="20" > 
 										<label class="form-check-label" for="flexRadioDefault2">대리</label>
 									</div>
 								</div>
@@ -134,7 +130,7 @@
 								</div>
 								<div class="col-6">
 									<div class="form-check form-check-inline">
-										<input class="form-check-input" type="radio" name="jobCode" value="40" checked> 
+										<input class="form-check-input" type="radio" name="jobCode" value="40" > 
 										<label class="form-check-label" for="flexRadioDefault4">지점장</label>
 									</div>
 								</div>
@@ -152,15 +148,16 @@
 								</div>
 							</div>
 							<div class="modal-footer">
-								<button class="btn btn-outline-primary" id="updatebtn" type="submit"
-									data-dismiss="modal">수정하기</button>
+								
+								<button class="btn btn-outline-primary" id="updatebtn" type="button"
+									>수정하기</button>
 								<a class="btn btn-outline-danger" href="">삭제하기</a>
 							</div>
-							</form>
+							
 						</div>
 					</div>
 				</div>
-			</div>
+			
 	
 
 </section>
@@ -169,6 +166,46 @@
 
 
 <script>
+/* 	$(".listupdatebtn").click(e=>{
+		const tr=$(e.target).parents("tr");
+		const td=$(tr).find("td");
+		console.log(td);
+		td.each((i,e)=>{
+			const val=e.innerText;
+			console.log(e,val);
+			 
+			
+		})
+		
+		
+		$("#updateModal").modal("show");
+	}); */
+	
+	$(document).ready(function() {
+	    $(".listupdatebtn").click(function() {
+	        var empNo = $(this).closest('tr').find('td:eq(0)').text();
+	        var empName = $(this).closest('tr').find('td:eq(1)').text();
+	        var deptName = $(this).closest('tr').find('td:eq(2)').text();
+	        var jobName = $(this).closest('tr').find('td:eq(3)').text();
+	        var workYn = $(this).closest('tr').find('td:eq(8)').text();
+	        
+	        // 필요한 modal 위치에 세팅
+	        $("#updateModal").find(".modal-title").text("ATO 사원수정");
+	        $("#updateModal").find("[name=empNo]").val(empNo);
+	        $("#updateModal").find("[name=empName]").val(empName);
+	        $("#updateModal").find("[name=deptCode]").val(deptName); 
+	        $("#updateModal").find("[name=jobCode][value=" + jobName + "]").prop("checked", true);
+	        $("#updateModal").find("[name=workYn][value=" + workYn + "]").prop("checked", true);
+
+	        // 모달 보여주기
+	        $("#updateModal").modal('show');
+	    });
+	});
+	
+	
+	
+	
+	
 	$(document).ready(function() {
 
 		new DataTable('#dataTable', {
@@ -183,8 +220,8 @@
 <script>
 	//파일업로드 script
 	// 파일 선택 input의 변경 이벤트를 감지하여 동작하는 함수
-	document.querySelector('input[type=file]').addEventListener('change',
-			handleFileSelect);
+// 	document.querySelector('input[type=file]').addEventListener('change',
+// 			handleFileSelect);
 
 	function changeImg() {
 		document.querySelector("input[type=file]").click();
