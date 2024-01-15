@@ -34,6 +34,13 @@ public interface CommuteService {
 	int selectWeekOverTime(Map<String, Object> startEndMap);
 	
 	List<Commute> selectWeekDatas(Map<String, Object> param);
+	
+	int weekTotalTime(Map<String, Object> param);
+	
+	int totalMonthTime(Map<String, Object> param);
+	
+	int monthOverTime(Map<String, Object> startEndMap);
+	
 
 //	ArrayList<Commute> selectCommuteStatusList(int commuteNo);
 

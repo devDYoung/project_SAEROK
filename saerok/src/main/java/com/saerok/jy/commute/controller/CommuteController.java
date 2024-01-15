@@ -42,7 +42,7 @@ public class CommuteController {
 	LocalDateTime now = LocalDateTime.now(); //현재 시간
 	
 	// 금일 근무 기록 조회
-	@PostMapping("/commute.do")
+	@GetMapping("/commute.do")
 	public ResponseEntity<Commute> selectCommuteList(HttpSession session, ModelAndView mv, Principal loginSession) {
 
 		// 현재 로그인 중인 사원의 사원번호
@@ -76,7 +76,7 @@ public class CommuteController {
 		param.put("status", status);
 		param.put("empNo", empNo);
 		
-		//Commute commute = commuteService.selectCommuteList(param);
+	
 		
 		String lateYN = "N";
 		if (checkDate.getHour() > 9) {
@@ -174,7 +174,7 @@ public class CommuteController {
 				.body(status);
 	}
 	
-	// 달의 전체 commute, 그 달의 주차별 시작,종료일 가져오기 (table에 뿌려주는 용도)
+	// 달의 전체 commute, 그 달의 주차별 시작,종료일 가져오기 (table에 넣어주기위함)
 	@ResponseBody
 	@GetMapping("/selectMonthWork.do")
 	public ResponseEntity<?> selectMonthWork(String dateText,Principal loginSession) {
@@ -238,6 +238,44 @@ public class CommuteController {
 				.header(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_JSON.toString())
 				.body(weekList);
 	}
+	
+	// 이번달, 금주의 누적시간 가져오기
+	@GetMapping("/weekTotalTime.do")
+	public ResponseEntity<?> weekTotalTime(String start, String end, Principal loginSession){
+		
+		String empNo = loginSession.getName();
+		String monthTime = now.format(dayfff);
+		
+		
+		Map<String,Object> param = new HashMap<>();
+		Map<String,Object> time = new HashMap<>();
+		param.put("empNo", empNo);
+		param.put("start", start);
+		param.put("end", end);
+		param.put("monthTime", monthTime);
+		
+		// 금주 누적시간 가져오기
+		int weekTotalTime = commuteService.weekTotalTime(param);
+		time.put("weekTotalTime",weekTotalTime);
+		
+		// 금주 연장시간 가져오기
+		int weekOverTime = commuteService.selectWeekOverTime(param);
+		time.put("weekOverTime",weekOverTime);
+		
+		//이번달 기본 누적 시간 가져오기
+		int totalMonthTime = commuteService.totalMonthTime(param);
+		time.put("totalMonthTime", totalMonthTime);
+		
+		//이번달 연장 근무 시간 가져오기
+		int totalMonthOverTime = commuteService.monthOverTime(param);
+		time.put("totalMonthOverTime", totalMonthOverTime);
+		
+		return ResponseEntity.ok()
+				.header(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_JSON.toString())
+				.body(time);
+	}
+	
+	
 
 
 }
