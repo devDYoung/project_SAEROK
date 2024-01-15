@@ -10,6 +10,7 @@ import com.saerok.jh.employee.model.dto.Employee;
 
 @Repository
 public class EmployeeDaoImpl implements EmployeeDao {
+
 	
 	//사원등록
 	@Override
@@ -21,6 +22,12 @@ public class EmployeeDaoImpl implements EmployeeDao {
 	@Override
 	public List<Employee> selectEmployeeList(SqlSession session) {
 		return session.selectList("emp.selectEmployeeList");
+	}
+	
+	//사원수정
+	@Override
+	public int updateEmployee(SqlSession session, Employee e) {
+		return session.update("emp.updateEmployee",e);
 	}
 	
 	
