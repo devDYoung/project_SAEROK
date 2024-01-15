@@ -29,6 +29,14 @@ public class EmployeeDaoImpl implements EmployeeDao {
 	public int updateEmployee(SqlSession session, Employee e) {
 		return session.update("emp.updateEmployee",e);
 	}
+
+	//사원삭제
+	@Override
+	public int deleteEmployee(SqlSession session, Employee empNo) {
+		return session.delete("emp.deleteEmployee",empNo);
+	}
+	
+	
 	
 	
 	

@@ -81,9 +81,13 @@
 		        DEPT_CODE=#{deptCode},
 		        JOB_CODE=#{jobCode},
 		        WORK_YN=#{workYn}
-
+		    WHERE EMP_NO=#{empNo}
 		</update>
-	   
+
+<!-- 사원 삭제 -->
+		<delete id="deleteEmployee" parameterType="emp">
+			DELETE EMPLOYEE WHERE EMP_NO=#{empNo}
+		</delete>
    
    
    

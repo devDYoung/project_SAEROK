@@ -19,7 +19,7 @@
 
 <section id="ato-success">
 	<div class="container-fluid">
-		<form class="selectempList" id="updateempForm" action="${path}/selectemp" method="post">
+		<%-- <form class="selectempList" id="updateempForm" action="${path}/selectemp" method="post"> --%>
 			<div class="card shadow mb-4">
 				<div class="card-header py-3">
 					<h6 class="m-0 font-weight-bold text-primary">ATO 사원리스트</h6>
@@ -48,9 +48,9 @@
 									<c:forEach var="loginEmployee" items="${empList}">
 										<tr>
 											<td><c:out value="${loginEmployee.empNo}" /></td>
-											<td><c:out value="${loginEmployee.empName}" /></td>
-											<td><c:out value="${loginEmployee.deptName}" /></td>
-											<td><c:out value="${loginEmployee.jobName}" /></td>
+											<td ><c:out value="${loginEmployee.empName}" /></td>
+											<td value="${loginEmployee.deptCode}"><c:out value="${loginEmployee.deptName}" /></td>
+											<td value="${loginEmployee.jobCode}"><c:out value="${loginEmployee.jobName}" /></td>
 											<td><c:out value="${loginEmployee.empPhone}" /></td>
 											<td><c:out value="${loginEmployee.empEmail}" /></td>
 											<td><c:out value="${loginEmployee.empAddr}" /></td>
@@ -58,8 +58,7 @@
 											<td><c:out value="${loginEmployee.workYn}" /></td>
 											<td> 
 												<button class="btn btn-outline-primary listupdatebtn" type="button"
-													 data-toggle="modal" 
-													 >수정하기</button>
+													 data-toggle="modal">수정하기</button>
 											</td>
 										</tr>
 									</c:forEach>
@@ -69,7 +68,7 @@
 					</div>
 				</div>
 			</div>
-		</form>
+		<%-- </form> --%>
 	</div>
 			<!-- 수정하기 Modal-->
 			<div class="modal fade" id="updateModal" tabindex="-1" role="dialog"
@@ -84,6 +83,7 @@
 							</button>
 						</div>
 						<br>
+						<form class="selectempList" id="updateempForm" action="${path}/selectemp" method="post">
 							<div class="col-md-8">
 								<label for="inputNo" class="form-label">사번</label> 
 								<input type="text" class="form-control" value="${loginEmployee.empNo }" name="empNo" disabled>
@@ -149,11 +149,10 @@
 							</div>
 							<div class="modal-footer">
 								
-								<button class="btn btn-outline-primary" id="updatebtn" type="button"
-									>수정하기</button>
-								<a class="btn btn-outline-danger" href="">삭제하기</a>
+								<button class="btn btn-outline-primary" id="updatebtn" type="button">수정하기</button>
+								<button class="btn btn-outline-danger" id="deletebtn" type="button">삭제하기</button>
 							</div>
-							
+							</form>
 						</div>
 					</div>
 				</div>
@@ -185,27 +184,24 @@
 	    $(".listupdatebtn").click(function() {
 	        var empNo = $(this).closest('tr').find('td:eq(0)').text();
 	        var empName = $(this).closest('tr').find('td:eq(1)').text();
-	        var deptName = $(this).closest('tr').find('td:eq(2)').text();
-	        var jobName = $(this).closest('tr').find('td:eq(3)').text();
+	        var deptName = $(this).closest('tr').find('td:eq(2)').attr("value");
+	        var jobName = $(this).closest('tr').find('td:eq(3)').attr("value");
 	        var workYn = $(this).closest('tr').find('td:eq(8)').text();
 	        
 	        // 필요한 modal 위치에 세팅
 	        $("#updateModal").find(".modal-title").text("ATO 사원수정");
 	        $("#updateModal").find("[name=empNo]").val(empNo);
 	        $("#updateModal").find("[name=empName]").val(empName);
-	        $("#updateModal").find("[name=deptCode]").val(deptName); 
-	        $("#updateModal").find("[name=jobCode][value=" + jobName + "]").prop("checked", true);
-	        $("#updateModal").find("[name=workYn][value=" + workYn + "]").prop("checked", true);
+	        $("#updateModal").find("[value="+deptName+"]").prop("selected",true); 
+	        $("#updateModal").find("[value=" + jobName + "]").prop("checked", true);
+	        $("#updateModal").find("[value=" + workYn + "]").prop("checked", true);
 
 	        // 모달 보여주기
 	        $("#updateModal").modal('show');
 	    });
 	});
 	
-	
-	
-	
-	
+
 	$(document).ready(function() {
 
 		new DataTable('#dataTable', {
@@ -244,27 +240,58 @@
 
 <!-- 수정하기 ajax로 보내기 -->
 <script>
-	$("#updatebtn").click(function (event) {
-	    event.preventDefault(); 
-	    $.ajax({
-	        type: "POST",
-	        url: "${path}/updateemp", 
-	        data: $("#updateempForm").serialize(), 
-	        dataType: "json", 
-	        success: function (data) {
-	            if (data.successYn == "Y") {
-	                alert("수정완료!!");
-	            } else {
-	                alert("수정실패!!");
-	            }
-	        },
-	        error: function (error) {
-	            console.error("수정 중 에러발생!!:", error);
-	            alert("수정 중 에러가 발생했습니다.");
-	        }
-	    });
-	});
+$("#updatebtn").click(function (event) {
+    event.preventDefault(); 
 
+    // 폼 데이터 수집
+    var formData = {
+        empNo: $("[name='empNo']").val(),
+        empName: $("[name='empName']").val(),
+        deptCode: $("[name='deptCode']").val(),
+        jobCode: $("input[name='jobCode']:checked").val(),
+        workYn: $("input[name='workYn']:checked").val()
+    }
+
+    $.ajax({
+        method: "POST",
+        url: "${path}/updateemp", 
+        data: JSON.stringify(formData),
+        contentType: 'application/json',
+        success: function (data) {
+            alert(data);
+            $("#updateModal").modal("hide");
+            location.replace("${path}/selectemp");
+        },
+        error: function (error) {
+            console.error("수정 중 에러발생!!:", error);
+            alert("수정 중 에러가 발생했습니다.");
+        }
+    });
+});
+$("#deletebtn").click(function (event) {
+    event.preventDefault(); 
+
+    // 폼 데이터 수집
+    var formData2 = {
+        empNo: $("[name='empNo']").val(),
+    }
+
+    $.ajax({
+        method: "POST",
+        url: "${path}/deleteemp", 
+        data: JSON.stringify(formData2),
+        contentType: 'application/json',
+        success: function (data) {
+            alert(data);
+            $("#updateModal").modal("hide");
+            location.replace("${path}/selectemp");
+        },
+        error: function (error) {
+            console.error("삭제 중 에러발생!!:", error);
+            alert("삭제 중 에러가 발생했습니다.");
+        }
+    });
+});
 </script>
 
 
