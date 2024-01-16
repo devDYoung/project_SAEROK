@@ -31,45 +31,61 @@
 
 
 	<div class="card shadow mb-4">
+
 		<div class="card-header py-3">
-			<h6 class="m-0 font-weight-bold text-primary">전체 리스트</h6>
-			<div class="d-flex justify-content-end">
-				<button class="btn btn-facebook btn-block col-1"
-					onclick="location.assign('${path}/approval/basicForm');">작성하기</button>
-			</div>
-		</div>
-		<div class="card-body">
-			<div class="table-responsive">
-				<table class="table table-bordered" id="dataTable" width="100%"
-					cellspacing="0">
-
-					<thead>
-
-						<tr>
-							<th>결재번호</th>
-							<th>제목</th>
-							<th>기안자</th>
-							<th>문서구분종류</th>
-							<th>진행상태</th>
-						</tr>
-					</thead>
-					<tbody>
-						<c:forEach var="a" items="${approval}">
-							<tr>
-								<td><c:out value="${a.apvNo}" /></td>
-								<td><c:out value="${a.apvName}" /></td>
-								<td><c:out value="${loginEmployee.empName }" /></td>
-								<td><c:out value="${a.apvDocNo}" /></td>
-								<td><c:out value="${a.apvCheck }" /></td>
-							</tr>
-						</c:forEach>
-					</tbody>
-
-				</table>
+			<ul class="nav nav-tabs mb-3">
+				<li class="nav-item"><a href="#board" data-toggle="tab"
+					aria-expanded="true" class="nav-link active"> <i
+						class="mdi mdi-home-variant d-lg-none d-block mr-1"></i> <span
+						class="d-none d-lg-block  font-weight-bold">전체 문서</span>
+				</a></li>
+				<li class="nav-item"><a href="#calendar" data-toggle="tab"
+					aria-expanded="false" class="nav-link"> <i
+						class="mdi mdi-account-circle d-lg-none d-block mr-1"></i> <span
+						class="d-none d-lg-block  font-weight-bold">진행중인 문서</span>
+				</a></li>
+				<li class="nav-item"><a href="#approval" data-toggle="tab"
+					aria-expanded="false" class="nav-link"> <i
+						class="mdi mdi-account-circle d-lg-none d-block mr-1"></i> <span
+						class="d-none d-lg-block  font-weight-bold">완료 문서</span>
+				</a></li>
+			</ul>
+			<button class="btn btn-facebook btn-block col-1"
+				onclick="location.assign('${path}/approval/basicForm');">작성하기</button>
+			<br>
+			<div class="tab-content">
+				<div class="tab-pane active" id="board">
+					<div class="table-responsive">
+						<table class="table table-bordered" id="dataTable" width="100%"
+							cellspacing="0">
+							<thead>
+								<tr>
+									<th>결재번호</th>
+									<th>제목</th>
+									<th>기안자</th>
+									<th>문서구분종류</th>
+									<th>진행상태</th>
+								</tr>
+							</thead>
+							<tbody>
+								<c:forEach var="a" items="${approval}">
+									<tr>
+										<td><c:out value="${a.apvNo}" /></td>
+										<td><c:out value="${a.apvName}" /></td>
+										<td><c:out value="${loginEmployee.empName }" /></td>
+										<td><c:out value="${a.apvDocNo}" /></td>
+										<td><c:out value="${a.apvCheck }" /></td>
+									</tr>
+								</c:forEach>
+							</tbody>
+						</table>
+					</div>
+				</div>
+				<div class="tab-pane" id="calendar">진행중인문서</div>
+				<div class="tab-pane" id="approval">완료문서</div>
 			</div>
 		</div>
 	</div>
-
 </div>
 
 

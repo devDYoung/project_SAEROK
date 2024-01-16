@@ -11,22 +11,11 @@
 	<jsp:param value="MainPage" name="ATO" />
 </jsp:include>
 <link rel="stylesheet" href="${path }/resources/css/emp.css">
-<!-- Calendar & Reservation JavaScript -->
-<!-- <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-    Axios CDN
-    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
-    Moment CDN
-    <script src="https://cdn.jsdelivr.net/momentjs/latest/moment.min.js"></script>
-    fullcalendar-scheduler CDN
-    <script src="https://cdn.jsdelivr.net/npm/fullcalendar-scheduler@5.9.0/main.min.js"></script>
-    fullcalendar-scheduler 언어 CDN
-    <script src="https://cdn.jsdelivr.net/npm/fullcalendar-scheduler@5.9.0/locales-all.min.js"></script>-->
-
 <!-- Bootstrap core JavaScript-->
 <script src="${path }/resources/vendor/jquery/jquery.min.js"></script>
 <script
 	src="${path }/resources/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
-<!-- <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script> -->
+	<script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
 <style>
 .ato-login-img {
 	max-width: 70%;
@@ -38,7 +27,67 @@
     	const empNo = "${ loginEmployee.empNo }";
     </script>
 <section>
-	<div class="app-dashboard-body-content off-canvas-content"
+<div class="app-dashboard-body-content off-canvas-content"
+		data-off-canvas-content>
+		<!-- 상단 타이틀 -->
+		<div class="home-topbar topbar-div">
+			<!-- <div></div> -->
+		</div>
+		<!-- 본문시작 -->
+		<div>
+						<div class="home-content">
+							<div style="display: flex;">
+								<!-- 본문 왼쪽 -->
+								<div class="home-content-div">
+									<div id="home-left" class="div-padding div-margin">
+								<div style="height: 50px;"></div>
+										<table id="home-my-tbl">
+											<tbody>
+				                               <tr>
+				                                    <td id="year" colspan="2" class="font-14">clock</td>
+				                                </tr>
+												<tr>
+													<td colspan="2">
+														<c:if test="${!empty sessionScope.loginMember.attachment}">
+															<img src="${pageContext.request.contextPath}/resources/upload/emp/${sessionScope.loginMember.attachment.renameFilename}" alt="" class="img">
+														</c:if>
+														<c:if test="${empty sessionScope.loginMember.attachment}">
+															<img src="${pageContext.request.contextPath}/resources/images/default.png" alt="" class="img">
+														</c:if>
+													</td>
+												</tr>
+												<tr>
+													<td colspan="2">${sessionScope.loginMember.name} ${sessionScope.loginMember.jobTitle}</td>
+												</tr>
+												<tr>
+													<td colspan="2">${sessionScope.loginMember.deptTitle}</td>
+												</tr>
+												 
+				                                <tr>
+				                                    <td colspan="2" id="clock" style="color:black;">clock</td>
+				                                </tr>
+												<tr>
+				                                    <td class="font-14 font-bold">업무상태</td>
+				                                    <td class="text-right font-14 color-red font-bold" id="work-state">출근전</td>
+				                                </tr>    
+				                                <tr>
+				                                    <td class="font-14 font-bold">출근시간</td>
+				                                    <td class="text-right font-14" id="startwork-time">미등록</td>
+				                                </tr>
+				                                <tr>
+				                                    <td class="font-14 font-bold">퇴근시간</td>
+				                                    <td class="text-right font-14" id="endwork-time">미등록</td>
+				                                </tr>
+				                                <tr class="btn-tr">
+				                                    <td><button class="font-bold" id="btn-startwork">출근하기</button></td>
+				                                    <td class="text-right"><button class="font-bold" id="btn-endwork">퇴근하기</button></td>
+				                                </tr>
+				                            </tbody>
+				                        </table>
+				                    
+				                    </div>
+								</div>
+	<%-- <div class="app-dashboard-body-content off-canvas-content"
 		data-off-canvas-content>
 		<!-- 상단 타이틀 -->
 		<div class="home-topbar topbar-div">
@@ -100,7 +149,7 @@
 						</div>
 					</div>
 				</div>
-			</div>
+			</div> --%>
 			<!-- </div>
 					</div> -->
 			<!-- 본문 가운데 -->
@@ -129,14 +178,46 @@
 								<p>공지사항</p>
 							</div>
 							<div class="tab-pane active" id="calendar">
-								<!-- calendar app -->
-								달력
+							<!--  <div class="col-xl-6 col-lg-6"> -->
+           <!--  <div class="card shadow mb-4 border-left-info"> -->
+                <!-- Card Header - Dropdown -->
+                <!--  <div
+                    class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+                    <h6 class="m-0 font-weight-bold text-primary">중요일정</h6>
+                </div>  -->
+                <!-- Card Body -->
+              <!--   <div class="card-body"> -->
+                    <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                        <tbody>
+                            <c:if test="">
+	                      	  <c:forEach var="i" begin="0" end="4">
+	                      	  	<c:if test="">
+		                            <tr>
+		                                <td colspan="2">
+			                                <a href="">
+		                                		
+		                                	</a>
+		                                </td>
+		                            </tr>
+	                            </c:if>
+	                      	  </c:forEach>
+                        	</c:if>
+                        	<c:if test="">
+	                            <tr>
+	                                <td colspan="2">중요한 일정이 없습니다.</td>
+	                            </tr>
+                        	</c:if>
+                        </tbody>
+                    </table>
+     <!--  </div> --> 
+          <!--   </div> -->
 							</div>
 							<div class="tab-pane" id="approval">결재</div>
 						</div>
 
 					</div>
 				</div>
+				
 				<div id="home-center" class="div-padding div-margin">
 					<div class="card-header py-2">
 						<h6 class="m-0 font-weight-bold text-primary">월별매출</h6>
@@ -151,7 +232,7 @@
 		<!-- 본문 오른쪽 -->
 		<div>
 			<div id="home-right-div" class="div-padding div-margin">
-				<h5 style="padding: 20px">이번주 신제품</h5>
+				<%-- <h5 style="padding: 20px">이번주 신제품</h5>
 
 				<div id="carouselExampleIndicators" class="carousel slide"
 					data-ride="carousel">
@@ -178,8 +259,8 @@
 						class="carousel-control-next-icon" aria-hidden="true"></span> <span
 						class="sr-only">Next</span>
 					</a>
-				</div>
-
+				</div> --%>
+				
 			</div>
 		</div>
 	</div>

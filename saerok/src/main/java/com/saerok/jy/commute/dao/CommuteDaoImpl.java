@@ -13,10 +13,10 @@ import com.saerok.jy.commute.dto.Commute;
 public class CommuteDaoImpl implements CommuteDao {
 	
 	@Override
-	public Commute selectCommuteList(SqlSession session, Map<String, Object> param) {
-		return (Commute) session.selectList("commute.selectCommuteList", param);
+	public List<Commute> selectCommuteList(SqlSession session, Map<String, Object> param) {
+		return session.selectList("commute.selectCommuteList", param);
 	}
-
+// 에러난다
 
 	@Override
 	public int insertCommuteStatus(SqlSession session, Map status) {
@@ -49,7 +49,7 @@ public class CommuteDaoImpl implements CommuteDao {
 	}
 
 	@Override
-	public int  selectWeekWorkTime(SqlSession session, Map<String, Object> startEndMap) {
+	public int selectWeekWorkTime(SqlSession session, Map<String, Object> startEndMap) {
 		return session.selectOne("commute.selectWeekWorkTime", startEndMap);
 	}
 	
