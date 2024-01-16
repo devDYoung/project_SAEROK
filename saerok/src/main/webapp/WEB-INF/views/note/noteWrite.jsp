@@ -21,11 +21,11 @@
 			<!-- To make this form functional, sign up at-->
 			<!-- https://startbootstrap.com/solution/contact-forms-->
 			<!-- to get an API token!-->
-			<form id="contactForm" data-sb-form-api-token="API_TOKEN" autocomplete="off">
+			<form id="contactForm" data-sb-form-api-token="API_TOKEN">
 				<!-- 사원 입력-->
 				<div class="form-floating mb-3">
 					<h>받는 사람</h>
-					<input class="form-control" id="email" type="text" autocomplete="off"
+					<input class="form-control" id="email" type="text"
 						placeholder="사원 이름을 검색해주세요."
 						data-sb-validations="required,email" onkeyup="searchEmp();" list="searchResult"/>
 						<datalist id="searchResult"></datalist>
@@ -130,9 +130,7 @@
 <script>
 
 </script>
-
-
-<!--
+<!-- 이건 플랜B
  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 <script>
 	function openEmployeeModal() {
