@@ -7,7 +7,6 @@
 <c:set var="loginEmployee" value="${sessionScope.SPRING_SECURITY_CONTEXT.authentication.principal }"/> 
 <!DOCTYPE html>
 <html lang="utf-8">
-
 <head>
    
 <style>
@@ -124,9 +123,10 @@
                 </a>
                 <div id="collapseBoard" class="collapse" aria-labelledby="headingBoard" data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
-                    <a class="collapse-item" href="">공지사항</a>
-                        <a class="collapse-item" href="">전체게시판</a>
-                        <a class="collapse-item" href="">부서별게시판</a>
+                    	<%-- <a class="collapse-item" href="${path }/board/write">작성하기</a> --%>
+                   		<a class="collapse-item" href="${path }/board/All">전체 게시판</a>
+                       <!-- <a class="collapse-item" href="">전체게시판</a> -->
+                        <a class="collapse-item" href="${path }/board/part">부서별 게시판</a>
                     </div>
                 </div>
             </li>
@@ -138,7 +138,7 @@
                 </a>
                 <div id="collapseMsg" class="collapse" aria-labelledby="headingMsg" data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
-                        <a class="collapse-item"href="javascript:requestNote('${path }/note/write');">쪽지쓰기</a>
+                        <a class="collapse-item" href="javascript:requestNote('${path }/note/write');">쪽지쓰기</a>
                         <a class="collapse-item" href="javascript:requestNote('${path }/note/get');">받은쪽지함</a>
                         <a class="collapse-item" href="javascript:requestNote('${path }/note/send');">보낸쪽지함</a>
                         <a class="collapse-item" href="javascript:requestNote('${path }/note/basket');">휴지통</a>
@@ -460,9 +460,9 @@
          fetch(url)
          .then(response=>response.text())
          .then(data=>{
-            document.querySelector(".page-wrapper").innerHTML=data;
-            });
-      }
+            /* document.querySelector(".page-wrapper").innerHTML=data;
+            }); */
+      } 
       function searchEmp(){
          var empNameVal = $("#email").val();
          /* alert(empNameVal); */
