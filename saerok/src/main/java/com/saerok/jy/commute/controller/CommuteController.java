@@ -43,7 +43,7 @@ public class CommuteController {
 	
 	// 금일 근무 기록 조회
 	@GetMapping("/commute.do")
-	public ResponseEntity<Commute> selectCommuteList(HttpSession session, ModelAndView mv, Principal loginSession) {
+	public ResponseEntity<List<Commute>> selectCommuteList(HttpSession session, ModelAndView mv, Principal loginSession) {
 
 		// 현재 로그인 중인 사원의 사원번호
 		String empNo = loginSession.getName();
@@ -52,7 +52,7 @@ public class CommuteController {
 		 param.put("empNo", empNo);
 		 param.put("time", time);
 		
-		 Commute commute = commuteService.selectCommuteList(param);
+		 List<Commute> commute = commuteService.selectCommuteList(param);
 		 
 		 return ResponseEntity.ok()
 					.header(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_JSON.toString())
@@ -60,7 +60,7 @@ public class CommuteController {
 		
 		
 	}
-
+	
 	// 출퇴근버튼 눌렀을 때
 	@PostMapping("/workIn.do")
     @ResponseBody
@@ -157,9 +157,9 @@ public class CommuteController {
 		param.put("daytime", daytime);
 		param.put("overtime", overtime);
 		
-		Commute commute = commuteService.selectCommuteList(param);
+		List<Commute> commute = commuteService.selectCommuteList(param);
 		int result = 0;
-		if(commute.getStatus().equals("반차")) {
+		if(((ModelAndView) commute).getStatus().equals("반차")) {
 			result = commuteService.updateHalfDayOff(param); //반차 근무시간 업데이트시 4시간 추가 
 		}else {
 			result = commuteService.updateWorkTime(param); // 금일 근무시간 업데이트
@@ -190,7 +190,7 @@ public class CommuteController {
 	    for (int week = 1; week <= currentDate.lengthOfMonth() / 7 + 1; week++) {
 	        LocalDate startOfWeek = currentDate.withDayOfMonth((week - 1) * 7 + 1);
 	        LocalDate endOfWeek = currentDate.withDayOfMonth(week * 7).plusDays(6);
-
+	        
 	        // 주간별 누적 기본 근무시간 가져오기
 	        Map<String, Object> startEndMap = new HashMap<>();
 	        startEndMap.put("empNo", empNo);
@@ -227,13 +227,13 @@ public class CommuteController {
 	public ResponseEntity<?> selectWeekDatas(String start, String end,Principal loginSession){
 
 		String empNo = loginSession.getName();
-		
 		Map<String,Object> param = new HashMap<>();
 		param.put("empNo", empNo);
 		param.put("start", start);
 		param.put("end", end);
+		System.out.println(param);
 		List<Commute> weekList = commuteService.selectWeekDatas(param);
-		
+		System.out.println(weekList);
 		return ResponseEntity.ok()
 				.header(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_JSON.toString())
 				.body(weekList);
@@ -269,11 +269,12 @@ public class CommuteController {
 		//이번달 연장 근무 시간 가져오기
 		int totalMonthOverTime = commuteService.monthOverTime(param);
 		time.put("totalMonthOverTime", totalMonthOverTime);
-		
+
 		return ResponseEntity.ok()
 				.header(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_JSON.toString())
 				.body(time);
 	}
+	
 	
 	
 

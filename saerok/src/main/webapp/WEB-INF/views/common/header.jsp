@@ -111,7 +111,7 @@
                 <div id="collapseSKD" class="collapse" aria-labelledby="headingSKD"
                     data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
-                        <a class="collapse-item" href="">일정조회</a>
+                        <a class="collapse-item" href="${path}/calendar/calendarMain.do">일정조회</a>
                         <a class="collapse-item" href="">부서일정</a>
                     </div>
                 </div>
@@ -132,7 +132,7 @@
             </li>
             <li class="nav-item">
                 <a class="nav-link dpse-item " onclick="javascript:requestNote('${path }/note/get');" data-toggle="collapse" data-target="#collapseMsg"
-                    aria-expanded="true" aria-controls="collapseMsg" >
+                    aria-expanded="true" aria-controls="collapseMsg">
                     <i class="fas fa-fw fa-envelope"></i>
                     <span>쪽지</span>
                 </a>

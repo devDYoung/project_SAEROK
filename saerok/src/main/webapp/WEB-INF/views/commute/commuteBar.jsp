@@ -59,7 +59,7 @@ window.addEventListener('load', function(){
  	   success(data){
  		   console.log(data);
  		   if(data){
- 			   const {commuteNo,inDtime,outDtime,overtime,workingDay,status,lateYN,empNo,inTime,outTime,workingHours} = data;
+ 			   const {commuteNo,inDtime,outDtime,overtime,workingDay,status,lateYN,empNo,workingHours} = data;
  			   var starttime = new Date(inDtime);
  			   var endtime = new Date(outDtime);
  			   
@@ -67,11 +67,11 @@ window.addEventListener('load', function(){
  			   const daytimes = endtime - starttime; //퇴근시간 - 출근시간
  			   console.log(daytimes);
  			   
- 			   const workSatus = document.querySelector("#work-status");
- 			  workSatus.textContent = status;
+ 			   const workStatus = document.querySelector("#work-status");
+ 			  workStatus.textContent = status;
  			   
  			   
- 			   if(startWork){
+ 			   if(inDtime){
  				 var hours = (starttime.getHours()); 
                  var minutes = starttime.getMinutes();
                  var seconds = starttime.getSeconds();
@@ -80,7 +80,7 @@ window.addEventListener('load', function(){
                  document.querySelector('#inDtime').textContent = startWorkTime;
  			   }
  			   
- 			   if(endWork){
+ 			   if(outDtime){
   				  var hours = (endtime.getHours()); 
                   var minutes = endtime.getMinutes();
                   var seconds = endtime.getSeconds();
@@ -108,7 +108,7 @@ document.querySelector('#startBtn').addEventListener('click', function () {
 	$.ajax({
 	   url : '${path }/commute/workIn.do',
 	   method : 'POST',
-	   headers,
+	   /* headers, */
 	   contentType : "application/json; charset=utf-8",
 	   success(result){
 			console.log(result);
@@ -137,7 +137,7 @@ document.querySelector('#endBtn').addEventListener('click', function () {
 	$.ajax({
 	   url : '${path }/commute/workOut.do',
 	   method : 'POST',
-	   headers,
+	   /* headers, */
 	   contentType : "application/json; charset=utf-8",
 	   success(result){
 		   console.log(result);
