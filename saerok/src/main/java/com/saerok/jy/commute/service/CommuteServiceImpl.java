@@ -27,7 +27,7 @@ public class CommuteServiceImpl implements CommuteService {
 	private CommuteDao commuteDao;
 
 	@Override
-	public Commute selectCommuteList(Map<String, Object> param) {
+	public List<Commute> selectCommuteList(Map<String, Object> param) {
 		return commuteDao.selectCommuteList(session, param);
 	}
 

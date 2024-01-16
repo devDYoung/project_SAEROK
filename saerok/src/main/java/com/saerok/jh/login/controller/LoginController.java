@@ -106,5 +106,8 @@ public class LoginController {
 	@GetMapping("/commute/commuteMain.do")
 	public void commuteMain() {}
 	
+	// 일정 조회
+	@GetMapping("/calendar/calendarMain.do")
+	public void calendarMain() {}
 
 }
