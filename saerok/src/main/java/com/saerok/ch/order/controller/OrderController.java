@@ -32,10 +32,10 @@ public class OrderController {
     @GetMapping("/orders/{orderId}")
     public String listOrderDetails(@PathVariable int orderId, Model model) {
         List<OrderListDetail> orderDetails = orderService.findOrderDetailsByOrderId(orderId);
-        String orderStatus = orderService.findOrderStatusByOrderId(orderId); // 주문 상태 조회
+        String orderStatus = orderService.findOrderStatusByOrderId(orderId); 
 
         model.addAttribute("orderDetails", orderDetails);
-        model.addAttribute("orderStatus", orderStatus); // 주문 상태를 모델에 추가
+        model.addAttribute("orderStatus", orderStatus); 
         return "order/orderDetails"; 
     }
     

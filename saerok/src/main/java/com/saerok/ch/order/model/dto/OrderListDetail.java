@@ -19,7 +19,7 @@ public class OrderListDetail {
     private String itemCategory;  // 아이템 카테고리
     private int itemPrice;        // 아이템 가격
     private int quantity;         // 수량
-    private int branchNo;         // 지점 번호 추가
-    private BigDecimal totalPrice; // totalPrice 필드 추가
+    private int branchNo;         // 지점 번호 
+    private BigDecimal totalPrice; // 발주 금액
 
 }
