@@ -5,7 +5,7 @@ import java.util.List;
 import com.saerok.dy.board.model.dto.Board;
 
 public interface BoardService {
-    List<Board> getAllBoards();
+    List<Board> boardAll(int boardNo);
     List<Board> getDepartmentBoards();
    
 }
