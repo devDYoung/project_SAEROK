@@ -3,90 +3,77 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
-<%@ taglib prefix="springform"
-	uri="http://www.springframework.org/tags/form"%>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <c:set var="path" value="${pageContext.request.contextPath}" />
+<c:set var="loginEmployee"
+	value="${sessionScope.SPRING_SECURITY_CONTEXT.authentication.principal }" />
+<script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
 
-	<!-- 받은 쪽지함 페이지 내용 작성 -->
-	<c:forEach var="note" items="${noteSend}">
-		<p>${note.sender}님으로부터:${note.subject}</p>
-	</c:forEach>
-	<div class="container-fluid">
+<link
+	href="https://cdn.datatables.net/v/dt/dt-1.13.8/datatables.min.css"
+	rel="stylesheet" />
 
-		<!-- Page Heading -->
-		<h1 class="h3 mb-2 text-gray-800">보낸 쪽지함</h1>
-		<p class="mb-4">누구에게 쪽지를 보냈을까나~</p>
+<script
+	src="https://cdn.datatables.net/v/dt/dt-1.13.8/datatables.min.js">
+	
+</script>
 
-		<!-- DataTales Example -->
-		<div class="card shadow mb-4">
-			<div class="card-header py-3">
-				<h6 class="m-0 font-weight-bold text-primary">Message</h6>
-			</div>
-			<div class="card-body">
-				<div class="table-responsive">
-					<table class="table table-bordered" id="dataTable" width="100%"
-						cellspacing="0">
-						<thead>
-							<tr>
-								<th>선택</th>
-								<th>번호</th>
-								<th>받는사람</th>
-								<th>제목</th>
-								<th>날짜</th>
-								<th>수신확인</th>
-							</tr>
-						</thead>
-						<tbody>
-							<tr>
-								<td><input type="checkbox" name="yourCheckboxName"
-									value="yourCheckboxValue"></td>
-								<td></td>
-								<td></td>
-								<td></td>
-								<td></td>
-								<td></td>
-							</tr>
-							<tr>
-								<td><input type="checkbox" name="yourCheckboxName"
-									value="yourCheckboxValue"></td>
-								<td></td>
-								<td></td>
-								<td></td>
-								<td></td>
-								<td></td>
-							</tr>
-							<tr>
-								<td><input type="checkbox" name="yourCheckboxName"
-									value="yourCheckboxValue"></td>
-								<td></td>
-								<td></td>
-								<td></td>
-								<td></td>
-								<td></td>
-							</tr>
-							<tr>
-								<td><input type="checkbox" name="yourCheckboxName"
-									value="yourCheckboxValue"></td>
-								<td></td>
-								<td></td>
-								<td></td>
-								<td></td>
-								<td></td>
-							</tr>
-							<tr>
-								<td><input type="checkbox" name="yourCheckboxName"
-									value="yourCheckboxValue"></td>
-								<td></td>
-								<td></td>
-								<td></td>
-								<td></td>
-								<td></td>
-							</tr>
-						</tbody>
-					</table>
-				</div>
+<!-- 전체 리스트 출력 -->
+<div class="container-fluid">
+
+	<!-- Page Heading -->
+	<h1 class="h3 mb-2 text-gray-800">보낸 쪽지함</h1>
+
+	<!-- DataTales Example -->
+	<div class="card shadow mb-4">
+		<div class="card-header py-3">
+			<h6 class="m-0 font-weight-bold text-primary">Message</h6>
+		</div>
+		<div class="card-body">
+			<div class="table-responsive">
+				<table class="table table-bordered" id="dataTable" width="100%"
+					cellspacing="0">
+					<thead>
+						<tr>
+							<th>선택</th>
+							<th>번호</th>
+							<th>받는사람</th>
+							<th>제목</th>
+							<th>날짜</th>
+							<th>수신확인</th>
+						</tr>
+					</thead>
+					<tbody>
+						<c:if test="${not empty receivedNotes}">
+							<c:forEach var="note" items="${receivedNotes}">
+								<tr>
+									<td><input type="checkbox" name="noteCheckBox" /></td>
+									<td><c:out value="${note.noteNo}" /></td>
+									<td><c:out value="${note.rcvEmpNo}" /></td>
+									<td><c:out value="${note.noteTitle}" /></td>
+									<td><c:out value="${note.regDtime}" /></td>
+									<td><c:out value="${note.readYN}" /></td>
+
+								</tr>
+							</c:forEach>
+						</c:if>
+					</tbody>
+				</table>
 			</div>
 		</div>
 	</div>
-	<div id=pageBar>${pageBar}</div>
+</div>
+
+<script>
+	$(document).ready(function() {
+
+		new DataTable('#dataTable', {
+			info : false,
+			ordering : true,
+			paging : true
+		});
+	});
+</script>
+
+
 

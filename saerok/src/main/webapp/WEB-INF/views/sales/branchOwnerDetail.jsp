@@ -149,10 +149,17 @@
 								</c:if>
 							</c:forEach>
 							<div>
-								<button type="button" class="btn btn-primary">
-									<i class="bi bi-plus"></i> 매출 등록
-								</button>
-							</div>
+					    <button type="button" class="btn btn-primary" id="salesEntryButton">
+					        <i class="bi bi-plus"></i> 매출 등록
+					    </button>
+					</div>
+					
+					<script>
+					    document.getElementById('salesEntryButton').addEventListener('click', function() {
+					        window.location.href = '/owner/sales/entry';
+					    });
+					</script>
+
 						</div>
 						<div class="card-body">
 							<div class="table-responsive">
