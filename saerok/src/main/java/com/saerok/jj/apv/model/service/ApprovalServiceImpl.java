@@ -9,7 +9,7 @@ import org.springframework.stereotype.Service;
 
 import com.saerok.jj.apv.model.dao.ApprovalDao;
 import com.saerok.jj.apv.model.dto.Approval;
-import com.saerok.jj.apv.model.dto.CDocForm;
+import com.saerok.jj.apv.model.dto.AppLetter;
 
 import lombok.RequiredArgsConstructor;
 @Service
