@@ -123,39 +123,3 @@
 		</div>
 	</div>
 </form>
-<!-- 필수 입력 스크립트 -->
-<script>
-	function check_onclick() {
-		var loaWriteForm = document.loaWriteForm;
-
-		if (loaWriteForm.loaContent.value == ""
-				|| loaWriteForm.loaTitle.value == "") {
-			/* alert("상세내용 또는 제목란이 비어있습니다. 확인 후 등록하세요."); */
-			Swal.fire({
-				icon : 'error',
-				title : '상세내용 또는 \n제목란이 비어있습니다.',
-				text : '확인 후 등록하세요!'
-			})
-
-			return false;
-		} else if (loaWriteForm.proposerText.value == "") {
-			Swal.fire({
-				icon : 'error',
-				title : '결재서명 후 \n결재를 진행해주세요.'
-			})
-
-			return false;
-		} else {
-			return true;
-		}
-
-	}
-</script>
-<!-- 서명 클릭 스크립트  -->
-<script>
-	$("#proposer").one("click", function() {
-		var proposerValue = $("input[name='writerName']").val();
-
-		$("#proposerText").append(proposerValue);
-	});
-</script>

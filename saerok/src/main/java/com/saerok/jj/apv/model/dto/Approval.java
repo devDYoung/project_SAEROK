@@ -15,18 +15,13 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @Builder
 public class Approval {
-	private int apvNo;
-	private String apvDocNo;
-	private String apvName;
-	private String apvCheck;
-	private Date regTime;
-	private String modId;
-	private Date modTime;
-	private Employee appWriter;
-	private List<ApvWriter> apvEmps;
-	private List<Employee> refEmps;
-	private Employee empName;
+	private int appSeq; //결재고유번호
+	private Date appWriteDate; //작성일자
+	private String appCheck; //결재상태
+	private Employee empNo;//사원번호
+	private String appKinds; // 걀재종류 
 
-	
+	private List<ApvWriter> apvWriter;//결제선
+	private List<ApvRef> apvRef;
 	
 }
