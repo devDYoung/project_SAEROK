@@ -123,10 +123,10 @@
                 </a>
                 <div id="collapseBoard" class="collapse" aria-labelledby="headingBoard" data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
-                    	<a class="collapse-item" href="${path }/board/write">작성하기</a>
-                   		<a class="collapse-item" href="">공지사항</a>
+                    	<%-- <a class="collapse-item" href="${path }/board/write">작성하기</a> --%>
+                   		<a class="collapse-item" href="${path }/board/All">전체 게시판</a>
                        <!-- <a class="collapse-item" href="">전체게시판</a> -->
-                        <a class="collapse-item" href="">부서별게시판</a>
+                        <a class="collapse-item" href="${path }/board/part">부서별 게시판</a>
                     </div>
                 </div>
             </li>

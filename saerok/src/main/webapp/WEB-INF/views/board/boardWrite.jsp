@@ -25,7 +25,7 @@
 	// 폼 제출 전 컨텐츠 업데이트 함수
 	function updateContent() {
 		CKEDITOR.instances.t_content.updateElement();
-		
+
 		// 폼 제출 전에 필요한 경우 추가 로직이나 유효성 검사를 수행
 		document.getElementById("form").submit();
 	}
@@ -33,7 +33,7 @@
 
 <html>
 <head>
-<title>테스트</title>
+<title>게시판 작성</title>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 </head>
 <body>
@@ -55,7 +55,7 @@
 						onclick="updateContent()">저장</button>
 					<!-- 목록 버튼 -->
 					<button type="button" class="btn btn-sm btn-primary"
-						onclick="javascript:location.href='/bbs/list';">목록</button>
+						onclick="window.location.href='/board/All';">목록</button>
 				</div>
 			</form>
 		</div>

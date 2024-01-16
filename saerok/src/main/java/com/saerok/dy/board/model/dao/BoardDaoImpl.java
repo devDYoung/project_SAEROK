@@ -11,9 +11,16 @@ import com.saerok.dy.board.model.dto.Board;
 @Repository
 public class BoardDaoImpl implements BoardDao {
 
-	// 공지사항 조회
+	// 전체게시판 조회
 	@Override
-	public List<Board> boardReadAll(SqlSession session){
-		return session.selectList("board.boardReadAll");
+	public List<Board> boardAll(SqlSession session) {
+		return session.selectList("board.boardAll");
+	}
+
+	// 부서별 게시판 조회
+	@Override
+	public List<Board> boardPart(SqlSession session) {
+		return session.selectList("board.boardPart");
+
 	}
 }

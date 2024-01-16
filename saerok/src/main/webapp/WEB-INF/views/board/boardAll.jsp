@@ -1,4 +1,4 @@
-<%-- <%@ page language="java" contentType="text/html; charset=UTF-8"
+<%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
@@ -19,8 +19,8 @@
 
 <section id="ato-success">
 	<div class="container-fluid">
-		<form class="selectempList" id="updateempForm"
-			action="${path}/boardRead" method="post">
+		<form class="selectBoardAll" id="updateBoardForm"
+			action="${path}/boardAll" method="post">
 			<div class="card shadow mb-4">
 				<div class="card-header py-3">
 					<h6 class="m-0 font-weight-bold text-primary">전체 게시판</h6>
@@ -30,6 +30,7 @@
 						<table class="table table-bordered" id="dataTable" width="100%"
 							cellspacing="0">
 							<thead>
+
 								<tr>
 									<th scope="col" class="text-center">번호</th>
 									<th scope="col" class="text-center">제목</th>
@@ -41,8 +42,8 @@
 
 							</thead>
 							<tbody>
-								<c:if test="${not empty boardReadAll}">
-									<c:forEach var="loginEmployee" items="${empList}">
+								<c:if test="${not empty boardAll}">
+									<c:forEach var="loginEmployee" items="${boardAll}">
 										<tr>
 											<td><c:out value="${board.boardNo}" /></td>
 											<td><c:out value="${board.boardTitle}" /></td>
@@ -55,25 +56,34 @@
 													data-toggle="modal" data-target="#updateModal">수정하기</button>
 											</td> -->
 										</tr>
+
+
 									</c:forEach>
 								</c:if>
 							</tbody>
 						</table>
+						<div style="text-align: right;">
+							<button type="button" class="btn btn-sm btn-primary"
+								onclick="window.location.href='/board/write';">글쓰기</button>
+						</div>
 					</div>
 				</div>
 			</div>
 		</form>
 	</div>
 
-	<script>
-		$(document).ready(function() {
 
-			new DataTable('#dataTable', {
-				info : false,
-				ordering : true,
-				paging : true
-			});
+</section>
+
+<script>
+	$(document).ready(function() {
+
+		new DataTable('#dataTable', {
+			info : false,
+			ordering : true,
+			paging : true
 		});
-	</script>
+	});
+</script>
 
-	<jsp:include page="/WEB-INF/views/common/footer.jsp" /> --%>
+<jsp:include page="/WEB-INF/views/common/footer.jsp" />
