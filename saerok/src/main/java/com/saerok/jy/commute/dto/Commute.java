@@ -24,7 +24,7 @@ public class Commute {
 	private String empNo; //사원번호
 	private String inTime; //출근시간
 	private String outTime; //퇴근시간
-	
+	private long workingHours;// 근무시간
 	
 	
 	

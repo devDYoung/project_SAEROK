@@ -33,6 +33,18 @@ public class EmployeeServiceImpl implements EmployeeService {
 		// TODO Auto-generated method stub
 		return dao.selectEmployeeList(session);
 	}
+
+	
+	//사원수정
+	@Override
+	public int updateEmployee(Employee e) {
+		return dao.updateEmployee(session, e);
+	}
+	
+
+	
+	
+	
 	
 	
 	

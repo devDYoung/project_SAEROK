@@ -26,48 +26,9 @@ public class CommuteServiceImpl implements CommuteService {
 	@Autowired
 	private CommuteDao commuteDao;
 
-//	@Override
-//	public ArrayList<Commute> selectCommuteList(Commute commute) {
-//
-//		ArrayList<Commute> list = commuteDao.selectCommuteList(session, commute);
-//
-//		return list;
-//	}
-//	
-
 	@Override
-	public Commute selectCommuteList(Map<String, Object> param) {
+	public List<Commute> selectCommuteList(Map<String, Object> param) {
 		return commuteDao.selectCommuteList(session, param);
-	}
-
-	@Override
-	public Commute selectCommute(String empNo) {
-
-		Commute c = commuteDao.selectCommute(session, empNo);
-
-		return c;
-	}
-
-	@Override
-	@Transactional
-	public void insertCommute(String empNo) {
-
-		//int result = commuteDao.insertCommuteStatus(session, empNo);
-
-//		if (result < 0) {
-//			throw new CommuteException("출근 확인 실패");
-//		}
-
-	}
-
-	@Override
-	@Transactional
-	public void updateCommute(int commuteNo) {
-		int result = commuteDao.updateCommute(session, commuteNo);
-
-		if (result < 0) {
-			throw new CommuteException("퇴근 확인 실패");
-		}
 	}
 
 	@Override
@@ -96,12 +57,62 @@ public class CommuteServiceImpl implements CommuteService {
 	
 	
 	@Override
-	public ArrayList<Commute> selectCommuteStatusList(int commuteNo) {
-
-		ArrayList<Commute> list = commuteDao.selectCommuteStatusList(session, commuteNo);
-
-		return list;
+	public int updateWorkTime(Map<String, Object> param) {
+		return commuteDao.updateWorkTime(session, param);
 	}
+	
+	
+	@Override
+	public int updateHalfDayOff(Map<String, Object> param) {
+		return commuteDao.updateHalfDayOff(session, param);
+	}
+	
+	
+	@Override
+	public List<Commute> selectMonthWork(Map<String, Object> param) {
+		return commuteDao.selectMonthWork(session, param);
+	}
+	
+	//주간 기본근무시간 가져오기
+		@Override
+		public int selectWeekWorkTime(Map<String, Object> startEndMap) {
+			return commuteDao.selectWeekWorkTime(session, startEndMap);
+		}
+		
+		//주간 연장근무시간 가져오기
+		@Override
+		public int selectWeekOverTime(Map<String, Object> startEndMap) {
+			return commuteDao.selectWeekOverTime(session, startEndMap);
+		}
+
+		@Override
+		public List<Commute> selectWeekDatas(Map<String, Object> param) {
+			return commuteDao.selectWeekDatas(session, param);
+		}
+		
+		
+		@Override
+		public int weekTotalTime(Map<String, Object> param) {
+			return commuteDao.weekTotalTime(session, param);
+		}
+		
+		@Override
+		public int totalMonthTime(Map<String, Object> param) {
+			return commuteDao.totalMonthTime(session, param);
+		}
+		
+		@Override
+		public int monthOverTime(Map<String, Object> startEndMap) {
+			return commuteDao.monthOverTime(session, startEndMap);
+		}
+		
+//	@Override
+//	public ArrayList<Commute> selectCommuteStatusList(int commuteNo) {
+//
+//		ArrayList<Commute> list = commuteDao.selectCommuteStatusList(session, commuteNo);
+//
+//		return list;
+//	}
 
 }
 // test
