@@ -66,7 +66,7 @@
 }
 
 .custom-btn:hover {
-	opacity: 0.8; /* 호버 시 투명도 조정 */
+	opacity: 0.8; 
 }
 
 .button-group {
@@ -89,8 +89,8 @@
 }
 
 .total-amount-label {
-	font-weight: bold; /* 라벨 볼드체 */
-	color: #343a40; /* 글자색 */
+	font-weight: bold; 
+	color: #343a40; 
 }
 </style>
 </head>
@@ -111,7 +111,7 @@
 					<th>단가</th>
 					<th>수량</th>
 					<th>가격</th>
-					<!-- 새로운 컬럼 추가 -->
+				
 				</tr>
 			</thead>
 			<tbody>
@@ -125,7 +125,7 @@
 						<td>${detail.quantity}</td>
 						<td><fmt:formatNumber value="${detail.totalPrice}"
 								type="currency" /></td>
-						<!-- 새로운 컬럼 표시 -->
+					
 					</tr>
 				</c:forEach>
 			</tbody>
