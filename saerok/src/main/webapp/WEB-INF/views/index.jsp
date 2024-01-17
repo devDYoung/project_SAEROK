@@ -1,491 +1,490 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
-<%@ page import="java.util.Arrays" %>    
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>    
+	pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
-<c:set var="path" value="${pageContext.request.contextPath}"/>    
-<c:set var="loginEmployee" value="${sessionScope.SPRING_SECURITY_CONTEXT.authentication.principal }"/> 
-<!DOCTYPE html>
-<html lang="utf-8">
-<head>
-   
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
+<c:set var="path" value="${pageContext.request.contextPath}" />
+<c:set var="loginEmployee"
+	value="${sessionScope.SPRING_SECURITY_CONTEXT.authentication.principal }" />
+<jsp:include page="/WEB-INF/views/common/header.jsp">
+	<jsp:param value="MainPage" name="ATO" />
+</jsp:include>
+<link rel="stylesheet" href="${path }/resources/css/emp.css">
+<!-- Bootstrap core JavaScript-->
+<script src="${path }/resources/vendor/jquery/jquery.min.js"></script>
+<script
+	src="${path }/resources/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+	<script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
 <style>
-
-.dropdown-list-image img {
-    max-width: 50px; 
-    max-height: 50px; 
-    width: auto; 
+.ato-login-img {
+	max-width: 70%;
+	max-height: 70%;
+	width: auto;
 }
+</style>
+<script>
+    	const empNo = "${ loginEmployee.empNo }";
+    </script>
+<section>
+<div class="app-dashboard-body-content off-canvas-content"
+		data-off-canvas-content>
+		<!-- 상단 타이틀 -->
+		<div class="home-topbar topbar-div">
+			<!-- <div></div> -->
+		</div>
+		<!-- 본문시작 -->
+		<!-- <div> -->
+		<div class="page-wrapper">
+						<div class="home-content">
+							<div style="display: flex;">
+								<!-- 본문 왼쪽 -->
+								<div class="home-content-div">
+									<div id="home-left" class="div-padding div-margin">
+								<div style="height: 50px;"></div>
+										<table id="home-my-tbl">
+											<tbody>
+				                               <tr>
+				                                    <td id="year" colspan="2" class="font-14">clock</td>
+				                                </tr>
+												<tr>
+													<td colspan="2">
+														<c:if test="${!empty loginEmployee.destFileName}">
+															<img src="${path}/resources/upload/profile/${loginEmployee.destFileName}" alt="" class="img">
+														</c:if>
+														<%-- <c:if test="${!empty loginEmployee.destFileName}">
+															<img src="${path}/resources/upload/IMG_2341.jpg" alt="" class="img">
+														</c:if> --%>
+													</td>
+												</tr>
+												<tr>
+													<td colspan="2">${loginEmployee.empName} ${loginEmployee.jobName}</td>
+												</tr>
+												<tr>
+													<td colspan="2">${loginEmployee.deptName}</td>
+												</tr>
+												 
+				                                <tr>
+				                                    <td colspan="2" id="clock" style="color:black;">clock</td>
+				                                </tr>
+												<tr>
+				                                    <td class="font-14 font-bold">업무상태</td>
+				                                    <td class="text-right font-14 color-red font-bold" id="work-status">출근전</td>
+				                                </tr>    
+				                                <tr>
+				                                    <td class="font-14 font-bold">출근시간</td>
+				                                    <td class="text-right font-14" id="startwork-time">미등록</td>
+				                                </tr>
+				                                <tr>
+				                                    <td class="font-14 font-bold">퇴근시간</td>
+				                                    <td class="text-right font-14" id="endwork-time">미등록</td>
+				                                </tr>
+				                                <tr class="btn-tr">
+				                                    <td><button class="font-bold" id="startBtn">출근하기</button></td>
+				                                    <td class="text-right"><button class="font-bold" id="endBtn">퇴근하기</button></td>
+				                                </tr>
+				                            </tbody>
+				                        </table>
+				                    
+				                    </div>
+								</div>
+	<%-- <div class="app-dashboard-body-content off-canvas-content"
+		data-off-canvas-content>
+		<!-- 상단 타이틀 -->
+		<div class="home-topbar topbar-div">
+			<!-- <div></div> -->
+		</div>
+		<!-- 본문시작 -->
+		<div>
+			<div class="home-content">
+				<div style="display: flex;">
+					<!-- 본문 왼쪽 -->
+					<div class="home-content-div">
+						<div id="home-left" class="div-padding div-margin">
+							<div style="height: 50px;"></div>
+							<div class="ato-login-img" name="oriFileName">
+								<img
+									src="${path}/resources/upload/profile/${loginEmployee.destFileName}"
+									alt="ato-profile-img" class="ato-login-img">
+							</div>
+							<br>
+							<!-- 이미지 경로 수정하기 -->
+							<h4 id="todate" class="card-title mb-3 font-weight-bold"></h4>
+							<p id="clock" style="font-size: 40px"></p>
+							<div>
+								<br>
+								<div class="d-flex" style="font-size: 16px;">
+									<p class="col-6" style="padding: 0px;">${loginEmployee.empName }
+										${loginEmployee.jobName}</p>
+									<!-- <p class="col-6 text-right" style="padding: 0px;" id="inDtime"></p> -->
+								</div>
+								<div class="d-flex" style="font-size: 16px">
+									<p class="col-6" style="padding: 0px;">${loginEmployee.deptName}</p>
+									<!-- <p class="col-6 text-right" style="padding: 0px;" id="outDtime"></p> -->
+								</div>
+								<div class="d-flex" style="font-size: 16px;">
+									<p class="col-6" style="padding: 0px;">출근시간</p>
+									<p class="col-6 text-right" style="padding: 0px;" id="inDtime"></p>
+								</div>
+								<div class="d-flex" style="font-size: 16px">
+									<p class="col-6" style="padding: 0px;">퇴근시간</p>
+									<p class="col-6 text-right" style="padding: 0px;" id="outDtime"></p>
+								</div>
+								<div class="d-flex" style="font-size: 16px">
+									<p class="col-6" style="padding: 0px;">근무상태</p>
+									<p class="col-6 text-right" style="padding: 0px;"
+										id="work-status"></p>
+								</div>
+							</div>
+							<!-- 출퇴근 버튼 -->
+							<div class="d-flex align-items-center">
+								<input type="button" id="startBtn"
+									class="btn btn-rounded btn-outline-primary col-6"
+									style="margin: 2px" value="출근하기" name="work-status" /> <input
+									type="button" id="endBtn"
+									class="btn btn-rounded btn-outline-primary col-6"
+									style="margin: 2px" value="퇴근하기" name="work-status" />
+							</div>
+							<input type="hidden" name="commuteNo" value="${c.commuteNo}">
+							<input type="hidden" name="index" value="1">
+						</div>
+					</div>
+				</div>
+			</div> --%>
+			<!-- </div>
+					</div> -->
+			<!-- 본문 가운데 -->
+			<div>
+				<div id="home-center" class="div-padding div-margin">
+					<div id="board-div" class="home-div">
+						<ul class="nav nav-tabs mb-3">
+							<li class="nav-item"><a href="#board" data-toggle="tab"
+								aria-expanded="false" class="nav-link"> <i
+									class="mdi mdi-home-variant d-lg-none d-block mr-1"></i> <span
+									class="d-none d-lg-block  font-weight-bold">공지사항</span>
+							</a></li>
+							<li class="nav-item"><a href="#calendar" data-toggle="tab"
+								aria-expanded="true" class="nav-link active"> <i
+									class="mdi mdi-account-circle d-lg-none d-block mr-1"></i> <span
+									class="d-none d-lg-block  font-weight-bold">일정</span>
+							</a></li>
+							<li class="nav-item"><a href="#approval" data-toggle="tab"
+								aria-expanded="true" class="nav-link"> <i
+									class="mdi mdi-account-circle d-lg-none d-block mr-1"></i> <span
+									class="d-none d-lg-block  font-weight-bold">결재</span>
+							</a></li>
+						</ul>
+						<div class="tab-content">
+							<div class="tab-pane" id="board">
+								<p>공지사항</p>
+							</div>
+							<div class="tab-pane active" id="calendar">
+							<!--  <div class="col-xl-6 col-lg-6"> -->
+           <!--  <div class="card shadow mb-4 border-left-info"> -->
+                <!-- Card Header - Dropdown -->
+                <!--  <div
+                    class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+                    <h6 class="m-0 font-weight-bold text-primary">중요일정</h6>
+                </div>  -->
+                <!-- Card Body -->
+              <!--   <div class="card-body"> -->
+                    <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                        <tbody>
+                            <c:if test="">
+	                      	  <c:forEach var="i" begin="0" end="4">
+	                      	  	<c:if test="">
+		                            <tr>
+		                                <td colspan="2">
+			                                <a href="">
+		                                		
+		                                	</a>
+		                                </td>
+		                            </tr>
+	                            </c:if>
+	                      	  </c:forEach>
+                        	</c:if>
+                        	<c:if test="">
+	                            <tr>
+	                                <td colspan="2">중요한 일정이 없습니다.</td>
+	                            </tr>
+                        	</c:if>
+                        </tbody>
+                    </table>
+     <!--  </div> --> 
+          <!--   </div> -->
+							</div>
+							<div class="tab-pane" id="approval">결재</div>
+						</div>
 
-/* 부모 컨테이너에 대한 스타일 */
-.dropdown-list-image {
-    display: flex;
-    align-items: center; /* 수직 가운데 정렬 */
-}
+					</div>
+				</div>
+				
+				<div id="home-center" class="div-padding div-margin">
+					<div class="card-header py-2">
+						<h6 class="m-0 font-weight-bold text-primary">월별매출</h6>
+					</div>
+					<div class="chart-area">
+						<canvas id="monthlySalesChart"></canvas>
+					</div>
+				</div>
+			</div>
+		</div>
 
-.dropdown-list-image img {
-    border-radius: 50%;
-    max-width: 100%; /* 이미지가 부모 컨테이너를 넘지 않도록 설정 */
-    margin-right: 5px; /* 이미지와 텍스트 간격 조절 */
+		<!-- 본문 오른쪽 -->
+		<div>
+			<div id="home-right-div" class="div-padding div-margin">
+				<%-- <h5 style="padding: 20px">이번주 신제품</h5>
 
-}
+				<div id="carouselExampleIndicators" class="carousel slide"
+					data-ride="carousel">
+					<div class="carousel-inner" role="listbox">
+						<div class="carousel-item">
+							<img class="img-fluid"
+								src="${paht }/resources/upload/IMG_2341.jpg" alt="First slide">
+						</div>
+						<div class="carousel-item">
+							<img class="img-fluid"
+								src="${path }/resources/upload/IMG_2342.jpg" alt="Second slide">
+						</div>
+						<div class="carousel-item active">
+							<img class="img-fluid"
+								src="${path }/resources/upload/IMG_2343.jpg" alt="Third slide">
+						</div>
+					</div>
+					<a class="carousel-control-prev" href="#carouselExampleIndicators"
+						role="button" data-slide="prev"> <span
+						class="carousel-control-prev-icon" aria-hidden="true"></span> <span
+						class="sr-only">Previous</span>
+					</a> <a class="carousel-control-next" href="#carouselExampleIndicators"
+						role="button" data-slide="next"> <span
+						class="carousel-control-next-icon" aria-hidden="true"></span> <span
+						class="sr-only">Next</span>
+					</a>
+				</div> --%>
+				
+			</div>
+		</div>
+	</div>
+
+	<!-- 본문 오른쪽 -->
+
+	<div class="notification-list">
+		<div class="left-noti"></div>
+		<div class="right-noti"></div>
+	</div>
+
+	</div>
+	</div>
+<script>
+window.addEventListener('load', function(){
+	
+   $.ajax({
+	   url : '${path }/commute/commute.do',
+	   contentType : "application/json; charset=utf-8",
+	   success(data){
+		   console.log(data);
+		   if(data){
+			   const {commuteNo,inDtime,outDtime,overtime,workingDay,status,lateYN,empNo,workingHours} = data;
+			   var starttime = new Date(inDtime);
+			   var endtime = new Date(outDtime);
+			   
+			   //하루 근무시간 계산
+			   const daytimes = workingHours;
+			   
+			   const workStatus = document.querySelector("#work-status");
+			   workStatus.textContent = status;
+			   
+			   if(inDtime){
+				 var hours = (starttime.getHours()); 
+                var minutes = starttime.getMinutes();
+                var seconds = starttime.getSeconds();
+                var startWorkTime = `\${hours < 10 ? '0' + hours : hours}:\${minutes < 10 ? '0'+minutes : minutes}:\${seconds < 10 ? '0'+seconds : seconds}`;
+                // 출근시간 정보 출력
+                document.querySelector('#startwork-time').textContent = startWorkTime;
+			   }
+			   
+			   if(outDtime){
+ 				  var hours = (endtime.getHours()); 
+                 var minutes = endtime.getMinutes();
+                 var seconds = endtime.getSeconds();
+                 var endWorkTime = `\${hours < 10 ? '0' + hours : hours}:\${minutes < 10 ? '0'+minutes : minutes}:\${seconds < 10 ? '0'+seconds : seconds}`;
+                 // 퇴근시간 정보 출력
+				  document.querySelector('#endwork-time').textContent = endWorkTime;
+			   }
+			   
+			   if(daytimes > 0){
+				   //하루 근무시간 update
+				  updateDayWorkTime(daytimes);
+			   }
+		   }
+	   },
+	   error : console.log
+   });
+  
+});
 
 
-   </style>
-   
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <meta name="description" content="">
-    <meta name="author" content="">
 
-    <title>Saerok</title>
 
-    <!-- Custom fonts for this template-->
-    <link href="${pageContext.request.contextPath }/resources/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
-    <link
-        href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
-        rel="stylesheet">
-
-    <!-- Custom styles for this template-->
-    <link href="${pageContext.request.contextPath }/resources/css/sb-admin-2.min.css" rel="stylesheet">
-
-</head>
-
-<body id="page-top">
-    <!-- Page Wrapper -->
-    <div id="wrapper">
-
-        <!-- Sidebar -->
-        <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
-
-            <!-- Sidebar - Brand -->
-            <a class="sidebar-brand d-flex align-items-center justify-content-center" href="${path}/">
-                <div class="sidebar-brand-icon rotate-n-15">
-                    <i class="fas fa-gift"></i>
-                </div>
-                <div class="sidebar-brand-text mx-3">아토</div>
-            </a>
-            <!-- 아토 누르면 메인페이지로 넘어가도록!! : 완료!! 화면전환 메소드는 loginController에 있음-->
-            <!-- Divider -->
-            <hr class="sidebar-divider my-0">
-            <!-- Divider -->
-            <hr class="sidebar-divider">
-            <!-- Heading -->
-            <li class="nav-item">
-                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseHR"
-                    aria-expanded="true" aria-controls="collapseHR">
-                    <i class="fas fa-fw fa-users"></i>
-                    <span>인사관리</span>
-                </a>
-                <div id="collapseHR" class="collapse" aria-labelledby="headingHR" data-parent="#accordionSidebar">
-                    <div class="bg-white py-2 collapse-inner rounded">
-                        <a class="collapse-item" href="${path }/insertemp">사원등록</a>
-                        <a class="collapse-item" href="${path }/selectemp">사원조회</a>
-                        <a class="collapse-item" href="">조직도</a>
-                    </div>
-                </div>
-            </li>
-                 <li class="nav-item">
-                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseWORK"
-                    aria-expanded="true" aria-controls="collapseWORK">
-                    <i class="fas fa-fw fa-clock"></i>
-                    <span>근태관리</span>
-                </a>
-                <div id="collapseWORK" class="collapse" aria-labelledby="headingWORK"
-                    data-parent="#accordionSidebar">
-                    <div class="bg-white py-2 collapse-inner rounded">
-                        <a class="collapse-item" href="${path }/commute/commuteMain.do">내 근태현황</a>
-                        <a class="collapse-item" href="">부서별 근태현황</a>
-                        <a class="collapse-item" href="">연차현황</a>
-                    </div>
-                </div>
-            </li>
-                 <li class="nav-item">
-                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseSKD"
-                    aria-expanded="true" aria-controls="collapseSKD">
-                    <i class="fas fa-fw fa-calendar-alt"></i>
-                    <span>일정관리</span>
-                </a>
-                <div id="collapseSKD" class="collapse" aria-labelledby="headingSKD"
-                    data-parent="#accordionSidebar">
-                    <div class="bg-white py-2 collapse-inner rounded">
-                        <a class="collapse-item" href="${path }/calendar/calendarMain.do">일정조회</a>
-                        <a class="collapse-item" href="">부서일정</a>
-                    </div>
-                </div>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseBoard"
-                    aria-expanded="true" aria-controls="collapseBoard">
-                    <i class="fas fa-th-list"></i>
-                    <span>게시판</span>
-                </a>
-                <div id="collapseBoard" class="collapse" aria-labelledby="headingBoard" data-parent="#accordionSidebar">
-                    <div class="bg-white py-2 collapse-inner rounded">
-                       <%-- <a class="collapse-item" href="${path }/board/write">작성하기</a> --%>
-                         <a class="collapse-item" href="${path }/board/All">공지 사항</a>
-                       <!-- <a class="collapse-item" href="">전체게시판</a> -->
-                        <a class="collapse-item" href="${path }/board/part">부서별 게시판</a>
-                    </div>
-                </div>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link dpse-item " onclick="javascript:requestNote('${path }/note/get');" data-toggle="collapse" data-target="#collapseMsg"
-                    aria-expanded="true" aria-controls="collapseMsg">
-                    <i class="fas fa-fw fa-envelope"></i>
-                    <span>쪽지</span>
-                </a>
-                <div id="collapseMsg" class="collapse" aria-labelledby="headingMsg" data-parent="#accordionSidebar">
-                    <div class="bg-white py-2 collapse-inner rounded">
-                        <a class="collapse-item" href="javascript:requestNote('${path }/note/write');">쪽지쓰기</a>
-                        <a class="collapse-item" href="javascript:requestNote('${path }/note/get');">받은쪽지함</a>
-                        <a class="collapse-item" href="javascript:requestNote('${path }/note/send');">보낸쪽지함</a>
-                        <a class="collapse-item" href="javascript:requestNote('${path }/note/basket');">휴지통</a>
-                    </div>
-                </div>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseCharts"
-                    aria-expanded="true" aria-controls="collapseCharts">
-                    <i class="fas fa-fw fa-chart-bar"></i>
-                    <span>지점관리</span>
-                </a>
-                    <div id="collapseCharts" class="collapse" aria-labelledby="headingCharts" data-parent="#accordionSidebar">
-                        <div class="bg-white py-2 collapse-inner rounded">
-                            <a class="collapse-item" href="/sales/all">매출현황</a>
-                            <a class="collapse-item" href="/sales/branch">지점별매출</a>
-                            <a class="collapse-item" href="/orders">발주목록</a>
-                            <a class="collapse-item" href="/branch/">지점조회</a>
-                        </div>
-                    </div>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseStore"
-                    aria-expanded="true" aria-controls="collapseStore">
-                    <i class="fas fa-fw fa-chart-line"></i>
-                    <span>점주전용</span>
-                </a>
-                    <div id="collapseStore" class="collapse" aria-labelledby="headingStore" data-parent="#accordionSidebar">
-                        <div class="bg-white py-2 collapse-inner rounded">
-                            <a class="collapse-item" href="/owner/sales">매출현황</a>
-                            <a class="collapse-item" href="/owner/detail">매출관리</a>
-                            <a class="collapse-item" href="/inventory">재고목록</a>
-                            <a class="collapse-item" href="">물품발주</a>
-                            <a class="collapse-item" href="">발주목록</a>
-                        </div>
-                    </div>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseEDSM"
-                    aria-expanded="true" aria-controls="collapseEDSM">
-                    <i class="fas fa-fw fa-folder"></i>
-                    <span>전자결재</span>
-                </a>
-                    <div id="collapseEDSM" class="collapse" aria-labelledby="headingEDSM" data-parent="#accordionSidebar">
-                        <div class="bg-white py-2 collapse-inner rounded">
-                            <a class="collapse-item" href="${path }/approval/approvalList.do">문서함</a>
-                        </div>
-                    </div>
-            </li>
-            <!-- Divider -->
-            <hr class="sidebar-divider d-none d-md-block">
-
-            <!-- Sidebar Toggler (Sidebar) -->
-            <div class="text-center d-none d-md-inline">
-                <button class="rounded-circle border-0" id="sidebarToggle">
-                </button>
-            </div>
-        </ul>
-        <!-- End of Sidebar -->
-
-        <!-- Content Wrapper -->
-        <div id="content-wrapper" class="d-flex flex-column">
-            <!-- Main Content -->
-            <div id="content">
-                <!-- Topbar -->
-                <nav class="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top shadow">
-
-                    <!-- Sidebar Toggle (Topbar) -->
-                    <button id="sidebarToggleTop" class="btn btn-link d-md-none rounded-circle mr-3">
-                        <i class="fa fa-bars"></i>
-                    </button>
-
-                    <!-- Topbar Search -->
-                    <form
-                        class="d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search">
-                        <div class="input-group">
-                            <input type="text" class="form-control bg-light border-0 small" placeholder="Search for..."
-                                aria-label="Search" aria-describedby="basic-addon2">
-                            <div class="input-group-append">
-                                <button class="btn btn-primary" type="button">
-                                    <i class="fas fa-search fa-sm"></i>
-                                </button>
-                            </div>
-                        </div>
-                    </form>
-
-                    <!-- Topbar Navbar -->
-                    <ul class="navbar-nav ml-auto">
-
-                        <!-- Nav Item - Search Dropdown (Visible Only XS) -->
-                        <li class="nav-item dropdown no-arrow d-sm-none">
-                            <a class="nav-link dropdown-toggle" href="#" id="searchDropdown" role="button"
-                                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                <i class="fas fa-search fa-fw"></i>
-                            </a>
-                            <!-- Dropdown - Messages -->
-                            <div class="dropdown-menu dropdown-menu-right p-3 shadow animated--grow-in"
-                                aria-labelledby="searchDropdown">
-                                 <form class="form-inline mr-auto w-100 navbar-search">
-                                    <div class="input-group">
-                                        <input type="text" class="form-control bg-light border-0 small"
-                                            placeholder="Search for..." aria-label="Search"
-                                            aria-describedby="basic-addon2">
-                                        <div class="input-group-append">
-                                            <button class="btn btn-primary" type="button">
-                                                <i class="fas fa-search fa-sm"></i>
-                                            </button>
-                                        </div>
-                                    </div>
-                                </form> 
-                            </div>
-                        </li>
-
-                        <!-- Nav Item - Alerts -->
-                        <!--  <li class="nav-item dropdown no-arrow mx-1">
-                            <a class="nav-link dropdown-toggle" href="#" id="alertsDropdown" role="button"
-                                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                <i class="fas fa-bell fa-fw"></i>
-                                Counter - Alerts
-                                <span class="badge badge-danger badge-counter">3+</span>
-                            </a>
-                            Dropdown - Alerts
-                            <div class="dropdown-list dropdown-menu dropdown-menu-right shadow animated--grow-in"
-                                aria-labelledby="alertsDropdown">
-                                <h6 class="dropdown-header">
-                                    알림
-                                </h6>
-                                <a class="dropdown-item d-flex align-items-center" href="#">
-                                    <div class="mr-3">
-                                        <div class="icon-circle bg-primary">
-                                            <i class="fas fa-file-alt text-white"></i>
-                                        </div>
-                                    </div>
-                                    <div>
-                                        <div class="small text-gray-500">알림날짜</div>
-                                        <span class="font-weight-bold">알림내용!</span>
-                                    </div>
-                                </a>
-                                <a class="dropdown-item d-flex align-items-center" href="#">
-                                    <div class="mr-3">
-                                        <div class="icon-circle bg-success">
-                                            <i class="fas fa-donate text-white"></i>
-                                        </div>
-                                    </div>
-                                    <div>
-                                        <div class="small text-gray-500">알림날짜</div>
-                                        알림내용!
-                                    </div>
-                                </a>
-                                <a class="dropdown-item d-flex align-items-center" href="#">
-                                    <div class="mr-3">
-                                        <div class="icon-circle bg-warning">
-                                            <i class="fas fa-exclamation-triangle text-white"></i>
-                                        </div>
-                                    </div>
-                                    <div>
-                                        <div class="small text-gray-500">알림날짜</div>
-                                        알림내용!
-                                    </div>
-                                </a>
-                                <a class="dropdown-item text-center small text-gray-500" href="#">모든알림보기</a>
-                            </div>
-                        </li> -->
-
-                       <!-- Nav Item - Alerts -->
-                   <!--       <li class="nav-item dropdown no-arrow mx-1">
-                            <a class="nav-link dropdown-toggle" href="#" id="alertsDropdown" role="button"
-                                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                <i class="fas fa-bell fa-fw"></i>
-                                Counter - Alerts
-                                <span class="badge badge-danger badge-counter">3+</span>
-                            </a>
-                            Dropdown - Alerts
-                            <div class="dropdown-list dropdown-menu dropdown-menu-right shadow animated--grow-in"
-                                aria-labelledby="alertsDropdown">
-                                <h6 class="dropdown-header">
-                                    알림
-                                </h6>
-                                <a class="dropdown-item d-flex align-items-center" href="#">
-                                    <div class="mr-3">
-                                        <div class="icon-circle bg-primary">
-                                            <i class="fas fa-file-alt text-white"></i>
-                                        </div>
-                                    </div>
-                                    <div>
-                                        <div class="small text-gray-500">알림날짜</div>
-                                        <span class="font-weight-bold">알림내용!</span>
-                                    </div>
-                                </a>
-                                <a class="dropdown-item d-flex align-items-center" href="#">
-                                    <div class="mr-3">
-                                        <div class="icon-circle bg-success">
-                                            <i class="fas fa-donate text-white"></i>
-                                        </div>
-                                    </div>
-                                    <div>
-                                        <div class="small text-gray-500">알림날짜</div>
-                                        알림내용!
-                                    </div>
-                                </a>
-                                <a class="dropdown-item d-flex align-items-center" href="#">
-                                    <div class="mr-3">
-                                        <div class="icon-circle bg-warning">
-                                            <i class="fas fa-exclamation-triangle text-white"></i>
-                                        </div>
-                                    </div>
-                                    <div>
-                                        <div class="small text-gray-500">알림날짜</div>
-                                        알림내용!
-                                    </div>
-                                </a>
-                                <a class="dropdown-item text-center small text-gray-500" href="#">모든알림보기</a>
-                            </div>
-                        </li> -->
-
-                        <!-- Nav Item - Messages
-                        <li class="nav-item dropdown no-arrow mx-1">
-                            <a class="nav-link dropdown-toggle" href="#" id="messagesDropdown" role="button"
-                                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                <i class="fas fa-envelope fa-fw"></i>
-                                Counter - Messages
-                                <span class="badge badge-danger badge-counter">7</span>
-                            </a>
-                            Dropdown - Messages
-                            <div class="dropdown-list dropdown-menu dropdown-menu-right shadow animated--grow-in"
-                                aria-labelledby="messagesDropdown">
-                                <h6 class="dropdown-header">
-                                    쪽지알림
-                                </h6>
-                                <a class="dropdown-item d-flex align-items-center" href="#">
-                                    <div class="dropdown-list-image mr-3">
-                                        <img class="rounded-circle" src="img/undraw_profile_1.svg"
-                                            alt="...">
-                                        <div class="status-indicator bg-success"></div>
-                                    </div>
-                                    <div class="font-weight-bold">
-                                        <div class="text-truncate">쪽지내용.</div>
-                                        <div class="small text-gray-500">보낸사람 · 58m</div>
-                                    </div>
-                                </a>
-                                <a class="dropdown-item d-flex align-items-center" href="#">
-                                    <div class="dropdown-list-image mr-3">
-                                        <img class="rounded-circle" src="img/undraw_profile_2.svg"
-                                            alt="...">
-                                        <div class="status-indicator"></div>
-                                    </div>
-                                    <div>
-                                        <div class="text-truncate">쪽지내용</div>
-                                        <div class="small text-gray-500">보낸사람 · 1d</div>
-                                    </div>
-                                </a>
-                                <a class="dropdown-item d-flex align-items-center" href="#">
-                                    <div class="dropdown-list-image mr-3">
-                                        <img class="rounded-circle" src="img/undraw_profile_3.svg"
-                                            alt="...">
-                                        <div class="status-indicator bg-warning"></div>
-                                    </div>
-                                    <div>
-                                        <div class="text-truncate">쪽지내용!</div>
-                                        <div class="small text-gray-500">보낸사람 · 2d</div>
-                                    </div>
-                                </a> -->
-                                <!-- <a class="dropdown-item d-flex align-items-center" href="#"> -->
-                                    <div class="dropdown-list-image mr-3" name="oriFileName">
-                                        <a href="${path }/mypage">
-                                 <img src="${path}/resources/upload/profile/${loginEmployee.destFileName}" alt="ato-profile-img">
-                                 </a>
-                                        <div class="status-indicator bg-success"></div>
-                                    </div>
-                                    
-                                    <!-- <div>
-                                        <div class="text-truncate">쪽지내용.</div>
-                                        <div class="small text-gray-500">보낸사람 · 2w</div>
-                                    </div>
-                                </a>
-                                <a class="dropdown-item text-center small text-gray-500" href="#">쪽지 더보기</a>
-                            </div>
-                        </li> -->
- 
-                        <div class="topbar-divider d-none d-sm-block"></div> 
-
-                        <!-- Nav Item - User Information -->
-                        <li class="nav-item dropdown no-arrow">
-                            <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button"
-                                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                <span class="mr-2 d-none d-lg-inline text-gray-600 small">${loginEmployee.empName }</span>
-                                <!-- <img class="img-profile rounded-circle"
-                                    src="img/undraw_profile.svg"> -->
-                            </a>
-                            <!-- Dropdown - User Information -->
-                            <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in"
-                                aria-labelledby="userDropdown">
-                                <a class="dropdown-item" href="${path }/mypage">
-                                    <i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
-                                    마이페이지
-                                </a>
-                                <div class="dropdown-divider"></div>
-                                <a class="dropdown-item" href="${path}/logoutpage " data-toggle="modal" data-target="#logoutModal">
-                                    <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400" ></i>
-                                    로그아웃
-                                </a>
-                            </div>
-                        </li>
-
-                    </ul>
-
-                </nav>
-                <!-- End of Topbar -->
-   <script>
-      function requestNote(url){
-         fetch(url)
-         .then(response=>response.text())
-         .then(data=>{
-               document.querySelector(".page-wrapper").innerHTML=data;
-            });
-      } 
-      function searchEmp(){
-         var empNameVal = $("#email").val();
-         /* alert(empNameVal); */
-         $.ajax({
-            type: "GET", 
-            url:"/note/selectEmpByName",
-            data: { 
-                  empName: empNameVal
-            },
-            success : function(result){
-               //todo 이름으로 검색한 결과들을 노출하는 로직을 짜야되요
-               //결과가 있든 없든 여기다가 짜야됨
-               //console.log(result.empList);
-               var result0 = result.empList[0];
-               console.log(result);
-               $("#searchResult").html('');
-               result.empList.forEach(e=>{
-                  const $op=document.createElement("option");
-                  $op.value=e.empNo+" "+e.empName;
-                  
-                  $("#searchResult").append($op);
-               })
-               
-            },
-            error : function(){
-               //통신실패
-               alert("실패");
+document.querySelector('#startBtn').addEventListener('click', function () {
+    $.ajax({
+        url: '${path}/commute/workIn.do',
+        method: 'POST',
+        contentType: 'application/json; charset=utf-8',
+        data: JSON.stringify({
+            status: '10' // 10:출근
+        }),
+        success: function (data) {
+            if (data.successYn == 'Y') {
+                alert('출근 성공입니다.');
+            } else if (data.successYn == '연차') {
+                alert('연차 중입니다.');
+            } else {
+                alert('이미 출근하셨습니다.');
             }
-         }); 
-         
-      }
-   </script>
-    <!-- Scroll to Top Button-->
- 
+        },
+        error: console.log
+    });
+});
+
+
+//퇴근하기 버튼 누를시
+document.querySelector('#endBtn').addEventListener('click', function () {
+	
+	$.ajax({
+	   url : '${path}/commute/workOut.do',
+	   method : 'POST',
+	   contentType : "application/json; charset=utf-8",
+	   success(data){
+		   console.log(data);
+		   if(data.successYn == "Y"){
+	           alert("퇴근 성공입니다.");
+	       }else if(data.successYn == '출근전'){
+	    	   alert("출근전입니다.");
+	    	   return;
+	       }else if(data.successYn == '연차'){
+	    	   alert("연차중입니다.");
+	    	   return;
+	       }
+	       else{
+	           alert("이미 퇴근하셨습니다.");
+	           return;
+	       }
+		},
+	   error : console.log
+  });
+});
+
+const updateWorkTime = (daytimes) =>{
+	
+   $.ajax({
+       url: '${path }/commute/updateWorkTime.do',
+       method: 'POST',
+       data: {daytimes},
+       success(data) {
+         console.log(data);
+       },
+       error: console.log
+     });
+	};
+</script>		
+
+	<!-- Core plugin JavaScript-->
+	<script src="/vendor/jquery-easing/jquery.easing.min.js"></script>
+
+	<!-- Custom scripts for all pages-->
+	<script src="/js/sb-admin-2.min.js"></script>
+
+	<!-- Page level plugins -->
+	<script src="/vendor/chart.js/Chart.min.js"></script>
+
+	<!-- Page level custom scripts -->
+	<script src="/js/demo/chart-area-demo.js"></script>
+	<script src="/js/demo/chart-pie-demo.js"></script>
+	<script src="/js/demo/chart-bar-demo.js"></script>
+
+</section>
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+
+<script>
+const monthlySalesData = {
+    labels: [],
+    sales: []
+};
+
+<c:forEach items="${monthlySalesTotals}" var="record">
+    monthlySalesData.labels.push("${record.SALESMONTH}");
+    monthlySalesData.sales.push(${record.TOTALSALES}); 
+</c:forEach>
+
+const ctx = document.getElementById('monthlySalesChart').getContext('2d');
+const gradient = ctx.createLinearGradient(0, 0, 0, 400);
+gradient.addColorStop(0, 'rgba(0, 123, 255, 0.5)');
+gradient.addColorStop(1, 'rgba(0, 123, 255, 0)');
+
+const monthlySalesChart = new Chart(ctx, {
+    type: 'line',
+    data: {
+        labels: monthlySalesData.labels,
+        datasets: [{
+            label: '월간 매출액',
+            backgroundColor: gradient,
+            borderColor: 'rgba(0, 123, 255, 1)',
+            data: monthlySalesData.sales,
+            fill: true,
+            pointBackgroundColor: 'white',
+            pointBorderColor: 'rgba(0, 123, 255, 1)',
+            pointHoverBackgroundColor: 'rgba(0, 123, 255, 1)',
+            pointHoverBorderColor: 'white'
+        }]
+    },
+    options: {
+        responsive: true,
+        title: {
+            display: true,
+            text: '월간 매출 추이',
+            fontColor: 'black',
+            fontSize: 20
+        },
+        scales: {
+            yAxes: [{
+                gridLines: {
+                    drawBorder: true,
+                    color: 'lightgrey'
+                },
+                ticks: {
+                    beginAtZero: true,
+                    fontColor: 'black'
+                }
+            }],
+            xAxes: [{
+                gridLines: {
+                    drawBorder: true,
+                    color: 'lightgrey'
+                },
+                ticks: {
+                    fontColor: 'black'
+                }
+            }]
+        },
+        legend: {
+            labels: {
+                fontColor: 'black'
+            }
+        },
+        hover: {
+            mode: 'nearest',
+            intersect: true
+        },
+        tooltips: {
+            mode: 'index',
+            intersect: false
+        }
+    }
+});
+</script>
+<%-- <%— <script src="${pageContext.request.contextPath}/resources/js/emp.js"></script> —%> --%>
+<br>
+<jsp:include page="/WEB-INF/views/common/footer.jsp" />
