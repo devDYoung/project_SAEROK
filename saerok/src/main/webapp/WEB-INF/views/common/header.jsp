@@ -8,7 +8,9 @@
 <!DOCTYPE html>
 <html lang="utf-8">
 <head>
-   
+   <script src="https://kit.fontawesome.com/cbe4aa3844.js" crossorigin="anonymous"></script>
+			<link rel="stylesheet"
+				href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css" />
 <style>
 
 .dropdown-list-image img {
@@ -110,8 +112,9 @@
                 <div id="collapseSKD" class="collapse" aria-labelledby="headingSKD"
                     data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
-                        <a class="collapse-item" href="${path }/calendar/calendarMain.do">일정조회</a>
-                        <a class="collapse-item" href="">부서일정</a>
+                        <a class="collapse-item" href="${path }/calendar/calendarMain.do">일정관리</a>
+                        <a class="collapse-item" href="${path }/calendar/calendarView.do">일정조회</a>
+                         <a class="collapse-item" href="${path }/calendar/calendarWrite.do">일정추가</a>
                     </div>
                 </div>
             </li>
@@ -123,9 +126,7 @@
                 </a>
                 <div id="collapseBoard" class="collapse" aria-labelledby="headingBoard" data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
-                    	<%-- <a class="collapse-item" href="${path }/board/write">작성하기</a> --%>
                    		<a class="collapse-item" href="${path }/board/All">전체 게시판</a>
-                       <!-- <a class="collapse-item" href="">전체게시판</a> -->
                         <a class="collapse-item" href="${path }/board/part">부서별 게시판</a>
                     </div>
                 </div>
@@ -452,8 +453,8 @@
          fetch(url)
          .then(response=>response.text())
          .then(data=>{
-            /* document.querySelector(".page-wrapper").innerHTML=data;
-            }); */
+             document.querySelector(".page-wrapper").innerHTML=data;
+            }); 
       } 
       function searchEmp(){
          var empNameVal = $("#email").val();
