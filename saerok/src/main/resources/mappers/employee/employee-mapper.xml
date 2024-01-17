@@ -87,6 +87,7 @@
 <!-- 사원 삭제 -->
 		<delete id="deleteEmployee" parameterType="emp">
 			DELETE EMPLOYEE WHERE EMP_NO=#{empNo}
+			
 		</delete>
    
    
