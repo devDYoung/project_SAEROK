@@ -41,6 +41,14 @@ public class EmployeeServiceImpl implements EmployeeService {
 		return dao.updateEmployee(session, e);
 	}
 	
+	//사원삭제
+	@Override
+	public int deleteEmployee(Employee empNo) {
+		return dao.deleteEmployee(session, empNo);
+	}
+	
+	
+	
 
 	
 	

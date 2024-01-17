@@ -30,7 +30,6 @@
             </div>
         </div>
     </div> 
-	<script src="${path}/resources/vendor/jquery/jquery.min.js"></script>
     <script src="${path }/resources/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
 
     <!-- Core plugin JavaScript-->
@@ -39,5 +38,6 @@
     <!-- Custom scripts for all pages-->
     <script src="${path}/resources/js/sb-admin-2.min.js"></script> 
 	
+	<script src="${path}/resources/vendor/jquery/jquery.min.js"></script>
 </body>
 </html>

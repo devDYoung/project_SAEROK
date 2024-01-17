@@ -34,6 +34,14 @@
 			<!-- <div></div> -->
 		</div>
 		<!-- 본문시작 -->
+
+
+		<!-- <div> -->
+
+
+
+		<!-- <div> -->
+
 		<div class="page-wrapper">
 						<div class="home-content">
 							<div style="display: flex;">
@@ -48,19 +56,19 @@
 				                                </tr>
 												<tr>
 													<td colspan="2">
-														<c:if test="${!empty sessionScope.loginMember.attachment}">
-															<img src="${pageContext.request.contextPath}/resources/upload/emp/${sessionScope.loginMember.attachment.renameFilename}" alt="" class="img">
+														<c:if test="${!empty loginEmployee.destFileName}">
+															<img src="${path}/resources/upload/profile/${loginEmployee.destFileName}" alt="" class="img">
 														</c:if>
-														<c:if test="${empty sessionScope.loginMember.attachment}">
-															<img src="${pageContext.request.contextPath}/resources/images/default.png" alt="" class="img">
-														</c:if>
+														<%-- <c:if test="${!empty loginEmployee.destFileName}">
+															<img src="${path}/resources/upload/IMG_2341.jpg" alt="" class="img">
+														</c:if> --%>
 													</td>
 												</tr>
 												<tr>
-													<td colspan="2">${sessionScope.loginMember.name} ${sessionScope.loginMember.jobTitle}</td>
+													<td colspan="2">${loginEmployee.empName} ${loginEmployee.jobName}</td>
 												</tr>
 												<tr>
-													<td colspan="2">${sessionScope.loginMember.deptTitle}</td>
+													<td colspan="2">${loginEmployee.deptName}</td>
 												</tr>
 												 
 				                                <tr>
@@ -68,7 +76,7 @@
 				                                </tr>
 												<tr>
 				                                    <td class="font-14 font-bold">업무상태</td>
-				                                    <td class="text-right font-14 color-red font-bold" id="work-state">출근전</td>
+				                                    <td class="text-right font-14 color-red font-bold" id="work-status">출근전</td>
 				                                </tr>    
 				                                <tr>
 				                                    <td class="font-14 font-bold">출근시간</td>
@@ -79,8 +87,8 @@
 				                                    <td class="text-right font-14" id="endwork-time">미등록</td>
 				                                </tr>
 				                                <tr class="btn-tr">
-				                                    <td><button class="font-bold" id="btn-startwork">출근하기</button></td>
-				                                    <td class="text-right"><button class="font-bold" id="btn-endwork">퇴근하기</button></td>
+				                                    <td><button class="font-bold" id="startBtn">출근하기</button></td>
+				                                    <td class="text-right"><button class="font-bold" id="endBtn">퇴근하기</button></td>
 				                                </tr>
 				                            </tbody>
 				                        </table>
@@ -275,176 +283,121 @@
 	</div>
 	</div>
 
-	<script>
-       $(function() {
-         //출퇴근 버튼 설정
-         var start = "${c.inDtime}";
-         var end = "${c.outDtime}";
-         //null이면 출근x, 퇴근x
-         //null이 아니면 - 출근o, 퇴근x
-         //          - 출근o, 퇴근o
-         if (start == "") {
-            $('#startBtn').attr('disabled', false);
-            $('#endBtn').attr('disabled', false);
+		<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
-            $('#inDtime').text("미등록")
-            $('#outDtime').text("미등록")
-         }
-         if (start != "" && end == "") {
-            $('#startBtn').attr('disabled', true) //출근버튼 비활성화
+<script>
+window.addEventListener('load', function(){
+	
+   $.ajax({
+	   url : '${path }/commute/commute.do',
+	   contentType : "application/json; charset=utf-8",
+	   success(data){
+		   console.log(data);
+		   if(data){
+			   const {commuteNo,inDtime,outDtime,overtime,workingDay,status,lateYN,empNo,workingHours} = data;
+			   var starttime = new Date(inDtime);
+			   var endtime = new Date(outDtime);
+			   
+			   //하루 근무시간 계산
+			   const daytimes = workingHours;
+			   
+			   const workStatus = document.querySelector("#work-status");
+			   workStatus.textContent = status;
+			   
+			   if(inDtime){
+				 var hours = (starttime.getHours()); 
+                var minutes = starttime.getMinutes();
+                var seconds = starttime.getSeconds();
+                var startWorkTime = `\${hours < 10 ? '0' + hours : hours}:\${minutes < 10 ? '0'+minutes : minutes}:\${seconds < 10 ? '0'+seconds : seconds}`;
+                // 출근시간 정보 출력
+                document.querySelector('#startwork-time').textContent = startWorkTime;
+			   }
+			   
+			   if(outDtime){
+ 				  var hours = (endtime.getHours()); 
+                 var minutes = endtime.getMinutes();
+                 var seconds = endtime.getSeconds();
+                 var endWorkTime = `\${hours < 10 ? '0' + hours : hours}:\${minutes < 10 ? '0'+minutes : minutes}:\${seconds < 10 ? '0'+seconds : seconds}`;
+                 // 퇴근시간 정보 출력
+				  document.querySelector('#endwork-time').textContent = endWorkTime;
+			   }
+			   
+			   if(daytimes > 0){
+				   //하루 근무시간 update
+				  updateDayWorkTime(daytimes);
+			   }
+		   }
+	   },
+	   error : console.log
+   });
+  
+});
 
-            $('#inDtime').text(start) //출근시간 표시
-            $('#outDtime').text("미등록")
-         } else if (start != "" && end != "") {
-            $('#startBtn').attr('disabled', true) //출근버튼 비활성화
-            $('#endBtn').attr('disabled', true) //퇴근버튼 비활성화
 
-            $('#inDtime').text(start) //출근시간 표시
-            $('#outDtime').text(end) //퇴근시간 표시
-            
-         } 
-         
-         // loginEmployee가 null이 아닌 경우에만 속성에 액세스하기 전에 null 체크
-         var empNo = "${loginEmployee != null ? loginEmployee.empNo : 'null'}";
-         //console.log("직원 번호: " + empNo);
-         
-         //출근 버튼 클릭시
 
-         $("#startBtn").click(function(e){
-        	 $.ajax({
- 				type: "POST", 
- 				url: "${path}/commute/workIn.do",
- 				data: { 
- 					status: "10" // 10: 출근
- 				},
- 				success : function(result){
- 					console.log(result);
- 					if(result.successYn == "Y"){
- 						//todo 버튼 활성화
- 						alert("출근 성공 \n출근 시간: " + result.indtime);
- 						
- 						const indtime=new Date(result.indtime);
- 						
- 						document.querySelector("#inDtime").innerText=
- 							indtime.getHours()+":"+
- 							(indtime.getMinutes()<10?"0"+indtime.getMinutes():indtime.getMinutes());
- 							
- 						
- 					}else{
- 						alert("출근 실패");
- 					}
 
- 				},
- 				error : function(){
- 					alert("근무정보를 조회할 수 없습니다. \n관리자에게 문의하세요.");
- 				}
- 			});
-         });
+document.querySelector('#startBtn').addEventListener('click', function () {
+    $.ajax({
+        url: '${path}/commute/workIn.do',
+        method: 'POST',
+        contentType: 'application/json; charset=utf-8',
+        data: JSON.stringify({
+            status: '10' // 10:출근
+        }),
+        success: function (data) {
+            if (data.successYn == 'Y') {
+                alert('출근 성공입니다.');
+            } else if (data.successYn == '연차') {
+                alert('연차 중입니다.');
+            } else {
+                alert('이미 출근하셨습니다.');
+            }
+        },
+        error: console.log
+    });
+});
+
+
+//퇴근하기 버튼 누를시
+document.querySelector('#endBtn').addEventListener('click', function () {
+	
+	$.ajax({
+	   url : '${path}/commute/workOut.do',
+	   method : 'POST',
+	   contentType : "application/json; charset=utf-8",
+	   success(data){
+		   console.log(data);
+		   if(data.successYn == "Y"){
+	           alert("퇴근 성공입니다.");
+	       }else if(data.successYn == '출근전'){
+	    	   alert("출근전입니다.");
+	    	   return;
+	       }else if(data.successYn == '연차'){
+	    	   alert("연차중입니다.");
+	    	   return;
+	       }
+	       else{
+	           alert("이미 퇴근하셨습니다.");
+	           return;
+	       }
+		},
+	   error : console.log
+  });
+});
+
+const updateWorkTime = (daytimes) =>{
+	
+   $.ajax({
+       url: '${path }/commute/updateWorkTime.do',
+       method: 'POST',
+       data: {daytimes},
+       success(data) {
+         console.log(data);
+       },
+       error: console.log
      });
-      
-      
-      // 퇴근버튼 클릭시
-      $("#endBtn").click(function(e){
-    	    $.ajax({
-    	        type: "POST", 
-    	        url: "${path}/commute/workOut.do",
-    	        data: { 
-    	            status: "20" // 20: 퇴근
-    	        },
-    	        success : function(result){
-    	        	console.log(result);
-    	            if(result.successYn == "Y"){
-    	                // 퇴근 성공
-    	                alert("퇴근 성공\n퇴근 시간: " + result.outdtime);
-    	    
-    	                const outdtime=new Date(result.outdtime);
-    	                
-    	                document.querySelector("#outDtime").innerText=
- 							outdtime.getHours()+":"+
- 							(outdtime.getMinutes()<10?"0"+outdtime.getMinutes():outdtime.getMinutes());
-    	                
-    	                
-    	            } else {
-    	                alert("퇴근 실패");
-    	            }
-    	            
-    	           
-    	        },
-    	        error : function(){
-    	            alert("근무정보를 조회할 수 없습니다. \n관리자에게 문의하세요.");
-    	        }
-    	    });
-    	});
-      
-
-
-      //시간표시 기능
-      
-     	 window.onload = function() {
-    		printClock();
-		}	
-    	function printClock() {
-
-         var clock = document.getElementById("clock"); // 출력할 장소 선택
-         var todate = document.getElementById("todate");
-         var currentDate = new Date(); // 현재시간
-         var day = new Array('일', '월', '화', '수', '목', '금', '토')
-         var today = day[currentDate.getDay()];
-         var calendar = currentDate.getFullYear() + "-"
-               + (currentDate.getMonth() + 1) + "-"
-               + currentDate.getDate() + " (" + today + ")"// 현재 날짜
-         var currentHours = addZeros(currentDate.getHours(), 2);
-         var currentMinute = addZeros(currentDate.getMinutes(), 2);
-         var currentSeconds = addZeros(currentDate.getSeconds(), 2);
-
-         clock.innerHTML = currentHours + ":" + currentMinute + ":"
-               + currentSeconds; //날짜를 출력해 줌
-         todate.innerHTML = calendar; //날짜를 출력해 줌
-         
-        
-
-         setTimeout("printClock()", 1000); // 1초마다 printClock() 함수 호출
-
-         function addZeros(num, digit) { // 자릿수 맞춰주기
-            var zero = '';
-            num = num.toString();
-            if (num.length < digit) {
-               for (i = 0; i < digit - num.length; i++) {
-                  zero += '0';
-               }
-            }
-            return zero + num;
-         }
-      }
-      
-
-      function setCookie(name, value, expiredDate) {
-         var today = new Date();
-
-         today.setDate(today.getDate() + expiredDate);
-
-         document.cookie = name + '=' + escape(value) + '; expires='
-               + today.toGMTString();
-      }
-
-      function getCookie(name) {
-
-         var cookie = document.cookie;
-
-         if (cookie != "") {
-            var cookie_arr = cookie.split(";");
-            for ( var index in cookie_array) {
-               var cookie_name = cookie_arr[index].split("=");
-               if (cookie_name[0] == "mycookie") {
-                  return cookie_name[1];
-               }
-
-            }
-
-         }
-      }
-         
-   </script>
+	};
+</script>		
 
 
 	<!-- Core plugin JavaScript-->
@@ -461,10 +414,8 @@
 	<script src="/js/demo/chart-pie-demo.js"></script>
 	<script src="/js/demo/chart-bar-demo.js"></script>
 
+
 </section>
-
-<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-
 
 <script>
 const monthlySalesData = {
@@ -543,6 +494,21 @@ const monthlySalesChart = new Chart(ctx, {
     }
 });
 </script>
-<%-- <script src="${pageContext.request.contextPath}/resources/js/emp.js"></script> --%>
+<%-- <%— <script src="${pageContext.request.contextPath}/resources/js/emp.js"></script> —%> --%>
 <br>
+
+
+	<!-- Core plugin JavaScript-->
+	<script src="${path }/resources/vendor/jquery-easing/jquery.easing.min.js"></script>
+
+	<!-- Custom scripts for all pages-->
+	<script src="${path }/resources/js/sb-admin-2.min.js"></script>
+
+	<!-- Page level plugins -->
+<%-- 	<script src="${path }/resources/vendor/chart.js/Chart.min.js"></script> --%>
+
+	<!-- Page level custom scripts -->
+<%-- 	<script src="${path }/resources/js/demo/chart-area-demo.js"></script>
+	<script src="${path }/resources/js/demo/chart-pie-demo.js"></script>
+	<script src="${path }/resources/js/demo/chart-bar-demo.js"></script> --%>
 <jsp:include page="/WEB-INF/views/common/footer.jsp" />

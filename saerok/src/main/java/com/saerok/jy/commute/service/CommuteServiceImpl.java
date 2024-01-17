@@ -1,12 +1,9 @@
 package com.saerok.jy.commute.service;
 
-import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 import org.apache.ibatis.session.SqlSession;
-import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import org.springframework.stereotype.Service;
@@ -41,71 +38,65 @@ public class CommuteServiceImpl implements CommuteService {
 		}
 		return result;
 	}
-	
-	
-	
+
 	@Override
 	@Transactional
 	public int updateCommuteEndTime(Map status) {
 		int result = commuteDao.updateCommuteEndTime(session, status);
-		
+
 		if (result < 0) {
 			throw new CommuteException("근무상태변경 실패");
 		}
 		return result;
 	}
-	
-	
+
 	@Override
 	public int updateWorkTime(Map<String, Object> param) {
 		return commuteDao.updateWorkTime(session, param);
 	}
-	
-	
+
 	@Override
 	public int updateHalfDayOff(Map<String, Object> param) {
 		return commuteDao.updateHalfDayOff(session, param);
 	}
-	
-	
+
 	@Override
 	public List<Commute> selectMonthWork(Map<String, Object> param) {
 		return commuteDao.selectMonthWork(session, param);
 	}
-	
-	//주간 기본근무시간 가져오기
-		@Override
-		public int selectWeekWorkTime(Map<String, Object> startEndMap) {
-			return commuteDao.selectWeekWorkTime(session, startEndMap);
-		}
-		
-		//주간 연장근무시간 가져오기
-		@Override
-		public int selectWeekOverTime(Map<String, Object> startEndMap) {
-			return commuteDao.selectWeekOverTime(session, startEndMap);
-		}
 
-		@Override
-		public List<Commute> selectWeekDatas(Map<String, Object> param) {
-			return commuteDao.selectWeekDatas(session, param);
-		}
-		
-		
-		@Override
-		public int weekTotalTime(Map<String, Object> param) {
-			return commuteDao.weekTotalTime(session, param);
-		}
-		
-		@Override
-		public int totalMonthTime(Map<String, Object> param) {
-			return commuteDao.totalMonthTime(session, param);
-		}
-		
-		@Override
-		public int monthOverTime(Map<String, Object> startEndMap) {
-			return commuteDao.monthOverTime(session, startEndMap);
-		}
-		
+	// 주간 기본근무시간 가져오기
+	@Override
+	public int selectWeekWorkTime(Map<String, Object> startEndMap) {
+		return commuteDao.selectWeekWorkTime(session, startEndMap);
+	}
+
+	// 주간 연장근무시간 가져오기
+	@Override
+	public int selectWeekOverTime(Map<String, Object> startEndMap) {
+		return commuteDao.selectWeekOverTime(session, startEndMap);
+	}
+
+	@Override
+	public List<Commute> selectWeekDatas(Map<String, Object> param) {
+		return commuteDao.selectWeekDatas(session, param);
+	}
+
+	@Override
+	public int weekTotalTime(Map<String, Object> param) {
+		return commuteDao.weekTotalTime(session, param);
+	}
+
+	@Override
+	public int totalMonthTime(Map<String, Object> param) {
+		return commuteDao.totalMonthTime(session, param);
+	}
+
+	@Override
+	public int monthOverTime(Map<String, Object> startEndMap) {
+		return commuteDao.monthOverTime(session, startEndMap);
+	}
+
 //	@Override
 //	public ArrayList<Commute> selectCommuteStatusList(int commuteNo) {
 //

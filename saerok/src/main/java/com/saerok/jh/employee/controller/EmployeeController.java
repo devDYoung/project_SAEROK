@@ -11,7 +11,9 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.saerok.jh.employee.model.dto.Employee;
@@ -104,24 +106,22 @@ public class EmployeeController {
       
   // 사원수정
     @PostMapping("/updateemp")
-     public String updateEmployee(Employee e, Model model) {
-    	
+    @ResponseBody
+     public String updateEmployee(@RequestBody Employee e, Model model) {
+    	System.out.println(e);
     	int result = service.updateEmployee(e);
         
-		String msg, loc, successYn;
-		if (result > 0) {
-			successYn = "Y";
-			msg = "사원수정성공!!";
-			loc = "/selectemp";
-		} else {
-			successYn = "N";
-			msg = "사원수정실패!!";
-			loc = "employee/empList?empNo=" + e.getEmpNo();
-		}
-		model.addAttribute("successYn", "Y");
-		model.addAttribute("msg", msg);
-        return "employee/empList";
+		return result>0?"성공":"실패";
      }
+    
+    @PostMapping("/deleteemp")
+    @ResponseBody
+    public String deleteEmployee(@RequestBody Employee empNo, Model model) {
+    	System.out.println(empNo);
+    	int result = service.deleteEmployee(empNo);
+    	
+    	return result>0?"성공":"실패";
+    }
 
      
      
