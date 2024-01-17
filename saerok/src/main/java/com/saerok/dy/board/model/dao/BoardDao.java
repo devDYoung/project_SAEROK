@@ -13,5 +13,7 @@ public interface BoardDao {
 	List<Board> boardAll(SqlSession session);
 
 	List<Board> boardPart(SqlSession session);
+	
+	void save(Board board);
 
 }

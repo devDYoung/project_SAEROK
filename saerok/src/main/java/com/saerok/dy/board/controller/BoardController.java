@@ -44,7 +44,9 @@ public class BoardController {
 
 	// 부서별 게시판 페이지로 이동
 	@GetMapping("/Part")
-	public String boardPart() {
+	public String boardPart(Model model) {
+		List<Board> boardPart=boardService.boardPart();
+		model.addAttribute("boardPart",boardPart);
 		return "board/boardPart";
 	}
 
@@ -56,5 +58,12 @@ public class BoardController {
 		// 성공 시 이미지 URL을 반환하도록 수정
 		// 실패 시 에러 메시지를 반환하도록 수정
 		return "success";
+	}
+	
+	// 게시글 저장
+	@PostMapping("/save")
+	public String saveBoard(Board board) {
+		boardService.save(board);
+		return "redirect:/board/All";
 	}
 }

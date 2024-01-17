@@ -6,6 +6,7 @@ import com.saerok.dy.board.model.dto.Board;
 
 public interface BoardService {
     List<Board> boardAll();
-    List<Board> getDepartmentBoards();
+    List<Board> boardPart();
+    void save(Board board);
    
 }
