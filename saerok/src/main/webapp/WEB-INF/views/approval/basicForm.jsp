@@ -7,16 +7,12 @@
 <c:set var="path" value="${pageContext.request.contextPath}" />
 <c:set var="loginEmployee"
 	value="${sessionScope.SPRING_SECURITY_CONTEXT.authentication.principal }" />
-<script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
 
 <jsp:include page="/WEB-INF/views/common/header.jsp">
 	<jsp:param value="일반" name="title" />
 </jsp:include>
 
-<script src="./jquery-3.4.1.min.js"></script>
-<link rel="stylesheet" href="./bootstrapt/css/bootstrap.min.css" />
-<link rel="stylesheet" href="./bootstrapt/css/bootstrap.css" />
-<script src="./bootstrapt/js/bootstrap.min.js"></script>
+<script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
 
 
 <button id="testBtn" class="btn">모달 test</button>
@@ -25,15 +21,48 @@
 <div class="modal fade" id="testModal" tabindex="-1" role="dialog"
 	aria-labelledby="exampleModalLabel" aria-hidden="true">
 	<div class="modal-dialog" role="document">
-		<div class="modal-content">
+		<div class="modal-content"
+			style="width: 1000px; height: 1000px; left: -50%; display: flex; position: relative;">
 			<div class="modal-header">
 				<button class="close" type="button" data-dismiss="modal"
-					aria-label="Close">
-					
-				</button>
+					aria-label="Close"></button>
 				<h3 class="modal-title" id="exampleModalLabel">결재선</h3>
 			</div>
-			<div class="modal-body">조직도 트리구조</div>
+			<div class="modal-body">
+				<div style="border: 1px solid black; width: 300px;">
+					<ul id="mixed" class="loadDeptButton">
+						<li><span class="deptName" role="button"
+							style="color: black;"> <i class="fas fa-search fa-fw"></i>
+								인사팀-HR
+						</span>
+							<ul class="team-list">
+							</ul>
+						</li>
+
+
+						<li><span class="deptName" role="button"
+							style="color: black;"><i class="fas fa-fw fa-folder"></i>
+								관리팀-MG</span>
+							<ul class="team-list">
+
+							</ul></li>
+						<li><span class="deptName" role="button"
+							style="color: black;"><i class="fas fa-fw fa-folder"></i>
+								영업-SA</span>
+							<ul class="team-list">
+
+							</ul></li>
+						<li><span class="deptName" role="button"
+							style="color: black;"><i class="fas fa-fw fa-folder"></i>
+								지점팀-STORE</span>
+							<ul class="team-list">
+
+							</ul></li>
+					</ul>
+				</div>
+			</div>
+
+
 			<div class="modal-footer">
 				<a class="btn" id="modalY" href="#">예</a>
 				<button class="btn" type="button" data-dismiss="modal">아니요</button>
@@ -41,16 +70,78 @@
 		</div>
 	</div>
 </div>
+<script>
+    function loadDeptInfo(depCode) {
+        console.log('DEPT_CODE:', depCode);
+       
+    }
 
+    // 예시: 버튼 클릭 시 loadDeptInfo 호출
+    $(document).ready(function() {
+        $('.loadDeptButton>li').click(function(e) {
+        	const deptName=e.currentTarget.children[0].innerText;
+        	const deptCodeName=deptName.substring(deptName.indexOf("-")+1);
+        	let deptCode;
+        	switch(deptCodeName){
+        		case "HR" : deptCode=100;break;
+        		case "MG" : deptCode=200;break;
+        		case "SA" : deptCode=300;break;
+        		case "STORE" : deptCode=400;break;
+        	}
+        	 $.ajax({
+                 url: '${path}/approval/checkDept',
+                 method: 'GET',
+                 data: { deptCode: deptCode },
+                 success: function(response) {
+                	const ul=$(e.currentTarget).find(".team-list");
+                	console.log(ul);
+                	ul.html("");
+                 	response.forEach(e=>{
+                 		const $li=$("<li>");
+                 		const $span=$("<span>").text(e.empName+" "+e.jobName);
+                 		$li.append($span);
+                 		ul.append($li);
+                 	});
+                     console.log('Success:', response);
+                 },
+                 error: function(xhr, status, error) {
+                     console.error('Failed:', error);
+                 }
+             });
+        });
+    });
+</script>
+<!--조직도  -->
+<script>
+	$(document).ready(function() {
+		$('.team-list').hide(); // 부서 하위 목록 숨김
 
+		$('.deptName').click(function() {
+			$(this).siblings('.team-list').toggle();
+		});
+		
+	});
+</script>
 
-
+<!--모달창 띄우기  -->
 <script>
 	$('#testBtn').click(function(e) {
 		e.preventDefault();
 		$('#testModal').modal("show");
 	});
 </script>
+
+
+
+
+
+
+
+
+
+
+
+
 
 <strong>&nbsp; 문서 종류 : </strong>
 <select id="selectDoc" name="selectDoc" class="form-select"
@@ -60,17 +151,16 @@
 	<option value="D3">지출 결의서</option>
 </select>
 
-<button type="button" onclick="openModal()">결재</button>
 
 
 
 
 
-<form class="documentForm" name="basicForm" action="${path}"
-	method="POST" onsubmit="return check_onclick()">
+<form class="documentForm" name="basicForm" action="" method="POST"
+	onsubmit="return check_onclick()">
 	<div id="documentForm " class="documentForm"
 		style="margin: 50px 50px 50px 50px; width: min-content;">
-		<div class="v_doc_Form">
+		<div class="basicForm">
 			<table border="1" style="display: inline-block; text-align: center;">
 				<tr>
 					<td rowspan="2" colspan="4"
@@ -183,7 +273,7 @@
 	//AJAX양식선택
 	function loadDocumentForm(docType) {
 		$.ajax({
-			url : '/approval/docForms',
+			url : '${path}/approval/docForms',
 			type : 'GET',
 			data : {
 				docType : docType
@@ -245,7 +335,7 @@
 	});
 </script>
 
-<!-- 비고 +/- -->
+<!-- 지출결의서폼 비고 +/- -->
 <script>
 	function fn_addForm() {
 		alert("추가함");
@@ -265,6 +355,11 @@
 		$(button).closest('tr').remove();
 	}
 </script>
+
+
+
+
+
 
 
 

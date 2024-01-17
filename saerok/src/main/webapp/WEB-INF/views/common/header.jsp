@@ -452,8 +452,8 @@
          fetch(url)
          .then(response=>response.text())
          .then(data=>{
-            /* document.querySelector(".page-wrapper").innerHTML=data;
-            }); */
+            document.querySelector(".page-wrapper").innerHTML=data;
+          });
       } 
       function searchEmp(){
          var empNameVal = $("#email").val();
