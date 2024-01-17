@@ -34,7 +34,7 @@
 			<!-- <div></div> -->
 		</div>
 		<!-- 본문시작 -->
-		<div>
+		<div class="page-wrapper">
 						<div class="home-content">
 							<div style="display: flex;">
 								<!-- 본문 왼쪽 -->

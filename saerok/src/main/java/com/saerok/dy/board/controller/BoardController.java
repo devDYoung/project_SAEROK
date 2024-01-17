@@ -3,6 +3,7 @@ package com.saerok.dy.board.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -30,9 +31,9 @@ public class BoardController {
 		return "board/boardWrite";
 	}
 
-	// 전체 게시판 페이지로 이동
+	// 공지사항 페이지로 이동
 	@GetMapping("/All")
-	public String boardAll() {
+	public String boardAll(Model model) {
 		return "board/boardAll";
 	}
 
