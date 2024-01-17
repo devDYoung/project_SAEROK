@@ -9,7 +9,7 @@ public interface NoteService {
    
 
     // 받은 쪽지함 조회
-    List<Note> getReceivedNotes(String rcvEmpNo);
+    List<Note> getReceivedNotes();
  
 
     // 이름으로 사원 조회
