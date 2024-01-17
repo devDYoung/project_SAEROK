@@ -34,7 +34,10 @@
 			<!-- <div></div> -->
 		</div>
 		<!-- 본문시작 -->
+
 		<!-- <div> -->
+
+
 		<div class="page-wrapper">
 						<div class="home-content">
 							<div style="display: flex;">
@@ -275,6 +278,7 @@
 
 	</div>
 	</div>
+		<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 <script>
 window.addEventListener('load', function(){
 	
@@ -389,24 +393,9 @@ const updateWorkTime = (daytimes) =>{
 	};
 </script>		
 
-	<!-- Core plugin JavaScript-->
-	<script src="/vendor/jquery-easing/jquery.easing.min.js"></script>
 
-	<!-- Custom scripts for all pages-->
-	<script src="/js/sb-admin-2.min.js"></script>
-
-	<!-- Page level plugins -->
-	<script src="/vendor/chart.js/Chart.min.js"></script>
-
-	<!-- Page level custom scripts -->
-	<script src="/js/demo/chart-area-demo.js"></script>
-	<script src="/js/demo/chart-pie-demo.js"></script>
-	<script src="/js/demo/chart-bar-demo.js"></script>
 
 </section>
-
-<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-
 
 <script>
 const monthlySalesData = {
@@ -487,4 +476,19 @@ const monthlySalesChart = new Chart(ctx, {
 </script>
 <%-- <script src="${pageContext.request.contextPath}/resources/js/emp.js"></script> --%>
 <br>
+
+
+	<!-- Core plugin JavaScript-->
+	<script src="${path }/resources/vendor/jquery-easing/jquery.easing.min.js"></script>
+
+	<!-- Custom scripts for all pages-->
+	<script src="${path }/resources/js/sb-admin-2.min.js"></script>
+
+	<!-- Page level plugins -->
+<%-- 	<script src="${path }/resources/vendor/chart.js/Chart.min.js"></script> --%>
+
+	<!-- Page level custom scripts -->
+<%-- 	<script src="${path }/resources/js/demo/chart-area-demo.js"></script>
+	<script src="${path }/resources/js/demo/chart-pie-demo.js"></script>
+	<script src="${path }/resources/js/demo/chart-bar-demo.js"></script> --%>
 <jsp:include page="/WEB-INF/views/common/footer.jsp" />

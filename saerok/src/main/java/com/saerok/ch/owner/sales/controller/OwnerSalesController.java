@@ -59,7 +59,7 @@ public class OwnerSalesController {
     // 매출 등록 폼 페이지
     @GetMapping("/sales/entry")
     public String showSalesEntryPage() {
-        return "sales/salesEntry"; // 매출 등록 폼 JSP 페이지
+        return "sales/salesEntry"; 
        
     }
 
@@ -67,7 +67,7 @@ public class OwnerSalesController {
     @PostMapping("/sales/add")
     public String addSales(@RequestParam Map<String, Object> salesData, Model model) {
         try {
-            salesService.addBranchSales(salesData); // 매출 데이터 저장
+            salesService.addBranchSales(salesData); 
             model.addAttribute("message", "매출이 성공적으로 등록되었습니다.");
         } catch (Exception e) {
             model.addAttribute("message", "매출 등록에 실패했습니다.");

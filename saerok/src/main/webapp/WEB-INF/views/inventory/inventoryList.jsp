@@ -112,6 +112,30 @@
 .status-rejected {
 	color: #FF0000;
 }
+
+/* 검색 */
+.dataTables_wrapper .dataTables_filter {
+    float: right; 
+}
+
+.dataTables_wrapper .dataTables_filter input {
+    height: 30px; 
+    padding: 0.3em 1em;
+    border: 2px solid #6C7AE0;
+    margin-left: 10px;
+    border-radius: 5px; 
+    color: #6C7AE0; 
+    font-weight: bold;
+    transition: all 0.3s; 
+}
+
+.dataTables_wrapper .dataTables_filter input:focus {
+    border-color: #6C7AE0; 
+    box-shadow: 0 0 5px #6C7AE0;
+    outline: none; 
+}
+
+
 </style>
 </head>
 <body>
@@ -157,7 +181,7 @@
 											{
 												"paging" : true,
 												"lengthChange" : false,
-												"searching" : false,
+												"searching" : true,
 												"ordering" : false,
 												"info" : true,
 												"autoWidth" : false,

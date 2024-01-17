@@ -11,6 +11,8 @@
    <script src="https://kit.fontawesome.com/cbe4aa3844.js" crossorigin="anonymous"></script>
 			<link rel="stylesheet"
 				href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css" />
+				  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="//code.jquery.com/ui/1.13.2/themes/base/jquery-ui.css">
 <style>
 
 .dropdown-list-image img {
@@ -126,7 +128,12 @@
                 </a>
                 <div id="collapseBoard" class="collapse" aria-labelledby="headingBoard" data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
+
                    		<a class="collapse-item" href="${path }/board/All">전체 게시판</a>
+
+                    	<%-- <a class="collapse-item" href="${path }/board/write">작성하기</a> --%>
+                   		<a class="collapse-item" href="${path }/board/All">공지 사항</a>
+                       <!-- <a class="collapse-item" href="">전체게시판</a> -->
                         <a class="collapse-item" href="${path }/board/part">부서별 게시판</a>
                     </div>
                 </div>
@@ -424,7 +431,7 @@
                         <!-- Nav Item - User Information -->
                         <li class="nav-item dropdown no-arrow">
                             <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button"
-                                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
                                 <span class="mr-2 d-none d-lg-inline text-gray-600 small">${loginEmployee.empName }</span>
                                 <!-- <img class="img-profile rounded-circle"
                                     src="img/undraw_profile.svg"> -->

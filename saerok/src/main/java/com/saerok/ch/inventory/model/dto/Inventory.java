@@ -17,8 +17,8 @@ public class Inventory {
     private int itemId;
     private int stock;         // 현재 재고
     private int bufferStock;   // 버퍼 재고
-    private String itemName;   // 품목 이름
-    private String itemCategory; // 카테고리
+    private String itemName;   
+    private String itemCategory; 
 
     
 }

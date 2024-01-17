@@ -16,7 +16,7 @@ public class OrderList {
     private int orderId;
     private String branchName; 
     private Date orderDate;
-    private int totalQuantity; // 전체 발주 수량
-    private BigDecimal totalAmount; // 전체 발주 금액
+    private int totalQuantity; 
+    private BigDecimal totalAmount; 
     private String orderStatus;
 }

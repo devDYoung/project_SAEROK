@@ -123,62 +123,58 @@
                             Object.keys(weekDates).sort().forEach(key  =>{
       
     	                        const row1 = document.createElement("tr");
-    	                        row1.classList.add("table-expand-row");
+    	                       // row1.classList.add("table-expand-row");
     	                        row1.setAttribute("id","work-container-tr");
     	                        row1.dataset.openDetails = "";
     	        				row1.dataset.start = weekDates[key].start;
     	        				row1.dataset.end = weekDates[key].end;
     	        				
-    	        			
     	        				const tbody2 = document.createElement("tbody");
-    						
+    	        				
+    							
     	        				row1.onclick = (e) =>{
-    	        					const start = e.target.parentNode.dataset.start;
-    	        					const end = e.target.parentNode.dataset.end;
+    	        					const start = e.currentTarget.dataset.start;
+    	        					const end = e.currentTarget.dataset.end;
     	        					$.ajax({
     	        						url : '${path }/commute/selectWeekDatas.do',
     	        						data : {start,end},
     	        						success(data){
     	        							console.log(data);
-    	        							
-    	        							if(tbody2.innerHTML == ""){
-    		        							data.forEach((datas) =>{
-    		        								const subTr = document.createElement("tr");
-    		        								const {empNo, outDtime, commuteNo, overtime, workingDay, inDtime, status, workingHours} = datas;
-    		        								const subTd1 = document.createElement("td");
-    		        								subTd1.textContent = changeWorkingDay(workingDay);
-    		        								
-    		        								const subTd2 = document.createElement("td");
-    		        								subTd2.textContent = changeTimeText(inDtime);
-    		        								
-    		        								const subTd3 = document.createElement("td");
-    		        								subTd3.textContent = changeTimeText(outDtime);
-    		        								
-    		        								const subTd4 = document.createElement("td");
-    		        								subTd4.classList.add("font-bold");
-    		        								subTd4.textContent = chageWorkTime(workingHours+overtime);
-    		        								
-    		        								const subTd5 = document.createElement("td");
-    		        								subTd5.textContent = "기본 "+ chageWorkTime(workingHours) + " / 연장 " + chageWorkTime(overtime);
-    		        								
-    		        								const subTd6 = document.createElement("td");
-    		        								if(status == '연차'){
-    			        								subTd6.textContent = "완료(" + status + " 8.00h)";
-    		        								}
-    		        								else if(status == '반차'){
-    		        									subTd6.textContent = "완료(" + status + " 4.00h)";
-    		        								}
-    		        								else{
-    		        									subTd6.textContent = "";
-    		        								}
-    		        								
-    		        								subTr.append(subTd1,subTd2,subTd3,subTd4,subTd5,subTd6);
-    		        								tbody2.append(subTr);
-    		        							});
-    	        								
+    	        							if(tbody2.innerHTML==""){
+	    		        							data.forEach((datas) =>{
+	    		        								const subTr = document.createElement("tr");
+	    		        								const {empNo, outDtime, commuteNo, overtime, workingDay, inDtime, status, workingHours} = datas;
+	    		        								const subTd1 = document.createElement("td");
+	    		        								subTd1.textContent = changeWorkingDay(workingDay);
+	    		        								
+	    		        								const subTd2 = document.createElement("td");
+	    		        								subTd2.textContent = changeTimeText(inDtime);
+	    		        								
+	    		        								const subTd3 = document.createElement("td");
+	    		        								subTd3.textContent = changeTimeText(outDtime);
+	    		        								
+	    		        								const subTd4 = document.createElement("td");
+	    		        								subTd4.classList.add("font-bold");
+	    		        								subTd4.textContent = chageWorkTime(workingHours+overtime);
+	    		        								
+	    		        								const subTd5 = document.createElement("td");
+	    		        								subTd5.textContent = "기본 "+ chageWorkTime(workingHours) + " / 연장 " + chageWorkTime(overtime);
+	    		        								
+	    		        								const subTd6 = document.createElement("td");
+	    		        								if(status == '연차'){
+	    			        								subTd6.textContent = "완료(" + status + " 8.00h)";
+	    		        								}
+	    		        								else if(status == '반차'){
+	    		        									subTd6.textContent = "완료(" + status + " 4.00h)";
+	    		        								}
+	    		        								else{
+	    		        									subTd6.textContent = "";
+	    		        								}
+	    		        								
+	    		        								subTr.append(subTd1,subTd2,subTd3,subTd4,subTd5,subTd6);
+	    		        								tbody2.append(subTr);
+	    		        							});
     	        							}
-    	        							
-    	        						
     	        						},
     	        						error :console.log
     	        					});
