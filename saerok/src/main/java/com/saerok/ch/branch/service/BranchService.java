@@ -9,4 +9,5 @@ public interface BranchService {
     void addBranch(Branch branch);
     void updateBranch(Branch branch);
     void deleteBranch(int branchNo);
+    
 }

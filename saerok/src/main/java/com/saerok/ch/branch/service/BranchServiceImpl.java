@@ -16,6 +16,7 @@ public class BranchServiceImpl implements BranchService {
     public BranchServiceImpl(BranchMapper branchMapper) {
         this.branchMapper = branchMapper;
     }
+    
 
     @Override
     public List<Branch> findAllBranches(String searchKeyword) {

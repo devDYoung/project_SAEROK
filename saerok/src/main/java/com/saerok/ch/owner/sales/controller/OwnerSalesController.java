@@ -2,6 +2,7 @@ package com.saerok.ch.owner.sales.controller;
 
 
 import java.math.BigDecimal;
+import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,31 +29,19 @@ public class OwnerSalesController {
 		this.salesService = salesService;
 	}
 
-    @GetMapping("/sales")
-    public String showSales(Model model) {
-        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-        Employee loggedInEmployee = (Employee) authentication.getPrincipal();
-        String empNo = loggedInEmployee.getEmpNo();
-
-        BigDecimal todaySales = salesService.findOwnerTodaySalesTotal(empNo);
-        BigDecimal monthSales = salesService.findOwnerCurrentMonthSalesTotal(empNo);
-        BigDecimal yearSales = salesService.findOwnerCurrentYearSalesTotal(empNo);
-
-        model.addAttribute("todaySales", todaySales);
-        model.addAttribute("monthSales", monthSales);
-        model.addAttribute("yearSales", yearSales);
-
-        return "sales/ownerAllSales";
-    }
-    
+   
     @GetMapping("/detail")
     public String getSales(Model model) {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         Employee loggedInEmployee = (Employee) authentication.getPrincipal();
         String empNo = loggedInEmployee.getEmpNo();
+        
+        List<Map<String, Object>> categorySales = salesService.getCurrentMonthSalesByCategoryForOwner(empNo);
 
         model.addAttribute("detailSales", salesService.getBranchOwnerDetailSales(empNo));
         model.addAttribute("monthlySales", salesService.getBranchOwnerCurrentMonthSales(empNo));
+        model.addAttribute("categorySales", categorySales);
+        
         return "sales/branchOwnerDetail";
     }
     

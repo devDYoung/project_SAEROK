@@ -12,11 +12,9 @@
 <jsp:include page="/WEB-INF/views/common/header.jsp">
 	<jsp:param value="CalendarMain" name="ATO" />
 </jsp:include>
-
 <!-- cdn -->
 <!-- fullcalendar css -->
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/fullcalendar@5.10.1/main.css">
-
 <script src="https://cdn.jsdelivr.net/npm/fullcalendar@5.10.1/main.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.18.1/moment.min.js"></script>
 <!-- fullcalendar 언어 설정관련 script -->
@@ -65,7 +63,7 @@
 				            </div>
 				            <div class="modal-footer">
 							<div id="saveBtn" ><input class="btn btn-primary btn-user btn-block" type="submit" value="작성하기"></div>
-							<div id="center-bot2" ><input class="btn btn-primary btn-user btn-block" type="" value="취소하기"></div>
+							<div id="center-bot2" ><input class="btn btn-primary btn-user btn-block" type="submit" value="취소하기"></div>
 				            </div>
 				        </form>
 				        </div>

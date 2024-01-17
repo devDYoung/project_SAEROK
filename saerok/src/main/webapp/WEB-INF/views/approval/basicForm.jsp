@@ -29,36 +29,40 @@
 				<h3 class="modal-title" id="exampleModalLabel">결재선</h3>
 			</div>
 			<div class="modal-body">
-				<div style="border: 1px solid black; width: 300px;">
-					<ul id="mixed" class="loadDeptButton">
-						<li><span class="deptName" role="button"
-							style="color: black;"> <i class="fas fa-search fa-fw"></i>
-								인사팀-HR
-						</span>
-							<ul class="team-list">
-							</ul>
-						</li>
-
-
-						<li><span class="deptName" role="button"
-							style="color: black;"><i class="fas fa-fw fa-folder"></i>
-								관리팀-MG</span>
-							<ul class="team-list">
-
-							</ul></li>
-						<li><span class="deptName" role="button"
-							style="color: black;"><i class="fas fa-fw fa-folder"></i>
-								영업-SA</span>
-							<ul class="team-list">
-
-							</ul></li>
-						<li><span class="deptName" role="button"
-							style="color: black;"><i class="fas fa-fw fa-folder"></i>
-								지점팀-STORE</span>
-							<ul class="team-list">
-
-							</ul></li>
-					</ul>
+				<div style="display: flex;">
+					 <div style="border: 1px solid black; width: 300px;">
+						<ul id="mixed" class="loadDeptButton">
+							<li>
+								<span class="deptName" role="button" style="color: black;">
+							 		<i class="fas fa-search fa-fw"></i>
+										인사팀-HR
+								</span>
+								<ul class="team-list"></ul>
+							</li>
+							<li>
+								<span class="deptName" role="button" style="color: black;">
+									<i class="fas fa-fw fa-folder"></i>
+										관리팀-MG
+								</span>
+								<ul class="team-list"></ul>
+							</li>
+							<li>
+								<span class="deptName" role="button" style="color: black;">
+									<i class="fas fa-fw fa-folder"></i>
+										영업-SA
+								</span>
+								<ul class="team-list"></ul>
+							</li>
+							<li>
+								<span class="deptName" role="button" style="color: black;">
+									<i class="fas fa-fw fa-folder"></i>
+										지점팀-STORE
+								</span>
+								<ul class="team-list"></ul>
+							</li>
+						</ul>
+					</div>
+					<button class="btn btn-success btn-circle btn-lg" style="margin: 300px 0px 100px 50px;height: 50px; width: 50px;">추가</button>
 				</div>
 			</div>
 
