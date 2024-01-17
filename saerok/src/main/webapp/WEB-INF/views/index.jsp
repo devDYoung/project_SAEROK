@@ -34,14 +34,6 @@
 			<!-- <div></div> -->
 		</div>
 		<!-- 본문시작 -->
-
-
-		<!-- <div> -->
-
-
-
-		<!-- <div> -->
-
 		<div class="page-wrapper">
 						<div class="home-content">
 							<div style="display: flex;">
@@ -59,9 +51,6 @@
 														<c:if test="${!empty loginEmployee.destFileName}">
 															<img src="${path}/resources/upload/profile/${loginEmployee.destFileName}" alt="" class="img">
 														</c:if>
-														<%-- <c:if test="${!empty loginEmployee.destFileName}">
-															<img src="${path}/resources/upload/IMG_2341.jpg" alt="" class="img">
-														</c:if> --%>
 													</td>
 												</tr>
 												<tr>
