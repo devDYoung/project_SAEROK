@@ -17,5 +17,7 @@ public interface EmployeeService {
 	//사원수정
 	 int updateEmployee(Employee e);
 	
+	//사원삭제
+	 int deleteEmployee(Employee empNo);
 	
 }

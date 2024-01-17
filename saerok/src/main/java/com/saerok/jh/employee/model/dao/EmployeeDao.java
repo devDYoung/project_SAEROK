@@ -19,6 +19,7 @@ public interface EmployeeDao {
 	//사원수정
 	int updateEmployee(SqlSession session, Employee e);
 	
-	
+	//사원삭제
+	int deleteEmployee(SqlSession session, Employee empNo);
 	
 }
