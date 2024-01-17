@@ -24,5 +24,8 @@ public class Schedule {
 	private String deptCode; // 부서번호
 	private String empNo; // 사원번호 일정 등록한 사람
 	private String category; // 일정카테고리 10: 정해진 카테고리1 20: 카테고리2 99: default 카테고리
+	private String skdImpt; // 중요일정
+	private String regDtime; // 등록일
+	private String modDtime; // 수정일
 
 }

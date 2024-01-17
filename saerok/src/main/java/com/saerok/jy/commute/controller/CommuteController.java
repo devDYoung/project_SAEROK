@@ -2,9 +2,11 @@ package com.saerok.jy.commute.controller;
 
 import java.security.Principal;
 import java.text.SimpleDateFormat;
+import java.time.DayOfWeek;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.time.temporal.TemporalAdjusters;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
@@ -18,6 +20,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
@@ -60,75 +63,159 @@ public class CommuteController {
 		
 		
 	}
-	
-	// 출퇴근버튼 눌렀을 때
+//	
+//	// 출퇴근버튼 눌렀을 때
+//	@PostMapping("/workIn.do")
+//    @ResponseBody
+//	public Map<String, Object> workIn(Model model, HttpSession session, HttpServletRequest request, Principal loginSession) {
+//		// 사원번호
+//		String empNo = loginSession.getName();
+//
+//		// 상태
+//		String status = request.getParameter("status");
+//		LocalDateTime checkDate = LocalDateTime.now();
+//		String time = now.format(dayf);
+//		Map param = new HashMap();
+//		param.put("status", status);
+//		param.put("empNo", empNo);
+//		
+//	
+//		
+//		String lateYN = "N";
+//		if (checkDate.getHour() > 9) {
+//			lateYN = "Y";
+//		} 
+//		param.put(lateYN, lateYN);
+//		
+//		int result = commuteService.insertCommuteStatus(param);
+//		Map<String, Object> returnResult =  new HashMap<>();
+//		returnResult.put("lateYN", lateYN);
+//		if(result > 0) {
+//			returnResult.put("successYn", "Y");
+//			returnResult.put("indtime",
+//					new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss")
+//					.format((Date)param.get("indtime")));
+//		}else {
+//			returnResult.put("successYn", "N");
+//		}
+//		return returnResult;
+//		
+//	}
 	@PostMapping("/workIn.do")
-    @ResponseBody
-	public Map<String, Object> workIn(Model model, HttpSession session, HttpServletRequest request, Principal loginSession) {
-		// 사원번호
-		String empNo = loginSession.getName();
-
-		// 상태
-		String status = request.getParameter("status");
-		LocalDateTime checkDate = LocalDateTime.now();
-		String time = now.format(dayf);
-		Map param = new HashMap();
-		param.put("status", status);
-		param.put("empNo", empNo);
-		
-	
-		
-		String lateYN = "N";
-		if (checkDate.getHour() > 9) {
-			lateYN = "Y";
-		} 
-		param.put(lateYN, lateYN);
-		
-		int result = commuteService.insertCommuteStatus(param);
-		Map<String, Object> returnResult =  new HashMap<>();
-		returnResult.put("lateYN", lateYN);
-		if(result > 0) {
-			returnResult.put("successYn", "Y");
-			returnResult.put("indtime",
-					new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss")
-					.format((Date)param.get("indtime")));
-		}else {
-			returnResult.put("successYn", "N");
-		}
-		return returnResult;
-		
-	}
-		
-	
-	@PostMapping("/workOut.do")
 	@ResponseBody
-	public Map<String, Object> workOut(Model model, HttpSession session, HttpServletRequest request, Principal loginSession) {
-	    // 사원번호
+	public Map<String, Object> workIn(@RequestBody Map<String, String> requestData, Principal loginSession) {
 	    String empNo = loginSession.getName();
+	    String status = requestData.get("status");
 	    
-	    // 퇴근 시간 설정
-	    String status = request.getParameter("status");
 	    LocalDateTime checkDate = LocalDateTime.now();
-	    Map param = new HashMap();
-	    param.put("status", "20"); 
+	    String lateYN = (checkDate.getHour() > 9) ? "Y" : "N";
+
+	    Map<String, Object> param = new HashMap<>();
+	    param.put("status", status);
 	    param.put("empNo", empNo);
-	   
-	    int result = commuteService.updateCommuteEndTime(param); // 퇴근 시간 업데이트
-	    
-	    Map<String, Object> returnResult =  new HashMap<>();
-	    if (result > 0) {
+	    param.put("lateYN", lateYN);
+
+	    int data = commuteService.insertCommuteStatus(param);
+
+	    Map<String, Object> returnResult = new HashMap<>();
+	    returnResult.put("lateYN", lateYN);
+
+	    if (data > 0) {
 	        returnResult.put("successYn", "Y");
-	       // returnResult.put("outTime", checkDate.toString()); // 퇴근 시간 반환
-	        returnResult.put("outdtime", new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss")
-					.format((Date)param.get("outdtime")));
+	        returnResult.put("indtime", checkDate.format(DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm:ss")));
 	    } else {
 	        returnResult.put("successYn", "N");
 	    }
 
 	    return returnResult;
 	}
+
 	
+//	@PostMapping("/workOut.do")
+//	@ResponseBody
+//	public Map<String, Object> workOut(Model model, HttpSession session, HttpServletRequest request, Principal loginSession) {
+//	    // 사원번호
+//	    String empNo = loginSession.getName();
+//	    
+//	    // 퇴근 시간 설정
+//	    String status = request.getParameter("status");
+//	    LocalDateTime checkDate = LocalDateTime.now();
+//	    Map param = new HashMap();
+//	    param.put("status", "20"); 
+//	    param.put("empNo", empNo);
+//	   
+//	    int result = commuteService.updateCommuteEndTime(param); // 퇴근 시간 업데이트
+//	    
+//	    Map<String, Object> returnResult =  new HashMap<>();
+//	    if (result > 0) {
+//	        returnResult.put("successYn", "Y");
+//	       // returnResult.put("outTime", checkDate.toString()); // 퇴근 시간 반환
+//	        returnResult.put("outdtime", new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss")
+//					.format((Date)param.get("outdtime")));
+//	    } else {
+//	        returnResult.put("successYn", "N");
+//	    }
+//
+//	    return returnResult;
+//	}
+//	
 	
+//	@PostMapping("/workOut.do")
+//	@ResponseBody
+//	public Map<String, Object> workOut(Model model, HttpSession session, HttpServletRequest request, Principal loginSession) {
+//	    // 사원번호
+//	    String empNo = loginSession.getName();
+//
+//	    // 퇴근 시간 설정
+//	    String status = request.getParameter("status");
+//	    LocalDateTime checkDate = LocalDateTime.now();
+//	    Map param = new HashMap();
+//	    param.put("status", "20"); 
+//	    param.put("empNo", empNo);
+//
+//	    int result = commuteService.updateCommuteEndTime(param); // 퇴근 시간 업데이트
+//
+//	    Map<String, Object> returnResult = new HashMap<>();
+//	    if (result > 0) {
+//	        returnResult.put("successYn", "Y");
+//	        returnResult.put("outdtime", new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss")
+//	            .format(checkDate)); // 퇴근 시간 반환
+//	    } else {
+//	        returnResult.put("successYn", "N");
+//	    }
+//
+//	    return returnResult;
+//	}
+
+	@PostMapping("/workOut.do")
+	@ResponseBody
+	public Map<String, Object> workOut(Model model, HttpSession session, HttpServletRequest request, Principal loginSession) {
+	    // 사원번호
+	    String empNo = loginSession.getName();
+
+	    // 퇴근 시간 설정
+	    String status = request.getParameter("status");
+	    LocalDateTime checkDate = LocalDateTime.now();
+	    Map param = new HashMap();
+	    param.put("status", "20"); 
+	    param.put("empNo", empNo);
+
+	    int result = commuteService.updateCommuteEndTime(param); // 퇴근 시간 업데이트
+
+	    Map<String, Object> returnResult = new HashMap<>();
+	    if (result > 0) {
+	        returnResult.put("successYn", "Y");
+
+	        // LocalDateTime을 형식화하기 위해 DateTimeFormatter를 사용합니다.
+	        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm:ss");
+	        returnResult.put("outdtime", formatter.format(checkDate)); // 퇴근 시간 반환
+	    } else {
+	        returnResult.put("successYn", "N");
+	    }
+
+	    return returnResult;
+	}
+
 	
 	//퇴근버튼 눌렀을시 오늘 근무시간 업데이트
 	@PostMapping("/updateWorkTime.do")
@@ -188,9 +275,11 @@ public class CommuteController {
 
 	    // 주차별로 반복
 	    for (int week = 1; week <= currentDate.lengthOfMonth() / 7 + 1; week++) {
-	        LocalDate startOfWeek = currentDate.withDayOfMonth((week - 1) * 7 + 1);
-	        LocalDate endOfWeek = currentDate.withDayOfMonth(week * 7).plusDays(6);
-	        
+	        LocalDate startOfWeek = currentDate.with(TemporalAdjusters.firstDayOfMonth())
+	                                          .with(TemporalAdjusters.nextOrSame(DayOfWeek.MONDAY))
+	                                          .plusWeeks(week - 1);
+
+	        LocalDate endOfWeek = startOfWeek.plusDays(6);
 	        // 주간별 누적 기본 근무시간 가져오기
 	        Map<String, Object> startEndMap = new HashMap<>();
 	        startEndMap.put("empNo", empNo);
