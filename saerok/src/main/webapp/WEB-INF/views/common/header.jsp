@@ -123,8 +123,8 @@
                 </a>
                 <div id="collapseBoard" class="collapse" aria-labelledby="headingBoard" data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
-                    	<%-- <a class="collapse-item" href="${path }/board/write">작성하기</a> --%>
-                   		<a class="collapse-item" href="${path }/board/All">전체 게시판</a>
+                       <%-- <a class="collapse-item" href="${path }/board/write">작성하기</a> --%>
+                         <a class="collapse-item" href="${path }/board/All">공지 사항</a>
                        <!-- <a class="collapse-item" href="">전체게시판</a> -->
                         <a class="collapse-item" href="${path }/board/part">부서별 게시판</a>
                     </div>
@@ -422,26 +422,24 @@
 
                         <!-- Nav Item - User Information -->
                         <li class="nav-item dropdown no-arrow">
-                            <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button"
-                                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                <span class="mr-2 d-none d-lg-inline text-gray-600 small">${loginEmployee.empName }</span>
-                                <!-- <img class="img-profile rounded-circle"
-                                    src="img/undraw_profile.svg"> -->
-                            </a>
-                            <!-- Dropdown - User Information -->
-                            <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in"
-                                aria-labelledby="userDropdown">
-                                <a class="dropdown-item" href="${path }/mypage">
-                                    <i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
-                                    마이페이지
-                                </a>
-                                <div class="dropdown-divider"></div>
-                                <a class="dropdown-item" href="${path}/logoutpage " data-toggle="modal" data-target="#logoutModal">
-                                    <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400" ></i>
-                                    로그아웃
-                                </a>
-                            </div>
-                        </li>
+    <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button"
+        data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+        <span class="mr-2 d-none d-lg-inline text-gray-600 small">${loginEmployee.empName}</span>
+    </a>
+    <!-- Dropdown - User Information -->
+    <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in"
+        aria-labelledby="userDropdown">
+        <a class="dropdown-item" href="${path }/mypage">
+            <i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
+            마이페이지
+        </a>
+        <div class="dropdown-divider"></div>
+        <a class="dropdown-item" href="${path}/logoutpage" data-toggle="modal" data-target="#logoutModal">
+            <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
+            로그아웃
+        </a>
+    </div>
+</li>
 
                     </ul>
 
@@ -452,8 +450,8 @@
          fetch(url)
          .then(response=>response.text())
          .then(data=>{
-            document.querySelector(".page-wrapper").innerHTML=data;
-          });
+               document.querySelector(".page-wrapper").innerHTML=data;
+            });
       } 
       function searchEmp(){
          var empNameVal = $("#email").val();

@@ -47,17 +47,17 @@ public class BranchController {
     // 지점 정보 수정 폼 페이지
     @GetMapping("/update/{branchNo}")
     public String updateBranchForm(@PathVariable int branchNo, Model model) {
-        Branch branch = branchService.findBranchById(branchNo); // 해당 지점 정보 조회
+        Branch branch = branchService.findBranchById(branchNo); 
         model.addAttribute("branch", branch);
-        return "branch/updateBranch"; // 지점 정보 수정 폼 페이지 반환
+        return "branch/updateBranch"; 
     }
 
     // 지점 정보 수정 처리
     @PostMapping("/update/{branchNo}")
     public String updateBranch(@PathVariable int branchNo, Branch branch) {
-        branch.setBranchNo(branchNo); // URL에서 받은 지점 번호 설정
+        branch.setBranchNo(branchNo); 
         branchService.updateBranch(branch);
-        return "redirect:/branch/"; // 지점 목록 페이지로 리다이렉션
+        return "redirect:/branch/"; 
     }
     
     // 지점 삭제 처리
