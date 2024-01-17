@@ -346,6 +346,11 @@
       
       return `\${date}일 (\${dayOfWeek})`;
     }
+    
+
+    // 오늘 날짜로 함수 호출
+    const today = new Date();
+    console.log(changeWorkingDay(today));
 
 
 

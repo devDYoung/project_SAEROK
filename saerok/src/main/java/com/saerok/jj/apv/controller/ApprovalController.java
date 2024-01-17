@@ -60,9 +60,18 @@ public class ApprovalController {
         }
     }
 	
-}
+	
+	   //결재선 사원리스트불러오기
+	    @GetMapping("/checkDept")
+	    @ResponseBody
+	    public List<Map<String, Object>> deptName(Integer deptCode) {
+	        return service.deptName(deptCode);
+	    }
+
+	}
 	
 	
 	
 	
 	
+

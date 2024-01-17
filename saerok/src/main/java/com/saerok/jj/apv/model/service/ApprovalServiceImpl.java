@@ -7,6 +7,7 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.saerok.jh.employee.model.dao.EmployeeDao;
 import com.saerok.jj.apv.model.dao.ApprovalDao;
 import com.saerok.jj.apv.model.dto.Approval;
 import com.saerok.jj.apv.model.dto.AppLetter;
@@ -16,9 +17,12 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 public class ApprovalServiceImpl implements ApprovalService {
 	
+	
+
 	private final SqlSession session;
 	
 	private final ApprovalDao dao;
+	
 	
 	
 	
@@ -39,6 +43,13 @@ public class ApprovalServiceImpl implements ApprovalService {
 	public int insertApproval(Approval a) {
 		// TODO Auto-generated method stub
 		return 0;
+	}
+	
+	
+	@Override
+	public List<Map<String, Object>> deptName(Integer deptCode) {
+		// TODO Auto-generated method stub
+		return dao.selectEmployeeList(session,deptCode);
 	}
 
 
