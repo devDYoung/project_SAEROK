@@ -12,14 +12,14 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @Builder
 public class OrderListDetail {
-    private int orderDetailId;    // 발주 상세 ID
-    private int orderId;          // 발주 ID
-    private int itemId;           // 아이템 ID
-    private String itemName;      // 아이템 이름
-    private String itemCategory;  // 아이템 카테고리
-    private int itemPrice;        // 아이템 가격
-    private int quantity;         // 수량
-    private int branchNo;         // 지점 번호 추가
-    private BigDecimal totalPrice; // totalPrice 필드 추가
+    private int orderDetailId;    
+    private int orderId;          
+    private int itemId;           
+    private String itemName;      
+    private String itemCategory;  
+    private int itemPrice;        
+    private int quantity;         
+    private int branchNo;       
+    private BigDecimal totalPrice;
 
 }

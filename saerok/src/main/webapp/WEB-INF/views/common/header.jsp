@@ -7,7 +7,6 @@
 <c:set var="loginEmployee" value="${sessionScope.SPRING_SECURITY_CONTEXT.authentication.principal }"/> 
 <!DOCTYPE html>
 <html lang="utf-8">
-
 <head>
    
 <style>
@@ -111,7 +110,7 @@
                 <div id="collapseSKD" class="collapse" aria-labelledby="headingSKD"
                     data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
-                        <a class="collapse-item" href="">일정조회</a>
+                        <a class="collapse-item" href="${path }/calendar/calendarMain.do">일정조회</a>
                         <a class="collapse-item" href="">부서일정</a>
                     </div>
                 </div>
@@ -124,21 +123,22 @@
                 </a>
                 <div id="collapseBoard" class="collapse" aria-labelledby="headingBoard" data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
-                    <a class="collapse-item" href="">공지사항</a>
-                        <a class="collapse-item" href="">전체게시판</a>
-                        <a class="collapse-item" href="">부서별게시판</a>
+                    	<%-- <a class="collapse-item" href="${path }/board/write">작성하기</a> --%>
+                   		<a class="collapse-item" href="${path }/board/All">공지 사항</a>
+                       <!-- <a class="collapse-item" href="">전체게시판</a> -->
+                        <a class="collapse-item" href="${path }/board/part">부서별 게시판</a>
                     </div>
                 </div>
             </li>
             <li class="nav-item">
                 <a class="nav-link dpse-item " onclick="javascript:requestNote('${path }/note/get');" data-toggle="collapse" data-target="#collapseMsg"
-                    aria-expanded="true" aria-controls="collapseMsg" >
+                    aria-expanded="true" aria-controls="collapseMsg">
                     <i class="fas fa-fw fa-envelope"></i>
                     <span>쪽지</span>
                 </a>
                 <div id="collapseMsg" class="collapse" aria-labelledby="headingMsg" data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
-                        <a class="collapse-item"href="javascript:requestNote('${path }/note/write');">쪽지쓰기</a>
+                        <a class="collapse-item" href="javascript:requestNote('${path }/note/write');">쪽지쓰기</a>
                         <a class="collapse-item" href="javascript:requestNote('${path }/note/get');">받은쪽지함</a>
                         <a class="collapse-item" href="javascript:requestNote('${path }/note/send');">보낸쪽지함</a>
                         <a class="collapse-item" href="javascript:requestNote('${path }/note/basket');">휴지통</a>
@@ -184,15 +184,7 @@
                 </a>
                     <div id="collapseEDSM" class="collapse" aria-labelledby="headingEDSM" data-parent="#accordionSidebar">
                         <div class="bg-white py-2 collapse-inner rounded">
-                            <a class="collapse-item" href="${path }/approval/approvalList.do">전체문서함</a>
-                            <div id="collapseEDSM" class="collapse" aria-labelledby="headingEDSM"data-parent="#accordionSidebar" >
-                                <div class="bg-white py-2 collapse-inner rounded">
-                                <a class="collapse-item" href="">대기</a>
-                                <a class="collapse-item" href="#">진행</a>
-                                <a class="collapse-item" href="#">완료</a>
-                                 </div>
-                            </div>
-                            <a class="collapse-item" href="/approval/approvalUpdate.do">+ 글쓰기 +</a>
+                            <a class="collapse-item" href="${path }/approval/approvalList.do">문서함</a>
                         </div>
                     </div>
             </li>
@@ -460,9 +452,9 @@
          fetch(url)
          .then(response=>response.text())
          .then(data=>{
-            document.querySelector(".page-wrapper").innerHTML=data;
+            	document.querySelector(".page-wrapper").innerHTML=data;
             });
-      }
+      } 
       function searchEmp(){
          var empNameVal = $("#email").val();
          /* alert(empNameVal); */

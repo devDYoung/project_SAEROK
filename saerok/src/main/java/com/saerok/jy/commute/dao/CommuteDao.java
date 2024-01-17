@@ -13,10 +13,9 @@ import com.saerok.jy.commute.dto.Commute;
 
 public interface CommuteDao {
 
-   
-//ArrayList<Commute> selectCommuteList(SqlSession session, Commute commute);
+  
+List<Commute> selectCommuteList(SqlSession session, Map<String, Object> param);
 
-Commute selectCommuteList(SqlSession session, Map<String, Object> param);
 
 //int insertCommute(SqlSession sessoin, Map empNo);
 //
@@ -39,6 +38,12 @@ int selectWeekWorkTime(SqlSession session, Map<String, Object> startEndMap);
 int selectWeekOverTime(SqlSession session, Map<String, Object> startEndMap);
 
 List<Commute> selectWeekDatas(SqlSession session, Map<String, Object> param);
+
+int weekTotalTime(SqlSession session, Map<String, Object> param);
+
+int totalMonthTime(SqlSession session, Map<String, Object> param);
+
+int monthOverTime(SqlSession session, Map<String, Object> startEndMap);
 
 //public ArrayList<Commute> selectCommuteStatusList(SqlSession session,int commuteNo);
 

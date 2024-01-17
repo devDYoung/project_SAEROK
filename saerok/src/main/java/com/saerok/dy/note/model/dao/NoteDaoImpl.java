@@ -16,7 +16,7 @@ public class NoteDaoImpl implements NoteDao {
 	public List<Note> getReceivedNotes(SqlSession session) {
 		return session.selectList("note.getReceivedNotes");
 	}
-	
+
 	// 이름으로 사원 조회
 	@Override
 	public List<Employee> selectEmpByName(SqlSession session) {

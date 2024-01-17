@@ -13,6 +13,45 @@
 	<jsp:param value="일반" name="title" />
 </jsp:include>
 
+<script src="./jquery-3.4.1.min.js"></script>
+<link rel="stylesheet" href="./bootstrapt/css/bootstrap.min.css" />
+<link rel="stylesheet" href="./bootstrapt/css/bootstrap.css" />
+<script src="./bootstrapt/js/bootstrap.min.js"></script>
+
+
+<button id="testBtn" class="btn">모달 test</button>
+
+<!-- Modal-->
+<div class="modal fade" id="testModal" tabindex="-1" role="dialog"
+	aria-labelledby="exampleModalLabel" aria-hidden="true">
+	<div class="modal-dialog" role="document">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button class="close" type="button" data-dismiss="modal"
+					aria-label="Close">
+					
+				</button>
+				<h3 class="modal-title" id="exampleModalLabel">결재선</h3>
+			</div>
+			<div class="modal-body">조직도 트리구조</div>
+			<div class="modal-footer">
+				<a class="btn" id="modalY" href="#">예</a>
+				<button class="btn" type="button" data-dismiss="modal">아니요</button>
+			</div>
+		</div>
+	</div>
+</div>
+
+
+
+
+<script>
+	$('#testBtn').click(function(e) {
+		e.preventDefault();
+		$('#testModal').modal("show");
+	});
+</script>
+
 <strong>&nbsp; 문서 종류 : </strong>
 <select id="selectDoc" name="selectDoc" class="form-select"
 	onchange="loadDocumentForm(this.value)">
@@ -20,6 +59,12 @@
 	<option value="D2">휴가신청서</option>
 	<option value="D3">지출 결의서</option>
 </select>
+
+<button type="button" onclick="openModal()">결재</button>
+
+
+
+
 
 <form class="documentForm" name="basicForm" action="${path}"
 	method="POST" onsubmit="return check_onclick()">
@@ -57,7 +102,7 @@
 						<button class="send-open" type="button">+ 수신참조자 +</button>
 					</td>
 					<td colspan="6" style="height: 70px;"><textArea readonly
-							name="referList" id="referList"class="form-control"
+							name="referList" id="referList" class="form-control"
 							style="border: none; font-size: 19px; width: 600px; height: 60px; text-align: center; resize: none;"></textArea>
 					</td>
 				</tr>
@@ -65,41 +110,49 @@
 					<td
 						style="color: black; height: 70px; width: 80px; font-size: 15px;">성
 						명</td>
-					<td><input type="text" name="writerName" style="border: none; background: transparent; text-align: center;"
+					<td><input type="text" name="writerName"
+						style="border: none; background: transparent; text-align: center;"
 						value="${ loginEmployee.empName }" readonly></td>
-					<td style="color: black; width: 80px; font-size: 15px; ">부 서</td>
-					<td><input type="text" style="border: none; background: transparent; text-align: center;" value="${ loginEmployee.deptName }"
-						readonly></td>
+					<td style="color: black; width: 80px; font-size: 15px;">부 서</td>
+					<td><input type="text"
+						style="border: none; background: transparent; text-align: center;"
+						value="${ loginEmployee.deptName }" readonly></td>
 					<td style="color: black; width: 80px; font-size: 15px;">직 급</td>
-					<td colspan="3"><input type="text" style="border: none; background: transparent;"
+					<td colspan="3"><input type="text"
+						style="border: none; background: transparent;"
 						value="${ loginEmployee.jobName }" readonly></td>
 				</tr>
 				<tr>
-                    <td style="color: black; height: 50px; width: 80px;">제 목</td>
-                    <td colspan="8"><textarea  class="form-control" name="loaTitle" id="loaTitle" style=" width: 100%; height: 50px; resize: none; overflow: hidden;"></textarea></td>
-                </tr>
-                <tr>
-                    <td colspan="8" style="height: 90px;" >
-                        <!-- <label class="inputFileButton" for="inputFile">
+					<td style="color: black; height: 50px; width: 80px;">제 목</td>
+					<td colspan="8"><textarea class="form-control" name="loaTitle"
+							id="loaTitle"
+							style="width: 100%; height: 50px; resize: none; overflow: hidden;"></textarea></td>
+				</tr>
+				<tr>
+					<td colspan="8" style="height: 90px;">
+						<!-- <label class="inputFileButton" for="inputFile">
                        첨부파일 업로드
                          </label>
                
                          <input type="file" id="inputFile" style="display: none;" /> -->
-                   
-                         <input type="file" id="inputFile" name="appLoaFileUpload"/>
-                    </td>
-                </tr>
-                <tr>
-                    <td style="color: black;height: 70px; width: 300px;">상세내용</td>
-              
-                
-                    <td colspan="8">
-                        <textarea class="form-control" name="loaContent" id="loaContent" cols="151px" rows="11px" style="width: 100%; height: 300px; border: none; resize: none; overflow: hidden; font-size: 25px;"></textarea>
-                    </td>
-                </tr>
-                <tr>
-                    <td colspan="8" style="text-align: center; height: 100px; border-bottom: none;">위와 같은 품의사유로, 검토 후 결재 바랍니다.</td>
-                </tr>
+
+						<input type="file" id="inputFile" name="appLoaFileUpload" />
+					</td>
+				</tr>
+				<tr>
+					<td style="color: black; height: 70px; width: 300px;">상세내용</td>
+
+
+					<td colspan="8"><textarea class="form-control"
+							name="loaContent" id="loaContent" cols="151px" rows="11px"
+							style="width: 100%; height: 300px; border: none; resize: none; overflow: hidden; font-size: 25px;"></textarea>
+					</td>
+				</tr>
+				<tr>
+					<td colspan="8"
+						style="text-align: center; height: 100px; border-bottom: none;">위와
+						같은 품의사유로, 검토 후 결재 바랍니다.</td>
+				</tr>
 				<tr style="color: black; border-top: none; border-bottom: none;">
 					<td colspan="8" style="text-align: center; height: 100px;">
 						2024년 &nbsp; 2 월 &nbsp; 2일 &nbsp;</td>
@@ -109,8 +162,7 @@
 						style="color: black; text-align: right; height: 100px; padding-right: 50px;">
 						<input type="button" name="sign" id="sign"
 						style="font-size: 15px; width: 70px; height: 30px; border: none; text-align: center; border-radius: 20px; margin-right: 10px"
-						value="서명" />
-					<textArea name="signText" id="signText"
+						value="서명" /> <textArea name="signText" id="signText"
 							style="width: 100px; border: none; text-align: center; resize: none; font-size: 24px;"
 							readonly="readonly"></textArea>
 					</td>
@@ -148,30 +200,8 @@
 </script>
 
 <!-- 필수 입력 스크립트 -->
-<script>
-	function check_onclick() {
-		var loaWriteForm = document.loaWriteForm;
 
-		if (loaWriteForm.loaContent.value == "" || loaWriteForm.loaTitle.value == "") {
-			Swal.fire({
-				icon : 'error',
-				title : '상세내용 또는 \n제목란이 비어있습니다.',
-				text : '확인 후 등록하세요!'
-			})
-			return false;
-		} else if (loaWriteForm.proposerText.value == "") {
-			Swal.fire({
-				icon : 'error',
-				title : '결재서명 후 \n결재를 진행해주세요.'
-			})
-			return false;
-		} else {
-			return true;
-		}
-	}
-</script>
 
-<<<<<<< HEAD
 <!-- 서명 클릭 스크립트  -->
 <script>
 	$(document).ready(function() {
@@ -183,61 +213,60 @@
 
 	// 금액 자동 포맷팅 스크립트 함수명에 fn_ 추가
 	$(document).ready(function() {
-	    $("#allAmount").bind('keyup keydown',function(){
-	        fn_inputNumberFormat(this);
-	    });
+		$("#allAmount").bind('keyup keydown', function() {
+			fn_inputNumberFormat(this);
+		});
 
-	    function fn_inputNumberFormat(obj) {
-	        obj.value = fn_comma(fn_uncomma(obj.value));
-	    }
+		function fn_inputNumberFormat(obj) {
+			obj.value = fn_comma(fn_uncomma(obj.value));
+		}
 
-	    function fn_comma(str) {
-	        str = String(str);
-	        return str.replace(/(\d)(?=(?:\d{3})+(?!\d))/g, '$1,');
-	    }
+		function fn_comma(str) {
+			str = String(str);
+			return str.replace(/(\d)(?=(?:\d{3})+(?!\d))/g, '$1,');
+		}
 
-	    function fn_uncomma(str) {
-	        str = String(str);
-	        return str.replace(/[^\d]+/g, '');
-	    }
+		function fn_uncomma(str) {
+			str = String(str);
+			return str.replace(/[^\d]+/g, '');
+		}
 
-	    function fn_getNumberOnly(str) {
-	        var len = str.length;
-	        var sReturn = "";
+		function fn_getNumberOnly(str) {
+			var len = str.length;
+			var sReturn = "";
 
-	        for (var i = 0; i < len; i++) {
-	            if ((str.charAt(i) >= "0") && (str.charAt(i) <= "9")) {
-	                sReturn += str.charAt(i);
-	            }
-	        }
-	        return sReturn;
-	    }
+			for (var i = 0; i < len; i++) {
+				if ((str.charAt(i) >= "0") && (str.charAt(i) <= "9")) {
+					sReturn += str.charAt(i);
+				}
+			}
+			return sReturn;
+		}
 	});
 </script>
 
 <!-- 비고 +/- -->
-
-<!-- 123 -->
 <script>
-$(document).ready(function() {
-    // 추가 버튼 클릭 시 동작
-    $(".btn-primary").on("click", function() {
-        // 새로운 행 생성
-        var newRow = '<tr>'
-            + '<td colspan="2"><input type="text" name="erDetail" id="erDetail"></td>'
-            + '<td colspan="2"><input type="text" name="erAmount" id="erAmount"></td>'
-            + '<td colspan="2"><input type="text" name="erReference" id="erReference" value="-"></td>'
-            + '</tr>';
+	function fn_addForm() {
+		alert("추가함");
+		var newRow = '<tr>'
+				+ '<td colspan="2"><input type="text" name="erDetail" id="erDetail"></td>'
+				+ '<td colspan="2"><input type="text" name="erAmount" id="erAmount"></td>'
+				+ '<td colspan="3"><input type="text" name="erReference" id="erReference" value="-"></td>'
+				+ '<td><button type="button" class="deleteButton" onclick="fn_deleteForm(this);">삭제</button></td>'
+				+ '</tr>';
 
-        // 생성된 행을 마지막 행으로 추가
-        $("#putContents").after(newRow);
-    });
+		// 생성된 행을 마지막 행으로 추가
+		$("#putContents").after(newRow);
+	}
 
-    // 삭제 버튼 클릭 시 동작
-    $(".btn-outline-danger").on("click", function() {
-        // 마지막 행 제거
-        $("#putContents").prev().remove();
-    });
-});
+	function fn_deleteForm(button) {
+		// 현재 버튼이 속한 행을 선택하고 삭제합니다.
+		$(button).closest('tr').remove();
+	}
 </script>
+
+
+
+
 <jsp:include page="/WEB-INF/views/common/footer.jsp" />

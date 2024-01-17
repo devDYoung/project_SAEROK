@@ -11,32 +11,12 @@ import com.saerok.jy.commute.dto.Commute;
 
 @Repository
 public class CommuteDaoImpl implements CommuteDao {
-//
-//	@Override
-//	public ArrayList<Commute> selectCommuteList(SqlSession session, Commute commute) {
-//		return (ArrayList) session.selectList("commute.selectCommuteList", commute);
-//	}
 	
 	@Override
-	public Commute selectCommuteList(SqlSession session, Map<String, Object> param) {
-		return (Commute) session.selectList("commute.selectCommuteList", param);
+	public List<Commute> selectCommuteList(SqlSession session, Map<String, Object> param) {
+		return session.selectList("commute.selectCommuteList", param);
 	}
-
-
-//	@Override
-//	public int insertCommute(SqlSession session, Map empNo) {
-//		return session.insert("commute.insertCommute", empNo);
-//	}
-//
-//	@Override
-//	public Commute selectCommute(SqlSession session, String empNo) {
-//		return (Commute) session.selectList("commute.selectCommute", empNo);
-//	}
-//
-//	@Override
-//	public int updateCommute(SqlSession session, int commuteNo) {
-//		return session.update("commute.updateCommute", commuteNo);
-//	}
+// 에러난다
 
 	@Override
 	public int insertCommuteStatus(SqlSession session, Map status) {
@@ -83,6 +63,23 @@ public class CommuteDaoImpl implements CommuteDao {
 	public List<Commute> selectWeekDatas(SqlSession session, Map<String, Object> param) {
 		return session.selectList("commute.selectWeekDatas", param);
 	}
+	
+	
+	@Override
+	public int weekTotalTime(SqlSession session, Map<String, Object> param) {
+		return session.selectOne("commute.weekTotalTime", param);
+	}
+	
+	@Override
+	public int totalMonthTime(SqlSession session, Map<String, Object> param) {
+		return session.selectOne("commute.totalMonthTime", param);
+	}
+	
+	@Override
+	public int monthOverTime(SqlSession session, Map<String, Object> startEndMap) {
+		return session.selectOne("commute.monthOverTime", startEndMap);
+	}
+	
 	
 //	@Override
 //	public ArrayList<Commute> selectCommuteStatusList(SqlSession session, int commuteNo) {

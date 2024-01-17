@@ -87,10 +87,9 @@
 					<td colspan="2">금 액</td>
 					<td colspan="2">비 고</td>
 					<td colspan="1" style="font-size: 17px">
-						<button type="button" class="btn btn-primary"
-                    onclick="fn_addForm();">추가</button>
-                    <button type="button" class="btn btn-odanger"
-                    onclick="fn_deleteForm();">삭제</button>
+						<button type="button"
+                   			 onclick="fn_addForm();">추가</button>
+                    	
 					</td>
 				</tr>
 				<tr id="putContents">
@@ -108,7 +107,7 @@
 				</tr>
 				<tr style="color: black; border-top: none; border-bottom: none;">
 					<td colspan="8" style="text-align: center; height: 100px;">
-						2024년 &nbsp; 2 월 &nbsp; 2일 &nbsp;</td>
+						2024년 &nbsp; test 월 &nbsp; test 일 &nbsp;</td>
 				</tr>
 				<tr>
 					<td colspan="8"
@@ -131,96 +130,6 @@
 		</div>
 	</div>
 </form>
-<!-- 필수 입력 스크립트 -->
-<script>
-	function check_onclick() {
-		var loaWriteForm = document.loaWriteForm;
-
-		if (loaWriteForm.loaContent.value == "" || loaWriteForm.loaTitle.value == "") {
-			Swal.fire({
-				icon : 'error',
-				title : '상세내용 또는 \n제목란이 비어있습니다.',
-				text : '확인 후 등록하세요!'
-			})
-			return false;
-		} else if (loaWriteForm.proposerText.value == "") {
-			Swal.fire({
-				icon : 'error',
-				title : '결재서명 후 \n결재를 진행해주세요.'
-			})
-			return false;
-		} else {
-			return true;
-		}
-	}
-</script>
-
-<!-- 서명 클릭 스크립트  -->
-<script>
-	$(document).ready(function() {
-		$("#proposer").one("click", function() {
-			var proposerValue = $("input[name='writerName']").val();
-			$("#proposerText").append(proposerValue);
-		});
-	});
-
-	// 금액 자동 포맷팅 스크립트 함수명에 fn_ 추가
-	$(document).ready(function() {
-	    $("#allAmount").bind('keyup keydown',function(){
-	        fn_inputNumberFormat(this);
-	    });
-
-	    function fn_inputNumberFormat(obj) {
-	        obj.value = fn_comma(fn_uncomma(obj.value));
-	    }
-
-	    function fn_comma(str) {
-	        str = String(str);
-	        return str.replace(/(\d)(?=(?:\d{3})+(?!\d))/g, '$1,');
-	    }
-
-	    function fn_uncomma(str) {
-	        str = String(str);
-	        return str.replace(/[^\d]+/g, '');
-	    }
-
-	    function fn_getNumberOnly(str) {
-	        var len = str.length;
-	        var sReturn = "";
-
-	        for (var i = 0; i < len; i++) {
-	            if ((str.charAt(i) >= "0") && (str.charAt(i) <= "9")) {
-	                sReturn += str.charAt(i);
-	            }
-	        }
-	        return sReturn;
-	    }
-	});
-</script>
-
-<!-- 비고 +/- -->
-<script>
-$(document).ready(function() {
-    // 추가 버튼 클릭 시 동작
-    $(".btn-primary").on("click", function() {
-        // 새로운 행 생성
-        var newRow = '<tr>'
-            + '<td colspan="2"><input type="text" name="erDetail" id="erDetail"></td>'
-            + '<td colspan="2"><input type="text" name="erAmount" id="erAmount"></td>'
-            + '<td colspan="2"><input type="text" name="erReference" id="erReference" value="-"></td>'
-            + '</tr>';
-
-        // 생성된 행을 마지막 행으로 추가
-        $("#putContents").after(newRow);
-    });
-
-    // 삭제 버튼 클릭 시 동작
-    $(".btn-outline-danger").on("click", function() {
-        // 마지막 행 제거
-        $("#putContents").prev().remove();
-    });
-});
-</script>
 
 
 

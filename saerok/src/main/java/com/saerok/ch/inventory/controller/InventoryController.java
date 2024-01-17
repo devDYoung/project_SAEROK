@@ -24,13 +24,8 @@ public class InventoryController {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         Employee loggedInEmployee = (Employee) authentication.getPrincipal();
         String empNo = loggedInEmployee.getEmpNo();
-        // 재고 목록 가져오기
         List<Inventory> inventoryList = inventoryService.getInventoryForEmployee(empNo);
         
-        // 콘솔에 재고 목록 출력
-        System.out.println("Inventory List: " + inventoryList);
-        System.out.println("empNo: " + empNo);
-
 
         model.addAttribute("inventoryList", inventoryList);
         return "inventory/inventoryList"; 

@@ -15,7 +15,6 @@
 
 		<!-- Page Heading -->
 		<h1 class="h3 mb-2 text-gray-800">휴지통</h1>
-		<p class="mb-4">삭제한 쪽지 여깄지요~!</p>
 
 		<!-- DataTales Example -->
 		<div class="card shadow mb-4">

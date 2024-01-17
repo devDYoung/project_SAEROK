@@ -27,7 +27,7 @@ public class CommuteServiceImpl implements CommuteService {
 	private CommuteDao commuteDao;
 
 	@Override
-	public Commute selectCommuteList(Map<String, Object> param) {
+	public List<Commute> selectCommuteList(Map<String, Object> param) {
 		return commuteDao.selectCommuteList(session, param);
 	}
 
@@ -88,6 +88,22 @@ public class CommuteServiceImpl implements CommuteService {
 		@Override
 		public List<Commute> selectWeekDatas(Map<String, Object> param) {
 			return commuteDao.selectWeekDatas(session, param);
+		}
+		
+		
+		@Override
+		public int weekTotalTime(Map<String, Object> param) {
+			return commuteDao.weekTotalTime(session, param);
+		}
+		
+		@Override
+		public int totalMonthTime(Map<String, Object> param) {
+			return commuteDao.totalMonthTime(session, param);
+		}
+		
+		@Override
+		public int monthOverTime(Map<String, Object> startEndMap) {
+			return commuteDao.monthOverTime(session, startEndMap);
 		}
 		
 //	@Override
