@@ -1,15 +1,15 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+   pageEncoding="UTF-8"%>
 <!-- Footer -->
 <footer class="sticky-footer bg-white">
-	<div class="container my-auto">
-		<div class="copyright text-center my-auto">
-			<span>Copyright &copy; saerok 2023</span>
-		</div>
-	</div>
+   <div class="container my-auto">
+      <div class="copyright text-center my-auto">
+         <span>Copyright &copy; saerok 2023</span>
+      </div>
+   </div>
 </footer>
 <a class="scroll-to-top rounded" href="#page-top"> <i
-	class="fas fa-angle-up"></i>
+   class="fas fa-angle-up"></i>
 </a>
 <!-- 로그아웃 모달 -->
     <div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
@@ -37,8 +37,7 @@
 
     <!-- Custom scripts for all pages-->
     <script src="${path}/resources/js/sb-admin-2.min.js"></script> 
-	
-<%-- 	<script src="${path}/resources/vendor/jquery/jquery.min.js"></script> --%>
-	
+   
+   <%-- <script src="${path}/resources/vendor/jquery/jquery.min.js"></script> --%>
 </body>
 </html>

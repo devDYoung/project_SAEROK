@@ -177,7 +177,6 @@
                 </a>
                     <div id="collapseStore" class="collapse" aria-labelledby="headingStore" data-parent="#accordionSidebar">
                         <div class="bg-white py-2 collapse-inner rounded">
-                            <a class="collapse-item" href="/owner/sales">매출현황</a>
                             <a class="collapse-item" href="/owner/detail">매출관리</a>
                             <a class="collapse-item" href="/inventory">재고목록</a>
                             <a class="collapse-item" href="">물품발주</a>
