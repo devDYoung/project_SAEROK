@@ -123,8 +123,8 @@
                 </a>
                 <div id="collapseBoard" class="collapse" aria-labelledby="headingBoard" data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
-                    	<%-- <a class="collapse-item" href="${path }/board/write">작성하기</a> --%>
-                   		<a class="collapse-item" href="${path }/board/All">전체 게시판</a>
+                       <%-- <a class="collapse-item" href="${path }/board/write">작성하기</a> --%>
+                         <a class="collapse-item" href="${path }/board/All">공지 사항</a>
                        <!-- <a class="collapse-item" href="">전체게시판</a> -->
                         <a class="collapse-item" href="${path }/board/part">부서별 게시판</a>
                     </div>
@@ -168,7 +168,6 @@
                 </a>
                     <div id="collapseStore" class="collapse" aria-labelledby="headingStore" data-parent="#accordionSidebar">
                         <div class="bg-white py-2 collapse-inner rounded">
-                            <a class="collapse-item" href="/owner/sales">매출현황</a>
                             <a class="collapse-item" href="/owner/detail">매출관리</a>
                             <a class="collapse-item" href="/inventory">재고목록</a>
                             <a class="collapse-item" href="">물품발주</a>
@@ -452,8 +451,8 @@
          fetch(url)
          .then(response=>response.text())
          .then(data=>{
-            /* document.querySelector(".page-wrapper").innerHTML=data;
-            }); */
+               document.querySelector(".page-wrapper").innerHTML=data;
+            });
       } 
       function searchEmp(){
          var empNameVal = $("#email").val();
