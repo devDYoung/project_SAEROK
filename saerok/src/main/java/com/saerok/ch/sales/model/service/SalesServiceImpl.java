@@ -80,20 +80,7 @@ public class SalesServiceImpl implements SalesService {
     
     
     //점주전용
-    @Override
-	public BigDecimal findOwnerTodaySalesTotal(String empNo) {
-		return salesMapper.findOwnerTodaySalesTotal(empNo);
-	}
-
-	@Override
-	public BigDecimal findOwnerCurrentMonthSalesTotal(String empNo) {
-		return salesMapper.findOwnerCurrentMonthSalesTotal(empNo);
-	}
-
-	@Override
-	public BigDecimal findOwnerCurrentYearSalesTotal(String empNo) {
-		return salesMapper.findOwnerCurrentYearSalesTotal(empNo);
-	}
+ 
 	
 
     @Override
@@ -119,6 +106,11 @@ public class SalesServiceImpl implements SalesService {
     @Override
     public void addBranchSales(Map<String, Object> salesData) {
         salesMapper.insertBranchSales(salesData);
+    }
+    
+    @Override
+    public List<Map<String, Object>> getCurrentMonthSalesByCategoryForOwner(String empNo) {
+        return salesMapper.findCurrentMonthSalesByCategoryForOwner(empNo);
     }
 	
 	

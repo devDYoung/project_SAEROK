@@ -23,6 +23,7 @@ public class BranchController {
     public BranchController(BranchService branchService) {
         this.branchService = branchService;
     }
+   
 
     // 모든 지점 조회
     @GetMapping("/")
