@@ -16,6 +16,8 @@ public class ApprovalDaoImpl implements ApprovalDao {
 
 	
 
+	
+
 	@Override
 	public List<Approval> selectApproval(SqlSession session,Map<String, Integer> page) {
 		int cPage=page.get("cPage");
@@ -35,6 +37,13 @@ public class ApprovalDaoImpl implements ApprovalDao {
 	public int insertApproval(SqlSession session, Approval a) {
 		// TODO Auto-generated method stub
 		return session.insert("approval.insertApproval",a);
+	}
+	
+	//결재선 리스트 불러오기
+	@Override
+	public List<Map<String, Object>> selectEmployeeList(SqlSession session, Integer deptCode) {
+		// TODO Auto-generated method stub
+		return session.selectList("approval.selectEmployeeByDeptName",deptCode);
 	}
 
 }

@@ -31,9 +31,9 @@ public class BoardController {
 		return "board/boardWrite";
 	}
 
-	// 전체 게시판 페이지로 이동
+	// 공지사항 페이지로 이동
 	@GetMapping("/All")
-	public String boardAll() {
+	public String boardAll(Model model) {
 		return "board/boardAll";
 	}
 

@@ -33,13 +33,13 @@
 
 <html>
 <head>
-<title>게시판 작성</title>
+<title>게시글 작성</title>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 </head>
 <body>
 	<section>
 		<div class="container px-5 my-5 px-5">
-			<h2>게시판 작성</h2>
+			<h2>게시글 작성</h2>
 			<form name="form" id="form" role="form" method="post" action=""
 				enctype="multipart/form-data">
 				<input type="hidden" name="bno" id="bno" value="${bbs.bno}" />

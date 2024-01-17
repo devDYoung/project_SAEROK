@@ -64,7 +64,7 @@ window.addEventListener('load', function(){
  			   var endtime = new Date(outDtime);
  			   
  			   //하루 근무시간 계산
- 			   const daytimes = endtime - starttime; //퇴근시간 - 출근시간
+ 			   const daytimes = workingHours; //퇴근시간 - 출근시간
  			   console.log(daytimes);
  			   
  			   const workStatus = document.querySelector("#work-status");
@@ -77,7 +77,7 @@ window.addEventListener('load', function(){
                  var seconds = starttime.getSeconds();
                  var startWorkTime = `\${hours < 10 ? '0' + hours : hours}:\${minutes < 10 ? '0'+minutes : minutes}:\${seconds < 10 ? '0'+seconds : seconds}`;
                  // 출근시간 정보 출력
-                 document.querySelector('#inDtime').textContent = startWorkTime;
+                 document.querySelector('#startwork-time').textContent = startWorkTime;
  			   }
  			   
  			   if(outDtime){
@@ -86,7 +86,7 @@ window.addEventListener('load', function(){
                   var seconds = endtime.getSeconds();
                   var endWorkTime = `\${hours < 10 ? '0' + hours : hours}:\${minutes < 10 ? '0'+minutes : minutes}:\${seconds < 10 ? '0'+seconds : seconds}`;
                   // 퇴근시간 정보 출력
- 				  document.querySelector('#outDtime').textContent = endWorkTime;
+ 				  document.querySelector('#endwork-time').textContent = endWorkTime;
  			   }
  			   
  			   if(daytimes > 0){
@@ -108,17 +108,12 @@ document.querySelector('#startBtn').addEventListener('click', function () {
 	$.ajax({
 	   url : '${path }/commute/workIn.do',
 	   method : 'POST',
-	   /* headers, */
 	   contentType : "application/json; charset=utf-8",
-	   success(result){
-			console.log(result);
-	       if(result.status === "성공"){
-	           alert("출근이 성공적으로 등록됬습니다.");
-	           location.reload();
-	       }else if(result.status === '출장'){
-	    	   alert("출장시에는 자동적으로 출근처리가 완료됩니다.");
-	    	  return;
-	       }else if(result.status === '연차'){
+	   success(data){
+			console.log(data);
+	       if(data.successYn == "Y"){
+	           alert("출근 성공입니다.");
+	       }else if(data.successYn == '연차'){
 	    	   alert("연차중입니다.");
 	    	   return;
 	       }
@@ -137,21 +132,16 @@ document.querySelector('#endBtn').addEventListener('click', function () {
 	$.ajax({
 	   url : '${path }/commute/workOut.do',
 	   method : 'POST',
-	   /* headers, */
 	   contentType : "application/json; charset=utf-8",
-	   success(result){
-		   console.log(result);
+	   success(data){
+		   console.log(data);
 		   
-		   if(result.status === "성공"){
-	           alert("퇴근이 성공적으로 등록됬습니다.");
-	           location.reload();
-	       }else if(result.status === '출근전'){
+		   if(data.successYn == "Y"){
+	           alert("퇴근 성공입니다.");
+	       }else if(data.successYn == '출근전'){
 	    	   alert("출근전입니다.");
 	    	   return;
-	       }else if(result.status === '출장'){
-	    	   alert("출장시에는 자동적으로 퇴근처리가 완료됩니다.");
-	    	  return;
-	       }else if(result.status === '연차'){
+	       }else if(data.successYn == '연차'){
 	    	   alert("연차중입니다.");
 	    	   return;
 	       }
@@ -169,7 +159,6 @@ const updateWorkTime = (daytimes) =>{
     $.ajax({
         url: '${path }/commute/updateWorkTime.do',
         method: 'POST',
-        headers,
         data: {daytimes},
         success(data) {
           console.log(data);
