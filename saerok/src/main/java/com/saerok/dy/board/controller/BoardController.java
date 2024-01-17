@@ -1,6 +1,8 @@
 
 package com.saerok.dy.board.controller;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -10,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.saerok.dy.board.model.dto.Board;
 import com.saerok.dy.board.model.service.BoardService;
 
 import lombok.RequiredArgsConstructor;
@@ -34,6 +37,8 @@ public class BoardController {
 	// 공지사항 페이지로 이동
 	@GetMapping("/All")
 	public String boardAll(Model model) {
+		List<Board> boardAll=boardService.boardAll();
+		model.addAttribute("boardAll",boardAll);
 		return "board/boardAll";
 	}
 

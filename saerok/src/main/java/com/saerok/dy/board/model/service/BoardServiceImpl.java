@@ -18,7 +18,7 @@ public class BoardServiceImpl implements BoardService {
 	private final SqlSession session;
 
 	@Override
-	public List<Board> boardAll(int boardNo) {
+	public List<Board> boardAll() {
 		return dao.boardAll(session);
 	}
 
