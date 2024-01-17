@@ -13,5 +13,7 @@ public interface ApprovalService {
 	Approval selectApprovalByNo(String apvDocNo);
 	
 	int insertApproval(Approval a);
+	
+	List<Map<String,Object>> deptName(Integer deptCode);
 }
 
