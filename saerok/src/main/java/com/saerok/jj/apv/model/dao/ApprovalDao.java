@@ -12,6 +12,7 @@ import org.apache.ibatis.session.SqlSession;
 public interface ApprovalDao {
 	
 	
+	
 	List<Approval> selectApproval(SqlSession session, Map<String, Integer> page);
 	
 	Approval selectApprovalByNo(SqlSession session, String DocNo);
@@ -19,6 +20,9 @@ public interface ApprovalDao {
 	
 
 	int insertApproval(SqlSession session, Approval a);
+	
+	
+	List<Map<String, Object>> selectEmployeeList(SqlSession session, Integer deptCode);
 }
 
 	
