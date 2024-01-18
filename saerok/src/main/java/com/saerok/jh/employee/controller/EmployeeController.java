@@ -114,6 +114,7 @@ public class EmployeeController {
 		return result>0?"성공":"실패";
      }
     
+    //사원삭제
     @PostMapping("/deleteemp")
     @ResponseBody
     public String deleteEmployee(@RequestBody Employee empNo, Model model) {
@@ -123,8 +124,20 @@ public class EmployeeController {
     	return result>0?"성공":"실패";
     }
 
-     
-     
+  //에러페이지
+    @GetMapping("/errorPage")
+    public String error() {
+       return "common/errorpage";
+
+    }
+//    
+//    //에러페이지
+//    @RequestMapping(method = {RequestMethod.POST, RequestMethod.GET}, path = "/error")
+//    public String error() {
+//       return "index";
+//
+//    }
+    
      
      
      
