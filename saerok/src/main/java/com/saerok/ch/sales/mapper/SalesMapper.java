@@ -34,6 +34,6 @@ public interface SalesMapper {
     List<Map<String, Object>> findBranchOwnerCurrentMonthSales(@Param("empNo") String empNo);
     List<Map<String, Object>> findCurrentMonthSalesByCategoryForOwner(@Param("empNo") String empNo);
 
-    void insertBranchSales(Map<String, Object> salesData);  
+    void insertBranchSales(Map<String, Object> salesData);  //매출등록
 
 }

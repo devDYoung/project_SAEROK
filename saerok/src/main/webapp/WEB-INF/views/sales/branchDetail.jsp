@@ -185,3 +185,4 @@
 		src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
 </body>
 </html>
+<jsp:include page="/WEB-INF/views/common/footer.jsp" />
