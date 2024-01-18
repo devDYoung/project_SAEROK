@@ -13,22 +13,32 @@ import com.saerok.jy.commute.dto.Commute;
 public class CommuteDaoImpl implements CommuteDao {
 	
 	@Override
-	public List<Commute> selectCommuteList(SqlSession session, Map<String, Object> param) {
-		return session.selectList("commute.selectCommuteList", param);
+	public Commute selectCommuteList(SqlSession session, Map<String, Object> param) {
+		return (Commute)session.selectOne("commute.selectCommuteList", param);
+	}
+	
+	@Override
+	public Commute selectExsistWorkInList(SqlSession session, Map<String, Object> param) {
+		return (Commute)session.selectOne("commute.selectExsistWorkInList", param);
+	}
+	
+	@Override
+	public List<Commute> selectCommuteWorkList(SqlSession session, Map<String, Object> param) {
+		return session.selectList("commute.selectCommuteWorkList", param);
 	}
 // 에러난다
 
 	@Override
-	public int insertCommuteStatus(SqlSession session, Map status) {
+	public int insertCommuteStatus(SqlSession session, String empNo) {
 
-		return session.insert("commute.insertCommuteStatus", status);
+		return session.insert("commute.insertCommuteStatus", empNo);
 	}
 	
 	
 	@Override
-	public int updateCommuteEndTime(SqlSession session, Map status) {
+	public int updateCommuteEndTime(SqlSession session, Map<String, Object> param) {
 
-		return session.update("commute.updateCommuteEndTime", status);
+		return session.update("commute.updateCommuteEndTime", param);
 	}
 	
 	@Override
@@ -80,7 +90,13 @@ public class CommuteDaoImpl implements CommuteDao {
 		return session.selectOne("commute.monthOverTime", startEndMap);
 	}
 	
-	
+	public int checkStartwork(SqlSession session, Map<String, Object> param) {
+		return session.selectOne("commute.checkStartwork",param);
+	}
+
+	public int updateStartWork(SqlSession session, Map<String, Object> param) {
+		return session.update("commute.updateStartWork",param);
+	}
 //	@Override
 //	public ArrayList<Commute> selectCommuteStatusList(SqlSession session, int commuteNo) {
 //
