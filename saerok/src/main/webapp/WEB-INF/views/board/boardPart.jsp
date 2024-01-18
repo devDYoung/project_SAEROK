@@ -24,12 +24,17 @@
 			<div class="card shadow mb-4">
 				<div class="card-header py-3">
 					<h6 class="m-0 font-weight-bold text-primary">부서별 게시판</h6>
+					<div class="d-flex justify-content-end">
+						<button type="button" class="btn btn-facebook btn-block col-1"
+							onclick="window.location.href='/board/write';">작성하기</button>
+					</div>
 				</div>
 				<div class="card-body">
 					<div class="table-responsive">
 						<table class="table table-bordered" id="dataTable" width="100%"
 							cellspacing="0">
 							<thead>
+
 								<tr>
 									<th scope="col" class="text-center">번호</th>
 									<th scope="col" class="text-center">제목</th>
@@ -42,34 +47,43 @@
 							</thead>
 							<tbody>
 								<c:if test="${not empty boardPart}">
-									<c:forEach var="loginEmployee" items="${boardPart}">
+									<c:forEach var="b" items="${boardPart}">
 										<tr>
-											<td><c:out value="${board.boardNo}" /></td>
-											<td><c:out value="${board.boardTitle}" /></td>
-											<td><c:out value="${board.boardContent}" /></td>
-											<td><c:out value="${board.OriFileName}" /></td>
-											<td><c:out value="${board.regId}" /></td>
-											<td><c:out value="${board.regDtime}" /></td>
+											<td><c:out value="${b.boardNo}" /></td>
+											<td><c:out value="${b.boardTitle}" /></td>
+											<td><c:out value="${b.bordContent}" /></td>
+											<td><c:out value="${b.oriFileName}" /></td>
+											<td><c:out value="${b.regId}" /></td>
+											<td><fmt:formatDate value="${b.regDtime}"
+													pattern="yyyy-MM-dd" /></td>
 										</tr>
 									</c:forEach>
+
 								</c:if>
 							</tbody>
 						</table>
+						<!-- <div style="text-align: right;">
+							<button type="button" class="btn btn-sm btn-primary"
+								onclick="window.location.href='/board/write';">글쓰기</button>
+						</div> -->
 					</div>
 				</div>
 			</div>
 		</form>
 	</div>
 
-	<script>
-		$(document).ready(function() {
 
-			new DataTable('#dataTable', {
-				info : false,
-				ordering : true,
-				paging : true
-			});
+</section>
+
+<script>
+	$(document).ready(function() {
+
+		new DataTable('#dataTable', {
+			info : false,
+			ordering : true,
+			paging : true
 		});
-	</script>
+	});
+</script>
 
-	<jsp:include page="/WEB-INF/views/common/footer.jsp" /> 
+<jsp:include page="/WEB-INF/views/common/footer.jsp" />
