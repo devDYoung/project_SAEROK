@@ -1,4 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
+<%-- <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
@@ -56,7 +56,7 @@
 								  </div>
 								</nav> -->
 								<div class="tab-content" id="nav-tabContent">
-<%-- 								
+								
 								  <!-- 회의 -->
 								  <div class="tab-pane fade show active" id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab" tabindex="0">
 								  
@@ -105,7 +105,7 @@
 									</div>
 									
 								</div>
-								<!-- 회의 끝 --> --%>
+								<!-- 회의 끝 -->
 								 
 								  <!-- 휴가 -->
 								  <div class="tab-pane fade" id="nav-profile" role="tabpanel" aria-labelledby="nav-profile-tab" tabindex="0">
@@ -335,4 +335,4 @@
 		
 	
 
-<jsp:include page="/WEB-INF/views/common/footer.jsp" />
+<jsp:include page="/WEB-INF/views/common/footer.jsp" /> --%>

@@ -33,10 +33,10 @@
 						email is required.</div>
 					<div class="invalid-feedback" data-sb-feedback="email:email">Email
 						is not valid.</div>
-					<div class="d-grid text-right">
+					<!-- <div class="d-grid text-right">
 						<button class="btn-sm btn btn-primary btn-lg" id="submitButton"
 							type="button" onclick="openEmployeeModal()">사원 조회</button>
-					</div>
+					</div> -->
 				</div>
 				<!-- 쪽지 제목 입력-->
 				<div class="form-floating mb-3">

@@ -10,8 +10,9 @@
 	
                 <div class="all-container app-dashboard-body-content off-canvas-content" data-off-canvas-content>
                 <!-- 왼쪽 추가 메뉴 -->
-                <div class="left-container">
+                <!-- <div class="left-container">
                     <div id="home-left-work" class="div-padding div-margin">
+                    <div style="height: 50px;"></div>
                         <table id="home-work-tbl">
 
                             <tbody>
@@ -27,11 +28,11 @@
                                 </tr>            
                                 <tr>
                                     <td class="font-14 font-bold">출근시간</td>
-                                    <td class="text-right font-14" id="inDtime">미등록</td>
+                                    <td class="text-right font-14" id="startwork-time">미등록</td>
                                 </tr>
                                 <tr>
                                     <td class="font-14 font-bold">퇴근시간</td>
-                                    <td class="text-right font-14" id="outDtime">미등록</td>
+                                    <td class="text-right font-14" id="endwork-time">미등록</td>
                                 </tr>
                                 <tr>
                                     <td class="font-14 font-bold">주간 누적 근무시간</td>
@@ -46,12 +47,67 @@
                     
                     </div>
                 </div>
-             </div>
+             </div> -->
+              <div class="page-wrapper">
+                  <div class="home-content">
+                     <!-- <div style="display: flex;"> -->
+                        <!-- 본문 왼쪽 -->
+                        <div class="home-content-div">
+                           <div id="home-left" class="div-padding div-margin">
+                        <div style="height: 50px;"></div>
+                              <table id="home-my-tbl">
+                                 <tbody>
+                                           <tr>
+                                                <td id="year" colspan="2" class="font-14">clock</td>
+                                            </tr>
+                                    <tr>
+                                       <td colspan="2">
+                                          <c:if test="${!empty loginEmployee}">
+                                             <img src="${path}/resources/upload/profile/${loginEmployee.destFileName}" alt="" class="img">
+                                          </c:if>
+                                       </td>
+                                    </tr>
+                                    <tr>
+                                       <td colspan="2">${loginEmployee.empName} ${loginEmployee.jobName}</td>
+                                    </tr>
+                                    <tr>
+                                       <td colspan="2">${loginEmployee.deptName}</td>
+                                    </tr>
+                                     
+                                            <tr>
+                                                <td colspan="2" id="clock" style="color:black;">clock</td>
+                                            </tr>
+                                    <tr>
+                                                <td class="font-14 font-bold">업무상태</td>
+                                                <td class="text-right font-14 color-red font-bold" id="work-status">출근전</td>
+                                            </tr>    
+                                            <tr>
+                                                <td class="font-14 font-bold">출근시간</td>
+                                                <td class="text-right font-14" id="startwork-time">미등록</td>
+                                            </tr>
+                                            <tr>
+                                                <td class="font-14 font-bold">퇴근시간</td>
+                                                <td class="text-right font-14" id="endwork-time">미등록</td>
+                                            </tr>
+                                            <tr class="btn-tr">
+                                                <td><button class="font-bold" id="startBtn">출근</button></td>
+                                                <td class="text-right"><button class="font-bold" id="endBtn">퇴근</button></td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                
+                                </div>
+                        </div>
+                        </div>
+                        </div>
+     <!--                    </div> -->
+    <!--                     </div> -->
 
 <script>
 window.addEventListener('load', function(){
 	
-    
+	getStartAndEndDateOfWeek();
+	
     $.ajax({
  	   url : '${path }/commute/commute.do',
  	   method:'GET',
@@ -59,12 +115,12 @@ window.addEventListener('load', function(){
  	   success(data){
  		   console.log(data);
  		   if(data){
- 			   const {commuteNo,inDtime,outDtime,overtime,workingDay,status,lateYN,empNo,workingHours} = data;
+ 			   const {commuteNo,inDtime,outDtime,overtime,workingDay,status,lateYN,empNo,workingHours} = data[0];
  			   var starttime = new Date(inDtime);
  			   var endtime = new Date(outDtime);
  			   
  			   //하루 근무시간 계산
- 			   const daytimes = workingHours; //퇴근시간 - 출근시간
+ 			   const daytimes = endtime-starttime; //
  			   console.log(daytimes);
  			   
  			   const workStatus = document.querySelector("#work-status");
@@ -88,11 +144,11 @@ window.addEventListener('load', function(){
                   // 퇴근시간 정보 출력
  				  document.querySelector('#endwork-time').textContent = endWorkTime;
  			   }
- 			   
+ 			   /* 
  			   if(daytimes > 0){
  				   //하루 근무시간 update
  				  updateWorkTime(daytimes);
- 			   }
+ 			   } */
  		   }
  	   },
  	   error : console.log
@@ -104,16 +160,16 @@ window.addEventListener('load', function(){
 
 //출근 버튼 클릭 시
 document.querySelector('#startBtn').addEventListener('click', function () {
-	
+
 	$.ajax({
 	   url : '${path }/commute/workIn.do',
 	   method : 'POST',
 	   contentType : "application/json; charset=utf-8",
 	   success(data){
 			console.log(data);
-	       if(data.successYn == "Y"){
+	       if(data.status === "성공"){
 	           alert("출근 성공입니다.");
-	       }else if(data.successYn == '연차'){
+	       }else if(data.status === '연차'){
 	    	   alert("연차중입니다.");
 	    	   return;
 	       }
@@ -136,12 +192,12 @@ document.querySelector('#endBtn').addEventListener('click', function () {
 	   success(data){
 		   console.log(data);
 		   
-		   if(data.successYn == "Y"){
+		   if(data.status === "성공"){
 	           alert("퇴근 성공입니다.");
-	       }else if(data.successYn == '출근전'){
+	       }else if(data.status === '출근전'){
 	    	   alert("출근전입니다.");
 	    	   return;
-	       }else if(data.successYn == '연차'){
+	       }else if(data.status === '연차'){
 	    	   alert("연차중입니다.");
 	    	   return;
 	       }
@@ -191,14 +247,14 @@ function getStartAndEndDateOfWeek() {
 			  const {totalMonthOverTime ,totalMonthTime, weekOverTime ,weekTotalTime} = data;
 			  const totalWorkTime = document.querySelector("#totalwork-time");
 			  
-			  totalWorkTime.textContent = chageWorkTime(weekTotalTime + weekOverTime);
+			  totalWorkTime.textContent = changeWorkTime(weekTotalTime + weekOverTime);
 		  },
 		  error : console.log
 		  
 	  });
 }
 
-function chageWorkTime(times){
+function changeWorkTime(times){
 	const time = times / 1000;
 	const hours = Math.floor(time / 3600); // 시간 계산
 	const minutes = Math.floor((time % 3600) / 60); // 분 계산

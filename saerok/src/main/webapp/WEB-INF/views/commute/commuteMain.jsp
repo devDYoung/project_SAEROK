@@ -24,8 +24,8 @@
         margin: 0 10px;
     }
 </style>
-  <div class="home-container">
-                    <div class="div-padding">
+  <div class="home-container" class="div-padding div-margin">
+                    <!-- <div class="div-padding"> -->
                         <div id="date-box">
                             <h4>
                                 <button id="prev-btn"><i class="fas fa-chevron-left"></i></button>
@@ -63,7 +63,7 @@
 
                     </div>
                 </div>
-     
+                </div>
      
 	<script>
         window.addEventListener('load',()=>{
@@ -102,7 +102,7 @@
                     const container = document.querySelector("#work-info-container");
                     container.innerHTML = "";
                      $.ajax({
-                        url : '${path }/commute/selectMonthWork.do',
+                        url : "${path }/commute/selectMonthWork.do",
                         data : {dateText},
                         contentType : "application/json; charset=utf-8",
                         success(data){
@@ -123,7 +123,7 @@
                             Object.keys(weekDates).sort().forEach(key  =>{
       
     	                        const row1 = document.createElement("tr");
-    	                       // row1.classList.add("table-expand-row");
+    	                       row1.classList.add("table-expand-row");
     	                        row1.setAttribute("id","work-container-tr");
     	                        row1.dataset.openDetails = "";
     	        				row1.dataset.start = weekDates[key].start;
@@ -136,14 +136,14 @@
     	        					const start = e.currentTarget.dataset.start;
     	        					const end = e.currentTarget.dataset.end;
     	        					$.ajax({
-    	        						url : '${path }/commute/selectWeekDatas.do',
+    	        						url : "${path }/commute/selectWeekDatas.do",
     	        						data : {start,end},
     	        						success(data){
     	        							console.log(data);
     	        							if(tbody2.innerHTML==""){
-	    		        							data.forEach((datas) =>{
+	    		        							//data.forEach((datas) =>{
 	    		        								const subTr = document.createElement("tr");
-	    		        								const {empNo, outDtime, commuteNo, overtime, workingDay, inDtime, status, workingHours} = datas;
+	    		        								const {empNo, outDtime, commuteNo, overtime, workingDay, inDtime, status, workingHours} = data[0];
 	    		        								const subTd1 = document.createElement("td");
 	    		        								subTd1.textContent = changeWorkingDay(workingDay);
 	    		        								
@@ -155,10 +155,11 @@
 	    		        								
 	    		        								const subTd4 = document.createElement("td");
 	    		        								subTd4.classList.add("font-bold");
-	    		        								subTd4.textContent = chageWorkTime(workingHours+overtime);
+	    		        								//subTd4.textContent = changeWorkTime(workingHours+overtime);
+	    		        								subTd4.textContent = changeWorkTimeNew(inDtime, outDtime);
 	    		        								
 	    		        								const subTd5 = document.createElement("td");
-	    		        								subTd5.textContent = "기본 "+ chageWorkTime(workingHours) + " / 연장 " + chageWorkTime(overtime);
+	    		        								subTd5.textContent = "기본 "+ changeWorkTime(workingHours) + " / 연장 " + changeWorkTime(overtime);
 	    		        								
 	    		        								const subTd6 = document.createElement("td");
 	    		        								if(status == '연차'){
@@ -173,7 +174,7 @@
 	    		        								
 	    		        								subTr.append(subTd1,subTd2,subTd3,subTd4,subTd5,subTd6);
 	    		        								tbody2.append(subTr);
-	    		        							});
+	    		        							//});
     	        							}
     	        						},
     	        						error :console.log
@@ -200,10 +201,10 @@
     	
     	                        const td2 = document.createElement("td");
     	                        td2.classList.add("total-time-info");
-    	                        td2.textContent = "누적 근무시간 " + chageWorkTime(workTime+workOverTime);
+    	                        td2.textContent = "누적 근무시간 " + changeWorkTime(workTime+workOverTime);
     							const span0 = document.createElement("span");
     							span0.classList.add("font-12","color-gray");
-    							span0.textContent = " ( 초과 근무시간 " + chageWorkTime(workOverTime) +" )";
+    							span0.textContent = " ( 초과 근무시간 " + changeWorkTime(workOverTime) +" )";
     							td2.append(span0);
     	                        
     	                        const row2 = document.createElement("tr");
@@ -242,10 +243,10 @@
     	
     	                        const header6 = document.createElement("th");
     	                        header6.setAttribute("width", "100");
-    	                        header6.textContent = "승인요청내역";
+    	                        header6.textContent = "승인요청내역"; 
     	
     	                        
-    	                        headerRow.append(header1,header2,header3,header4,header5,header6);
+    	                        headerRow.append(header1,header2,header3,header4,header5);
     	                        thead.append(headerRow);
     	                        nestedTable.append(thead,tbody2);
     	                        td3.append(nestedTable);
@@ -309,15 +310,15 @@
     			  const monthOverTime = document.querySelector("#main-month-over-time")
     			  
     			  let times = 144000000 - (weekTotalTime + weekOverTime); // 40시간 - 주간 기본 근무시간
-    			  mainTotalWorkTime.textContent = chageWorkTime(weekTotalTime + weekOverTime);
-    			  mainWeekOverTime.textContent = chageWorkTime(weekOverTime);
+    			  mainTotalWorkTime.textContent = changeWorkTime(weekTotalTime + weekOverTime);
+    			  mainWeekOverTime.textContent = changeWorkTime(weekOverTime);
     			  if(times < 0){
-    				  mainWorkTime.textContent = chageWorkTime(0);
+    				  mainWorkTime.textContent = changeWorkTime(0);
     			  }else{
-    				  mainWorkTime.textContent = chageWorkTime(times);				  
+    				  mainWorkTime.textContent = changeWorkTime(times);				  
     			  }
-    			  monthWorkTime.textContent = chageWorkTime(totalMonthTime + totalMonthOverTime);
-    			  monthOverTime.textContent = chageWorkTime(totalMonthOverTime);
+    			  monthWorkTime.textContent = changeWorkTime(totalMonthTime + totalMonthOverTime);
+    			  monthOverTime.textContent = changeWorkTime(totalMonthOverTime);
     		  },
     		  error : console.log
     		  
@@ -325,7 +326,7 @@
     }
 
     // 총근무시간
-    function chageWorkTime(times){
+    function changeWorkTime(times){
     	const time = times / 1000;
     	const hours = Math.floor(time / 3600); // 시간 계산
     	const minutes = Math.floor((time % 3600) / 60); // 분 계산
@@ -334,11 +335,26 @@
     	return `\${hours}h \${minutes}m \${seconds}s`;	
     }
 
+    function changeWorkTimeNew(inDtime, outDtime) {
+    	var inDate = new Date(inDtime);
+    	var outDate = new Date(outDtime);
+    	
+    	var overDay = Math.trunc((outDate-inDate)/1000/3600/24);
+    	var overHour = Math.trunc(((outDate-inDate)/1000/3600)%24);
+    	var overMin = Math.trunc(((outDate-inDate)/1000/3600/24)%60);
+    	var overSec = Math.trunc(((outDate-inDate)/1000/3600/24/60)%60);
+    	
+    	console.log("hjhjhj", overDay, overHour, overMin, overSec);
+		
+    	return `\${overHour}h \${overMin}m \${overSec}s`;
+    }
+    
     // workingDay날짜 00일 (월)로 변경
     function changeWorkingDay(workingDay) {
-      const year = workingDay[0];
-      const month = workingDay[1] - 1; // JavaScript의 Date 객체에서 월은 0부터 시작합니다.
-      const date = workingDay[2];
+      const day = new Date(workingDay);
+      const year = day.getFullYear();
+      const month = day.getMonth()+1; // JavaScript의 Date 객체에서 월은 0부터 시작합니다.
+      const date = day.getDate();
       
       const dayOfWeekNames = ["일", "월", "화", "수", "목", "금", "토"];
       const dayOfWeekIndex = new Date(year, month, date).getDay(); // 해당 날짜의 요일을 구합니다.

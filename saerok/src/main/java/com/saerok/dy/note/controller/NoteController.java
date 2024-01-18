@@ -36,7 +36,7 @@ public class NoteController {
 	// 받은 쪽지함 페이지로 이동
 	@GetMapping("/get")
 	public String readNotePage(Model model) {
-		List<Note> receivedNotes = noteService.getReceivedNotes("Ato_1");
+		List<Note> receivedNotes = noteService.getReceivedNotes();
 		model.addAttribute("receivedNotes", receivedNotes);
 		return "note/noteGet";
 	}

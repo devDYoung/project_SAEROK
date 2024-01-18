@@ -52,7 +52,13 @@ public class Employee implements UserDetails {
 	      auth.add(new SimpleGrantedAuthority(MyAuthority.HR_MASTER.name())); // 인사부장 -> HR_MASTER
 	   } else if (deptCode.equals("400") && jobCode.equals("40")) {
 	      auth.add(new SimpleGrantedAuthority(MyAuthority.BRANCHER.name())); // 지점장 -> BRANCHER
+	   }else if(deptCode.equals("200") && (jobCode.equals("10") || jobCode.equals("20") || jobCode.equals("30"))) {
+		   auth.add(new SimpleGrantedAuthority(MyAuthority.MG.name())); // 관리팀 -> MG
+	   }else if(deptCode.equals("300") && (jobCode.equals("10") || jobCode.equals("20") || jobCode.equals("30"))) {
+		   auth.add(new SimpleGrantedAuthority(MyAuthority.SA.name())); // 영업팀 -> SA
 	   }
+	   
+	   
 	   return auth;
 	}
 
