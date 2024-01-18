@@ -30,13 +30,13 @@ public class SaerokMVCConfiguration implements WebMvcConfigurer {
 			Properties exceptionProp=new Properties();
 			
 			//추가적인 exception 페이지 설정 가능
-			exceptionProp.setProperty(AccessDeniedException.class.getName(), "common/errorpage");
+			exceptionProp.setProperty(AccessDeniedException.class.getName(), "/common/errorpage");
 			SimpleMappingExceptionResolver exceptionResolver= new SimpleMappingExceptionResolver();
 			exceptionResolver.setExceptionMappings(exceptionProp);
 
 			return exceptionResolver;
 		}
-//		
+		
 		
 		
 		
