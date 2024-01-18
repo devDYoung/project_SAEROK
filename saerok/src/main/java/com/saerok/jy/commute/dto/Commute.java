@@ -22,8 +22,6 @@ public class Commute {
 	private long overtime; //연장근무시간
 	private String workingDay; //근무일
 	private String empNo; //사원번호
-	private String inTime; //출근시간
-	private String outTime; //퇴근시간
 	private long workingHours;// 근무시간
 	
 	
