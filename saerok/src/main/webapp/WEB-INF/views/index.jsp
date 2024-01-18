@@ -338,8 +338,8 @@ const updateWorkTime = (daytimes) =>{
 				<!-- 본문 오른쪽 -->
 				<div>
 					<div id="home-right-div" class="div-padding div-margin">
-						<!-- <h5 style="padding: 20px">최근 알림</h5>
- -->
+						<h5 style="padding: 20px">최근 알림</h5>
+
 
 
 

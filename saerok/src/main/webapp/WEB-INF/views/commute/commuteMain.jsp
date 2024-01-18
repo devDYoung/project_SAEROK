@@ -143,7 +143,7 @@
     	        							if(tbody2.innerHTML==""){
 	    		        							//data.forEach((datas) =>{
 	    		        								const subTr = document.createElement("tr");
-	    		        								const {outDtime, commuteNo, overtime, workingDay, inDtime, status, workingHours} = data[0];
+	    		        								const {empNo, outDtime, commuteNo, overtime, workingDay, inDtime, status, workingHours} = data[0];
 	    		        								const subTd1 = document.createElement("td");
 	    		        								subTd1.textContent = changeWorkingDay(workingDay);
 	    		        								
