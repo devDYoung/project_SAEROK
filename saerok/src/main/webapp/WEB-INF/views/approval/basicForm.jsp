@@ -15,8 +15,6 @@
 <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
 
 
-<button id="testBtn" class="btn">모달 test</button>
-
 <!-- Modal-->
 <div class="modal fade" id="testModal" tabindex="-1" role="dialog"
 	aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -30,121 +28,201 @@
 			</div>
 			<div class="modal-body">
 				<div style="display: flex;">
-					 <div style="border: 1px solid black; width: 300px;">
+					<div style="border: 1px solid black; width: 300px;">
 						<ul id="mixed" class="loadDeptButton">
-							<li>
-								<span class="deptName" role="button" style="color: black;">
-							 		<i class="fas fa-search fa-fw"></i>
-										인사팀-HR
-								</span>
-								<ul class="team-list"></ul>
-							</li>
-							<li>
-								<span class="deptName" role="button" style="color: black;">
-									<i class="fas fa-fw fa-folder"></i>
-										관리팀-MG
-								</span>
-								<ul class="team-list"></ul>
-							</li>
-							<li>
-								<span class="deptName" role="button" style="color: black;">
-									<i class="fas fa-fw fa-folder"></i>
-										영업-SA
-								</span>
-								<ul class="team-list"></ul>
-							</li>
-							<li>
-								<span class="deptName" role="button" style="color: black;">
-									<i class="fas fa-fw fa-folder"></i>
-										지점팀-STORE
-								</span>
-								<ul class="team-list"></ul>
-							</li>
+							<li><span class="deptName" role="button"
+								style="color: black;"> <i class="fas fa-search fa-fw"></i>
+									인사팀-HR
+							</span>
+								<ul class="team-list"></ul></li>
+							<li><span class="deptName" role="button"
+								style="color: black;"> <i class="fas fa-fw fa-folder"></i>
+									관리팀-MG
+							</span>
+								<ul class="team-list"></ul></li>
+							<li><span class="deptName" role="button"
+								style="color: black;"> <i class="fas fa-fw fa-folder"></i>
+									영업-SA
+							</span>
+								<ul class="team-list"></ul></li>
+							<li><span class="deptName" role="button"
+								style="color: black;"> <i class="fas fa-fw fa-folder"></i>
+									지점팀-STORE
+							</span>
+								<ul class="team-list"></ul></li>
 						</ul>
 					</div>
-					<button class="btn btn-success btn-circle btn-lg" style="margin: 300px 0px 100px 50px;height: 50px; width: 50px;">추가</button>
+					<div>
+						<input type="button" id="addButton" value="결재자추가"
+							style="width: 100px; height: 50px;"> <input type="button"
+							id="resetButton" value="취소" style="width: 50px; height: 50px;"><br>
+						<input type="button" id="addReferButton" value="참조자추가"
+							style="width: 100px; height: 50px; margin-top: 300px"> <input
+							type="button" id="resetButton" value="취소"
+							style="width: 50px; height: 50px;">
+					</div>
+					<div style="display: flex; flex-direction: column;">
+						<div id="approverElement"
+							style="border: 1px solid red; margin-left: 100px; width: 400px; height: 350px;">
+							결재자</div>
+						<div id="referElement"
+							style="border: 1px solid blue; margin-left: 100px; height: 325.5px;">수신참조자
+						</div>
+					</div>
 				</div>
 			</div>
 
 
 			<div class="modal-footer">
-				<a class="btn" id="modalY" href="#">예</a>
+				<a class="btn" id="modalY" onclick="fn_modalClose();">예</a>
 				<button class="btn" type="button" data-dismiss="modal">아니요</button>
 			</div>
 		</div>
 	</div>
 </div>
-<script>
-    function loadDeptInfo(depCode) {
-        console.log('DEPT_CODE:', depCode);
-       
-    }
 
-    // 예시: 버튼 클릭 시 loadDeptInfo 호출
-    $(document).ready(function() {
-        $('.loadDeptButton>li').click(function(e) {
-        	const deptName=e.currentTarget.children[0].innerText;
-        	const deptCodeName=deptName.substring(deptName.indexOf("-")+1);
-        	let deptCode;
-        	switch(deptCodeName){
-        		case "HR" : deptCode=100;break;
-        		case "MG" : deptCode=200;break;
-        		case "SA" : deptCode=300;break;
-        		case "STORE" : deptCode=400;break;
-        	}
-        	 $.ajax({
-                 url: '${path}/approval/checkDept',
-                 method: 'GET',
-                 data: { deptCode: deptCode },
-                 success: function(response) {
-                	const ul=$(e.currentTarget).find(".team-list");
-                	console.log(ul);
-                	ul.html("");
-                 	response.forEach(e=>{
-                 		const $li=$("<li>");
-                 		const $span=$("<span>").text(e.empName+" "+e.jobName);
-                 		$li.append($span);
-                 		ul.append($li);
-                 	});
-                     console.log('Success:', response);
-                 },
-                 error: function(xhr, status, error) {
-                     console.error('Failed:', error);
-                 }
-             });
+<script>
+function fn_modalClose(){
+	alert("등록완료 !!");
+	$("#testModal").modal("hide");
+	const approvalLineContainer = $($.makeArray($(".basicForm>table tr:first-child>td:gt(1)")).reverse());
+	const addLineEmp=$("#approverElement>label");
+	addLineEmp.each((i,e)=>{
+		console.log(approvalLineContainer[i]);
+		console.log(e);
+		$(e).find("input[type=checkbox]").attr("type","hidden");
+		$(approvalLineContainer[i]).html("");
+				
+		$(approvalLineContainer[i]).append(e);
+	});
+	 // 참조자 추가
+    const referContainer = $("#referContainer"); 
+    const addLineRefer = $("#referElement>label"); 
+    referContainer.html(""); 
+    addLineRefer.each((i,e)=>{
+        $(e).find("input[type=checkbox]").attr("type","hidden");
+        referContainer.append(e);
+    });
+	
+}
+function loadDeptInfo(depCode) {
+    console.log('DEPT_CODE:', depCode);
+}
+
+//버튼 클릭 시 loadDeptInfo 호출
+$(document).ready(function() {
+    $('.loadDeptButton>li').click(function(e) {
+        const deptName = e.currentTarget.children[0].innerText;
+        const deptCodeName = deptName.substring(deptName.indexOf("-") + 1);
+        let deptCode;
+        switch(deptCodeName) {
+            case "HR": deptCode = 100; break;
+            case "MG": deptCode = 200; break;
+            case "SA": deptCode = 300; break;
+            case "STORE": deptCode = 400; break;
+        }
+        $.ajax({
+            url: '${path}/approval/checkDept',
+            method: 'GET',
+            data: { deptCode: deptCode },
+            success: function(response) {
+                const ul = $(e.currentTarget).find(".team-list");
+                ul.html("");
+
+                response.forEach(e => {
+                	  const $li = $("<li>");
+                	  const $label=$("<label>");
+                	  const $input=$("<input>").attr({"type":"checkbox","value":e.empNo,"class":"choiceEmp"});
+                	  const $a = $("<span>").text(e.empName + " " + e.jobName);
+                	  $li.on("click", function(event) {
+                		
+                	    event.stopPropagation();
+                	  });
+                	  $label.append($input).append($a);
+                	  $li.append($label);
+                	  ul.append($li);
+                	});
+
+            },
+            error: function(xhr, status, error) {
+                console.error('Failed:', error);
+            }
         });
     });
+});
 </script>
-<!--조직도  -->
+
 <script>
-	$(document).ready(function() {
-		$('.team-list').hide(); // 부서 하위 목록 숨김
+/* 결재자 추가  */
+$(document).ready(function() {
+    function addPeople(selector, limit, elementId, alertMessage) {
+        const selectedPeople = $(selector).find("input:checked");
+        const existingPeople = $(elementId).find("input[name='order']").map(function() {
+            return $(this).val();
+        }).get();
 
-		$('.deptName').click(function() {
-			$(this).siblings('.team-list').toggle();
-		});
-		
-	});
+        selectedPeople.each(function(index, elem) {
+            const order = index + 1;
+            // 이미 선택된 사람인지 확인
+            if (existingPeople.includes(order.toString())) {
+                $(elem).prop("checked", false);
+            } else {
+                const line = $(elem).parent().clone();
+                const orderInput = $("<input>").attr({"type": "hidden", "name": "order", "value": order});
+                line.append(orderInput);
+                line.css("display", "block");
+                $(elementId).append(line);
+            }
+        });
+
+        const selectedCount = $(elementId).find("input[name='order']").length;
+        if (selectedCount > limit) {
+            alert(alertMessage);
+            selectedPeople.prop("checked", false);
+        }
+    }
+
+    // 결재자 추가 버튼 클릭 이벤트
+    $("#addButton").click(function() {
+        addPeople(".team-list>li", 3, "#approverElement", "결재선은 3명까지만 가능합니다.");
+    });
+
+    // 참조자 추가 버튼 클릭 이벤트
+    $("#addReferButton").click(function() {
+        addPeople(".team-list>li", 5, "#referElement", "참조인은 5명까지만 가능합니다.");
+    });
+});
+
+
 </script>
-
 <!--모달창 띄우기  -->
 <script>
-	$('#testBtn').click(function(e) {
-		e.preventDefault();
-		$('#testModal').modal("show");
-	});
+	$(function(){
+		$('#testBtn').click(function(e) {
+			e.preventDefault();
+			$('#testModal').modal("show");
+		});	
+		$('#testBtn2').click(function(e) {
+			e.preventDefault();
+			$('#testModal').modal("show");
+		});	
+	})
+	
+	
+	<!-- 조직도 -->
+	$(document).ready(function() {
+		  $('.team-list').hide(); // 부서 하위 목록 숨김
+
+		  $('.deptName').click(function() {
+		    $(this).siblings('.team-list').toggle();
+		  });
+
+		  $('.team-list li').click(function() {
+		    // 하위 목록의 클릭 이벤트 처리
+		    console.log('List item clicked:', $(this).text());
+		  });
+		});
 </script>
-
-
-
-
-
-
-
-
-
-
-
 
 
 <strong>&nbsp; 문서 종류 : </strong>
@@ -154,8 +232,6 @@
 	<option value="D2">휴가신청서</option>
 	<option value="D3">지출 결의서</option>
 </select>
-
-
 
 
 
@@ -170,35 +246,18 @@
 					<td rowspan="2" colspan="4"
 						style="color: black; font-size: 40px; font-weight: 600;">품의서</td>
 					<td rowspan="2"
-						style="color: black; padding-top: 20px; font-size: 20px;">결 재</td>
+						style="color: black;  font-size: 20px;"><input
+						type="button" id="testBtn2" class="rounded-circle border-0" value="결재" /></td>
 					<td style="color: black; font-size: 15px;">최초승인자</td>
 					<td style="color: black; font-size: 15px;">중간승인자</td>
 					<td style="color: black; font-size: 15px;">최종승인자</td>
 				</tr>
 				<tr>
-					<td style="">
-						<!-- 이미지화 시켜서 인쇄할 수 있는 방법 찾아보기 --> <input type="text" value=""
-						id="firstApprover" name="firstApprover" readonly="readonly"
-						class="nameView"> <input type="button" value="검색"
-						class="searchMember" id="firstBtn" name="firstApprover">
-					</td>
-					<td><input type="text" value="" id="interimName"
-						name="interimApprover" readonly="readonly" class="nameView">
-						<input type="button" value="검색" class="searchMember"
-						id="secondBtn" name="interimApprover"></td>
-					<td><input type="text" value="" id="finalApprover"
-						name="finalApprover" readonly="readonly" class="nameView">
-						<input type="button" value="검색" class="searchMember" id="thirdBtn"
-						name="finalApprover"></td>
+
 				</tr>
 				<tr>
-					<td colspan="2" style="color: black; height: 70px;">
-						<button class="send-open" type="button">+ 수신참조자 +</button>
-					</td>
-					<td colspan="6" style="height: 70px;"><textArea readonly
-							name="referList" id="referList" class="form-control"
-							style="border: none; font-size: 19px; width: 600px; height: 60px; text-align: center; resize: none;"></textArea>
-					</td>
+					<td colspan="2" style="color: black; height: 70px;">수신참조자</td>
+					<td colspan="6" id="referContainer" style="height: 70px;"></td>
 				</tr>
 				<tr>
 					<td
@@ -359,6 +418,25 @@
 		$(button).closest('tr').remove();
 	}
 </script>
+
+
+
+
+
+
+<div id="직원목록">
+	<ul>
+		<li><a href="#" class="직원">직원1</a></li>
+		<li><a href="#" class="직원">직원2</a></li>
+		<li><a href="#" class="직원">직원3</a></li>
+	</ul>
+</div>
+
+<div id="결재자">
+	<!-- 추가된 결재자가 여기에 나타납니다 -->
+</div>
+
+<button id="추가버튼">추가</button>
 
 
 
