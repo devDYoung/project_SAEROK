@@ -51,7 +51,7 @@
 										<tr>
 											<td><c:out value="${b.boardNo}" /></td>
 											<td><c:out value="${b.boardTitle}" /></td>
-											<td><c:out value="${b.boardContent}" /></td>
+											<td><c:out value="${b.bordContent}" /></td>
 											<td><c:out value="${b.oriFileName}" /></td>
 											<td><c:out value="${b.regId}" /></td>
 											<td><fmt:formatDate value="${b.regDtime}"
