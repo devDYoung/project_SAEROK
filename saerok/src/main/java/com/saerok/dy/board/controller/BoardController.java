@@ -1,6 +1,7 @@
 
 package com.saerok.dy.board.controller;
 
+import java.security.Principal;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -62,7 +63,12 @@ public class BoardController {
 	
 	// 게시글 저장
 	@PostMapping("/save")
-	public String saveBoard(Board board) {
+	public String saveBoard(Board board, Principal loginSession) {
+
+		// 현재 로그인 중인 사원의 사원번호
+		String empNo = loginSession.getName();
+		board.setRegId(empNo);
+		
 		boardService.save(board);
 		return "redirect:/board/All";
 	}
