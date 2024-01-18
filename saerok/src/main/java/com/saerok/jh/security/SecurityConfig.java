@@ -54,8 +54,8 @@ public class SecurityConfig{
             })
             .exceptionHandling(
                     exceptionHandle 
-                    ->exceptionHandle.accessDeniedHandler(
-                          new MyAccessDeniedHandler()))
+                    ->exceptionHandle.accessDeniedPage(
+                          "/errorPage"))
             .authenticationProvider(dbprovider) // DB와 연동하여 인증 처리
             .build(); // SecurityFilterChain 빌드 및 반환
          }
