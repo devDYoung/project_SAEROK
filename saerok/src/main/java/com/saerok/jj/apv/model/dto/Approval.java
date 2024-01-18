@@ -19,9 +19,9 @@ public class Approval {
 	private Date appWriteDate; //작성일자
 	private String appCheck; //결재상태
 	private Employee empNo;//사원번호
-	private String appKinds; // 걀재종류 
+	private String appKinds; // 결재종류 
 
-	private List<ApvWriter> apvWriter;//결제선
+	private List<ApvWriter> apvWriter;//결재선
 	private List<ApvRef> apvRef;
 	
 }
