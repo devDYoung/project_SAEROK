@@ -26,7 +26,6 @@ public class CommuteDaoImpl implements CommuteDao {
 	public List<Commute> selectCommuteWorkList(SqlSession session, Map<String, Object> param) {
 		return session.selectList("commute.selectCommuteWorkList", param);
 	}
-// 에러난다
 
 	@Override
 	public int insertCommuteStatus(SqlSession session, String empNo) {
@@ -97,10 +96,5 @@ public class CommuteDaoImpl implements CommuteDao {
 	public int updateStartWork(SqlSession session, Map<String, Object> param) {
 		return session.update("commute.updateStartWork",param);
 	}
-//	@Override
-//	public ArrayList<Commute> selectCommuteStatusList(SqlSession session, int commuteNo) {
-//
-//		return (ArrayList) session.selectList("commute.selectCommuteStatusList", commuteNo);
-//	}
-
+	
 }
