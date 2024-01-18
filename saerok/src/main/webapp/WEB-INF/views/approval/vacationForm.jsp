@@ -11,46 +11,28 @@
 <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 
 
-<form id="documentForm " name="vacationForm" action="${path}"
-	method="POST" onsubmit="return check_onclick()">
+<form class="documentForm" name="basicForm" action="" method="POST"
+	onsubmit="return check_onclick()">
 	<div id="documentForm " class="documentForm"
 		style="margin: 50px 50px 50px 50px; width: min-content;">
-		<div class="vForm">
+		<div class="basicForm">
 			<table border="1" style="display: inline-block; text-align: center;">
 				<tr>
 					<td rowspan="2" colspan="4"
-						style="color: black; font-size: 40px; font-weight: 600;">휴 가
-						신 청 서</td>
-					<td rowspan="2"
-						style="color: black; padding-top: 20px; font-size: 20px;">결 재</td>
+						style="color: black; font-size: 40px; font-weight: 600;">휴가신청서</td>
+					<td rowspan="2" style="color: black; font-size: 20px;"><input
+						type="button" id="testBtn2" class="rounded-circle border-0"
+						value="결재" /></td>
 					<td style="color: black; font-size: 15px;">최초승인자</td>
 					<td style="color: black; font-size: 15px;">중간승인자</td>
 					<td style="color: black; font-size: 15px;">최종승인자</td>
 				</tr>
 				<tr>
-					<td style="">
-						<!-- 이미지화 시켜서 인쇄할 수 있는 방법 찾아보기 --> <input type="text" value=""
-						id="firstApprover" name="firstApprover" readonly="readonly"
-						class="nameView"> <input type="button" value="검색"
-						class="searchMember" id="firstBtn" name="firstApprover">
-					</td>
-					<td><input type="text" value="" id="interimName"
-						name="interimApprover" readonly="readonly" class="nameView">
-						<input type="button" value="검색" class="searchMember"
-						id="secondBtn" name="interimApprover"></td>
-					<td><input type="text" value="" id="finalApprover"
-						name="finalApprover" readonly="readonly" class="nameView">
-						<input type="button" value="검색" class="searchMember" id="thirdBtn"
-						name="finalApprover"></td>
+
 				</tr>
 				<tr>
-					<td colspan="2" style="color: black; height: 70px;">
-						<button class="send-open" type="button">수신참조자 +</button>
-					</td>
-					<td colspan="6" style="height: 70px;"><textArea readonly
-							class="form-control" name="referList" id="referList"
-							style="border: none; font-size: 19px; width: 600px; height: 60px; text-align: center; resize: none;"></textArea>
-					</td>
+					<td colspan="2" style="color: black; height: 70px;">수신참조자</td>
+					<td colspan="6" id="referContainer" style="height: 70px;"></td>
 				</tr>
 				<tr>
 					<td
@@ -88,20 +70,7 @@
 					</span> &nbsp;&nbsp; ~ &nbsp;&nbsp; <span> <input
 							style="width: 160px; font-size: 18px;" type="date"
 							name="leaveFinish" id="endDate" />
-					</span> <script type="text/javascript">
-						// 시작일 < 종료일
-						var start = document.getElementById('startDate');
-						var end = document.getElementById('endDate');
-
-						start.addEventListener('change', function() {
-							if (start.value)
-								end.min = start.value;
-						}, false);
-						end.addEventListener('change', function() {
-							if (end.value)
-								start.max = end.value;
-						}, false);
-					</script></td>
+					</span></td>
 				</tr>
 				<tr>
 					<td
@@ -159,6 +128,24 @@
 	</div>
 </form>
 
+
+
+
+<!--휴가 기간  -->
+<script type="text/javascript">
+	// 시작일 < 종료일
+	var start = document.getElementById('startDate');
+	var end = document.getElementById('endDate');
+
+	start.addEventListener('change', function() {
+		if (start.value)
+			end.min = start.value;
+	}, false);
+	end.addEventListener('change', function() {
+		if (end.value)
+			start.max = end.value;
+	}, false);
+</script>
 <!-- 필수 입력 스크립트 -->
 <script>
 	function check_onclick() {

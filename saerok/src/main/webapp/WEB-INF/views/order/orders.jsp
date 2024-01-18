@@ -4,9 +4,7 @@
 <jsp:include page="/WEB-INF/views/common/header.jsp" />
 <c:set var="loginEmployee"
 	value="${sessionScope.SPRING_SECURITY_CONTEXT.authentication.principal }" />
-<!DOCTYPE html>
-<html>
-<head>
+
 <title>발주 목록</title>
 <link rel="stylesheet"
 	href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
@@ -126,8 +124,7 @@
 	color: #FF0000;
 }
 </style>
-</head>
-<body>
+
 
 	<div class="container-fluid">
 		<div class="d-sm-flex align-items-center justify-content-between mb-4">
@@ -225,5 +222,7 @@
 
 
 
-</body>
-</html>
+
+<jsp:include page="/WEB-INF/views/common/footer.jsp" />
+<script
+	src="https://cdn.datatables.net/1.10.21/js/jquery.dataTables.min.js"></script>
