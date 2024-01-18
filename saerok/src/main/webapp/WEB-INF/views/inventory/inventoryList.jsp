@@ -4,10 +4,7 @@
 <jsp:include page="/WEB-INF/views/common/header.jsp" />
 <c:set var="loginEmployee"
 	value="${sessionScope.SPRING_SECURITY_CONTEXT.authentication.principal}" />
-<!DOCTYPE html>
-<html>
-<head>
-<title>Inventory List</title>
+
 <link rel="stylesheet"
 	href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -18,7 +15,11 @@
 <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
 <script
 	src="https://cdn.datatables.net/1.10.21/js/jquery.dataTables.min.js"></script>
+
 <style>
+#content-wrapper{
+	overflow: unset !important;
+}
 .container-fluid {
 	font-family: 'Noto Sans KR', sans-serif;
 }
@@ -137,8 +138,7 @@
 
 
 </style>
-</head>
-<body>
+
 	<div class="container-fluid">
 		<div class="d-sm-flex align-items-center justify-content-between mb-2">
 			<h1 class="h3 mb-0 text-gray-800">재고 목록</h1>
@@ -167,11 +167,14 @@
 			</tbody>
 		</table>
 	</div>
-
+	<!-- <script src="vendor/jquery/jquery.min.js"></script>  -->
+	<script src="/resources/vendor/bootstrap/js/bootstrap.bundle.min.js"></script> 
 	<script
 		src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
 	<script
 		src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+
+
 	<script>
 		$(document)
 				.ready(
@@ -191,5 +194,8 @@
 											});
 						});
 	</script>
-</body>
-</html>
+
+
+<jsp:include page="/WEB-INF/views/common/footer.jsp" />
+<script
+	src="https://cdn.datatables.net/1.10.21/js/jquery.dataTables.min.js"></script>

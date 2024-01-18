@@ -63,18 +63,18 @@
                            <th>결재번호</th>
                            <th>제목</th>
                            <th>기안자</th>
-                           <th>문서구분종류</th>
+                           <th>기안일</th>
                            <th>진행상태</th>
                         </tr>
                      </thead>
                      <tbody>
                         <c:forEach var="a" items="${approval}">
                            <tr>
-                              <td><c:out value="${a.apvNo}" /></td>
-                              <td><c:out value="${a.apvName}" /></td>
+                              <td><c:out value="${a.appSeq}" /></td>
+                              <td><c:out value="제목" /></td>
                               <td><c:out value="${loginEmployee.empName }" /></td>
-                              <td><c:out value="${a.apvDocNo}" /></td>
-                              <td><c:out value="${a.apvCheck }" /></td>
+                              <td><c:out value="${a.appWriteDate}" /></td>
+                              <td><c:out value="${a.appCheck }" /></td>
                            </tr>
                         </c:forEach>
                      </tbody>
