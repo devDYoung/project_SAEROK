@@ -84,9 +84,9 @@
                 </a>
                 <div id="collapseHR" class="collapse" aria-labelledby="headingHR" data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
-                        <a class="collapse-item" href="${path }/insertemp">사원등록</a>
-                        <a class="collapse-item" href="${path }/selectemp">사원조회</a>
-                        <a class="collapse-item" href="">조직도</a>
+                        <a class="collapse-item" href="${path }/human/insertemp">사원등록</a>
+                        <a class="collapse-item" href="${path }/human/selectemp">사원조회</a>
+                        <a class="collapse-item" href="${path }/groupemp">조직도</a>
                     </div>
                 </div>
             </li>

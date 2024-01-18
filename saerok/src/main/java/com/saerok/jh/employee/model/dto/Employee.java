@@ -46,7 +46,7 @@ public class Employee implements UserDetails {
 	public Collection<? extends GrantedAuthority> getAuthorities() {
 	   // 권한 정보를 담을 리스트를 생성
 	   List<GrantedAuthority> auth = new ArrayList<>();
-	   if (deptCode.equals("100") && (jobCode.equals("10") || jobCode.equals("20") || jobCode.equals("30"))) {
+	   if (deptCode.equals("100") && jobCode.equals("20")) {
 	      auth.add(new SimpleGrantedAuthority(MyAuthority.HR.name())); //인사팀 -> HR
 	   } else if (deptCode.equals("100") && jobCode.equals("10")) {
 	      auth.add(new SimpleGrantedAuthority(MyAuthority.HR_MASTER.name())); // 인사부장 -> HR_MASTER
