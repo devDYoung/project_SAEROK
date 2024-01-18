@@ -25,13 +25,11 @@ public interface SalesService {
 	
 	
 	//점주전용
-	BigDecimal findOwnerTodaySalesTotal(String empNo);
-	BigDecimal findOwnerCurrentMonthSalesTotal(String empNo);
-	BigDecimal findOwnerCurrentYearSalesTotal(String empNo);
-	
+
 	 List<Map<String, Object>> getBranchOwnerDetailSales(String empNo);
 	 List<Map<String, Object>> getBranchOwnerCurrentMonthSales(String empNo);
-	 
+	 List<Map<String, Object>> getCurrentMonthSalesByCategoryForOwner(String empNo);
+
 	 void addBranchSales(Map<String, Object> salesData);
 
 }

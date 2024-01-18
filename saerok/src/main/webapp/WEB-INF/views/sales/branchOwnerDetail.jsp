@@ -133,7 +133,34 @@
 				</div>
 			</c:forEach>
 		</c:if>
+		<div class="row">
+			<div class="col-xl-5 col-lg-6">
+				<div class="card shadow mb-4">
+					<div class="card-header py-3">
+						<h6 class="m-0 font-weight-bold text-primary">월간 카테고리 매출 분석</h6>
+					</div>
+					<div class="card-body">
+						<div class="chart-area">
+							<canvas id="myChart"></canvas>
+						</div>
+					</div>
+				</div>
+			</div>
 
+			<div class="col-xl-7 col-lg-6">
+				<div class="card shadow mb-4">
+					<div class="card-header py-3">
+						<h6 class="m-0 font-weight-bold text-primary">일간 매출 분석</h6>
+					</div>
+					<div class="card-body">
+						<div class="chart-area">
+
+							<canvas id="myChart2"></canvas>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
 
 		<!-- 당월 매출 -->
 		<c:if test="${!empty monthlySales}">
@@ -149,17 +176,10 @@
 								</c:if>
 							</c:forEach>
 							<div>
-					    <button type="button" class="btn btn-primary" id="salesEntryButton">
-					        <i class="bi bi-plus"></i> 매출 등록
-					    </button>
-					</div>
-					
-					<script>
-					    document.getElementById('salesEntryButton').addEventListener('click', function() {
-					        window.location.href = '/owner/sales/entry';
-					    });
-					</script>
-
+								<button type="button" class="btn btn-primary">
+									<i class="bi bi-plus"></i> 매출 등록
+								</button>
+							</div>
 						</div>
 						<div class="card-body">
 							<div class="table-responsive">
@@ -194,12 +214,108 @@
 	</div>
 
 
+	<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
-	<!-- Include Bootstrap and other scripts -->
 	<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
 	<script
 		src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
 	<script
 		src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+
+
+	<script>
+	
+	<!-- 원형 그래프 -->
+    document.addEventListener('DOMContentLoaded', function () {
+        var ctx = document.getElementById('myChart').getContext('2d');
+        var categorySalesData = [
+            <c:forEach items="${categorySales}" var="item" varStatus="status">
+                {
+                    category: "${item.category}",
+                    totalSales: ${item.totalSales},
+                    totalQuantity: ${item.totalQuantity}
+                }<c:if test="${!status.last}">,</c:if>
+            </c:forEach>
+        ];
+        var labels = categorySalesData.map(function(item) { return item.category; });
+        var data = categorySalesData.map(function(item) { return item.totalSales; });
+
+        var myChart = new Chart(ctx, {
+            type: 'doughnut', 
+            data: {
+                labels: labels, 
+                datasets: [{
+                    label: '판매 금액',
+                    data: data, 
+                    backgroundColor: [ 
+                        'rgba(255, 99, 132, 0.5)',
+                        'rgba(54, 162, 235, 0.5)',
+                        'rgba(255, 206, 86, 0.5)',
+                        'rgba(75, 192, 192, 0.5)',
+                        'rgba(153, 102, 255, 0.5)',
+                        'rgba(255, 159, 64, 0.5)'
+                    ],
+                    borderColor: [ 
+                        'rgba(255,99, 132, 1)',
+                        'rgba(54, 162, 235, 1)',
+                        'rgba(255, 206, 86, 1)',
+                        'rgba(75, 192, 192, 1)',
+                        'rgba(153, 102, 255, 1)',
+                        'rgba(255, 159, 64, 1)'
+                        ],
+                        borderWidth: 1
+                        }]
+        },
+        options: {
+        responsive: true,
+       maintainAspectRatio: false
+       }
+       });
+});
+</script>
+
+
+
+<!-- 선형 그래프 -->
+	<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        var ctx = document.getElementById('myChart2').getContext('2d');
+        var monthlySalesData = [
+            <c:forEach items="${monthlySales}" var="item" varStatus="status">
+                {
+                    salesDay: "${item.salesDay}",
+                    totalSales: ${item.totalSales}
+                }<c:if test="${!status.last}">,</c:if>
+            </c:forEach>
+        ];
+        var labels = monthlySalesData.map(function(item) { return item.salesDay + '일'; });
+        var data = monthlySalesData.map(function(item) { return item.totalSales; });
+
+        var myChart2 = new Chart(ctx, {
+            type: 'line',
+            data: {
+                labels: labels,
+                datasets: [{
+                    label: '일간 매출',
+                    data: data,
+                    backgroundColor: 'rgba(75, 192, 192, 0.2)',
+                    borderColor: 'rgba(75, 192, 192, 1)',
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                scales: {
+                    yAxes: [{
+                        ticks: {
+                            beginAtZero: true
+                        }
+                    }]
+                }
+            }
+        });
+    });
+</script>
 </body>
 </html>

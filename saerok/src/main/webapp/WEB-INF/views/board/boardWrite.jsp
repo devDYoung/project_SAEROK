@@ -15,7 +15,7 @@
 <!-- CKEditor 초기화 스크립트 -->
 <script>
 	window.onload = function() {
-		CKEDITOR.replace("t_content", {
+		CKEDITOR.replace("bordContent", {
 			filebrowserUploadUrl : '${path}/board/imageUpload.do',
 			height : 500,
 			width : 1000
@@ -24,7 +24,7 @@
 
 	// 폼 제출 전 컨텐츠 업데이트 함수
 	function updateContent() {
-		CKEDITOR.instances.t_content.updateElement();
+		CKEDITOR.instances.bordContent.updateElement();
 
 		// 폼 제출 전에 필요한 경우 추가 로직이나 유효성 검사를 수행
 		document.getElementById("form").submit();
@@ -40,15 +40,15 @@
 	<section>
 		<div class="container px-5 my-5 px-5">
 			<h2>게시글 작성</h2>
-			<form name="form" id="form" role="form" method="post" action=""
+			<form name="form" id="form" role="form" method="post" action="/board/save"
 				enctype="multipart/form-data">
-				<input type="hidden" name="bno" id="bno" value="${bbs.bno}" />
 				<div class="mb-3">
-					<label for="title">제목</label> <input type="text"
-						class="form-control" name="title" id="title"
+					<label for="title">제목</label>
+					<input type="text"
+						class="form-control" name="boardTitle" id="boardTitle"
 						placeholder="제목을 입력해 주세요" value="${bbs.title}">
 				</div>
-				<textarea class="form-control" name="t_content" id="t_content"></textarea>
+				<textarea class="form-control" name="bordContent" id="bordContent"></textarea>
 				<div>
 					<!-- 저장 버튼 -->
 					<button type="button" class="btn btn-sm btn-success" id="writeBtn"

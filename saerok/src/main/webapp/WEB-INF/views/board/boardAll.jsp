@@ -25,9 +25,9 @@
 				<div class="card-header py-3">
 					<h6 class="m-0 font-weight-bold text-primary">공지사항</h6>
 					<div class="d-flex justify-content-end">
-					<button type="button" class="btn btn-facebook btn-block col-1"
-								onclick="window.location.href='/board/write';">작성하기</button>
-			</div>
+						<button type="button" class="btn btn-facebook btn-block col-1"
+							onclick="window.location.href='/board/write';">작성하기</button>
+					</div>
 				</div>
 				<div class="card-body">
 					<div class="table-responsive">
@@ -51,18 +51,14 @@
 										<tr>
 											<td><c:out value="${b.boardNo}" /></td>
 											<td><c:out value="${b.boardTitle}" /></td>
-											<td><c:out value="${b.boardContent}" /></td>
-											<td><c:out value="${b.OriFileName}" /></td>
+											<td class="bordTd"><c:out value="${b.bordContent}" /></td>
+											<td><c:out value="${b.oriFileName}" /></td>
 											<td><c:out value="${b.regId}" /></td>
-											<td><c:out value="${b.regDtime}" /></td>
-											<!-- <td>
-												<button class="btn btn-outline-primary" type="button"
-													data-toggle="modal" data-target="#updateModal">수정하기</button>
-											</td> -->
+											<td><fmt:formatDate value="${b.regDtime}"
+													pattern="yyyy-MM-dd" /></td>
 										</tr>
-
-
 									</c:forEach>
+
 								</c:if>
 							</tbody>
 						</table>
@@ -87,6 +83,15 @@
 			ordering : true,
 			paging : true
 		});
+		
+		setTimeout(function(){
+			console.log($(".bordTd").text());
+			$(".bordTd").foreach(function(i){
+				$(this).text(i)
+			})
+			$("#bordTd").text($("#bordTd").text());	
+		}, 50);
+		
 	});
 </script>
 

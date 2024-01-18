@@ -126,7 +126,7 @@
                        <%-- <a class="collapse-item" href="${path }/board/write">작성하기</a> --%>
                          <a class="collapse-item" href="${path }/board/All">공지 사항</a>
                        <!-- <a class="collapse-item" href="">전체게시판</a> -->
-                        <a class="collapse-item" href="${path }/board/part">부서별 게시판</a>
+                        <a class="collapse-item" href="${path }/board/Part">부서별 게시판</a>
                     </div>
                 </div>
             </li>
@@ -168,7 +168,6 @@
                 </a>
                     <div id="collapseStore" class="collapse" aria-labelledby="headingStore" data-parent="#accordionSidebar">
                         <div class="bg-white py-2 collapse-inner rounded">
-                            <a class="collapse-item" href="/owner/sales">매출현황</a>
                             <a class="collapse-item" href="/owner/detail">매출관리</a>
                             <a class="collapse-item" href="/inventory">재고목록</a>
                             <a class="collapse-item" href="">물품발주</a>

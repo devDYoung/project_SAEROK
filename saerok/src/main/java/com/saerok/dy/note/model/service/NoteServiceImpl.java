@@ -20,7 +20,7 @@ public class NoteServiceImpl implements NoteService {
 
 	// 받은 쪽지 조회
 	@Override
-	public List<Note> getReceivedNotes(String revEmpNo) {
+	public List<Note> getReceivedNotes() {
 		// TODO Auto-generated method stub
 		return dao.getReceivedNotes(session);
 	}
