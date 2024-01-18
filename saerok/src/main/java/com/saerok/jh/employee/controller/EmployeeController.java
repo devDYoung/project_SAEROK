@@ -114,6 +114,7 @@ public class EmployeeController {
 		return result>0?"성공":"실패";
      }
     
+    //사원삭제
     @PostMapping("/deleteemp")
     @ResponseBody
     public String deleteEmployee(@RequestBody Employee empNo, Model model) {
