@@ -24,30 +24,30 @@ public class CommuteServiceImpl implements CommuteService {
 	private CommuteDao commuteDao;
 
 	@Override
-	public List<Commute> selectCommuteList(Map<String, Object> param) {
+	public Commute selectCommuteList(Map<String, Object> param) {
 		return commuteDao.selectCommuteList(session, param);
 	}
 
 	@Override
-	@Transactional
-	public int insertCommuteStatus(Map status) {
-		int result = commuteDao.insertCommuteStatus(session, status);
+	public Commute selectExsistWorkInList(Map<String, Object> param) {
+		return commuteDao.selectExsistWorkInList(session, param);
+	}
 
-		if (result < 0) {
-			throw new CommuteException("근무상태변경 실패");
-		}
-		return result;
+	@Override
+	public List<Commute> selectCommuteWorkList(Map<String, Object> param) {
+		return commuteDao.selectCommuteWorkList(session, param);
+	}
+	
+	@Override
+	@Transactional
+	public int insertCommuteStatus(String empNo) {
+		return commuteDao.insertCommuteStatus(session, empNo);
 	}
 
 	@Override
 	@Transactional
-	public int updateCommuteEndTime(Map status) {
-		int result = commuteDao.updateCommuteEndTime(session, status);
-
-		if (result < 0) {
-			throw new CommuteException("근무상태변경 실패");
-		}
-		return result;
+	public int updateCommuteEndTime(Map<String, Object> param) {
+		return commuteDao.updateCommuteEndTime(session,param);
 	}
 
 	@Override
@@ -96,7 +96,17 @@ public class CommuteServiceImpl implements CommuteService {
 	public int monthOverTime(Map<String, Object> startEndMap) {
 		return commuteDao.monthOverTime(session, startEndMap);
 	}
-
+	
+	@Override
+	public int checkStartwork(Map<String, Object> param) {
+		return commuteDao.checkStartwork(session,param);
+	}
+	
+	
+	@Override
+	public int updateStartWork(Map<String, Object> param) {
+		return commuteDao.updateStartWork(session,param);
+	}
 //	@Override
 //	public ArrayList<Commute> selectCommuteStatusList(int commuteNo) {
 //

@@ -11,7 +11,11 @@ public interface CommuteService {
 
 	//ArrayList<Commute> selectCommuteList(Commute commute);
 	
-	List<Commute> selectCommuteList (Map<String, Object> param);
+	Commute selectCommuteList (Map<String, Object> param);
+	
+	Commute selectExsistWorkInList (Map<String, Object> param);
+	
+	List<Commute> selectCommuteWorkList(Map<String, Object> param);
 
 	//Commute selectCommute(String empNo);
 //
@@ -19,9 +23,9 @@ public interface CommuteService {
 //
 //	void updateCommute(int commuteNo);
 
-	int insertCommuteStatus(Map status);
+	int insertCommuteStatus(String empNo);
 	
-	int updateCommuteEndTime(Map status);
+	int updateCommuteEndTime(Map<String, Object> param);
 	
 	int updateWorkTime(Map<String, Object> param);
 	
@@ -41,6 +45,9 @@ public interface CommuteService {
 	
 	int monthOverTime(Map<String, Object> startEndMap);
 	
+	int checkStartwork(Map<String, Object> param);
+	
+	int updateStartWork(Map<String, Object> param);
 
 //	ArrayList<Commute> selectCommuteStatusList(int commuteNo);
 
