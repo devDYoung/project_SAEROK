@@ -7,6 +7,7 @@
 <c:set var="path" value="${pageContext.request.contextPath}" />
 <c:set var="loginEmployee"
 	value="${sessionScope.SPRING_SECURITY_CONTEXT.authentication.principal }" />
+
 <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
 
 <link
@@ -33,11 +34,12 @@
 
 					<thead>
 						<tr>
-							<div>
-								<button class="btn btn-rounded btn-outline-primary col-1"
-									onclick="requestNote('${path}/note/write');">쪽지쓰기</button>
-							</div>
+						<div>
+							<button type="button" class="btn btn-primary" data-toggle="modal"
+								data-target="#exampleModal" data-whatever="@fat">쪽지 쓰기</button>
+						</div>
 						</tr>
+						
 						<tr>
 							<th>쪽지번호</th>
 							<th>보낸사람</th>
@@ -59,6 +61,38 @@
 						</c:if>
 					</tbody>
 				</table>
+			</div>
+		</div>
+	</div>
+</div>
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog"
+	aria-labelledby="exampleModalLabel" aria-hidden="true">
+	<div class="modal-dialog" role="document">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h5 class="modal-title" id="exampleModalLabel">Message</h5>
+				<button type="button" class="close" data-dismiss="modal"
+					aria-label="Close">
+					<span aria-hidden="true">&times;</span>
+				</button>
+			</div>
+			<div class="modal-body">
+				<form>
+					<div class="form-group">
+						<label for="recipient-name" class="col-form-label" >수신자 </label> <input
+							type="text" class="form-control" id="recipient-name" placeholder="사원이름을 검색해주세요."
+							data-sb-validations="required,email" onkeyup="searchEmp();" list="searchResult"/>
+						<datalist id="searchResult"></datalist>
+					</div>
+					<div class="form-group">
+						<label for="message-text" class="col-form-label">내용</label>
+						<textarea class="form-control" id="message-text"></textarea>
+					</div>
+				</form>
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-secondary" data-dismiss="modal">닫기</button>
+				<button type="button" class="btn btn-primary">보내기</button>
 			</div>
 		</div>
 	</div>

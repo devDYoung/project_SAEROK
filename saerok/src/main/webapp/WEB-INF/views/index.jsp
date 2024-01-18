@@ -443,6 +443,14 @@
 
          }
       }
+      document.addEventListener('DOMContentLoaded', function() {
+          var profileImage = document.querySelector('.nav-link.dropdown-toggle');
+          var dropdownMenu = document.querySelector('.dropdown-menu');
+
+          profileImage.addEventListener('click', function() {
+              dropdownMenu.classList.toggle('show');
+          });
+      });
          
    </script>
 
@@ -535,6 +543,7 @@ const monthlySalesChart = new Chart(ctx, {
         hover: {
             mode: 'nearest',
             intersect: true
+            
         },
         tooltips: {
             mode: 'index',
