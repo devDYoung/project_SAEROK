@@ -283,11 +283,7 @@ $(document).ready(function() {
 				</tr>
 				<tr>
 					<td colspan="8" style="height: 90px;">
-						<div id="basicFileForm" class="custom-file">
-							<input type="file" class="custom-file-input" name="upFile"
-								id="upFile1"> <label class="custom-file-label"
-								for="upFile1">파일을 선택하세요</label>
-						</div>
+
 					</td>
 				</tr>
 				<tr>
@@ -351,6 +347,7 @@ $(document).ready(function() {
 </script>
 
 <!-- 필수 입력 스크립트 -->
+
 
 <!-- 지출결의서폼 비고 +/- -->
 <script>
