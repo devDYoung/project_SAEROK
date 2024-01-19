@@ -12,6 +12,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
@@ -26,6 +27,7 @@ import lombok.extern.slf4j.Slf4j;
 @Controller
 @RequiredArgsConstructor
 @Slf4j
+@RequestMapping("/human")
 public class EmployeeController {
    @Autowired
    private final EmployeeService service;
@@ -130,13 +132,13 @@ public class EmployeeController {
        return "common/errorpage";
 
     }
-//    
-//    //에러페이지
-//    @RequestMapping(method = {RequestMethod.POST, RequestMethod.GET}, path = "/error")
-//    public String error() {
-//       return "index";
-//
-//    }
+
+    //조직도 화면전환
+    @GetMapping("/groupemp")
+    public String groupEmployee() {
+       return "employee/groupList";
+
+    }
     
      
      
