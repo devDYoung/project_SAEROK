@@ -34,12 +34,13 @@
 
 					<thead>
 						<tr>
-						<div>
-							<button type="button" class="btn btn-primary" data-toggle="modal"
-								data-target="#exampleModal" data-whatever="@fat">쪽지 쓰기</button>
-						</div>
+							<div>
+								<button type="button" class="btn btn-primary"
+									data-toggle="modal" data-target="#exampleModal"
+									data-whatever="@fat">쪽지 쓰기</button>
+							</div>
 						</tr>
-						
+
 						<tr>
 							<th>쪽지번호</th>
 							<th>보낸사람</th>
@@ -79,9 +80,10 @@
 			<div class="modal-body">
 				<form>
 					<div class="form-group">
-						<label for="recipient-name" class="col-form-label" >수신자 </label> <input
-							type="text" class="form-control" id="recipient-name" placeholder="사원이름을 검색해주세요."
-							data-sb-validations="required,email" onkeyup="searchEmp();" list="searchResult"/>
+						<label for="recipient-name" class="col-form-label">수신자 </label> <input
+							type="text" class="form-control" id="recipient-name"
+							placeholder="사원 이름을 검색해주세요." data-sb-validations="required,email"
+							onkeyup="searchEmp();" list="searchResult" />
 						<datalist id="searchResult"></datalist>
 					</div>
 					<div class="form-group">
@@ -90,10 +92,23 @@
 					</div>
 				</form>
 			</div>
+			<style>
+.material-symbols-outlined {
+	font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+}
+
+.btn-primary {
+	/* 여기에 원하는 스타일 속성을 추가하세요 */
+	font-family: 'material-symbols-outlined', sans-serif;
+	/* 추가적으로 필요한 스타일 속성을 설정하세요 */
+}
+</style>
+
 			<div class="modal-footer">
-				<button type="button" class="btn btn-secondary" data-dismiss="modal">닫기</button>
-				<button type="button" class="btn btn-primary">보내기</button>
+				<button type="button"
+					class="btn btn-primary material-symbols-outlined">보내기</button>
 			</div>
+
 		</div>
 	</div>
 </div>
