@@ -24,7 +24,7 @@
 			<div class="modal-header">
 				<button class="close" type="button" data-dismiss="modal"
 					aria-label="Close"></button>
-				<h3 class="modal-title" id="exampleModalLabel">결재선</h3>
+			
 			</div>
 			<div class="modal-body">
 				<div style="display: flex;">
@@ -52,23 +52,7 @@
 								<ul class="team-list"></ul></li>
 						</ul>
 					</div>
-					<div>
-						<input type="button" id="addButton" value="결재자추가"
-							style="width: 100px; height: 50px;"> <input type="button"
-							id="resetButton" value="취소" style="width: 50px; height: 50px;"><br>
-						<input type="button" id="addReferButton" value="참조자추가"
-							style="width: 100px; height: 50px; margin-top: 300px"> <input
-							type="button" id="resetButton" value="취소"
-							style="width: 50px; height: 50px;">
-					</div>
-					<div style="display: flex; flex-direction: column;">
-						<div id="approverElement"
-							style="border: 1px solid red; margin-left: 100px; width: 400px; height: 350px;">
-							결재자</div>
-						<div id="referElement"
-							style="border: 1px solid blue; margin-left: 100px; height: 325.5px;">수신참조자
-						</div>
-					</div>
+					
 				</div>
 			</div>
 
@@ -152,49 +136,7 @@ $(document).ready(function() {
 });
 </script>
 
-<script>
-/* 결재자 추가  */
-$(document).ready(function() {
-    function addPeople(selector, limit, elementId, alertMessage) {
-        const selectedPeople = $(selector).find("input:checked");
-        const existingPeople = $(elementId).find("input[name='order']").map(function() {
-            return $(this).val();
-        }).get();
 
-        selectedPeople.each(function(index, elem) {
-            const order = index + 1;
-            // 이미 선택된 사람인지 확인
-            if (existingPeople.includes(order.toString())) {
-                $(elem).prop("checked", false);
-            } else {
-                const line = $(elem).parent().clone();
-                const orderInput = $("<input>").attr({"type": "hidden", "name": "order", "value": order});
-                line.append(orderInput);
-                line.css("display", "block");
-                $(elementId).append(line);
-            }
-        });
-
-        const selectedCount = $(elementId).find("input[name='order']").length;
-        if (selectedCount > limit) {
-            alert(alertMessage);
-            selectedPeople.prop("checked", false);
-        }
-    }
-
-    // 결재자 추가 버튼 클릭 이벤트
-    $("#addButton").click(function() {
-        addPeople(".team-list>li", 3, "#approverElement", "결재선은 3명까지만 가능합니다.");
-    });
-
-    // 참조자 추가 버튼 클릭 이벤트
-    $("#addReferButton").click(function() {
-        addPeople(".team-list>li", 5, "#referElement", "참조인은 5명까지만 가능합니다.");
-    });
-});
-
-
-</script>
 <!--모달창 띄우기  -->
 <script>
 	$(function(){
