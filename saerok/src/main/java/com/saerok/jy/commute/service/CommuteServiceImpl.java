@@ -107,13 +107,5 @@ public class CommuteServiceImpl implements CommuteService {
 	public int updateStartWork(Map<String, Object> param) {
 		return commuteDao.updateStartWork(session,param);
 	}
-//	@Override
-//	public ArrayList<Commute> selectCommuteStatusList(int commuteNo) {
-//
-//		ArrayList<Commute> list = commuteDao.selectCommuteStatusList(session, commuteNo);
-//
-//		return list;
-//	}
 
 }
-// test
