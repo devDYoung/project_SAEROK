@@ -20,7 +20,7 @@
 	aria-labelledby="exampleModalLabel" aria-hidden="true">
 	<div class="modal-dialog" role="document">
 		<div class="modal-content"
-			style="width: 1000px; height: 1000px; left: -50%; display: flex; position: relative;">
+			style="width: 1000px; height: auto; left: -50%; display: flex; position: relative;">
 			<div class="modal-header">
 				<button class="close" type="button" data-dismiss="modal"
 					aria-label="Close"></button>
@@ -202,7 +202,7 @@ $(document).ready(function() {
 			e.preventDefault();
 			$('#testModal').modal("show");
 		});	
-		$('#testBtn2').click(function(e) {
+		$(document).on('click','#testBtn2',function(e) {
 			e.preventDefault();
 			$('#testModal').modal("show");
 		});	
@@ -245,9 +245,9 @@ $(document).ready(function() {
 				<tr>
 					<td rowspan="2" colspan="4"
 						style="color: black; font-size: 40px; font-weight: 600;">품의서</td>
-					<td rowspan="2"
-						style="color: black;  font-size: 20px;"><input
-						type="button" id="testBtn2" class="rounded-circle border-0" value="결재" /></td>
+					<td rowspan="2" style="color: black; font-size: 20px;"><input
+						type="button" id="testBtn2" class="rounded-circle border-0"
+						value="결재" /></td>
 					<td style="color: black; font-size: 15px;">최초승인자</td>
 					<td style="color: black; font-size: 15px;">중간승인자</td>
 					<td style="color: black; font-size: 15px;">최종승인자</td>
@@ -283,13 +283,7 @@ $(document).ready(function() {
 				</tr>
 				<tr>
 					<td colspan="8" style="height: 90px;">
-						<!-- <label class="inputFileButton" for="inputFile">
-                       첨부파일 업로드
-                         </label>
-               
-                         <input type="file" id="inputFile" style="display: none;" /> -->
 
-						<input type="file" id="inputFile" name="appLoaFileUpload" />
 					</td>
 				</tr>
 				<tr>
@@ -355,49 +349,6 @@ $(document).ready(function() {
 <!-- 필수 입력 스크립트 -->
 
 
-<!-- 서명 클릭 스크립트  -->
-<script>
-	$(document).ready(function() {
-		$("#proposer").one("click", function() {
-			var proposerValue = $("input[name='writerName']").val();
-			$("#proposerText").append(proposerValue);
-		});
-	});
-
-	// 금액 자동 포맷팅 스크립트 함수명에 fn_ 추가
-	$(document).ready(function() {
-		$("#allAmount").bind('keyup keydown', function() {
-			fn_inputNumberFormat(this);
-		});
-
-		function fn_inputNumberFormat(obj) {
-			obj.value = fn_comma(fn_uncomma(obj.value));
-		}
-
-		function fn_comma(str) {
-			str = String(str);
-			return str.replace(/(\d)(?=(?:\d{3})+(?!\d))/g, '$1,');
-		}
-
-		function fn_uncomma(str) {
-			str = String(str);
-			return str.replace(/[^\d]+/g, '');
-		}
-
-		function fn_getNumberOnly(str) {
-			var len = str.length;
-			var sReturn = "";
-
-			for (var i = 0; i < len; i++) {
-				if ((str.charAt(i) >= "0") && (str.charAt(i) <= "9")) {
-					sReturn += str.charAt(i);
-				}
-			}
-			return sReturn;
-		}
-	});
-</script>
-
 <!-- 지출결의서폼 비고 +/- -->
 <script>
 	function fn_addForm() {
@@ -420,23 +371,16 @@ $(document).ready(function() {
 </script>
 
 
+ <script>
+    $("input[name=upFile]").change(e=>{
+        const fileName=e.target.files[0].name;
+        $(e.target).next(".custom-file-label").text(fileName);
+    });
+</script>
 
 
 
 
-<div id="직원목록">
-	<ul>
-		<li><a href="#" class="직원">직원1</a></li>
-		<li><a href="#" class="직원">직원2</a></li>
-		<li><a href="#" class="직원">직원3</a></li>
-	</ul>
-</div>
-
-<div id="결재자">
-	<!-- 추가된 결재자가 여기에 나타납니다 -->
-</div>
-
-<button id="추가버튼">추가</button>
 
 
 
