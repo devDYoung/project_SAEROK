@@ -7,13 +7,12 @@ import com.saerok.jj.apv.model.dto.Approval;
 import com.saerok.jj.apv.model.dto.AppLetter;
 
 public interface ApprovalService {
-	
-	List<Approval> selectApproval(Map<String, Integer> page);
-	
-	Approval selectApprovalByNo(String apvDocNo);
-	
-	int insertApproval(Approval a);
-	
-	List<Map<String,Object>> deptName(Integer deptCode);
-}
 
+	List<Approval> selectApproval(Map<String, Integer> page);
+
+	Approval selectApprovalByNo(String apvDocNo);
+
+	List<Map<String, Object>> deptName(Integer deptCode);
+
+	int insertApproval(Approval a);
+}

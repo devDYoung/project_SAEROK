@@ -36,8 +36,10 @@
            , EMP_EMAIL=#{empEmail}
            , EMP_ADDR=#{empAddr}
            , EMP_DETAIL_ADDR=#{empDetailAddr} 
+           <if test="oriFileName != null and destFileName !=null">
            , ORI_FILENAME=#{oriFileName}
            , DEST_FILENAME=#{destFileName}
+           </if>
            , EMP_DATE=(select emp_date from employee where EMP_NO=#{empNo})
         WHERE EMP_NO=#{empNo}
       </update>

@@ -85,7 +85,9 @@ public class LoginController {
                    return Map.of("successYn",result==1?"Y":"N");
                }
 
-           } catch (IOException exception) {
+           } catch (IOException | NullPointerException exception) {
+        	   System.err.println("하나만 수정 되나?");
+        	   result = service.updateMyPage(e);
         	   exception.printStackTrace();
            }
 		   return Map.of("successYn",result==1?"Y":"N");
