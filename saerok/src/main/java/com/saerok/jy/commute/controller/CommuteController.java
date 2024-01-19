@@ -82,10 +82,14 @@ public class CommuteController {
 
 	    if(commute == null) {
 	        int result = commuteService.insertCommuteStatus(empNo); // insert
-	        status.put("status", "성공");
+	        status.put("status", "출근");
 	    }else if(commute.getInDtime() != null) {
 	    	status.put("status", "이미출근");
 	    }
+	    
+	    return ResponseEntity.ok()
+				.header(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_JSON.toString())
+				.body(status);
 //	    
 //	    if(commute.getStatus().equals("반차")) {
 //	    	int result = commuteService.updateStartWork(param); //반차일시 반차 행 update
@@ -98,9 +102,7 @@ public class CommuteController {
 //	    	status.put("status", "실패");
 //	    }
 //	    
-	    return ResponseEntity.ok()
-				.header(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_JSON.toString())
-				.body(status);
+
 	}
 	
 	
@@ -116,12 +118,35 @@ public class CommuteController {
 		 
 		Commute commute = commuteService.selectExsistWorkInList(param);
 		
-		if(commute.getInDtime() != null) {
-	        int result = commuteService.updateCommuteEndTime(param); 
-	        status.put("status", "성공");
-	    }else if(commute.getOutDtime() != null) {
-	    	status.put("status", "이미퇴근");
+//		if(commute.getInDtime() != null) {
+//	        int result = commuteService.updateCommuteEndTime(param); 
+//	     // 업데이트 이후 최신 commute를 다시 가져오기
+//	        commute = commuteService.selectExsistWorkInList(param);
+//	        status.put("status", "퇴근");
+//	    }else if(commute.getOutDtime() != null) {
+//	    	status.put("status", "이미퇴근");
+//	    }
+//		
+		
+		if (commute != null) {
+	        if (commute.getInDtime() != null && commute.getOutDtime() == null) {
+	            int result = commuteService.updateCommuteEndTime(param);
+
+	            // 업데이트 이후 최신 commute를 다시 가져오기
+	            commute = commuteService.selectExsistWorkInList(param);
+
+	            status.put("status", "퇴근");
+	        } else if (commute.getOutDtime() != null) {
+	            status.put("status", "이미퇴근");
+	        } else {
+	            status.put("status", "출근전");
+	        }
+	    } else {
+	        status.put("status", "출근전");
 	    }
+		return ResponseEntity.ok()
+				.header(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_JSON.toString())
+				.body(status);
 		
 //		if(commute == null) {
 //			status.put("status","출근전");
@@ -139,9 +164,6 @@ public class CommuteController {
 //			status.put("status", "실패");
 //		}
 			
-		return ResponseEntity.ok()
-				.header(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_JSON.toString())
-				.body(status);
 	}
 	
 	//퇴근버튼 눌렀을시 오늘 근무시간 업데이트
@@ -188,7 +210,7 @@ public class CommuteController {
 				.body(status);
 	}
 	
-	// 달의 전체 workingManagement, 그 달의 주차별 시작,종료일 가져오기 (table에 뿌려주는 용도)
+	// 달의 전체 commute, 그 달의 주차별 시작,종료일 가져오기 (table에 뿌려주는 용도)
 		@ResponseBody
 		@GetMapping("/selectMonthWork.do")
 		public ResponseEntity<?> selectMonthWork(String dateText,Principal loginSession){

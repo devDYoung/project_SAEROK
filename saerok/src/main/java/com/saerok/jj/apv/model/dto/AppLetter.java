@@ -11,7 +11,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @Builder
 public class AppLetter {
-	private String letterSeq; //품의서 고유번호
+	private int letterSeq; //품의서 고유번호
 	private Approval appSeq; //전자결재번호
 	private String letterTitle; //품의서 제목
 	private String letterDetail; //상세내용

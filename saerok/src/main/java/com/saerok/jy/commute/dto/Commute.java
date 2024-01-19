@@ -1,7 +1,5 @@
  package com.saerok.jy.commute.dto;
 
-
-
 import java.sql.Timestamp;
 
 import lombok.AllArgsConstructor;
