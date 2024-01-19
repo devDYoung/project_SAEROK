@@ -27,9 +27,9 @@ public class SecurityConfig{
                .requestMatchers("/resources/**").permitAll()
                .requestMatchers(req->CorsUtils.isPreFlightRequest(req)).permitAll()
                .requestMatchers("/WEB-INF/views/**").permitAll() // "/WEB-INF/views/**" 경로에 대한 모든 사용자 허용
-               .requestMatchers("/insertemp").hasAnyAuthority(MyAuthority.HR.name())
-            //   .requestMatchers("/insertemp").hasRole(MyAuthority.HR_MASTER.name())
-               .requestMatchers("/selectemp").hasAnyAuthority(MyAuthority.HR.name())
+//               .requestMatchers("/insertemp").hasAnyAuthority(MyAuthority.HR.name())
+               .requestMatchers("/human/selectemp").hasAnyAuthority(MyAuthority.HR_MASTER.name(),MyAuthority.HR.name())
+               .requestMatchers("/human/insertemp").hasAnyAuthority(MyAuthority.HR_MASTER.name())
                
                //메소드 방식으로 선언할 수도 있다. 
                .anyRequest().authenticated(); //권한이 있어야 해!  // 나머지 모든 요청에 대해 인증이 필요함
@@ -55,7 +55,7 @@ public class SecurityConfig{
             .exceptionHandling(
                     exceptionHandle 
                     ->exceptionHandle.accessDeniedPage(
-                          "/errorPage"))
+                          "/human/errorPage"))
             .authenticationProvider(dbprovider) // DB와 연동하여 인증 처리
             .build(); // SecurityFilterChain 빌드 및 반환
          }

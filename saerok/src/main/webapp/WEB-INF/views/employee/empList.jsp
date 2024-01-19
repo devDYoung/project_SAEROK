@@ -83,7 +83,8 @@
 							</button>
 						</div>
 						<br>
-						<form class="selectempList" id="updateempForm" action="${path}/selectemp" method="post">
+						<form class="selectempList" id="updateempForm" action="${path}/human/selectemp" method="post">
+							<div class="container">
 							<div class="col-md-8">
 								<label for="inputNo" class="form-label">사번</label> 
 								<input type="text" class="form-control" value="${loginEmployee.empNo }" name="empNo" disabled>
@@ -106,7 +107,7 @@
 								</select>
 							</div>
 							<br>
-							<div class="row">
+							<div class="row" style="padding-left:13px;">
 								<div class="col-12">
 									<p>직책</p>
 								</div>
@@ -136,7 +137,7 @@
 								</div>
 							</div>
 							<br>
-							<div class="col-6">
+							<div class="col-6" style="padding-bottom:20px;">
 								<label for="inputdeptCode" class="form-label">재직여부</label> <br>
 								<div class="form-check form-check-inline">
 									<input class="form-check-input" type="radio" name="workYn" value="Y"> 
@@ -151,6 +152,7 @@
 								
 								<button class="btn btn-outline-primary" id="updatebtn" type="button">수정하기</button>
 								<button class="btn btn-outline-danger" id="deletebtn" type="button">삭제하기</button>
+							</div>
 							</div>
 							</form>
 						</div>
