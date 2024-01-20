@@ -24,4 +24,6 @@ public class Approval {
 	private List<ApvWriter> apvWriter;//결재선
 	private List<ApvRef> apvRef;
 	
+	private List<AppLetter> file;
+	
 }

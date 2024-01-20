@@ -49,6 +49,5 @@ public interface CommuteService {
 	
 	int updateStartWork(Map<String, Object> param);
 
-//	ArrayList<Commute> selectCommuteStatusList(int commuteNo);
 
 }
