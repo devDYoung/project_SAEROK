@@ -9,10 +9,10 @@
 <html lang="utf-8">
 <head>
    <script src="https://kit.fontawesome.com/cbe4aa3844.js" crossorigin="anonymous"></script>
-			<link rel="stylesheet"
-				href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css" />
-<!-- 			  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-	  <link rel="stylesheet" href="//code.jquery.com/ui/1.13.2/themes/base/jquery-ui.css"> -->
+         <link rel="stylesheet"
+            href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css" />
+<!--            <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+     <link rel="stylesheet" href="//code.jquery.com/ui/1.13.2/themes/base/jquery-ui.css"> -->
 <style>
 
 .dropdown-list-image img {
@@ -128,11 +128,8 @@
                 </a>
                 <div id="collapseBoard" class="collapse" aria-labelledby="headingBoard" data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
-
-                   		<a class="collapse-item" href="${path }/board/All">전체 게시판</a>
-
-                    	<%-- <a class="collapse-item" href="${path }/board/write">작성하기</a> --%>
-                   		<a class="collapse-item" href="${path }/board/All">공지 사항</a>
+                       <%-- <a class="collapse-item" href="${path }/board/write">작성하기</a> --%>
+                         <a class="collapse-item" href="${path }/board/All">공지 사항</a>
 
                        <!-- <a class="collapse-item" href="">전체게시판</a> -->
                         <a class="collapse-item" href="${path }/board/Part">부서별 게시판</a>
@@ -147,7 +144,6 @@
                 </a>
                 <div id="collapseMsg" class="collapse" aria-labelledby="headingMsg" data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
-                        <a class="collapse-item" href="javascript:requestNote('${path }/note/write');">쪽지쓰기</a>
                         <a class="collapse-item" href="javascript:requestNote('${path }/note/get');">받은쪽지함</a>
                         <a class="collapse-item" href="javascript:requestNote('${path }/note/send');">보낸쪽지함</a>
                         <a class="collapse-item" href="javascript:requestNote('${path }/note/basket');">휴지통</a>
@@ -232,7 +228,7 @@
                             </div>
                         </div>
                     </form>
-					
+
                     <!-- Topbar Navbar -->
                     <ul class="navbar-nav ml-auto">
 
@@ -498,5 +494,5 @@
          
       }
    </script>
-    <!-- Scroll to Top Button-->
+    <!— Scroll to Top Button—>
  
