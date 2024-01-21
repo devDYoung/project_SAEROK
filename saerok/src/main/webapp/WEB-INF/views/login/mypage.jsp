@@ -56,7 +56,7 @@
 </head>
 <body>
    <section class="mypage-section">
-      <div class="myPage-container">
+      <div class="myPage-container page-wrapper">
          <!-- <h2 id="profile-comment">내 프로필</h2> -->
          <%-- <img id="profile-img" class="img-profile rounded-circle"
             src="${pageContext.request.contextPath }/resources/img/ato100px.png"></a> --%>   

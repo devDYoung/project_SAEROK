@@ -16,7 +16,7 @@
 
 
 <section id="ato-success">
-	<div class="container-fluid">
+	<div class="container-fluid page-wrapper">
 
 		<div class="card shadow mb-4">
 			<div class="card-header py-3">

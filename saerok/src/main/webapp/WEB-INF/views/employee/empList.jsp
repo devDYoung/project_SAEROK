@@ -18,7 +18,7 @@
 <jsp:include page="/WEB-INF/views/common/header.jsp" />
 
 <section id="ato-success">
-	<div class="container-fluid">
+	<div class="container-fluid page-wrapper">
 		<%-- <form class="selectempList" id="updateempForm" action="${path}/selectemp" method="post"> --%>
 			<div class="card shadow mb-4">
 				<div class="card-header py-3">
@@ -280,13 +280,13 @@ $("#deletebtn").click(function (event) {
 
     $.ajax({
         method: "POST",
-        url: "${path}/deleteemp", 
+        url: "${path}/human/deleteemp", 
         data: JSON.stringify(formData2),
         contentType: 'application/json',
         success: function (data) {
             alert(data);
             $("#updateModal").modal("hide");
-            location.replace("${path}/selectemp");
+            location.replace("${path}/human/selectemp");
         },
         error: function (error) {
             console.error("삭제 중 에러발생!!:", error);
