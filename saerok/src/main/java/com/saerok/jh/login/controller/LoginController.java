@@ -108,16 +108,9 @@ public class LoginController {
 	@GetMapping("/commute/commuteMain.do")
 	public void commuteMain() {}
 	
-	// 일정 조회
-	@GetMapping("/calendar/calendarMain.do")
-	public void calendarMain() {}
-	
-	// 일정 조회
-	@GetMapping("/calendar/calendarView.do")
-	public void calendarView() {}
+	// 내 근태 조회
+	@GetMapping("/commute/commuteList.do")
+	public void commuteList() {}
 
-	// 일정 조회
-	@GetMapping("/calendar/calendarWrite.do")
-	public void calendarWrite() {}
 
 }

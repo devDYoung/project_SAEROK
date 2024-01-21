@@ -18,9 +18,9 @@
 <jsp:include page="/WEB-INF/views/common/header.jsp" />
 
 <section id="ato-success">
-	<div class="container-fluid">
+	<div class="container-fluid page-wrapper">
 		<%-- <form class="selectempList" id="updateempForm" action="${path}/selectemp" method="post"> --%>
-			<div class="card shadow mb-4">
+			<div class="card shadow mb-4" style="display: block">
 				<div class="card-header py-3">
 					<h6 class="m-0 font-weight-bold text-primary">ATO 사원리스트</h6>
 				</div>
@@ -183,6 +183,8 @@
 	}); */
 	
 	$(document).ready(function() {
+		
+		
 	    $(".listupdatebtn").click(function() {
 	        var empNo = $(this).closest('tr').find('td:eq(0)').text();
 	        var empName = $(this).closest('tr').find('td:eq(1)').text();
@@ -203,6 +205,18 @@
 	    });
 	});
 	
+	/* $("#updatebtn").hide();
+	$("#deletebtn").hide();
+	var deptCode = "${deptCode}";
+    var jobCode = "${jobCode}";
+    var deptName= "${loginEmployee.deptName}";
+    var jobName = "${loginEmployee.jobName}";
+ 	debugger
+    if (deptCode=="100" && jobCode=="10"){
+    	$("#updatebtn").show();
+    	$("#deletebtn").show();
+    } */
+		
 
 	$(document).ready(function() {
 
@@ -242,6 +256,8 @@
 
 <!-- 수정하기 ajax로 보내기 -->
 <script>
+
+
 $("#updatebtn").click(function (event) {
     event.preventDefault(); 
 
@@ -256,13 +272,13 @@ $("#updatebtn").click(function (event) {
 
     $.ajax({
         method: "POST",
-        url: "${path}/updateemp", 
+        url: "${path}/human/updateemp", 
         data: JSON.stringify(formData),
         contentType: 'application/json',
         success: function (data) {
             alert(data);
             $("#updateModal").modal("hide");
-            location.replace("${path}/selectemp");
+            location.replace("${path}/human/selectemp");
         },
         error: function (error) {
             console.error("수정 중 에러발생!!:", error);
@@ -280,13 +296,13 @@ $("#deletebtn").click(function (event) {
 
     $.ajax({
         method: "POST",
-        url: "${path}/deleteemp", 
+        url: "${path}/human/deleteemp", 
         data: JSON.stringify(formData2),
         contentType: 'application/json',
         success: function (data) {
             alert(data);
             $("#updateModal").modal("hide");
-            location.replace("${path}/selectemp");
+            location.replace("${path}/human/selectemp");
         },
         error: function (error) {
             console.error("삭제 중 에러발생!!:", error);

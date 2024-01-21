@@ -111,14 +111,15 @@
                     <i class="fas fa-fw fa-calendar-alt"></i>
                     <span>일정관리</span>
                 </a>
-                <%-- <div id="collapseSKD" class="collapse" aria-labelledby="headingSKD"
+                <div id="collapseSKD" class="collapse" aria-labelledby="headingSKD"
                     data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
-                        <a class="collapse-item" href="${path }/calendar/calendarMain.do">일정관리</a>
-                        <a class="collapse-item" href="${path }/calendar/calendarView.do">일정조회</a>
-                         <a class="collapse-item" href="${path }/calendar/calendarWrite.do">일정추가</a>
+                        <a class="collapse-item" href="${path }/calendar/Main">내 일정</a>
+                        <a class="collapse-item" href="${path }/calendar/View/1">일정조회</a>
+                        <a class="collapse-item" href="${path }/calendar/Impt/1">중요일정</a>
+                         <a class="collapse-item" href="${path }/calendar/Write">일정작성</a>
                     </div>
-                </div> --%>
+                </div> 
             </li>
             <li class="nav-item">
                 <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseBoard"
@@ -144,7 +145,7 @@
                 </a>
                 <div id="collapseMsg" class="collapse" aria-labelledby="headingMsg" data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
-                    	<%-- <a class="collapse-item" href="javascript:requestNote('${path }/note/write');">쪽지쓰기</a> --%>
+                       <%-- <a class="collapse-item" href="javascript:requestNote('${path }/note/write');">쪽지쓰기</a> --%>
                         <a class="collapse-item" href="/note/get">받은쪽지함</a>
                         <a class="collapse-item" href="/note/send">보낸쪽지함</a>
                         <a class="collapse-item" href="/note/basket">휴지통</a>
@@ -443,7 +444,7 @@
                                 </a>
                                 <div class="dropdown-divider"></div>
                                 <a class="dropdown-item" href="${path}/logoutpage " data-toggle="modal" data-target="#logoutModal">
-                                    <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400" ></i>
+                                    <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 tfext-gray-400" ></i>
                                     로그아웃
                                 </a>
                             </div>

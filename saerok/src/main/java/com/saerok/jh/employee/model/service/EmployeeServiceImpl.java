@@ -16,46 +16,46 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 public class EmployeeServiceImpl implements EmployeeService {
 
-	private final EmployeeDao dao;
-	private final SqlSession session;
+   private final EmployeeDao dao;
+   private final SqlSession session;
 
-	//사원등록
-	@Override
-	@Transactional //트랜젝션 처리 어노테이션 
+   //사원등록
+   @Override
+   @Transactional //트랜젝션 처리 어노테이션 
     public int insertEmployeeEnd(Map<String,Object> param) {
         
         return dao.insertEmployeeEnd(session,param);
     }
-	
-	//전체사원조회
-	@Override
-	public List<Employee> selectEmployeeList() {
-		// TODO Auto-generated method stub
-		return dao.selectEmployeeList(session);
-	}
+   
+   //전체사원조회
+   @Override
+   public List<Employee> selectEmployeeList() {
+      // TODO Auto-generated method stub
+      return dao.selectEmployeeList(session);
+   }
 
-	
-	//사원수정
-	@Override
-	public int updateEmployee(Employee e) {
-		return dao.updateEmployee(session, e);
-	}
-	
-	//사원삭제
-	@Override
-	public int deleteEmployee(Employee empNo) {
-		return dao.deleteEmployee(session, empNo);
-	}
-	
-	
-	
+   
+   //사원수정
+   @Override
+   public int updateEmployee(Employee e) {
+      return dao.updateEmployee(session, e);
+   }
+   
+   //사원삭제
+   @Override
+   public int deleteEmployee(Employee empNo) {
+      return dao.deleteEmployee(session, empNo);
+   }
+   
+   
+   
 
-	
-	
-	
-	
-	
-	
-	
+   
+   
+   
+   
+   
+   
+   
 
 }

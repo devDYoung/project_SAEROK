@@ -24,7 +24,7 @@
         margin: 0 10px;
     }
 </style>
-  <div class="home-container" class="div-padding div-margin">
+  <div class="home-container" class="div-padding div-margin page-wrapper">
                     <!-- <div class="div-padding"> -->
                         <div id="date-box">
                             <h4>
@@ -130,7 +130,6 @@
     	        				row1.dataset.end = weekDates[key].end;
     	        				
     	        				const tbody2 = document.createElement("tbody");
-    	        				
     							
     	        				row1.onclick = (e) =>{
     	        					const start = e.currentTarget.dataset.start;

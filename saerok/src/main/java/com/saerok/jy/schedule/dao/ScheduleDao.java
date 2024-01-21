@@ -5,38 +5,42 @@ import java.util.List;
 import org.apache.ibatis.session.SqlSession;
 
 import com.saerok.PageFactory;
+import com.saerok.jh.employee.model.dto.Employee;
 import com.saerok.jy.schedule.dto.Schedule;
 
 public interface ScheduleDao {
 
 	// 일정 작성
-	int skdWrite(SqlSession session, Schedule schedule);
+	int insertSkd(SqlSession session, Schedule skd);
 
 	// 캘린더에서 일정 작성
-	int modalwrite(SqlSession session,Schedule schedule);
+	int insertModalSkd(SqlSession session,Schedule skd);
 
 	// 일정 삭제
-	int skdDelete(SqlSession session,String empNo);
+	int skdDelete(SqlSession session, int no);
 
 	// 일정 수정
-	int skdEdit(SqlSession session,Schedule schedule);
+	int updateOne(SqlSession session,Schedule schedule);
 
-	// 일정 목록 조회
-	List<Schedule> selectList(SqlSession session,PageFactory pf, String empNo);
+//	// 일정 목록 조회
+//	List<Schedule> selectList(SqlSession session,PageFactory pf, Employee emp);
 
 	// 전체 일정 갯수 조회
-	int selectToatalCnt(SqlSession session);
+	int selectTotalAll(SqlSession session);
 
 	// 일정 상세조회 (번호)
-	Schedule selectOne(SqlSession session,String empNo);
+	Schedule selectOne(SqlSession session,int no);
 
 	// 캘린더에서 일정 보기
 	List<Schedule> getSkd(SqlSession session,String empNo);
 
 	// 중요 일정 등록
-	String skdImpt(SqlSession session,Schedule skd);
+	String insertImpt(SqlSession session,Schedule skd);
+	
+	//중요 일정 수정
+	void updateImpt(SqlSession session, Schedule skd);
 
-	// 중요 일정 목록 조회
-	List<Schedule> selectImptList(SqlSession session,PageFactory pf, String empNo);
+//	// 중요 일정 목록 조회
+//	List<Schedule> selectImptList(SqlSession session,PageFactory pf, int no);
 
 }
