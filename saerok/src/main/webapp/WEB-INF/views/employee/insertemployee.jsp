@@ -57,7 +57,7 @@
           <!-- Nested Row within Card Body -->
           <div class="row">
             <div class="col-lg-5">
-              <img class="ato-insertimg" src="${path}/resources/img/ato-img4.jpg" alt="아토 logo">
+              <img class="ato-insertimg" src="${path}/resources/img/ato_img5.jpg" alt="아토 logo">
             </div>
             <div class="col-lg-7">
               <div class="p-5">
