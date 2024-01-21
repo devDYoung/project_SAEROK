@@ -19,7 +19,6 @@ import com.saerok.jj.apv.model.dto.AppLetter;
 
 import lombok.RequiredArgsConstructor;
 
-
 @Service
 @RequiredArgsConstructor
 public class ApprovalServiceImpl implements ApprovalService {
@@ -49,10 +48,9 @@ public class ApprovalServiceImpl implements ApprovalService {
 	@Override
 	@Transactional
 	public int insertAppLetter(MultipartFile upFile, AppLetter appLetter) {
-		    int result = dao.insertAppLetter(upFile,appLetter,session);
+		int result = dao.insertAppLetter(upFile, appLetter, session);
 
-
-		    return result;
-		}
+		return result;
+	}
 
 }

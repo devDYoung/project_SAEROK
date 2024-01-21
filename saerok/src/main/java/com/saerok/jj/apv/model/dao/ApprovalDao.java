@@ -7,6 +7,7 @@ import com.saerok.jj.apv.model.dto.Approval;
 
 import jakarta.servlet.http.HttpSession;
 
+import com.saerok.jh.employee.model.dto.Employee;
 import com.saerok.jj.apv.model.dto.AppLetter;
 
 import org.apache.ibatis.session.RowBounds;
@@ -23,6 +24,6 @@ public interface ApprovalDao {
 
 	int insertApproval(SqlSession session, Approval a);
 
+	int insertAppLetter(MultipartFile upFile, AppLetter appLetter, SqlSession session);
 
-	int insertAppLetter(MultipartFile upFile,  AppLetter appLetter, SqlSession session);
 }
