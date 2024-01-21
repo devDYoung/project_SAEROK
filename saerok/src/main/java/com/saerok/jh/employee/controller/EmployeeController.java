@@ -77,11 +77,11 @@ public class EmployeeController {
 
                String msg, loc;
                if (result > 0) {
-                  return "redirect:/selectemp";
+                  return "redirect:/human/selectemp";
                         
                } else {
                    msg = "사원등록실패";
-                   loc = "index";
+                   loc = "/";
                }
 
                model.addAttribute("msg", msg);
@@ -100,7 +100,7 @@ public class EmployeeController {
      @GetMapping("/selectemp")
      public String searchEmployee(Model model) {
        List<Employee> empList = service.selectEmployeeList();
-       log.debug("{}",empList);
+      // log.debug("{}",empList);
        model.addAttribute("empList",empList);
         return "employee/empList";
 

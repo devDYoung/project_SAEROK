@@ -7,6 +7,9 @@
 	uri="http://www.springframework.org/tags/form"%>
 <c:set var="path" value="${pageContext.request.contextPath}" />
 
+
+
+
 	<!-- 휴지통 -->
 	<c:forEach var="note" items="${noteSend}">
 		<p>${note.sender}님으로부터:${note.subject}</p>

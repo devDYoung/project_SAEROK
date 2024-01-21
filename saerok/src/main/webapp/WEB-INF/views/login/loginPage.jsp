@@ -24,7 +24,7 @@
 </head>
 
 <body class="bg-gradient-primary">
-    <div class="container">
+    <div class="container page-wrapper">
         <div class="row justify-content-center">
             <div class="col-xl-5 col-lg-12 col-md-5">
                 <div class="card o-hidden border-0 shadow-lg my-5">

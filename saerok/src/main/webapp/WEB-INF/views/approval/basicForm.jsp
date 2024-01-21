@@ -28,7 +28,7 @@
 			</div>
 			<div class="modal-body">
 				<div style="display: flex;">
-					<div style="border: 1px solid black; width: 300px;">
+					<div style=" box-shadow: 0 0 10px rgba(0, 0, 0, 0.2); width: 300px;">
 						<ul id="mixed" class="loadDeptButton">
 							<li><span class="deptName" role="button"
 								style="color: black;"> <i class="fas fa-search fa-fw"></i>
@@ -53,8 +53,8 @@
 						</ul>
 					</div>
 					<div>
-						<input type="button" id="addButton" value="결재자추가"
-							style="width: 100px; height: 50px;"> <input type="button"
+						<input type="button" id="addButton" value="결재자추가" 
+							style="width: 100px; height: 50px; "> <input type="button"
 							id="resetButton" value="취소" style="width: 50px; height: 50px;"><br>
 						<input type="button" id="addReferButton" value="참조자추가"
 							style="width: 100px; height: 50px; margin-top: 300px"> <input
@@ -62,11 +62,20 @@
 							style="width: 50px; height: 50px;">
 					</div>
 					<div style="display: flex; flex-direction: column;">
+						<div
+							style=" margin-left: 100px; box-shadow: 0 0 10px rgba(0, 0, 0, 0.2); padding: 10px;">
+							결재자 선택</div>
 						<div id="approverElement"
-							style="border: 1px solid red; margin-left: 100px; width: 400px; height: 350px;">
-							결재자</div>
+							style=" margin-left: 100px; width: 300px; height: 300px; box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);">
+							<!-- Your content here -->
+						</div>
+						<div
+							style=" margin-left: 100px; box-shadow: 0 0 10px rgba(0, 0, 0, 0.2); padding: 10px;">
+							수신참조자 선책</div>
+
 						<div id="referElement"
-							style="border: 1px solid blue; margin-left: 100px; height: 325.5px;">수신참조자
+							style=" margin-left: 100px; height: 325.5px; box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);">
+							<!-- Your content here -->
 						</div>
 					</div>
 				</div>
@@ -191,6 +200,12 @@ $(document).ready(function() {
     $("#addReferButton").click(function() {
         addPeople(".team-list>li", 5, "#referElement", "참조인은 5명까지만 가능합니다.");
     });
+    
+    // 취소 버튼 클릭 이벤트
+    $("#resetButton").click(function() {
+        $("#approverElement").empty();
+        $("#referElement").empty();
+    });
 });
 
 
@@ -236,8 +251,10 @@ $(document).ready(function() {
 
 
 
-<form class="documentForm" name="basicForm" action="" method="POST"
-	onsubmit="return check_onclick()">
+<form class="documentForm" name="basicForm"
+	action="${path }/approval/insertAppLetter.do" method="POST"
+	enctype="multipart/form-data">
+	<input type="hidden" name="loginEmp" value="${loginEmployee.empNo }">
 	<div id="documentForm " class="documentForm"
 		style="margin: 50px 50px 50px 50px; width: min-content;">
 		<div class="basicForm">
@@ -277,13 +294,17 @@ $(document).ready(function() {
 				</tr>
 				<tr>
 					<td style="color: black; height: 50px; width: 80px;">제 목</td>
-					<td colspan="8"><textarea class="form-control" name="loaTitle"
-							id="loaTitle"
+					<td colspan="8"><textarea class="form-control"
+							name="letterTitle" id="loaTitle"
 							style="width: 100%; height: 50px; resize: none; overflow: hidden;"></textarea></td>
 				</tr>
 				<tr>
 					<td colspan="8" style="height: 90px;">
-
+						<div class="custom-file">
+							<input type="file" class="custom-file-input" name="upFile"
+								id="upFile1"> <label class="custom-file-label"
+								for="upFile1">파일을 선택하세요</label>
+						</div>
 					</td>
 				</tr>
 				<tr>
@@ -291,7 +312,7 @@ $(document).ready(function() {
 
 
 					<td colspan="8"><textarea class="form-control"
-							name="loaContent" id="loaContent" cols="151px" rows="11px"
+							name="letterDetail" id="loaContent" cols="151px" rows="11px"
 							style="width: 100%; height: 300px; border: none; resize: none; overflow: hidden; font-size: 25px;"></textarea>
 					</td>
 				</tr>
@@ -371,7 +392,7 @@ $(document).ready(function() {
 </script>
 
 
- <script>
+<script>
     $("input[name=upFile]").change(e=>{
         const fileName=e.target.files[0].name;
         $(e.target).next(".custom-file-label").text(fileName);

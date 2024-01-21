@@ -100,7 +100,7 @@
                     data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
                         <a class="collapse-item" href="${path }/commute/commuteMain.do">내 근태현황</a>
-                        <a class="collapse-item" href="${path }/commute/commuteList.do">부서별 근태현황</a>
+                        <a class="collapse-item" href="">부서별 근태현황</a>
                         <a class="collapse-item" href="">연차현황</a>
                     </div>
                 </div>
@@ -138,16 +138,17 @@
                 </div>
             </li>
             <li class="nav-item">
-                <a class="nav-link dpse-item " onclick="javascript:requestNote('${path }/note/get');" data-toggle="collapse" data-target="#collapseMsg"
+                <a class="nav-link dpse-item " data-toggle="collapse" data-target="#collapseMsg"
                     aria-expanded="true" aria-controls="collapseMsg">
                     <i class="fas fa-fw fa-envelope"></i>
                     <span>쪽지</span>
                 </a>
                 <div id="collapseMsg" class="collapse" aria-labelledby="headingMsg" data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
-                        <a class="collapse-item" href="javascript:requestNote('${path }/note/get');">받은쪽지함</a>
-                        <a class="collapse-item" href="javascript:requestNote('${path }/note/send');">보낸쪽지함</a>
-                        <a class="collapse-item" href="javascript:requestNote('${path }/note/basket');">휴지통</a>
+                       <%-- <a class="collapse-item" href="javascript:requestNote('${path }/note/write');">쪽지쓰기</a> --%>
+                        <a class="collapse-item" href="/note/get">받은쪽지함</a>
+                        <a class="collapse-item" href="/note/send">보낸쪽지함</a>
+                        <a class="collapse-item" href="/note/basket">휴지통</a>
                     </div>
                 </div>
             </li>
@@ -443,7 +444,7 @@
                                 </a>
                                 <div class="dropdown-divider"></div>
                                 <a class="dropdown-item" href="${path}/logoutpage " data-toggle="modal" data-target="#logoutModal">
-                                    <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400" ></i>
+                                    <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 tfext-gray-400" ></i>
                                     로그아웃
                                 </a>
                             </div>
