@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.saerok.dy.note.model.dao.NoteDao;
 import com.saerok.dy.note.model.dto.Note;
@@ -30,5 +31,15 @@ public class NoteServiceImpl implements NoteService {
 	public List<Employee> selectEmpByName(String empName) {
 		// TODO Auto-generated method stub
 		return dao.selectEmpByName(session);
+	}
+	
+	@Override
+	@Transactional() //트랜젝션 처리 어노테이션 
+	public boolean sendNote(Note note) {
+		int result = dao.insertNote(session, note);
+    	if(result > 0) {
+    		return true; // 성공적으로 전송되었을 경우 true 반환
+    	}
+        return false;
 	}
 }

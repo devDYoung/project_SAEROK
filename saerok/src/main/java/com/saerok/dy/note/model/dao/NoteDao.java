@@ -14,4 +14,8 @@ public interface NoteDao {
 
 	// 이름으로 사원 조회
 	List<Employee> selectEmpByName(SqlSession session);
+
+	// 쪽지를 DB에 저장하는 메소드
+	int insertNote(SqlSession session, Note note);
+
 }

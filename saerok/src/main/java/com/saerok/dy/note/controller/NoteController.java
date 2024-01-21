@@ -1,5 +1,6 @@
 package com.saerok.dy.note.controller;
 
+import java.security.Principal;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -8,7 +9,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.saerok.dy.note.model.dto.Note;
@@ -74,5 +77,27 @@ public class NoteController {
 		 result.put("empList", empList);
 		 
 		 return result;
+    }
+    
+    @PostMapping("/send")
+    @ResponseBody
+    public String sendNote(Principal loginSession, @RequestParam String recipientName, @RequestParam String messageText) {
+
+		// 현재 로그인 중인 사원의 사원번호
+		String empNo = loginSession.getName();
+		
+    	Note note = new Note();
+    	note.setRevEmpNo(recipientName.split(" ")[0]);
+    	note.setNoteContent(messageText);
+    	note.setSndEmpNo(empNo);
+    	note.setModId(empNo);
+    	
+        boolean isSentSuccessfully = noteService.sendNote(note);
+
+        if (isSentSuccessfully) {
+            return "success";
+        } else {
+            return "error";
+        }
     }
 }

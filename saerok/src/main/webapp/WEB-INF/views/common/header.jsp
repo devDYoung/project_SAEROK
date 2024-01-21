@@ -137,17 +137,17 @@
                 </div>
             </li>
             <li class="nav-item">
-                <a class="nav-link dpse-item " onclick="javascript:requestNote('${path }/note/get');" data-toggle="collapse" data-target="#collapseMsg"
+                <a class="nav-link dpse-item " data-toggle="collapse" data-target="#collapseMsg"
                     aria-expanded="true" aria-controls="collapseMsg">
                     <i class="fas fa-fw fa-envelope"></i>
                     <span>쪽지</span>
                 </a>
                 <div id="collapseMsg" class="collapse" aria-labelledby="headingMsg" data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
-                    	<a class="collapse-item" href="javascript:requestNote('${path }/note/write');">쪽지쓰기</a>
-                        <a class="collapse-item" href="javascript:requestNote('${path }/note/get');">받은쪽지함</a>
-                        <a class="collapse-item" href="javascript:requestNote('${path }/note/send');">보낸쪽지함</a>
-                        <a class="collapse-item" href="javascript:requestNote('${path }/note/basket');">휴지통</a>
+                    	<%-- <a class="collapse-item" href="javascript:requestNote('${path }/note/write');">쪽지쓰기</a> --%>
+                        <a class="collapse-item" href="/note/get">받은쪽지함</a>
+                        <a class="collapse-item" href="/note/send">보낸쪽지함</a>
+                        <a class="collapse-item" href="/note/basket">휴지통</a>
                     </div>
                 </div>
             </li>
