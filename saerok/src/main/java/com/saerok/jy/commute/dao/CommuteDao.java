@@ -22,11 +22,6 @@ List<Commute> selectCommuteWorkList(SqlSession session, Map<String, Object> para
 // 금일 출근 기록이 있는지 확인
 Commute selectExsistWorkInList(SqlSession session, Map<String, Object> param);
 
-//int insertCommute(SqlSession sessoin, Map empNo);
-//
-//Commute selectCommute(SqlSession session, String empNo);
-//
-//int updateCommute(SqlSession session, int commuteNo);
 
 // 출근하기 버튼 누를 시 근무 시작 일시 저장
 int insertCommuteStatus(SqlSession session, String empNo);
