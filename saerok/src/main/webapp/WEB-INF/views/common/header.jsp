@@ -111,14 +111,14 @@
                     <i class="fas fa-fw fa-calendar-alt"></i>
                     <span>일정관리</span>
                 </a>
-                <div id="collapseSKD" class="collapse" aria-labelledby="headingSKD"
+                <%-- <div id="collapseSKD" class="collapse" aria-labelledby="headingSKD"
                     data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
                         <a class="collapse-item" href="${path }/calendar/calendarMain.do">일정관리</a>
                         <a class="collapse-item" href="${path }/calendar/calendarView.do">일정조회</a>
                          <a class="collapse-item" href="${path }/calendar/calendarWrite.do">일정추가</a>
                     </div>
-                </div>
+                </div> --%>
             </li>
             <li class="nav-item">
                 <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseBoard"
@@ -494,5 +494,5 @@
          
       }
    </script>
-    <!— Scroll to Top Button —>
+    <!-- Scroll to Top Button -->
  

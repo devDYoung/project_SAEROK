@@ -449,7 +449,7 @@ const monthlySalesChart = new Chart(ctx, {
 <!-- Core plugin JavaScript-->
 <script src="/vendor/jquery-easing/jquery.easing.min.js"></script>
 
-<!-- Custom scripts for all pages-->
+<!— Custom scripts for all pages—>
 <script src="/js/sb-admin-2.min.js"></script>
 <br>
 <jsp:include page="/WEB-INF/views/common/footer.jsp" />
