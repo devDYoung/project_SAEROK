@@ -64,11 +64,29 @@
 
 <script>
 	$(document).ready(function() {
-
 		new DataTable('#dataTable', {
 			info : false,
 			ordering : true,
 			paging : true
+		});
+		$('#send-btn').click(function() {
+			var recipientName = $('#recipient-name').val();
+			var messageText = $('#message-text').val();
+			debugger
+			// AJAX로 데이터 전송
+			$.ajax({
+				type : 'POST',
+				url : '${path}/note/send', // 실제 컨트롤러의 매핑 주소로 변경
+				data : {
+					recipientName : recipientName,
+					messageText : messageText
+				},
+				success : function(response) {
+					// 모달 닫기 로직 추가
+				},
+				error : function(error) {
+				}
+			});
 		});
 	});
 </script>

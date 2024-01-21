@@ -22,4 +22,9 @@ public class NoteDaoImpl implements NoteDao {
 	public List<Employee> selectEmpByName(SqlSession session) {
 		return session.selectList("note.selectEmpByName");
 	}
+	
+	@Override
+	public int insertNote(SqlSession session, Note note) {
+		return session.insert("note.insertNote", note);
+	}
 }
