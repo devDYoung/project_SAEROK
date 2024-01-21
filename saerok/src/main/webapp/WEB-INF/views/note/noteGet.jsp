@@ -46,7 +46,6 @@
 						<tr>
 							<th>쪽지번호</th>
 							<th>보낸사람</th>
-							<th>제목</th>
 							<th>날짜</th>
 						</tr>
 					</thead>
@@ -56,7 +55,6 @@
 								<tr>
 									<td><c:out value="${note.noteNo}" /></td>
 									<td><c:out value="${note.sndEmpNo}" /></td>
-									<td><c:out value="${note.noteTitle}" /></td>
 									<td><c:out value="${note.regDtime}" /></td>
 
 								</tr>
@@ -136,13 +134,13 @@
 			// AJAX로 데이터 전송
 			$.ajax({
 				type : 'POST',
-				url : '${path}/note/send', // 실제 컨트롤러의 매핑 주소로 변경
+				url : '${path}/note/send', 
 				data : {
 					recipientName : recipientName,
 					messageText : messageText
 				},
 				success : function(response) {
-					// 모달 닫기 로직	 추가
+					 $('#myModal').modal('hide');
 				},
 				error : function(error) {
 				}
