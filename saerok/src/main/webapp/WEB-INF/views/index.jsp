@@ -26,8 +26,8 @@
 	width: auto;
 }
 </style>
-<!-- <script>
-       const empNo = "${ loginEmployee.empNo }";
+<!--  <script>
+       const empNo = "${loginEmployee.empNo}";
     </script> -->
 <section>
 	<div class="app-dashboard-body-content off-canvas-content"
@@ -157,7 +157,7 @@ document.querySelector('#startBtn').addEventListener('click', function () {
 			console.log(data);
 	       if(data.status === "출근"){
 	           alert("출근 성공입니다.");
-	           /* location.reload(); */
+	           location.reload();
 	       }else if(data.status === '출장'){
 	    	   alert("출장시에는 출근처리됩니다.");
 	    	  return;
@@ -186,7 +186,7 @@ document.querySelector('#endBtn').addEventListener('click', function () {
 		   
 		   if(data.status === "퇴근"){
 	           alert("퇴근 성공입니다.");
-	          /*  location.reload(); */
+	          location.reload();
 	       }else if(data.status === '출근전'){
 	    	   alert("출근전입니다.");
 	    	   return;
@@ -248,7 +248,33 @@ const updateWorkTime = (daytimes) =>{
 									</ul>
 									<div class="tab-content">
 										<div class="tab-pane" id="board">
-											<p>공지사항</p>
+											<%-- <table class="table table-bordered" id="dataTable"
+												width="100%" cellspacing="0">
+												<thead>
+								<tr>
+									<th scope="col" class="text-center">번호</th>
+									<th scope="col" class="text-center">제목</th>
+									<th scope="col" class="text-center">작성자</th>
+									<th scope="col" class="text-center">작성일</th>
+								</tr>
+							</thead>
+							<tbody>
+								<c:if test="${not empty boardAll}">
+									<c:forEach var="b" items="${boardAll}">
+										<tr>
+											<td><c:out value="${b.boardNo}" /></td>
+											<td><c:out value="${b.boardTitle}" /></td>
+											<td class="bordTd"><c:out value="${b.bordContent}" /></td>
+											<td><c:out value="${b.oriFileName}" /></td>
+											<td><c:out value="${b.regId}" /></td>
+											<td><fmt:formatDate value="${b.regDtime}"
+													pattern="yyyy-MM-dd" /></td>
+										</tr>
+									</c:forEach>
+
+								</c:if>
+							</tbody>
+											</table> --%>
 										</div>
 										<div class="tab-pane active" id="calendar">
 											<!--  <div class="col-xl-6 col-lg-6"> -->
@@ -263,16 +289,20 @@ const updateWorkTime = (daytimes) =>{
 											<table class="table table-bordered" id="dataTable"
 												width="100%" cellspacing="0">
 												<tbody>
-													<c:if test="">
+													<c:if test="${not empty scheduleList }">
 														<c:forEach var="i" begin="0" end="4">
-															<c:if test="">
+															<c:if test="${not empty schduleList[i] }">
 																<tr>
-																	<td colspan="2"><a href=""> </a></td>
+																	<td colspan="2">
+																		<a href="{path}/calendar/Detail/${scheduleList[i].scheduleNo }">
+																					${ scheduleList[i].skdTitle }
+																	 	</a>
+																	 </td>
 																</tr>
 															</c:if>
 														</c:forEach>
 													</c:if>
-													<c:if test="">
+													<c:if test="${empty scheduleList }">
 														<tr>
 															<td colspan="2">중요한 일정이 없습니다.</td>
 														</tr>

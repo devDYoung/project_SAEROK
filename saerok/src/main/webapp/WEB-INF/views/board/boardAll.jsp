@@ -34,7 +34,6 @@
 						<table class="table table-bordered" id="dataTable" width="100%"
 							cellspacing="0">
 							<thead>
-
 								<tr>
 									<th scope="col" class="text-center">번호</th>
 									<th scope="col" class="text-center">제목</th>
@@ -43,7 +42,6 @@
 									<th scope="col" class="text-center">작성자</th>
 									<th scope="col" class="text-center">작성일</th>
 								</tr>
-
 							</thead>
 							<tbody>
 								<c:if test="${not empty boardAll}">

@@ -51,7 +51,7 @@
 </head>
 <body>
   <section class="insertato-section">
-    <div class="container">
+    <div class="container page-wrapper">
       <div class="card o-hidden border-0 shadow-lg my-5">
         <div class="card-body p-0">
           <!-- Nested Row within Card Body -->
@@ -171,7 +171,7 @@
         var empPw = $("#empPw").val();
         var empEmail = $("#empEmail").val();
 
-        var url = "${path}/insertempEnd?empName=" + encodeURIComponent(empName)
+        var url = "${path}/human/insertempEnd?empName=" + encodeURIComponent(empName)
                   + "&empPw=" + encodeURIComponent(empPw)
                   + "&empEmail=" + encodeURIComponent(empEmail);
         window.location.href = url;
