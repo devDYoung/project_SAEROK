@@ -53,6 +53,7 @@
 			<button class="btn btn-facebook btn-block col-1"
 				onclick="location.assign('${path}/approval/basicForm');">작성하기</button>
 			<br>
+			<!-- 전체 문서  -->
 			<div class="tab-content">
 				<div class="tab-pane active" id="board">
 					<div class="table-responsive">
@@ -68,19 +69,20 @@
 								</tr>
 							</thead>
 							<tbody>
-								<c:forEach var="a" items="${approval}">
+								<%-- <c:forEach var="a" items="${list}">
 									<tr>
 										<td><c:out value="${a.appSeq}" /></td>
 										<td><c:out value="제목" /></td>
-										<td><c:out value="${loginEmployee.empName }" /></td>
+										<td><c:out value="${a.empName}" /></td>
 										<td><c:out value="${a.appWriteDate}" /></td>
 										<td><c:out value="${a.appCheck }" /></td>
 									</tr>
-								</c:forEach>
+								</c:forEach> --%>
 							</tbody>
 						</table>
 					</div>
 				</div>
+				<!--진행중 문서  -->
 				<div class="tab-pane" id="proceeding">
 					<div class="table-responsive">
 						<table class="table table-bordered" id="dataTable" width="100%"
@@ -95,19 +97,20 @@
 								</tr>
 							</thead>
 							<tbody>
-								<c:forEach var="a" items="${approval}">
+								<c:forEach var="a" items="${list}">
 									<tr>
 										<td><c:out value="${a.appSeq}" /></td>
 										<td><c:out value="제목" /></td>
-										<td><c:out value="${loginEmployee.empName }" /></td>
+										<td><c:out value="${a.empName}" /></td>
 										<td><c:out value="${a.appWriteDate}" /></td>
-										<td><c:out value="${a.appCheck }" /></td>
+										<td><c:out value="${a.appCheck}" /></td>
 									</tr>
 								</c:forEach>
 							</tbody>
 						</table>
 					</div>
 				</div>
+				<!-- 완료 문서 -->
 				<div class="tab-pane" id="complete">
 					<div class="table-responsive">
 						<table class="table table-bordered" id="dataTable" width="100%"
@@ -122,15 +125,9 @@
 								</tr>
 							</thead>
 							<tbody>
-								<c:forEach var="a" items="${approval}">
 									<tr>
-										<td><c:out value="${a.appSeq}" /></td>
-										<td><c:out value="제목" /></td>
-										<td><c:out value="${loginEmployee.empName }" /></td>
-										<td><c:out value="${a.appWriteDate}" /></td>
-										<td><c:out value="${a.appCheck }" /></td>
+										
 									</tr>
-								</c:forEach>
 							</tbody>
 						</table>
 					</div>
