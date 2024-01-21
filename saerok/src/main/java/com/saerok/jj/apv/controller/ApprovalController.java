@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.servlet.ModelAndView;
 
 import com.saerok.jh.employee.model.dto.Employee;
 import com.saerok.jj.apv.model.dto.AppLetter;
@@ -38,7 +39,7 @@ public class ApprovalController {
 	private ApprovalService service;
 
 	@GetMapping("/approvalList.do")
-	public String selectApproval(Model model) {
+	public ModelAndView selectApproval(ModelAndView model) {
 	    List<Approval> approval = service.selectApproval();
 	    Employee emp = new Employee(); 
 
@@ -46,8 +47,9 @@ public class ApprovalController {
 	    list.add(approval);
 	    list.add(emp);
 	    
-	    model.addAttribute("list", list);
-	    return "approval/approvalList";
+	    model.addObject("list", approval);
+	    model.setViewName("approval/approvalList");
+	    return model;
 	}
 	
 	

@@ -65,19 +65,33 @@
 									<th>제목</th>
 									<th>기안자</th>
 									<th>기안일</th>
+									<th>결재자</th>
 									<th>진행상태</th>
 								</tr>
 							</thead>
 							<tbody>
-								<%-- <c:forEach var="a" items="${list}">
+								 <c:forEach var="a" items="${list}">
 									<tr>
-										<td><c:out value="${a.appSeq}" /></td>
+										<td>${a.appSeq}</td>
 										<td><c:out value="제목" /></td>
-										<td><c:out value="${a.empName}" /></td>
+										
+										<td><c:out value="${a.appEmpName}" /></td>
 										<td><c:out value="${a.appWriteDate}" /></td>
+										<td>
+											<c:forEach var="b" items="${a.apvWriter}" varStatus="i">
+												<c:choose>
+													<c:when test="${i.index == 0}">
+														${b.apvEmpName} 
+													</c:when>
+													<c:otherwise>
+														, ${b.apvEmpName}
+													</c:otherwise>
+												</c:choose>
+											</c:forEach>
+										</td>
 										<td><c:out value="${a.appCheck }" /></td>
 									</tr>
-								</c:forEach> --%>
+								</c:forEach>
 							</tbody>
 						</table>
 					</div>
@@ -99,11 +113,11 @@
 							<tbody>
 								<c:forEach var="a" items="${list}">
 									<tr>
-										<td><c:out value="${a.appSeq}" /></td>
+										<%--  <td><c:out value="${a.appSeq}" /></td> 
 										<td><c:out value="제목" /></td>
-										<td><c:out value="${a.empName}" /></td>
+										 <td><c:out value="${a.empName}" /></td> 
 										<td><c:out value="${a.appWriteDate}" /></td>
-										<td><c:out value="${a.appCheck}" /></td>
+										<td><c:out value="${a.appCheck}" /></td> --%>
 									</tr>
 								</c:forEach>
 							</tbody>
