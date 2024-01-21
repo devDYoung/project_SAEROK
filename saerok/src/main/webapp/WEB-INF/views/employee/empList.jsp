@@ -205,7 +205,7 @@
 	    });
 	});
 	
-	$("#updatebtn").hide();
+	/* $("#updatebtn").hide();
 	$("#deletebtn").hide();
 	var deptCode = "${deptCode}";
     var jobCode = "${jobCode}";
@@ -215,7 +215,7 @@
     if (deptCode=="100" && jobCode=="10"){
     	$("#updatebtn").show();
     	$("#deletebtn").show();
-    }
+    } */
 		
 
 	$(document).ready(function() {
