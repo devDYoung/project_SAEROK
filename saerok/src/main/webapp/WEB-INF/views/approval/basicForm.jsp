@@ -236,8 +236,10 @@ $(document).ready(function() {
 
 
 
-<form class="documentForm" name="basicForm" action="" method="POST"
-	onsubmit="return check_onclick()">
+<form class="documentForm" name="basicForm"
+	action="${path }/approval/insertAppLetter.do" method="POST"
+	enctype="multipart/form-data">
+	<input type="hidden" name="loginEmp" value="${loginEmployee.empNo }">
 	<div id="documentForm " class="documentForm"
 		style="margin: 50px 50px 50px 50px; width: min-content;">
 		<div class="basicForm">
@@ -277,13 +279,17 @@ $(document).ready(function() {
 				</tr>
 				<tr>
 					<td style="color: black; height: 50px; width: 80px;">제 목</td>
-					<td colspan="8"><textarea class="form-control" name="loaTitle"
+					<td colspan="8"><textarea class="form-control" name="letterTitle"
 							id="loaTitle"
 							style="width: 100%; height: 50px; resize: none; overflow: hidden;"></textarea></td>
 				</tr>
 				<tr>
 					<td colspan="8" style="height: 90px;">
-
+						<div class="custom-file">
+							<input type="file" class="custom-file-input" name="upFile"
+								id="upFile1"> <label class="custom-file-label"
+								for="upFile1">파일을 선택하세요</label>
+						</div>
 					</td>
 				</tr>
 				<tr>
@@ -291,7 +297,7 @@ $(document).ready(function() {
 
 
 					<td colspan="8"><textarea class="form-control"
-							name="loaContent" id="loaContent" cols="151px" rows="11px"
+							name="letterDetail" id="loaContent" cols="151px" rows="11px"
 							style="width: 100%; height: 300px; border: none; resize: none; overflow: hidden; font-size: 25px;"></textarea>
 					</td>
 				</tr>
@@ -371,7 +377,7 @@ $(document).ready(function() {
 </script>
 
 
- <script>
+<script>
     $("input[name=upFile]").change(e=>{
         const fileName=e.target.files[0].name;
         $(e.target).next(".custom-file-label").text(fileName);
