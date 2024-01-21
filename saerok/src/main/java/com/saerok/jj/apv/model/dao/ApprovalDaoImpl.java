@@ -9,6 +9,7 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.stereotype.Repository;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.saerok.jh.employee.model.dto.Employee;
 import com.saerok.jj.apv.model.dto.AppLetter;
 import com.saerok.jj.apv.model.dto.Approval;
 
@@ -47,5 +48,6 @@ public class ApprovalDaoImpl implements ApprovalDao {
 	public int insertAppLetter(MultipartFile upFile, AppLetter appLetter, SqlSession session) {
 		return session.insert("approval.insertAppLetter", appLetter);
 	}
+
 
 }
