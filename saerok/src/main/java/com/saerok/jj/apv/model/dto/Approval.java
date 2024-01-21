@@ -18,7 +18,7 @@ public class Approval {
 	private int appSeq; //결재고유번호
 	private Date appWriteDate; //작성일자
 	private String appCheck; //결재상태
-	private Employee empNo;//사원번호
+	private String empNo;//사원번호
 	private String appKinds; // 결재종류 
 
 	private List<ApvWriter> apvWriter;//결재선

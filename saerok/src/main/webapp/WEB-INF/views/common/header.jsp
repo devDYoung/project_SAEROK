@@ -84,9 +84,9 @@
                 </a>
                 <div id="collapseHR" class="collapse" aria-labelledby="headingHR" data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
-                        <a class="collapse-item" href="${path }/insertemp">사원등록</a>
-                        <a class="collapse-item" href="${path }/selectemp">사원조회</a>
-                        <a class="collapse-item" href="${path }/groupemp">조직도</a>
+                        <a class="collapse-item" href="${path }/human/insertemp">사원등록</a>
+                        <a class="collapse-item" href="${path }/human/selectemp">사원조회</a>
+                        <a class="collapse-item" href="${path }/human/groupemp">조직도</a>
                     </div>
                 </div>
             </li>
@@ -128,9 +128,6 @@
                 </a>
                 <div id="collapseBoard" class="collapse" aria-labelledby="headingBoard" data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
-
-                         <a class="collapse-item" href="${path }/board/All">전체 게시판</a>
-
                        <%-- <a class="collapse-item" href="${path }/board/write">작성하기</a> --%>
                          <a class="collapse-item" href="${path }/board/All">공지 사항</a>
 
@@ -147,7 +144,6 @@
                 </a>
                 <div id="collapseMsg" class="collapse" aria-labelledby="headingMsg" data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
-                        <a class="collapse-item" href="javascript:requestNote('${path }/note/write');">쪽지쓰기</a>
                         <a class="collapse-item" href="javascript:requestNote('${path }/note/get');">받은쪽지함</a>
                         <a class="collapse-item" href="javascript:requestNote('${path }/note/send');">보낸쪽지함</a>
                         <a class="collapse-item" href="javascript:requestNote('${path }/note/basket');">휴지통</a>
@@ -498,5 +494,5 @@
          
       }
    </script>
-    <!-- Scroll to Top Button-->
+    <!— Scroll to Top Button —>
  

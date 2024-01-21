@@ -1,6 +1,5 @@
 package com.saerok.jj.apv.model.dto;
 
-import com.saerok.jh.employee.model.dto.Employee;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -13,7 +12,7 @@ import lombok.NoArgsConstructor;
 @Builder
 public class ApvRef {
 	private String refNo;
-	private String refCc;
-	private Employee empNo;
+	private String appSeq;
+	private String empNo;
 	
 }

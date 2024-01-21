@@ -13,7 +13,7 @@ import lombok.NoArgsConstructor;
 @Builder
 public class AppLeave {
 	private String leaveSeq; //휴가신청서고유번호
-	private Approval appSeq; //전자결재번호
+	private int appSeq; //전자결재번호
 	private String leaveClassify; //휴가구분
 	private Date leaveStart; //휴가시작일
 	private Date leaveEnd; //휴가종료일
