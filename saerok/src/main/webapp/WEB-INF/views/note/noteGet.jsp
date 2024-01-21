@@ -77,6 +77,8 @@
 					<span aria-hidden="true">&times;</span>
 				</button>
 			</div>
+			
+			<!-- keyup 사용해서 사원 조회 -->
 			<div class="modal-body">
 				<form>
 					<div class="form-group">

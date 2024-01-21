@@ -27,11 +27,12 @@ public class NoteController {
 	@Autowired
 	private final NoteService noteService;
 
-	// 쪽지 쓰기 페이지로 이동
-	@GetMapping("/write")
-	public String noteWritePage() {
-		return "note/noteWrite";
-	}
+	/*
+	 * // 쪽지 쓰기 페이지로 이동
+	 * 
+	 * @GetMapping("/write") public String noteWritePage() { return
+	 * "note/noteWrite"; }
+	 */
 	
 	// 받은 쪽지함 페이지로 이동
 	@GetMapping("/get")

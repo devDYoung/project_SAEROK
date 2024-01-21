@@ -34,7 +34,7 @@
 					<thead>
 						<tr>
 							<th>선택</th>
-							<th>번호</th>
+							<th>번호</th> 
 							<th>받는사람</th>
 							<th>제목</th>
 							<th>날짜</th>
