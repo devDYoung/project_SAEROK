@@ -84,9 +84,9 @@
                 </a>
                 <div id="collapseHR" class="collapse" aria-labelledby="headingHR" data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
-                        <a class="collapse-item" href="${path }/insertemp">사원등록</a>
-                        <a class="collapse-item" href="${path }/selectemp">사원조회</a>
-                        <a class="collapse-item" href="${path }/groupemp">조직도</a>
+                        <a class="collapse-item" href="${path }/human/insertemp">사원등록</a>
+                        <a class="collapse-item" href="${path }/human/selectemp">사원조회</a>
+                        <a class="collapse-item" href="${path }/human/groupemp">조직도</a>
                     </div>
                 </div>
             </li>
@@ -100,7 +100,7 @@
                     data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
                         <a class="collapse-item" href="${path }/commute/commuteMain.do">내 근태현황</a>
-                        <a class="collapse-item" href="">부서별 근태현황</a>
+                        <a class="collapse-item" href="${path }/commute/commuteList.do">부서별 근태현황</a>
                         <a class="collapse-item" href="">연차현황</a>
                     </div>
                 </div>
@@ -114,11 +114,12 @@
                 <div id="collapseSKD" class="collapse" aria-labelledby="headingSKD"
                     data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
-                        <a class="collapse-item" href="${path }/calendar/calendarMain.do">일정관리</a>
-                        <a class="collapse-item" href="${path }/calendar/calendarView.do">일정조회</a>
-                         <a class="collapse-item" href="${path }/calendar/calendarWrite.do">일정추가</a>
+                        <a class="collapse-item" href="${path }/calendar/Main">내 일정</a>
+                        <a class="collapse-item" href="${path }/calendar/View/1">일정조회</a>
+                        <a class="collapse-item" href="${path }/calendar/Impt/1">중요일정</a>
+                         <a class="collapse-item" href="${path }/calendar/Write">일정작성</a>
                     </div>
-                </div>
+                </div> 
             </li>
             <li class="nav-item">
                 <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseBoard"
@@ -128,9 +129,6 @@
                 </a>
                 <div id="collapseBoard" class="collapse" aria-labelledby="headingBoard" data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
-
-                         <a class="collapse-item" href="${path }/board/All">전체 게시판</a>
-
                        <%-- <a class="collapse-item" href="${path }/board/write">작성하기</a> --%>
                          <a class="collapse-item" href="${path }/board/All">공지 사항</a>
 
@@ -147,7 +145,6 @@
                 </a>
                 <div id="collapseMsg" class="collapse" aria-labelledby="headingMsg" data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
-                        <a class="collapse-item" href="javascript:requestNote('${path }/note/write');">쪽지쓰기</a>
                         <a class="collapse-item" href="javascript:requestNote('${path }/note/get');">받은쪽지함</a>
                         <a class="collapse-item" href="javascript:requestNote('${path }/note/send');">보낸쪽지함</a>
                         <a class="collapse-item" href="javascript:requestNote('${path }/note/basket');">휴지통</a>
@@ -498,5 +495,5 @@
          
       }
    </script>
-    <!-- Scroll to Top Button-->
+    <!-- Scroll to Top Button -->
  
