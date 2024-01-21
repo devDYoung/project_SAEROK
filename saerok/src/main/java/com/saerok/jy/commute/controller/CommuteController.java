@@ -7,6 +7,7 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.temporal.TemporalAdjusters;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
@@ -26,6 +27,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.saerok.jh.employee.model.dto.Employee;
+import com.saerok.jh.employee.model.service.EmployeeService;
 import com.saerok.jy.commute.dto.Commute;
 import com.saerok.jy.commute.dto.CommuteCal;
 import com.saerok.jy.commute.service.CommuteService;
@@ -39,6 +42,9 @@ public class CommuteController {
 
 	@Autowired
 	private CommuteService commuteService;
+	
+	@Autowired
+	private EmployeeService employeeService;
 	
 	DateTimeFormatter dayff = DateTimeFormatter.ofPattern("yy-MM"); //날짜 패턴 변경
 	DateTimeFormatter dayfff = DateTimeFormatter.ofPattern("yy/MM"); //날짜 패턴 변경
@@ -86,10 +92,6 @@ public class CommuteController {
 	    }else if(commute.getInDtime() != null) {
 	    	status.put("status", "이미출근");
 	    }
-	    
-	    return ResponseEntity.ok()
-				.header(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_JSON.toString())
-				.body(status);
 //	    
 //	    if(commute.getStatus().equals("반차")) {
 //	    	int result = commuteService.updateStartWork(param); //반차일시 반차 행 update
@@ -102,7 +104,9 @@ public class CommuteController {
 //	    	status.put("status", "실패");
 //	    }
 //	    
-
+	    return ResponseEntity.ok()
+				.header(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_JSON.toString())
+				.body(status);
 	}
 	
 	
@@ -118,35 +122,12 @@ public class CommuteController {
 		 
 		Commute commute = commuteService.selectExsistWorkInList(param);
 		
-//		if(commute.getInDtime() != null) {
-//	        int result = commuteService.updateCommuteEndTime(param); 
-//	     // 업데이트 이후 최신 commute를 다시 가져오기
-//	        commute = commuteService.selectExsistWorkInList(param);
-//	        status.put("status", "퇴근");
-//	    }else if(commute.getOutDtime() != null) {
-//	    	status.put("status", "이미퇴근");
-//	    }
-//		
-		
-		if (commute != null) {
-	        if (commute.getInDtime() != null && commute.getOutDtime() == null) {
-	            int result = commuteService.updateCommuteEndTime(param);
-
-	            // 업데이트 이후 최신 commute를 다시 가져오기
-	            commute = commuteService.selectExsistWorkInList(param);
-
-	            status.put("status", "퇴근");
-	        } else if (commute.getOutDtime() != null) {
-	            status.put("status", "이미퇴근");
-	        } else {
-	            status.put("status", "출근전");
-	        }
-	    } else {
-	        status.put("status", "출근전");
+		if(commute.getInDtime() != null) {
+	        int result = commuteService.updateCommuteEndTime(param); 
+	        status.put("status", "퇴근");
+	    }else if(commute.getOutDtime() != null) {
+	    	status.put("status", "이미퇴근");
 	    }
-		return ResponseEntity.ok()
-				.header(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_JSON.toString())
-				.body(status);
 		
 //		if(commute == null) {
 //			status.put("status","출근전");
@@ -164,6 +145,9 @@ public class CommuteController {
 //			status.put("status", "실패");
 //		}
 			
+		return ResponseEntity.ok()
+				.header(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_JSON.toString())
+				.body(status);
 	}
 	
 	//퇴근버튼 눌렀을시 오늘 근무시간 업데이트
@@ -210,7 +194,7 @@ public class CommuteController {
 				.body(status);
 	}
 	
-	// 달의 전체 commute, 그 달의 주차별 시작,종료일 가져오기 (table에 뿌려주는 용도)
+	// 달의 전체 workingManagement, 그 달의 주차별 시작,종료일 가져오기 (table에 뿌려주는 용도)
 		@ResponseBody
 		@GetMapping("/selectMonthWork.do")
 		public ResponseEntity<?> selectMonthWork(String dateText,Principal loginSession){
@@ -265,8 +249,8 @@ public class CommuteController {
 			param.put("empNo", empNo);
 			param.put("start", start);
 			param.put("end", end);
+			System.out.println(empNo);
 			List<Commute> weekList = commuteService.selectWeekDatas(param);
-			
 			return ResponseEntity.ok()
 					.header(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_JSON.toString())
 					.body(weekList);
@@ -308,6 +292,85 @@ public class CommuteController {
 					.body(time);
 		}
 		
+		
+//		
+//		@ResponseBody
+//		@GetMapping("/selectDeptWork.do")
+//		public ResponseEntity<?> selectDeptWork(String dateText, String deptCode) {
+//		    String[] arr = dateText.split("\\.");
+//		    String date = arr[0].substring(2) + "/" + arr[1];
+//
+//		    Map<String,Object> param = new HashMap<>();
+//		    param.put("date",date);
+//		    param.put("deptCode", deptCode);
+//
+//		    CommuteCal cal = new CommuteCal();
+//		    DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy.MM");
+//		    LocalDate currentDate = LocalDate.parse(dateText + ".01", DateTimeFormatter.ofPattern("yyyy.MM.dd"));
+//		    
+//		    List<Employee> empList = employeeService.selectEmpDeptList(deptCode);
+//
+//		    List<Map<String, Object>> workList = new ArrayList<>();
+//
+//		    for(Employee emp : empList) {
+//		        Map<String, Object> work = new HashMap<>();
+//		        List<Map<String, Object>> weekDatesList = new ArrayList<>();
+//		        work.put("name", emp.getEmpName()); // 회원 이름
+//		        work.put("jobName", emp.getJobName()); // 회원 직급
+//		        work.put("DeptName", emp.getDeptName()); // 회원 부서
+//		        
+//		        // profile있을 시 프로필 보여주고 없으면 기본프로필 보여주기
+//		        String destFileName = emp.getDestFileName();
+//		        if(destFileName == null) {
+//		        	work.put("profile", "default.png");
+//		        }else {
+//		        	work.put("profile", emp.getDestFileName());
+//		        }
+//
+//		        Map<String, Object> startEndMap = new HashMap<>();
+//		        startEndMap.put("empNo", emp.getEmpNo()); // 회원 pk no
+//		        startEndMap.put("monthTime", date); //선택한 달 ex)23/03
+//		    
+//
+//
+//		        // 선택한 달의 기본 누적근무 시간
+//		        int monthWorkTime = commuteService.totalMonthTime(startEndMap);
+//		        work.put("monthWorkTime", monthWorkTime);
+//
+//		        // 선택한 달의 연장 누적근무 시간
+//		        int monthOverTime = commuteService.monthOverTime(startEndMap);
+//		        work.put("monthOverTime", monthOverTime);
+//
+//		        // 선택한 달의 주차별 시작,끝날짜
+//		        Map<String, Map<String, Object>> weekDates = cal.updateDateText(currentDate);
+//
+//		        for (String week : weekDates.keySet()) {
+//		            startEndMap.put("start", weekDates.get(week).get("start"));
+//		            startEndMap.put("end", weekDates.get(week).get("end"));
+//
+//		            int workTimes = commuteService.selectWeekWorkTime(startEndMap);
+//		            int overTimes = commuteService.selectWeekOverTime(startEndMap);
+//
+//		            Map<String, Object> weekMap = new HashMap<>();
+//		            weekMap.put("week", week);
+//		            weekMap.put("workTime", workTimes);
+//		            weekMap.put("overTime", overTimes);
+//		            weekMap.put("start", weekDates.get(week).get("start"));
+//		            weekMap.put("end", weekDates.get(week).get("end"));
+//
+//		            weekDatesList.add(weekMap);
+//		        }
+//
+//		        work.put("weekDates", weekDatesList);
+//		        workList.add(work);
+//		    }
+//
+//		    return ResponseEntity.ok()
+//		            .header(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_JSON.toString())
+//		            .body(workList);
+//		}
+//	
+//		
 		
 
 

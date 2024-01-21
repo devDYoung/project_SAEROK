@@ -28,6 +28,7 @@
       <typeAlias alias="board" type="com.saerok.dy.board.model.dto.Board" />
 
 
+
 	</typeAliases>
 
 </configuration>
