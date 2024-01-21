@@ -442,7 +442,7 @@
                                 </a>
                                 <div class="dropdown-divider"></div>
                                 <a class="dropdown-item" href="${path}/logoutpage " data-toggle="modal" data-target="#logoutModal">
-                                    <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400" ></i>
+                                    <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 tfext-gray-400" ></i>
                                     로그아웃
                                 </a>
                             </div>

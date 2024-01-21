@@ -171,7 +171,7 @@
         var empPw = $("#empPw").val();
         var empEmail = $("#empEmail").val();
 
-        var url = "${path}/insertempEnd?empName=" + encodeURIComponent(empName)
+        var url = "${path}/human/insertempEnd?empName=" + encodeURIComponent(empName)
                   + "&empPw=" + encodeURIComponent(empPw)
                   + "&empEmail=" + encodeURIComponent(empEmail);
         window.location.href = url;
