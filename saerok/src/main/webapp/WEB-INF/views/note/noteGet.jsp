@@ -19,6 +19,8 @@
 	
 </script>
 
+<jsp:include page="/WEB-INF/views/common/header.jsp" />
+
 <!-- 전체 리스트 출력 -->
 <div class="container-fluid">
 
@@ -44,7 +46,6 @@
 						<tr>
 							<th>쪽지번호</th>
 							<th>보낸사람</th>
-							<th>제목</th>
 							<th>날짜</th>
 						</tr>
 					</thead>
@@ -54,7 +55,6 @@
 								<tr>
 									<td><c:out value="${note.noteNo}" /></td>
 									<td><c:out value="${note.sndEmpNo}" /></td>
-									<td><c:out value="${note.noteTitle}" /></td>
 									<td><c:out value="${note.regDtime}" /></td>
 
 								</tr>
@@ -77,8 +77,10 @@
 					<span aria-hidden="true">&times;</span>
 				</button>
 			</div>
+			
+			<!-- keyup 사용해서 사원 조회 -->
 			<div class="modal-body">
-				<form>
+				<form autocomplete="off">
 					<div class="form-group">
 						<label for="recipient-name" class="col-form-label">수신자 </label> <input
 							type="text" class="form-control" id="recipient-name"
@@ -106,24 +108,43 @@
 
 			<div class="modal-footer">
 				<button type="button"
-					class="btn btn-primary material-symbols-outlined">보내기</button>
+					class="btn btn-primary material-symbols-outlined" id="send-btn">보내기</button>
 			</div>
 
 		</div>
 	</div>
 </div>
 
+<jsp:include page="/WEB-INF/views/common/footer.jsp" />
+
 <script>
 	$(document).ready(function() {
-
+		/* 
 		new DataTable('#dataTable', {
 			info : false,
 			ordering : true,
 			paging : true
 		});
+		 */
+		$('#send-btn').click(function() {
+			
+			var recipientName = $('#recipient-name').val();
+			var messageText = $('#message-text').val();
+			
+			// AJAX로 데이터 전송
+			$.ajax({
+				type : 'POST',
+				url : '${path}/note/send', 
+				data : {
+					recipientName : recipientName,
+					messageText : messageText
+				},
+				success : function(response) {
+					 $('#myModal').modal('hide');
+				},
+				error : function(error) {
+				}
+			});
+		});
 	});
 </script>
-
-
-
-
