@@ -63,6 +63,7 @@
 
 				</div>
 			</div>
+			
 		</div>
 	</div>
 
@@ -83,7 +84,7 @@ window.addEventListener('load', function(){
  			   var endtime = new Date(outDtime);
  			   
  			   //하루 근무시간 계산
- 			   const daytimes = endtime-starttime; //
+ 			   var daytimes = endtime-starttime; //
  			   console.log(daytimes);
  			   
  			   const workStatus = document.querySelector("#work-status");
@@ -132,7 +133,7 @@ document.querySelector('#startBtn').addEventListener('click', function () {
 				console.log(data);
 		       if(data.status === "출근"){
 		           alert("출근 성공입니다.");
-		           /* location.reload(); */
+		            location.reload();
 		       }else if(data.status === '출장'){
 		    	   alert("출장시에는 출근처리됩니다.");
 		    	  return;
@@ -161,7 +162,7 @@ document.querySelector('#endBtn').addEventListener('click', function () {
 			   
 			   if(data.status === "퇴근"){
 		           alert("퇴근 성공입니다.");
-		          /*  location.reload(); */
+		            location.reload();
 		       }else if(data.status === '출근전'){
 		    	   alert("출근전입니다.");
 		    	   return;

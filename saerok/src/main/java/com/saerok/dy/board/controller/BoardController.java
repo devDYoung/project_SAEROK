@@ -26,50 +26,50 @@ import lombok.RequiredArgsConstructor;
 
 public class BoardController {
 
-	@Autowired
-	private final BoardService boardService;
+   @Autowired
+   private final BoardService boardService;
 
-	// 게시판 작성 페이지로 이동
-	@GetMapping("/write")
-	public String boardWrite() {
-		return "board/boardWrite";
-	}
+   // 게시판 작성 페이지로 이동
+   @GetMapping("/write")
+   public String boardWrite() {
+      return "board/boardWrite";
+   }
 
-	// 공지사항 페이지로 이동
-	@GetMapping("/All")
-	public String boardAll(Model model) {
-		List<Board> boardAll=boardService.boardAll();
-		model.addAttribute("boardAll",boardAll);
-		return "board/boardAll";
-	}
+   // 공지사항 페이지로 이동
+   @GetMapping("/All")
+   public String boardAll(Model model) {
+      List<Board> boardAll=boardService.boardAll();
+      model.addAttribute("boardAll",boardAll);
+      return "board/boardAll";
+   }
 
-	// 부서별 게시판 페이지로 이동
-	@GetMapping("/Part")
-	public String boardPart(Model model) {
-		List<Board> boardPart=boardService.boardPart();
-		model.addAttribute("boardPart",boardPart);
-		return "board/boardPart";
-	}
+   // 부서별 게시판 페이지로 이동
+   @GetMapping("/Part")
+   public String boardPart(Model model) {
+      List<Board> boardPart=boardService.boardPart();
+      model.addAttribute("boardPart",boardPart);
+      return "board/boardPart";
+   }
 
-	// 이미지 업로드 처리
-	@PostMapping("/imageUpload.do")
-	@ResponseBody
-	public String handleImageUpload(MultipartFile file) {
-		// 이미지 업로드 로직을 구현
-		// 성공 시 이미지 URL을 반환하도록 수정
-		// 실패 시 에러 메시지를 반환하도록 수정
-		return "success";
-	}
-	
-	// 게시글 저장
-	@PostMapping("/save")
-	public String saveBoard(Board board, Principal loginSession) {
+   // 이미지 업로드 처리
+   @PostMapping("/imageUpload.do")
+   @ResponseBody
+   public String handleImageUpload(MultipartFile file) {
+      // 이미지 업로드 로직을 구현
+      // 성공 시 이미지 URL을 반환하도록 수정
+      // 실패 시 에러 메시지를 반환하도록 수정
+      return "success";
+   }
+   
+   // 게시글 저장
+   @PostMapping("/save")
+   public String saveBoard(Board board, Principal loginSession) {
 
-		// 현재 로그인 중인 사원의 사원번호
-		String empNo = loginSession.getName();
-		board.setRegId(empNo);
-		
-		boardService.save(board);
-		return "redirect:/board/All";
-	}
+      // 현재 로그인 중인 사원의 사원번호
+      String empNo = loginSession.getName();
+      board.setRegId(empNo);
+      
+      boardService.save(board);
+      return "redirect:/board/All";
+   }
 }
