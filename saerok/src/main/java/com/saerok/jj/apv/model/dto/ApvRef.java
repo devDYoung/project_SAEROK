@@ -12,7 +12,7 @@ import lombok.NoArgsConstructor;
 @Builder
 public class ApvRef {
 	private String refNo;
-	private String appSeq;
+	private int appSeq;
 	private String empNo;
 	
 }
