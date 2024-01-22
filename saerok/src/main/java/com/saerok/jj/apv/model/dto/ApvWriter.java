@@ -15,9 +15,10 @@ import lombok.NoArgsConstructor;
 @Builder
 public class ApvWriter {
 	private String apvState;
-	private int apvNo;
-	private String apvEmpNo;
-	private String apvEmpName;
+	private int appSeq;
 	private Date apvEmpTime;
 	private String returnReason;
+	private String apvEmpNo;
+	private String apvEmpName;
+	private int writerList;
 }
