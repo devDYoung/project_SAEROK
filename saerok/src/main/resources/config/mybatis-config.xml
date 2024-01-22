@@ -13,7 +13,6 @@
 		<!-- 지영  -->
 		<typeAlias alias="schedule" type="com.saerok.jy.schedule.dto.Schedule"/>
 		<typeAlias alias="commute" type="com.saerok.jy.commute.dto.Commute"/>
-		<typeAlias alias="commute" type="com.saerok.jy.commute.dto.CommuteCal"/>
 		
 		
 		<!-- 정재  -->

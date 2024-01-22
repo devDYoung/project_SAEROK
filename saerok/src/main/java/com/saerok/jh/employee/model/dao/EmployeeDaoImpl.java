@@ -36,6 +36,15 @@ public class EmployeeDaoImpl implements EmployeeDao {
       return session.delete("emp.deleteEmployee",empNo);
    }
    
+   // 부서별 근태현황 조회
+   @Override
+   public List<Employee> selectEmpDeptList(SqlSession session, String deptCode){
+	   return session.selectList("emp.selectEmpDeptList", deptCode);
+   }
+   
+   public List<Employee>empFinderDeptList(SqlSession session,  Map<String, Object> param){
+	   return session.selectList("emp.empFinderDeptList", param);
+   }
    
    
    

@@ -100,8 +100,8 @@
                     data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
                         <a class="collapse-item" href="${path }/commute/commuteMain.do">내 근태현황</a>
-                        <a class="collapse-item" href="">부서별 근태현황</a>
-                        <a class="collapse-item" href="">연차현황</a>
+                        <a class="collapse-item" href="${path }/commute/commuteList.do">부서별 근태현황</a>
+                        <a class="collapse-item" href="${path }/commute/AnnualList.do">연차현황</a>
                     </div>
                 </div>
             </li>

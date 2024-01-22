@@ -22,4 +22,9 @@ public interface EmployeeDao {
    //사원삭제
    int deleteEmployee(SqlSession session, Employee empNo);
    
+ //부서별 근태현황 사원조회
+ 	List<Employee> selectEmpDeptList(SqlSession session, String deptCode);
+ 	
+ 	List<Employee> empFinderDeptList(SqlSession session, Map<String, Object> param);
+   
 }
