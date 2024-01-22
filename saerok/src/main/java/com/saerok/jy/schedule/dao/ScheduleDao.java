@@ -22,8 +22,8 @@ public interface ScheduleDao {
 	// 일정 수정
 	int updateOne(SqlSession session,Schedule schedule);
 
-//	// 일정 목록 조회
-//	List<Schedule> selectList(SqlSession session,PageFactory pf, Employee emp);
+	// 일정 목록 조회
+	List<Schedule> selectList(SqlSession session,PageFactory pf, Employee emp);
 
 	// 전체 일정 갯수 조회
 	int selectTotalAll(SqlSession session);
