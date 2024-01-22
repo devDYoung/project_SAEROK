@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<c:set var="root" value="${pageContext.request.contextPath}"/>
+<c:set var="path" value="${pageContext.request.contextPath}"/>
 
 <style>
 
@@ -111,9 +111,9 @@
 
 </style>
 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js" integrity="sha512-uto9mlQzrs59VwILcLiRYeLKPPbS/bT71da/OEBYEwcdNUk8jYIy+D176RYoop1Da+f9mvkYrmj5MCLZWEtQuA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.css" integrity="sha512-aOG0c6nPNzGk+5zjwyJaoRUgCdOrfSDhmMID2u4+OIslr0GjpLKo7Xm0Ao3xmpM4T8AmIouRkqwj1nrdVsLKEQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"  crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"  crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.css" crossorigin="anonymous" referrerpolicy="no-referrer" />
 
 
 <!-- Begin Page Content -->
@@ -130,29 +130,29 @@
 							    <form action="" method="post">
 							        <div id="page">
 							            <div calss="title" style="margin-top: 45px;">
-                                            <a id="title">${cvo.title}</a>
+                                            <a id="title">${schedule.skdTitle}</a>
 							            </div>
 							            <div id="create">
-							                작성일 <a id="now_date">${cvo.modifyDate}</a>
+							                작성일 <a id="now_date">${schedule.modDtime}</a>
 							            </div>
                                         <div id="create">
-							                작성자 <a id="now_date">${cvo.writer}</a>
+							                작성자 <a id="now_date">${schedule.empNo}</a>
 							            </div>
 							            <div id="start">
-							                시작일 <a class="datepicker-start"  name="startDate">${cvo.startDate}</a>
+							                시작일 <a class="datepicker-start"  name="startDate">${schedule.skdStart}</a>
 							            </div>
 							            <div id="end">
-							                종료일<a class="datepicker-end" name="endDate">${cvo.endDate}</a>
+							                종료일<a class="datepicker-end" name="endDate">${schedule.skdEnd}</a>
 							            </div>
 							            <hr id="line">
 							            <div>
-							                <div id="con">${cvo.content}</div>
+							                <div id="con">${schedule.skdContent}</div>
 							            </div>
-							            <c:if test="${ cvo.writer eq loginVo.nick }">
+							            <c:if test="${ schedule.empNo eq loginEmployee.empNo }">
                                             <div id="center-bot">
                                                 <div class="row" id="btns">
-                                                    <a class="btn btn-primary btn-user btn-block" id="edit" href="${root}/calendar/edit/${cvo.calNo}">수정하기</a>
-                                                    <a class="btn btn-danger btn-user btn-block" id="delete" href="${root}/calendar/delete/${cvo.calNo}">삭제하기</a>
+                                                    <a class="btn btn-primary btn-user btn-block" id="edit" href="${path}/calendar/Edit/${schedule.scheduleNo}">수정하기</a>
+                                                    <a class="btn btn-danger btn-user btn-block" id="delete" href="${path}/calendar/Delete/${schedule.scheduleNo}">삭제하기</a>
                                                 </div>
 
                                             </div>

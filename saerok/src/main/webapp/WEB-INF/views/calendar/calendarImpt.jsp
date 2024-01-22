@@ -1,8 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<c:set var="root" value="${pageContext.request.contextPath}"/>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-OERcA2EqjJCMA+/3y+gxIOqMEjwtxJY7qPCqsdltbNJuaOe923+mo//f6V8Qbsw3" crossorigin="anonymous"></script>
+<c:set var="path" value="${pageContext.request.contextPath}"/>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
 
 <style>
 
@@ -49,41 +49,41 @@
 								  <div class="tab-pane fade show active" id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab" tabindex="0">
 								  
 									  <div class ="d-flex flex-wrap w-100">
-										<c:forEach items="${cvoList}" var="x">
-											<c:if test="${x.cateNo eq 2}">
+										<c:forEach items="${schdeuleList}" var="s">
+											<c:if test="${s.category eq 20}">
 											<div class="row">
 												<div class="col-md-4">
 													<div class="card" style="width: 21rem; height: 10rem; margin: 20px;">
 														<div class="card-body">
-															<c:if test="${x.star eq 'N'}">
-																<h5 id="star${x.calNo}"  style="float: right;">☆</h5>
+															<c:if test="${s.star eq 'N'}">
+																<h5 id="star${s.scheduleNo}"  style="float: right;">☆</h5>
 																</c:if>
-																<c:if test="${x.star eq 'Y'}">
-																<h5 id="star${x.calNo}" style="float: right;">★</h5>
+																<c:if test="${s.star eq 'Y'}">
+																<h5 id="star${s.scheduleNo}" style="float: right;">★</h5>
 																</c:if>
 																<script>
-																		$('#star${x.calNo}').on('click', function() {
+																		$('#star${s.calNo}').on('click', function() {
 																			console.log('adfadsf');
 																			$.ajax({
 																			type: "get",
-																			url: `${root}/calendar/star`,
+																			url: `${path}/calendar/Impt`,
 																			data: {
-																				calNo : '${x.calNo}'
+																				scheduleNo : '${s.scheduleNo}'
 																			},
 																			success: function (check) {
 																				if(check == 'Y'){
-																					document.querySelector('#star${x.calNo}').innerHTML='★';
+																					document.querySelector('#star${s.scheduleNo}').innerHTML='★';
 																				}else if(check =='N'){
-																					document.querySelector('#star${x.calNo}').innerHTML='☆';
+																					document.querySelector('#star${s.scheduleNo}').innerHTML='☆';
 																				}
 																			}
 																			});
 																		});
 																</script>
-														  <h5 class="card-title"  onclick="location.href='${root}/calendar/detail/${x.calNo}'" style="overflow:hidden; white-space:nowrap; text-overflow:ellipsis;">${x.title}</h5>
-														  <h5 class="card-title">${x.startDate}</h5>
-														  <h6 class="card-subtitle mb-2 text-muted">${x.writer}</h6>
-														  <p class="card-text" style='overflow:hidden; white-space:nowrap; text-overflow:ellipsis;'>${x.content}</p>
+														  <h5 class="card-title"  onclick="location.href='${path}/calendar/Detail/${s.scheduleNo}'" style="overflow:hidden; white-space:nowrap; text-overflow:ellipsis;">${s.skdTitle}</h5>
+														  <h5 class="card-title">${x.skdStart}</h5>
+														  <h6 class="card-subtitle mb-2 text-muted">${s.empNo}</h6>
+														  <p class="card-text" style='overflow:hidden; white-space:nowrap; text-overflow:ellipsis;'>${s.skdContent}</p>
 														</div>
 													 </div>
 												</div>

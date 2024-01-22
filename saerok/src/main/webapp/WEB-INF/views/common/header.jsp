@@ -114,10 +114,10 @@
                 <div id="collapseSKD" class="collapse" aria-labelledby="headingSKD"
                     data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
-                        <a class="collapse-item" href="${path }/calendar/Main">내 일정</a>
-                        <a class="collapse-item" href="${path }/calendar/View/1">일정조회</a>
-                        <a class="collapse-item" href="${path }/calendar/Impt/1">중요일정</a>
-                         <a class="collapse-item" href="${path }/calendar/Write">일정작성</a>
+                        <a class="collapse-item" href="${path }/calendar/calendarMain">내 일정</a>
+                        <a class="collapse-item" href="${path }/calendar/calendarView">일정조회</a>
+                        <a class="collapse-item" href="${path }/calendar/calendarImpt">중요일정</a>
+                         <a class="collapse-item" href="${path }/calendar/calendarWrite">일정작성</a>
                     </div>
                 </div> 
             </li>

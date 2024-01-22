@@ -79,9 +79,9 @@
 
 </style>
 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js" integrity="sha512-uto9mlQzrs59VwILcLiRYeLKPPbS/bT71da/OEBYEwcdNUk8jYIy+D176RYoop1Da+f9mvkYrmj5MCLZWEtQuA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.css" integrity="sha512-aOG0c6nPNzGk+5zjwyJaoRUgCdOrfSDhmMID2u4+OIslr0GjpLKo7Xm0Ao3xmpM4T8AmIouRkqwj1nrdVsLKEQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"  crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"  crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.css" crossorigin="anonymous" referrerpolicy="no-referrer" />
 
 	<!-- Begin Page Content -->
 	       <div class="container-fluid">
@@ -97,7 +97,7 @@
 								    <form action="" method="post">
 								        <div id="page">
 								            <div>
-								                <textarea id="title" name="title" placeholder="" value="">${cvo.title}</textarea>
+								                <textarea id="title" name="title" placeholder="" value="">${schedule.skdTitle}</textarea>
 								            </div>
 								            <div id="create">
 								                작성일 <input id="now_date" type="date" value="">
@@ -107,7 +107,7 @@
 											
 													카테고리  
 											
-												<select name="cateNo" id="select" class="form-select form-select-sm" aria-label=".form-select-sm example">
+												<select name="category" id="select" class="form-select form-select-sm" aria-label=".form-select-sm example">
 														  <option value="1" selected>기타</option>
 														  <option value="2">회의</option>
 														  <option value="3">휴가</option>
@@ -116,7 +116,7 @@
 														</select>
 								            </div>
 											<script>
-												const x = '${cvo.cateNo}'
+												const x = '${schedule.category}'
 												document.querySelector('#select').value=x;
 											</script>
 								            <div id="start">
@@ -126,7 +126,7 @@
 								                    $( ".datepicker-start" ).datepicker({ minDate: 0
 													, dateFormat : "yy-mm-dd"
 													});
-								                    $('.datepicker-start').datepicker('setDate', "${cvo.startDate}");
+								                    $('.datepicker-start').datepicker('setDate', "${schedule.skdStart}");
 									
 								                  })
 								                </script>
@@ -137,14 +137,14 @@
 								                  $(function(){
 								                    $('.datepicker-end').datepicker({ minDate: 0
 														, dateFormat : "yy-mm-dd"});
-								                    $('.datepicker-end').datepicker('setDate', "${cvo.endDate}");
+								                    $('.datepicker-end').datepicker('setDate', "${schedule.skdEnd}");
 								                  })
 								                </script>
 								            </div>
 
 								            <hr id="line">
 								            <div>
-								                <textarea id="con" placeholder="내용을 입력하세요" name="content" value="">${cvo.content}</textarea>
+								                <textarea id="con" placeholder="내용을 입력하세요" name="content" value="">${schedule.skdContent}</textarea>
 								            </div>
 								            <div id="center-bot" ><input class="btn btn-primary btn-user btn-block" type="submit" value="작성하기"></div>
 								        </div>
