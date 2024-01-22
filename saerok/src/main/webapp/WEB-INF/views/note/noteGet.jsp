@@ -140,9 +140,13 @@
 					messageText : messageText
 				},
 				success : function(response) {
-					 $('#myModal').modal('hide');
+					alert(response);
+					 $("#exampleModal").modal("hide");
+					 location.replace("${path}/note/get");
 				},
 				error : function(error) {
+					console.error("에러 발생",error);
+					alert("쪽지 전송에 실패하였습니다.");
 				}
 			});
 		});
