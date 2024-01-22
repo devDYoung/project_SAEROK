@@ -19,10 +19,13 @@
 		<typeAlias alias="approval" type="com.saerok.jj.apv.model.dto.Approval"/>
 		<typeAlias alias="apvRef" type="com.saerok.jj.apv.model.dto.ApvRef"/>
 		<typeAlias alias="apvWriter" type="com.saerok.jj.apv.model.dto.ApvWriter"/>
+		<typeAlias alias="appCash" type="com.saerok.jj.apv.model.dto.AppCash"/>
+		<typeAlias alias="appLeave" type="com.saerok.jj.apv.model.dto.AppLeave"/>
+		<typeAlias alias="appLetter" type="com.saerok.jj.apv.model.dto.AppLetter"/>
 
 		<!-- 도영 -->
-		<typeAlias alias="note" type="com.saerok.dy.note.model.dto.Note" />
-		<typeAlias alias="board" type="com.saerok.dy.board.model.dto.Board" />
+      <typeAlias alias="note" type="com.saerok.dy.note.model.dto.Note" />
+      <typeAlias alias="board" type="com.saerok.dy.board.model.dto.Board" />
 
 
 

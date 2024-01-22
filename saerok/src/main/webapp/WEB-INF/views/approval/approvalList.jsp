@@ -39,12 +39,12 @@
 						class="mdi mdi-home-variant d-lg-none d-block mr-1"></i> <span
 						class="d-none d-lg-block  font-weight-bold">전체 문서</span>
 				</a></li>
-				<li class="nav-item"><a href="#calendar" data-toggle="tab"
+				<li class="nav-item"><a href="#proceeding" data-toggle="tab"
 					aria-expanded="false" class="nav-link"> <i
 						class="mdi mdi-account-circle d-lg-none d-block mr-1"></i> <span
 						class="d-none d-lg-block  font-weight-bold">진행중인 문서</span>
 				</a></li>
-				<li class="nav-item"><a href="#approval" data-toggle="tab"
+				<li class="nav-item"><a href="#complete" data-toggle="tab"
 					aria-expanded="false" class="nav-link"> <i
 						class="mdi mdi-account-circle d-lg-none d-block mr-1"></i> <span
 						class="d-none d-lg-block  font-weight-bold">완료 문서</span>
@@ -53,8 +53,49 @@
 			<button class="btn btn-facebook btn-block col-1"
 				onclick="location.assign('${path}/approval/basicForm');">작성하기</button>
 			<br>
+			<!-- 전체 문서  -->
 			<div class="tab-content">
 				<div class="tab-pane active" id="board">
+					<div class="table-responsive">
+						<table class="table table-bordered" id="dataTable" width="100%"
+							cellspacing="0">
+							<thead>
+								<tr>
+									<th>결재번호</th>
+									<th>제목</th>
+									<th>기안자</th>
+									<th>신청일</th>
+									<th>결재자</th>
+									<th>상태</th>
+								</tr>
+							</thead>
+							<tbody>
+								<c:forEach var="a" items="${list}">
+									<tr>
+										<td>${a.appSeq}</td>
+										<td>제목불러와야해</td>
+										<td>${a.appEmpName}</td>
+										<td>${a.appWriteDate}</td>
+										<td><c:forEach var="b" items="${a.apvWriter}"
+												varStatus="i">
+												<c:choose>
+													<c:when test="${i.index == 0}">
+							                            ${b.apvEmpName} 
+							                        </c:when>
+												<c:otherwise>
+							                          , ${b.apvEmpName}
+							                     </c:otherwise>
+												</c:choose>
+											</c:forEach></td>
+										<td>${a.appCheck }</td>
+									</tr>
+								</c:forEach>
+							</tbody>
+						</table>
+					</div>
+				</div>
+				<!--진행중 문서  -->
+				<div class="tab-pane" id="proceeding">
 					<div class="table-responsive">
 						<table class="table table-bordered" id="dataTable" width="100%"
 							cellspacing="0">
@@ -68,21 +109,41 @@
 								</tr>
 							</thead>
 							<tbody>
-								<c:forEach var="a" items="${approval}">
+								<c:forEach var="a" items="${list}">
 									<tr>
-										<td><c:out value="${a.appSeq}" /></td>
+										<%--  <td><c:out value="${a.appSeq}" /></td> 
 										<td><c:out value="제목" /></td>
-										<td><c:out value="${loginEmployee.empName }" /></td>
+										 <td><c:out value="${a.empName}" /></td> 
 										<td><c:out value="${a.appWriteDate}" /></td>
-										<td><c:out value="${a.appCheck }" /></td>
+										<td><c:out value="${a.appCheck}" /></td> --%>
 									</tr>
 								</c:forEach>
 							</tbody>
 						</table>
 					</div>
 				</div>
-				<div class="tab-pane" id="calendar">진행중인문서</div>
-				<div class="tab-pane" id="approval">완료문서</div>
+				<!-- 완료 문서 -->
+				<div class="tab-pane" id="complete">
+					<div class="table-responsive">
+						<table class="table table-bordered" id="dataTable" width="100%"
+							cellspacing="0">
+							<thead>
+								<tr>
+									<th>결재번호</th>
+									<th>제목</th>
+									<th>기안자</th>
+									<th>기안일</th>
+									<th>진행상태</th>
+								</tr>
+							</thead>
+							<tbody>
+								<tr>
+
+								</tr>
+							</tbody>
+						</table>
+					</div>
+				</div>
 			</div>
 		</div>
 	</div>

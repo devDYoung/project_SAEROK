@@ -51,7 +51,7 @@
 </head>
 <body>
   <section class="insertato-section">
-    <div class="container">
+    <div class="container page-wrapper">
       <div class="card o-hidden border-0 shadow-lg my-5">
         <div class="card-body p-0">
           <!-- Nested Row within Card Body -->
@@ -61,7 +61,7 @@
             </div>
             <div class="col-lg-7">
               <div class="p-5">
-                <form class="insertEmp" id="employeeForm" action="${path}/insertempEnd" method="post"
+                <form class="insertEmp" id="employeeForm" action="${path}/human/insertempEnd" method="post"
                 enctype="multipart/form-data">
                  <div class="text-center">
                   <h1 class="h4 text-gray-900 mb-4" style="text-align: center;">ATO 사원등록</h1>
@@ -171,7 +171,7 @@
         var empPw = $("#empPw").val();
         var empEmail = $("#empEmail").val();
 
-        var url = "${path}/insertempEnd?empName=" + encodeURIComponent(empName)
+        var url = "${path}/human/insertempEnd?empName=" + encodeURIComponent(empName)
                   + "&empPw=" + encodeURIComponent(empPw)
                   + "&empEmail=" + encodeURIComponent(empEmail);
         window.location.href = url;

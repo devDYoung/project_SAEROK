@@ -24,7 +24,7 @@
 </head>
 
 <body class="bg-gradient-primary">
-    <div class="container">
+    <div class="container page-wrapper">
         <div class="row justify-content-center">
             <div class="col-xl-5 col-lg-12 col-md-5">
                 <div class="card o-hidden border-0 shadow-lg my-5">
@@ -56,7 +56,7 @@
                                                     for="remember-id">자동로그인</label>
                                             </div>
                                         </div>
-                                        <button type="button"
+                                        <button type="button" id="loginBtn"
                                             class="btn btn-primary btn-user btn-block"
                                             onclick="fn_login();">Log in</button>
                                         <hr>
@@ -80,14 +80,26 @@
 
     <!-- Core plugin JavaScript -->
     <script src="${pageContext.request.contextPath }/resources/vendor/jquery-easing/jquery.easing.min.js"></script>
-    <script>
-        //로그인 실행 script
-         function fn_login() {
-        console.log($("#no").val());
-        if ($("#no").val() != "" && $("#pw").val() != "") {
-            $("#login-form").submit(); // 폼을 직접 제출하도록 수정
+   <script>
+    // 엔터 키 이벤트를 감지하는 함수
+    function handleEnterKey(event) {
+        if (event.keyCode === 13) { // 13은 엔터 키의 키 코드입니다.
+            fn_login(); // 로그인 함수 호출
         }
     }
-    </script>
+
+    // 로그인 실행 script
+    function fn_login() {
+        console.log($("#no").val());
+        if ($("#no").val() !== "" && $("#pw").val() !== "") {
+            $("#login-form").submit();
+        }
+    }
+
+    // 엔터 키 이벤트 핸들러를 등록
+    $('#no, #pw').on('keypress', function(event) {
+        handleEnterKey(event);
+    });
+</script>
 
 <div id=pageBar>${pageBar}</div> 

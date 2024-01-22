@@ -14,23 +14,22 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 public class BoardServiceImpl implements BoardService {
 
-	private final BoardDao dao;
-	private final SqlSession session;
+   private final BoardDao dao;
+   private final SqlSession session;
 
-	@Override
-	public List<Board> boardAll() {
-		return dao.boardAll(session);
-	}
+   @Override
+   public List<Board> boardAll() {
+      return dao.boardAll(session);
+   }
 
-	@Override
-	public List<Board> boardPart() {
-		return dao.boardPart(session);
-	}
-	
-	@Override
+   @Override
+   public List<Board> boardPart() {
+      return dao.boardPart(session);
+   }
+   
+   @Override
     public void save(Board board) {
         // 게시글을 DB에 저장하는 로직을 여기에 구현
         dao.save(board);
     }
 }
-

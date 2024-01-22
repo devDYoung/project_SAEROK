@@ -52,7 +52,7 @@
 				<div>
 					<!-- 저장 버튼 -->
 					<button type="button" class="btn btn-sm btn-success" id="writeBtn"
-						onclick="updateContent()">저장</button>
+						onclick="updateContent(); alert('게시글이 등록되었습니다.');">저장</button>
 					<!-- 목록 버튼 -->
 					<button type="button" class="btn btn-sm btn-primary"
 						onclick="window.location.href='/board/All';">목록</button>
