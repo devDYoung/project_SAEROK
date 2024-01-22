@@ -21,6 +21,6 @@ public interface ApprovalService {
 
 	List<Map<String, Object>> deptName(Integer deptCode);
 
-	int insertAppLetter(MultipartFile upFile, AppLetter appLetter);
+	int insertAppLetter(AppLetter appLetter,List<Map> approvalList);
 
 }

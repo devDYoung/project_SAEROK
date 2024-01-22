@@ -56,10 +56,10 @@
 						<input type="button" id="addButton" value="결재자추가" 
 							style="width: 100px; height: 50px; "> <input type="button"
 							id="resetButton" value="취소" style="width: 50px; height: 50px;"><br>
-						<input type="button" id="addReferButton" value="참조자추가"
+						<!-- <input type="button" id="addReferButton" value="참조자추가"
 							style="width: 100px; height: 50px; margin-top: 300px"> <input
 							type="button" id="resetButton" value="취소"
-							style="width: 50px; height: 50px;">
+							style="width: 50px; height: 50px;"> -->
 					</div>
 					<div style="display: flex; flex-direction: column;">
 						<div
@@ -69,14 +69,14 @@
 							style=" margin-left: 100px; width: 300px; height: 300px; box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);">
 							<!-- Your content here -->
 						</div>
-						<div
+						<!-- <div
 							style=" margin-left: 100px; box-shadow: 0 0 10px rgba(0, 0, 0, 0.2); padding: 10px;">
 							수신참조자 선책</div>
 
 						<div id="referElement"
 							style=" margin-left: 100px; height: 325.5px; box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);">
-							<!-- Your content here -->
-						</div>
+							Your content here
+						</div> -->
 					</div>
 				</div>
 			</div>
@@ -169,7 +169,7 @@ $(document).ready(function() {
         const existingPeople = $(elementId).find("input[name='order']").map(function() {
             return $(this).val();
         }).get();
-
+		let approvalLine=[];
         selectedPeople.each(function(index, elem) {
             const order = index + 1;
             // 이미 선택된 사람인지 확인
@@ -177,12 +177,19 @@ $(document).ready(function() {
                 $(elem).prop("checked", false);
             } else {
                 const line = $(elem).parent().clone();
-                const orderInput = $("<input>").attr({"type": "hidden", "name": "order", "value": order});
-                line.append(orderInput);
+                const obj={};
+                obj["empNo"]=line.find(".choiceEmp").val();
+                obj["order"]=order;
                 line.css("display", "block");
                 $(elementId).append(line);
+                approvalLine.push(obj);
             }
         });
+        
+        const orderInput = $("<input>").attr({"type": "hidden", "name": "apporvalData", 
+                	"value": JSON.stringify(approvalLine)});
+        $(basicForm).find("input[name=apporvalData]").remove();
+        $(basicForm).append(orderInput);
 
         const selectedCount = $(elementId).find("input[name='order']").length;
         if (selectedCount > limit) {
@@ -338,7 +345,7 @@ $(document).ready(function() {
 			</table>
 		</div>
 		<div id="button" style="text-align: center; margin-top: 10px">
-			<input type="hidden" name="vasicForm" value="폼의서">
+			<input type="hidden" name="basicForm" value="품의서">
 			<button type="submit" class="btn btn-primary" onclick="">등록</button>
 			<!-- ${path}/approval/updateLeave -->
 			<input type="text" style="border: none; width: 10px;" disabled>

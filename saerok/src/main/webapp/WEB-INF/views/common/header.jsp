@@ -191,7 +191,7 @@
                     <div id="collapseEDSM" class="collapse" aria-labelledby="headingEDSM" data-parent="#accordionSidebar">
                         <div class="bg-white py-2 collapse-inner rounded">
                             <a class="collapse-item" href="${path }/approval/approvalList.do">전체 문서함</a>
-                             <a class="collapse-item" href="${path }/approval/approvalList.do">내 문서함</a>
+                             <a class="collapse-item" href="${path }/approval/myApproval">내 문서함</a>
                         </div>
                     </div>
             </li>

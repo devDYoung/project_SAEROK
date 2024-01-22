@@ -45,9 +45,22 @@ public class ApprovalDaoImpl implements ApprovalDao {
 	}
 
 	@Override
-	public int insertAppLetter(MultipartFile upFile, AppLetter appLetter, SqlSession session) {
+	public int insertAppLetter(AppLetter appLetter, SqlSession session) {
 		return session.insert("approval.insertAppLetter", appLetter);
 	}
+
+	@Override
+	public int insertAppr(SqlSession session, AppLetter approval) {
+		return session.insert("approval.insertAppr",approval);
+	}
+
+	@Override
+	public int insertApprovalLine(SqlSession session, Map approvalList) {
+		// TODO Auto-generated method stub
+		return session.insert("approval.insertApprovalLine",approvalList);
+	}
+	
+	
 
 
 }

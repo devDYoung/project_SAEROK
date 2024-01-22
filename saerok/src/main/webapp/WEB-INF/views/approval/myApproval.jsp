@@ -33,16 +33,18 @@
 	<div class="card shadow mb-4">
 
 		<div class="card-header py-3">
+			<button class="btn btn-facebook btn-block col-1"
+				onclick="location.assign('${path}/approval/basicForm');">작성하기</button>
 			<ul class="nav nav-tabs mb-3">
 				<li class="nav-item"><a href="#board" data-toggle="tab"
 					aria-expanded="true" class="nav-link active"> <i
 						class="mdi mdi-home-variant d-lg-none d-block mr-1"></i> <span
-						class="d-none d-lg-block  font-weight-bold">전체 문서</span>
+						class="d-none d-lg-block  font-weight-bold">내 문서</span>
 				</a></li>
 				<li class="nav-item"><a href="#proceeding" data-toggle="tab"
 					aria-expanded="false" class="nav-link"> <i
 						class="mdi mdi-account-circle d-lg-none d-block mr-1"></i> <span
-						class="d-none d-lg-block  font-weight-bold">진행중인 문서</span>
+						class="d-none d-lg-block  font-weight-bold">결재중 문서</span>
 				</a></li>
 				<li class="nav-item"><a href="#complete" data-toggle="tab"
 					aria-expanded="false" class="nav-link"> <i
@@ -50,9 +52,7 @@
 						class="d-none d-lg-block  font-weight-bold">완료 문서</span>
 				</a></li>
 			</ul>
-			
-			<br>
-			<!-- 전체 문서  -->
+			<!-- 나의 문서  -->
 			<div class="tab-content">
 				<div class="tab-pane active" id="board">
 					<div class="table-responsive">
@@ -68,31 +68,12 @@
 								</tr>
 							</thead>
 							<tbody>
-								<c:forEach var="a" items="${list}">
-									<tr>
-										<td>${a.appSeq}</td>
-										<td>제목불러와야해</td>
-										<td>${a.appEmpName}</td>
-										<%-- <td><c:forEach var="b" items="${a.apvWriter}"
-												varStatus="i">
-												<c:choose>
-													<c:when test="${i.index == 0}">
-							                            ${b.apvEmpName} 
-							                        </c:when>
-												<c:otherwise>
-							                          , ${b.apvEmpName}
-							                     </c:otherwise>
-												</c:choose>
-											</c:forEach></td> --%>
-										<td>${a.appWriteDate}</td>
-										<td>${a.appCheck }</td>
-									</tr>
-								</c:forEach>
+
 							</tbody>
 						</table>
 					</div>
 				</div>
-				<!--진행중 문서  -->
+				<!--결재 문서  -->
 				<div class="tab-pane" id="proceeding">
 					<div class="table-responsive">
 						<table class="table table-bordered" id="dataTable" width="100%"
