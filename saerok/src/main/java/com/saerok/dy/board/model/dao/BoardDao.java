@@ -10,10 +10,13 @@ import com.saerok.dy.board.model.dto.Board;
 public interface BoardDao {
 
 	// 공지사항 조회
-	List<Board> boardAll(SqlSession session);
+	List<Board> noticeList(SqlSession session);
 
 	List<Board> boardPart(SqlSession session);
 	
 	void save(Board board);
+	
+	//공지사항 상세보기
+	Board selectNoticeByNo(SqlSession session, int boardNo);
 
 }
