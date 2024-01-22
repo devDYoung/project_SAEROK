@@ -1,14 +1,16 @@
 package com.saerok.jj.apv.controller;
 
-import java.io.File;
 import java.io.IOException;
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
+import java.nio.file.Path;
+import java.sql.Date;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
+import java.io.File;
 import org.springframework.stereotype.Controller;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -19,13 +21,13 @@ import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.saerok.jh.employee.model.dto.Employee;
 import com.saerok.jh.employee.model.service.EmployeeService;
 import com.saerok.jj.apv.model.dto.AppLetter;
 import com.saerok.jj.apv.model.dto.Approval;
 import com.saerok.jj.apv.model.service.ApprovalService;
 
-import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -38,26 +40,30 @@ import lombok.extern.slf4j.Slf4j;
 public class ApprovalController {
 
 	private ApprovalService service;
-	
+
 	private EmployeeService empService;
 
+	// 전체리스트 조회
 	@GetMapping("/approvalList.do")
 	public ModelAndView selectApproval(ModelAndView model) {
-	    List<Approval> approval = service.selectApproval();
-	    
-	    List<Employee> emp = empService.selectEmployeeList();
+		List<Approval> approval = service.selectApproval();
 
-	    List<Object> list = new ArrayList<>();
-	    list.add(approval);
-	    list.add(emp);
-	    
-	    model.addObject("list", approval);
-	    model.addObject("listEmp", emp);
-	    model.setViewName("approval/approvalList");
-	    return model;
+		List<Employee> emp = empService.selectEmployeeList();
+
+		List<Object> list = new ArrayList<>();
+		list.add(approval);
+		list.add(emp);
+
+		model.addObject("list", approval);
+		model.addObject("listEmp", emp);
+		model.setViewName("approval/approvalList");
+		return model;
 	}
-	
-	
+
+	// 내문서함 조회
+	@GetMapping("/myApproval")
+	public void myApproval() {
+	}
 
 	// 결재선 사원리스트불러오기
 	@GetMapping("/checkDept")
@@ -66,7 +72,7 @@ public class ApprovalController {
 		return service.deptName(deptCode);
 	}
 
-	// 폼양식
+	// 폼양식 AJAX 이용
 	@GetMapping("/docForms")
 	public String loadDocumentForm(@RequestParam(value = "docType", defaultValue = "D1") String docType, Model model) {
 		switch (docType) {
@@ -85,58 +91,63 @@ public class ApprovalController {
 	@GetMapping("/basicForm")
 	public void basicForm() {
 	}
-	
-	
-	  //폼 등록
-	  
-	  @PostMapping("/insertAppLetter.do")
-	  public String insertAppLetter(MultipartFile upFile , AppLetter basicForm, Approval a, Model
-	  model, HttpSession session, @RequestParam String loginEmp) {
-	  a.setEmpNo(loginEmp); a.setAppKinds("APPLETTER"); service.insertAppLetter(upFile,basicForm);
-	  basicForm.setAppSeq(a.getAppSeq()); 
-	  //String reFileName = service.uploadFile(upFile, session); // 서비스 메서드를 호출합니다.
-	  
-	  System.out.println(a); 
-	  System.out.println(basicForm); return "common/msg"; }
-	 
-	
-	// 테스트
-	@GetMapping("/test")
-	public void test() {
-	}
-	
-	
-	
-	// 파일첨부 관련
-	private String saveAppFile(MultipartFile file, HttpServletRequest request) {
-	    String originalFileName = null;
-	    String renameFileName = null;
-	    String renamePath = null;
-	    String rootPath = request.getSession().getServletContext().getRealPath("resources");
-	    String savePath = rootPath + "/upload/approvalFile";
 
-	    log.info("Root Path : " + rootPath);
-	    log.info("Save Path : " + savePath);
+	// 폼 등록
+	@PostMapping("/insertAppLetter.do")
+	@Transactional
+	public String insertAppLetter(MultipartFile upFile, AppLetter basicForm,
+			String apporvalData, Model model, HttpSession session, @RequestParam String loginEmp) {
 
-	    File folder = new File(savePath); // Save Path가 실제로 존재하지 않으면 폴더를 생성하는 로직
+		List<Map> approvalList = null;
+		try {
+			approvalList = new ObjectMapper().readValue(apporvalData, List.class);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 
-	    if (!folder.exists()) {
-	        folder.mkdirs();
-	    }
+		// service.insertAppLetter(basicForm, approvalList);
 
-	    originalFileName = file.getOriginalFilename();
-	    renameFileName = LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyyMMdd_HHmmssSSS"))
-	            + originalFileName.substring(originalFileName.lastIndexOf("."));
-	    renamePath = savePath + "/" + renameFileName;
+		int result = 0;
+		log.debug("{}", upFile.getOriginalFilename());
+		try {
+			if (!upFile.isEmpty()) {
+				String originalFileName = upFile.getOriginalFilename();
 
-	    try {
-	        file.transferTo(new File(renamePath)); // 업로드 한 파일 데이터를 지정한 파일에 저장한다.
-	    } catch (IOException e) {
-	        log.error("파일 전송 에러 : " + e.getMessage(), e);
-	        throw new RuntimeException("파일 전송 중 에러 발생", e); // 실패 시 예외를 던져서 해당 요청을 중단시킵니다.
-	    }
+				String destFileName = System.currentTimeMillis() + "_" + originalFileName;
+				String path = session.getServletContext().getRealPath("/resources/upload/approvalFile");
+				File destFile = new File(path, destFileName);
+				upFile.transferTo(destFile);
 
-	    return renameFileName;
+				basicForm.setOriFileName(originalFileName);
+				basicForm.setReFileName(destFileName);
+				result = service.insertAppLetter(basicForm, approvalList);
+			}
+
+			String msg, loc;
+			if (result > 0) {
+				return "redirect:/approval/approvalList.do";
+
+			} else {
+				msg = "등록실패";
+				loc = "/";
+			}
+
+			model.addAttribute("msg", msg);
+			model.addAttribute("loc", loc);
+
+		} catch (IOException e) {
+			e.printStackTrace();
+			model.addAttribute("msg", "파일 업로드 실패!!!");
+			model.addAttribute("loc", "index");
+		}
+
+		return "common/msg";
 	}
 
 }
+
+/*
+ * // 테스트
+ * 
+ * @GetMapping("/test") public void test() { }
+ */

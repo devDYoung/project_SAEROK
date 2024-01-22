@@ -47,9 +47,22 @@ public class ApprovalServiceImpl implements ApprovalService {
 
 	@Override
 	@Transactional
-	public int insertAppLetter(MultipartFile upFile, AppLetter appLetter) {
-		int result = dao.insertAppLetter(upFile, appLetter, session);
-
+	public int insertAppLetter(AppLetter appLetter,List<Map> approvalList) {
+		//1. 전자결재 table등록
+		int result=dao.insertAppr(session, appLetter);
+		//2. 종류별 내용등록(품의서, 휴가서, )
+		if(result>0) {
+			result=dao.insertAppLetter(appLetter, session);
+		}
+		
+		//3. 결재선 
+		if(result>0) {
+			approvalList.stream().forEach(e->{
+				dao.insertApprovalLine(session, e);
+			});
+			
+		}
+		
 		return result;
 	}
 
