@@ -63,7 +63,6 @@
 
                     </div>
                 </div>
-                </div>
      
 	<script>
         window.addEventListener('load',()=>{

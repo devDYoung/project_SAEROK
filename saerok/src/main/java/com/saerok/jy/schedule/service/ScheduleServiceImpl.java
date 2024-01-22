@@ -27,21 +27,21 @@ public class ScheduleServiceImpl implements ScheduleService{
 	
 	//일정 작성
 	@Override
-	public int skdWrite(Schedule skd) {
+	public int skdWrite(Schedule sc) {
 		
 		int result = 0;
 		
 		try {
 		    SimpleDateFormat dateFormat = new SimpleDateFormat("MM/dd/yyyy"); 
-		    Date parsedSDate = dateFormat.parse(skd.getSkdStart());
-		    Date parsedEDate = dateFormat.parse(skd.getSkdEnd());
+		    Date parsedSDate = dateFormat.parse(sc.getSkdStart());
+		    Date parsedEDate = dateFormat.parse(sc.getSkdEnd());
 		    Timestamp timestamp = new java.sql.Timestamp(parsedSDate.getTime());
 		    Timestamp timestamp2 = new java.sql.Timestamp(parsedEDate.getTime());
-		    skd.setSkdStart(timestamp.toString());
-		    skd.setSkdEnd(timestamp2.toString());
+		    sc.setSkdStart(timestamp.toString());
+		    sc.setSkdEnd(timestamp2.toString());
 		    
 		    
-		    result = skddao.insertSkd(session, skd);
+		    result = skddao.insertSkd(session, sc);
 		} catch(Exception e) { 
 			e.printStackTrace();
 		}
@@ -52,21 +52,21 @@ public class ScheduleServiceImpl implements ScheduleService{
 	
 	//캘린더에서 일정 작성
 	@Override
-	public int modalwrite(Schedule skd) {
+	public int modalwrite(Schedule sc) {
 		
 		int result = 0;
 		
 		try {
 		    SimpleDateFormat dateFormat = new SimpleDateFormat("MM/dd/yyyy"); 
-		    Date parsedSDate = dateFormat.parse(skd.getSkdStart());
-		    Date parsedEDate = dateFormat.parse(skd.getSkdEnd());
+		    Date parsedSDate = dateFormat.parse(sc.getSkdStart());
+		    Date parsedEDate = dateFormat.parse(sc.getSkdEnd());
 		    Timestamp timestamp = new java.sql.Timestamp(parsedSDate.getTime());
 		    Timestamp timestamp2 = new java.sql.Timestamp(parsedEDate.getTime());
-		    skd.setSkdStart(timestamp.toString());
-		    skd.setSkdEnd(timestamp2.toString());
+		    sc.setSkdStart(timestamp.toString());
+		    sc.setSkdEnd(timestamp2.toString());
 		    
 		    
-		    result = skddao.insertModalSkd(session, skd);
+		    result = skddao.insertModalSkd(session, sc);
 		} catch(Exception e) { 
 			e.printStackTrace();
 		}
@@ -75,26 +75,26 @@ public class ScheduleServiceImpl implements ScheduleService{
 	}
 	//일정 삭제
 	@Override
-	public int skdDelete(int no) {
+	public int skdDelete(String no) {
 		return skddao.skdDelete(session, no);
 	}
 
 	//일정 수정
 	@Override
-	public int skdEdit(Schedule skd) {
+	public int skdEdit(Schedule sc) {
 		int result = 0;
 		
 		try {
 		    SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd"); 
-		    Date parsedSDate = dateFormat.parse(skd.getSkdStart());
-		    Date parsedEDate = dateFormat.parse(skd.getSkdEnd());
+		    Date parsedSDate = dateFormat.parse(sc.getSkdStart());
+		    Date parsedEDate = dateFormat.parse(sc.getSkdEnd());
 		    Timestamp timestamp = new java.sql.Timestamp(parsedSDate.getTime());
 		    Timestamp timestamp2 = new java.sql.Timestamp(parsedEDate.getTime());
-		    skd.setSkdStart(timestamp.toString());
-		    skd.setSkdEnd(timestamp2.toString());
+		    sc.setSkdStart(timestamp.toString());
+		    sc.setSkdEnd(timestamp2.toString());
 		    
 		    
-		    result = skddao.updateOne(session, skd);
+		    result = skddao.updateOne(session, sc);
 		} catch(Exception e) { 
 			e.printStackTrace();
 		}
@@ -102,11 +102,11 @@ public class ScheduleServiceImpl implements ScheduleService{
 		return result;
 	}
 
-//	//일정 목록 조회
-//	@Override
-//	public List<Schedule> selectList(PageFactory pf, Employee emp) {
-//		return skddao.selectList(session, pf, emp);
-//	}
+	//일정 목록 조회
+	@Override
+	public List<Schedule> selectList(PageFactory pf, String empNo) {
+		return skddao.selectList(session, pf, empNo);
+	}
 
 	//일정 갯수 조회
 	@Override
@@ -116,14 +116,14 @@ public class ScheduleServiceImpl implements ScheduleService{
 
 	//일정 상세조회(번호)
 	@Override
-	public Schedule selectOne(int no) {
+	public Schedule selectOne(String no) {
 		return skddao.selectOne(session, no);
 	}
 
 	//캘린더에서 일정보기
 	@Override
-	public List<Schedule> getSkd(String empNo) {
-		return skddao.getSkd(session, empNo);
+	public List<Schedule> getSchedule(String empNo) {
+		return skddao.getSchedule(session, empNo);
 	}
 
 	//중요 일정 등록
@@ -147,7 +147,7 @@ public class ScheduleServiceImpl implements ScheduleService{
 //
 //	//중요 일정 목록 조회
 //	@Override
-//	public List<Schedule> selectImptList(PageFactory pf, int no) {
+//	public List<Schedule> selectImptList(PageFactory pf, String no) {
 //		return skddao.selectImptList(session, pf, no);
 //	}
 //
