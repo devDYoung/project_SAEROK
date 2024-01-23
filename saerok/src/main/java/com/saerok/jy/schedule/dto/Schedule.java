@@ -13,7 +13,7 @@ import lombok.NoArgsConstructor;
 @Builder
 public class Schedule {
 	
-	private int scheduleNo; // 일정번호
+	private String scheduleNo; // 일정번호
 	private String skdTitle; // 제목
 	private String skdContent; // 내용
 	private String skdStart; // 시작일

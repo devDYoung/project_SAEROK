@@ -10,8 +10,9 @@ import lombok.Setter;
 @Setter
 public class Board {
 	private int boardNo;
+	private String boardCategory;
 	private String boardTitle;
-	private String bordContent;
+	private String boardContent;
 	private String boardWriter;
 	private String oriFileName;
 	private String destFileName;

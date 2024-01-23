@@ -18,9 +18,17 @@ public class BoardServiceImpl implements BoardService {
    private final SqlSession session;
 
    @Override
-   public List<Board> boardAll() {
-      return dao.boardAll(session);
+   public List<Board> noticeList() {
+      return dao.noticeList(session);
    }
+   
+ //공지사항 상세보기
+   @Override
+   public Board selectNoticeByNo(int boardNo) {
+       return dao.selectNoticeByNo(session,boardNo);
+   }
+   
+   
 
    @Override
    public List<Board> boardPart() {

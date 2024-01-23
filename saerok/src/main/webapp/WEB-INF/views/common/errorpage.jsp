@@ -26,7 +26,7 @@
 	<br>
 	<!-- 404 Error Text -->
 	<div class="text-center">
-		<div class="error mx-auto" data-text="404">404</div>
+		<div class="error mx-auto" data-text="403">403</div>
 		<br>
 		<p class="lead text-gray-800 mb-5">권한이 없습니다.</p>
 		<p class="text-gray-500 mb-0">페이지에 대한 권한이 없어 접근이 불가합니다.</p>
