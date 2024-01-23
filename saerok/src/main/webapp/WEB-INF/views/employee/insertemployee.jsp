@@ -30,7 +30,7 @@
 
   .ato-insertimg {
     width: 460px;
-    height: 825px;
+    height: 840px;
     float: left; /* 이미지를 왼쪽으로 정렬 */
   }
 
@@ -38,7 +38,7 @@
     width: 100px;
     height: 90px;
     margin-top: 10px;
-    margin-left: 10px; /* 이미지를 왼쪽으로 이동시키기 위해 수정 */
+   
   }
   
 
@@ -61,8 +61,7 @@
             </div>
             <div class="col-lg-7">
               <div class="p-5">
-                <form class="insertEmp" id="employeeForm" action="${path}/human/insertempEnd" method="post"
-                enctype="multipart/form-data">
+                <form class="insertEmp" id="employeeForm" action="${path}/human/insertempEnd" method="post" enctype="multipart/form-data">
                  <div class="text-center">
                   <h1 class="h4 text-gray-900 mb-4" style="text-align: center;">ATO 사원등록</h1>
                   <label for="fileUploaderLabel" class="custom-file-upload">
@@ -90,15 +89,6 @@
                       placeholder="전화번호">
                   </div>
                   <div class="form-group row">
-                    <div class="col-sm-6 mb-3 mb-sm-0">
-                      <input type="text" class="form-control form-control-user"
-                        name=empDate placeholder="입사일">
-                    </div>
-                    <div class="col-sm-6">
-                      <input type="text" class="form-control form-control-user"
-                        name="issueAnnu" placeholder="발급연차">
-                    </div>
-                  </div>
                    <div class="col-sm-6">
 				    <select name="deptCode" class="form-select form-select-sm rounded" aria-label="Small select example" style="height: 40px;">
 				        <option selected>부서</option>
@@ -108,7 +98,11 @@
 				        <option value="400">지점</option>
 				    </select>
 				 </div>
-				 <br>
+                    <div class="col-sm-6">
+                      <input type="text" class="form-control form-control-user"
+                        name="issueAnnu" placeholder="발급연차">
+                    </div>
+                  </div>
 				 <div class="row">
 				    <div class="col-12">
 				        <p>직책</p>
@@ -139,7 +133,12 @@
 					        </div>
 					    </div>
 					</div>
-					</div>
+				</div>
+					<br>
+					<div class="col-sm-6 mb-3 mb-sm-0">
+					<p>입사일</p>
+                      <input type="date" class="form-control form-control-user" name=empDate>
+                    </div>
                  	<br><br>
                      <button type="submit" class="btn btn-primary btn-user btn-block" onclick="submitForm()">사원등록</button>
                    <br><br>
@@ -166,16 +165,16 @@
 <jsp:include page="/WEB-INF/views/common/footer.jsp" />
 <script>
 	//사원등록 
-    function submitForm() {
-        var empName = $("#empName").val();
-        var empPw = $("#empPw").val();
-        var empEmail = $("#empEmail").val();
+   function submitForm() {
+    var empName = $("#empName").val();
+    var empPw = $("#empPw").val();
+    var empEmail = $("#empEmail").val();
 
-        var url = "${path}/human/insertempEnd?empName=" + encodeURIComponent(empName)
-                  + "&empPw=" + encodeURIComponent(empPw)
-                  + "&empEmail=" + encodeURIComponent(empEmail);
-        window.location.href = url;
-    }
+    var url = "${path}/human/insertempEnd?empName=" + encodeURIComponent(empName)
+              + "&empPw=" + encodeURIComponent(empPw)
+              + "&empEmail=" + encodeURIComponent(empEmail);
+    window.location.href = url;
+}
 
 	
     //파일업로드 script
