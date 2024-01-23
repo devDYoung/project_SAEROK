@@ -24,6 +24,10 @@ public interface ApprovalDao {
 
 	int insertApproval(SqlSession session, Approval a);
 
-	int insertAppLetter(MultipartFile upFile, AppLetter appLetter, SqlSession session);
-
+	int insertAppLetter(AppLetter appLetter, SqlSession session);
+	
+	int insertAppr(SqlSession session, AppLetter approval);
+	
+	int insertApprovalLine(SqlSession session, Map approvalList);
+	
 }

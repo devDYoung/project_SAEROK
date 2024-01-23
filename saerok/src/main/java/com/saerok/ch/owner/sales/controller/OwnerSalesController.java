@@ -63,4 +63,13 @@ public class OwnerSalesController {
         }
         return "redirect:/owner/sales/entry";
     }
+    
+    
+    
 }
+
+
+
+
+
+

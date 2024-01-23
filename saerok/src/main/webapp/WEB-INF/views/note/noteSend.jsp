@@ -9,15 +9,8 @@
 	value="${sessionScope.SPRING_SECURITY_CONTEXT.authentication.principal }" />
 <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
 
-<link
-	href="https://cdn.datatables.net/v/dt/dt-1.13.8/datatables.min.css"
-	rel="stylesheet" />
 
-<script
-	src="https://cdn.datatables.net/v/dt/dt-1.13.8/datatables.min.js">
-	
-</script>
-
+<jsp:include page="/WEB-INF/views/common/header.jsp" />
 <!-- 전체 리스트 출력 -->
 <div class="container-fluid">
 
@@ -36,7 +29,6 @@
 							<th>선택</th>
 							<th>번호</th>
 							<th>받는사람</th>
-							<th>제목</th>
 							<th>날짜</th>
 							<th>수신확인</th>
 						</tr>
@@ -48,7 +40,6 @@
 									<td><input type="checkbox" name="noteCheckBox" /></td>
 									<td><c:out value="${note.noteNo}" /></td>
 									<td><c:out value="${note.rcvEmpNo}" /></td>
-									<td><c:out value="${note.noteTitle}" /></td>
 									<td><c:out value="${note.regDtime}" /></td>
 									<td><c:out value="${note.readYN}" /></td>
 
@@ -64,11 +55,11 @@
 
 <script>
 	$(document).ready(function() {
-		new DataTable('#dataTable', {
+		/* new DataTable('#dataTable', {
 			info : false,
 			ordering : true,
 			paging : true
-		});
+		}); */
 		$('#send-btn').click(function() {
 			var recipientName = $('#recipient-name').val();
 			var messageText = $('#message-text').val();
@@ -76,20 +67,24 @@
 			// AJAX로 데이터 전송
 			$.ajax({
 				type : 'POST',
-				url : '${path}/note/send', // 실제 컨트롤러의 매핑 주소로 변경
+				url : '${path}/note/send', // 실제 주소로 매핑
 				data : {
 					recipientName : recipientName,
 					messageText : messageText
 				},
 				success : function(response) {
-					// 모달 닫기 로직 추가
+					alert(response);
+					$("#Modal").modal("hide");
+					location.replace("${path}/note/send");
 				},
 				error : function(error) {
+					console.log("에러에러",error);
+					alert("쪽지쪽지")
 				}
 			});
 		});
 	});
 </script>
 
-
+<jsp:include page="/WEB-INF/views/common/footer.jsp" />
 

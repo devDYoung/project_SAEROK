@@ -47,7 +47,16 @@ public class EmployeeServiceImpl implements EmployeeService {
       return dao.deleteEmployee(session, empNo);
    }
    
-   
+   // 부서별 근태현황 조회
+	@Override
+	public List<Employee> selectEmpDeptList(String deptCode) {
+		return dao.selectEmpDeptList(session, deptCode);
+	}
+	
+	@Override
+	public List<Employee> empFinderDeptList(Map<String, Object> param) {
+		return dao.empFinderDeptList(session, param);
+	}
    
 
    
