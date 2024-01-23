@@ -28,12 +28,6 @@ public class BoardController {
    @Autowired
    private final BoardService boardService;
 
-   // 공지사항 작성 페이지로 이동
-   @GetMapping("/noticewrite")
-   public String noticeWrite() {
-      return "notice/noticeWrite";
-   }
-
    // 공지사항 페이지로 이동
    @GetMapping("/noticelist")
    public String noticeList(Model model) {
@@ -47,20 +41,23 @@ public class BoardController {
    public String selectNoticeByNo(@RequestParam int boardNo, Model model) {
      // 게시글 상세보기 로직
      Board board = boardService.selectNoticeByNo(boardNo);
-     System.out.println(board);
-
-//     if (b == null) {
-//       // 게시글이 없을 경우 예외 처리
-//       // 예를 들어, 404 에러 페이지로 리다이렉트 또는 에러 메시지를 보여줄 수 있습니다.
-//       return "redirect:/error";
-//     }
-     
      model.addAttribute("b", board);
-     
-     System.out.println(board);
+    
      return "notice/noticeView";
    }
    
+   
+   // 공지사항 작성 페이지로 이동
+   @GetMapping("/noticewrite")
+   public String noticeWrite() {
+      return "notice/noticeWrite";
+   }
+   
+   //공지사항 작성
+  // @PostMapping("/noticewrite/insert")
+  // public String insertNotice() {
+	   
+  // }
    
    // 부서별 게시판 페이지로 이동
    @GetMapping("/Part")
@@ -70,10 +67,7 @@ public class BoardController {
       return "board/boardPart";
    }
    
-   @PostMapping("/noticewrite/test")
-   public void test() {
-	   System.err.println("여기오니");
-   }
+  
 
 
    // 이미지 업로드 처리

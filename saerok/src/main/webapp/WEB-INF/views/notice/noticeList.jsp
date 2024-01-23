@@ -14,6 +14,14 @@
     rel="stylesheet" />
 <script
     src="https://cdn.datatables.net/v/dt/dt-1.13.8/datatables.min.js"></script>
+    
+<style>
+    #dataTable a {
+        color: inherit; 
+        text-decoration: none; 
+    }
+</style>    
+    
 
 <jsp:include page="/WEB-INF/views/common/header.jsp" />
 

@@ -40,7 +40,7 @@
 	<section>
 		<div class="container px-5 my-5 px-5">
 			<h2>게시글 작성</h2>
-			<form name="form" id="form" role="form" method="post" action="/board/noticewrite/test"
+			<form name="form" id="form" role="form" method="post" action="/board/noticewrite"
 				enctype="multipart/form-data">
 				<div class="col-lg-11">
 							<table class="table table-bordered">

@@ -63,6 +63,7 @@
 		<div class="row">
 			<table class="table table-bordered">
 					<tr>
+					
 						<th style="text-align: center; background-color: #F2F2F2; ">제목</th>
 						 <td><c:out value="${b.boardTitle}" /></td>
 					</tr>
@@ -84,7 +85,7 @@
 				</tbody>
 			</table>
 			<div class="btn-container">
-				<button id="list-btn" class="btn btn-outline-success" onclick="listBtn();">목록</button>
+				<button id="list-btn" class="btn btn-outline-primary" onclick="listBtn();">목록</button>
 			</div>
 		</div>
 	</div>
