@@ -14,13 +14,20 @@
 
 <!-- CKEditor 초기화 스크립트 -->
 <script>
-	window.onload = function() {
-		CKEDITOR.replace("bordContent", {
+	/* window.onload = function() {
+		CKEDITOR.replace("boardContent", {
 			filebrowserUploadUrl : '${path}/board/imageUpload.do',
 			height : 500,
 			width : 1000
 		});
 	};
+	
+	 */
+	window.onload = function() {
+	    CKEDITOR.replace("boardContent");
+	};
+	
+	
 
     // 폼 제출 전 컨텐츠 업데이트 함수
     function updateContent() {
@@ -43,7 +50,7 @@
             <form name="form" id="form" role="form" method="post" action="${path}/board/save"
                 enctype="multipart/form-data">
                 <div class="col-lg-11">
-                    <table class="table table-bordered">
+                    <table class="table table-boardered">
                         <thead>
                             <tr>
                                 <th style="text-align: center; background-color: #F2F2F2;">제목</th>
