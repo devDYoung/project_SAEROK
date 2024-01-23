@@ -30,4 +30,8 @@ public interface ApprovalDao {
 	
 	int insertApprovalLine(SqlSession session, Map approvalList);
 	
+	
+	// 내 문서함 조회
+	List<Approval> myApproval(SqlSession session, Employee loginEmployee);
+	
 }
