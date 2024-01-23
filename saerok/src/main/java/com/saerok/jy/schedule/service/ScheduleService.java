@@ -26,7 +26,7 @@ public interface ScheduleService {
 		int skdEdit(Schedule sc);
 
 		//일정 목록 조회
-		List<Schedule> selectList(PageFactory pf, String empNo);
+		List<Schedule> selectList(String empNo);
 		
 		//전체 일정 갯수 조회
 		int selectTotalCnt();
@@ -38,11 +38,11 @@ public interface ScheduleService {
 		//중요 일정 등록
 		String skdImpt(Schedule skd);
 
-//		//중요 일정 목록 조회
-//		List<Schedule> selectImptList(PageFactory pf, String empNo);
-//
-//
-//		
+		//중요 일정 목록 조회
+		List<Schedule> selectImptList(String empNo);
+
+
+		
 
 	
 

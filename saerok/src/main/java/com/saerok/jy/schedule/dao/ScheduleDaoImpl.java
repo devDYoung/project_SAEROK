@@ -39,7 +39,7 @@ public class ScheduleDaoImpl implements ScheduleDao{
 
 	//일정 목록 조회
 	@Override
-	public List<Schedule> selectList(SqlSession session, PageFactory pf, String empNo) {
+	public List<Schedule> selectList(SqlSession session, String empNo) {
 	
 		return session.selectList("schedule.selectList", empNo);
 	}
@@ -74,16 +74,12 @@ public class ScheduleDaoImpl implements ScheduleDao{
 		session.update("schedule.updateImpt", skd);
 	}
 
-//	//중요 일정 목록 조회
-//	@Override
-//	public List<Schedule> selectImptList(SqlSession session, PageFactory pf, String no) {
-//		
-//			
-//			return session.selectList("schedule.selectImptList", no, rb);
-//		} else {
-//			return session.selectList("schedule.selectImptList", no);
-//		}
-//	}
+	//중요 일정 목록 조회
+	@Override
+	public List<Schedule> selectImptList(SqlSession session, String no) {
+	
+			return session.selectList("schedule.selectImptList", no);
+	}
 
 
 }

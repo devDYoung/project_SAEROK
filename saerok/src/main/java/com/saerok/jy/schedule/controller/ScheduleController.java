@@ -143,21 +143,21 @@ public class ScheduleController {
 		public String skdView(Model model, @PathVariable int cPage, HttpServletRequest req, HttpSession session,Principal loginSession) {
 			model.addAttribute("page", "calendar/calendarView");
 			
-			int numPerpage = skdService.selectTotalCnt();
+//			int numPerpage = skdService.selectTotalCnt();
 			
 			//PageFactory pf = PageFactory.getPage(cPage, numPerpage, 5);
-			PageFactory pf = new PageFactory();
+//			PageFactory pf = new PageFactory();
 			int totalCount = skdService.selectTotalCnt(); // 이 부분을 추가
-			model.addAttribute("pageBar", pf.getPage(cPage, numPerpage, totalCount, "View"));
+//			model.addAttribute("pageBar", pf.getPage(cPage, numPerpage, totalCount, "View"));
 			
 			String empNo = loginSession.getName();
 			
 			//데이터 조회
-			List<Schedule> scheduleList = skdService.selectList(pf, empNo);
+			List<Schedule> scheduleList = skdService.selectList(empNo);
 			
 			
 			model.addAttribute("scheduleList", scheduleList);
-			model.addAttribute("pf", pf);
+//			model.addAttribute("pf", pf);
 			
 			return "index"; 
 		}
@@ -191,27 +191,27 @@ public class ScheduleController {
 		
 		
 		//중요 일정만 조회하기
-//		@GetMapping("ImptView/{pno}")
-//		public String imptView (Model model, @PathVariable int pno, HttpServletRequest req, HttpSession session,Principal loginSession) {
-//			model.addAttribute("page", "calendar/calendarImptView");
-//			
-//			int totalCount = skdService.selectTotalCnt();
-//			
+		@GetMapping("ImptView/{pno}")
+		public String imptView (Model model, @PathVariable int pno, HttpServletRequest req, HttpSession session,Principal loginSession) {
+			model.addAttribute("page", "calendar/calendarImptView");
+			
+			int totalCount = skdService.selectTotalCnt();
+			
 //			PageFactory pf = new PageFactory();
 //			model.addAttribute("pageBar", pf.getPage(pno, 5, totalCount, "ImptView"));
-//			
-//			String empNo = loginSession.getName();
-//			
-//			//데이터 조회
-//			List<Schedule> scheduleList = skdService.selectImptList(pf, empNo);
-//			
-//			 
-//			model.addAttribute("scheduleList", scheduleList);
+			
+			String empNo = loginSession.getName();
+			
+			//데이터 조회
+			List<Schedule> scheduleList = skdService.selectImptList(empNo);
+			
+			 
+			model.addAttribute("scheduleList", scheduleList);
 //			model.addAttribute("pf", pf);
-//			
-//			return "index"; 
-//		}
-//	
+			
+			return "index"; 
+		}
+	
 	
 
 }

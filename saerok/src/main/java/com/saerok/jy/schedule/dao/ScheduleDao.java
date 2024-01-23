@@ -23,7 +23,7 @@ public interface ScheduleDao {
 	int updateOne(SqlSession session,Schedule sc);
 
 	// 일정 목록 조회
-	List<Schedule> selectList(SqlSession session,PageFactory pf, String empNo);
+	List<Schedule> selectList(SqlSession session,String empNo);
 
 	// 전체 일정 갯수 조회
 	int selectTotalAll(SqlSession session);
@@ -40,7 +40,7 @@ public interface ScheduleDao {
 	//중요 일정 수정
 	void updateImpt(SqlSession session, Schedule skd);
 
-//	// 중요 일정 목록 조회
-//	List<Schedule> selectImptList(SqlSession session,PageFactory pf, String no);
+	// 중요 일정 목록 조회
+	List<Schedule> selectImptList(SqlSession session, String no);
 
 }

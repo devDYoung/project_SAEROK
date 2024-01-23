@@ -104,8 +104,8 @@ public class ScheduleServiceImpl implements ScheduleService{
 
 	//일정 목록 조회
 	@Override
-	public List<Schedule> selectList(PageFactory pf, String empNo) {
-		return skddao.selectList(session, pf, empNo);
+	public List<Schedule> selectList(String empNo) {
+		return skddao.selectList(session,empNo);
 	}
 
 	//일정 갯수 조회
@@ -144,13 +144,13 @@ public class ScheduleServiceImpl implements ScheduleService{
 		
 		return changeStar;
 	}
-//
-//	//중요 일정 목록 조회
-//	@Override
-//	public List<Schedule> selectImptList(PageFactory pf, String no) {
-//		return skddao.selectImptList(session, pf, no);
-//	}
-//
+
+	//중요 일정 목록 조회
+	@Override
+	public List<Schedule> selectImptList(String no) {
+		return skddao.selectImptList(session, no);
+	}
+
 
 
 	
