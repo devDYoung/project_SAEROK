@@ -1,7 +1,6 @@
 package com.saerok.ch.owner.sales.controller;
 
 
-import java.math.BigDecimal;
 import java.util.List;
 import java.util.Map;
 
@@ -9,14 +8,21 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.google.gson.Gson;
+import com.google.gson.JsonSyntaxException;
+import com.google.gson.reflect.TypeToken;
 import com.saerok.ch.sales.model.service.SalesService;
 import com.saerok.jh.employee.model.dto.Employee;
+
+import java.lang.reflect.Type;
 
 @Controller
 @RequestMapping("/owner")
@@ -45,25 +51,35 @@ public class OwnerSalesController {
         return "sales/branchOwnerDetail";
     }
     
-    // 매출 등록 폼 페이지
-    @GetMapping("/sales/entry")
-    public String showSalesEntryPage() {
-        return "sales/salesEntry"; 
-       
-    }
-
-    // 매출 데이터 처리
-    @PostMapping("/sales/add")
-    public String addSales(@RequestParam Map<String, Object> salesData, Model model) {
-        try {
-            salesService.addBranchSales(salesData); 
-            model.addAttribute("message", "매출이 성공적으로 등록되었습니다.");
-        } catch (Exception e) {
-            model.addAttribute("message", "매출 등록에 실패했습니다.");
-        }
-        return "redirect:/owner/sales/entry";
+    @GetMapping("/detail/add")
+    public String showAddSalesForm(Model model) {
+        List<Map<String, Object>> items = salesService.getAllItems();
+        model.addAttribute("items", items);
+        
+        return "sales/ownerSalesAdd"; 
     }
     
+    @Transactional
+    @PostMapping("/detail/add")
+    public String addSales(
+        @RequestParam String salesData, 
+        RedirectAttributes redirectAttributes) throws JsonSyntaxException {
+
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        Employee loggedInEmployee = (Employee) authentication.getPrincipal();
+        String empNo = loggedInEmployee.getEmpNo();
+
+        Gson gson = new Gson();
+        Type salesDataType = new TypeToken<List<Map<String, Object>>>(){}.getType();
+        List<Map<String, Object>> salesDataList = gson.fromJson(salesData, salesDataType);
+        for (Map<String, Object> salesDataMap : salesDataList) {
+            salesDataMap.put("empNo", empNo);
+        }
+        salesService.addBranchSales(salesDataList);
+        redirectAttributes.addFlashAttribute("message", "매출이 성공적으로 등록되었습니다.");
+        return "redirect:/owner/detail";
+    }
+
     
     
 }
