@@ -29,11 +29,12 @@ public interface SalesMapper {
     
     
     //점주전용
-
     List<Map<String, Object>> findBranchOwnerDetailSales(@Param("empNo") String empNo);
     List<Map<String, Object>> findBranchOwnerCurrentMonthSales(@Param("empNo") String empNo);
     List<Map<String, Object>> findCurrentMonthSalesByCategoryForOwner(@Param("empNo") String empNo);
-
-    void insertBranchSales(Map<String, Object> salesData);  //매출등록
-
+    
+    //매출등록
+    List<Map<String, Object>> findAllItems();
+    void insertBranchSales(Map<String, Object> params);
+    void updateInventoryStock(Map<String, Object> params);
 }
