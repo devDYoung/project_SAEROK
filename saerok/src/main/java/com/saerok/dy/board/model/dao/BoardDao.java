@@ -12,6 +12,7 @@ public interface BoardDao {
 	// 공지사항 조회
 	List<Board> noticeList(SqlSession session);
 
+	// 부서별 조회
 	List<Board> boardPart(SqlSession session);
 	
 	void save(Board board);
