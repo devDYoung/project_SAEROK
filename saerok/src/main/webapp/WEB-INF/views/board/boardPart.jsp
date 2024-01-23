@@ -26,7 +26,7 @@
 					<h6 class="m-0 font-weight-bold text-primary">부서별 게시판</h6>
 					<div class="d-flex justify-content-end">
 						<button type="button" class="btn btn-facebook btn-block col-1"
-							onclick="window.location.href='/board/write';">작성하기</button>
+							onclick="window.location.href='/board/noticewrite';">작성하기</button>
 					</div>
 				</div>
 				<div class="card-body">
