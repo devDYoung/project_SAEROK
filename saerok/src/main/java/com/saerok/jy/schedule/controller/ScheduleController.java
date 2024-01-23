@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.saerok.PageFactory;
+import com.saerok.jh.employee.model.dto.Employee;
 import com.saerok.jy.schedule.dto.Schedule;
 import com.saerok.jy.schedule.service.ScheduleService;
 
@@ -24,20 +25,38 @@ import jakarta.servlet.http.HttpSession;
 @RequestMapping("/calendar")
 public class ScheduleController {
 	
+	// 내문서함 조회
+		@GetMapping("/calendarWrite")
+		public void calendarWrite() {
+		}
+		
+		// 내문서함 조회
+		@GetMapping("/calendarImpt")
+		public void calendarImpt() {
+		}
+		// 내문서함 조회
+		@GetMapping("/calendarView")
+		public void calendarView() {
+		}
+		// 내문서함 조회
+		@GetMapping("/calendarMain")
+		public void calendarMain() {
+		}
+		
+	
 	@Autowired
 	private ScheduleService skdService;
-	
-	
+		
 	//일정 메인 (캘린더에서 데이터 조회)
 		@GetMapping("Main")
 		public String skdMain(ModelAndView mv, HttpServletRequest request, Model model, Principal loginSession) {
 			model.addAttribute("page", "calendar/calendarMain");
-			
+		
 			String empNo = loginSession.getName();
 
-			List<Schedule> skd= skdService.getSkd(empNo);
-			request.setAttribute("schduleList", skd);
-			
+			List<Schedule> schedule= skdService.getSchedule(empNo);
+			request.setAttribute("schduleList", schedule);
+			System.out.println(schedule);
 			
 			return "index";
 		}
@@ -63,12 +82,12 @@ public class ScheduleController {
 		
 		//일정 작성
 		@PostMapping("Write")
-		public String skdWrite(Schedule skd, Model model, HttpSession session,Principal loginSession) {
+		public String skdWrite(Schedule sc, Model model, HttpSession session,Principal loginSession) {
 			
 			String empNo = loginSession.getName();
 			
-			skd.setEmpNo(empNo);
-			int result = skdService.skdWrite(skd);
+			sc.setEmpNo(empNo);
+			int result = skdService.skdWrite(sc);
 			
 			
 			//화면 선택
@@ -85,7 +104,7 @@ public class ScheduleController {
 		
 		//일정 수정 (화면)
 		@GetMapping("Edit/{no}")
-		public String skdEdit(Model model, @PathVariable int no) {
+		public String skdEdit(Model model, @PathVariable String no) {
 			Schedule schedule = skdService.selectOne(no);
 			model.addAttribute("page", "calendar/calendarEdit");
 			model.addAttribute("schedule", schedule);
@@ -94,11 +113,11 @@ public class ScheduleController {
 		
 		//일정 수정
 		@PostMapping("Edit/{no}")
-		public String skdEdit(@PathVariable int no, Model model, Schedule skd, HttpSession session) {
+		public String skdEdit(@PathVariable String no, Model model, Schedule sc, HttpSession session) {
 			
-			skd.setScheduleNo(no);
+			sc.setScheduleNo(no);
 			
-			int result = skdService.skdEdit(skd);
+			int result = skdService.skdEdit(sc);
 			
 			if(result == 1) {
 				session.setAttribute("alertMsg", "일정 수정 완료");
@@ -114,7 +133,7 @@ public class ScheduleController {
 		
 		//일정 삭제
 		@GetMapping("Delete/{no}")
-		public String skdDelete(@PathVariable int no , HttpSession session , Model model) {
+		public String skdDelete(@PathVariable String no , HttpSession session , Model model) {
 			
 			int result = skdService.skdDelete(no);
 			
@@ -128,46 +147,49 @@ public class ScheduleController {
 		}
 		
 		
-//		
-//		//일정 조회
-//		@GetMapping("View/{pno}")
-//		public String skdView(Model model, @PathVariable int cPage, HttpServletRequest req, HttpSession session,Principal loginSession) {
-//			model.addAttribute("page", "calendar/calendarView");
-//			
-//			int numPerpage = skdService.selectToatalCnt();
-//			
-//			PageFactory pf = PageFactory.getPage(cPage, numPerpage, 5);
-//			
-//			String empNo = loginSession.getName();
-//			
-//			//데이터 조회
-//			List<Schedule> skdList = skdService.selectList(pf, empNo);
-//			
-//			
-//			model.addAttribute("skdList", skdList);
-//			model.addAttribute("pf", pf);
-//			
-//			return "index"; 
-//		}
-//		
-//		
-//		//일정 상세 조회
-//		@GetMapping("Detail/{no}")
-//		public String skdDetail(@PathVariable String no, Model model) {
-//			model.addAttribute("page", "calendar/calendarDetail");
-//			
-//			Schedule skd = skdService.selectOne(no);
-//			
-//			model.addAttribute("skd", skd);
-//			
-//			return "index";
-//		}
-//		
+		
+		//일정 조회
+		@GetMapping("View/{pno}")
+		public String skdView(Model model, @PathVariable int cPage, HttpServletRequest req, HttpSession session,Principal loginSession) {
+			model.addAttribute("page", "calendar/calendarView");
+			
+			int numPerpage = skdService.selectTotalCnt();
+			
+			//PageFactory pf = PageFactory.getPage(cPage, numPerpage, 5);
+			PageFactory pf = new PageFactory();
+			int totalCount = skdService.selectTotalCnt(); // 이 부분을 추가
+			model.addAttribute("pageBar", pf.getPage(cPage, numPerpage, totalCount, "View"));
+			
+			String empNo = loginSession.getName();
+			
+			//데이터 조회
+			List<Schedule> scheduleList = skdService.selectList(pf, empNo);
+			
+			
+			model.addAttribute("scheduleList", scheduleList);
+			model.addAttribute("pf", pf);
+			
+			return "index"; 
+		}
+		
+		
+		//일정 상세 조회
+		@GetMapping("Detail/{no}")
+		public String skdDetail(@PathVariable String no, Model model) {
+			model.addAttribute("page", "calendar/calendarDetail");
+			
+			Schedule schdeule = skdService.selectOne(no);
+			
+			model.addAttribute("schdeule", schdeule);
+			
+			return "index";
+		}
+		
 		
 		//중요 일정 등록하기, 해제하기
 		@GetMapping("Impt")
 		@ResponseBody
-		public String skdImpt(int scheduleNo, HttpSession session,Principal loginSession) {
+		public String skdImpt(String scheduleNo, HttpSession session,Principal loginSession) {
 			
 			String empNo = loginSession.getName();
 			Schedule skd = new Schedule();
@@ -183,22 +205,23 @@ public class ScheduleController {
 //		public String imptView (Model model, @PathVariable int pno, HttpServletRequest req, HttpSession session,Principal loginSession) {
 //			model.addAttribute("page", "calendar/calendarImptView");
 //			
-//			int totalCount = skdService.selectToatalCnt();
+//			int totalCount = skdService.selectTotalCnt();
 //			
-//			PageFactory pf = PageFactory.getPageFactory(totalCount, pno, 5, 10);
+//			PageFactory pf = new PageFactory();
+//			model.addAttribute("pageBar", pf.getPage(pno, 5, totalCount, "ImptView"));
 //			
 //			String empNo = loginSession.getName();
 //			
 //			//데이터 조회
-//			List<Schedule> skdList = skdService.selectImptList(pf, empNo);
+//			List<Schedule> scheduleList = skdService.selectImptList(pf, empNo);
 //			
 //			 
-//			model.addAttribute("skdList", skdList);
+//			model.addAttribute("scheduleList", scheduleList);
 //			model.addAttribute("pf", pf);
 //			
 //			return "index"; 
 //		}
 //	
-//	
+	
 
 }

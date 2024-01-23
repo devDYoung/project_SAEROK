@@ -50,8 +50,7 @@
 						class="d-none d-lg-block  font-weight-bold">완료 문서</span>
 				</a></li>
 			</ul>
-			<button class="btn btn-facebook btn-block col-1"
-				onclick="location.assign('${path}/approval/basicForm');">작성하기</button>
+			
 			<br>
 			<!-- 전체 문서  -->
 			<div class="tab-content">
@@ -65,7 +64,6 @@
 									<th>제목</th>
 									<th>기안자</th>
 									<th>신청일</th>
-									<th>결재자</th>
 									<th>상태</th>
 								</tr>
 							</thead>
@@ -75,8 +73,7 @@
 										<td>${a.appSeq}</td>
 										<td>제목불러와야해</td>
 										<td>${a.appEmpName}</td>
-										<td>${a.appWriteDate}</td>
-										<td><c:forEach var="b" items="${a.apvWriter}"
+										<%-- <td><c:forEach var="b" items="${a.apvWriter}"
 												varStatus="i">
 												<c:choose>
 													<c:when test="${i.index == 0}">
@@ -86,7 +83,8 @@
 							                          , ${b.apvEmpName}
 							                     </c:otherwise>
 												</c:choose>
-											</c:forEach></td>
+											</c:forEach></td> --%>
+										<td>${a.appWriteDate}</td>
 										<td>${a.appCheck }</td>
 									</tr>
 								</c:forEach>

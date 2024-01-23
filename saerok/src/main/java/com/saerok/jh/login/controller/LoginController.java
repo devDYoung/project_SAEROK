@@ -108,9 +108,11 @@ public class LoginController {
 	@GetMapping("/commute/commuteMain.do")
 	public void commuteMain() {}
 	
-	// 내 근태 조회
+	// 부서/이름으로 근태 조회
 	@GetMapping("/commute/commuteList.do")
 	public void commuteList() {}
-
+	// 연차 조회
+	@GetMapping("/commute/AnnualList.do")
+	public void AnnualList() {}
 
 }

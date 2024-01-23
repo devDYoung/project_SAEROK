@@ -19,5 +19,10 @@ public interface EmployeeService {
    
    //사원삭제
     int deleteEmployee(Employee empNo);
+    
+   // 부서별 근태 현황 조회
+    List<Employee> selectEmpDeptList(String deptCode);
+    
+    List<Employee> empFinderDeptList(Map<String, Object> param);
    
 }
