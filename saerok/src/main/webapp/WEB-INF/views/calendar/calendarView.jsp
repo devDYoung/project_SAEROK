@@ -9,6 +9,7 @@
 	value="${sessionScope.SPRING_SECURITY_CONTEXT.authentication.principal }" />
 <script
 	src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js"></script>
 <!-- 	<link
 	href="https://cdn.datatables.net/v/dt/dt-1.13.8/datatables.min.css"
 	rel="stylesheet" />

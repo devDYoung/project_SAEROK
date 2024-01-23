@@ -61,16 +61,6 @@ public class ScheduleController {
 			return "index";
 		}
 		
-
-		//일정 메인에서 모달로 상세정보 조회
-		
-		//일정 캘린더에서 모달로 일정 작성
-
-		//메인에서 모달로 일정 수정
-		
-		//메인에서 모달로 일정 삭제
-
-		
 		
 		//일정 작성 (화면)
 		@GetMapping("Write")
@@ -199,8 +189,8 @@ public class ScheduleController {
 			return skdService.skdImpt(skd);
 		}
 		
-//		
-//		//중요 일정만 조회하기
+		
+		//중요 일정만 조회하기
 //		@GetMapping("ImptView/{pno}")
 //		public String imptView (Model model, @PathVariable int pno, HttpServletRequest req, HttpSession session,Principal loginSession) {
 //			model.addAttribute("page", "calendar/calendarImptView");
