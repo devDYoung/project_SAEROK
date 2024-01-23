@@ -103,14 +103,23 @@ public class SalesServiceImpl implements SalesService {
         return salesList;
     }
     
-    @Override
-    public void addBranchSales(Map<String, Object> salesData) {
-        salesMapper.insertBranchSales(salesData);
-    }
     
     @Override
     public List<Map<String, Object>> getCurrentMonthSalesByCategoryForOwner(String empNo) {
         return salesMapper.findCurrentMonthSalesByCategoryForOwner(empNo);
+    }
+    
+    @Override
+    public List<Map<String, Object>> getAllItems() {
+        return salesMapper.findAllItems();
+    }
+    
+    @Override
+    public void addBranchSales(List<Map<String, Object>> salesDataList) {
+        for(Map<String, Object> salesData : salesDataList) {
+            salesMapper.insertBranchSales(salesData);
+            salesMapper.updateInventoryStock(salesData);
+        }
     }
 	
 	
