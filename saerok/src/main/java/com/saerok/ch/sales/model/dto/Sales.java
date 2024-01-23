@@ -10,9 +10,8 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @Builder
 public class Sales {
-    private int salesId;           
-    private int branchNo;         
-    private int itemId;           
-    private int quantity;         
-    private String salesDate;      
+    private String empNo;
+    private String itemId;
+    private int quantity;
+    private String salesDate;   
 }

@@ -42,6 +42,14 @@ public class OrderServiceImpl implements OrderService {
     public void updateOrderStatus(int orderId, String status) {
         orderMapper.updateOrderStatus(orderId, status);
     }
+    
+    
+    //점주-본인지점 발주리스트 가져오기
+    @Override
+    public List<OrderList> findBranchOwnerOrderLists(String empNo) {
+        return orderMapper.findBranchOwnerOrderLists(empNo);
+    }
+    
 
     @Transactional
     @Override
