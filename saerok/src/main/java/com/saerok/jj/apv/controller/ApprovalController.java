@@ -3,12 +3,12 @@ package com.saerok.jj.apv.controller;
 import java.io.IOException;
 import java.io.File;
 import java.nio.file.Path;
+import java.security.Principal;
 import java.sql.Date;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
-
 
 import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Transactional;
@@ -57,8 +57,14 @@ public class ApprovalController {
 
 	// 내문서함 조회
 	@GetMapping("/myApproval")
-	public void myApproval() {
+	public ModelAndView myApproval(ModelAndView model, Principal loginSession) {
+	    String empNo = loginSession.getName();
+	    List<Approval> myApprovalList = service.myApproval(empNo);
+	    model.addObject("myApprovalList", myApprovalList); 
+	    model.setViewName("approval/myApproval");
+	    return model;
 	}
+
 
 	// 결재선 사원리스트불러오기
 	@GetMapping("/checkDept")
@@ -90,8 +96,8 @@ public class ApprovalController {
 	// 폼 등록
 	@PostMapping("/insertAppLetter.do")
 	@Transactional
-	public String insertAppLetter(MultipartFile upFile, AppLetter basicForm,
-			String apporvalData, Model model, HttpSession session, @RequestParam String loginEmp) {
+	public String insertAppLetter(MultipartFile upFile, AppLetter basicForm, String apporvalData, Model model,
+			HttpSession session, @RequestParam String loginEmp) {
 
 		List<Map> approvalList = null;
 		try {
@@ -136,9 +142,8 @@ public class ApprovalController {
 		return "common/msg";
 	}
 
-	/*
-	 * // 테스트
-	 * 
-	 * @GetMapping("/test") public void test() { }
-	 */
+	// 테스트
+	@GetMapping("/test")
+	public void test() {
+	}
 }

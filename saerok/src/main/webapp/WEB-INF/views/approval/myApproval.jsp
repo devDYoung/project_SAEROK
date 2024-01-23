@@ -26,7 +26,7 @@
 
 
 <!-- 전체 리스트 -->
-
+	${loginEmployee}
 <div class="container-fluid">
 
 	<div class="card shadow mb-4">
@@ -87,13 +87,14 @@
 								</tr>
 							</thead>
 							<tbody>
-								  <c:forEach var="a" items="${myApprovalList}">
+						
+								  <c:forEach var="m" items="${myApprovalList}">
 										<tr>
-											<td><c:out value="${a.appSeq}" /></td>
-											<td><c:out value="제목" /></td>
-											<td><c:out value="${loginEmployee.empNo}" /></td>
-											<td><c:out value="${a.appWriteDate}" /></td>
-											<td><c:out value="${a.appCheck}" /></td>
+											<td>${m.appSeq}</td>
+											<td><c:out value="${m.letterTitle }" /></td>
+											<td><c:out value="${m.appEmpName}" /></td>
+											<td><c:out value="${m.appWriteDate}" /></td>
+											<td><c:out value="${m.appCheck}" /></td>
 										</tr>
 								</c:forEach>
 							</tbody>

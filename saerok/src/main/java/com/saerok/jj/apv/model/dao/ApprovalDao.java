@@ -32,6 +32,6 @@ public interface ApprovalDao {
 	
 	
 	// 내 문서함 조회
-	List<Approval> myApproval(SqlSession session, Employee loginEmployee);
+	List<Approval> myApproval(SqlSession session, String empNo);
 	
 }

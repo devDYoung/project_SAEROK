@@ -65,8 +65,8 @@ public class ApprovalDaoImpl implements ApprovalDao {
 	
 	//내문서함 조회
 	@Override
-	public List<Approval> myApproval(SqlSession session, Employee loginEmployee) {
-	    return session.selectList("approval.myApproval", loginEmployee);
+	public List<Approval> myApproval(SqlSession session, String empNo) {
+	    return session.selectList("approval.myApproval", empNo);
 	}
 
 	

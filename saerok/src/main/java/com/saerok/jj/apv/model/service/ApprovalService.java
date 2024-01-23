@@ -24,5 +24,6 @@ public interface ApprovalService {
 	int insertAppLetter(AppLetter appLetter, List<Map> approvalList);
 
 	// 내 문서함 조회
-	List<Approval> myApproval(Employee loginEmployee);
+	List<Approval> myApproval(String empNo);
+
 }

@@ -63,7 +63,7 @@ public class ApprovalServiceImpl implements ApprovalService {
 
     // 추가: 내 문서함 조회
     @Override
-    public List<Approval> myApproval(Employee loginEmployee) {
-        return dao.myApproval(session, loginEmployee);
+    public List<Approval> myApproval(String empNo) {
+        return dao.myApproval(session, empNo);
     }
 }
