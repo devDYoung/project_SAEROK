@@ -30,6 +30,7 @@ public interface SalesService {
 	 List<Map<String, Object>> getBranchOwnerCurrentMonthSales(String empNo);
 	 List<Map<String, Object>> getCurrentMonthSalesByCategoryForOwner(String empNo);
 
-	 void addBranchSales(Map<String, Object> salesData);
+	 List<Map<String, Object>> getAllItems();
+	 void addBranchSales(List<Map<String, Object>> salesDataList);
 
 }

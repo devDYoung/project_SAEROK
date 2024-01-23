@@ -176,7 +176,8 @@
 								</c:if>
 							</c:forEach>
 							<div>
-								<button type="button" class="btn btn-primary">
+								<button type="button" class="btn btn-primary"
+									onclick="location.href='/owner/detail/add'">
 									<i class="bi bi-plus"></i> 매출 등록
 								</button>
 							</div>
@@ -276,7 +277,7 @@
 
 
 
-<!-- 선형 그래프 -->
+	<!-- 선형 그래프 -->
 	<script>
     document.addEventListener('DOMContentLoaded', function () {
         var ctx = document.getElementById('myChart2').getContext('2d');
