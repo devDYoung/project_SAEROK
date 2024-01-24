@@ -9,7 +9,6 @@ import org.springframework.stereotype.Repository;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.saerok.jy.commute.common.CommuteException;
 import com.saerok.jy.commute.dao.CommuteDao;
 import com.saerok.jy.commute.dto.Commute;
 

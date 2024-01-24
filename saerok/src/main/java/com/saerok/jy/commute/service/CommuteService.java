@@ -17,12 +17,6 @@ public interface CommuteService {
 	
 	List<Commute> selectCommuteWorkList(Map<String, Object> param);
 
-	//Commute selectCommute(String empNo);
-//
-//	void insertCommute(String empNo);
-//
-//	void updateCommute(int commuteNo);
-
 	int insertCommuteStatus(String empNo);
 	
 	int updateCommuteEndTime(Map<String, Object> param);

@@ -114,5 +114,10 @@ public class LoginController {
 	// 연차 조회
 	@GetMapping("/commute/AnnualList.do")
 	public void AnnualList() {}
+	
+	// 연차 조회
+	@GetMapping("/calendar/schedule")
+	public void schedule() {}
+
 
 }

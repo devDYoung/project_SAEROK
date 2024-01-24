@@ -16,8 +16,8 @@
 	</jsp:include>
 	<link rel="stylesheet" href="${path}/resources/css/empDept.css">
 <style>
-div#search-memberJob {display: <%= "job_title".equals(searchType) ? "inline-block" : "none" %>;}
-div#search-memberName {display: <%= searchType == null ||  "name".equals(searchType) ? "inline-block" : "none" %>;}
+div#search-memberJob {display: <%= "job_Name".equals(searchType) ? "inline-block" : "none" %>;}
+div#search-memberName {display: <%= searchType == null ||  "emp_Name".equals(searchType) ? "inline-block" : "none" %>;}
 </style>
 <script>
 window.addEventListener('load', () => {
@@ -28,46 +28,6 @@ window.addEventListener('load', () => {
  	<jsp:include page="/WEB-INF/views/commute/commuteBar.jsp" />
 	
 			<div class="home-container">
-						<!-- 상단 타이틀 -->
-						<%-- <div class="top-container">
-							<div class="container-title font-bold">부서 근태 현황</div>
-							<div class="home-topbar topbar-div">
-								<div>
-									<a href="#" id="home-my-img">
-										<img
-											src="${path}/resources/upload/profile/${loginEmployee.destFileName}"
-											alt="" class="img">
-										<c:if test="${empty sessionScope.loginMember.attachment}">
-											<img src="${pageContext.request.contextPath}/resources/images/default.png" alt="" class="my-img">
-										</c:if>
-									</a>
-								</div>
-								<div id="my-menu-modal">
-									<div class="my-menu-div">
-										<button class="my-menu" onclick="location.href = '${path }/emp/empInfo.do'">기본정보</button>
-									</div>
-									<div class="my-menu-div">
-										<form:form action="${pageContext.request.contextPath}/emp/empLogout.do" method="POST">
-											<button class="my-menu" type="submit">로그아웃</button>								
-										</form:form>
-									</div>
-								</div>
-							</div>
-						</div> --%>
-                  <!--   <script>
-                        document.querySelector('#home-my-img').addEventListener('click', (e) => {
-                            const modal = document.querySelector('#my-menu-modal');
-                            const style = modal.style.display;
-
-                            if (style == 'inline-block') {
-                                modal.style.display = 'none';
-                            } else {
-                                modal.style.display = 'inline-block';
-                            }
-                        });
-                    </script> -->
-                    <!-- 상단 타이틀 end -->
-
                     <!-- 본문 -->
                     <div class="div-padding">
                         <div id="date-box">

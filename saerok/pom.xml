@@ -133,6 +133,7 @@
    </dependencies>
 
    <build>
+	   <finalName>GDJ71_saerok_final</finalName>
       <plugins>
          <plugin>
             <groupId>org.springframework.boot</groupId>
