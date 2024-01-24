@@ -160,10 +160,10 @@
                 </a>
                     <div id="collapseCharts" class="collapse" aria-labelledby="headingCharts" data-parent="#accordionSidebar">
                         <div class="bg-white py-2 collapse-inner rounded">
-                            <a class="collapse-item" href="/sales/all">매출현황</a>
-                            <a class="collapse-item" href="/sales/branch">지점별매출</a>
-                            <a class="collapse-item" href="/orders">발주목록</a>
-                            <a class="collapse-item" href="/branch/">지점조회</a>
+                            <a class="collapse-item" href="${path }/sales/all">매출현황</a>
+                            <a class="collapse-item" href="${path }/sales/branch">지점별매출</a>
+                            <a class="collapse-item" href="${path }/orders">발주목록</a>
+                            <a class="collapse-item" href="${path }/branch/">지점조회</a>
                         </div>
                     </div>
             </li>
@@ -175,10 +175,10 @@
                 </a>
                     <div id="collapseStore" class="collapse" aria-labelledby="headingStore" data-parent="#accordionSidebar">
                         <div class="bg-white py-2 collapse-inner rounded">
-                            <a class="collapse-item" href="/owner/detail">매출관리</a>
-                            <a class="collapse-item" href="/inventory">재고목록</a>
+                            <a class="collapse-item" href="${path }/owner/detail">매출관리</a>
+                            <a class="collapse-item" href="${path }/inventory">재고목록</a>
                             <a class="collapse-item" href="">물품발주</a>
-                            <a class="collapse-item" href="/owner/order/detail">발주목록</a>
+                            <a class="collapse-item" href="${path }/owner/order/detail">발주목록</a>
                         </div>
                     </div>
             </li>

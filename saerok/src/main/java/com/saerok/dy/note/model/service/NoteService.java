@@ -11,6 +11,8 @@ public interface NoteService {
     // 받은 쪽지함 조회
     List<Note> getReceivedNotes();
  
+    // 보낸 쪽지함 조회
+    List<Note> getSentNotes();
 
     // 이름으로 사원 조회
     List<Employee> selectEmpByName(String empName);

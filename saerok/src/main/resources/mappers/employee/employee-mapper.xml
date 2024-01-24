@@ -90,6 +90,96 @@
       <delete id="deleteEmployee" parameterType="emp">
          DELETE EMPLOYEE WHERE EMP_NO=#{empNo}
       </delete>
-   
+      
+<!--       <select id="selectEmpDeptList" parameterType="map" resultType="string">
+   SELECT
+   EMP_NO, EMP_NAME,(SELECT JOB_NAME FROM EMPLOYEE WHERE E.JOB_CODE=JOB_CODE)AS JOB_NAME,
+   (SELECT DEPT_NAME FROM EMPLOYEE WHERE E.DEPT_CODE=DEPT_CODE)AS DEPT_NAME,
+   (SELECT DEST_FILENAME FROM EMPLOYEE WHERE PK_NO = E.EMP_NO) AS DESTFILENAME 
+   FROM EMP E WHERE(E.WORK_YN='N' OR EMP_DATE>=(TO_DATE(TO_CHAR(SYSDATE,'YYYY-MM-DD HH:24:MI:SS'),
+   'YYYY-MM-DD HH24:MI:SS'))
+   )AND E.DEPT_CODE=#{deptCode}
+   ORDER BY E.JOB_CODE
+</select> -->
+  <select id="selectEmpDeptList" parameterType="map" resultType="string">
+    SELECT
+        EMP_NO,
+        EMP_NAME,
+        (SELECT JOB_NAME FROM EMPLOYEE WHERE EMP_CODE = E.JOB_CODE) AS JOB_NAME,
+        (SELECT DEPT_NAME FROM EMPLOYEE WHERE EMP_CODE = E.DEPT_CODE) AS DEPT_NAME,
+        (SELECT DEST_FILENAME FROM EMPLOYEE WHERE PK_NO = E.EMP_NO) AS DESTFILENAME
+    FROM EMP E
+    WHERE
+        (E.WORK_YN = 'N' OR E.EMP_DATE >= (TO_DATE(TO_CHAR(SYSDATE, 'YYYY-MM-DD HH24:MI:SS'), 'YYYY-MM-DD HH24:MI:SS')))
+        AND E.DEPT_CODE = #{deptCode}
+    ORDER BY E.JOB_CODE
+</select>
+  
+  
+<!-- <select id="empFinderDeptList" resultMap="empMap">
+    SELECT 
+        e.*,
+        j.job_name,
+        d.dept_name,
+        (SELECT dest_filename FROM employee WHERE pk_no = e.emp_no) destFilename
+    FROM 
+        emp e 
+        JOIN dept d ON e.dept_code = d.dept_code
+        JOIN job j ON e.job_code = j.job_code
+    WHERE
+        (
+            work_yn = 'N'
+            OR
+            emp_date >= (TO_DATE_TZ(TO_CHAR(SYSDATE, 'YYYY-MM-DD HH24:MI:SS'), 'YYYY-MM-DD HH24:MI:SS') AT TIME ZONE 'Asia/Seoul')
+        )
+        <if test="searchType == 'dept_name'">
+            AND d.dept_name LIKE '%' || #{searchKeyword} || '%'
+        </if>
+        <if test="searchType == 'job_name'">
+            AND j.job_name LIKE '%' || #{searchKeyword} || '%'
+        </if>
+        <if test="searchType == 'emp_name'">
+            AND e.emp_name LIKE '%' || #{searchKeyword} || '%'
+        </if>
+        <if test="deptCode != null">
+            AND e.dept_code = #{deptCode}
+        </if>
+    ORDER BY
+        e.dept_code, e.job_code
+</select> -->
+<select id="empFinderDeptList" resultMap="empMap" parameterType="map">
+    SELECT 
+        EMPLOYEE,
+        JOB_NAME,
+        DEPT_NAME,
+        (SELECT dest_filename FROM employee WHERE pk_no = e.emp_no) AS destFilename
+    FROM 
+        emp e 
+        JOIN dept d ON e.dept_code = d.dept_code
+        JOIN job j ON e.job_code = j.job_code
+    WHERE
+        (
+            e.work_yn = 'N'
+            OR
+            e.emp_date >= (TO_DATE_TZ(TO_CHAR(SYSDATE, 'YYYY-MM-DD HH24:MI:SS'), 'YYYY-MM-DD HH24:MI:SS') AT TIME ZONE 'Asia/Seoul')
+        )
+        AND (
+            CASE 
+                WHEN #{searchType} = 'dept_name' THEN d.dept_name LIKE '%' || #{searchKeyword} || '%'
+                WHEN #{searchType} = 'job_name' THEN j.job_name LIKE '%' || #{searchKeyword} || '%'
+                WHEN #{searchType} = 'emp_name' THEN e.emp_name LIKE '%' || #{searchKeyword} || '%'
+                ELSE 1 = 1 
+            END
+        )
+        AND (
+            CASE 
+                WHEN #{deptCode} IS NOT NULL THEN e.dept_code = #{deptCode}
+                ELSE 1 = 1 
+            END
+        )
+    ORDER BY
+        e.dept_code, e.job_code
+</select>
+
 
 </mapper>

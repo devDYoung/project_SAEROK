@@ -136,14 +136,14 @@
     	        					$.ajax({
     	        						url : "${path }/commute/selectWeekDatas.do",
     	        						data : {start,end},
-    	        						success(data){
+    	        						success:(data)=>{
     	        							console.log(data);
     	        							if(tbody2.innerHTML==""){
-	    		        							//data.forEach((datas) =>{
+	    		        							data.forEach((datas) =>{
 	    		        								const subTr = document.createElement("tr");
-	    		        								const {empNo, outDtime, commuteNo, overtime, workingDay, inDtime, status, workingHours} = data[0];
+	    		        								const {empNo, outDtime, commuteNo, overtime, workingDay, inDtime, status, workingHours} = datas;
 	    		        								const subTd1 = document.createElement("td");
-	    		        								subTd1.textContent = changeWorkingDay(workingDay);
+	    		        								subTd1.textContent = changeWorkingDay(inDtime);
 	    		        								
 	    		        								const subTd2 = document.createElement("td");
 	    		        								subTd2.textContent = changeTimeText(inDtime);
@@ -172,7 +172,7 @@
 	    		        								
 	    		        								subTr.append(subTd1,subTd2,subTd3,subTd4,subTd5,subTd6);
 	    		        								tbody2.append(subTr);
-	    		        							//});
+	    		        							});
     	        							}
     	        						},
     	        						error :console.log
@@ -357,7 +357,7 @@
       const date = day.getDate();
       
       const dayOfWeekNames = ["일", "월", "화", "수", "목", "금", "토"];
-      const dayOfWeekIndex = new Date(year, month, date).getDay(); // 해당 날짜의 요일을 구합니다.
+      const dayOfWeekIndex = day.getDay(); // 해당 날짜의 요일을 구합니다.
       const dayOfWeek = dayOfWeekNames[dayOfWeekIndex]; // 요일 이름을 배열에서 찾아옵니다.
       
       return `\${date}일 (\${dayOfWeek})`;

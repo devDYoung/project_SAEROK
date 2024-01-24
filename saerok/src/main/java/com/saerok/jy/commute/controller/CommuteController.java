@@ -27,6 +27,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.saerok.jh.employee.model.dto.Employee;
 import com.saerok.jh.employee.model.service.EmployeeService;
 import com.saerok.jy.commute.dto.Commute;
@@ -249,7 +251,6 @@ public class CommuteController {
 			param.put("empNo", empNo);
 			param.put("start", start);
 			param.put("end", end);
-			System.out.println(empNo);
 			List<Commute> weekList = commuteService.selectWeekDatas(param);
 			
 //			return ResponseEntity.ok()
@@ -382,10 +383,6 @@ public class CommuteController {
 		@ResponseBody
 		@GetMapping("/searchEmpDept.do")
 		public ResponseEntity<?> searchEmpDept( String dateText, String deptCode, String searchType, String searchKeyword) {
-//			log.debug("dateText = {}",dateText);
-//			log.debug("deptCode = {}",deptCode);
-//			log.debug("searchType = {}",searchType);
-//			log.debug("searchKeyword = {}",searchKeyword);
 			
 			String[] arr = dateText.split("\\.");
 			    String date = arr[0].substring(2) + "/" + arr[1];
@@ -401,7 +398,6 @@ public class CommuteController {
 			    LocalDate currentDate = LocalDate.parse(dateText + ".01", DateTimeFormatter.ofPattern("yyyy.MM.dd"));
 
 			    List<Employee> empList = employeeService.empFinderDeptList(param);
-//			    log.debug("empList = {}",empList);
 
 			    List<Map<String, Object>> workList = new ArrayList<>();
 

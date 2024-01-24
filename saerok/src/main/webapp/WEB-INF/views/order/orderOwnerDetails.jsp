@@ -14,6 +14,11 @@
 	rel="stylesheet">
 
 <style>
+
+#cancelOrderButton {
+
+    background-color: #6A287E; 
+}
 .container-fluid {
 	font-family: 'Noto Sans KR', sans-serif;
 }
@@ -91,11 +96,9 @@
 <body>
 	<div class="container-fluid">
 	
-	   <!-- '발주 취소하기' 버튼 추가 -->
+	
     <c:if test="${orderStatus == '대기중'}">
-        <div class="button-group">
-            <button id="cancelOrderButton" class="custom-btn btn-reject">발주 취소하기</button>
-        </div>
+        
     </c:if>
 		<div
 			class="d-sm-flex align-items-center justify-content-center mb-4 mt-3">
@@ -143,6 +146,10 @@
 			<span class="total-amount-label">발주 금액 : </span>
 			<fmt:formatNumber value="${totalOrderAmount}" type="currency" />
 		</div>
+		
+		<div class="button-group">
+            <button id="cancelOrderButton" class="custom-btn btn-reject">발주 취소하기</button>
+        </div>
 
 
 	</div>
