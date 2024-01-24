@@ -37,14 +37,19 @@
         <result column="JOB_CODE" property="jobCode"/>
         <result column="JOB_NAME" property="jobName"/>
      </resultMap>
-     
-     <!--받은 쪽지함 조회--> 
+   
     <select id="readNotePage" resultMap="receivedNotes" >
         SELECT * FROM note 
     </select>
     
+    <!-- 보낸 쪽지함 조회 -->
+    <select id="getSentNotes" resultMap="receivedNotes">
+        SELECT * FROM note WHERE SND_EMP_NO = #{empNo}
+    </select>
+      
+     <!--받은 쪽지함 조회--> 
    <select id="getReceivedNotes" resultMap="receivedNotes">   
-       SELECT * FROM note    
+       SELECT * FROM note
     </select>
     
     <select id="selectEmpByName"  parameterType="String" resultMap="empMap">

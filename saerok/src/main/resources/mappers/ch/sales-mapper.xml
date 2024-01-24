@@ -53,6 +53,15 @@
 		<result property="totalQuantity" column="totalQuantity" />
 	</resultMap>
 	
+	
+	<resultMap id="ItemResultMap" type="java.util.HashMap">
+		<result property="itemId" column="ITEM_ID" />
+		<result property="itemName" column="ITEM_NAME" />
+		<result property="itemCategory" column="ITEM_CATEGORY" />
+		<result property="itemPrice" column="ITEM_PRICE" />
+	</resultMap>
+	
+	
 
 
 	<!-- 당일 매출 내역 조회 -->
@@ -296,8 +305,6 @@
 </select>
 
 
-
-
 		<!-- 본인지점 당월 카테고리별 매출액 조회 -->
 	<select id="findCurrentMonthSalesByCategoryForOwner"
 		parameterType="java.util.Map" resultMap="CategorySalesResultMap">
@@ -316,15 +323,28 @@
 	</select>
 	
 	
-	<!-- 본인지점 매출등록 -->
-	<insert id="insertBranchSales" parameterType="map">
-	    INSERT INTO SALES (SALES_ID, BRANCH_NO, ITEM_ID, QUANTITY, SALES_DATE)
-	    VALUES (SEQ_SALES_ID.NEXTVAL, 
-	            (SELECT BRANCH_NO FROM BRANCH WHERE EMP_NO = #{empNo}), 
-	            #{itemId}, #{quantity}, #{salesDate})
-	</insert>
+		<!-- 모든 아이템 목록 조회 -->
+	<select id="findAllItems" resultMap="ItemResultMap">
+		SELECT ITEM_ID, ITEM_NAME, ITEM_CATEGORY, ITEM_PRICE
+		FROM ITEM
+	</select>
 
+
+	<!-- 본인지점 매출등록 -->
+	<insert id="insertBranchSales" parameterType="java.util.Map">
+		INSERT INTO SALES (SALES_ID, BRANCH_NO, ITEM_ID, QUANTITY, SALES_DATE)
+		VALUES (SALES_SEQ.NEXTVAL,
+		(SELECT BRANCH_NO FROM BRANCH WHERE EMP_NO = #{empNo}),
+		#{itemId}, #{quantity}, TO_DATE(#{salesDate}, 'YYYY/MM/DD'))
+	</insert>
 	
+	   <!-- 매출등록 재고감소 -->
+   <update id="updateInventoryStock" parameterType="java.util.Map">
+      UPDATE INVENTORY
+      SET STOCK = STOCK - #{quantity}
+      WHERE BRANCH_NO = (SELECT BRANCH_NO FROM BRANCH WHERE EMP_NO = #{empNo})
+      AND ITEM_ID = #{itemId}
+   </update>
 
 
 
