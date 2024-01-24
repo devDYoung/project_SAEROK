@@ -14,13 +14,14 @@
 	rel="stylesheet">
 
 <!-- Custom styles for this template-->
-<link href="css/sb-admin-2.min.css" rel="stylesheet">
+<link href="/resources/sb-admin-2.min.css" rel="stylesheet">
 
 </head>
 
 <body id="page-top">
 	<br>
 	<!-- 404 Error Text -->
+	
 	<div class="text-center">
 		<div class="error mx-auto" data-text="404">404</div>
 		<p class="lead text-gray-800 mb-5">권한이 없습니다.</p>
