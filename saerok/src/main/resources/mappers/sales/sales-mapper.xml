@@ -1,0 +1,332 @@
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.saerok.ch.sales.mapper.SalesMapper">
+
+	<resultMap id="SalesDetailResultMap" type="java.util.HashMap">
+		<result property="branchName" column="BRANCH_NAME" />
+		<result property="salesDate" column="SALES_DATE" />
+		<result property="itemName" column="ITEM_NAME" />
+		<result property="category" column="ITEM_CATEGORY" />
+		<result property="price" column="ITEM_PRICE" />
+		<result property="quantity" column="QUANTITY" />
+		<result property="totalPrice" column="TOTAL_PRICE" />
+	</resultMap>
+
+	<resultMap id="DailySalesResultMap" type="java.util.HashMap">
+		<result property="salesDay" column="SALES_DAY" />
+		<result property="branchName" column="BRANCH_NAME" />
+		<result property="totalSales" column="TOTAL_SALES" />
+	</resultMap>
+
+	<resultMap id="SalesResultMap" type="java.util.HashMap">
+		<result property="salesDay" column="salesDay" />
+		<result property="totalSales" column="totalSales" />
+	</resultMap>
+
+	<resultMap id="BranchMonthlySalesResultMap"
+		type="java.util.HashMap">
+		<result property="salesMonth" column="salesMonth" />
+		<result property="branchRegion" column="branchRegion" />
+		<result property="branchName" column="branchName" />
+		<result property="totalSales" column="totalSales" />
+	</resultMap>
+
+	<resultMap id="BranchSalesResultMap" type="java.util.HashMap">
+		<result property="branchNo" column="BRANCH_NO" />
+		<result property="branchName" column="BRANCH_NAME" />
+		<result property="dailySales" column="DAILY_SALES" />
+		<result property="monthlySales" column="MONTHLY_SALES" />
+		<result property="annualSales" column="ANNUAL_SALES" />
+	</resultMap>
+
+
+	<resultMap id="DetailSalesResultMap" type="java.util.HashMap">
+		<result property="currentMonth" column="currentMonth" />
+		<result property="salesDay" column="salesDay" />
+		<result property="totalSales" column="totalSales" />
+	</resultMap>
+	
+	
+	<resultMap id="CategorySalesResultMap"
+		type="java.util.HashMap">
+		<result property="category" column="ITEM_CATEGORY" />
+		<result property="totalSales" column="totalSales" />
+		<result property="totalQuantity" column="totalQuantity" />
+	</resultMap>
+	
+
+
+	<!-- 당일 매출 내역 조회 -->
+	<select id="findTodaySalesDetails"
+		resultMap="SalesDetailResultMap">
+		SELECT
+		b.BRANCH_NAME,
+		TO_CHAR(s.SALES_DATE, 'YYYY-MM-DD') AS
+		SALES_DATE,
+		i.ITEM_NAME,
+		i.ITEM_CATEGORY,
+		i.ITEM_PRICE,
+		s.QUANTITY,
+		(i.ITEM_PRICE * s.QUANTITY) AS TOTAL_PRICE
+		FROM SALES s
+		JOIN ITEM i ON
+		s.ITEM_ID = i.ITEM_ID
+		JOIN BRANCH b ON s.BRANCH_NO = b.BRANCH_NO
+		WHERE
+		TO_CHAR(s.SALES_DATE, 'YYYY-MM-DD') = TO_CHAR(SYSDATE, 'YYYY-MM-DD')
+		ORDER BY s.SALES_DATE DESC, s.SALES_ID
+	</select>
+
+	<!-- 일간 매출액 조회 -->
+	<select id="findTodaySalesTotal"
+		resultType="java.math.BigDecimal">
+		SELECT SUM(i.ITEM_PRICE * s.QUANTITY)
+		FROM SALES s
+		JOIN ITEM
+		i ON s.ITEM_ID = i.ITEM_ID
+		WHERE TO_CHAR(s.SALES_DATE, 'YYYY-MM-DD') =
+		TO_CHAR(SYSDATE, 'YYYY-MM-DD')
+	</select>
+
+	<!-- 월간 매출액 조회 -->
+	<select id="findCurrentMonthSalesTotal"
+		resultType="java.math.BigDecimal">
+		SELECT SUM(i.ITEM_PRICE * s.QUANTITY)
+		FROM SALES s
+		JOIN ITEM
+		i ON s.ITEM_ID = i.ITEM_ID
+		WHERE TO_CHAR(s.SALES_DATE, 'YYYY-MM') =
+		TO_CHAR(SYSDATE, 'YYYY-MM')
+	</select>
+
+	<!-- 연간 매출액 조회 -->
+	<select id="findCurrentYearSalesTotal"
+		resultType="java.math.BigDecimal">
+		SELECT SUM(i.ITEM_PRICE * s.QUANTITY)
+		FROM SALES s
+		JOIN ITEM
+		i ON s.ITEM_ID = i.ITEM_ID
+		WHERE TO_CHAR(s.SALES_DATE, 'YYYY') =
+		TO_CHAR(SYSDATE, 'YYYY')
+	</select>
+
+	<!-- 월별 매출액 조회 -->
+	<select id="findMonthlySalesTotals" resultType="java.util.Map">
+		SELECT
+		TO_CHAR(s.SALES_DATE, 'YYYY-MM') AS salesMonth,
+		SUM(i.ITEM_PRICE *
+		s.QUANTITY) AS totalSales
+		FROM SALES s
+		JOIN ITEM i ON s.ITEM_ID =
+		i.ITEM_ID
+		GROUP BY TO_CHAR(s.SALES_DATE, 'YYYY-MM')
+		ORDER BY salesMonth
+	</select>
+
+	<!-- 현재 월의 지점별 월간 매출 조회 -->
+	<select id="findCurrentMonthBranchSales"
+		resultMap="BranchMonthlySalesResultMap">
+		SELECT
+		TO_CHAR(SALES_DATE, 'MM') AS salesMonth,
+		b.BRANCH_REGION AS branchRegion,
+		b.BRANCH_NAME AS branchName,
+		SUM(i.ITEM_PRICE * s.QUANTITY) AS totalSales
+		FROM SALES s
+		JOIN ITEM i ON
+		s.ITEM_ID = i.ITEM_ID
+		JOIN BRANCH b ON s.BRANCH_NO = b.BRANCH_NO
+		WHERE
+		TO_CHAR(s.SALES_DATE, 'YYYY-MM') = TO_CHAR(SYSDATE, 'YYYY-MM')
+		GROUP BY
+		TO_CHAR(SALES_DATE, 'MM'), b.BRANCH_REGION, b.BRANCH_NAME
+		ORDER BY
+		totalSales DESC
+	</select>
+
+
+	<!-- 지점별 일간, 월간, 연간 매출 조회 -->
+	<select id="findBranchSales" parameterType="java.util.Map"
+		resultMap="BranchSalesResultMap">
+		SELECT
+		b.BRANCH_NO,
+		b.BRANCH_NAME,
+		COALESCE((SELECT SUM(i.ITEM_PRICE *
+		s.QUANTITY)
+		FROM SALES s
+		JOIN ITEM i ON s.ITEM_ID = i.ITEM_ID
+		WHERE
+		b.BRANCH_NO = s.BRANCH_NO
+		AND TO_CHAR(s.SALES_DATE, 'YYYY-MM-DD') =
+		TO_CHAR(SYSDATE,
+		'YYYY-MM-DD')), 0)
+		AS DAILY_SALES,
+		COALESCE((SELECT
+		SUM(i.ITEM_PRICE * s.QUANTITY)
+		FROM SALES s
+		JOIN ITEM i ON s.ITEM_ID =
+		i.ITEM_ID
+		WHERE b.BRANCH_NO = s.BRANCH_NO
+		AND TO_CHAR(s.SALES_DATE,
+		'YYYY-MM') = TO_CHAR(SYSDATE, 'YYYY-MM')), 0)
+		AS MONTHLY_SALES,
+		COALESCE((SELECT SUM(i.ITEM_PRICE * s.QUANTITY)
+		FROM SALES s
+		JOIN ITEM i
+		ON s.ITEM_ID = i.ITEM_ID
+		WHERE b.BRANCH_NO = s.BRANCH_NO
+		AND
+		TO_CHAR(s.SALES_DATE, 'YYYY') = TO_CHAR(SYSDATE, 'YYYY')), 0)
+		AS
+		ANNUAL_SALES
+		FROM BRANCH b
+		<where>
+			<if test="searchKeyword != null and searchKeyword.trim() != ''">
+				BRANCH_NAME LIKE '%' || #{searchKeyword} || '%'
+			</if>
+		</where>
+		<choose>
+			<when test="sortOrder == null or sortOrder == 'BRANCH_NO'">
+				ORDER BY b.BRANCH_NO
+			</when>
+			<when test="sortOrder == 'BRANCH_NAME'">
+				ORDER BY b.BRANCH_NAME
+			</when>
+			<when test="sortOrder == 'TOTAL_SALES_DESC'">
+				ORDER BY MONTHLY_SALES DESC
+			</when>
+			<when test="sortOrder == 'TOTAL_SALES_ASC'">
+				ORDER BY MONTHLY_SALES
+			</when>
+		</choose>
+	</select>
+
+
+	<!-- 지점별 상세 매출 조회 -->
+	<select id="findBranchDetailSales" parameterType="java.util.Map"
+		resultMap="BranchSalesResultMap">
+		SELECT
+		b.BRANCH_NO,
+		b.BRANCH_NAME,
+		TO_CHAR(SYSDATE, 'YYYY-MM') AS "salesMonth",
+		COALESCE(SUM(CASE
+		WHEN TO_CHAR(s.SALES_DATE, 'YYYY-MM-DD') = TO_CHAR(SYSDATE, 'YYYY-MM-DD')
+		THEN i.ITEM_PRICE * s.QUANTITY
+		ELSE 0 END), 0) AS "DAILY_SALES",
+		COALESCE(SUM(CASE
+		WHEN TO_CHAR(s.SALES_DATE, 'YYYY-MM') = TO_CHAR(SYSDATE, 'YYYY-MM')
+		THEN i.ITEM_PRICE * s.QUANTITY
+		ELSE 0 END), 0) AS "MONTHLY_SALES",
+		COALESCE(SUM(i.ITEM_PRICE * s.QUANTITY), 0) AS "ANNUAL_SALES"
+		FROM BRANCH b
+		LEFT JOIN SALES s ON b.BRANCH_NO = s.BRANCH_NO AND TO_CHAR(s.SALES_DATE,
+		'YYYY') = TO_CHAR(SYSDATE, 'YYYY')
+		LEFT JOIN ITEM i ON s.ITEM_ID = i.ITEM_ID
+		WHERE b.BRANCH_NO = #{branchNo}
+		GROUP BY b.BRANCH_NO, b.BRANCH_NAME
+	</select>
+
+	<!-- 지점별 당월 매출 조회 -->
+	<select id="findCurrentMonthSalesByDay"
+		parameterType="java.util.Map" resultMap="DetailSalesResultMap">
+		SELECT
+		TO_CHAR(s.SALES_DATE,
+		'MM') AS "currentMonth",
+		TO_CHAR(s.SALES_DATE, 'DD') AS "salesDay",
+		SUM(i.ITEM_PRICE * s.QUANTITY) AS "totalSales"
+		FROM SALES s
+		JOIN ITEM i
+		ON s.ITEM_ID = i.ITEM_ID
+		JOIN BRANCH b ON
+		s.BRANCH_NO = b.BRANCH_NO
+		WHERE b.BRANCH_NO = #{branchNo}
+		AND
+		TO_CHAR(s.SALES_DATE, 'YYYY-MM') =
+		TO_CHAR(SYSDATE, 'YYYY-MM')
+		GROUP BY
+		TO_CHAR(s.SALES_DATE, 'MM'),
+		TO_CHAR(s.SALES_DATE, 'DD')
+		ORDER BY
+		"salesDay"
+	</select>
+	
+	
+	
+	
+	<!-- 지점전용 -->
+	
+
+<!-- 본인지점  상세 매출 조회 -->
+<select id="findBranchOwnerDetailSales" parameterType="java.util.Map" resultMap="BranchSalesResultMap">
+	SELECT
+	    b.BRANCH_NO,
+	    b.BRANCH_NAME,
+	    COALESCE(SUM(CASE
+	        WHEN TO_CHAR(s.SALES_DATE, 'YYYY-MM-DD') = TO_CHAR(SYSDATE, 'YYYY-MM-DD')
+	        THEN i.ITEM_PRICE * s.QUANTITY
+	        ELSE 0 END), 0) AS "DAILY_SALES",
+	    COALESCE(SUM(CASE
+	        WHEN TO_CHAR(s.SALES_DATE, 'YYYY-MM') = TO_CHAR(SYSDATE, 'YYYY-MM')
+	        THEN i.ITEM_PRICE * s.QUANTITY
+	        ELSE 0 END), 0) AS "MONTHLY_SALES",
+	    COALESCE(SUM(CASE
+	        WHEN TO_CHAR(s.SALES_DATE, 'YYYY') = TO_CHAR(SYSDATE, 'YYYY')
+	        THEN i.ITEM_PRICE * s.QUANTITY
+	        ELSE 0 END), 0) AS "ANNUAL_SALES"
+	FROM BRANCH b
+	JOIN EMPLOYEE e ON b.EMP_NO = e.EMP_NO
+	LEFT JOIN SALES s ON b.BRANCH_NO = s.BRANCH_NO
+	LEFT JOIN ITEM i ON s.ITEM_ID = i.ITEM_ID
+	WHERE e.EMP_NO = #{empNo}
+	GROUP BY b.BRANCH_NO, b.BRANCH_NAME
+</select>
+
+	<!-- 본인지점 당월 매출 조회 -->
+<select id="findBranchOwnerCurrentMonthSales" parameterType="java.util.Map" resultMap="DetailSalesResultMap">
+    SELECT
+    TO_CHAR(s.SALES_DATE, 'MM') AS "currentMonth",
+    TO_CHAR(s.SALES_DATE, 'DD') AS "salesDay",
+    SUM(i.ITEM_PRICE * s.QUANTITY) AS "totalSales"
+    FROM SALES s
+    JOIN ITEM i ON s.ITEM_ID = i.ITEM_ID
+    JOIN BRANCH b ON s.BRANCH_NO = b.BRANCH_NO
+    JOIN EMPLOYEE e ON b.EMP_NO = e.EMP_NO
+    WHERE e.EMP_NO = #{empNo} AND TO_CHAR(s.SALES_DATE, 'YYYY-MM') = TO_CHAR(SYSDATE, 'YYYY-MM')
+    GROUP BY TO_CHAR(s.SALES_DATE, 'MM'), TO_CHAR(s.SALES_DATE, 'DD')
+    		ORDER BY
+		"salesDay"
+</select>
+
+
+
+
+		<!-- 본인지점 당월 카테고리별 매출액 조회 -->
+	<select id="findCurrentMonthSalesByCategoryForOwner"
+		parameterType="java.util.Map" resultMap="CategorySalesResultMap">
+		SELECT
+		i.ITEM_CATEGORY,
+		SUM(i.ITEM_PRICE * s.QUANTITY) AS totalSales,
+		SUM(s.QUANTITY) AS totalQuantity
+		FROM SALES s
+		JOIN ITEM i ON s.ITEM_ID = i.ITEM_ID
+		JOIN BRANCH b ON s.BRANCH_NO = b.BRANCH_NO
+		JOIN EMPLOYEE e ON b.EMP_NO = e.EMP_NO
+		WHERE e.EMP_NO = #{empNo} AND TO_CHAR(s.SALES_DATE, 'YYYY-MM') =
+		TO_CHAR(SYSDATE, 'YYYY-MM')
+		GROUP BY i.ITEM_CATEGORY
+		ORDER BY totalSales DESC
+	</select>
+	
+	
+	<!-- 본인지점 매출등록 -->
+	<insert id="insertBranchSales" parameterType="map">
+	    INSERT INTO SALES (SALES_ID, BRANCH_NO, ITEM_ID, QUANTITY, SALES_DATE)
+	    VALUES (SEQ_SALES_ID.NEXTVAL, 
+	            (SELECT BRANCH_NO FROM BRANCH WHERE EMP_NO = #{empNo}), 
+	            #{itemId}, #{quantity}, #{salesDate})
+	</insert>
+
+	
+
+
+
+
+</mapper>
