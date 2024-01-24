@@ -1,0 +1,41 @@
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper
+	namespace="com.saerok.ch.inventory.mapper.InventoryMapper">
+
+
+	<resultMap id="InventoryResultMap"
+		type="com.saerok.ch.inventory.model.dto.Inventory">
+		<result property="itemId" column="ITEM_ID" />
+		<result property="itemCategory" column="ITEM_CATEGORY" />
+		<result property="itemName" column="ITEM_NAME" />
+		<result property="stock" column="STOCK" />
+		<result property="bufferStock" column="BUFFER_STOCK" />
+	</resultMap>
+
+
+
+	<!-- 재고 증가 -->
+	<update id="increaseStock">
+		UPDATE INVENTORY
+		SET STOCK = STOCK + #{quantity}
+		WHERE
+		BRANCH_NO = #{branchNo} AND ITEM_ID = #{itemId}
+	</update>
+
+
+	<select id="findInventoryByEmpNo" resultMap="InventoryResultMap">
+		SELECT
+		itm.ITEM_ID,
+		itm.ITEM_CATEGORY,
+		itm.ITEM_NAME,
+		inv.STOCK,
+		inv.BUFFER_STOCK
+		FROM BRANCH br
+		JOIN INVENTORY inv ON br.BRANCH_NO = inv.BRANCH_NO
+		JOIN ITEM itm ON inv.ITEM_ID = itm.ITEM_ID
+		WHERE br.EMP_NO = #{empNo}
+
+	</select>
+
+
+</mapper>

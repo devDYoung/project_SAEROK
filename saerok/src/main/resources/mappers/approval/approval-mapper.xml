@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="approval">
+
+   <resultMap id="approval" type="approval">
+      <id column="APPSEQ" property="appSeq" />
+      <result column="APPWRITEDATE" property="appWriteDate" />
+      <result column="APPCHECK" property="appCheck" />
+      <result column="APPKINDS" property="appKinds" />
+
+      <result column="APPSEQ" property="appSeq" jdbcType="INTEGER" />
+      <result column="LETTERSEQ" property="letterSeq" />
+      <result column="LETTERTITLE" property="letterTitle" />
+      <result column="LETTERDETAIL" property="letterDetail" />
+      <result column="LETTERSTATUS" property="letterStatus" />
+      <result column="ORIFILENAME" property="oriFileName" />
+      <result column="REFILENAME" property="reFileName" />
+
+      <result column="app_emp_name" property="appEmpName" />
+
+      <!-- Employee 매핑 -->
+      <association property="empNo" resultMap="emp.empMap" />
+      <!-- ApvWriter 매핑 -->
+      <collection property="apvWriter" ofType="apvWriter">
+         <result column="APV_STATE" property="apvState" />
+         <result column="APV_EMP_TIME" property="apvEmpTime" />
+         <result column="RETURN_REASON" property="returnReason" />
+         <result column="apv_emp_name" property="apvEmpNo" />
+         <result column="EMP_NO" property="apvEmpName" />
+         <result column="WRITERLIST" property="writerList" />
+      </collection>
+      <!-- ApvRef 매핑 -->
+      <collection property="apvRef" ofType="apvRef">
+         <result column="appSeq" property="appSeq" />
+         <result column="EMP_NO" property="empNo" />
+      </collection>
+   </resultMap>
+
+
+
+
+   <!--전체 결재리스트 불러오기  -->
+   <select id="selectApproval" resultMap="approval">
+      SELECT t1.APPSEQ AS APPSEQ
+      , t1.APPWRITEDATE
+      , t1.APPCHECK
+      , t1.APPKINDS
+      , t2.LETTERSTATUS
+      ,
+      t1.emp_no AS app_emp_no
+      , (SELECT emp_name FROM EMPLOYEE e WHERE
+      e.emp_no = t1.emp_no) AS
+      app_emp_name
+      , t3.emp_no AS apv_emp_no
+      , (SELECT
+      emp_name FROM EMPLOYEE e WHERE e.emp_no = t3.emp_no) AS
+      apv_emp_name
+      FROM APPROVAL t1
+      , APPLETTER t2
+      , APV_REF t3
+   </select>
+
+   <!--결재자들 선택 추가 -->
+   <select id="selectEmployeeByDeptName" resultMap="emp.empMap"
+      parameterType="_int">
+      SELECT *
+      FROM EMPLOYEE
+      JOIN DEPARTMENT USING(dept_code)
+      JOIN ATO_JOB USING(job_code)
+      WHERE DEPT_CODE=#{deptCode}
+      ORDER BY
+      JOB_CODE ASC
+   </select>
+
+
+
+
+
+
+   <insert id="insertAppLetter" parameterType="appLetter">
+      <selectKey keyProperty="appSeq" order="BEFORE"
+         resultType="_int"> SELECT app_seq.CURRVAL from dual </selectKey>
+      INSERT INTO APPLETTER(
+      LETTERSEQ, APPSEQ, LETTERTITLE,
+      LETTERDETAIL,LETTERSTATUS,ORIFILENAME,REFILENAME)
+      VALUES(
+      'Letter_'||TO_CHAR(LETTERSEQ.NEXTVAL),
+      #{appSeq},#{letterTitle},
+      #{letterDetail},default,
+      #{oriFileName},#{reFileName})
+   </insert>
+
+   <insert id="insertAppr" parameterType="appLetter">
+      INSERT INTO APPROVAL(APPSEQ,APPWRITEDATE,APPCHECK,EMP_NO,APPKINDS)
+      VALUES(   APP_SEQ.NEXTVAL,SYSDATE, DEFAULT,#{loginEmp},#{basicForm} )
+   </insert>
+
+
+   <!--결재선 라인 -->
+   <insert id="insertApprovalLine" parameterType="java.util.Map">
+         <selectKey keyProperty="appSeq" order="BEFORE"
+         resultType="_int"> SELECT app_seq.CURRVAL from dual </selectKey>
+      INSERT INTO APV_WRITER(
+         APPSEQ, EMP_NO,WRITERLIST)
+      VALUES(#{appSeq},#{empNo},#{order})
+   </insert>
+   
+
+</mapper>
