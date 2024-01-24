@@ -242,7 +242,7 @@ public class CommuteController {
 		// 주차 클릭시 start,end 사이 날짜 근무 가져오기
 		@ResponseBody
 		@GetMapping("/selectWeekDatas.do")
-		public ResponseEntity<?> selectWeekDatas(String start, String end,Principal loginSession){
+		public List<Commute> selectWeekDatas(String start, String end,Principal loginSession){
 			
 			String empNo = loginSession.getName();
 			Map<String,Object> param = new HashMap<>();
@@ -251,9 +251,11 @@ public class CommuteController {
 			param.put("end", end);
 			System.out.println(empNo);
 			List<Commute> weekList = commuteService.selectWeekDatas(param);
-			return ResponseEntity.ok()
-					.header(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_JSON.toString())
-					.body(weekList);
+			
+//			return ResponseEntity.ok()
+//					.header(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_JSON.toString())
+//					.body(weekList);
+			return weekList;
 		}
 		
 		// 이번달, 금주의 누적시간 가져오기
