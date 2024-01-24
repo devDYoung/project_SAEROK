@@ -296,7 +296,7 @@
     	const end = endDate.getFullYear() + "." + (endDate.getMonth() + 1) + "." + endDate.getDate();
     	  
     	$.ajax({
-    		  url : "${path}/commute/weekTotalTime.do",
+    		  url : "${path }/commute/weekTotalTime.do",
     		  data : {start, end},
     		  contentType : "application/json; charset=utf-8",
     		  success(data){
@@ -349,7 +349,9 @@
     
     // workingDay날짜 00일 (월)로 변경
     function changeWorkingDay(workingDay) {
+     console.log("Input Date:", workingDay);
       const day = new Date(workingDay);
+      console.log("Parsed Date:", day);
       const year = day.getFullYear();
       const month = day.getMonth()+1; // JavaScript의 Date 객체에서 월은 0부터 시작합니다.
       const date = day.getDate();

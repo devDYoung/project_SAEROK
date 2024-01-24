@@ -47,7 +47,7 @@ public class CommuteController {
 	private EmployeeService employeeService;
 	
 	DateTimeFormatter dayff = DateTimeFormatter.ofPattern("yy-MM"); //날짜 패턴 변경
-	DateTimeFormatter dayfff = DateTimeFormatter.ofPattern("yy/MM"); //날짜 패턴 변경
+	DateTimeFormatter dayfff = DateTimeFormatter.ofPattern("yy-MM"); //날짜 패턴 변경
 	DateTimeFormatter dayf = DateTimeFormatter.ofPattern("yy-MM-dd"); //날짜 패턴 변경
 	LocalDateTime now = LocalDateTime.now(); //현재 시간
 	
@@ -270,6 +270,7 @@ public class CommuteController {
 			param.put("start", start);
 			param.put("end", end);
 			param.put("monthTime", monthTime);
+			System.out.println(start+end+monthTime);
 			
 			// 금주 누적시간 가져오기
 			int weekTotalTime = commuteService.weekTotalTime(param);
