@@ -26,6 +26,12 @@ public class NoteServiceImpl implements NoteService {
 		return dao.getReceivedNotes(session);
 	}
 
+	// 보낸 쪽지 조회
+	@Override
+	public List<Note> getSentNotes(){
+		return dao.getSentNotes(session);
+	}
+	
 	// 이름으로 사원 조회
 	@Override
 	public List<Employee> selectEmpByName(String empName) {
