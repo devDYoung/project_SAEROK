@@ -119,18 +119,18 @@
    <update id="updateCommuteEndTime" parameterType="map">
       UPDATE COMMUTE
       SET
-      OUT_DTIME = TO_CHAR(SYSTIMESTAMP, 'yyyy-MM-dd HH24:MI:SS'),
+      OUT_DTIME = TO_DATE(SYSTIMESTAMP, 'yy-MM-dd HH24:MI:SS'),
       STATUS=#{status}
       WHERE EMP_NO = #{empNo} AND
-      TO_CHAR(SYSDATE,'YYYY-MM-DD')
-      =TO_CHAR(WORKINGDAY,'YYYY-MM-DD') AND
+      TO_DATE(SYSDATE,'YY-MM-DD')
+      =TO_DATE(WORKINGDAY,'YY-MM-DD') AND
       OUT_DTIME IS NULL
       <selectKey keyProperty="outdtime" resultType="date">
          SELECT
          OUT_DTIME FROM COMMUTE
          WHERE EMP_NO = #{empNo} AND
-         TO_CHAR(SYSDATE,'YYYY-MM-DD')
-         =TO_CHAR(WORKINGDAY,'YYYY-MM-DD')
+         TO_DATE(SYSDATE,'YY-MM-DD')
+         =TO_DATE(WORKINGDAY,'YY-MM-DD')
       </selectKey>
    </update> 
 <!-- <update id="updateCommuteEndTime" parameterType="map">
@@ -222,8 +222,8 @@
       SELECT NVL(SUM(workingHours), 0)
       FROM commute
       WHERE emp_No = #{empNo}
-      AND workingDay BETWEEN TO_DATE(#{start}, 'YYYY-MM-DD') AND
-      TO_DATE(#{end}, 'YYYY-MM-DD')
+      AND workingDay BETWEEN TO_DATE(#{start}, 'YY-MM-DD') AND
+      TO_DATE(#{end}, 'YY-MM-DD')
    </select>
    <!-- <select id="selectWeekWorkTime" parameterType="map" resultType="_int"> 
       select nvl(sum(workingHours), 0) as 해당기간근무시간 from commute where emp_no = 
@@ -260,7 +260,7 @@
    <select id="monthOverTime" parameterType="map" resultType="_int">
       SELECT NVL(SUM(OVERTIME), 0)
       FROM COMMUTE
-      WHERE TO_CHAR(WORKINGDAY, 'YYYY-MM') = #{monthTime}
+      WHERE TO_DATE(WORKINGDAY, 'YY-MM-DD') = #{monthTime}
       AND EMP_NO = #{empNO}
    </select>
 
