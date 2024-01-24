@@ -35,8 +35,8 @@
   }
 
   #profile-img {
-    width: 100px;
-    height: 90px;
+    width: 90px;
+    height: 80px;
     margin-top: 10px;
    
   }
