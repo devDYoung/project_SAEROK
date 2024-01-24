@@ -54,9 +54,8 @@ public class NoteController {
 
 	// 보낸 쪽지함 페이지로 이동
 	@GetMapping("/send")
-	public String sendNotePage(Model model,Principal loginSession) {
-		String empNo=loginSession.getName();
-		List<Note> sentNotes=noteService.getSentNotes(empNo);
+	public String sendNotePage(Model model) {
+		List<Note> sentNotes=noteService.getSentNotes();
 		model.addAttribute("sentNotes",sentNotes);
 		return "note/noteSend";
 	}
