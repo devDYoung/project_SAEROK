@@ -1,4 +1,4 @@
-<%-- <%@ page language="java" contentType="text/html; charset=UTF-8"
+ <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
@@ -91,7 +91,7 @@
 																			console.log('adfadsf');
 																			$.ajax({
 																			type: "get",
-																			url: `${path}/calendar/Impt`,
+																			url: `${path}/calendar/StarView`,
 																			data: {
 																				scheduleNo : '${s.scheduleNo}'
 																			},
@@ -157,7 +157,7 @@
 																			});
 																		});
 																</script>
-														  <h5 class="card-title" onclick="location.href='${path}/calendar/Detail/${s.scheduleNo}'" style="overflow:hidden; white-space:nowrap; text-overflow:ellipsis;">${s.skdTitle}</h5>
+														  <h5 class="card-title" onclick="location.href='${path}/calendar/calendarDetail/${s.scheduleNo}'" style="overflow:hidden; white-space:nowrap; text-overflow:ellipsis;">${s.skdTitle}</h5>
 														  <h5 class="card-title">${s.skdStart} ~ ${s.skdEnd}</h5>
 														  <h6 class="card-subtitle mb-2 text-muted">${s.empNo}</h6>
 														  <p class="card-text" style='overflow:hidden; white-space:nowrap; text-overflow:ellipsis;'>${s.skdContent}</p>
@@ -347,5 +347,3 @@
 <!-- End Page Content -->
 
 
-
-	 --%>

@@ -2,6 +2,7 @@ package com.saerok.jy.schedule.service;
 
 import java.sql.Timestamp;
 import java.text.SimpleDateFormat;
+import java.time.LocalDate;
 import java.util.Date;
 import java.util.List;
 
@@ -16,7 +17,6 @@ import com.saerok.jy.schedule.dao.ScheduleDao;
 import com.saerok.jy.schedule.dto.Schedule;
 
 @Service
-@Repository
 public class ScheduleServiceImpl implements ScheduleService{
 	
 	@Autowired
@@ -27,7 +27,7 @@ public class ScheduleServiceImpl implements ScheduleService{
 	
 	//일정 작성
 	@Override
-	public int skdWrite(Schedule sc) {
+	public int write(Schedule sc) {
 		
 		int result = 0;
 		
@@ -75,13 +75,13 @@ public class ScheduleServiceImpl implements ScheduleService{
 	}
 	//일정 삭제
 	@Override
-	public int skdDelete(String no) {
-		return skddao.skdDelete(session, no);
+	public int delete(String no) {
+		return skddao.delete(session, no);
 	}
 
 	//일정 수정
 	@Override
-	public int skdEdit(Schedule sc) {
+	public int edit(Schedule sc) {
 		int result = 0;
 		
 		try {
@@ -111,7 +111,7 @@ public class ScheduleServiceImpl implements ScheduleService{
 	//일정 갯수 조회
 	@Override
 	public int selectTotalCnt() {
-		return skddao.selectTotalAll(session);
+		return skddao.selectCountAll(session);
 	}
 
 	//일정 상세조회(번호)
@@ -128,9 +128,9 @@ public class ScheduleServiceImpl implements ScheduleService{
 
 	//중요 일정 등록
 	@Override
-	public String skdImpt(Schedule skd) {
+	public String star(Schedule skd) {
 		
-		String star = skddao.insertImpt(session, skd);
+		String star = skddao.selectStar(session, skd);
 		String changeStar = "";
 		
 		if(star.equals("Y")) {
@@ -138,19 +138,94 @@ public class ScheduleServiceImpl implements ScheduleService{
 		}else {
 			changeStar = "Y";
 		}
-		skd.setSkdImpt(changeStar);
+		skd.setStar(changeStar);
 		
-		skddao.updateImpt(session, skd);
+		skddao.updateStar(session, skd);
 		
 		return changeStar;
 	}
 
 	//중요 일정 목록 조회
 	@Override
-	public List<Schedule> selectImptList(String no) {
-		return skddao.selectImptList(session, no);
+	public List<Schedule> selectStarList(String no) {
+		return skddao.selectStarList(session, no);
 	}
 
+
+	
+//	// 오늘 날짜의 모든 일정 조회(홈)
+//	public List<Schedule> selectTodaySchedule(String empNo){
+//		String todayYmd = LocalDate.now().toString();
+//		return skddao.selectTodaySchedule(session, empNo, todayYmd);
+//	}
+//	
+//	// 해당 달의 일정 목록 조회
+//	public List<Schedule>  selectMonthSchedule(String empNo){
+//		return skddao.selectMonthSchedule(session, empNo);
+//	}
+//	
+//	// 회사/부서/개인 일정
+//	public List<Schedule> selectFilteredMonthSchedule(String empNo, String skdTypeCd) {
+//		// 회사 일정 조회
+//	    if ("00".equals(skdTypeCd)) {
+//	        return skddao.selectAdminSchedule(session);
+//	        // 개인 일정 조회
+//	    } else if ("99".equals(skdTypeCd)) {
+//	        return skddao.selectPersonalSchedule(session, empNo);
+//	        // 부서별 일정 조회
+//	    } else {
+//	        return skddao.selectDeptSchedule(session, empNo);
+//	    }
+//	}
+//	
+//	// 관리자 일정만
+//	public List<Schedule>  selectAdminSchedule() {
+//		return skddao.selectAdminSchedule(session);
+//	}
+//	
+//	// 선택한 일정 조회
+//	public Schedule selectDateSchedule(int scheduleNo){
+//		return skddao.selectDateSchedule(session, scheduleNo);
+//	}
+//	
+//	// 일정 등록
+//	public int insertSchedule(Schedule schedule) {
+//		return skddao.insertSchedule(session, schedule);
+//	}
+//	
+//	// 등록시 사용자 부서 세팅
+//	public String setUserDept(String empNo){
+//		return skddao.setUserDept(session, empNo);
+//	}
+//	
+//	// 일정 수정
+//	public int modifySchedule(Schedule schdule) {
+//		//log.debug("\u001B[41m" + "service modifySchedule schdule : " + schdule + "\u001B[0m");
+//		return skddao.modifySchedule(session, schdule);
+//	}
+//	
+//	// 일정 삭제
+//	public int deleteSchedule(int scheduleNo) {
+//		return skddao.deleteSchedule(session, scheduleNo);
+//	}
+//
+//	@Override
+//	public List<Schedule> selectTodaySchedule(String empNo, String todayYmd) {
+//		// TODO Auto-generated method stub
+//		return null;
+//	}
+//
+//	@Override
+//	public List<Schedule> selectPersonalSchedule(String empNo) {
+//		// TODO Auto-generated method stub
+//		return null;
+//	}
+//
+//	@Override
+//	public List<Schedule> selectDeptSchedule(String empNo) {
+//		// TODO Auto-generated method stub
+//		return null;
+//	}
 
 
 	

@@ -1,4 +1,155 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<c:set var="path" value="${pageContext.request.contextPath}"/>
+
+<style>
+
+    #page{
+        width: 95%;
+        height: 100%;
+        margin: auto;
+        background-color: white;
+    }
+
+    #title{
+        margin-top: 30px;
+        margin-left: 10%;
+        border: none;
+        width: 80%;
+        height: 50px;
+        resize: none;
+        font-size: 30px;
+        font-weight: 600;
+    }
+    
+    textarea:focus {
+        outline: none;
+    }
+
+    textarea::placeholder {
+        color:rgb(189, 189, 189);
+    }
+
+    #select{
+        width: 100px;
+        height: 23px;
+        font-size: 13px;
+        border: none;
+		display: inline;
+		margin-left: 45px;
+    }
+
+    #file-name{
+        margin-left: 50px;
+    }
+
+    #create, #start, #end, #cate, #file, #line{
+        margin-left: 10%;
+        margin-top: 10px;
+        font-size: 15px;
+    }
+
+    .datepicker-start, .datepicker-end, #now_date{
+        margin-left: 67px;
+        height: 20px;
+        border: none;
+    }
+
+    #line{
+        margin-top: 20px;
+        width: 80%;
+    }
+
+    #con{
+        margin-left: 10%;
+        width: 80%;
+        height: 600px;
+        border: none;
+        height: 600px;
+        resize: none;
+    }
+
+    #submit, #center-bot{
+        margin: auto;
+        width: 100px;
+    }
+
+
+</style>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.css" />
+
+	<!-- Begin Page Content -->
+	       <div class="container-fluid">
+	          <!-- DataTales Example Start-->
+	          <div class="card shadow mb-4">
+	              <div class="card-header py-3">
+	                  <h6 class="m-0 font-weight-bold text-primary" >일정 작성</h6>
+	              </div>
+	              
+	              <div class="card-body">
+									<!--start-->
+									<!-- Page Heading -->
+								    <form action="${path }/calendar/Write" method="post">
+								        <div id="page">
+								            <div>
+								                <textarea id="title" name="title" placeholder="제목 없음"></textarea>
+								            </div>
+								            <div id="create">
+								                작성일 <input id="now_date" type="date" value="">
+												<script>document.getElementById('now_date').valueAsDate = new Date();</script>
+								            </div>
+								            <div id="cate">
+												
+													카테고리  
+													<select name="cateNo" id="select" class="form-select form-select-sm" aria-label=".form-select-sm example">
+															  <option value="1" selected>기타</option>
+															  <option value="2">회의</option>
+															  <option value="3">휴가</option>
+															  <option value="4">반차</option>
+															  <option value="5">외근</option>
+															</select>
+												
+								            </div>
+								            <div id="start">
+								                시작일 <input class="datepicker-start" name="startDate">
+								                <script>
+								                  $(function(){
+								                    $( ".datepicker-start" ).datepicker({ minDate: 0});
+								                    $('.datepicker-start').datepicker('setDate', 'today');
+								                  })
+								                </script>
+								            </div>
+								            <div id="end">
+								                종료일 <input class="datepicker-end" name="endDate">
+								                <script>
+								                  $(function(){
+								                    $('.datepicker-end').datepicker({ minDate: 0});
+								                    $('.datepicker-end').datepicker('setDate', 'today');
+								                  })
+								                </script>
+								            </div>
+
+								            <hr id="line">
+								            <div>
+								                <textarea id="con" placeholder="내용을 입력하세요" name="content"></textarea>
+								            </div>
+								            <div id="center-bot" ><input class="btn btn-primary btn-user btn-block" type="submit" value="작성하기"></div>
+								        </div>
+								    </form>
+									<!--end-->
+							  </div>
+	
+					  </div>
+			<!-- DataTales Example End-->
+		  </div>
+	<!-- End Page Content -->
+	
+
+<%-- <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
@@ -9,21 +160,33 @@
 	value="${sessionScope.SPRING_SECURITY_CONTEXT.authentication.principal }" />
 <!-- <script
 	src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script> -->
-	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js"></script>
-  <head>
-	<title>일정관리</title>
-	
+<script
+	src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js"></script>
+<jsp:include page="/WEB-INF/views/common/header.jsp">
 
-    
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
-    <link href='${path}/resources/fullcalendar-scheduler-5.11.5/lib/main.css' rel='stylesheet' />
-    <script src='${path}/resources/fullcalendar-scheduler-5.11.5/lib/main.js'></script>
-    <script src="${path}/resources/fullcalendar-scheduler-5.11.5/lib/locales/ko.js"></script>
-    <script>
+	<jsp:param value="CommuteMain" name="ATO" />
+</jsp:include>
+<title>일정관리</title>
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
+<link
+	href='${path}/resources/fullcalendar-scheduler-5.11.5/lib/main.css'
+	rel='stylesheet' />
+<script
+	src='${path}/resources/fullcalendar-scheduler-5.11.5/lib/main.js'></script>
+<script
+	src="${path}/resources/fullcalendar-scheduler-5.11.5/lib/locales/ko.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
+<style>
+.swal2-container {
+	z-index: 1100;
+}
+</style>
+<script>
     	//full calenader
 		document.addEventListener('DOMContentLoaded', function() {	
         	const calendarEl = document.getElementById('calendar');
-        	const userId = "${userId}";
+        	const empNo = "${empNo}";
         	// 헤더툴바 출력버튼
         	const headerToolbarBtn = {
         	        left: '오늘 이전,다음',
@@ -32,7 +195,7 @@
        	    };
         	
         	// 관리자 로그인시 회사 일정만 보이게
-        	if (userId === "admin") {
+        	if (empNo === "admin") {
         		headerToolbarBtn.right = '';
             };
         	
@@ -42,8 +205,8 @@
                 eventSources: [
                     {
                         googleCalendarId: 'ko.south_korea#holiday@group.v.calendar.google.com',
-                        color: 'red',
-                        textColor: 'white'
+                        color: 'pink',
+                        textColor: 'black'
                     }
                 ],
                 
@@ -84,19 +247,19 @@
         	const customButtons = {
         		    회사: {
         		        text: '회사',
-        		        click: clickCatCd('00')
+        		        click: clicktypeCd('00')
         		    },
         		    개인: {
         		        text: '개인',
-        		        click: clickCatCd('99')
+        		        click: clicktypeCd('99')
         		    },
         		    부서: {
         		        text: '부서',
-        		        click: clickCatCd('user')
+        		        click: clicktypeCd('user')
         		    },
         		    초기화 : {
         		        text: '초기화',
-        		        click: clickCatCd()
+        		        click: clicktypeCd()
         		    },
         		    이전 : {
         		    	text: '이전',
@@ -147,33 +310,33 @@
 			};
 			
         	// 카테고리 버튼을 눌렀을때 카테고리 값을 버튼에 부여하여 함수실행
-        	function clickCatCd(skdCatCd) {
+        	function clicktypeCd(skdTypeCd) {
     		    return function() {
-    		    	selectedCategory = skdCatCd;
-    		        selectAllSchedule(skdCatCd);
+    		    	selectedCategory = skdTypeCd;
+    		        selectAllSchedule(skdTypeCd);
     		    };
     		};
 
 			// 화사/개인/일정 버튼 누를때마다 값을 바꿈
-			function selectAllSchedule(skdCatCd) {
+			function selectAllSchedule(skdTypeCd) {
 				let eventSourceUrl = '';
 				
-				// skdCatCd에 따라 다른 이벤트 소스 URL 선택
-			    if (skdCatCd === '00') {
+				// skdTypeCd에 따라 다른 이벤트 소스 URL 선택
+			    if (skdTypeCd === '00') {
 			        eventSourceUrl = '${path}/events/adminSchedule';
-			    } else if (skdCatCd === '99') {
+			    } else if (skdTypeCd === '99') {
 			        eventSourceUrl = '${path}/events/personalSchedule';
-			    } else if (skdCatCd === 'user') {
+			    } else if (skdTypeCd === 'employee') {
 			        eventSourceUrl = '${path}/events/deptSchedule';
 			    } else {
 			        eventSourceUrl = '${path}/events/everySchedule';
 			    }
-			    // 'skdCatCd' 값을 서버로 전송하여 일정 목록을 가져오는 ajax 요청
+			    // 'skdTypeCd' 값을 서버로 전송하여 일정 목록을 가져오는 ajax 요청
 			    $.ajax({
 			        url: eventSourceUrl,
 			        type: 'GET',
 			        data: {
-	        			skdCatCd: skdCatCd 
+	        			skdTypeCd: skdTypeCd 
 		        	},
 			        dataType: 'json',
 			        success: function(data) {
@@ -200,31 +363,31 @@
 		            type: 'GET',
 		            url: '${path}/events/scheduleOne',
 		            data: {
-		            	skdNo: event.id 
+		            	scheduleNo: event.id 
 		            }, // 해당 일정의 id 값을 전달
 		            success: function(response) {
 		                $('#scheduleOneModal').modal('show');
 		                $('.skdTitle').text(response.skdTitle);
-		                $('.skdContents').text(response.skdContents);
+		                $('.skdContent').text(response.skdContent);
 		                $('.skdStartYmd').text(response.skdStartYmd);
 		                $('.skdEndYmd').text(response.skdEndYmd);
 		                
 		             	// response 객체에서 일정 정보를 읽어와서 selectedEvent 객체 생성
 		                var selectedEvent = {
-		                    skdNo: response.skdNo,
+		                    scheduleNo: response.scheduleNo,
 		                    skdTitle: response.skdTitle,
-		                    skdContents: response.skdContents,
+		                    skdContent: response.skdContent,
 		                    skdStartYmd: response.skdStartYmd,
 		                    skdEndYmd: response.skdEndYmd,
-		                    skdStartTime: response.skdStartTime,
-		                    skdEndTime: response.skdEndTime,
-		                    skdCatCd: response.skdCatCd,
-		                    skdUserId: response.userId
+		                    skdStart: response.skdStart,
+		                    skdEnd: response.skdEnd,
+		                    skdTypeCd: response.skdTypeCd,
+		                    skdempNo: response.empNo
 		                };
 		             	console.log(selectedEvent);
 		             	
 		             	// 작성자가 일치하지 않으면 수정/삭제 버튼을 숨김
-		             	if(userId !== selectedEvent.skdUserId) {
+		             	if(empNo !== selectedEvent.skdempNo) {
 		                    $('#deleteScheduleBtn').hide();
 		                    $('#editScheduleBtn').hide();
 		                } else {
@@ -250,7 +413,7 @@
 	                            cancelButtonText: '취소'
 	                        }).then((result) => {
 	                            if (result.isConfirmed) {
-		                        	deleteSchedule(selectedEvent.skdNo);
+		                        	deleteSchedule(selectedEvent.scheduleNo);
 		                    	}
 	                        });
 		                });
@@ -267,13 +430,13 @@
 			$('#insertScdBtn').on('click', function() {
 			    // 일정 정보 가져오기
 			    var insertScheduleData = {
-			        skdCatCd: $('input[name="insertCd"]:checked').val(),
+			        skdTypeCd: $('input[name="insertCd"]:checked').val(),
 			        skdTitle: $('input[name="skdTitle"]').val(),
-			        skdContents: $('input[name="skdContents"]').val(),
+			        skdContent: $('input[name="skdContent"]').val(),
 			        skdStartYmd: $('input[name="skdStartYmd"]').val(),
-			        skdStartTime: $('input[name="skdStartTime"]').val(),
+			        skdStart: $('input[name="skdStart"]').val(),
 			        skdEndYmd: $('input[name="skdEndYmd"]').val(),
-			        skdEndTime: $('input[name="skdEndTime"]').val()
+			        skdEnd: $('input[name="skdEnd"]').val()
 			    };
 			
 			    // AJAX를 이용해 일정 등록 요청 보내기
@@ -287,11 +450,11 @@
 			            if (response.success) {
 			            	// 입력 필드 초기화
 			            	$('input[name="skdTitle"]').val('');
-			            	$('input[name="skdContents"]').val('');
+			            	$('input[name="skdContent"]').val('');
 			            	$('input[name="skdStartYmd"]').val('');
-			            	$('input[name="skdStartTime"]').val('');
+			            	$('input[name="skdStart"]').val('');
 			            	$('input[name="skdEndYmd"]').val('');
-			            	$('input[name="skdEndTime"]').val('');
+			            	$('input[name="skdEnd"]').val('');
 			                // 성공한 경우, 모달 닫기
 			                $('#insertScheduleModal').modal('hide');
 			                // 달력 갱신
@@ -307,7 +470,7 @@
 			            }
 			        },
 			        error: function() {
-			            console.error('등록 실패');
+			            console.error('돌아가');
 			        }
 			    });
 			});
@@ -320,9 +483,9 @@
 			    $('#modifyScheduleModal').modal('show');
 			    
 			    // 카테고리 설정
-			    var catCd = selectedEvent.skdCatCd;
+			    var typeCd = selectedEvent.skdTypeCd;
 			    
-			    if (catCd == 99) {
+			    if (typeCd == 99) {
 			        $('#modifyCd2').prop('checked', true);
 			    } else {
 			        $('#modifyCd1').prop('checked', true);
@@ -337,24 +500,24 @@
 				
 				// 상세정보 값 설정
 				$('#modifyTitle').val(titleWithoutCat);
-			    $('#modifyContents').val(selectedEvent.skdContents);
+			    $('#modifyContents').val(selectedEvent.skdContent);
 			    $('#modifyStartYmd').val(skdStartYmd);
-			    $('#modifyStartTime').val(selectedEvent.skdStartTime);
+			    $('#modifyStartTime').val(selectedEvent.skdStart);
 			    $('#modifyEndYmd').val(skdEndYmd);
-			    $('#modifyEndTime').val(selectedEvent.skdEndTime);
+			    $('#modifyEndTime').val(selectedEvent.skdEnd);
 			
 			    $('#modifyScdBtn').off('click');
 		        // 수정 버튼 클릭 시 값 담기
 			    $('#modifyScdBtn').on('click', function () {
-					var skdNo = selectedEvent.skdNo;
-					var userId = selectedEvent.skdUserId;
-					var skdCatCd = $('input[name="modifyCd"]:checked').val();
+					var scheduleNo = selectedEvent.scheduleNo;
+					var empNo = selectedEvent.skdempNo;
+					var skdTypeCd = $('input[name="modifyCd"]:checked').val();
 					var skdTitle = $('#modifyTitle').val();
-					var skdContents = $('#modifyContents').val();
+					var skdContent = $('#modifyContents').val();
 					var skdStartYmd = $('#modifyStartYmd').val();
-					var skdStartTime = $('#modifyStartTime').val();
+					var skdStart = $('#modifyStartTime').val();
 					var skdEndYmd = $('#modifyEndYmd').val();
-					var skdEndTime = $('#modifyEndTime').val();
+					var skdEnd = $('#modifyEndTime').val();
 
 			        // 수정 실행
 				    $.ajax({
@@ -362,15 +525,15 @@
 				        url: '${path}/events/modifySchedule',
 				        contentType: 'application/json', // 전송 데이터 타입 설정
 				        data: JSON.stringify({
-				        	skdNo : skdNo,
-				        	userId : userId,
+				        	scheduleNo : scheduleNo,
+				        	empNo : empNo,
 				        	skdTitle : skdTitle,
-				        	skdCatCd : skdCatCd,
-				        	skdContents : skdContents,
+				        	skdTypeCd : skdTypeCd,
+				        	skdContent : skdContent,
 				        	skdStartYmd : skdStartYmd,
-				        	skdStartTime : skdStartTime,
+				        	skdStart : skdStart,
 				        	skdEndYmd : skdEndYmd,
-				        	skdEndTime : skdEndTime
+				        	skdEnd : skdEnd
 				        }), // 데이터를 JSON 형식으로 변환하여 전송
 				        success: function(response) {
 				        	$('#modifyScheduleModal').modal('hide');
@@ -396,12 +559,12 @@
 			}
 		    
 			// 일정삭제
-		    function deleteSchedule(skdNo) {
+		    function deleteSchedule(scheduleNo) {
 		    	$.ajax({
 		            type: 'POST',
 		            url: '${path}/events/deleteSchedule',
 		            data: {
-		                skdNo: skdNo
+		                scheduleNo: scheduleNo
 		            },
 		            success: function(response) {
 		                if (response.success) {
@@ -424,27 +587,28 @@
 			calendar.render();
 		});
     </script>
-    <style>
-    	#calendar .fc-scroller {
-		  overflow-x: hidden !important;
-		  overflow-y: auto;
-		}
-		/* 일요일 날짜 빨간색 */
-		.fc-day-sun a {
-		  color: red;
-		  text-decoration: none;
-		}
-		
-		/* 토요일 날짜 파란색 */
-		.fc-day-sat a {
-		  color: blue;
-		  text-decoration: none;
-		}
-		.fc-license-message{
-			display: none;
-		}
-    </style>
-    <script>
+<style>
+#calendar .fc-scroller {
+	overflow-x: hidden !important;
+	overflow-y: auto;
+}
+/* 일요일 날짜 빨간색 */
+.fc-day-sun a {
+	color: red;
+	text-decoration: none;
+}
+
+/* 토요일 날짜 파란색 */
+.fc-day-sat a {
+	color: blue;
+	text-decoration: none;
+}
+
+.fc-license-message {
+	display: none;
+}
+</style>
+<script>
 	$(document).ready(function() {
 		// 공통 정규식
 	    var titleRegex = /^[A-Za-z0-9가-힣!@#$%^&*()_+{}\[\]:;<>,.?~\s]{1,10}$/;
@@ -468,7 +632,7 @@
 	    });
 
 	    // 내용 입력란 blur 함수
-	    $("#modifyContents, input[name='skdContents']").blur(function() {
+	    $("#modifyContents, input[name='skdContent']").blur(function() {
 	        var input = $(this);
 	        var value = input.val();
 
@@ -485,11 +649,11 @@
 	    $("#insertScdBtn, #modifyScdBtn").click(function() {
 	        // 모든 입력란의 값을 가져옵니다.
 	        var titleInput = $("#modifyTitle, input[name='skdTitle']");
-	        var contentsInput = $("#modifyContents, input[name='skdContents']");
+	        var contentsInput = $("#modifyContents, input[name='skdContent']");
 	        var startYmdInput = $("#modifyStartYmd, input[name='skdStartYmd']");
 	        var endYmdInput = $("#modifyEndYmd, input[name='skdEndYmd']");
-	        var startTimeInput = $("#modifyStartTime, input[name='skdStartTime']");
-	        var endTimeInput = $("#modifyEndTime, input[name='skdEndTime']");
+	        var startTimeInput = $("#modifyStartTime, input[name='skdStart']");
+	        var endTimeInput = $("#modifyEndTime, input[name='skdEnd']");
 
 	        // 입력값이 빈 값인지 확인합니다.
 	        var isEmpty = titleInput.val().trim() === "" ||
@@ -511,38 +675,20 @@
 	    });
 	});
 	</script>
-    
-	</head>
 
-	<body>
+</head>
+
+<body>
 	<!-- Layout wrapper -->
 	<div class="layout-wrapper layout-content-navbar">
 		<!-- Layout container -->
 		<div class="layout-container">
-			<!-- Menu -->
-			<aside id="layout-menu" class="layout-menu menu-vertical menu bg-menu-theme">
-				<div class="app-brand demo">
-					<a href="${pageContext.request.contextPath}">
-						<img src="${pageContext.request.contextPath}/assets/img/logo/yeyebooks_logo.png" style="width:100%">
-					</a>
-				</div>
-	
-				<div class="menu-inner-shadow"></div>
-				
-				<ul class="menu-inner py-1">
-		            <li class="menu-item active">
-		              <a class="menu-link">
-		                <i class='menu-icon tf-icons bx bx-calendar'></i>
-		                일정
-		              </a>
-		            </li>
-	          	</ul>
-	        </aside>
-	        <!-- / Menu -->
-	        
+
+			<!-- / Menu -->
+
 			<div class="layout-page">
 				<!-- Navbar -->
-				<%-- <jsp:include page="./inc/navbar.jsp"></jsp:include> --%>
+				<jsp:include page="./inc/navbar.jsp"></jsp:include>
 				<!-- / Navbar -->
 
 				<!-- Content wrapper -->
@@ -556,184 +702,224 @@
 									<div class="card-body">
 										<div id="calendar"></div>
 										<!-- 상세보기 모달창 -->
-										<div class="modal fade" id="scheduleOneModal" tabindex="-1" aria-hidden="true">
-										    <div class="modal-dialog modal-lg" role="document">
-										        <div class="modal-content">
-										            <div class="modal-header">
-										                <h3 class="modal-title" id="exampleModalLabel3"><strong>일정 상세</strong></h3>
-										                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-										            </div>
-										            <div class="modal-body">
-										            	<div class="row">
-										            		<div class="row mb-3">
-							                                	<label class="form-label">제목
-							                                		<span class="form-control skdTitle">제목</span>
-							                                	</label>
-							                                </div>
-								                            <div class="row mb-3">
-							                                	<label class="form-label">내용
-								                                	<span class="form-control skdContents"></span>
-							                                	</label>
-							                                </div>
-							                                <div class="row g-1">
-								                                <div class="col mb-0">
-								                                	<label for="skdStartY" class="form-label">시작일</label>
-								                                	<span id="skdStartY" class="form-control skdStartYmd"></span>
-								                                </div>
-								                                <div class="col mb-0">
-								                                    <label for="skdEndY" class="form-label">종료일</label>
-								                                    <span id="skdEndY" class="form-control skdEndYmd"></span>
+										<div class="modal fade" id="scheduleOneModal" tabindex="-1"
+											aria-hidden="true">
+											<div class="modal-dialog modal-lg" role="document">
+												<div class="modal-content">
+													<div class="modal-header">
+														<h3 class="modal-title" id="exampleModalLabel3">
+															<strong>일정 상세</strong>
+														</h3>
+														<button type="button" class="btn-close"
+															data-bs-dismiss="modal" aria-label="Close"></button>
+													</div>
+													<div class="modal-body">
+														<div class="row">
+															<div class="row mb-3">
+																<label class="form-label">제목 <span
+																	class="form-control skdTitle">제목</span>
+																</label>
+															</div>
+															<div class="row mb-3">
+																<label class="form-label">내용 <span
+																	class="form-control skdContent"></span>
+																</label>
+															</div>
+															<div class="row g-1">
+																<div class="col mb-0">
+																	<label for="skdStartY" class="form-label">시작일</label> <span
+																		id="skdStartY" class="form-control skdStartYmd"></span>
 																</div>
-								                            </div>
-										                </div>
-										            </div>
-										            <div class="modal-footer">
-						                                <button type="button" class="btn btn-primary" id="editScheduleBtn">수정</button>
-						                                <button type="button" class="btn btn-primary" id="deleteScheduleBtn">삭제</button>
-											            <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">닫기</button>
-										            </div>
-										        </div>
-										    </div>
+																<div class="col mb-0">
+																	<label for="skdEndY" class="form-label">종료일</label> <span
+																		id="skdEndY" class="form-control skdEndYmd"></span>
+																</div>
+															</div>
+														</div>
+													</div>
+													<div class="modal-footer">
+														<button type="button" class="btn btn-primary"
+															id="editScheduleBtn">수정</button>
+														<button type="button" class="btn btn-primary"
+															id="deleteScheduleBtn">삭제</button>
+														<button type="button" class="btn btn-outline-secondary"
+															data-bs-dismiss="modal">닫기</button>
+													</div>
+												</div>
+											</div>
 										</div>
-										
+
 										<!-- 수정하기 모달창 -->
-										<div class="modal fade" id="modifyScheduleModal" tabindex="-1" aria-hidden="true">
-										    <div class="modal-dialog modal-lg" role="document">
-										        <div class="modal-content">
-										            <div class="modal-header">
-										                <h3 class="modal-title" id="exampleModalLabel3"><strong>일정 수정</strong></h3>
-										                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-										            </div>
-										            <div class="modal-body">
-										            	<div class="row">
-										            		<c:choose>
-										            			<c:when test="${userId == 'admin'}">
-										            				<label class="form-label">카테고리
-									                                	<input type="radio" id="modifyCd" name="modifyCd" value="00" checked="checked">회사
-										            				</label>
-										            			</c:when>
-										            			<c:otherwise>
-												            		<div class="row mb-3">
-									                                	<label class="form-label">카테고리
-										                                	<input type="radio" id="modifyCd1" name="modifyCd" value="user">부서
-									                                		<input type="radio" id="modifyCd2" name="modifyCd" value="99">개인
-									                                	</label>
-									                                </div>
-										            			</c:otherwise>
-										            		</c:choose>
-										            		<div class="row mb-3">
-							                                	<label class="form-label">제목
-							                                		<input type="text" class="form-control" id="modifyTitle" name="modifyTitle" placeholder="제목을 입력하세요" required="required">
-							                                	</label>
-							                                </div>
-								                            <div class="row mb-3">
-							                                	<label class="form-label">내용
-								                                	<input type="text" class="form-control" id="modifyContents" name="modifyContents" placeholder="내용을 입력하세요" required="required">
-							                                	</label>
-							                                </div>
-							                                <div class="row g-1">
-								                                <div class="col mb-0 row g-1">
-								                                	<label class="form-label">시작일
-									                                	<div class="col mb-1">
-										                                	<input type="date" id="modifyStartYmd" class="form-control" required="required">
-										                                </div>	
-										                                <div class="col mb-0">
-										                                	<input type="time" id="modifyStartTime" class="form-control" required="required">
-									                                	</div>
-								                                	</label>
-								                                </div>
-								                                <div class="col mb-0 row g-1">
-								                                    <label class="form-label">종료일
-								                                		<div class="col mb-1">
-										                                	<input type="date" id="modifyEndYmd" class="form-control" required="required">
-							                                			</div>
-								                                		<div class="col mb-0">
-										                                	<input type="time" id="modifyEndTime"class="form-control" required="required">
-							                                			</div>
-								                                    </label>
+										<div class="modal fade" id="modifyScheduleModal" tabindex="-1"
+											aria-hidden="true">
+											<div class="modal-dialog modal-lg" role="document">
+												<div class="modal-content">
+													<div class="modal-header">
+														<h3 class="modal-title" id="exampleModalLabel3">
+															<strong>일정 수정</strong>
+														</h3>
+														<button type="button" class="btn-close"
+															data-bs-dismiss="modal" aria-label="Close"></button>
+													</div>
+													<div class="modal-body">
+														<div class="row">
+															<c:choose>
+																<c:when test="${empNo == 'admin'}">
+																	<label class="form-label">카테고리 <input
+																		type="radio" id="modifyCd" name="modifyCd" value="00"
+																		checked="checked">회사
+																	</label>
+																</c:when>
+																<c:otherwise>
+																	<div class="row mb-3">
+																		<label class="form-label">카테고리 <input
+																			type="radio" id="modifyCd1" name="modifyCd"
+																			value="user">부서 <input type="radio"
+																			id="modifyCd2" name="modifyCd" value="99">개인
+																		</label>
+																	</div>
+																</c:otherwise>
+															</c:choose>
+															<div class="row mb-3">
+																<label class="form-label">제목 <input type="text"
+																	class="form-control" id="modifyTitle"
+																	name="modifyTitle" placeholder="제목을 입력하세요"
+																	required="required">
+																</label>
+															</div>
+															<div class="row mb-3">
+																<label class="form-label">내용 <input type="text"
+																	class="form-control" id="modifyContents"
+																	name="modifyContents" placeholder="내용을 입력하세요"
+																	required="required">
+																</label>
+															</div>
+															<div class="row g-1">
+																<div class="col mb-0 row g-1">
+																	<label class="form-label">시작일
+																		<div class="col mb-1">
+																			<input type="date" id="modifyStartYmd"
+																				class="form-control" required="required">
+																		</div>
+																		<div class="col mb-0">
+																			<input type="time" id="modifyStartTime"
+																				class="form-control" required="required">
+																		</div>
+																	</label>
 																</div>
-								                            </div>
-										                </div>
-										            </div>
-										            <div class="modal-footer">
-						                                <button type="button" class="btn btn-primary" id="modifyScdBtn">수정</button>
-						                                <button type="button" class="btn btn-primary" id="cancelModifyBtn">취소</button>
-											            <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">닫기</button>
-										            </div>
-										        </div>
-										    </div>
+																<div class="col mb-0 row g-1">
+																	<label class="form-label">종료일
+																		<div class="col mb-1">
+																			<input type="date" id="modifyEndYmd"
+																				class="form-control" required="required">
+																		</div>
+																		<div class="col mb-0">
+																			<input type="time" id="modifyEndTime"
+																				class="form-control" required="required">
+																		</div>
+																	</label>
+																</div>
+															</div>
+														</div>
+													</div>
+													<div class="modal-footer">
+														<button type="button" class="btn btn-primary"
+															id="modifyScdBtn">수정</button>
+														<button type="button" class="btn btn-primary"
+															id="cancelModifyBtn">취소</button>
+														<button type="button" class="btn btn-outline-secondary"
+															data-bs-dismiss="modal">닫기</button>
+													</div>
+												</div>
+											</div>
 										</div>
-										
+
 										<!-- 작성하기 모달창 -->
-										<div class="modal fade" id="insertScheduleModal" tabindex="-1" aria-hidden="true">
-										    <div class="modal-dialog modal-lg" role="document">
-										        <div class="modal-content">
-										            <div class="modal-header">
-										                <h3 class="modal-title" id="exampleModalLabel3"><strong>일정 추가</strong></h3>
-										                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-										            </div>
-										            <div class="modal-body">
-										            	<div class="row">
-										            		<c:choose>
-										            			<c:when test="${userId == 'admin'}">
-										            				<label for="titleSm" class="form-label">카테고리</label>
-								                                	<div class="col mb-0">
-									                                	<input type="radio" id="titleSm" name="insertCd" class="insertCatCd" value="00" checked="checked">회사
-									                                </div>	
-										            			</c:when>
-										            			<c:otherwise>
-												            		<div class="row mb-3">
-									                                	<label for="titleSm" class="form-label">카테고리</label>
-									                                	<div class="col mb-0">
-										                                	<input type="radio" id="titleSm" name="insertCd" class="insertCatCd" value="user">부서
-										                                </div>	
-										                                <div class="col mb-0">
-									                                		<input type="radio" id="titleSm" name="insertCd" class="insertCatCd" value="99">개인
-									                                	</div>
-									                                </div>
-										            			</c:otherwise>
-										            		</c:choose>
-										            		<div class="row mb-3">
-							                                	<label class="form-label">제목
-							                                		<input type="text" class="form-control" name="skdTitle" placeholder="제목을 입력하세요" required="required">
-							                                	</label>
-							                                </div>
-								                            <div class="row mb-3">
-							                                	<label class="form-label">내용
-								                                	<input type="text" class="form-control" name="skdContents"placeholder="내용을 입력하세요" required="required">
-							                                	</label>
-							                                </div>
-							                                <div class="row g-1">
-								                                <div class="col mb-0 row g-1">
-								                                	<label for="skdStartY" class="form-label">시작일</label>
-								                                	<div class="col mb-5">
-									                                	<input type="date" id="insertSkdStartY" name="skdStartYmd" class="form-control" required="required">
-									                                </div>	
-									                                <div class="col mb-0">
-									                                	<input type="time" name="skdStartTime" class="form-control" required="required">
-								                                	</div>
-								                                </div>
-								                                <div class="col mb-0 row g-1">
-								                                    <label for="skdEndY" class="form-label">종료일</label>
-							                                		<div class="col mb-5">
-									                                	<input type="date" id="insertSkdEndY" name="skdEndYmd" class="form-control" required="required">
-						                                			</div>
-							                                		<div class="col mb-0">
-									                                	<input type="time" name="skdEndTime" class="form-control" required="required">
-						                                			</div>
+										<div class="modal fade" id="insertScheduleModal" tabindex="-1"
+											aria-hidden="true">
+											<div class="modal-dialog modal-lg" role="document">
+												<div class="modal-content">
+													<div class="modal-header">
+														<h3 class="modal-title" id="exampleModalLabel3">
+															<strong>일정 추가</strong>
+														</h3>
+														<button type="button" class="btn-close"
+															data-bs-dismiss="modal" aria-label="Close"></button>
+													</div>
+													<div class="modal-body">
+														<div class="row">
+															<c:choose>
+																<c:when test="${empNo == 'admin'}">
+																	<label for="titleSm" class="form-label">카테고리</label>
+																	<div class="col mb-0">
+																		<input type="radio" id="titleSm" name="insertCd"
+																			class="inserttypeCd" value="00" checked="checked">회사
+																	</div>
+																</c:when>
+																<c:otherwise>
+																	<div class="row mb-3">
+																		<label for="titleSm" class="form-label">카테고리</label>
+																		<div class="col mb-0">
+																			<input type="radio" id="titleSm" name="insertCd"
+																				class="inserttypeCd" value="user">부서
+																		</div>
+																		<div class="col mb-0">
+																			<input type="radio" id="titleSm" name="insertCd"
+																				class="inserttypeCd" value="99">개인
+																		</div>
+																	</div>
+																</c:otherwise>
+															</c:choose>
+															<div class="row mb-3">
+																<label class="form-label">제목 <input type="text"
+																	class="form-control" name="skdTitle"
+																	placeholder="제목을 입력하세요" required="required">
+																</label>
+															</div>
+															<div class="row mb-3">
+																<label class="form-label">내용 <input type="text"
+																	class="form-control" name="skdContent"
+																	placeholder="내용을 입력하세요" required="required">
+																</label>
+															</div>
+															<div class="row g-1">
+																<div class="col mb-0 row g-1">
+																	<div class="col mb-5">
+																		<input type="date" id="insertSkdStartY"
+																			name="skdStartYmd" class="form-control"
+																			required="required">
+																	</div>
+																	<div class="col mb-0">
+																		<input type="time" name="skdStart"
+																			class="form-control" required="required">
+																	</div>
 																</div>
-								                            </div>
-										                </div>
-										            </div>
-										            <div class="modal-footer">
-						                                <button type="button" class="btn btn-primary" id="insertScdBtn">등록</button>
-						                                <button type="button" class="btn btn-primary" id="cancelInsertBtn">취소</button>
-											            <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">닫기</button>
-										            </div>
-										        </div>
-										    </div>
+																<div class="col mb-0 row g-1">
+																	<label for="skdEndY" class="form-label">종료일</label>
+																	<div class="col mb-5">
+																		<input type="date" id="insertSkdEndY" name="skdEndYmd"
+																			class="form-control" required="required">
+																	</div>
+																	<div class="col mb-0">
+																		<input type="time" name="skdEnd" class="form-control"
+																			required="required">
+																	</div>
+																</div>
+															</div>
+														</div>
+													</div>
+													<div class="modal-footer">
+														<button type="button" class="btn btn-primary"
+															id="insertScdBtn">등록</button>
+														<button type="button" class="btn btn-primary"
+															id="cancelInsertBtn">취소</button>
+														<button type="button" class="btn btn-outline-secondary"
+															data-bs-dismiss="modal">닫기</button>
+													</div>
+												</div>
+											</div>
 										</div>
-										
+
 									</div>
 								</div>
 							</div>
@@ -741,11 +927,10 @@
 					</div>
 				</div>
 				<!-- Overlay -->
-			 	<div class="layout-overlay layout-menu-toggle"></div>
+				<div class="layout-overlay layout-menu-toggle"></div>
 			</div>
 		</div>
 	</div>
-    <!-- / Layout wrapper -->
-
-	</body>
-</html>
+	<!-- / Layout wrapper -->
+	<script async defer src="https://buttons.github.io/buttons.js"></script>
+	<jsp:include page="/WEB-INF/views/common/footer.jsp" /> --%>

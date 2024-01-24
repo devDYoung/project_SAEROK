@@ -292,8 +292,13 @@ public class CommuteController {
 					.body(time);
 		}
 		
+		@GetMapping("/empDeptView.do")
+		public String empDeptView(@RequestParam String code, Model model) {
+			model.addAttribute("deptCode", code);
+			return "commute/commuteList";
+		}
 		
-		
+		//부서별 월,주간 근태현황
 		@ResponseBody
 		@GetMapping("/selectDeptWork.do")
 		public ResponseEntity<?> selectDeptWork(String dateText, String deptCode) {
