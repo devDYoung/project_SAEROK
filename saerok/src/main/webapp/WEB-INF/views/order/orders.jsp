@@ -1,6 +1,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
+<c:set var="path" value="${pageContext.request.contextPath}" />
 <jsp:include page="/WEB-INF/views/common/header.jsp" />
 <c:set var="loginEmployee"
 	value="${sessionScope.SPRING_SECURITY_CONTEXT.authentication.principal }" />
@@ -213,7 +214,7 @@
 		            const left = (window.screen.width / 2) - (width / 2);
 		            const top = (window.screen.height / 2) - (height / 2);
 
-		            window.open('/orders/' + orderId, '_blank', 'width=' + width + ',height=' + height + ',top=' + top + ',left=' + left);
+		            window.open('${path}/orders/' + orderId, '_blank', 'width=' + width + ',height=' + height + ',top=' + top + ',left=' + left);
 		        });
 		    });
 		});

@@ -1,0 +1,361 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="schedule">
+
+	<resultMap id="ScheduleMap"
+		type="com.saerok.jy.schedule.dto.Schedule">
+		<result property="scheduleNo" column="SCHEDULE_NO" />
+		<result property="skdTitle" column="SKD_TITLE" />
+		<result property="skdContent" column="SKD_CONTENT" />
+		<result property="skdStart" column="SKD_START" />
+		<result property="skdEnd" column="SKD_END" />
+		<result property="skdTypeCd" column="SKD_TYPE_CD" />
+		<result property="deptCode" column="DEPT_CODE" />
+		<result property="empNo" column="EMP_NO" />
+		<result property="category" column="CATEGORY" />
+		<result property="star" column="STAR" />
+		<result property="regDtime" column="REG_DTIME" />
+		<result property="modDtime" column="MOD_DTIME" />
+		
+
+	</resultMap> 
+
+	<!-- 일정 작성 -->
+	<insert id="insertSkd">
+		INSERT INTO SCHEDULE 
+		( 
+			SCHEDULE_NO
+			,CATEGORY
+			,SKD_TITLE
+			,SKD_CONTENT
+			,EMP_NO
+			,SKD_START
+			,SKD_END 
+		) 
+		VALUES 
+		( 
+			SEQ_SCHEDULE_NO.NEXTVAL 
+			, #{category} 
+			, #{skdTitle}
+			, #{skdContent}
+			, #{empNo} 
+			, #{skdStart}
+			, #{skdEnd}
+		) 
+	</insert>
+	
+	<!-- 모달에서 일정 작성 -->
+	<insert id="insertModalSkd">
+	INSERT INTO SCHEDULE 
+		( 
+			SCHEDULE_NO
+			,CATEGORY
+			,SKD_TITLE
+			,SKD_CONTENT
+			,EMP_NO
+			,SKD_START
+			,SKD_END 
+		) 
+		VALUES 
+		( 
+			SEQ_SCHEDULE_NO.NEXTVAL 
+			, #{category} 
+			, #{skdTitle}
+			, #{skdContent}
+			, #{empNo} 
+			, #{skdStart}
+			, #{skdEnd}
+		) 
+	</insert>
+	
+	
+	<!-- 일정 삭제 -->
+	<update id="deleteCalendar">
+		DELETE FROM schedule
+		WHERE SCHEDULE_No = #{scheduleNo}
+	</update>
+	
+	
+	<!-- 일정 수정 -->
+	<update id="updateOne">
+		UPDATE schedule
+			SET
+				SKD_TITLE = #{skdTitle}
+				, CATEGORY = #{category}
+				, SKD_CONTENT = #{skdContent}
+				, SKD_START = #{skdStart}
+				, SKD_END = #{skdEnd}
+				, MOD_DTIME = SYSDATE
+			WHERE SCHEDULE_NO = #{scheduleNo}
+	</update>
+
+
+	<!-- 일정 조회 -->
+	<select id="selectList" resultType="map">
+		SELECT 
+		        S.SCHEDULE_NO
+		        ,S.CATEGORY
+		        ,S.SKD_TITLE
+		        ,S.SKD_CONTENT
+		        ,TO_CHAR(S.REG_DTIME, 'YYYY-MM-DD') AS REG_DTIME
+		        ,TO_CHAR(S.MOD_DTIME, 'YYYY-MM-DD') AS MOD_DTIME
+		        ,TO_CHAR(S.SKD_START, 'YYYY-MM-DD') AS SKD_START
+		        ,TO_CHAR(S.SKD_END, 'YYYY-MM-DD') AS SKD_END
+		        ,S.SKD_TYPE_CD
+		        ,E.EMP_NO AS WRITER
+		        ,S.STAR
+		    FROM SCHEDULE S
+		    JOIN EMPLOYEE E
+		    ON S.EMP_NO = E.EMP_NO
+		    WHERE S.SKD_TYPE_CD = '02'
+		    AND E.DEPT_CODE = #{DEPT_CODE}
+		    ORDER BY S.SKD_START ASC
+	</select>
+	
+	
+	<!-- 일정 갯수 -->
+	<select id="selectCountAll" resultType="_int">
+		SELECT COUNT(SCHEDULE_NO)
+		FROM SCHEDULE
+		<!-- WHERE STATUS = 'Y' -->
+	</select>
+	
+	
+	<!-- 일정 상세 조회 -->
+	<select id="selectOne" resultType="map">
+		SELECT
+			 S.SCHEDULE_NO
+		        ,S.CATEGORY
+		        ,S.SKD_TITLE
+		        ,S.SKD_CONTENT
+		        ,TO_CHAR(S.REG_DTIME, 'YYYY-MM-DD') AS REG_DTIME
+		        ,TO_CHAR(S.MOD_DTIME, 'YYYY-MM-DD') AS MOD_DTIME
+		        ,TO_CHAR(S.SKD_START, 'YYYY-MM-DD') AS SKD_START
+		        ,TO_CHAR(S.SKD_END, 'YYYY-MM-DD') AS SKD_END
+		        ,S.SKD_TYPE_CD
+		        ,E.EMP_NO AS WRITER
+		FROM SCHEDULE S
+		 JOIN EMPLOYEE E
+		ON S.EMP_NO = E.EMP_NO
+		WHERE S.SCHEDULE_NO = #{scheduleNo}
+		<!-- AND C.STATUS = 'Y' -->
+	</select>
+	
+	
+	<!-- 캘린더에 일정 출력 -->
+	<select id="calendarList" resultType="map">
+		SELECT
+			 S.SCHEDULE_NO
+		        ,S.CATEGORY
+		        ,S.SKD_TITLE
+		        ,S.SKD_CONTENT
+		        ,TO_CHAR(S.REG_DTIME, 'YYYY-MM-DD') AS REG_DTIME
+		        ,TO_CHAR(S.MOD_DTIME, 'YYYY-MM-DD') AS MOD_DTIME
+		        ,TO_CHAR(S.SKD_START, 'YYYY-MM-DD') AS SKD_START
+		        ,TO_CHAR(S.SKD_END, 'YYYY-MM-DD') AS SKD_END
+		        ,S.SKD_TYPE_CD
+		        ,E.EMP_NO AS WRITER
+		FROM SCHEDULE S
+		 JOIN EMPLOYEE E
+		ON S.EMP_NO = E.EMP_NO
+		WHERE S.SKD_TYPE_CD = '02'
+		AND E.DEPT_CODE = #{DEPT_CODE}
+	</select>
+	
+	
+	<!-- 중요 일정 등록 -->
+	<select id="selectStar" resultType="string">
+		SELECT STAR
+		FROM schedule
+		WHERE SCHEDULE_NO = #{scheduleNo}
+	</select>
+	
+	
+	<!-- 중요 일정 수정 -->
+	<update id="updateStar">
+		UPDATE schedule
+		SET STAR = #{star}
+		WHERE SCHEDULE_NO = #{scheduleNo}
+	</update>
+	
+	
+	<!-- 중요 일정 목록 조회 -->
+	<select id="selectStarList" resultType="map">
+		SELECT
+			 S.SCHEDULE_NO
+		        ,S.CATEGORY
+		        ,S.SKD_TITLE
+		        ,S.SKD_CONTENT
+		        ,TO_CHAR(S.REG_DTIME, 'YYYY-MM-DD') AS REG_DTIME
+		        ,S.MOD_DTIME
+		        ,TO_CHAR(S.SKD_START, 'YYYY-MM-DD') AS SKD_START
+		        ,TO_CHAR(S.SKD_END, 'YYYY-MM-DD') AS SKD_END
+		        ,S.SKD_TYPE_CD
+		        ,E.EMP_NO AS WRITER
+		FROM SCHEDULE S
+		 JOIN EMPLOYEE E
+		    ON S.EMP_NO = E.EMP_NO
+		    WHERE S.SKD_TYPE_CD
+		    AND S.STAR = 'Y'
+		    AND S.EMP_NO = #{empNo}
+		    ORDER BY C.SKD_START ASC		
+	</select>
+	
+	
+
+<!--  	<select id="selectTodaySchedule">
+		SELECT skd_title skdTitle, skd_start skdStart, '개인' skdCategory
+		FROM schedule
+		WHERE skd_Type_Cd = (SELECT CODE FROM common_code WHERE group_code = 'S001' AND code_nm = '개인')
+		AND emp_No = #{empNo}
+		AND #{todayYmd} BETWEEN skd_start_ymd AND skd_end_ymd
+		UNION 
+		SELECT skd_title skdTitle, skd_start skdStart, '전체' skdCategory
+		FROM schedule
+		WHERE skd_Type_Cd = (SELECT CODE FROM common_code WHERE group_code = 'S001' AND code_nm = '전체')
+		AND #{todayYmd} BETWEEN skd_start_ymd AND skd_end_ymd
+		UNION
+		SELECT skd_title skdTitle, skd_start skdStart, '부서' skdCategory
+		FROM schedule
+		WHERE skd_Type_Cd = (SELECT dept_cd FROM user WHERE emp_No = #{empNo})
+		AND #{todayYmd} BETWEEN skd_start_ymd AND skd_end_ymd
+		ORDER BY skdStart
+	</select>
+	
+	아이디 별 선택한 달의 전체 일정조회(선택값에 따라 회사/부서/개인 일정 조회)
+	<select id="selectMonthSchedule">
+		SELECT 
+			SCHEDULE_NO scheduleNo,
+			emp_No empNo,
+			skd_Type_Cd skdTypeCd,
+			skd_start_ymd skdStartYmd,
+			skd_title skdTitle,
+			skd_end_ymd skdEndYmd,
+			skd_start skdStart,
+			skd_end skdEnd,
+			skd_contents skdContent,
+			c_date cDate,
+			regDtime uDate
+		FROM schedule
+		WHERE 
+			skd_Type_Cd = '00' or
+			(emp_No = #{empNo} AND skd_Type_Cd = '99') or
+			skd_Type_Cd = (SELECT code FROM common_code WHERE group_code = 'D001' AND code = (SELECT dept_cd FROM user WHERE emp_No = #{empNo}))
+	</select>
+	
+	아이디별 각각 선택 일정 조회
+	회사일정
+	<select id="selectAdminSchedule">
+		SELECT 
+			SCHEDULE_NO scheduleNo,
+			emp_No empNo,
+			skd_Type_Cd skdTypeCd,
+			skd_start_ymd skdStartYmd,
+			skd_title skdTitle,
+			skd_end_ymd skdEndYmd,
+			skd_start skdStart,
+			skd_end skdEnd,
+			skd_contents skdContent,
+			c_date cDate,
+			regDtime uDate
+		FROM schedule
+		WHERE 
+			skd_Type_Cd = '00'
+	</select>
+	개인일정
+	<select id="selectPersonalSchedule">
+		SELECT 
+			SCHEDULE_NO scheduleNo,
+			emp_No empNo,
+			skd_Type_Cd skdTypeCd,
+			skd_start_ymd skdStartYmd,
+			skd_title skdTitle,
+			skd_end_ymd skdEndYmd,
+			skd_start skdStart,
+			skd_end skdEnd,
+			skd_contents skdContent,
+			c_date cDate,
+			regDtime uDate
+		FROM schedule
+		WHERE 
+			skd_Type_Cd = '99'
+		AND emp_No = #{empNo}
+	</select>
+	부서일정
+	<select id="selectDeptSchedule">
+		SELECT 
+			SCHEDULE_NO scheduleNo,
+			emp_No empNo,
+			skd_Type_Cd skdTypeCd,
+			skd_start_ymd skdStartYmd,
+			skd_title skdTitle,
+			skd_end_ymd skdEndYmd,
+			skd_start skdStart,
+			skd_end skdEnd,
+			skd_contents skdContent,
+			c_date cDate,
+			regDtime uDate
+		FROM schedule
+		WHERE 
+			skd_Type_Cd = (SELECT code FROM common_code WHERE group_code = 'D001' AND code = (SELECT dept_cd FROM Employee WHERE emp_No = #{empNo}))
+	</select>
+	
+	선택날짜 일정상세
+	<select id="selectDateSchedule">
+		SELECT 
+			SCHEDULE_NO scheduleNo,
+			emp_No empNo,
+			skd_Type_Cd skdTypeCd,
+			skd_title skdTitle,
+			skd_start_ymd skdStartYmd,
+			skd_end_ymd skdEndYmd,
+			skd_start skdStart,
+			skd_end skdEnd,
+			skd_content skdContent,
+			mod_Dtime modDtime,
+			reg_Dtime regDtime
+		FROM schedule
+		WHERE
+			SCHEDULE_NO = #{scheduleNo}
+	</select>
+	
+	일정등록
+<insert id="insertSchedule" parameterType="com.saerok.jy.schedule.dto.Schedule">
+    INSERT INTO Schedule
+        (emp_No, schedule_No, skd_Type_Cd, skd_title, category, skd_start_ymd, skd_end_ymd, skd_start, skd_end, skd_content, dept_code, skd_impt, mod_Dtime, reg_Dtime)
+    VALUES 
+        (#{empNo}, #{scheduleNo}, #{skdTypeCd}, #{skdTitle}, #{category}, #{skdStartYmd}, #{skdEndYmd}, #{skdStart}, #{skdEnd}, #{skdContent}, #{deptCode}, #{skdImpt}, #{modDtime}, #{regDtime})
+</insert>
+	
+	등록시 사용자 부서코드 설정
+	<select id="setUserDept">
+		SELECT CODE
+		FROM DEPARTMENT
+		WHERE 
+			group_code = '100' 
+		AND CODE = (SELECT dept_code FROM EMPLOYEE WHERE emp_No = #{empNo})
+	</select>
+	
+	일정수정
+	<update id="modifySchedule">
+		UPDATE schedule
+		SET
+			skd_Type_Cd = #{skdTypeCd}, 
+			skd_title = #{skdTitle}, 
+			skd_start_ymd = #{skdStartYmd}, 
+			skd_end_ymd = #{skdEndYmd}, 
+			skd_start = #{skdStart}, 
+			skd_end = #{skdEnd}, 
+			skd_contents = #{skdContent}, 
+			regDtime = NOW()
+		WHERE 
+			SCHEDULE_NO = #{scheduleNo} 
+	</update>
+	
+	일정삭제
+	<delete id="deleteSchedule">
+		DELETE FROM schedule
+		WHERE SCHEDULE_No = #{scheduleNo}
+	</delete> -->
+
+</mapper> 

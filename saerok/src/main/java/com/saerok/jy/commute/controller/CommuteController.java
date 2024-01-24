@@ -49,7 +49,7 @@ public class CommuteController {
 	private EmployeeService employeeService;
 	
 	DateTimeFormatter dayff = DateTimeFormatter.ofPattern("yy-MM"); //날짜 패턴 변경
-	DateTimeFormatter dayfff = DateTimeFormatter.ofPattern("yy/MM"); //날짜 패턴 변경
+	DateTimeFormatter dayfff = DateTimeFormatter.ofPattern("yy-MM"); //날짜 패턴 변경
 	DateTimeFormatter dayf = DateTimeFormatter.ofPattern("yy-MM-dd"); //날짜 패턴 변경
 	LocalDateTime now = LocalDateTime.now(); //현재 시간
 	
@@ -252,8 +252,6 @@ public class CommuteController {
 			param.put("start", start);
 			param.put("end", end);
 			List<Commute> weekList = commuteService.selectWeekDatas(param);
-	
-			
 			
 //			return ResponseEntity.ok()
 //					.header(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_JSON.toString())
@@ -275,6 +273,7 @@ public class CommuteController {
 			param.put("start", start);
 			param.put("end", end);
 			param.put("monthTime", monthTime);
+			System.out.println(start+end+monthTime);
 			
 			// 금주 누적시간 가져오기
 			int weekTotalTime = commuteService.weekTotalTime(param);
@@ -297,8 +296,13 @@ public class CommuteController {
 					.body(time);
 		}
 		
+		@GetMapping("/empDeptView.do")
+		public String empDeptView(@RequestParam String code, Model model) {
+			model.addAttribute("deptCode", code);
+			return "commute/commuteList";
+		}
 		
-		
+		//부서별 월,주간 근태현황
 		@ResponseBody
 		@GetMapping("/selectDeptWork.do")
 		public ResponseEntity<?> selectDeptWork(String dateText, String deptCode) {
@@ -379,10 +383,6 @@ public class CommuteController {
 		@ResponseBody
 		@GetMapping("/searchEmpDept.do")
 		public ResponseEntity<?> searchEmpDept( String dateText, String deptCode, String searchType, String searchKeyword) {
-//			log.debug("dateText = {}",dateText);
-//			log.debug("deptCode = {}",deptCode);
-//			log.debug("searchType = {}",searchType);
-//			log.debug("searchKeyword = {}",searchKeyword);
 			
 			String[] arr = dateText.split("\\.");
 			    String date = arr[0].substring(2) + "/" + arr[1];
@@ -398,7 +398,6 @@ public class CommuteController {
 			    LocalDate currentDate = LocalDate.parse(dateText + ".01", DateTimeFormatter.ofPattern("yyyy.MM.dd"));
 
 			    List<Employee> empList = employeeService.empFinderDeptList(param);
-//			    log.debug("empList = {}",empList);
 
 			    List<Map<String, Object>> workList = new ArrayList<>();
 

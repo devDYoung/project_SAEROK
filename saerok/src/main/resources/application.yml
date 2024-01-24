@@ -12,12 +12,13 @@ spring:
     hikari: 
       maximum-pool-size: 1
       minimum-idle: 1
-      auto-commit: false
+      
 # spring.mvc.view.prfix/suffix    
   mvc: 
     view:
       suffix: .jsp
       prefix: /WEB-INF/views/   
+
 # mutlipartfile설정하기
   servlet:
   
@@ -29,8 +30,6 @@ mybatis:
   config-location: classpath:config/mybatis-config.xml
   
 
-logging:
-  level: 
-    '[com.saerok]': debug
+
 
            

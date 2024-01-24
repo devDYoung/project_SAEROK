@@ -116,7 +116,7 @@
                     <div class="bg-white py-2 collapse-inner rounded">
                         <a class="collapse-item" href="${path }/calendar/calendarMain">내 일정</a>
                         <a class="collapse-item" href="${path }/calendar/calendarView">일정조회</a>
-                        <a class="collapse-item" href="${path }/calendar/calendarImpt">중요일정</a>
+                        <a class="collapse-item" href="${path }/calendar/calendarStarView">중요일정</a>
                          <a class="collapse-item" href="${path }/calendar/calendarWrite">일정작성</a>
                     </div>
                 </div> 
@@ -179,6 +179,7 @@
                             <a class="collapse-item" href="${path }/inventory">재고목록</a>
                             <a class="collapse-item" href="">물품발주</a>
                             <a class="collapse-item" href="${path }/owner/order/detail">발주목록</a>
+                        <!-- ㅎㅎ -->
                         </div>
                     </div>
             </li>

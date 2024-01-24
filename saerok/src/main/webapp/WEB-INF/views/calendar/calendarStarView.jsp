@@ -1,8 +1,26 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
-<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<c:set var="path" value="${pageContext.request.contextPath}"/>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
+ <%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
+<c:set var="path" value="${pageContext.request.contextPath}" />
+<c:set var="loginEmployee"
+	value="${sessionScope.SPRING_SECURITY_CONTEXT.authentication.principal }" />
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js"></script>
+<!-- 	<link
+	href="https://cdn.datatables.net/v/dt/dt-1.13.8/datatables.min.css"
+	rel="stylesheet" />
+
+<script
+	src="https://cdn.datatables.net/v/dt/dt-1.13.8/datatables.min.js">
+	
+</script> -->
+<jsp:include page="/WEB-INF/views/common/header.jsp">
+	<jsp:param value="CommuteMain" name="ATO" />
+</jsp:include>
 
 <style>
 
@@ -62,7 +80,7 @@
 																<h5 id="star${s.scheduleNo}" style="float: right;">★</h5>
 																</c:if>
 																<script>
-																		$('#star${s.calNo}').on('click', function() {
+																		$('#star${s.scheduleNo}').on('click', function() {
 																			console.log('adfadsf');
 																			$.ajax({
 																			type: "get",
@@ -80,7 +98,7 @@
 																			});
 																		});
 																</script>
-														  <h5 class="card-title"  onclick="location.href='${path}/calendar/Detail/${s.scheduleNo}'" style="overflow:hidden; white-space:nowrap; text-overflow:ellipsis;">${s.skdTitle}</h5>
+														  <h5 class="card-title"  onclick="location.href='${path}/calendar/calendarDetail/${s.scheduleNo}'" style="overflow:hidden; white-space:nowrap; text-overflow:ellipsis;">${s.skdTitle}</h5>
 														  <h5 class="card-title">${x.skdStart}</h5>
 														  <h6 class="card-subtitle mb-2 text-muted">${s.empNo}</h6>
 														  <p class="card-text" style='overflow:hidden; white-space:nowrap; text-overflow:ellipsis;'>${s.skdContent}</p>
@@ -320,6 +338,3 @@
 <!-- End Page Content -->
 
 
-
-		
-	
