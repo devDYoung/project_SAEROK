@@ -178,7 +178,7 @@
                             <a class="collapse-item" href="/owner/detail">매출관리</a>
                             <a class="collapse-item" href="/inventory">재고목록</a>
                             <a class="collapse-item" href="">물품발주</a>
-                            <a class="collapse-item" href="">발주목록</a>
+                            <a class="collapse-item" href="/owner/order/detail">발주목록</a>
                         </div>
                     </div>
             </li>
