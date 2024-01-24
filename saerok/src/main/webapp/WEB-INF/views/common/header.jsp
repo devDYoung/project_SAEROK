@@ -179,6 +179,7 @@
                             <a class="collapse-item" href="${path }/inventory">재고목록</a>
                             <a class="collapse-item" href="">물품발주</a>
                             <a class="collapse-item" href="${path }/owner/order/detail">발주목록</a>
+                        <!-- ㅎㅎ -->
                         </div>
                     </div>
             </li>
