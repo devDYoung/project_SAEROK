@@ -110,7 +110,7 @@
         (SELECT DEST_FILENAME FROM EMPLOYEE WHERE PK_NO = E.EMP_NO) AS DESTFILENAME
     FROM EMP E
     WHERE
-        (E.WORK_YN = 'N' OR E.EMP_DATE >= (TO_DATE(TO_CHAR(SYSDATE, 'YYYY-MM-DD HH24:MI:SS'), 'YYYY-MM-DD HH24:MI:SS')))
+        (E.WORK_YN = 'N' OR E.EMP_DATE >= (TO_DATE(TO_CHAR(SYSDATE, 'YY-MM-DD HH24:MI:SS'), 'YY-MM-DD HH24:MI:SS')))
         AND E.DEPT_CODE = #{deptCode}
     ORDER BY E.JOB_CODE
 </select>
@@ -161,7 +161,7 @@
         (
             e.work_yn = 'N'
             OR
-            e.emp_date >= (TO_DATE_TZ(TO_CHAR(SYSDATE, 'YYYY-MM-DD HH24:MI:SS'), 'YYYY-MM-DD HH24:MI:SS') AT TIME ZONE 'Asia/Seoul')
+            e.emp_date >= (TO_DATE_TZ(TO_CHAR(SYSDATE, 'YY-MM-DD HH24:MI:SS'), 'YY-MM-DD HH24:MI:SS') AT TIME ZONE 'Asia/Seoul')
         )
         AND (
             CASE 
