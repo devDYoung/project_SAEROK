@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="approval">
+   
+   <resultMap id="approval" type="approval">
+       <id column="APPSEQ" property="appSeq"/>
+       <result column="APPWRITEDATE" property="appWriteDate"/>
+       <result column="APPCHECK" property="appCheck"/>
+       <result column="APPKINDS" property="appKinds"/>
+   
+       <!-- Employee 매핑 -->
+       <association property="empNo" resultMap="emp.empMap"/>       
+       <!-- ApvWriter 매핑 -->
+       <collection property="apvWriter" ofType="apvWriter">
+       
+         <result column="APV_STATE" property="apvState"/>
+         <result column="APV_EMP_TIME" property="apvEmpTime"/>
+         <result column="RETURN_REASON" property="returnReason"/>   
+      </collection>
+       <!-- ApvRef 매핑 -->
+       <collection property="apvRef" ofType="apvRef">
+         <result column="REF_CC" property="refCc"/>
+         
+      </collection>
+</resultMap>
+
+   <select id="selectApproval" resultMap="approval">
+      SELECT *
+    FROM APPROVAL A
+    JOIN Employee E USING (EMP_NO)
+  
+   </select>
+   <select id="selectEmployeeByDeptName" resultMap="emp.empMap" parameterType="_int">
+      SELECT *
+          FROM EMPLOYEE
+          JOIN DEPARTMENT USING(dept_code) 
+          JOIN ATO_JOB USING(job_code) 
+          WHERE DEPT_CODE=#{deptCode}
+          ORDER BY JOB_CODE  ASC 
+   </select>
+   
+                     
+   
+   <!--<select id="selectApprovalByNo" resultType="approval" parameterType="long">
+      SELECT * FROM APPROVAL WHERE APV_NO=#{apvNo}
+   </select>-->
+   <!-- <insert id="insertApproval" parameterType="approval">
+      INSERT INTO APPROVAL VALUES(SEQ_APPROVALNO.NEXTVAL,#{~)
+   </insert> -->
+</mapper>

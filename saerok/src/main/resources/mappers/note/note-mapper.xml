@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="note">
+
+   <resultMap id="receivedNotes" type="note">
+        <id property="noteNo" column="NOTE_NO"/>
+        <result property="revEmpNo" column="RCV_EMP_NO"/>
+        <result property="sndEmpNo" column="SND_EMP_NO"/>
+        <result property="noteTitle" column="NOTE_TITLE"/>
+        <result property="noteContent" column="NOTE_CONTENT"/>
+        <result property="readYn" column="READ_YN"/>
+        <result property="delYn" column="DEL_YN"/>
+        <result property="tempYn" column="TEMP_YN"/>
+        <result property="regDtime" column="REG_DTIME"/>
+        <result property="modId" column="MOD_ID"/>
+        <result property="modDtime" column="MOD_DTIME"/>
+    </resultMap>
+
+   <resultMap type="emp" id="empMap">
+        <id column="EMP_NO" property="empNo"/>
+        <result column="EMP_PW" property="empPw"/>
+        <result column="EMP_NAME" property="empName"/>
+        <result column="EMP_PHONE" property="empPhone"/>
+        <result column="EMP_EMAIL" property="empEmail"/>
+        <result column="EMP_ADDR" property="empAddr"/>
+        <result column="EMP_DETAIL_ADDR" property="empDetailAddr"/>
+        <result column="EMP_DATE" property="empDate"/>
+        <result column="WORK_YN" property="workYn"/>
+        <result column="ORI_FILENAME" property="oriFileName"/>
+        <result column="DEST_FILENAME" property="destFileName"/>
+        <result column="ISSUE_ANNU" property="issueAnnu"/>
+        <result column="USE_ANNU" property="useAnnu"/>
+        <result column="DEPT_CODE" property="deptCode"/>
+        <result column="DEPT_NAME" property="deptName"/>
+        <result column="JOB_CODE" property="jobCode"/>
+        <result column="JOB_NAME" property="jobName"/>
+     </resultMap>
+     
+     <!--받은 쪽지함 조회--> 
+    <select id="readNotePage" resultMap="receivedNotes" >
+        SELECT * FROM note 
+    </select>
+    
+   <select id="getReceivedNotes" resultMap="receivedNotes">   
+       SELECT * FROM note    
+    </select>
+    
+    <select id="selectEmpByName"  parameterType="String" resultMap="empMap">
+       SELECT * FROM EMPLOYEE WHERE EMP_NAME LIKE '%' || #{empName} || '%'  
+    </select>
+    
+    <insert id="insertNote"  parameterType="note">
+      INSERT INTO note(NOTE_NO, RCV_EMP_NO, SND_EMP_NO, NOTE_CONTENT, READ_YN, DEL_YN, TEMP_YN, REG_DTIME,MOD_ID,MOD_DTIME)
+      VALUES(note_seq.nextval, #{revEmpNo}, #{sndEmpNo}, #{noteContent}, 'N', 'N', 'N', sysdate, #{sndEmpNo}, sysdate)
+    </insert>
+</mapper>
