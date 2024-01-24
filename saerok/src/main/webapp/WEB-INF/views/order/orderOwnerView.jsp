@@ -2,6 +2,7 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 <jsp:include page="/WEB-INF/views/common/header.jsp" />
+<c:set var="path" value="${pageContext.request.contextPath}" />
 <c:set var="loginEmployee"
 	value="${sessionScope.SPRING_SECURITY_CONTEXT.authentication.principal }" />
 
