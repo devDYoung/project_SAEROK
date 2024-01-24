@@ -33,7 +33,7 @@ build/
 .vscode/
 
 
-src/main/resources/
+
 Scripts/
 Users/
 .dbeaver/

@@ -1,0 +1,36 @@
+server: 
+  port: 9090
+#server.port=9090
+
+#spring.datasource.driver-class-name
+spring: 
+  datasource: 
+    driver-class-name: oracle.jdbc.driver.OracleDriver
+    url: jdbc:oracle:thin:@14.36.141.71:10052:xe
+    username: saerok
+    password: saerok
+    hikari: 
+      maximum-pool-size: 1
+      minimum-idle: 1
+      auto-commit: false
+# spring.mvc.view.prfix/suffix    
+  mvc: 
+    view:
+      suffix: .jsp
+      prefix: /WEB-INF/views/   
+# mutlipartfile설정하기
+  servlet:
+  
+    multipart:
+      max-file-size: 10MB
+      
+mybatis: 
+  mapper-locations: classpath:mappers/**/*.xml
+  config-location: classpath:config/mybatis-config.xml
+  
+
+logging:
+  level: 
+    '[com.saerok]': debug
+
+           
