@@ -211,7 +211,7 @@
 		            const left = (window.screen.width / 2) - (width / 2);
 		            const top = (window.screen.height / 2) - (height / 2);
 
-		            window.open('/owner/order/two/' + orderId, '_blank', 'width=' + width + ',height=' + height + ',top=' + top + ',left=' + left);
+		            window.open('${path }/owner/order/two/' + orderId, '_blank', 'width=' + width + ',height=' + height + ',top=' + top + ',left=' + left);
 		        });
 		    });
 		});
