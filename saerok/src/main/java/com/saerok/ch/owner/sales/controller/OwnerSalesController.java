@@ -1,6 +1,7 @@
 package com.saerok.ch.owner.sales.controller;
 
 
+import java.lang.reflect.Type;
 import java.util.List;
 import java.util.Map;
 
@@ -22,18 +23,16 @@ import com.google.gson.reflect.TypeToken;
 import com.saerok.ch.sales.model.service.SalesService;
 import com.saerok.jh.employee.model.dto.Employee;
 
-import java.lang.reflect.Type;
-
 @Controller
 @RequestMapping("/owner")
 public class OwnerSalesController {
-	
-	private final SalesService salesService;
+   
+   private final SalesService salesService;
 
-	@Autowired
-	public OwnerSalesController(SalesService salesService) {
-		this.salesService = salesService;
-	}
+   @Autowired
+   public OwnerSalesController(SalesService salesService) {
+      this.salesService = salesService;
+   }
 
    
     @GetMapping("/detail")
@@ -83,7 +82,6 @@ public class OwnerSalesController {
     
     
 }
-
 
 
 
