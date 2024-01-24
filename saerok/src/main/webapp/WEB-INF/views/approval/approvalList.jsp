@@ -28,8 +28,7 @@
 <!-- 전체 리스트 -->
 
 <div class="container-fluid">
-
-
+${list }
 	<div class="card shadow mb-4">
 
 		<div class="card-header py-3">
@@ -71,7 +70,7 @@
 								<c:forEach var="a" items="${list}">
 									<tr>
 										<td>${a.appSeq}</td>
-										<td>제목불러와야해</td>
+										<td>${a.letterTitle}</td>
 										<td>${a.appEmpName}</td>
 										<%-- <td><c:forEach var="b" items="${a.apvWriter}"
 												varStatus="i">

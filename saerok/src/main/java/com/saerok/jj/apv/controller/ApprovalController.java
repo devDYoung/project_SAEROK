@@ -1,14 +1,15 @@
 package com.saerok.jj.apv.controller;
 
 import java.io.IOException;
+import java.io.File;
 import java.nio.file.Path;
+import java.security.Principal;
 import java.sql.Date;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
-import java.io.File;
 import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
@@ -17,7 +18,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -36,24 +36,19 @@ import lombok.extern.slf4j.Slf4j;
 @AllArgsConstructor
 @RequestMapping("/approval")
 @Slf4j
-@SessionAttributes("loginEmployee")
 public class ApprovalController {
 
-	private ApprovalService service;
-
-	private EmployeeService empService;
+	private final ApprovalService service;
+	private final EmployeeService empService;
 
 	// 전체리스트 조회
 	@GetMapping("/approvalList.do")
 	public ModelAndView selectApproval(ModelAndView model) {
 		List<Approval> approval = service.selectApproval();
-
 		List<Employee> emp = empService.selectEmployeeList();
-
 		List<Object> list = new ArrayList<>();
 		list.add(approval);
 		list.add(emp);
-
 		model.addObject("list", approval);
 		model.addObject("listEmp", emp);
 		model.setViewName("approval/approvalList");
@@ -62,8 +57,14 @@ public class ApprovalController {
 
 	// 내문서함 조회
 	@GetMapping("/myApproval")
-	public void myApproval() {
+	public ModelAndView myApproval(ModelAndView model, Principal loginSession) {
+	    String empNo = loginSession.getName();
+	    List<Approval> myApprovalList = service.myApproval(empNo);
+	    model.addObject("myApprovalList", myApprovalList); 
+	    model.setViewName("approval/myApproval");
+	    return model;
 	}
+
 
 	// 결재선 사원리스트불러오기
 	@GetMapping("/checkDept")
@@ -95,8 +96,8 @@ public class ApprovalController {
 	// 폼 등록
 	@PostMapping("/insertAppLetter.do")
 	@Transactional
-	public String insertAppLetter(MultipartFile upFile, AppLetter basicForm,
-			String apporvalData, Model model, HttpSession session, @RequestParam String loginEmp) {
+	public String insertAppLetter(MultipartFile upFile, AppLetter basicForm, String apporvalData, Model model,
+			HttpSession session, @RequestParam String loginEmp) {
 
 		List<Map> approvalList = null;
 		try {
@@ -112,12 +113,10 @@ public class ApprovalController {
 		try {
 			if (!upFile.isEmpty()) {
 				String originalFileName = upFile.getOriginalFilename();
-
 				String destFileName = System.currentTimeMillis() + "_" + originalFileName;
 				String path = session.getServletContext().getRealPath("/resources/upload/approvalFile");
 				File destFile = new File(path, destFileName);
 				upFile.transferTo(destFile);
-
 				basicForm.setOriFileName(originalFileName);
 				basicForm.setReFileName(destFileName);
 				result = service.insertAppLetter(basicForm, approvalList);
@@ -126,7 +125,6 @@ public class ApprovalController {
 			String msg, loc;
 			if (result > 0) {
 				return "redirect:/approval/approvalList.do";
-
 			} else {
 				msg = "등록실패";
 				loc = "/";
@@ -144,10 +142,8 @@ public class ApprovalController {
 		return "common/msg";
 	}
 
+	// 테스트
+	@GetMapping("/test")
+	public void test() {
+	}
 }
-
-/*
- * // 테스트
- * 
- * @GetMapping("/test") public void test() { }
- */
