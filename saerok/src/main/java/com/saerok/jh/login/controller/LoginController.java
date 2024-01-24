@@ -57,7 +57,7 @@ public class LoginController {
 //	}
 
 	//마이페이지 수정
-	   @PostMapping("/jj/updatemypage")
+	   @PostMapping("/updatemypage")
 	   @ResponseBody
 	   public Map<String,String> updateMyPage(@RequestParam(required = false) MultipartFile profile,
 			   Employee e,HttpSession session) {
