@@ -53,11 +53,13 @@ public class BoardController {
       return "notice/noticeWrite";
    }
    
-   //공지사항 작성
-  // @PostMapping("/noticewrite/insert")
-  // public String insertNotice() {
-	   
-  // }
+	/*
+	 * //공지사항 작성
+	 * 
+	 * @PostMapping("/noticewrite") public String insertNotice() {
+	 * 
+	 * }
+	 */
    
    // 부서별 게시판 페이지로 이동
    @GetMapping("/Part")
@@ -83,11 +85,13 @@ public class BoardController {
 
    // 게시글 저장
    @PostMapping("/save")
-   public String saveBoard(Board board, Principal loginSession) {
+   public String saveBoard(Board board, Principal loginSession,Model model) {
 
       // 현재 로그인 중인 사원의 사원번호
       String empNo = loginSession.getName();
       board.setRegId(empNo);
+      
+      model.addAttribute("content",board.getBoardContent());
       
       boardService.save(board);
       return "redirect:/board/noticelist";

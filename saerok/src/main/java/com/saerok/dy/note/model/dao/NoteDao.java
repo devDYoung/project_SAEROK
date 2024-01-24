@@ -11,6 +11,9 @@ public interface NoteDao {
 
 	// 어떤 사용자가 받은 쪽지함을 조회할 것인지
 	List<Note> getReceivedNotes(SqlSession session);
+	
+	// 어떤 사용자가 보낸 쪽지함을 조회할 것인지
+	List<Note> getSentNotes(SqlSession session);
 
 	// 이름으로 사원 조회
 	List<Employee> selectEmpByName(SqlSession session);
