@@ -34,8 +34,8 @@
 						</tr>
 					</thead>
 					<tbody>
-						<c:if test="${not empty receivedNotes}">
-							<c:forEach var="note" items="${receivedNotes}">
+						<c:if test="${not empty sentNotes}">
+							<c:forEach var="note" items="${sentNotes}">
 								<tr>
 									<td><input type="checkbox" name="noteCheckBox" /></td>
 									<td><c:out value="${note.noteNo}" /></td>
