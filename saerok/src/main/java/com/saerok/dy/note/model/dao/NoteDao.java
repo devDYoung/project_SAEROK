@@ -13,7 +13,7 @@ public interface NoteDao {
 	List<Note> getReceivedNotes(SqlSession session);
 	
 	// 어떤 사용자가 보낸 쪽지함을 조회할 것인지
-	List<Note> getSentNotes(SqlSession session);
+	List<Note> getSentNotes(SqlSession session, String empNo);
 
 	// 이름으로 사원 조회
 	List<Employee> selectEmpByName(SqlSession session);
