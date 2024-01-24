@@ -30,6 +30,8 @@ public class ApprovalDaoImpl implements ApprovalDao {
 		return session.selectOne("approval.selectApprovalByNo", appKinds);
 	}
 
+	
+
 	// 결재선 리스트 불러오기
 	@Override
 	public List<Map<String, Object>> selectEmployeeList(SqlSession session, Integer deptCode) {
@@ -60,6 +62,13 @@ public class ApprovalDaoImpl implements ApprovalDao {
 		return session.insert("approval.insertApprovalLine",approvalList);
 	}
 	
+	
+	//내문서함 조회
+	@Override
+	public List<Approval> myApproval(SqlSession session, String empNo) {
+	    return session.selectList("approval.myApproval", empNo);
+	}
+
 	
 
 

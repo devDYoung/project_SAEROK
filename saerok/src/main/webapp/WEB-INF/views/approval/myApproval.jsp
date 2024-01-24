@@ -26,9 +26,8 @@
 
 
 <!-- 전체 리스트 -->
-
+	${loginEmployee}
 <div class="container-fluid">
-
 
 	<div class="card shadow mb-4">
 
@@ -73,7 +72,7 @@
 						</table>
 					</div>
 				</div>
-				<!--결재 문서  -->
+				<!--결재진행 문서  -->
 				<div class="tab-pane" id="proceeding">
 					<div class="table-responsive">
 						<table class="table table-bordered" id="dataTable" width="100%"
@@ -88,14 +87,15 @@
 								</tr>
 							</thead>
 							<tbody>
-								<c:forEach var="a" items="${list}">
-									<tr>
-										<%--  <td><c:out value="${a.appSeq}" /></td> 
-										<td><c:out value="제목" /></td>
-										 <td><c:out value="${a.empName}" /></td> 
-										<td><c:out value="${a.appWriteDate}" /></td>
-										<td><c:out value="${a.appCheck}" /></td> --%>
-									</tr>
+						
+								  <c:forEach var="m" items="${myApprovalList}">
+										<tr>
+											<td>${m.appSeq}</td>
+											<td><c:out value="${m.letterTitle }" /></td>
+											<td><c:out value="${m.appEmpName}" /></td>
+											<td><c:out value="${m.appWriteDate}" /></td>
+											<td><c:out value="${m.appCheck}" /></td>
+										</tr>
 								</c:forEach>
 							</tbody>
 						</table>
@@ -127,7 +127,9 @@
 		</div>
 	</div>
 </div>
+<div>
 
+</div>
 
 
 
