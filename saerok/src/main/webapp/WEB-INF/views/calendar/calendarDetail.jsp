@@ -1,10 +1,18 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
-<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<c:set var="path" value="${pageContext.request.contextPath}"/>
-
+	pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
+<c:set var="path" value="${pageContext.request.contextPath}" />
+<c:set var="loginEmployee"
+	value="${sessionScope.SPRING_SECURITY_CONTEXT.authentication.principal }" />
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+<jsp:include page="/WEB-INF/views/common/header.jsp">
+	<jsp:param value="CommuteMain" name="ATO" />
+</jsp:include>
 <style>
-
     #page{
         width: 95%;
         height: 100%;
@@ -127,13 +135,13 @@
               <div class="card-body">
 								<!--start-->
 								<!-- Page Heading -->
-							    <form action="" method="post">
+							    <form action="${path }/calendar/Detail" method="post">
 							        <div id="page">
 							            <div calss="title" style="margin-top: 45px;">
                                             <a id="title">${schedule.skdTitle}</a>
 							            </div>
 							            <div id="create">
-							                작성일 <a id="now_date">${schedule.modDtime}</a>
+							                작성일 <a id="now_date">${schedule.regDtime}</a>
 							            </div>
                                         <div id="create">
 							                작성자 <a id="now_date">${schedule.empNo}</a>
@@ -151,8 +159,8 @@
 							            <c:if test="${ schedule.empNo eq loginEmployee.empNo }">
                                             <div id="center-bot">
                                                 <div class="row" id="btns">
-                                                    <a class="btn btn-primary btn-user btn-block" id="edit" href="${path}/calendar/Edit/${schedule.scheduleNo}">수정하기</a>
-                                                    <a class="btn btn-danger btn-user btn-block" id="delete" href="${path}/calendar/Delete/${schedule.scheduleNo}">삭제하기</a>
+                                                    <a class="btn btn-primary btn-user btn-block" id="edit" href="${path}/calendar/calendarEdit/${schedule.scheduleNo}">수정하기</a>
+                                                    <a class="btn btn-danger btn-user btn-block" id="delete" href="${path}/calendar/calendarDelete/${schedule.scheduleNo}">삭제하기</a>
                                                 </div>
 
                                             </div>
@@ -168,4 +176,4 @@
 	  </div>
 <!-- End Page Content -->
 
-	
+ 

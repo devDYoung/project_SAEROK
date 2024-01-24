@@ -332,7 +332,7 @@ const updateWorkTime = (daytimes) =>{
 					<!-- 본문 오른쪽 -->
 					<div>
 						<div id="home-right-div" class="div-padding div-margin">
-							<%-- <h5 style="padding: 20px">이번주 신제품</h5>
+							<h5 style="padding: 20px">이번주 신제품</h5>
 
             <div id="carouselExampleIndicators" class="carousel slide"
                data-ride="carousel">
@@ -359,7 +359,7 @@ const updateWorkTime = (daytimes) =>{
                   class="carousel-control-next-icon" aria-hidden="true"></span> <span
                   class="sr-only">Next</span>
                </a>
-            </div> --%>
+            </div> 
 
 						</div>
 					</div>
