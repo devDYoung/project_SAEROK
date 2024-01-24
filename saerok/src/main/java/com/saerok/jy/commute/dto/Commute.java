@@ -2,6 +2,8 @@
 
 import java.sql.Timestamp;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -13,7 +15,9 @@ import lombok.NoArgsConstructor;
 public class Commute {
 	
 	private int commuteNo; // 출퇴근번호
+	@JsonFormat(shape=JsonFormat.Shape.STRING, pattern="yyyy-MM-dd'T'HH:mm:ss", timezone="Asia/Seoul" ,locale = "ko_KR")
 	private Timestamp inDtime; //출근일시
+	@JsonFormat(shape=JsonFormat.Shape.STRING, pattern="yyyy-MM-dd'T'HH:mm:ss", timezone="Asia/Seoul",locale = "ko_KR")
 	private Timestamp outDtime; //퇴근일시
 	private String lateYN; //지각여부  Y: 9시 이후 출근인 경우, N: 아닌경우
 	private String status; //근무상태 10:출근, 20:퇴근, 30:연차, 40: 반차

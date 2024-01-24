@@ -9,7 +9,10 @@ spring:
     url: jdbc:oracle:thin:@14.36.141.71:10052:xe
     username: saerok
     password: saerok
-
+    hikari: 
+      maximum-pool-size: 1
+      minimum-idle: 1
+      
 # spring.mvc.view.prfix/suffix    
   mvc: 
     view:

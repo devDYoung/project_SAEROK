@@ -1,0 +1,80 @@
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.saerok.ch.branch.mapper.BranchMapper">
+
+	<resultMap id="BranchResultMap"
+		type="com.saerok.ch.branch.model.dto.Branch">
+		<result property="branchNo" column="BRANCH_NO" />
+		<result property="branchName" column="BRANCH_NAME" />
+		<result property="branchRegion" column="BRANCH_REGION" />
+		<result property="branchTel" column="BRANCH_TEL" />
+		<result property="branchDescription"
+			column="BRANCH_DESCRIPTION" />
+		<result property="empNo" column="EMP_NO" />
+		<result property="empName" column="EMP_NAME" />
+		<result property="empPhone" column="EMP_PHONE" />
+
+	</resultMap>
+	
+
+	<!-- 모든 지점 조회, 지점명으로 검색 -->
+	<select id="findAllBranches" parameterType="String"
+		resultMap="BranchResultMap">
+		SELECT b.BRANCH_NO, b.BRANCH_NAME, b.BRANCH_REGION, b.BRANCH_TEL,
+		b.BRANCH_DESCRIPTION, b.EMP_NO, e.EMP_NAME, e.EMP_PHONE
+		FROM BRANCH b
+		LEFT JOIN EMPLOYEE e ON b.EMP_NO = e.EMP_NO
+		<if test="searchKeyword != null and searchKeyword != ''">
+			WHERE b.BRANCH_NAME LIKE '%' || #{searchKeyword} || '%'
+		</if>
+		ORDER BY b.BRANCH_NO ASC
+	</select>
+
+	<!-- 지점 추가 -->
+	<insert id="addBranch"
+		parameterType="com.saerok.ch.branch.model.dto.Branch">
+		INSERT INTO BRANCH (
+		BRANCH_NO,
+		BRANCH_NAME,
+		BRANCH_REGION,
+		BRANCH_TEL,
+		BRANCH_DESCRIPTION,
+		EMP_NO
+		) VALUES (
+		BRANCH_SEQ.NEXTVAL,
+		#{branchName},
+		#{branchRegion},
+		#{branchTel},
+		#{branchDescription},
+		#{empNo}
+		)
+	</insert>
+
+	<!-- 지점 정보 수정 -->
+	<update id="updateBranch"
+		parameterType="com.saerok.ch.branch.model.dto.Branch">
+		UPDATE BRANCH
+		SET
+		BRANCH_NAME = #{branchName},
+		BRANCH_REGION = #{branchRegion},
+		BRANCH_TEL = #{branchTel},
+		BRANCH_DESCRIPTION = #{branchDescription},
+		EMP_NO = #{empNo}
+		WHERE
+		BRANCH_NO = #{branchNo}
+	</update>
+
+	<!-- 특정 지점 상세 정보 조회 -->
+	<select id="findBranchById" parameterType="int"
+		resultMap="BranchResultMap">
+		SELECT * FROM BRANCH WHERE BRANCH_NO = #{branchNo}
+	</select>
+
+
+	<!-- 지점 삭제 -->
+	<delete id="deleteBranch" parameterType="int">
+		DELETE FROM BRANCH WHERE
+		BRANCH_NO = #{branchNo}
+	</delete>
+
+
+</mapper>

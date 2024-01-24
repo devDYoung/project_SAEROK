@@ -5,18 +5,33 @@
     <!-- 게시판 resultMap -->
     <resultMap type="board" id="boardMap">
         <id column="BOARD_NO" property="boardNo"/>
+        <result column="BOARD_CATEGORY" property="boardCategory"/>
         <result column="BOARD_TITLE" property="boardTitle"/>
         <result column="BOARD_CONTENT" property="boardContent"/>
-        <result column="ORI_FILE_NAME" property="oriFileName"/>
+        <result column="ORI_FILENAME" property="oriFileName"/>
         <result column="REG_ID" property="regId"/>
         <result column="REG_DTIME" property="regDtime"/>
     </resultMap>
 
-    <!-- 전체 게시판 조회 -->
+    <!-- 공지사항 조회 -->
     <select id="boardAll" resultMap="boardMap">
-        SELECT * FROM board
+        SELECT BOARD_NO
+                , BOARD_TITLE
+                , REGEXP_REPLACE(BOARD_CONTENT, '&lt;.+?&gt;' ) as BOARD_CONTENT
+                , ORI_FILENAME
+                , REG_ID
+                , REG_DTIME
+           FROM board
     </select>
-
+    
+    <!-- 공지사항 상세보기 -->
+    <select id="selectNoticeByNo" parameterType="_int" resultMap="boardMap">
+        SELECT *
+        FROM BOARD
+        WHERE BOARD_NO = #{boardNo}
+    </select>
+    
+    
     <!-- 부서별 게시판 조회 -->
     <select id="boardPart" resultMap="boardMap">
         SELECT * FROM board
@@ -24,8 +39,8 @@
 
     <!-- 새로운 게시글 저장 -->
     <insert id="save" parameterType="board">
-        INSERT INTO board (BOARD_TITLE, BOARD_CONTENT, ORI_FILE_NAME, REG_ID, REG_DTIME)
-        VALUES (#{boardTitle}, #{boardContent}, #{oriFileName}, #{regId}, #{regDtime})
+        INSERT INTO board (BOARD_NO, BOARD_TITLE, BOARD_CONTENT, REG_ID, REG_DTIME, MOD_ID, MOD_DTIME)
+        VALUES (board_seq.nextval, #{boardTitle}, #{boardContent}, #{regId}, sysdate, #{regId}, sysdate )
     </insert>
 
 </mapper>
