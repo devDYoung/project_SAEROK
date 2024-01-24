@@ -35,18 +35,20 @@
   }
 
   #profile-img {
-    width: 100px;
-    height: 90px;
+    width: 90px;
+    height: 80px;
     margin-top: 10px;
    
   }
-  
-
     .dropdown-item {
         color: white; /* 흰색으로 변경 */
     }
-
-  
+    
+	.card-body.p-0 {
+	    height: 775px; 
+	    padding: 0; 
+  }	
+	
 </style>
 </head>
 <body>
@@ -116,7 +118,7 @@
 					    </div>
 					    <div class="col-6">
 					        <div class="form-check form-check-inline">
-					            <input class="form-check-input" type="radio" name="jobCode" value="20" checked>
+					            <input class="form-check-input" type="radio" name="jobCode" value="20">
 					            <label class="form-check-label" for="flexRadioDefault2">대리</label>
 					        </div>
 					    </div>
@@ -128,7 +130,7 @@
 					    </div>
 					    <div class="col-6">
 					        <div class="form-check form-check-inline">
-					            <input class="form-check-input" type="radio" name="jobCode" value="40" checked>
+					            <input class="form-check-input" type="radio" name="jobCode" value="40">
 					            <label class="form-check-label" for="flexRadioDefault4">지점장</label>
 					        </div>
 					    </div>
@@ -139,7 +141,7 @@
 					<p>입사일</p>
                       <input type="date" class="form-control form-control-user" name=empDate>
                     </div>
-                 	<br><br>
+                 	<br>
                      <button type="submit" class="btn btn-primary btn-user btn-block" onclick="submitForm()">사원등록</button>
                    <br><br>
                    <button type="reset" class="btn btn-primary btn-user btn-block" onclick="resetForm()">등록취소</button>
