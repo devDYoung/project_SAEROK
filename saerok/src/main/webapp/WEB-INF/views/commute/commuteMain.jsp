@@ -297,9 +297,10 @@
     	  
     	$.ajax({
     		  url : "${path }/commute/weekTotalTime.do",
-    		  data : {start, end},
+    		  data: { start: start, end: end },
     		  contentType : "application/json; charset=utf-8",
     		  success(data){
+    			  console.log("Success", data);
     			  const {totalMonthOverTime ,totalMonthTime, weekOverTime ,weekTotalTime} = data;
     			  const mainTotalWorkTime = document.querySelector("#main-totalwork-time");
     			  const mainWeekOverTime = document.querySelector("#main-week-over-time");
@@ -318,7 +319,7 @@
     			  monthWorkTime.textContent = changeWorkTime(totalMonthTime + totalMonthOverTime);
     			  monthOverTime.textContent = changeWorkTime(totalMonthOverTime);
     		  },
-    		  error : console.log
+    		  error : console.log("나와")
     		  
     	  });
     }
