@@ -17,6 +17,7 @@ public interface NoteService {
     // 이름으로 사원 조회
     List<Employee> selectEmpByName(String empName);
 
-
 	boolean sendNote(Note note);
+
+	boolean deleteToTrash(String empNo, int noteNo);
 }

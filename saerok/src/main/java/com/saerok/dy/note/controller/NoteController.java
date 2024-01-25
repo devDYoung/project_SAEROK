@@ -36,7 +36,7 @@ public class NoteController {
 	 * @GetMapping("/write") public String noteWritePage() { return
 	 * "note/noteWrite"; }
 	 */
-	
+
 	// 받은 쪽지함 페이지로 이동
 	@GetMapping("/get")
 	public String readNotePage(Model model) {
@@ -57,9 +57,9 @@ public class NoteController {
 	public String sendNotePage(Principal loginSession, Model model) {
 		// 현재 로그인 중인 사원의 사원번호
 		String empNo = loginSession.getName();
-				
-		List<Note> sentNotes=noteService.getSentNotes(empNo);
-		model.addAttribute("sentNotes",sentNotes);
+
+		List<Note> sentNotes = noteService.getSentNotes(empNo);
+		model.addAttribute("sentNotes", sentNotes);
 		return "note/noteSend";
 	}
 
@@ -68,42 +68,61 @@ public class NoteController {
 	public String deleteNotePage(Model model) {
 		return "note/noteBasket";
 	}
-	
-	//이름으로 사원 조회
-    @GetMapping("/selectEmpByName")
-    @ResponseBody
-    public Map selectEmpByName(Model model, HttpServletRequest request) {
-    	 String empName = request.getParameter("empName");
-		 List<Employee> empList = noteService.selectEmpByName(empName);
-		 //log.debug("{}",empList);
-		 //model.addAttribute("empList",empList);
-		 
-		 Map result = new HashMap();
-		 result.put("empList", empList);
-		 
-		 return result;
-    }
-    
-    @PostMapping("/send")
-    @ResponseBody
-    public String sendNote(Principal loginSession, @RequestParam String recipientName, @RequestParam String messageText) {
 
+	@PostMapping("/basket")
+	@ResponseBody
+	public String deleteNote(Principal loginSession, @RequestParam int noteNo) {
 		// 현재 로그인 중인 사원의 사원번호
 		String empNo = loginSession.getName();
 		
-    	Note note = new Note();
-    	note.setRevEmpNo(recipientName.split(" ")[0]);
-    	note.setNoteContent(messageText);
-    	note.setSndEmpNo(empNo);
-    	note.setModId(empNo);
-    	
-        boolean isSentSuccessfully = noteService.sendNote(note);
+		// NoteService를 통해 쪽지 삭제 후 휴지통으로 이동
+		boolean isDeleted = noteService.deleteToTrash(empNo,noteNo);
+		
+		if(isDeleted) {
+			return "쪽지가 삭제되었습니다.";
+		}else {
+			return "쪽지 삭제 실패하였습니다.";
+		
+		}
 
-        if (isSentSuccessfully) {
-            return "쪽지를 전송하였습니다.";
-        } else {
-            return "쪽지 전송에 실패하였습니다.";
-        }
-    }
-    
+	}
+
+	// 이름으로 사원 조회
+	@GetMapping("/selectEmpByName")
+	@ResponseBody
+	public Map selectEmpByName(Model model, HttpServletRequest request) {
+		String empName = request.getParameter("empName");
+		List<Employee> empList = noteService.selectEmpByName(empName);
+		// log.debug("{}",empList);
+		// model.addAttribute("empList",empList);
+
+		Map result = new HashMap();
+		result.put("empList", empList);
+
+		return result;
+	}
+
+	@PostMapping("/send")
+	@ResponseBody
+	public String sendNote(Principal loginSession, @RequestParam String recipientName,
+			@RequestParam String messageText) {
+
+		// 현재 로그인 중인 사원의 사원번호
+		String empNo = loginSession.getName();
+
+		Note note = new Note();
+		note.setRevEmpNo(recipientName.split(" ")[0]);
+		note.setNoteContent(messageText);
+		note.setSndEmpNo(empNo);
+		note.setModId(empNo);
+
+		boolean isSentSuccessfully = noteService.sendNote(note);
+
+		if (isSentSuccessfully) {
+			return "쪽지를 전송하였습니다.";
+		} else {
+			return "쪽지 전송에 실패하였습니다.";
+		}
+	}
+
 }
