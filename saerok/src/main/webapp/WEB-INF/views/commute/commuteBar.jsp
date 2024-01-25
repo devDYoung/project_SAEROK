@@ -174,7 +174,7 @@ document.querySelector('#endBtn').addEventListener('click', function () {
 		       }
 		       else{
 		           alert("이미 퇴근하셨습니다.");
-		           return;
+	                return;
 		       }
 			},
 		   error : console.log
@@ -239,6 +239,5 @@ function changeWorkTime(times){
 
 
 </script>
-
 	<script
 		src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>

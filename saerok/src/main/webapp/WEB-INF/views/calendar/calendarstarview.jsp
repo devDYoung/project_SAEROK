@@ -231,4 +231,4 @@
 	  </div>
 <!-- End Page Content -->
 
-
+<jsp:include page="/WEB-INF/views/common/footer.jsp" />
