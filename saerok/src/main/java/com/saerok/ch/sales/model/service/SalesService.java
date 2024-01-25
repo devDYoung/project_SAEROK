@@ -26,6 +26,7 @@ public interface SalesService {
 	
 	//점주전용
 
+	 //멘토님 Map<String, Object> getBranchOwnerDetailSales2(String empNo);
 	 List<Map<String, Object>> getBranchOwnerDetailSales(String empNo);
 	 List<Map<String, Object>> getBranchOwnerCurrentMonthSales(String empNo);
 	 List<Map<String, Object>> getCurrentMonthSalesByCategoryForOwner(String empNo);

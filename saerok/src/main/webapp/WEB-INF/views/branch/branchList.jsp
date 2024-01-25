@@ -2,7 +2,7 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <jsp:include page="/WEB-INF/views/common/header.jsp" />
 <c:set var="loginEmployee" value="${sessionScope.SPRING_SECURITY_CONTEXT.authentication.principal }"/>
-
+<c:set var="path" value="${pageContext.request.contextPath}" />
 
 <!DOCTYPE html>
 <html lang="en">
@@ -76,10 +76,11 @@
 							<td>${branch.empName}</td>
 							<td>${branch.empPhone}</td>
 							<td class="text-center"><a
-								href="/branch/update/${branch.branchNo}"
-								class="btn btn-primary btn-sm">수정</a> <!-- 삭제 버튼 -->
-								<button onclick="deleteBranch(${branch.branchNo})"
-									class="btn btn-danger btn-sm">삭제</button></td>
+								href="${path}/branch/update/${branch.branchNo}"
+								class="btn btn-primary btn-sm">수정</a> 
+								<!-- 삭제 버튼 -->
+								<!-- <button onclick="deleteBranch(${branch.branchNo})"
+									class="btn btn-danger btn-sm">삭제</button></td> -->
 						</tr>
 					</c:forEach>
 				</tbody>

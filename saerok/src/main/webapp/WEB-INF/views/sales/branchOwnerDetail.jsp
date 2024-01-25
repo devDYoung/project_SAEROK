@@ -76,7 +76,8 @@
 	<div class="container-fluid">
 		<div class="d-sm-flex align-items-center justify-content-between mb-4">
 			<h1 class="h3 mb-0 text-gray-800">새록
-				${branchDetailSales.branchName}</h1>
+				<%-- ${branchDetailSales2.branchName} --%>  <!-- 멘토님 -->
+				${detailSales[0].branchName }</h1>
 		</div>
 		<hr class="my-4">
 		<c:if test="${!empty detailSales}">
