@@ -7,8 +7,8 @@
 <c:set var="path" value="${pageContext.request.contextPath}" />
 <c:set var="loginEmployee"
 	value="${sessionScope.SPRING_SECURITY_CONTEXT.authentication.principal }" />
-<script
-	src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+<!-- <script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script> -->
 <jsp:include page="/WEB-INF/views/common/header.jsp">
 	<jsp:param value="CommuteMain" name="ATO" />
 </jsp:include>
@@ -135,7 +135,7 @@
               <div class="card-body">
 								<!--start-->
 								<!-- Page Heading -->
-							    <form action="${path }/calendar/Detail" method="post">
+							    <form action="" method="post">
 							        <div id="page">
 							            <div calss="title" style="margin-top: 45px;">
                                             <a id="title">${schedule.skdTitle}</a>
@@ -159,8 +159,8 @@
 							            <c:if test="${ schedule.empNo eq loginEmployee.empNo }">
                                             <div id="center-bot">
                                                 <div class="row" id="btns">
-                                                    <a class="btn btn-primary btn-user btn-block" id="edit" href="${path}/calendar/calendarEdit/${schedule.scheduleNo}">수정하기</a>
-                                                    <a class="btn btn-danger btn-user btn-block" id="delete" href="${path}/calendar/calendarDelete/${schedule.scheduleNo}">삭제하기</a>
+                                                    <a class="btn btn-primary btn-user btn-block" id="edit" href="${path}/calendar/edit/${schedule.scheduleNo}">수정하기</a>
+                                                    <a class="btn btn-danger btn-user btn-block" id="delete" href="${path}/calendar/delete/${schedule.scheduleNo}">삭제하기</a>
                                                 </div>
 
                                             </div>

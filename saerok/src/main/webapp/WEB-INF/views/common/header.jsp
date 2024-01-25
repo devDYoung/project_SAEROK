@@ -114,10 +114,12 @@
                 <div id="collapseSKD" class="collapse" aria-labelledby="headingSKD"
                     data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
-                        <a class="collapse-item" href="${path }/calendar/calendarMain">내 일정</a>
-                        <a class="collapse-item" href="${path }/calendar/calendarView">일정조회</a>
-                        <a class="collapse-item" href="${path }/calendar/calendarStarView">중요일정</a>
-                         <a class="collapse-item" href="${path }/calendar/calendarWrite">일정작성</a>
+                        <a class="collapse-item" href="${path }/calendar/calendarmain">내 일정</a>
+                        <a class="collapse-item" href="${path }/calendar/calendarview">일정조회</a>
+                        <a class="collapse-item" href="${path }/calendar/calendarstarview">중요일정</a>
+                         <a class="collapse-item" href="${path }/calendar/calendarwrite">일정작성</a>
+<%--                          <a class="collapse-item" href="${path }/calendar/calendardetail">일정작성</a>
+                         <a class="collapse-item" href="${path }/calendar/calendaredit">일정작성</a> --%>
                     </div>
                 </div> 
             </li>
@@ -146,9 +148,9 @@
                 <div id="collapseMsg" class="collapse" aria-labelledby="headingMsg" data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
                        <%-- <a class="collapse-item" href="javascript:requestNote('${path }/note/write');">쪽지쓰기</a> --%>
-                        <a class="collapse-item" href="/note/get">받은쪽지함</a>
-                        <a class="collapse-item" href="/note/send">보낸쪽지함</a>
-                        <a class="collapse-item" href="/note/basket">휴지통</a>
+                        <a class="collapse-item" href="${path }/note/get">받은쪽지함</a>
+                        <a class="collapse-item" href="${path }/note/send">보낸쪽지함</a>
+                        <a class="collapse-item" href="${path }/note/basket">휴지통</a>
                     </div>
                 </div>
             </li>

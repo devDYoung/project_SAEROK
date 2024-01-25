@@ -116,23 +116,24 @@
       )
    </insert>
 
-   <update id="updateCommuteEndTime" parameterType="map">
-      UPDATE COMMUTE
-      SET
-      OUT_DTIME = TO_DATE(SYSTIMESTAMP, 'yy-MM-dd HH24:MI:SS'),
-      STATUS=#{status}
-      WHERE EMP_NO = #{empNo} AND
-      TO_DATE(SYSDATE,'YY-MM-DD')
-      =TO_DATE(WORKINGDAY,'YY-MM-DD') AND
-      OUT_DTIME IS NULL
-      <selectKey keyProperty="outdtime" resultType="date">
-         SELECT
-         OUT_DTIME FROM COMMUTE
-         WHERE EMP_NO = #{empNo} AND
-         TO_DATE(SYSDATE,'YY-MM-DD')
-         =TO_DATE(WORKINGDAY,'YY-MM-DD')
-      </selectKey>
-   </update> 
+	<update id="updateCommuteEndTime" parameterType="map">
+		UPDATE COMMUTE
+		SET
+		OUT_DTIME = TO_CHAR(SYSTIMESTAMP, 'yyyy-MM-dd HH24:MI:SS'),
+		STATUS=#{status}
+		WHERE EMP_NO = #{empNo} AND
+		TO_CHAR(SYSDATE,'YYYY-MM-DD')
+		=TO_CHAR(WORKINGDAY,'YYYY-MM-DD') AND
+		OUT_DTIME IS NULL
+		<selectKey keyProperty="outdtime" resultType="date">
+			SELECT
+			OUT_DTIME FROM COMMUTE
+			WHERE EMP_NO = #{empNo} AND
+			TO_CHAR(SYSDATE,'YYYY-MM-DD')
+			=TO_CHAR(WORKINGDAY,'YYYY-MM-DD')
+		</selectKey>
+	</update>
+
 <!-- <update id="updateCommuteEndTime" parameterType="map">
     UPDATE commute
     SET out_Dtime = FROM_TZ(TO_TIMESTAMP(SYSTIMESTAMP, 'YYYY-MM-DD HH24:MI:SS.FF3'), 'Asia/Seoul'),
@@ -232,6 +233,7 @@
    <!-- <select id="selectWeekOverTime" parameterType="map" resultMap="commuteMap"> 
       SELECT NVL(SUM(OVERTIME),0) FROM COMMUTE WHERE EMP_NO =#{empNo}AND WORKINGDAY 
       BETWEEN #{start} AND TO_DATE(#{end}) ORDER BY WORKINGDAY </select> -->
+      
    <select id="selectWeekOverTime" parameterType="map"
       resultType="_int">
       SELECT NVL(SUM(OVERTIME), 0) AS TOTAL_OVERTIME
@@ -252,11 +254,13 @@
       WHERE emp_no = #{empNo}
       AND workingDay BETWEEN #{start} AND TO_DATE(#{end},'YY-MM-DD') + 1
    </select>
+   
    <select id="totalMonthTime" parameterType="map"
       resultType="_int">
       SELECT NVL(SUM(workingHours),0) FROM COMMUTE WHERE WORKINGDAY LIKE '%'
       || #{monthTime} || '%' AND EMP_NO=#{empNo}
    </select>
+   
    <select id="monthOverTime" parameterType="map" resultType="_int">
       SELECT NVL(SUM(OVERTIME), 0)
       FROM COMMUTE

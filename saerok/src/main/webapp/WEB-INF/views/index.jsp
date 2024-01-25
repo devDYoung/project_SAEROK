@@ -474,7 +474,7 @@ const monthlySalesChart = new Chart(ctx, {
     }
 });
 </script>
-<script src="${pageContext.request.contextPath}/resources/js/emp.js"></script>
+<script src="${path}/resources/js/emp.js"></script>
 
 <!-- Core plugin JavaScript-->
 <script src="/vendor/jquery-easing/jquery.easing.min.js"></script>

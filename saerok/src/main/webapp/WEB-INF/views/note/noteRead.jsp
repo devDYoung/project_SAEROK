@@ -14,7 +14,7 @@
 <body>
     <div class="container-fluid">
         <div
-			class="d-sm-flex align-items-center justify-content-center mb-4 mt-3">
+         class="d-sm-flex align-items-center justify-content-center mb-4 mt-3">
             <h1 class="h3 mb-0 text-gray-800">쪽지 상세 내용</h1>
         </div>
         <hr class="my-4">
@@ -25,7 +25,7 @@
             <p>보낸 사람: ${noteRead.sndEmpNo}</p>
             <p>내용: ${noteRead.noteContent}</p>
             <p>날짜: <c:out value="${noteRead.regDtime}" />
-			</p>
+         </p>
         </div>
     </div>
 

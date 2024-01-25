@@ -25,7 +25,5 @@ public class Schedule {
 	private String star; // 중요일정
 	private String regDtime; // 등록일
 	private String modDtime; // 수정일
-//	private String skdStartYmd;
-//	private String skdEndYmd;
 
 }

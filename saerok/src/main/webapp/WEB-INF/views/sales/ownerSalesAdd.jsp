@@ -3,7 +3,7 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
 <%@ taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
-
+<c:set var="path" value="${pageContext.request.contextPath}" />
 
 <jsp:include page="/WEB-INF/views/common/header.jsp" />
 <c:set var="loginEmployee"
@@ -61,7 +61,7 @@
 		</div>
 		<hr class="my-4">
 
-		<form id="salesForm" action="/owner/detail/add" method="post">
+		<form id="salesForm" action="${path}/owner/detail/add" method="post">
 			<div class="row justify-content-center">
 				<div class="col-md-3">
 					<div class="input-group date" id="datepicker">

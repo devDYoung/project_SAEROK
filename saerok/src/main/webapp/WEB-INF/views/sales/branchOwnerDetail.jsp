@@ -1,7 +1,9 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
+<c:set var="path" value="${pageContext.request.contextPath}" />
 <jsp:include page="/WEB-INF/views/common/header.jsp" />
+<c:set var="path" value="${pageContext.request.contextPath}" />
 <c:set var="loginEmployee"
 	value="${sessionScope.SPRING_SECURITY_CONTEXT.authentication.principal }" />
 
@@ -75,9 +77,10 @@
 
 	<div class="container-fluid">
 		<div class="d-sm-flex align-items-center justify-content-between mb-4">
-			<h1 class="h3 mb-0 text-gray-800">새록
+			<h1 class="h3 mb-0 text-gray-800">
 				<%-- ${branchDetailSales2.branchName} --%>  <!-- 멘토님 -->
 				${detailSales[0].branchName }</h1>
+				
 		</div>
 		<hr class="my-4">
 		<c:if test="${!empty detailSales}">
@@ -178,7 +181,7 @@
 							</c:forEach>
 							<div>
 								<button type="button" class="btn btn-primary"
-									onclick="location.href='/owner/detail/add'">
+									onclick="location.href='${path}/owner/detail/add'">
 									<i class="bi bi-plus"></i> 매출 등록
 								</button>
 							</div>

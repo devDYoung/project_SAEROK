@@ -94,7 +94,7 @@
 	              <div class="card-body">
 									<!--start-->
 									<!-- Page Heading -->
-								    <form action="${path }/calendar/Edit" method="post">
+								    <form action="" method="post">
 								        <div id="page">
 								            <div>
 								                <textarea id="title" name="title" placeholder="" value="">${schedule.skdTitle}</textarea>
@@ -109,10 +109,8 @@
 											
 												<select name="category" id="select" class="form-select form-select-sm" aria-label=".form-select-sm example">
 														  <option value="1" selected>기타</option>
-														  <option value="2">회의</option>
-														  <option value="3">휴가</option>
-														  <option value="4">반차</option>
-														  <option value="5">외근</option>
+														  <option value="2">휴가</option>
+														  <option value="3">반차</option>
 														</select>
 								            </div>
 											<script>
