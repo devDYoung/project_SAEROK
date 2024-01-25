@@ -21,13 +21,6 @@
 <jsp:include page="/WEB-INF/views/common/header.jsp">
 	<jsp:param value="CommuteMain" name="ATO" />
 </jsp:include>
-<c:if test = "${!empty sessionScope.alertMsg}">
-	<script>
-		alert("${sessionScope.alertMsg}");
-	</script>
-	<c:remove var="alertMsg"></c:remove>
-</c:if>
-
 
 <style>
 
@@ -45,7 +38,7 @@
 
 </style>
 
-<!-- Begin Page skdContent -->
+<!-- Begin Page Content -->
        <div class="container-fluid">
           <!-- DataTales Example Start-->
           <div class="card shadow mb-4">
@@ -60,69 +53,17 @@
 								
 								<nav>
 								  <div class="nav nav-tabs" id="nav-tab" role="tablist">
-								    <button class="nav-link active" id="nav-home-tab" data-bs-toggle="tab" data-bs-target="#nav-home" type="button" role="tab" aria-controls="nav-home" aria-selected="true">회의</button>
-								    <button class="nav-link" id="nav-profile-tab" data-bs-toggle="tab" data-bs-target="#nav-profile" type="button" role="tab" aria-controls="nav-profile" aria-selected="false">휴가</button>
+<!-- 								    <button class="nav-link active" id="nav-home-tab" data-bs-toggle="tab" data-bs-target="#nav-home" type="button" role="tab" aria-controls="nav-home" aria-selected="true">회의</button> -->
+								    <button class="nav-link" id="nav-profile-tab" data-bs-toggle="tab" data-bs-target="#nav-profile" type="button" role="tab" aria-controls="nav-profile" aria-selected="true">휴가</button>
 								    <button class="nav-link" id="nav-contact-tab" data-bs-toggle="tab" data-bs-target="#nav-contact" type="button" role="tab" aria-controls="nav-contact" aria-selected="false">반차</button>
-								    <button class="nav-link" id="nav-out-tab" data-bs-toggle="tab" data-bs-target="#nav-out" type="button" role="tab" aria-controls="nav-out" aria-selected="false">외근</button>								    
+<!-- 								    <button class="nav-link" id="nav-out-tab" data-bs-toggle="tab" data-bs-target="#nav-out" type="button" role="tab" aria-controls="nav-out" aria-selected="false">외근</button>		 -->						    
 								    <button class="nav-link" id="nav-ect-tab" data-bs-toggle="tab" data-bs-target="#nav-ect" type="button" role="tab" aria-controls="nav-ect" aria-selected="false">기타</button>
 								  </div>
 								</nav>
-								<div class="tab-content" id="nav-tabcontent">
-								
-								  <!-- 회의 -->
-								  <div class="tab-pane fade show active" id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab" tabindex="0">
-								  
-									  <div class ="d-flex flex-wrap w-100">
-										<c:forEach items="${scheduleList}" var="s">
-											<c:if test="${s.category eq 20}">
-											
-											<div class="row">
-												<div class="col-md-4">
-													<div class="card" style="width: 21rem; height: 10rem; margin: 20px;">
-														<div class="card-body">
-															<c:if test="${s.skdImpt eq 'N'}">
-																<h5 id="star${s.scheduleNo}"  style="float: right;">☆</h5>
-																</c:if>
-																<c:if test="${s.skdImpt eq 'Y'}">
-																<h5 id="star${s.scheduleNo}" style="float: right;">★</h5>
-																</c:if>
-																<script>
-																		$('#star${s.scheduleNo}').on('click', function() {
-																			console.log('adfadsf');
-																			$.ajax({
-																			type: "get",
-																			url: `${path}/calendar/StarView`,
-																			data: {
-																				scheduleNo : '${s.scheduleNo}'
-																			},
-																			success: function (check) {
-																				if(check == 'Y'){
-																					document.querySelector('#star${s.scheduleNo}').innerHTML='★';
-																				}else if(check =='N'){
-																					document.querySelector('#star${s.scheduleNo}').innerHTML='☆';
-																				}
-																			}
-																			});
-																		});
-																</script>
-														  <h5 class="card-title" onclick="location.href='${path}/calendar/Detail/${s.scheduleNo}'" style="overflow:hidden; white-space:nowrap; text-overflow:ellipsis;">${s.skdTitle}</h5>
-														  <h5 class="card-title">${s.skdStart}</h5>
-														  <h6 class="card-subtitle mb-2 text-muted">${s.empNo}</h6>
-														  <p class="card-text" style='overflow:hidden; white-space:nowrap; text-overflow:ellipsis;'>${s.skdContent}</p>
-														</div>
-													 </div>
-												</div>
-											</div>
-	
-											</c:if>
-										</c:forEach>
-									</div>
-									
-								</div>
-								<!-- 회의 끝 -->
-								 
+								<div class="tab-content" id="nav-tabContent">
+
 								  <!-- 휴가 -->
-								  <div class="tab-pane fade" id="nav-profile" role="tabpanel" aria-labelledby="nav-profile-tab" tabindex="0">
+<div class="tab-pane fade" id="nav-profile" role="tabpanel" aria-labelledby="nav-profile-tab" tabindex="0">
 								  
 									  <div class ="d-flex flex-wrap w-100">
 										<c:forEach items="${scheduleList}" var="s">
@@ -143,7 +84,7 @@
 																			console.log('adfadsf');
 																			$.ajax({
 																			type: "get",
-																			url: `${path}/calendar/Impt`,
+																			url: `${path}/calendar/star`,
 																			data: {
 																				scheduleNo : '${s.scheduleNo}'
 																			},
@@ -157,7 +98,7 @@
 																			});
 																		});
 																</script>
-														  <h5 class="card-title" onclick="location.href='${path}/calendar/calendarDetail/${s.scheduleNo}'" style="overflow:hidden; white-space:nowrap; text-overflow:ellipsis;">${s.skdTitle}</h5>
+														  <h5 class="card-title" onclick="location.href='${path}/calendar/detail/${s.scheduleNo}'" style="overflow:hidden; white-space:nowrap; text-overflow:ellipsis;">${s.skdTitle}</h5>
 														  <h5 class="card-title">${s.skdStart} ~ ${s.skdEnd}</h5>
 														  <h6 class="card-subtitle mb-2 text-muted">${s.empNo}</h6>
 														  <p class="card-text" style='overflow:hidden; white-space:nowrap; text-overflow:ellipsis;'>${s.skdContent}</p>
@@ -184,10 +125,10 @@
 												<div class="col-md-4">
 													<div class="card" style="width: 21rem; height: 10rem; margin: 20px;">
 														<div class="card-body">
-															<c:if test="${s.skdImpt eq 'N'}">
+															<c:if test="${s.star eq 'N'}">
 																<h5 id="star${s.scheduleNo}"  style="float: right;">☆</h5>
 																</c:if>
-																<c:if test="${s.skdImpt eq 'Y'}">
+																<c:if test="${s.star eq 'Y'}">
 																<h5 id="star${s.scheduleNo}" style="float: right;">★</h5>
 																</c:if>
 																<script>
@@ -195,7 +136,7 @@
 																			console.log('adfadsf');
 																			$.ajax({
 																			type: "get",
-																			url: `${path}/calendar/Impt`,
+																			url: `${path}/calendar/star`,
 																			data: {
 																				scheduleNo : '${s.scheduleNo}'
 																			},
@@ -209,7 +150,7 @@
 																			});
 																		});
 																</script>
-														  <h5 class="card-title" onclick="location.href='${path}/calendar/Detail/${s.scheduleNo}'" style="overflow:hidden; white-space:nowrap; text-overflow:ellipsis;">${x.skdTitle}</h5>
+														  <h5 class="card-title" onclick="location.href='${path}/calendar/detail/${s.scheduleNo}'" style="overflow:hidden; white-space:nowrap; text-overflow:ellipsis;">${x.skdTitle}</h5>
 														  <h5 class="card-title">${s.skdStart}</h5>
 														  <h6 class="card-subtitle mb-2 text-muted">${s.empNo}</h6>
 														  <p class="card-text" style='overflow:hidden; white-space:nowrap; text-overflow:ellipsis;'>${s.skdContent}</p>
@@ -225,58 +166,6 @@
 								  </div>
 								  <!-- 반차 끝-->
 								  
-								  <!-- 외근 -->
-								  <div class="tab-pane fade" id="nav-out" role="tabpanel" aria-labelledby="nav-out-tab" tabindex="0">
-								  
-									  <div class ="d-flex flex-wrap w-100">
-										<c:forEach items="${scheduleList}" var="s">
-											<c:if test="${s.category eq 5}">
-											
-											<div class="row">
-												<div class="col-md-4">
-													<div class="card" style="width: 21rem; height: 10rem; margin: 20px;">
-														<div class="card-body">
-															<c:if test="${s.skdImpt eq 'N'}">
-																<h5 id="star${x.scheduleNo}"  style="float: right;">☆</h5>
-																</c:if>
-																<c:if test="${x.skdStar eq 'Y'}">
-																<h5 id="star${x.scheduleNo}" style="float: right;">★</h5>
-																</c:if>
-																<script>
-																		$('#star${s.scheduleNo}').on('click', function() {
-																			console.log('adfadsf');
-																			$.ajax({
-																			type: "get",
-																			url: `${path}/calendar/Impt`,
-																			data: {
-																				scheduleNo : '${s.scheduleNo}'
-																			},
-																			success: function (check) {
-																				if(check == 'Y'){
-																					document.querySelector('#star${s.scheduleNo}').innerHTML='★';
-																				}else if(check =='N'){
-																					document.querySelector('#star${s.scheduleNo}').innerHTML='☆';
-																				}
-																			}
-																			});
-																		});
-																</script>
-														  <h5 class="card-title" onclick="location.href='${path}/calendar/Detail/${s.scheduleNo}'" style="overflow:hidden; white-space:nowrap; text-overflow:ellipsis;">${s.skdTitle}</h5>
-														  <h5 class="card-title">${s.skdStart}</h5>
-														  <h6 class="card-subtitle mb-2 text-muted">${s.empNo}</h6>
-														  <p class="card-text" style='overflow:hidden; white-space:nowrap; text-overflow:ellipsis;'>${s.skdContent}</p>
-														</div>
-													 </div>
-												</div>
-											</div>
-	
-											</c:if>
-										</c:forEach>
-									</div>
-
-								  </div>
-								  <!-- 외근 끝-->
-								  
 								  <!-- 기타 -->
 								  <div class="tab-pane fade" id="nav-ect" role="tabpanel" aria-labelledby="nav-ect-tab" tabindex="0">
 								  
@@ -288,10 +177,10 @@
 												<div class="col-md-4">
 													<div class="card" style="width: 21rem; height: 10rem; margin: 20px;">
 														<div class="card-body">
-															<c:if test="${s.skdImpt eq 'N'}">
+															<c:if test="${s.star eq 'N'}">
 																<h5 id="star${s.scheduleNo}"  style="float: right;">☆</h5>
 																</c:if>
-																<c:if test="${s.skdImpt eq 'Y'}">
+																<c:if test="${s.star eq 'Y'}">
 																<h5 id="star${s.scheduleNo}" style="float: right;">★</h5>
 																</c:if>
 																<script>
@@ -299,7 +188,7 @@
 																			console.log('adfadsf');
 																			$.ajax({
 																			type: "get",
-																			url: `${path}/calendar/Impt`,
+																			url: `${path}/calendar/star`,
 																			data: {
 																				scheduleNo : '${s.scheduleNo}'
 																			},
@@ -313,7 +202,7 @@
 																			});
 																		});
 																</script>
-														  <h5 class="card-title"  onclick="location.href='${path}/calendar/Detail/${s.scheduleNo}'" style="overflow:hidden; white-space:nowrap; text-overflow:ellipsis;">${s.skdTitle}</h5>
+														  <h5 class="card-title"  onclick="location.href='${path}/calendar/detail/${s.scheduleNo}'" style="overflow:hidden; white-space:nowrap; text-overflow:ellipsis;">${s.skdTitle}</h5>
 														  <h5 class="card-title">${s.skdStart}</h5>
 														  <h6 class="card-substitle mb-2 text-muted">${s.empNo}</h6>
 														  <p class="card-text" style='overflow:hidden; white-space:nowrap; text-overflow:ellipsis;'>${s.skdContent}</p>
@@ -338,11 +227,7 @@
 								</div>
 								<!--end-->
 						  </div>
-
-				  </div>
 		<!-- DataTales Example End-->
-		
-<jsp:include page="/WEB-INF/views/common/footer.jsp" />
 	  </div>
 <!-- End Page Content -->
 

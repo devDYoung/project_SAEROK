@@ -31,23 +31,44 @@ public class ScheduleServiceImpl implements ScheduleService{
 		
 		int result = 0;
 		
-		try {
-		    SimpleDateFormat dateFormat = new SimpleDateFormat("MM/dd/yyyy"); 
-		    Date parsedSDate = dateFormat.parse(sc.getSkdStart());
-		    Date parsedEDate = dateFormat.parse(sc.getSkdEnd());
-		    Timestamp timestamp = new java.sql.Timestamp(parsedSDate.getTime());
-		    Timestamp timestamp2 = new java.sql.Timestamp(parsedEDate.getTime());
-		    sc.setSkdStart(timestamp.toString());
-		    sc.setSkdEnd(timestamp2.toString());
-		    
-		    
-		    result = skddao.insertSkd(session, sc);
-		} catch(Exception e) { 
-			e.printStackTrace();
-		}
-		
-		return result;
-		
+//		try {
+//		    SimpleDateFormat dateFormat = new SimpleDateFormat("MM/dd/yyyy"); 
+//		    Date parsedSDate = dateFormat.parse(sc.getSkdStart());
+//		    Date parsedEDate = dateFormat.parse(sc.getSkdEnd());
+//		    Timestamp timestamp = new java.sql.Timestamp(parsedSDate.getTime());
+//		    Timestamp timestamp2 = new java.sql.Timestamp(parsedEDate.getTime());
+//		    sc.setSkdStart(timestamp.toString());
+//		    sc.setSkdEnd(timestamp2.toString());
+//		    
+//		    
+//		    result = skddao.insertSkd(session, sc);
+//		} catch(Exception e) { 
+//			e.printStackTrace();
+//		}
+//		
+//		return result;
+//		
+		  try {
+		        SimpleDateFormat dateFormat = new SimpleDateFormat("yy-mm-dd"); 
+
+		        // null 체크 추가
+		        if (sc.getSkdStart() != null && sc.getSkdEnd() != null) {
+		            Date parsedSDate = dateFormat.parse(sc.getSkdStart());
+		            Date parsedEDate = dateFormat.parse(sc.getSkdEnd());
+		            Timestamp timestamp = new java.sql.Timestamp(parsedSDate.getTime());
+		            Timestamp timestamp2 = new java.sql.Timestamp(parsedEDate.getTime());
+		            sc.setSkdStart(timestamp.toString());
+		            sc.setSkdEnd(timestamp2.toString());
+
+		            result = skddao.insertSkd(session, sc);
+		        } else {
+		            System.out.println("날짜가 null입니다.");
+		        }
+		    } catch(Exception e) { 
+		        e.printStackTrace();
+		    }
+
+		    return result;
 	}
 	
 	//캘린더에서 일정 작성
@@ -57,7 +78,7 @@ public class ScheduleServiceImpl implements ScheduleService{
 		int result = 0;
 		
 		try {
-		    SimpleDateFormat dateFormat = new SimpleDateFormat("MM/dd/yyyy"); 
+		    SimpleDateFormat dateFormat = new SimpleDateFormat("yy-mm-dd"); 
 		    Date parsedSDate = dateFormat.parse(sc.getSkdStart());
 		    Date parsedEDate = dateFormat.parse(sc.getSkdEnd());
 		    Timestamp timestamp = new java.sql.Timestamp(parsedSDate.getTime());
@@ -85,7 +106,7 @@ public class ScheduleServiceImpl implements ScheduleService{
 		int result = 0;
 		
 		try {
-		    SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd"); 
+		    SimpleDateFormat dateFormat = new SimpleDateFormat("yy-mm-dd"); 
 		    Date parsedSDate = dateFormat.parse(sc.getSkdStart());
 		    Date parsedEDate = dateFormat.parse(sc.getSkdEnd());
 		    Timestamp timestamp = new java.sql.Timestamp(parsedSDate.getTime());
@@ -150,85 +171,5 @@ public class ScheduleServiceImpl implements ScheduleService{
 	public List<Schedule> selectStarList(String no) {
 		return skddao.selectStarList(session, no);
 	}
-
-
-	
-//	// 오늘 날짜의 모든 일정 조회(홈)
-//	public List<Schedule> selectTodaySchedule(String empNo){
-//		String todayYmd = LocalDate.now().toString();
-//		return skddao.selectTodaySchedule(session, empNo, todayYmd);
-//	}
-//	
-//	// 해당 달의 일정 목록 조회
-//	public List<Schedule>  selectMonthSchedule(String empNo){
-//		return skddao.selectMonthSchedule(session, empNo);
-//	}
-//	
-//	// 회사/부서/개인 일정
-//	public List<Schedule> selectFilteredMonthSchedule(String empNo, String skdTypeCd) {
-//		// 회사 일정 조회
-//	    if ("00".equals(skdTypeCd)) {
-//	        return skddao.selectAdminSchedule(session);
-//	        // 개인 일정 조회
-//	    } else if ("99".equals(skdTypeCd)) {
-//	        return skddao.selectPersonalSchedule(session, empNo);
-//	        // 부서별 일정 조회
-//	    } else {
-//	        return skddao.selectDeptSchedule(session, empNo);
-//	    }
-//	}
-//	
-//	// 관리자 일정만
-//	public List<Schedule>  selectAdminSchedule() {
-//		return skddao.selectAdminSchedule(session);
-//	}
-//	
-//	// 선택한 일정 조회
-//	public Schedule selectDateSchedule(int scheduleNo){
-//		return skddao.selectDateSchedule(session, scheduleNo);
-//	}
-//	
-//	// 일정 등록
-//	public int insertSchedule(Schedule schedule) {
-//		return skddao.insertSchedule(session, schedule);
-//	}
-//	
-//	// 등록시 사용자 부서 세팅
-//	public String setUserDept(String empNo){
-//		return skddao.setUserDept(session, empNo);
-//	}
-//	
-//	// 일정 수정
-//	public int modifySchedule(Schedule schdule) {
-//		//log.debug("\u001B[41m" + "service modifySchedule schdule : " + schdule + "\u001B[0m");
-//		return skddao.modifySchedule(session, schdule);
-//	}
-//	
-//	// 일정 삭제
-//	public int deleteSchedule(int scheduleNo) {
-//		return skddao.deleteSchedule(session, scheduleNo);
-//	}
-//
-//	@Override
-//	public List<Schedule> selectTodaySchedule(String empNo, String todayYmd) {
-//		// TODO Auto-generated method stub
-//		return null;
-//	}
-//
-//	@Override
-//	public List<Schedule> selectPersonalSchedule(String empNo) {
-//		// TODO Auto-generated method stub
-//		return null;
-//	}
-//
-//	@Override
-//	public List<Schedule> selectDeptSchedule(String empNo) {
-//		// TODO Auto-generated method stub
-//		return null;
-//	}
-
-
-	
-	
 
 }

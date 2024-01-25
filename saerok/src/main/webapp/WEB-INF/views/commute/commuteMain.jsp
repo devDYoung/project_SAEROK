@@ -143,7 +143,7 @@
 	    		        								const subTr = document.createElement("tr");
 	    		        								const {empNo, outDtime, commuteNo, overtime, workingDay, inDtime, status, workingHours} = datas;
 	    		        								const subTd1 = document.createElement("td");
-	    		        								subTd1.textContent = changeWorkingDay(inDtime);
+	    		        								subTd1.textContent = changeWorkingDay(workingDay);
 	    		        								
 	    		        								const subTd2 = document.createElement("td");
 	    		        								subTd2.textContent = changeTimeText(inDtime);
@@ -319,7 +319,7 @@
     			  monthWorkTime.textContent = changeWorkTime(totalMonthTime + totalMonthOverTime);
     			  monthOverTime.textContent = changeWorkTime(totalMonthOverTime);
     		  },
-    		  error : console.log("나와")
+    		  error : console.log
     		  
     	  });
     }
@@ -365,13 +365,8 @@
     }
     
 
-    // 오늘 날짜로 함수 호출
-    const today = new Date();
-    console.log(changeWorkingDay(today));
-
-
 
     </script>
 
 <jsp:include page="/WEB-INF/views/common/footer.jsp" />
-<script src="${pageContext.request.contextPath}/resources/js/emp.js"></script>
+<script src="${path }/resources/js/emp.js"></script>
