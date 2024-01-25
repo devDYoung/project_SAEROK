@@ -17,7 +17,8 @@
       <result column="REFILENAME" property="reFileName" />
 
       <result column="app_emp_name" property="appEmpName" />
-
+      <result column="empNos" property="empNos" />
+	
       <!-- Employee 매핑 -->
       <association property="empNo" resultMap="emp.empMap" />
       <!-- ApvWriter 매핑 -->
@@ -25,14 +26,14 @@
          <result column="APV_STATE" property="apvState" />
          <result column="APV_EMP_TIME" property="apvEmpTime" />
          <result column="RETURN_REASON" property="returnReason" />
-         <result column="apv_emp_name" property="apvEmpNo" />
-         <result column="EMP_NO" property="apvEmpName" />
-         <result column="WRITERLIST" property="writerList" />
+         <result column="APV_EMP_NO" property="apvEmpNo" />
+         <result column="APV_EMP_NAME" property="apvEmpName" />
+         <result column="writerlist" property="writerList" />
       </collection>
       <!-- ApvRef 매핑 -->
       <collection property="apvRef" ofType="apvRef">
          <result column="appSeq" property="appSeq" />
-         <result column="EMP_NO" property="empNo" />
+         <result column="REF_EMP_NO" property="empNo" />
       </collection>
    </resultMap>
 
@@ -42,22 +43,24 @@
    <!--전체 결재리스트 불러오기  -->
    <select id="selectApproval" resultMap="approval">
       SELECT t1.APPSEQ AS APPSEQ
-      , t1.APPWRITEDATE
-      , t1.APPCHECK
-      , t1.APPKINDS
-      , t2.LETTERSTATUS
-      ,
-      t1.emp_no AS app_emp_no
-      , (SELECT emp_name FROM EMPLOYEE e WHERE
-      e.emp_no = t1.emp_no) AS
-      app_emp_name
-      , t3.emp_no AS apv_emp_no
-      , (SELECT
-      emp_name FROM EMPLOYEE e WHERE e.emp_no = t3.emp_no) AS
-      apv_emp_name
+	       , t1.APPWRITEDATE
+	       , t1.APPCHECK
+	       , t1.APPKINDS
+	       , t2.LETTERSTATUS
+	       , t1.emp_no AS app_emp_no
+	       , (SELECT emp_name FROM EMPLOYEE e WHERE
+			       e.emp_no = t1.emp_no) AS
+			       app_emp_name
+	       , t3.emp_no AS apv_emp_no
+	       , (SELECT
+		       emp_name FROM EMPLOYEE e WHERE e.emp_no = t3.emp_no) AS
+		       apv_emp_name
+		   , t2.LETTERTITLE
       FROM APPROVAL t1
-      , APPLETTER t2
-      , APV_REF t3
+		 , APPLETTER t2
+		 , APV_WRITER t3
+	 WHERE t1.APPSEQ = t2.APPSEQ 
+	   AND t1.APPSEQ = t3.APPSEQ 
    </select>
 
    <!--결재자들 선택 추가 -->
@@ -104,6 +107,71 @@
          APPSEQ, EMP_NO,WRITERLIST)
       VALUES(#{appSeq},#{empNo},#{order})
    </insert>
+   
+   <!--내문서 결재리스트 불러오기  -->
+   <select id="myApproval" parameterType="String" resultMap="approval">
+      SELECT t1.APPSEQ AS APPSEQ
+	       , t1.APPWRITEDATE
+	       , t1.APPCHECK
+	       , t1.APPKINDS
+	       , t2.LETTERSTATUS
+	       , t1.emp_no AS app_emp_no
+	       , (SELECT emp_name FROM EMPLOYEE e WHERE
+			       e.emp_no = t1.emp_no) AS
+			       app_emp_name
+	       , t3.emp_no AS apv_emp_no
+	       , (SELECT
+		       emp_name FROM EMPLOYEE e WHERE e.emp_no = t3.emp_no) AS
+		       apv_emp_name
+		   , t2.LETTERTITLE
+      FROM APPROVAL t1
+		 , APPLETTER t2
+		 , APV_WRITER t3
+	 WHERE t1.APPSEQ = t2.APPSEQ 
+	   AND t1.APPSEQ = t3.APPSEQ 
+	   AND t1.EMP_NO = #{empNo}
+	  
+   </select>
+   <!--결재해야할 문서  -->
+    <select id="myTodoApprovalList" parameterType="String" resultMap="approval">
+      SELECT t1.APPSEQ AS APPSEQ
+	       , t1.APPWRITEDATE
+	       , t1.APPCHECK
+	       , t1.APPKINDS
+	       , t2.LETTERSTATUS
+	       , t1.emp_no AS app_emp_no
+	       , (SELECT emp_name FROM EMPLOYEE e WHERE
+			       e.emp_no = t1.emp_no) AS
+			       app_emp_name
+	       , t3.emp_no AS APV_EMP_NO
+	       , (SELECT
+		       emp_name FROM EMPLOYEE e WHERE e.emp_no = t3.emp_no) AS
+		       apv_emp_name
+		   , t2.LETTERTITLE
+      FROM APPROVAL t1
+		 , APPLETTER t2
+		 , APV_WRITER t3
+	 WHERE t1.APPSEQ = t2.APPSEQ 
+	   AND t1.APPSEQ = t3.APPSEQ 
+	   AND EXISTS (
+	   		SELECT 1
+	   		  FROM APV_WRITER aw 
+	   		 WHERE aw.APPSEQ = t3.APPSEQ 
+	   		   AND aw.emp_no = #{empNo}
+	   )
+	   ORDER BY t1.APPSEQ DESC
+	    <!--  SELECT appseq
+		 , (SELECT max(APPWRITEDATE) FROM APPROVAL a2 WHERE a2.appseq = t1.appseq) as APPWRITEDATE
+		 , (SELECT max(APPCHECK) FROM APPROVAL a2 WHERE a2.appseq = t1.appseq) as APPCHECK
+		 , (SELECT max(APPKINDS) FROM APPROVAL a2 WHERE a2.appseq = t1.appseq) as APPKINDS
+		 , (SELECT max(LETTERSTATUS) FROM APPLETTER a2 WHERE a2.appseq = t1.appseq) as LETTERSTATUS
+		 , (SELECT max(emp_no) FROM APPROVAL a2 WHERE a2.appseq = t1.appseq) as empNo
+		 , (SELECT max(LETTERTITLE) FROM APPLETTER a2 WHERE a2.appseq = t1.appseq) as LETTERTITLE
+	     , (LISTAGG(t1.emp_no, ',') WITHIN GROUP(ORDER BY t1.emp_no)) as empNos
+	  FROM APV_WRITER t1
+	 WHERE t1.APPSEQ IN (SELECT a.appseq FROM APPROVAL a WHERE a.emp_no = #{empNo})
+	 GROUP BY t1.appseq -->
+   </select>
    
 
 </mapper>
