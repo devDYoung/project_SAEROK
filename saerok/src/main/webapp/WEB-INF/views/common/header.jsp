@@ -473,7 +473,7 @@
          /* alert(empNameVal); */
          $.ajax({
             type: "GET", 
-            url:"/note/selectEmpByName",
+            url:"${path }/note/selectEmpByName",
             data: { 
                   empName: empNameVal
             },
