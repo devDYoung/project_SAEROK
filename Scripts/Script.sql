@@ -48,6 +48,29 @@ DROP TABLE SCHEDULE ;
 
 SELECT * FROM schedule;
 
+INSERT INTO SCHEDULE 
+		( 
+			SCHEDULE_NO
+			,CATEGORY
+			,SKD_TITLE
+			,SKD_CONTENT
+			,EMP_NO
+			,SKD_START
+			,SKD_END 
+			,SKD_TYPE_CD
+		) 
+		VALUES 
+		( 
+			SEQ_SCHEDULE_NO.NEXTVAL 
+			, '10'
+			, '개인일정'
+			, '개인일정입니다.'
+			, 'ATO_2'
+			, '2024-01-18'
+			, '2024-01-21'
+			,'01'
+		) ;
+
 SELECT min(IN_DTIME)
 		  , max(OUT_DTIME)
    FROM COMMUTE 

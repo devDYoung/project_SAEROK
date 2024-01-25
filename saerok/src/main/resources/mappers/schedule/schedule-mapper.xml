@@ -31,6 +31,7 @@
 			,EMP_NO
 			,SKD_START
 			,SKD_END 
+			,SKD_TYPE_CD
 		) 
 		VALUES 
 		( 
@@ -41,6 +42,7 @@
 			, #{empNo} 
 			, #{skdStart}
 			, #{skdEnd}
+			,#{skdTypeCd}
 		) 
 	</insert>
 	
@@ -200,162 +202,5 @@
 		    AND S.EMP_NO = #{empNo}
 		    ORDER BY C.SKD_START ASC		
 	</select>
-	
-	
-
-<!--  	<select id="selectTodaySchedule">
-		SELECT skd_title skdTitle, skd_start skdStart, '개인' skdCategory
-		FROM schedule
-		WHERE skd_Type_Cd = (SELECT CODE FROM common_code WHERE group_code = 'S001' AND code_nm = '개인')
-		AND emp_No = #{empNo}
-		AND #{todayYmd} BETWEEN skd_start_ymd AND skd_end_ymd
-		UNION 
-		SELECT skd_title skdTitle, skd_start skdStart, '전체' skdCategory
-		FROM schedule
-		WHERE skd_Type_Cd = (SELECT CODE FROM common_code WHERE group_code = 'S001' AND code_nm = '전체')
-		AND #{todayYmd} BETWEEN skd_start_ymd AND skd_end_ymd
-		UNION
-		SELECT skd_title skdTitle, skd_start skdStart, '부서' skdCategory
-		FROM schedule
-		WHERE skd_Type_Cd = (SELECT dept_cd FROM user WHERE emp_No = #{empNo})
-		AND #{todayYmd} BETWEEN skd_start_ymd AND skd_end_ymd
-		ORDER BY skdStart
-	</select>
-	
-	아이디 별 선택한 달의 전체 일정조회(선택값에 따라 회사/부서/개인 일정 조회)
-	<select id="selectMonthSchedule">
-		SELECT 
-			SCHEDULE_NO scheduleNo,
-			emp_No empNo,
-			skd_Type_Cd skdTypeCd,
-			skd_start_ymd skdStartYmd,
-			skd_title skdTitle,
-			skd_end_ymd skdEndYmd,
-			skd_start skdStart,
-			skd_end skdEnd,
-			skd_contents skdContent,
-			c_date cDate,
-			regDtime uDate
-		FROM schedule
-		WHERE 
-			skd_Type_Cd = '00' or
-			(emp_No = #{empNo} AND skd_Type_Cd = '99') or
-			skd_Type_Cd = (SELECT code FROM common_code WHERE group_code = 'D001' AND code = (SELECT dept_cd FROM user WHERE emp_No = #{empNo}))
-	</select>
-	
-	아이디별 각각 선택 일정 조회
-	회사일정
-	<select id="selectAdminSchedule">
-		SELECT 
-			SCHEDULE_NO scheduleNo,
-			emp_No empNo,
-			skd_Type_Cd skdTypeCd,
-			skd_start_ymd skdStartYmd,
-			skd_title skdTitle,
-			skd_end_ymd skdEndYmd,
-			skd_start skdStart,
-			skd_end skdEnd,
-			skd_contents skdContent,
-			c_date cDate,
-			regDtime uDate
-		FROM schedule
-		WHERE 
-			skd_Type_Cd = '00'
-	</select>
-	개인일정
-	<select id="selectPersonalSchedule">
-		SELECT 
-			SCHEDULE_NO scheduleNo,
-			emp_No empNo,
-			skd_Type_Cd skdTypeCd,
-			skd_start_ymd skdStartYmd,
-			skd_title skdTitle,
-			skd_end_ymd skdEndYmd,
-			skd_start skdStart,
-			skd_end skdEnd,
-			skd_contents skdContent,
-			c_date cDate,
-			regDtime uDate
-		FROM schedule
-		WHERE 
-			skd_Type_Cd = '99'
-		AND emp_No = #{empNo}
-	</select>
-	부서일정
-	<select id="selectDeptSchedule">
-		SELECT 
-			SCHEDULE_NO scheduleNo,
-			emp_No empNo,
-			skd_Type_Cd skdTypeCd,
-			skd_start_ymd skdStartYmd,
-			skd_title skdTitle,
-			skd_end_ymd skdEndYmd,
-			skd_start skdStart,
-			skd_end skdEnd,
-			skd_contents skdContent,
-			c_date cDate,
-			regDtime uDate
-		FROM schedule
-		WHERE 
-			skd_Type_Cd = (SELECT code FROM common_code WHERE group_code = 'D001' AND code = (SELECT dept_cd FROM Employee WHERE emp_No = #{empNo}))
-	</select>
-	
-	선택날짜 일정상세
-	<select id="selectDateSchedule">
-		SELECT 
-			SCHEDULE_NO scheduleNo,
-			emp_No empNo,
-			skd_Type_Cd skdTypeCd,
-			skd_title skdTitle,
-			skd_start_ymd skdStartYmd,
-			skd_end_ymd skdEndYmd,
-			skd_start skdStart,
-			skd_end skdEnd,
-			skd_content skdContent,
-			mod_Dtime modDtime,
-			reg_Dtime regDtime
-		FROM schedule
-		WHERE
-			SCHEDULE_NO = #{scheduleNo}
-	</select>
-	
-	일정등록
-<insert id="insertSchedule" parameterType="com.saerok.jy.schedule.dto.Schedule">
-    INSERT INTO Schedule
-        (emp_No, schedule_No, skd_Type_Cd, skd_title, category, skd_start_ymd, skd_end_ymd, skd_start, skd_end, skd_content, dept_code, skd_impt, mod_Dtime, reg_Dtime)
-    VALUES 
-        (#{empNo}, #{scheduleNo}, #{skdTypeCd}, #{skdTitle}, #{category}, #{skdStartYmd}, #{skdEndYmd}, #{skdStart}, #{skdEnd}, #{skdContent}, #{deptCode}, #{skdImpt}, #{modDtime}, #{regDtime})
-</insert>
-	
-	등록시 사용자 부서코드 설정
-	<select id="setUserDept">
-		SELECT CODE
-		FROM DEPARTMENT
-		WHERE 
-			group_code = '100' 
-		AND CODE = (SELECT dept_code FROM EMPLOYEE WHERE emp_No = #{empNo})
-	</select>
-	
-	일정수정
-	<update id="modifySchedule">
-		UPDATE schedule
-		SET
-			skd_Type_Cd = #{skdTypeCd}, 
-			skd_title = #{skdTitle}, 
-			skd_start_ymd = #{skdStartYmd}, 
-			skd_end_ymd = #{skdEndYmd}, 
-			skd_start = #{skdStart}, 
-			skd_end = #{skdEnd}, 
-			skd_contents = #{skdContent}, 
-			regDtime = NOW()
-		WHERE 
-			SCHEDULE_NO = #{scheduleNo} 
-	</update>
-	
-	일정삭제
-	<delete id="deleteSchedule">
-		DELETE FROM schedule
-		WHERE SCHEDULE_No = #{scheduleNo}
-	</delete> -->
 
 </mapper> 

@@ -16,8 +16,8 @@
 	</jsp:include>
 	<link rel="stylesheet" href="${path}/resources/css/empDept.css">
 <style>
-div#search-memberJob {display: <%= "job_Name".equals(searchType) ? "inline-block" : "none" %>;}
-div#search-memberName {display: <%= searchType == null ||  "emp_Name".equals(searchType) ? "inline-block" : "none" %>;}
+div#search-employeeJob {display: <%= "job_Name".equals(searchType) ? "inline-block" : "none" %>;}
+div#search-employeeName {display: <%= searchType == null ||  "emp_Name".equals(searchType) ? "inline-block" : "none" %>;}
 </style>
 <script>
 window.addEventListener('load', () => {
@@ -40,16 +40,16 @@ window.addEventListener('load', () => {
 
                          <div id="search-container">
 						    <select id="searchType">
-						        <option value="empName" <%= "empName".equals(searchType) ? "selected" : "" %>>이름</option>
-						        <option value="jobName" <%= "jobName".equals(searchType) ? "selected" : "" %>>직급</option>				
+						        <option value="empName" <%= "emp_Name".equals(searchType) ? "selected" : "" %>>이름</option>
+						        <option value="jobName" <%= "job_Name".equals(searchType) ? "selected" : "" %>>직급</option>				
 						    </select>
 						    <div id="search-employeeJob" class="search-type">
-							            <input type="hidden" name="searchType" value="jobName" id="searchType"/>
+							            <input type="hidden" name="searchType" value="job_Name" id="searchType"/>
 							            <input type="text" name="searchKeyword"  id="searchKeyword" placeholder="검색할 직급을 입력하세요." />
 							            <button type="button">검색</button>			
 						    </div>
 						    <div id="search-employeeName" class="search-type">
-							            <input type="hidden" name="searchType" value="empName" id="searchType"/>
+							            <input type="hidden" name="searchType" value="emp_Name" id="searchType"/>
 							            <input type="text" name="searchKeyword" id="searchKeyword" placeholder="검색할 이름을 입력하세요." />
 							            <button type="button">검색</button>			
 						    </div>
@@ -81,7 +81,6 @@ window.addEventListener('load',()=>{
      //검색기능 타입변경
      document.querySelector("#searchType").addEventListener('change', (e) => {
  		console.log(e.target.value);
- 		// member_id, member_name, gender
  		
  		// 모두 숨김
  		document.querySelectorAll(".search-type").forEach((div) => {
@@ -91,9 +90,9 @@ window.addEventListener('load',()=>{
  		// 현재선택된 값에 상응하는 div만 노출
  		let id; 
  		switch(e.target.value){
- 		case "deptName" : id = "search-employeeDept"; break; 
- 		case "jobName" : id = "search-employeeJob"; break; 
- 		case "empName" : id = "search-employeeName"; break; 
+ 		case "dept_Name" : id = "search-employeeDept"; break; 
+ 		case "job_Name" : id = "search-employeeJob"; break; 
+ 		case "emp_Name" : id = "search-employeeName"; break; 
  		}
  		
  		document.querySelector("#" + id).style.display = "inline-block";
@@ -208,15 +207,15 @@ function deptSendData(){
         	
         	const p1 = document.createElement("p");
         	p1.classList.add("font-14","font-bold");
-        	p1.textContent = chageWorkTime(monthWorkTime + monthOverTime);
+        	p1.textContent = changeWorkTime(monthWorkTime + monthOverTime);
         	
         	const p2 = document.createElement("p");
         	p2.classList.add("font-12","color-gray","font-bold");
-        	p2.textContent = "기본:"+chageWorkTime(monthWorkTime);
+        	p2.textContent = "기본:"+changeWorkTime(monthWorkTime);
         	
         	const p3 = document.createElement("p");
         	p3.classList.add("font-12","color-gray","font-bold");
-        	p3.textContent = "연장:"+chageWorkTime(monthOverTime);
+        	p3.textContent = "연장:"+changeWorkTime(monthOverTime);
         	
         	td2.append(p1,p2,p3);
         	tr2.append(td1,td2);
@@ -238,15 +237,15 @@ function deptSendData(){
             	
             	const p4 = document.createElement("p");
             	p4.classList.add("font-14","font-bold");
-            	p4.textContent = chageWorkTime(workTime + overTime);
+            	p4.textContent = changeWorkTime(workTime + overTime);
             	
             	const p5 = document.createElement("p");
             	p5.classList.add("font-12","color-gray","font-bold");
-            	p5.textContent = "기본:"+chageWorkTime(workTime);
+            	p5.textContent = "기본:"+changeWorkTime(workTime);
             	
             	const p6 = document.createElement("p");
             	p6.classList.add("font-12","color-gray","font-bold");
-            	p6.textContent = "연장:"+chageWorkTime(overTime);
+            	p6.textContent = "연장:"+changeWorkTime(overTime);
             	
             	td3.append(p4,p5,p6);
             	tr2.append(td3);
@@ -351,15 +350,15 @@ document.querySelectorAll(".search-type").forEach((div) => {
         	
         	const p1 = document.createElement("p");
         	p1.classList.add("font-14","font-bold");
-        	p1.textContent = chageWorkTime(monthWorkTime + monthOverTime);
+        	p1.textContent = changeWorkTime(monthWorkTime + monthOverTime);
         	
         	const p2 = document.createElement("p");
         	p2.classList.add("font-12","color-gray","font-bold");
-        	p2.textContent = "기본:"+chageWorkTime(monthWorkTime);
+        	p2.textContent = "기본:"+changeWorkTime(monthWorkTime);
         	
         	const p3 = document.createElement("p");
         	p3.classList.add("font-12","color-gray","font-bold");
-        	p3.textContent = "연장:"+chageWorkTime(monthOverTime);
+        	p3.textContent = "연장:"+changeWorkTime(monthOverTime);
         	
         	td2.append(p1,p2,p3);
         	tr2.append(td1,td2);
@@ -381,15 +380,15 @@ document.querySelectorAll(".search-type").forEach((div) => {
             	
             	const p4 = document.createElement("p");
             	p4.classList.add("font-14","font-bold");
-            	p4.textContent = chageWorkTime(workTime + overTime);
+            	p4.textContent = changeWorkTime(workTime + overTime);
             	
             	const p5 = document.createElement("p");
             	p5.classList.add("font-12","color-gray","font-bold");
-            	p5.textContent = "기본:"+chageWorkTime(workTime);
+            	p5.textContent = "기본:"+changeWorkTime(workTime);
             	
             	const p6 = document.createElement("p");
             	p6.classList.add("font-12","color-gray","font-bold");
-            	p6.textContent = "연장:"+chageWorkTime(overTime);
+            	p6.textContent = "연장:"+changeWorkTime(overTime);
             	
             	td3.append(p4,p5,p6);
             	tr2.append(td3);
@@ -410,7 +409,7 @@ document.querySelectorAll(".search-type").forEach((div) => {
 
 
 //총근무시간
-function chageWorkTime(times){
+function changeWorkTime(times){
 	const time = times / 1000;
 	const hours = Math.floor(time / 3600); // 시간 계산
 	const minutes = Math.floor((time % 3600) / 60); // 분 계산
@@ -421,5 +420,5 @@ function chageWorkTime(times){
     
 </script>
 
-<script src="${pageContext.request.contextPath}/resources/js/emp.js"></script>			
+<script src="${path}/resources/js/emp.js"></script>			
 <jsp:include page="/WEB-INF/views/common/footer.jsp"/>

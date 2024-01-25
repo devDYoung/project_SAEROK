@@ -42,7 +42,7 @@
                                 </div>
                                 <div>
                                     <p class="font-14 font-bold">사용 연차</p>
-                                    <c:if test="${empty useAnnu }">
+                                    <c:if test="${empty employee }">
                                     	<h4 class="main-color">0.0</h4>
                                     </c:if>
                                     <c:if test="">
@@ -51,8 +51,8 @@
                                 </div>
                                 <div>
                                     <p class="font-14 font-bold">잔여 연차</p>
-                                     <c:if test="">
-                                     	<h4 class="main-color"></h4>
+                                     <c:if test="${empty employee }">
+                                     	<h4 class="main-color">${issueAnnu}</h4>
                                      </c:if>
                                      <c:if test="">
                                     	<h4 class="main-color"></h4>
@@ -103,7 +103,7 @@
 			                                            <td width="100">반차</td>
 		                                            </c:if>
 		                                            <td width="200">${day.leaveStart} ~ ${day.leaveEnd }</td>
-		                                            <td width="100">${day.count }</td>
+		                                            <td width="100"></td>
 		                                            <td width="300">${day.leaveDetail }</td>
 		                                        </tr>
 	                                       </c:forEach>
@@ -119,19 +119,10 @@
                     <!-- 본문 end -->
                 </div>
             </div>
-<form name="selectYearFrm" action="" method="GET">
-	<input type="hidden" name="year"/>
+<form name="" action="" method="">
+	<input type="hidden" name=""/>
 </form>
 <script>
-document.querySelector("#search-year").addEventListener('change', (e) => {
-		const yearAnnual = e.target;
-		console.log(yearAnnual.value);
-		
-		const frm = document.selectYearFrm;
-		frm.year.value = yearAnnual.value;
-		frm.submit(); 
-		
-});
 
 var yearNow = document.getElementById("yearAnnual");
         function clock() {
