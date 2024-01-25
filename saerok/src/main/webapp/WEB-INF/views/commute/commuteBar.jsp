@@ -107,11 +107,11 @@ window.addEventListener('load', function(){
                   // 퇴근시간 정보 출력
  				  document.querySelector('#endwork-time').textContent = endWorkTime;
  			   }
- 			   /* 
- 			   if(daytimes > 0){
+ 			   
+ 			  /*  if(daytimes > 0){
  				   //하루 근무시간 update
  				  updateWorkTime(daytimes);
- 			   } */
+ 			   }  */
  		   }
  	   },
  	   error : console.log
