@@ -26,9 +26,7 @@
 
 
 <!-- 전체 리스트 -->
-	${loginEmployee}
 <div class="container-fluid">
-
 	<div class="card shadow mb-4">
 
 		<div class="card-header py-3">
@@ -38,17 +36,17 @@
 				<li class="nav-item"><a href="#board" data-toggle="tab"
 					aria-expanded="true" class="nav-link active"> <i
 						class="mdi mdi-home-variant d-lg-none d-block mr-1"></i> <span
-						class="d-none d-lg-block  font-weight-bold">내 문서</span>
+						class="d-none d-lg-block  font-weight-bold">내가 쓴 문서</span>
 				</a></li>
 				<li class="nav-item"><a href="#proceeding" data-toggle="tab"
 					aria-expanded="false" class="nav-link"> <i
 						class="mdi mdi-account-circle d-lg-none d-block mr-1"></i> <span
-						class="d-none d-lg-block  font-weight-bold">결재중 문서</span>
+						class="d-none d-lg-block  font-weight-bold">결재해야할 문서</span>
 				</a></li>
 				<li class="nav-item"><a href="#complete" data-toggle="tab"
 					aria-expanded="false" class="nav-link"> <i
 						class="mdi mdi-account-circle d-lg-none d-block mr-1"></i> <span
-						class="d-none d-lg-block  font-weight-bold">완료 문서</span>
+						class="d-none d-lg-block  font-weight-bold">완료한 문서</span>
 				</a></li>
 			</ul>
 			<!-- 나의 문서  -->
@@ -67,7 +65,15 @@
 								</tr>
 							</thead>
 							<tbody>
-
+								<c:forEach var="m" items="${myApprovalList}">
+									<tr>
+										<td>${m.appSeq}</td>
+										<td><c:out value="${m.letterTitle }" /></td>
+										<td><c:out value="${m.appEmpName}" /></td>
+										<td><c:out value="${m.appWriteDate}" /></td>
+										<td><c:out value="${m.appCheck}" /></td>
+									</tr>
+								</c:forEach>
 							</tbody>
 						</table>
 					</div>
@@ -81,22 +87,59 @@
 								<tr>
 									<th>결재번호</th>
 									<th>제목</th>
-									<th>기안자</th>
-									<th>기안일</th>
+									<th>신청일</th>
+									<th>결재자</th>
 									<th>진행상태</th>
 								</tr>
 							</thead>
 							<tbody>
-						
-								  <c:forEach var="m" items="${myApprovalList}">
+								<c:set var="currentAppSeq" value="0"/>
+									<c:forEach var="m" items="${myTodoApprovalList}">
+										<c:if test="${currentAppSeq ne m.appSeq }">
+											<c:set var="currentAppSeq" value="${m.appSeq}"/>
+											<tr>
+												<td>${m.appSeq}</td>
+												<td><c:out value="${m.letterTitle }" /></td>
+												<td><c:out value="${m.appWriteDate}" /></td>
+												<td><c:out value="${m.empNos}" />
+													<c:forEach var="b" items="${m.apvWriter}"
+														varStatus="i">
+														<c:choose>
+															<c:when test="${i.index == 0}">
+									                            ${b.apvEmpNo} 
+									                        </c:when>
+														<c:otherwise>
+									                          , ${b.apvEmpNo}
+									                     </c:otherwise>
+														</c:choose>
+													</c:forEach>
+												</td>
+												<td><c:out value="${m.appCheck}" /></td>
+											</tr>
+										</c:if>
+									</c:forEach>
+								  <%-- <c:forEach var="m" items="${myTodoApprovalList}">
 										<tr>
 											<td>${m.appSeq}</td>
 											<td><c:out value="${m.letterTitle }" /></td>
-											<td><c:out value="${m.appEmpName}" /></td>
 											<td><c:out value="${m.appWriteDate}" /></td>
+											<td><c:out value="${m.empNos}" />
+												<c:forEach var="b" items="${m.apvWriter}"
+													varStatus="i">
+													<c:choose>
+														<c:when test="${i.index == 0}">
+								                            ${b.apvEmpName} 
+								                        </c:when>
+													<c:otherwise>
+								                          , ${b.apvEmpName}
+								                     </c:otherwise>
+													</c:choose>
+												</c:forEach>
+												
+											</td>
 											<td><c:out value="${m.appCheck}" /></td>
 										</tr>
-								</c:forEach>
+								</c:forEach> --%>
 							</tbody>
 						</table>
 					</div>
@@ -117,7 +160,7 @@
 							</thead>
 							<tbody>
 								<tr>
-
+									
 								</tr>
 							</tbody>
 						</table>

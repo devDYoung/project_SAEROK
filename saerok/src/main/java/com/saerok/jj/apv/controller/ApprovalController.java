@@ -60,8 +60,10 @@ public class ApprovalController {
 	public ModelAndView myApproval(ModelAndView model, Principal loginSession) {
 	    String empNo = loginSession.getName();
 	    List<Approval> myApprovalList = service.myApproval(empNo);
+	    List<Approval> myTodoApprovalList = service.myTodoApprovalList(empNo);
 	    model.addObject("myApprovalList", myApprovalList); 
-	    model.setViewName("approval/myApproval");
+	    model.addObject("myTodoApprovalList", myTodoApprovalList); 
+		model.setViewName("approval/myApproval");
 	    return model;
 	}
 
