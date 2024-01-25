@@ -22,6 +22,6 @@ public interface OrderMapper {
     
     // 지점주의 발주 목록 조회
     List<OrderList> findBranchOwnerOrderLists(@Param("empNo") String empNo);
-    
+   
 
 }

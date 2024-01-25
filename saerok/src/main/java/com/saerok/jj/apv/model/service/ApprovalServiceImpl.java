@@ -66,4 +66,9 @@ public class ApprovalServiceImpl implements ApprovalService {
     public List<Approval> myApproval(String empNo) {
         return dao.myApproval(session, empNo);
     }
+    
+    @Override
+    public List<Approval> myTodoApprovalList(String empNo) {
+        return dao.myTodoApprovalList(session, empNo);
+    }
 }

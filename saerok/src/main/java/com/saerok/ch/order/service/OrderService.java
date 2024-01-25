@@ -21,5 +21,8 @@ public interface OrderService {
     //점주-본인지점 발주리스트 가져오기
     List<OrderList> findBranchOwnerOrderLists(@Param("empNo") String empNo);
     
+    
+    
+    
 
 }

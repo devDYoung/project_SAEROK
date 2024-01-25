@@ -25,5 +25,7 @@ public interface ApprovalService {
 
 	// 내 문서함 조회
 	List<Approval> myApproval(String empNo);
+	
+	List<Approval> myTodoApprovalList(String empNo);
 
 }
