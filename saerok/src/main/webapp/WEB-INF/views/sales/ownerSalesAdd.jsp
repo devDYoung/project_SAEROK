@@ -61,7 +61,7 @@
 		</div>
 		<hr class="my-4">
 
-		<form id="salesForm" action="/owner/detail/add" method="post">
+		<form id="salesForm" action="${path}/owner/detail/add" method="post">
 			<div class="row justify-content-center">
 				<div class="col-md-3">
 					<div class="input-group date" id="datepicker">

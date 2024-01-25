@@ -43,7 +43,7 @@
     </select>
     
     <!-- 보낸 쪽지함 조회 -->
-    <select id="getSentNotes" resultMap="receivedNotes">
+    <select id="getSentNotes"  parameterType="String" resultMap="receivedNotes">
         SELECT * FROM note WHERE SND_EMP_NO = #{empNo}
     </select>
       
