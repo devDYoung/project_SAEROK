@@ -148,9 +148,9 @@
                 <div id="collapseMsg" class="collapse" aria-labelledby="headingMsg" data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
                        <%-- <a class="collapse-item" href="javascript:requestNote('${path }/note/write');">쪽지쓰기</a> --%>
-                        <a class="collapse-item" href="/note/get">받은쪽지함</a>
-                        <a class="collapse-item" href="/note/send">보낸쪽지함</a>
-                        <a class="collapse-item" href="/note/basket">휴지통</a>
+                        <a class="collapse-item" href="${path }/note/get">받은쪽지함</a>
+                        <a class="collapse-item" href="${path }/note/send">보낸쪽지함</a>
+                        <a class="collapse-item" href="${path }/note/basket">휴지통</a>
                     </div>
                 </div>
             </li>

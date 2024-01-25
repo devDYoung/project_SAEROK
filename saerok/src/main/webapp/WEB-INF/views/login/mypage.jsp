@@ -182,6 +182,7 @@
       $(document).ready(function() {
          //   console.log("aaa", "${employee.empEmail}");
          $("#mypageButton").click(function(event) {
+        	 console.error("버튼 테스트");
             event.preventDefault(); // 기본 폼 제출 방지
             const formData=new FormData();
             document.querySelectorAll("#mypageForm input:not(input[type=hidden])").forEach(e=>{
@@ -198,7 +199,7 @@
             // 프로필 업데이트를 위한 AJAX 요청
             $.ajax({
                type : "POST",
-               url : "/updatemypage", // 실제 서버 측 엔드포인트로 대체
+               url : "${path}/updatemypage", // 실제 서버 측 엔드포인트로 대체
                //data : $("#mypageForm").serialize(), // 폼 데이터 직렬화
 //                dataType : 'JSON',
                data : formData,

@@ -81,8 +81,12 @@ public class SalesServiceImpl implements SalesService {
     
     //점주전용
  
-	
-
+    //멘토님
+	//@Override
+    //public Map<String, Object> getBranchOwnerDetailSales2(String empNo) {
+	//        return salesMapper.findBranchOwnerDetailSales2(empNo);
+	//}
+	 
     @Override
     public List<Map<String, Object>> getBranchOwnerDetailSales(String empNo) {
         return salesMapper.findBranchOwnerDetailSales(empNo);
