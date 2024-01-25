@@ -39,9 +39,9 @@
                         <tr>
                            <td><input type="checkbox" name="noteCheckBox" /></td>
                            <td><c:out value="${note.noteNo}" /></td>
-                           <td><c:out value="${note.rcvEmpNo}" /></td>
+                           <td><c:out value="${note.revEmpNo}" /></td>
                            <td><c:out value="${note.regDtime}" /></td>
-                           <td><c:out value="${note.readYN}" /></td>
+                           <td><c:out value="${note.readYn}" /></td>
 
                         </tr>
                      </c:forEach>
