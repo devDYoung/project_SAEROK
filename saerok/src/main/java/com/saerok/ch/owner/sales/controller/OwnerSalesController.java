@@ -42,7 +42,8 @@ public class OwnerSalesController {
         String empNo = loggedInEmployee.getEmpNo();
         
         List<Map<String, Object>> categorySales = salesService.getCurrentMonthSalesByCategoryForOwner(empNo);
-
+        
+        //멘토님 model.addAttribute("branchDetailSales2", salesService.getBranchOwnerDetailSales2(empNo));
         model.addAttribute("detailSales", salesService.getBranchOwnerDetailSales(empNo));
         model.addAttribute("monthlySales", salesService.getBranchOwnerCurrentMonthSales(empNo));
         model.addAttribute("categorySales", categorySales);

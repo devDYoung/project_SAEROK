@@ -29,6 +29,7 @@ public interface SalesMapper {
     
     
     //점주전용
+    //멘토님 Map<String, Object> findBranchOwnerDetailSales2(@Param("empNo") String empNo);
     List<Map<String, Object>> findBranchOwnerDetailSales(@Param("empNo") String empNo);
     List<Map<String, Object>> findBranchOwnerCurrentMonthSales(@Param("empNo") String empNo);
     List<Map<String, Object>> findCurrentMonthSalesByCategoryForOwner(@Param("empNo") String empNo);
