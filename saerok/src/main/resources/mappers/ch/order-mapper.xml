@@ -109,6 +109,8 @@
 	    ORDER BY CASE WHEN ol.ORDER_STATUS = '대기중' THEN 0 ELSE 1 END, ol.ORDER_ID DESC
 	</select>
 	
+	
+
 
 
 
