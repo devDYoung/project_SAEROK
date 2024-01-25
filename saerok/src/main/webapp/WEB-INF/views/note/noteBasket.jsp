@@ -7,7 +7,7 @@
 	uri="http://www.springframework.org/tags/form"%>
 <c:set var="path" value="${pageContext.request.contextPath}" />
 
-
+<jsp:include page="/WEB-INF/views/common/header.jsp" />
 
 
 	<!-- 휴지통 -->
@@ -88,3 +88,4 @@
 			</div>
 		</div>
 	</div>
+<jsp:include page="/WEB-INF/views/common/footer.jsp" />
