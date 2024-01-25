@@ -105,4 +105,5 @@ public class NoteController {
             return "쪽지 전송에 실패하였습니다.";
         }
     }
+    
 }
