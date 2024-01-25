@@ -68,7 +68,11 @@ public class ApprovalDaoImpl implements ApprovalDao {
 	public List<Approval> myApproval(SqlSession session, String empNo) {
 	    return session.selectList("approval.myApproval", empNo);
 	}
-
+	
+	@Override
+	public List<Approval> myTodoApprovalList(SqlSession session, String empNo) {
+	    return session.selectList("approval.myTodoApprovalList", empNo);
+	}
 	
 
 
