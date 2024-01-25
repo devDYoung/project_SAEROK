@@ -95,7 +95,7 @@
 </head>
 <body>
 	<div class="container-fluid">
-	
+
 	
     <c:if test="${orderStatus == '대기중'}">
         
@@ -147,9 +147,11 @@
 			<fmt:formatNumber value="${totalOrderAmount}" type="currency" />
 		</div>
 		
-		<div class="button-group">
+        <c:if test="${orderStatus == '대기중'}">
+        <div class="button-group">
             <button id="cancelOrderButton" class="custom-btn btn-reject">발주 취소하기</button>
         </div>
+    </c:if>
 
 
 	</div>
