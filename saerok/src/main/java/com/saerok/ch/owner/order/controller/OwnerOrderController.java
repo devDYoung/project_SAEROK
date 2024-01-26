@@ -55,6 +55,17 @@ public class OwnerOrderController {
     }
     
     
+    @PostMapping("/cancel/{orderId}")
+    public ResponseEntity<?> cancelOrder(@PathVariable int orderId) {
+        try {
+            orderService.updateOrderStatus(orderId, "취소됨"); // 상태를 '취소됨'으로 업데이트
+            return ResponseEntity.ok().build();
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Error cancelling order");
+        }
+    }
+    
+    
    
 	
 
