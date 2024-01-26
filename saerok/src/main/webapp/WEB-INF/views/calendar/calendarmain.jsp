@@ -27,8 +27,6 @@
    src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.18.1/moment.min.js"></script>
 <!-- fullcalendar 언어 설정관련 script -->
 <script
-   src="https://cdn.jsdelivr.net/npm/fullcalendar@5.10.1/locales-all.js"></script>
-<script
    src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 <script
    src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
@@ -116,8 +114,7 @@ textarea::placeholder {
          <div class="modal fade" id="calendarModal" tabindex="-1"
             aria-labelledby="exampleModalLabel" aria-hidden="true">
             <div class="modal-dialog">
-               <form class="modal-content" action="${path}/calendarmain"
-                  method="post">
+               <form class="modal-content" action="${path}/write" method="post">
                   <!-- <div class="modal-header">
                   </div> -->
                   <div class="modal-body">
