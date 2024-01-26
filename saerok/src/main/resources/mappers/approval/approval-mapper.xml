@@ -2,7 +2,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="approval">
 
-   <resultMap id="approval" type="approval">
+   <resultMap id="approvalMap" type="approval">
       <id column="APPSEQ" property="appSeq" />
       <result column="APPWRITEDATE" property="appWriteDate" />
       <result column="APPCHECK" property="appCheck" />
@@ -18,9 +18,10 @@
 
       <result column="app_emp_name" property="appEmpName" />
       <result column="empNos" property="empNos" />
-	
+	  <result column="dept_name" property="deptName"/>
+	  <result column="job_name" property="jobName"/>
       <!-- Employee 매핑 -->
-      <association property="empNo" resultMap="emp.empMap" />
+     <!--  <association property="empNo" resultMap="emp.empMap" /> -->
       <!-- ApvWriter 매핑 -->
       <collection property="apvWriter" ofType="apvWriter">
          <result column="APV_STATE" property="apvState" />
@@ -41,7 +42,7 @@
 
 
    <!--전체 결재리스트 불러오기  -->
-   <select id="selectApproval" resultMap="approval">
+   <select id="selectApproval" resultMap="approvalMap">
       SELECT t1.APPSEQ AS APPSEQ
 	       , t1.APPWRITEDATE
 	       , t1.APPCHECK
@@ -109,7 +110,7 @@
    </insert>
    
    <!--내문서 결재리스트 불러오기  -->
-   <select id="myApproval" parameterType="String" resultMap="approval">
+   <select id="myApproval" parameterType="String" resultMap="approvalMap">
       SELECT t1.APPSEQ AS APPSEQ
 	       , t1.APPWRITEDATE
 	       , t1.APPCHECK
@@ -133,7 +134,7 @@
 	  
    </select>
    <!--결재해야할 문서  -->
-    <select id="myTodoApprovalList" parameterType="String" resultMap="approval">
+    <select id="myTodoApprovalList" parameterType="String" resultMap="approvalMap">
       SELECT t1.APPSEQ AS APPSEQ
 	       , t1.APPWRITEDATE
 	       , t1.APPCHECK
@@ -174,8 +175,8 @@
    </select>
    
    <!--상세페이지  -->
-   <select id="approvalDetailView" parameterType="String" resultMap="approval">
-    SELECT
+   <select id="approvalDetailView" parameterType="string" resultMap="approvalMap">
+     SELECT
         t1.APPSEQ AS APPSEQ,
         t1.APPWRITEDATE,
         t1.APPCHECK,
@@ -186,18 +187,21 @@
         t3.emp_no AS apv_emp_no,
         (SELECT emp_name FROM EMPLOYEE e WHERE e.emp_no = t3.emp_no) AS apv_emp_name,
         t2.LETTERTITLE,
-        (SELECT emp_name FROM EMPLOYEE e WHERE e.emp_no = t3.emp_no) AS apv_emp_name,
         t2.LETTERDETAIL,
-        (SELECT emp_name FROM EMPLOYEE e WHERE e.emp_no = t3.emp_no) AS apv_emp_name,
         t2.ORIFILENAME,
-        (SELECT emp_name FROM EMPLOYEE e WHERE e.emp_no = t3.emp_no) AS apv_emp_name,
-        t3.WRITERLIST
+        t3.WRITERLIST,
+        d.DEPT_NAME,
+        aj.JOB_NAME,
+        t3.APV_STATE
     FROM
         APPROVAL t1
-        JOIN APPLETTER t2 ON t1.APPSEQ = t2.APPSEQ
         JOIN APV_WRITER t3 ON t1.APPSEQ = t3.APPSEQ
+        JOIN APPLETTER t2 ON t1.APPSEQ = t2.APPSEQ
+		JOIN EMPLOYEE E ON t1.emp_no=e.emp_no
+        JOIN DEPARTMENT d ON E.DEPT_CODE =d.DEPT_CODE 
+        JOIN ATO_JOB aj ON E.JOB_CODE =aj.JOB_CODE 
     WHERE
-        t1.APPSEQ = #{appSeq}
+        t1.APPSEQ = ${appSeq}
 	</select>
    
    

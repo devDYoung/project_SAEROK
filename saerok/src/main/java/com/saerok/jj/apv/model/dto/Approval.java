@@ -64,5 +64,8 @@ public class Approval {
 	private String apvEmpName;
 	private Date apvEmpTime;
 	private String returnReason;
-
+	
+	
+	private String deptName;
+	private String jobName;
 }
