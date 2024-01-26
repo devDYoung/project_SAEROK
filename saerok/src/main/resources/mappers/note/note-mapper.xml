@@ -17,12 +17,12 @@
         <result property="modId" column="MOD_ID"/>
         <result property="modDtime" column="MOD_DTIME"/>
         <association property="revEmp" javaType="emp">
-        	<id column="revno" property="empNo"/>
-        	<result column="revname" property="empName"/>
+           <id column="revno" property="empNo"/>
+           <result column="revname" property="empName"/>
         </association>
         <association property="sndEmp" javaType="emp">
-        	<id column="sndno" property="empNo"/>
-        	<result column="sndname" property="empName"/>
+           <id column="sndno" property="empNo"/>
+           <result column="sndname" property="empName"/>
         </association>
     </resultMap>
 
@@ -57,19 +57,19 @@
                 rev.EMP_NO as revno, rev.EMP_NAME as revname,
                 SND.EMP_NO as sndno, SND.EMP_NAME as sndname
         FROM note n 
-        			join EMPLOYEE REV ON n.RCV_EMP_NO=rev.EMP_NO
-        			join EMPLOYEE SND ON n.SND_EMP_NO=SND.EMP_NO
+                 join EMPLOYEE REV ON n.RCV_EMP_NO=rev.EMP_NO
+                 join EMPLOYEE SND ON n.SND_EMP_NO=SND.EMP_NO
         WHERE SND_EMP_NO = #{empNo} order by REG_DTIME DESC
     </select>
       
      <!--받은 쪽지함 조회--> 
    <select id="getReceivedNotes" parameterType="String" resultMap="receivedNotes">   
-   				SELECT n.*,
+               SELECT n.*,
                 rev.EMP_NO as revno, rev.EMP_NAME as revname,
                 SND.EMP_NO as sndno, SND.EMP_NAME as sndname
         FROM note n 
-        			join EMPLOYEE REV ON n.RCV_EMP_NO=rev.EMP_NO
-        			join EMPLOYEE SND ON n.SND_EMP_NO=SND.EMP_NO
+                 join EMPLOYEE REV ON n.RCV_EMP_NO=rev.EMP_NO
+                 join EMPLOYEE SND ON n.SND_EMP_NO=SND.EMP_NO
         WHERE SND_EMP_NO = #{empNo} order by REG_DTIME DESC
     </select>
     

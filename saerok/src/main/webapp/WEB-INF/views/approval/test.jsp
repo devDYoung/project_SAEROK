@@ -7,250 +7,368 @@
 <c:set var="path" value="${pageContext.request.contextPath}" />
 <c:set var="loginEmployee"
 	value="${sessionScope.SPRING_SECURITY_CONTEXT.authentication.principal }" />
+<jsp:include page="/WEB-INF/views/common/header.jsp">
+	<jsp:param value="CommuteMain" name="ATO" />
+</jsp:include>
+<jsp:include page="/WEB-INF/views/commute/commuteBar.jsp" />  
 <script
-	src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.0/jquery.min.js"></script>
-<script>
-		const pageTitles = ["내 문서함", "진행중인 문서", "승인대기 문서", "결재대기 문서", "처리 완료된 문서", "반려된 문서", "회수된 문서"];
-		history.replaceState({}, null, location.pathname);
-	     $(document).ready(function() {
-	    	 $("#pageTitle").text(pageTitles[${status}]);
-	        
-	        // 페이지 로딩 시 초기 데이터 설정
-	        var initialStatus = window.location.search.split("=")[1] || "0";
-	        if (initialStatus == undefined){
-	        	initialStatus = "0";
-	        }
-	        $(".status-link[data-status='" + initialStatus + "']").click();
-	    });
-	</script>
-
-<style>
-.menu-link {
-	background-color: white;
-	border: none;
-	width: 88%;
-}
-
-.catScroll {
-	overflow-y: scroll;
-	overflow-x: hidden;
-	width: 100%;
-	height: 235px;
-}
-
-h2 {
-	text-align: center;
-}
-
-.addBtn {
-	display: flex;
-	justify-content: flex-end;
-}
-
-.table {
-	text-align: center;
-	table-layout: fixed;
-	width: 100%; /* 테이블의 전체 너비 */
-}
-
-.table th, .table td:nth-child(1) {
-	width: 25%;
-}
+	src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+ <link rel="stylesheet" href="${path }/resources/css/emp.css">
+ <style>
+    #work-week-container {
+        text-align: center;
+        width: 900px; /* 원하는 너비 값으로 조절 */
+        margin: 0 auto; /* 가운데 정렬을 위해 필요한 부분 */
+    }
+    #work-week-container > div {
+        margin: 0 10px;
+    }
 </style>
-</head>
+  <div class="home-container" class="div-padding div-margin page-wrapper">
+                    <!-- <div class="div-padding"> -->
+                        <div id="date-box">
+                            <h4>
+                                <button id="prev-btn"><i class="fas fa-chevron-left"></i></button>
+                                <span id="date-text">2023.12</span>
+                                <button id="next-btn"><i class="fas fa-chevron-right"></i></button>
+                            </h4>
+                        </div>
 
-<body>
-	<!-- Layout wrapper -->
-	<div class="layout-wrapper layout-content-navbar">
-		<div class="layout-container">
-			<!-- Menu -->
-			<aside id="layout-menu"
-				class="layout-menu menu-vertical menu bg-menu-theme">
-				<div class="app-brand demo">
-					<a href="${pageContext.request.contextPath}"> <img
-						src="${pageContext.request.contextPath}/assets/img/logo/yeyebooks_logo.png"
-						style="width: 100%">
-					</a>
-				</div>
+                        <div id="work-week-container">
+                            <div id="work-week-time">
+                                <div>
+                                    <p class="font-14">이번주 누적</p>
+                                    <h4 class="main-color" id="main-totalwork-time">0h 0m 0s</h4>
+                                </div>
+                                <div>
+                                    <p class="font-14">이번주 초과</p>
+                                    <h4 class="main-color" id="main-week-over-time">0h 0m 0s</h4>
+                                </div>
+                                <div>
+                                    <p class="font-14">이번주 잔여</p>
+                                    <h4 class="main-color" id="main-work-time">40h 0m 0s</h4>
+                                </div>
+                                <div>
+                                    <p class="font-14">이번달 누적</p>
+                                    <h4 class="color-gray" id="main-month-work-time">0h 0m 0s</h4>
+                                </div>
+                                <div>
+                                    <p class="font-14">이번달 연장</p>
+                                    <h4 class="color-gray" id="main-month-over-time">0h 0m 0s</h4>
+                                </div>
+                            </div>
+                        </div>
 
-				<div class="menu-inner-shadow"></div>
+                        <div id="work-info-container"></div>
 
-				<!-- 메뉴바 게시판 클릭 구현부 -->
-				<ul class="menu-inner py-1">
+                    </div>
+                </div>
+     
+	<script>
+        window.addEventListener('load',()=>{
+                sendData();
+                weekTimes();
+        });
+        
+        let currentDate = new Date();
 
-					<!-- Dashboard -->
-					<li class="menu-item"><a
-						href="/yeyebooks/approval/approvalList?status=0"
-						data-title="내 문서함" class="menu-link"> <i
-							class="menu-icon tf-icons bx bx-layout"></i>
-							<div data-i18n="Analytics">내 문서함</div>
-					</a></li>
+            function setCurrentDate() {
+                const dateText = document.getElementById("date-text");
+                const year = currentDate.getFullYear();
+                const month = currentDate.getMonth() + 1;
+                const monthText = month < 10 ? `0\${month}` : month;
+                dateText.textContent = `\${year}.\${monthText}`;
+            }
 
-					<li class="menu-item"><a
-						href="/yeyebooks/approval/approvalList?status=1"
-						data-title="진행중인 문서" class="menu-link"> <i
-							class="menu-icon tf-icons bx bx-layout"></i>
-							<div data-i18n="Analytics">진행중인 문서</div>
-					</a></li>
+            setCurrentDate();
 
-					<li class="menu-item"><a
-						href="/yeyebooks/approval/approvalList?status=2"
-						data-title="승인대기 문서" class="menu-link"> <i
-							class="menu-icon tf-icons bx bx-layout"></i>
-							<div data-i18n="Analytics">승인대기 문서</div>
-					</a></li>
-					<li class="menu-item"><a
-						href="/yeyebooks/approval/approvalList?status=3"
-						data-title="결재대기 문서" class="menu-link"> <i
-							class="menu-icon tf-icons bx bx-layout"></i>
-							<div data-i18n="Analytics">결재대기 문서</div>
-					</a></li>
+            document.getElementById("prev-btn").addEventListener("click", () => {
+                    currentDate.setMonth(currentDate.getMonth() - 1);
+                    setCurrentDate();
+                     sendData();
+                    
+            });
+
+                document.getElementById("next-btn").addEventListener("click", () => {
+                    currentDate.setMonth(currentDate.getMonth() + 1);
+                    setCurrentDate();
+                    sendData();
+            });
+                
+                // ajax 호출
+                function sendData() {
+                    const dateText = document.getElementById("date-text").textContent;
+                    const container = document.querySelector("#work-info-container");
+                    container.innerHTML = "";
+                     $.ajax({
+                        url : "${path }/commute/selectMonthWork.do",
+                        data : {dateText},
+                        contentType : "application/json; charset=utf-8",
+                        success(data){
+                            console.log(data);
+                            const {weekDates, workList} = data;
+                            console.log("weekDates", weekDates);
+                            console.log("workList", workList);
+                            
+                            const container = document.querySelector("#work-info-container");
+                            
+                            const table = document.createElement("table");
+                            table.classList.add("table-expand");
+
+                            const tbody = document.createElement("tbody");
+    						
+                            
+                            //주간별 정보
+                            Object.keys(weekDates).sort().forEach(key  =>{
+      
+    	                        const row1 = document.createElement("tr");
+    	                       row1.classList.add("table-expand-row");
+    	                        row1.setAttribute("id","work-container-tr");
+    	                        row1.dataset.openDetails = "";
+    	        				row1.dataset.start = weekDates[key].start;
+    	        				row1.dataset.end = weekDates[key].end;
+    	        				
+    	        				const tbody2 = document.createElement("tbody");
+    							
+    	        				row1.onclick = (e) =>{
+    	        					const start = e.currentTarget.dataset.start;
+    	        					const end = e.currentTarget.dataset.end;
+    	        					$.ajax({
+    	        						url : "${path }/commute/selectWeekDatas.do",
+    	        						data : {start,end},
+    	        						success:(data)=>{
+    	        							console.log(data);
+    	        							if(tbody2.innerHTML==""){
+	    		        							data.forEach((datas) =>{
+	    		        								const subTr = document.createElement("tr");
+	    		        								const {empNo, outDtime, commuteNo, overtime, workingDay, inDtime, status, workingHours} = datas;
+	    		        								const subTd1 = document.createElement("td");
+	    		        								subTd1.textContent = changeWorkingDay(workingDay);
+	    		        								
+	    		        								const subTd2 = document.createElement("td");
+	    		        								subTd2.textContent = changeTimeText(inDtime);
+	    		        								
+	    		        								const subTd3 = document.createElement("td");
+	    		        								subTd3.textContent = changeTimeText(outDtime);
+	    		        								
+	    		        								const subTd4 = document.createElement("td");
+	    		        								subTd4.classList.add("font-bold");
+	    		        								//subTd4.textContent = changeWorkTime(workingHours+overtime);
+	    		        								subTd4.textContent = changeWorkTimeNew(inDtime, outDtime);
+	    		        								
+	    		        								const subTd5 = document.createElement("td");
+	    		        								subTd5.textContent = "기본 "+ changeWorkTime(workingHours) + " / 연장 " + changeWorkTime(overtime);
+	    		        								
+	    		        								const subTd6 = document.createElement("td");
+	    		        								if(status == '연차'){
+	    			        								subTd6.textContent = "완료(" + status + " 8.00h)";
+	    		        								}
+	    		        								else if(status == '반차'){
+	    		        									subTd6.textContent = "완료(" + status + " 4.00h)";
+	    		        								}
+	    		        								else{
+	    		        									subTd6.textContent = "";
+	    		        								}
+	    		        								
+	    		        								subTr.append(subTd1,subTd2,subTd3,subTd4,subTd5,subTd6);
+	    		        								tbody2.append(subTr);
+	    		        							});
+    	        							}
+    	        						},
+    	        						error :console.log
+    	        					});
+    	        				};
+    	
+    	                        const td1 = document.createElement("td");
+    	                        td1.classList.add("border-bottom", "font-18");
+    	                        td1.setAttribute("width", "400");
+    	                        td1.textContent = key;
+    	             
+    	                        const start = weekDates[key].start.substring(5);
+    	                        const end = weekDates[key].end.substring(5);
+    	                        const workTime = weekDates[key].workTime;
+    	                        const workOverTime = weekDates[key].workOverTime;
+    	                        const span = document.createElement("span");
+    	                        span.classList.add("font-14","color-gray");
+    	                        span.textContent = " ( " + start + " ~ " + end + " ) ";
+    	                        td1.append(span);
+    	                        
+    	                        const expandIcon = document.createElement("span");
+    	                        expandIcon.classList.add("expand-icon");
+    	                        td1.append(expandIcon);
+    	
+    	                        const td2 = document.createElement("td");
+    	                        td2.classList.add("total-time-info");
+    	                        td2.textContent = "누적 근무시간 " + changeWorkTime(workTime+workOverTime);
+    							const span0 = document.createElement("span");
+    							span0.classList.add("font-12","color-gray");
+    							span0.textContent = " ( 초과 근무시간 " + changeWorkTime(workOverTime) +" )";
+    							td2.append(span0);
+    	                        
+    	                        const row2 = document.createElement("tr");
+    	                        row2.classList.add("table-expand-row-content");
+    	
+    	                        const td3 = document.createElement("td");
+    	                        td3.colSpan = 6;
+    	                        td3.classList.add("table-expand-row-nested");
+    	
+    	                        const nestedTable = document.createElement("table");
+    	                        nestedTable.setAttribute("id", "date-table");
+    	
+    	                        const thead = document.createElement("thead");
+    	
+    	                        const headerRow = document.createElement("tr");
+    	
+    	                        const header1 = document.createElement("th");
+    	                        header1.setAttribute("width", "50");
+    	                        header1.textContent = "일자";
+    	
+    	                        const header2 = document.createElement("th");
+    	                        header2.setAttribute("width", "100");
+    	                        header2.textContent = "출근시간";
+    	
+    	                        const header3 = document.createElement("th");
+    	                        header3.setAttribute("width", "100");
+    	                        header3.textContent = "퇴근시간";
+    	
+    	                        const header4 = document.createElement("th");
+    	                        header4.setAttribute("width", "100");
+    	                        header4.textContent = "총근무시간";
+    	
+    	                        const header5 = document.createElement("th");
+    	                        header5.setAttribute("width", "200");
+    	                        header5.textContent = "근무시간 상세";
+    	
+    	                        const header6 = document.createElement("th");
+    	                        header6.setAttribute("width", "100");
+    	                        header6.textContent = "승인요청내역"; 
+    	
+    	                        
+    	                        headerRow.append(header1,header2,header3,header4,header5);
+    	                        thead.append(headerRow);
+    	                        nestedTable.append(thead,tbody2);
+    	                        td3.append(nestedTable);
+    	                        row2.append(td3);
+    	                        row1.append(td1,td2);
+    	                        tbody.append(row1,row2);
+    	                        
+                            });
+                            table.append(tbody);
+                            container.append(table);
+
+                        },
+                        error:console.log
+                    }); 
+                }
+                
+    document.querySelector("#work-info-container").addEventListener('click',(e)=>{
+     
+    		$('[data-open-details]').click(function (e) {
+            	  $(this).next().toggleClass('is-active');
+            	  $(this).toggleClass('is-active');
+    		});
+    });
+
+    // 시간으로 변경
+    function changeTimeText(time) {
+    	if(time !== null){
+    	  const date = new Date(time); // Epoch 시간을 한국 시간으로 변환한 Date 객체 생성
+    	  
+    	  const hours = date.getHours().toString().padStart(2, '0'); 
+    	  const minutes = date.getMinutes().toString().padStart(2, '0'); 
+    	  const seconds = date.getSeconds().toString().padStart(2, '0'); 
+    	  
+    	  return `\${hours}:\${minutes}:\${seconds}`;				
+    	}
+    }
+
+    function weekTimes(){
+    	const today = new Date();
+    	const todayDay = today.getDay(); // 오늘 날짜의 요일 (0: 일요일, 1: 월요일, ..., 6: 토요일)
+
+    	const startDate = new Date(today); // 해당 주의 시작일
+    	startDate.setDate(startDate.getDate() - todayDay);
+
+    	const endDate = new Date(today); // 해당 주의 종료일
+    	endDate.setDate(endDate.getDate() + (6 - todayDay));
+
+    	const start = startDate.getFullYear() + "." + (startDate.getMonth() + 1) + "." + startDate.getDate();
+    	const end = endDate.getFullYear() + "." + (endDate.getMonth() + 1) + "." + endDate.getDate();
+    	  
+    	$.ajax({
+    		  url : "${path }/commute/weekTotalTime.do",
+    		  data: { start, end },
+    		  contentType : "application/json; charset=utf-8",
+    		  success(data){
+    			  console.log("Success", data);
+    			  const {totalMonthOverTime ,totalMonthTime, weekOverTime ,weekTotalTime} = data;
+    			  const mainTotalWorkTime = document.querySelector("#main-totalwork-time");
+    			  const mainWeekOverTime = document.querySelector("#main-week-over-time");
+    			  const mainWorkTime = document.querySelector("#main-work-time");
+    			  const monthWorkTime = document.querySelector("#main-month-work-time");
+    			  const monthOverTime = document.querySelector("#main-month-over-time")
+    			  
+    			  let times = 144000000 - (weekTotalTime + weekOverTime); // 40시간 - 주간 기본 근무시간
+    			  mainTotalWorkTime.textContent = changeWorkTime(weekTotalTime + weekOverTime);
+    			  mainWeekOverTime.textContent = changeWorkTime(weekOverTime);
+    			  if(times < 0){
+    				  mainWorkTime.textContent = changeWorkTime(0);
+    			  }else{
+    				  mainWorkTime.textContent = changeWorkTime(times);				  
+    			  }
+    			  monthWorkTime.textContent = changeWorkTime(totalMonthTime + totalMonthOverTime);
+    			  monthOverTime.textContent = changeWorkTime(totalMonthOverTime);
+    		  },
+    		  error(error) {
+    		        console.error("Error:", error);
+    		    }
+    		  
+    	  });
+    }
+
+    // 총근무시간
+    function changeWorkTime(times){
+    	const time = times / 1000;
+    	const hours = Math.floor(time / 3600); // 시간 계산
+    	const minutes = Math.floor((time % 3600) / 60); // 분 계산
+    	const seconds = Math.floor(time % 60); // 초 계산
+    	
+    	return `\${hours}h \${minutes}m \${seconds}s`;	
+    }
+
+    function changeWorkTimeNew(inDtime, outDtime) {
+    	var inDate = new Date(inDtime);
+    	var outDate = new Date(outDtime);
+    	
+    	var overDay = Math.trunc((outDate-inDate)/1000/3600/24);
+    	var overHour = Math.trunc(((outDate-inDate)/1000/3600)%24);
+    	var overMin = Math.trunc(((outDate-inDate)/1000/3600/24)%60);
+    	var overSec = Math.trunc(((outDate-inDate)/1000/3600/24/60)%60);
+    	
+    	console.log("hjhjhj", overDay, overHour, overMin, overSec);
+		
+    	return `\${overHour}h \${overMin}m \${overSec}s`;
+    }
+    
+    // workingDay날짜 00일 (월)로 변경
+    function changeWorkingDay(workingDay) {
+     console.log("Input Date:", workingDay);
+      const day = new Date(workingDay);
+      console.log("Parsed Date:", day);
+      const year = day.getFullYear();
+      const month = day.getMonth()+1; // JavaScript의 Date 객체에서 월은 0부터 시작합니다.
+      const date = day.getDate();
+      
+      const dayOfWeekNames = ["일", "월", "화", "수", "목", "금", "토"];
+      const dayOfWeekIndex = day.getDay(); // 해당 날짜의 요일을 구합니다.
+      const dayOfWeek = dayOfWeekNames[dayOfWeekIndex]; // 요일 이름을 배열에서 찾아옵니다.
+      
+      return `\${date}일 (\${dayOfWeek})`;
+    }
+    
 
 
-					</li>
-					<li class="menu-item"><a
-						href="/yeyebooks/approval/approvalList?status=4"
-						data-title="처리 완료된 문서" class="menu-link"> <i
-							class="menu-icon tf-icons bx bx-layout"></i>
-							<div data-i18n="Analytics">처리 완료된 문서</div>
-					</a></li>
-					<li class="menu-item"><a
-						href="/yeyebooks/approval/approvalList?status=5"
-						data-title="반려된 문서" class="menu-link"> <i
-							class="menu-icon tf-icons bx bx-layout"></i>
-							<div data-i18n="Analytics">반려된 문서</div>
-					</a></li>
-					<li class="menu-item"><a
-						href="/yeyebooks/approval/approvalList?status=6"
-						data-title="회수된 문서" class="menu-link"> <i
-							class="menu-icon tf-icons bx bx-layout"></i>
-							<div data-i18n="Analytics">회수된 문서</div>
-					</a></li>
-					<!-- /메뉴바 게시판 클릭 구현부 -->
-			</aside>
-			<!-- / Menu -->
+    </script>
 
-			<!-- Layout container -->
-			<div class="layout-page">
-				<!-- Content wrapper -->
-				<div class="content-wrapper">
-					<!-- Content -->
-					<div class="container-xxl flex-grow-1 container-p-y">
-						<!-- 게시판 변경 시 헤더 변경 -->
-						<h1 id="pageTitle" class="text-center"></h1>
-
-						<!-- 게시물 리스트 -->
-						<div class="card" style="height: 600px;">
-							<div class="table-responsive text-nowrap" style="height: 500px;">
-								<table class="table">
-									<thead>
-										<tr>
-											<th>문서번호</th>
-											<th>기안자</th>
-											<th>제목</th>
-											<th>문서종류</th>
-											<th>진행상태</th>
-										</tr>
-									</thead>
-									<tbody class="table-border-bottom-0">
-										<!-- 게시판 변경 시 내용변경 -->
-										<c:forEach var="m" items="${approvalList}">
-											<tr
-												onclick="window.location.href='<c:url value='/approval/approvalOne'><c:param name='aprvNo' value='${m.aprvNo}'/></c:url>';"
-												style="cursor: pointer;">
-												<td>${m.aprvNo}</td>
-												<td>${m.userName}</td>
-												<td>${m.aprvTitle}</td>
-												<td>${m.codeName}</td>
-												<td>${m.statName}</td>
-											</tr>
-										</c:forEach>
-									</tbody>
-								</table>
-								<!-- 구분선 -->
-								<hr class="m-0">
-							</div>
-
-							<!-- 페이징 -->
-							<div class="card-body"
-								style="height: 30px; display: flex; justify-content: space-between;">
-								<div class="row">
-									<div class="col">
-										<div class="demo-inline-spacing">
-											<%-- <nav aria-label="Page navigation">
-												<ul class="pagination">
-						                          	<!-- 페이징 -->
-													<c:if test="${currentPage!=1}">
-														<li class="page-item first">
-															<a class="page-link" href="/yeyebooks/board/boardList?boardCatCd=${boardCatCd}&currentPage=1">
-																<i class="tf-icon bx bx-chevrons-left"></i>
-															</a>
-														</li>
-													</c:if>
-													<!-- 1페이지가 아닐때 출력 -->
-													<c:if test="${minPage>1}">
-														<li class="page-item prev">
-															<a class="page-link" href="/yeyebooks/board/boardList?boardCatCd=${boardCatCd}&currentPage=${minPage-pagePerPage}">
-																<i class="tf-icon bx bx-chevron-left"></i>
-															</a>
-														</li>
-													</c:if>
-													<!-- 페이지 5단위 출력 -->
-													<c:forEach var="i" begin="${minPage}" end="${maxPage}">
-														<c:choose>
-															<c:when test="${i==currentPage}">
-																<!-- 현재 페이지일때 출력 -->
-																<li class="page-item active">
-																	<a class="page-link">${i}</a>
-																</li>
-															</c:when>
-															<c:otherwise>
-																<!-- 현재 페이지 아닐때 출력 -->
-																<li class="page-item">
-																	<a class="page-link" href="/yeyebooks/board/boardList?boardCatCd=${boardCatCd}&currentPage=${i}">${i}</a>
-																</li>
-															</c:otherwise>
-														</c:choose>
-													</c:forEach>
-													<!-- 마지막 페이지 아닐때 출력 -->
-													<c:if test="${maxPage!=lastPage}">
-														<li class="page-item next">
-															<a class="page-link" href="/yeyebooks/board/boardList?boardCatCd=${boardCatCd}&currentPage=${minPage+pagePerPage}">
-																<i class="tf-icon bx bx-chevron-right"></i>
-															</a>
-														</li>
-													</c:if>
-													<!-- 마지막 페이지일때 출력 -->
-													<c:if test="${currentPage!=lastPage}">
-														<li class="page-item last">
-															<a class="page-link" href="/yeyebooks/board/boardList?boardCatCd=${boardCatCd}&currentPage=${lastPage}">
-																<i class="tf-icon bx bx-chevrons-right"></i>
-															</a>
-														</li>
-													</c:if>
-												</ul>
-					                        </nav> --%>
-										</div>
-									</div>
-								</div>
-
-								<!-- 작성버튼 구분 -->
-								<div class="addBtn">
-									<button type="button" class="btn btn-primary"
-										onclick="location.href='${path}/approval/addApproval'">문서
-										작성</button>
-								</div>
-								<!-- / 작성버튼 -->
-							</div>
-							<!-- / 페이징 -->
-
-						</div>
-						<!--/ 게시물 리스트 -->
-					</div>
-					<!-- / Content -->
-				</div>
-				<!-- / Layout page -->
-			</div>
-		</div>
-		<!-- / Layout wrapper -->
-	</div>
+<script src="${path }/resources/js/emp.js"></script>
+<jsp:include page="/WEB-INF/views/common/footer.jsp" />
