@@ -23,7 +23,8 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 public class ApprovalServiceImpl implements ApprovalService {
 
-    private final SqlSession session;
+
+	private final SqlSession session;
     private final ApprovalDao dao;
 
     @Override
@@ -71,4 +72,12 @@ public class ApprovalServiceImpl implements ApprovalService {
     public List<Approval> myTodoApprovalList(String empNo) {
         return dao.myTodoApprovalList(session, empNo);
     }
+    
+  //상세페이지
+    @Override
+    public Approval approvalDetailView(String appSeq) {
+        return dao.approvalDetailView(session, appSeq);
+    }
+
+
 }

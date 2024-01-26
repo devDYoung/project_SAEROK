@@ -28,7 +28,7 @@
          <result column="RETURN_REASON" property="returnReason" />
          <result column="APV_EMP_NO" property="apvEmpNo" />
          <result column="APV_EMP_NAME" property="apvEmpName" />
-         <result column="writerlist" property="writerList" />
+         <result column="WRITERLIST" property="writerList" />
       </collection>
       <!-- ApvRef 매핑 -->
       <collection property="apvRef" ofType="apvRef">
@@ -172,6 +172,40 @@
 	 WHERE t1.APPSEQ IN (SELECT a.appseq FROM APPROVAL a WHERE a.emp_no = #{empNo})
 	 GROUP BY t1.appseq -->
    </select>
+   
+   <!--상세페이지  -->
+   <select id="approvalDetailView" parameterType="String" resultMap="approval">
+    SELECT
+        t1.APPSEQ AS APPSEQ,
+        t1.APPWRITEDATE,
+        t1.APPCHECK,
+        t1.APPKINDS,
+        t2.LETTERSTATUS,
+        t1.emp_no AS app_emp_no,
+        (SELECT emp_name FROM EMPLOYEE e WHERE e.emp_no = t1.emp_no) AS app_emp_name,
+        t3.emp_no AS apv_emp_no,
+        (SELECT emp_name FROM EMPLOYEE e WHERE e.emp_no = t3.emp_no) AS apv_emp_name,
+        t2.LETTERTITLE,
+        (SELECT emp_name FROM EMPLOYEE e WHERE e.emp_no = t3.emp_no) AS apv_emp_name,
+        t2.LETTERDETAIL,
+        (SELECT emp_name FROM EMPLOYEE e WHERE e.emp_no = t3.emp_no) AS apv_emp_name,
+        t2.ORIFILENAME,
+        (SELECT emp_name FROM EMPLOYEE e WHERE e.emp_no = t3.emp_no) AS apv_emp_name,
+        t3.WRITERLIST
+    FROM
+        APPROVAL t1
+        JOIN APPLETTER t2 ON t1.APPSEQ = t2.APPSEQ
+        JOIN APV_WRITER t3 ON t1.APPSEQ = t3.APPSEQ
+    WHERE
+        t1.APPSEQ = #{appSeq}
+	</select>
+   
+   
+   
+   
+   
+   
+   
    
 
 </mapper>
