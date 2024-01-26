@@ -132,8 +132,25 @@
 			TO_CHAR(SYSDATE,'YYYY-MM-DD')
 			=TO_CHAR(WORKINGDAY,'YYYY-MM-DD')
 		</selectKey>
+	</update> 
+<!-- 		<update id="updateCommuteEndTime" parameterType="map">
+		UPDATE COMMUTE
+		SET
+		OUT_DTIME = TO_DATE('yyyy-MM-dd'),
+		STATUS=#{status}
+		WHERE EMP_NO = #{empNo} AND
+		TO_DATE('YYYY-MM-DD')
+		=TO_DATE(WORKINGDAY,'YYYY-MM-DD') AND
+		OUT_DTIME IS NULL
+		<selectKey keyProperty="outdtime" resultType="date">
+			SELECT
+			OUT_DTIME FROM COMMUTE
+			WHERE EMP_NO = #{empNo} AND
+			TO_DATE('YYYY-MM-DD')
+			=TO_DATE(WORKINGDAY,'YYYY-MM-DD')
+		</selectKey>
 	</update>
-
+ -->
 <!-- <update id="updateCommuteEndTime" parameterType="map">
     UPDATE commute
     SET out_Dtime = FROM_TZ(TO_TIMESTAMP(SYSTIMESTAMP, 'YYYY-MM-DD HH24:MI:SS.FF3'), 'Asia/Seoul'),
