@@ -38,7 +38,7 @@
                                 </div>
                                 <div>
                                     <p class="font-14 font-bold">총연차</p>
-                                    <h4 class="main-color">${issueAnnu}</h4>
+                                    <h4 class="main-color">${loginEmployee.issueAnnu}</h4>
                                 </div>
                                 <div>
                                     <p class="font-14 font-bold">사용 연차</p>
@@ -52,7 +52,7 @@
                                 <div>
                                     <p class="font-14 font-bold">잔여 연차</p>
                                      <c:if test="${empty employee }">
-                                     	<h4 class="main-color">${issueAnnu}</h4>
+                                     	<h4 class="main-color">${loginEmployee.issueAnnu}</h4>
                                      </c:if>
                                      <c:if test="">
                                     	<h4 class="main-color"></h4>
