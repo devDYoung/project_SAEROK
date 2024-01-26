@@ -45,7 +45,24 @@
                                         <td><c:out value="${employee.empEmail}" /></td>
                                         <td><c:out value="${employee.empAddr}" /></td>
                                         <td><c:out value="${employee.empDetailAddr}" /></td>
-                                        <td><c:out value="${employee.workYn}" /></td>
+                                        <td>
+                                       <%-- 	<c:if test="${employee.workYn eq 'Y'}">
+                                        재직중
+                                        </c:if>
+                                        <c:if test="${employee.workYn eq 'N' }">
+                                        퇴사
+                                        </c:if>
+                                         --%>
+                                        <c:choose>
+                                        	<c:when test="${employee.workYn eq 'Y' }">
+                                        		재직
+                                        	</c:when>
+                                        	<c:otherwise>
+                                        		퇴사
+                                        	</c:otherwise>
+                                        </c:choose>
+                                        </td>
+                                       
                                         <td>
                                             <button class="btn btn-outline-primary listupdatebtn" type="button"
                                                 data-toggle="modal" data-target="#updateModal">수정하기</button>
@@ -133,11 +150,11 @@
                             <label for="inputdeptCode" class="form-label">재직여부</label> <br>
                             <div class="form-check form-check-inline">
                                 <input class="form-check-input" type="radio" name="workYn" value="Y">
-                                <label class="form-check-label" for="flexRadioDefault3">Y</label>
+                                <label class="form-check-label" for="flexRadioDefault3">재직</label>
                             </div>
                             <div class="form-check form-check-inline">
                                 <input class="form-check-input" type="radio" name="workYn" value="N">
-                                <label class="form-check-label" for="flexRadioDefault3">N</label>
+                                <label class="form-check-label" for="flexRadioDefault3">퇴사</label>
                             </div>
                         </div>
                         <div class="modal-footer">

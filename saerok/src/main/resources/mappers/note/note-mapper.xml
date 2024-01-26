@@ -60,4 +60,8 @@
       INSERT INTO note(NOTE_NO, RCV_EMP_NO, SND_EMP_NO, NOTE_CONTENT, READ_YN, DEL_YN, TEMP_YN, REG_DTIME,MOD_ID,MOD_DTIME)
       VALUES(note_seq.nextval, #{revEmpNo}, #{sndEmpNo}, #{noteContent}, 'N', 'N', 'N', sysdate, #{sndEmpNo}, sysdate)
     </insert>
+    
+    <update id="updateNoteDelStatus" parameterType="note">
+    UPDATE note SET DEL_YN=#{delYn} WHERE NOTE_NO=#{noteNo}
+    </update>
 </mapper>

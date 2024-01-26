@@ -22,30 +22,41 @@ public class NoteServiceImpl implements NoteService {
 	// 받은 쪽지 조회
 	@Override
 	public List<Note> getReceivedNotes() {
-		// TODO Auto-generated method stub
 		return dao.getReceivedNotes(session);
 	}
 
 	// 보낸 쪽지 조회
 	@Override
-	public List<Note> getSentNotes(String empNo){
+	public List<Note> getSentNotes(String empNo) {
 		return dao.getSentNotes(empNo, session);
 	}
-	
+
 	// 이름으로 사원 조회
 	@Override
 	public List<Employee> selectEmpByName(String empName) {
-		// TODO Auto-generated method stub
 		return dao.selectEmpByName(session);
 	}
-	
+
 	@Override
-	@Transactional() //트랜젝션 처리 어노테이션 
+	@Transactional
 	public boolean sendNote(Note note) {
 		int result = dao.insertNote(session, note);
-    	if(result > 0) {
-    		return true; // 성공적으로 전송되었을 경우 true 반환
-    	}
-        return false;
+		return result > 0; // 삼항 연산자로 변경하여 간결하게 표현
+	}
+
+	@Override
+	@Transactional
+	public boolean deleteToTrash(String empNo, int noteNo) {
+		// 휴지통으로 이동할 쪽지를 조회
+		Note note = dao.getNoteByNoteNo(noteNo, session);
+
+		// 로그인한 사용자의 쪽지만 삭제 가능하도록
+		if (note != null && empNo.equals(note.getSndEmpNo())) {
+			// 쪽지의 DEL_YN 상태를 'Y'로 변경하여 휴지통으로 이동
+			note.setDelYn("Y");
+			int result = dao.updateNoteDelStatus(session, note);
+			return result > 0;
+		}
+		return false;
 	}
 }

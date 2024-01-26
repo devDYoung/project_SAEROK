@@ -143,7 +143,19 @@ public class ApprovalController {
 
 		return "common/msg";
 	}
+	
+	//상세페이지
+	@GetMapping("/approvalDetailView")
+	public void approvalDetailView(String appSeq, Model model) {
+		Approval approvalDetail = service.approvalDetailView(appSeq);
+	    model.addAttribute("approvalDetailView", approvalDetail);
+	}
 
+	
+	
+	
+	
+	
 	// 테스트
 	@GetMapping("/test")
 	public void test() {
