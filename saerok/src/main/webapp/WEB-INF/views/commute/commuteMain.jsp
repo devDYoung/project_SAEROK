@@ -4,15 +4,15 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
-<c:set var="path" value="${pageContext.request.contextPath}" />
+<c:set var="path" value="${pageContext.request.contextPath}"/>
 <c:set var="loginEmployee"
-	value="${sessionScope.SPRING_SECURITY_CONTEXT.authentication.principal }" />
-<script
-	src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+	value="${sessionScope.SPRING_SECURITY_CONTEXT.authentication.principal }"/>
 <jsp:include page="/WEB-INF/views/common/header.jsp">
 	<jsp:param value="CommuteMain" name="ATO" />
 </jsp:include>
 <jsp:include page="/WEB-INF/views/commute/commuteBar.jsp" />  
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
  <link rel="stylesheet" href="${path }/resources/css/emp.css">
  <style>
     #work-week-container {
@@ -23,7 +23,7 @@
     #work-week-container > div {
         margin: 0 10px;
     }
-</style>
+</style>	
   <div class="home-container" class="div-padding div-margin page-wrapper">
                     <!-- <div class="div-padding"> -->
                         <div id="date-box">
@@ -107,8 +107,8 @@
                         success(data){
                             console.log(data);
                             const {weekDates, workList} = data;
-                            console.log(weekDates);
-                            console.log(workList);
+                            console.log("weekDates", weekDates);
+                            console.log("workList", workList);
                             
                             const container = document.querySelector("#work-info-container");
                             
@@ -297,7 +297,7 @@
     	  
     	$.ajax({
     		  url : "${path }/commute/weekTotalTime.do",
-    		  data: { start: start, end: end },
+    		  data: { start, end },
     		  contentType : "application/json; charset=utf-8",
     		  success(data){
     			  console.log("Success", data);
@@ -319,13 +319,31 @@
     			  monthWorkTime.textContent = changeWorkTime(totalMonthTime + totalMonthOverTime);
     			  monthOverTime.textContent = changeWorkTime(totalMonthOverTime);
     		  },
-    		  error : console.log
+    		  error(error) {
+    		        console.error("Error:", error);
+    		    }
     		  
     	  });
     }
 
     // 총근무시간
-    function changeWorkTime(times){
+    const resultElement = document.getElementById("result-container");
+
+function changeWorkTimeNew(inDtime, outDtime) {
+    var inDate = new Date(inDtime);
+    var outDate = new Date(outDtime);
+
+    var timeDifferenceInSeconds = Math.abs((outDate - inDate) / 1000);
+
+    var overDay = Math.floor(timeDifferenceInSeconds / (3600 * 24));
+    var overHour = Math.floor((timeDifferenceInSeconds % (3600 * 24)) / 3600);
+    var overMin = Math.floor((timeDifferenceInSeconds % 3600) / 60);
+    var overSec = Math.floor(timeDifferenceInSeconds % 60);
+
+    // 결과를 HTML에 출력
+    resultElement.textContent = `${overDay}일 ${overHour}시간 ${overMin}분 ${overSec}초`;
+}
+    /* function changeWorkTime(times){
     	const time = times / 1000;
     	const hours = Math.floor(time / 3600); // 시간 계산
     	const minutes = Math.floor((time % 3600) / 60); // 분 계산
@@ -333,8 +351,8 @@
     	
     	return `\${hours}h \${minutes}m \${seconds}s`;	
     }
-
-    function changeWorkTimeNew(inDtime, outDtime) {
+ */
+/*     function changeWorkTimeNew(inDtime, outDtime) {
     	var inDate = new Date(inDtime);
     	var outDate = new Date(outDtime);
     	
@@ -347,7 +365,23 @@
 		
     	return `\${overHour}h \${overMin}m \${overSec}s`;
     }
-    
+     */
+     
+     function changeWorkTimeNew(inDtime, outDtime) {
+    	    var inDate = new Date(inDtime);
+    	    var outDate = new Date(outDtime);
+
+    	    var timeDifferenceInSeconds = Math.abs((outDate - inDate) / 1000); // 초 단위로 차이 계산
+
+    	    var overDay = Math.floor(timeDifferenceInSeconds / (3600 * 24)); // 일 수 계산
+    	    var overHour = Math.floor((timeDifferenceInSeconds % (3600 * 24)) / 3600); // 시간 계산
+    	    var overMin = Math.floor((timeDifferenceInSeconds % 3600) / 60); // 분 계산
+    	    var overSec = Math.floor(timeDifferenceInSeconds % 60); // 초 계산
+
+    	    console.log("hjhjhj", overDay, overHour, overMin, overSec);
+
+    	    return `\${overHour}h \${overMin}m \${overSec}s`;
+    	}
     // workingDay날짜 00일 (월)로 변경
     function changeWorkingDay(workingDay) {
      console.log("Input Date:", workingDay);
@@ -368,5 +402,5 @@
 
     </script>
 
-<jsp:include page="/WEB-INF/views/common/footer.jsp" />
 <script src="${path }/resources/js/emp.js"></script>
+<jsp:include page="/WEB-INF/views/common/footer.jsp" />

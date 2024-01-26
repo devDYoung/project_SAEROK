@@ -148,7 +148,7 @@
       in_Dtime = null
       where
       emp_No = #{empNo}
-      and TRUNC(workingDay) = TO_DATE(#{time},'YY-MM-DD')
+      and TRUNC((TO_DATE(WORKINGDAY, 'YYYY-MM-DD')) = TO_DATE(#{time},'YYYY-MM-DD')
    </update>
 <!-- 
    <update id="updateStartWork" parameterType="map">
@@ -179,10 +179,10 @@
 
 <update id="updateWorkTime" parameterType="map">
       UPDATE COMMUTE SET
-      WORKINGHOURS =#{daytime}
-      OVERTIME =#{overtime}
+      WORKINGHOURS =TO_DATE(#{daytime},'YYYY-MM-DD')
+      OVERTIME =TO_DATE(#{overtime},'YYYY-MM-DD')
       WHERE EMP_NO=#{empNo} AND
-      TRUNC(WORKINGDAY)=TO_DATE(#{time},'YY-MM-DD')
+      TRUNC(TO_DATE(WORKINGDAY, 'YYYY-MM-DD'))=TO_DATE(#{time},'YYYY-MM-DD')
    </update> 
 <!--    <update id="updateWorkTime" parameterType="map">
     UPDATE COMMUTE
@@ -207,13 +207,13 @@
          <otherwise>#{overtime}</otherwise>
       </choose>
       where
-      emp_no = #{empNo} AND TRUNC(workingDay) = TO_DATE(#{time},'YY-MM-DD')
+      emp_no = #{empNo} AND TRUNC(TO_DATE(WORKINGDAY, 'YYYY-MM-DD'))= TO_DATE(#{time},'YYYY-MM-DD')
    </update>
 
 
    <select id="selectMonthWork" parameterType="map"
       resultMap="commuteMap">
-      SELECT * FROM COMMUTE WHERE WORKINGDAY LIKE '%' || #{date}
+      SELECT * FROM COMMUTE WHERE TO_DATE(WORKINGDAY, 'YYYY-MM-DD')  LIKE '%' || TO_DATE(#{date},'YYYY-MM-DD')
       || '%' AND
       EMP_NO=#{empNo}
    </select>
@@ -222,9 +222,9 @@
       resultType="_int">
       SELECT NVL(SUM(workingHours), 0)
       FROM commute
-      WHERE emp_No = #{empNo}
-      AND workingDay BETWEEN TO_DATE(#{start}, 'YY-MM-DD') AND
-      TO_DATE(#{end}, 'YY-MM-DD')
+      WHERE EMP_NO= #{empNo}
+      AND TO_DATE(WORKINGDAY, 'YYYY-MM-DD')  BETWEEN TO_DATE(#{start}, 'YYYY-MM-DD') AND
+      TO_DATE(#{end}, 'YYYY-MM-DD')
    </select>
    <!-- <select id="selectWeekWorkTime" parameterType="map" resultType="_int"> 
       select nvl(sum(workingHours), 0) as 해당기간근무시간 from commute where emp_no = 
@@ -238,34 +238,34 @@
       resultType="_int">
       SELECT NVL(SUM(OVERTIME), 0) AS TOTAL_OVERTIME
       FROM COMMUTE
-      WHERE EMP_NO = #{empNo} AND WORKINGDAY BETWEEN #{start} AND #{end}
+      WHERE EMP_NO = #{empNo} AND TO_DATE(WORKINGDAY, 'YYYY-MM-DD')  BETWEEN TO_DATE(#{start},'YYYY-MM-DD') AND TO_DATE(#{end},'YYYY-MM-DD')
    </select>
 
    <select id="selectWeekDatas" parameterType="map"
       resultMap="commuteMap">
       SELECT *
       FROM COMMUTE WHERE EMP_NO=#{empNo}AND WORKINGDAY
-      BETWEEN TO_DATE(#{start},'YY-MM-DD') AND TO_DATE(#{end},'YY-MM-DD')+1 ORDER BY WORKINGDAY
+      BETWEEN TO_DATE(#{start},'YYYY-MM-DD') AND TO_DATE(#{end},'YYYY-MM-DD')+1 ORDER BY WORKINGDAY
    </select>
 
    <select id="weekTotalTime" parameterType="map" resultType="_int">
       SELECT NVL(SUM(workingHours),0)
       FROM commute
       WHERE emp_no = #{empNo}
-      AND workingDay BETWEEN #{start} AND TO_DATE(#{end},'YY-MM-DD') + 1
+      AND TO_DATE(WORKINGDAY, 'YYYY-MM-DD') BETWEEN TO_DATE(#{start},'YYYY-MM-DD') AND TO_DATE(#{end},'YYYY-MM-DD') + 1
    </select>
    
    <select id="totalMonthTime" parameterType="map"
       resultType="_int">
-      SELECT NVL(SUM(workingHours),0) FROM COMMUTE WHERE WORKINGDAY LIKE '%'
-      || #{monthTime} || '%' AND EMP_NO=#{empNo}
+      SELECT NVL(SUM(workingHours),0) FROM COMMUTE WHERE  TO_DATE(WORKINGDAY, 'YYYY-MM-DD') LIKE '%'
+      || TO_DATE(#{monthTime},'YYYY-MM-DD') || '%' AND EMP_NO=#{empNo}
    </select>
    
    <select id="monthOverTime" parameterType="map" resultType="_int">
       SELECT NVL(SUM(OVERTIME), 0)
       FROM COMMUTE
-      WHERE TO_DATE(WORKINGDAY, 'YY-MM-DD') = #{monthTime}
-      AND EMP_NO = #{empNO}
+      WHERE TO_DATE(WORKINGDAY, 'YYYY-MM-DD') = TO_DATE(#{monthTime},'YYYY-MM-DD')
+      AND EMP_NO = #{empNo}
    </select>
 
    
