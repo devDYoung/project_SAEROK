@@ -15,8 +15,8 @@ public class NoteDaoImpl implements NoteDao {
 
 	// 받은 쪽지 조회
 	@Override
-	public List<Note> getReceivedNotes(SqlSession session) {
-		return session.selectList("note.getReceivedNotes");
+	public List<Note> getReceivedNotes(SqlSession session,String revName) {
+		return session.selectList("note.getReceivedNotes",revName);
 	}
 	
 	// 보낸 쪽지 조회

@@ -8,7 +8,7 @@
 <c:set var="loginEmployee"
 	value="${sessionScope.SPRING_SECURITY_CONTEXT.authentication.principal }" />
 
-
+${approvalDetailView}
 <style>
     .custom-file-link {
         color: blue;
@@ -34,18 +34,30 @@
 		<div class="basicForm">
 			<table border="1" style="display: inline-block; text-align: center;">
 				 <tr>
-                    <td rowspan="3" colspan="4" style="width: 300px; height: 140px; font-size: 40px; font-weight: 600;">품 의 서</td>
-                    <td rowspan="3" style="width: 20px; padding-top: 30px; font-size: 25px;">결 재</td>
-                    <c:forEach var="apvLine" items="${approvalDetailView.apvWriter.stream().sorted(e->e.getWriterList()).toList() }">
-                    <td style="height: 25px; width: 100px; font-size:17px">
-                    	${apvLine.apvEmpName }
-                    </td>
-                    </c:forEach>
-                </tr>
+				    <td rowspan="3" colspan="4" style="width: 300px; height: 140px; font-size: 40px; font-weight: 600;">품 의 서</td>
+				    <td rowspan="3" style="width: 20px; padding-top: 30px; font-size: 25px;">결 재</td>
+				    <c:forEach var="apvLine" items="${approvalDetailView.apvWriter.stream()
+				    .sorted((e,e2)->e2.getWriterList()-e.getWriterList()).toList() }">
+				        <td style="height: 25px; width: 100px; font-size:17px">
+				            ${apvLine.apvEmpName}
+				        </td>
+				    </c:forEach>
+				    
+				</tr>
+
 				<tr>
-					<td><input type="button" value="결재"/></td>
-					<td><input type="button" value="결재"/></td>
-					<td><input type="button" value="결재"/></td>
+					<c:forEach var="writer" items="${approvalDetailView.apvWriter.stream()
+				    .sorted((e,e2)->e2.getWriterList()-e.getWriterList()).toList() }">
+						<td>
+							<c:if test="${writer.apvEmpNo eq loginEmployee.empNo }">
+								<c:if test="${approvalDetailView.apvWriter.stream()
+												.filter(e->e.getWriterList()>writer.getWriterList())
+												.allMatch(e->e.getApvState()==300).orElse(true)}">
+									<input type="button" id="apv1" value="결재"/>
+								</c:if>
+							</c:if>
+						</td>
+					</c:forEach>
 				</tr>
 				<tr>
 					<td colspan="2" style="color: black; height: 70px;">수신참조자</td>
@@ -57,15 +69,15 @@
 						명</td>
 					<td><input type="text" name="writerName"
 						style="border: none; background: transparent; text-align: center;"
-						value="${ loginEmployee.empName }" readonly></td>
+						value="${approvalDetailView.appEmpName}" readonly></td>
 					<td style="color: black; width: 80px; font-size: 15px;">부 서</td>
-					<td><input type="text"Na
+					<td><input type="text"
 						style="border: none; background: transparent; text-align: center;"
-						value="${ loginEmployee.deptName }" readonly></td>
+						value="${approvalDetailView.deptName}" readonly></td>
 					<td style="color: black; width: 80px; font-size: 15px;">직 급</td>
 					<td colspan="3"><input type="text"
 						style="border: none; background: transparent;"
-						value="${ loginEmployee.jobName }" readonly></td>
+						value="${approvalDetailView.jobName}" readonly></td>
 				</tr>
 				<tr>
 					<td style="color: black; height: 50px; width: 80px;">제 목</td>
@@ -97,7 +109,7 @@
 				</tr>
 				<tr style="color: black; border-top: none; border-bottom: none;">
 					<td colspan="8" style="text-align: center; height: 100px;">
-						2024년 &nbsp; 2 월 &nbsp; 2일 &nbsp;</td>
+						${approvalDetailView.appWriteDate}</td>
 				</tr>
 				<tr>
 					<td colspan="8"
@@ -125,21 +137,8 @@
         // 각 writerList에 대응하는 승인자 이름을 가져오는 로직을 작성
         var approvalName = getApprovalName(writerList);
         
-        // 가져온 이름을 어떻게 표시할지 처리 (예: 알림창)
         alert(approvalName);
     }
-
-    function getApprovalName(writerList) {
-        // writerList 값에 따라 승인자 이름을 반환하는 로직
-        switch(writerList) {
-            case 1:
-                return "${approvalDetailView.apvWriter[0].apvEmpName}";
-            case 2:
-                return "${approvalDetailView.apvWriter[1].apvEmpName}";
-            case 3:
-                return "${approvalDetailView.apvWriter[2].apvEmpName}";
-            default:
-                return "Unknown";
-        }
-    }
 </script>
+
+

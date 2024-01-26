@@ -48,8 +48,8 @@
 							<c:forEach var="note" items="${receivedNotes}">
 								<tr>
 									<td><c:out value="${note.noteNo}" /></td>
-									<td><c:out value="${note.sndEmpNo}" /></td>
-									<td><c:out value="${note.regDtime}" /></td>
+									<td onclick="revMessage('${note.sndEmp.empNo}');"><c:out value="${note.sndEmp.empName }"/></td>
+									<td><fmt:formatDate  value="${note.regDtime}" pattern="yyyy-MM-dd HH:mm:ss"/></td>
 									<td>
 										<!-- 삭제 버튼 -->
 										<button type="button" class="btn btn-danger"
