@@ -124,12 +124,25 @@ public class CommuteController {
 		 
 		Commute commute = commuteService.selectExsistWorkInList(param);
 		
-		if(commute.getInDtime() != null) {
-	        int result = commuteService.updateCommuteEndTime(param); 
-	        status.put("status", "퇴근");
-	    }else if(commute.getOutDtime() != null) {
-	    	status.put("status", "이미퇴근");
-	    }
+//		if(commute.getInDtime() != null) {
+//	        int result = commuteService.updateCommuteEndTime(param); 
+//	        status.put("status", "퇴근");
+//	    }else if(commute.getOutDtime() != null) {
+//	    	status.put("status", "이미퇴근");
+//	    }
+		if (commute != null) {
+		    if (commute.getInDtime() != null) {
+		        int result = commuteService.updateCommuteEndTime(param);
+		        if (result > 0) {
+		            status.put("status", "퇴근");
+		        } else {
+		            status.put("status", "퇴근 처리 실패");
+		        }
+		    }
+		} else {
+		    status.put("status", "출근 기록이 없음");
+		}
+
 		
 //		if(commute == null) {
 //			status.put("status","출근전");
