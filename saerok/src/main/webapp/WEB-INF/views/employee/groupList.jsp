@@ -26,7 +26,7 @@
                     <img src="${path}/resources/upload/profile/ato_master.png" 
                         id="profile-img" class="img-profile rounded-circle" alt="ato-profile-img">
                 </label>
-                <p>ATO_MASTER</p>
+                <p>ATO_CEO</p>
             </div>
             <div class="card-body">
                 <div class="modal-dialog" role="document" style="display: flex; justify-content: center;">
