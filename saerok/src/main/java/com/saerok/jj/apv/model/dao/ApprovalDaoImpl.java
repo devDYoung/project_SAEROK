@@ -18,6 +18,8 @@ import jakarta.servlet.http.HttpSession;
 @Repository
 public class ApprovalDaoImpl implements ApprovalDao {
 
+	
+
 	@Override
 	public List<Approval> selectApproval(SqlSession session) {
 
@@ -68,8 +70,18 @@ public class ApprovalDaoImpl implements ApprovalDao {
 	public List<Approval> myApproval(SqlSession session, String empNo) {
 	    return session.selectList("approval.myApproval", empNo);
 	}
-
 	
-
+	//결재할 문서
+	@Override
+	public List<Approval> myTodoApprovalList(SqlSession session, String empNo) {
+	    return session.selectList("approval.myTodoApprovalList", empNo);
+	}
+	
+	
+	
+	@Override
+	public Approval approvalDetailView(SqlSession session, String appSeq) {
+	    return session.selectOne("approval.approvalDetailView", appSeq);
+	}
 
 }

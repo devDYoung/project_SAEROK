@@ -16,6 +16,14 @@
         <result property="regDtime" column="REG_DTIME"/>
         <result property="modId" column="MOD_ID"/>
         <result property="modDtime" column="MOD_DTIME"/>
+        <association property="revEmp" javaType="emp">
+           <id column="revno" property="empNo"/>
+           <result column="revname" property="empName"/>
+        </association>
+        <association property="sndEmp" javaType="emp">
+           <id column="sndno" property="empNo"/>
+           <result column="sndname" property="empName"/>
+        </association>
     </resultMap>
 
    <resultMap type="emp" id="empMap">
@@ -44,13 +52,30 @@
     
     <!-- 보낸 쪽지함 조회 -->
     <select id="getSentNotes"  parameterType="String" resultMap="receivedNotes">
-        SELECT * FROM note WHERE SND_EMP_NO = #{empNo}
+       <!--  SELECT * FROM note WHERE SND_EMP_NO = #{empNo} order by REG_DTIME DESC -->
+                SELECT n.*,
+                rev.EMP_NO as revno, rev.EMP_NAME as revname,
+                SND.EMP_NO as sndno, SND.EMP_NAME as sndname
+        FROM note n 
+                 join EMPLOYEE REV ON n.RCV_EMP_NO=rev.EMP_NO
+                 join EMPLOYEE SND ON n.SND_EMP_NO=SND.EMP_NO
+        WHERE SND_EMP_NO = #{empNo} order by REG_DTIME DESC
     </select>
       
      <!--받은 쪽지함 조회--> 
-   <select id="getReceivedNotes" resultMap="receivedNotes">   
-       SELECT * FROM note
+   <select id="getReceivedNotes" parameterType="String" resultMap="receivedNotes">   
+               SELECT n.*,
+                rev.EMP_NO as revno, rev.EMP_NAME as revname,
+                SND.EMP_NO as sndno, SND.EMP_NAME as sndname
+        FROM note n 
+                 join EMPLOYEE REV ON n.RCV_EMP_NO=rev.EMP_NO
+                 join EMPLOYEE SND ON n.SND_EMP_NO=SND.EMP_NO
+        WHERE SND_EMP_NO = #{empNo} order by REG_DTIME DESC
     </select>
+    
+    <!--  </select>
+       SELECT * FROM note WHERE RCV_EMP_NO=#{revName} order by REG_DTIME DESC
+    </select>-->
     
     <select id="selectEmpByName"  parameterType="String" resultMap="empMap">
        SELECT * FROM EMPLOYEE WHERE EMP_NAME LIKE '%' || #{empName} || '%'  
@@ -60,4 +85,8 @@
       INSERT INTO note(NOTE_NO, RCV_EMP_NO, SND_EMP_NO, NOTE_CONTENT, READ_YN, DEL_YN, TEMP_YN, REG_DTIME,MOD_ID,MOD_DTIME)
       VALUES(note_seq.nextval, #{revEmpNo}, #{sndEmpNo}, #{noteContent}, 'N', 'N', 'N', sysdate, #{sndEmpNo}, sysdate)
     </insert>
+    
+    <update id="updateNoteDelStatus" parameterType="note">
+    UPDATE note SET DEL_YN=#{delYn} WHERE NOTE_NO=#{noteNo}
+    </update>
 </mapper>

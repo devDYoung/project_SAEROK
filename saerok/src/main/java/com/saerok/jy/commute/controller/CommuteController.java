@@ -49,7 +49,7 @@ public class CommuteController {
 	private EmployeeService employeeService;
 	
 	DateTimeFormatter dayff = DateTimeFormatter.ofPattern("yy-MM"); //날짜 패턴 변경
-	DateTimeFormatter dayfff = DateTimeFormatter.ofPattern("yy-MM"); //날짜 패턴 변경
+	DateTimeFormatter dayfff = DateTimeFormatter.ofPattern("yyyy-MM-dd"); //날짜 패턴 변경
 	DateTimeFormatter dayf = DateTimeFormatter.ofPattern("yy-MM-dd"); //날짜 패턴 변경
 	LocalDateTime now = LocalDateTime.now(); //현재 시간
 	
@@ -124,12 +124,25 @@ public class CommuteController {
 		 
 		Commute commute = commuteService.selectExsistWorkInList(param);
 		
-		if(commute.getInDtime() != null) {
-	        int result = commuteService.updateCommuteEndTime(param); 
-	        status.put("status", "퇴근");
-	    }else if(commute.getOutDtime() != null) {
-	    	status.put("status", "이미퇴근");
-	    }
+//		if(commute.getInDtime() != null) {
+//	        int result = commuteService.updateCommuteEndTime(param); 
+//	        status.put("status", "퇴근");
+//	    }else if(commute.getOutDtime() != null) {
+//	    	status.put("status", "이미퇴근");
+//	    }
+		if (commute != null) {
+		    if (commute.getInDtime() != null) {
+		        int result = commuteService.updateCommuteEndTime(param);
+		        if (result > 0) {
+		            status.put("status", "퇴근");
+		        } else {
+		            status.put("status", "이미 퇴근");
+		        }
+		    }
+		} else {
+		    status.put("status", "출근 기록이 없음");
+		}
+
 		
 //		if(commute == null) {
 //			status.put("status","출근전");
@@ -273,8 +286,6 @@ public class CommuteController {
 			param.put("start", start);
 			param.put("end", end);
 			param.put("monthTime", monthTime);
-			System.out.println(start+end+monthTime);
-			
 			// 금주 누적시간 가져오기
 			int weekTotalTime = commuteService.weekTotalTime(param);
 			time.put("weekTotalTime",weekTotalTime);
@@ -373,6 +384,8 @@ public class CommuteController {
 		        work.put("weekDates", weekDatesList);
 		        workList.add(work);
 		    }
+		    
+		    System.out.println("workList: " + workList);
 
 		    return ResponseEntity.ok()
 		            .header(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_JSON.toString())

@@ -26,9 +26,7 @@
 
 
 <!-- 전체 리스트 -->
-
 <div class="container-fluid">
-${list }
 	<div class="card shadow mb-4">
 
 		<div class="card-header py-3">
@@ -72,7 +70,7 @@ ${list }
 										<td>${a.appSeq}</td>
 										<td>${a.letterTitle}</td>
 										<td>${a.appEmpName}</td>
-										<%-- <td><c:forEach var="b" items="${a.apvWriter}"
+										 <%-- <td><c:forEach var="b" items="${a.apvWriter}"
 												varStatus="i">
 												<c:choose>
 													<c:when test="${i.index == 0}">
@@ -84,7 +82,7 @@ ${list }
 												</c:choose>
 											</c:forEach></td> --%>
 										<td>${a.appWriteDate}</td>
-										<td>${a.appCheck }</td>
+										<td>${a.appCheck }</td> 
 									</tr>
 								</c:forEach>
 							</tbody>

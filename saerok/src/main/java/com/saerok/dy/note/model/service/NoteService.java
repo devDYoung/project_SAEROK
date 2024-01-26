@@ -9,7 +9,7 @@ public interface NoteService {
    
 
     // 받은 쪽지함 조회
-    List<Note> getReceivedNotes();
+    List<Note> getReceivedNotes(String revName);
  
     // 보낸 쪽지함 조회
     List<Note> getSentNotes(String empNo);
@@ -17,6 +17,7 @@ public interface NoteService {
     // 이름으로 사원 조회
     List<Employee> selectEmpByName(String empName);
 
-
 	boolean sendNote(Note note);
+
+	boolean deleteToTrash(String empNo, int noteNo);
 }

@@ -155,8 +155,8 @@ document.querySelector('#endBtn').addEventListener('click', function () {
 	$.ajax({
 		   url : '${path }/commute/workOut.do',
 		   method : 'POST',
-		   contentType : "application/json; charset=utf-8",
-		   success(data){
+/* 		   contentType : "application/json; charset=utf-8",
+ */		   success(data){
 			   console.log(data);
 			   
 			   if(data.status === "퇴근"){
@@ -174,7 +174,7 @@ document.querySelector('#endBtn').addEventListener('click', function () {
 		       }
 		       else{
 		           alert("이미 퇴근하셨습니다.");
-		           return;
+	                return;
 		       }
 			},
 		   error : console.log
@@ -210,7 +210,7 @@ function getStartAndEndDateOfWeek() {
 	  const start = startDate.getFullYear() + "." + (startDate.getMonth() + 1) + "." + startDate.getDate();
 	  const end = endDate.getFullYear() + "." + (endDate.getMonth() + 1) + "." + endDate.getDate();
 	  
-	  $.ajax({
+/* 	  $.ajax({
 		  url : "${path }/commute/weekTotalTime.do",
 		  data : {start, end},
 		  contentType : "application/json; charset=utf-8",
@@ -224,6 +224,36 @@ function getStartAndEndDateOfWeek() {
 		  error : console.log
 		  
 	  });
+} */
+$.ajax({
+	  url : "${path }/commute/weekTotalTime.do",
+	  data: { start, end },
+	  contentType : "application/json; charset=utf-8",
+	  success(data){
+		  console.log("Success", data);
+		  const {totalMonthOverTime ,totalMonthTime, weekOverTime ,weekTotalTime} = data;
+		  const mainTotalWorkTime = document.querySelector("#main-totalwork-time");
+		  const mainWeekOverTime = document.querySelector("#main-week-over-time");
+		  const mainWorkTime = document.querySelector("#main-work-time");
+		  const monthWorkTime = document.querySelector("#main-month-work-time");
+		  const monthOverTime = document.querySelector("#main-month-over-time")
+		  
+		  let times = 144000000 - (weekTotalTime + weekOverTime); // 40시간 - 주간 기본 근무시간
+		  mainTotalWorkTime.textContent = changeWorkTime(weekTotalTime + weekOverTime);
+		  mainWeekOverTime.textContent = changeWorkTime(weekOverTime);
+		  if(times < 0){
+			  mainWorkTime.textContent = changeWorkTime(0);
+		  }else{
+			  mainWorkTime.textContent = changeWorkTime(times);				  
+		  }
+		  monthWorkTime.textContent = changeWorkTime(totalMonthTime + totalMonthOverTime);
+		  monthOverTime.textContent = changeWorkTime(totalMonthOverTime);
+	  },
+	  error(error) {
+	        console.error("Error:", error);
+	    }
+	  
+});
 }
 
 function changeWorkTime(times){
@@ -239,6 +269,5 @@ function changeWorkTime(times){
 
 
 </script>
-
 	<script
 		src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>

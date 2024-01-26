@@ -5,8 +5,7 @@
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <c:set var="path" value="${pageContext.request.contextPath}" />
-<c:set var="loginEmployee"
-	value="${sessionScope.SPRING_SECURITY_CONTEXT.authentication.principal }" />
+<c:set var="loginEmployee" value="${sessionScope.SPRING_SECURITY_CONTEXT.authentication.principal }" />
 	<script
 	src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 	<jsp:include page="/WEB-INF/views/common/header.jsp">
@@ -38,7 +37,7 @@
                                 </div>
                                 <div>
                                     <p class="font-14 font-bold">총연차</p>
-                                    <h4 class="main-color">${issueAnnu}</h4>
+                                    <h4 class="main-color">${loginEmployee.issueAnnu}</h4>
                                 </div>
                                 <div>
                                     <p class="font-14 font-bold">사용 연차</p>
@@ -52,7 +51,7 @@
                                 <div>
                                     <p class="font-14 font-bold">잔여 연차</p>
                                      <c:if test="${empty employee }">
-                                     	<h4 class="main-color">${issueAnnu}</h4>
+                                     	<h4 class="main-color">${loginEmployee.issueAnnu}</h4>
                                      </c:if>
                                      <c:if test="">
                                     	<h4 class="main-color"></h4>

@@ -25,6 +25,7 @@ public class Approval {
 	private List<ApvRef> apvRef;
 	
 	private List<AppLetter> file;
+	private String empNos;
 	
 	//품의서
 	private int letterSeq; //품의서 고유번호
@@ -63,5 +64,8 @@ public class Approval {
 	private String apvEmpName;
 	private Date apvEmpTime;
 	private String returnReason;
-
+	
+	
+	private String deptName;
+	private String jobName;
 }

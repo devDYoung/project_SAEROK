@@ -33,5 +33,9 @@ public interface ApprovalDao {
 	
 	// 내 문서함 조회
 	List<Approval> myApproval(SqlSession session, String empNo);
+	List<Approval> myTodoApprovalList(SqlSession session, String empNo);
+	
+	//상세페이지
+	Approval approvalDetailView(SqlSession session, String appSeq);
 	
 }

@@ -46,13 +46,13 @@
     <title>Saerok</title>
 
     <!-- Custom fonts for this template-->
-    <link href="${pageContext.request.contextPath }/resources/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
+    <link href="${path }/resources/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
     <link
         href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
         rel="stylesheet">
 
     <!-- Custom styles for this template-->
-    <link href="${pageContext.request.contextPath }/resources/css/sb-admin-2.min.css" rel="stylesheet">
+    <link href="${path}/resources/css/sb-admin-2.min.css" rel="stylesheet">
 
 </head>
 
@@ -118,8 +118,6 @@
                         <a class="collapse-item" href="${path }/calendar/calendarview">일정조회</a>
                         <a class="collapse-item" href="${path }/calendar/calendarstarview">중요일정</a>
                          <a class="collapse-item" href="${path }/calendar/calendarwrite">일정작성</a>
-<%--                          <a class="collapse-item" href="${path }/calendar/calendardetail">일정작성</a>
-                         <a class="collapse-item" href="${path }/calendar/calendaredit">일정작성</a> --%>
                     </div>
                 </div> 
             </li>
@@ -195,6 +193,8 @@
                         <div class="bg-white py-2 collapse-inner rounded">
                             <a class="collapse-item" href="${path }/approval/approvalList.do">전체 문서함</a>
                              <a class="collapse-item" href="${path }/approval/myApproval">내 문서함</a>
+                             <a class="collapse-item" href="${path }/approval/basicForm">양식 작성하기</a>
+                            
                         </div>
                     </div>
             </li>
@@ -473,7 +473,7 @@
          /* alert(empNameVal); */
          $.ajax({
             type: "GET", 
-            url:"/note/selectEmpByName",
+            url:"${path }/note/selectEmpByName",
             data: { 
                   empName: empNameVal
             },
