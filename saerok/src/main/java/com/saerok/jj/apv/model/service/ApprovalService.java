@@ -27,5 +27,7 @@ public interface ApprovalService {
 	List<Approval> myApproval(String empNo);
 	
 	List<Approval> myTodoApprovalList(String empNo);
+	
+	Approval approvalDetailView(String appSeq); //품의서 상세조회 결재
 
 }

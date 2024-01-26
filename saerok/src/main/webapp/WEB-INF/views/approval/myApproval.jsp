@@ -24,14 +24,12 @@
 </jsp:include>
 
 
-
 <!-- 전체 리스트 -->
 <div class="container-fluid">
+
 	<div class="card shadow mb-4">
 
 		<div class="card-header py-3">
-			<button class="btn btn-facebook btn-block col-1"
-				onclick="location.assign('${path}/approval/basicForm');">작성하기</button>
 			<ul class="nav nav-tabs mb-3">
 				<li class="nav-item"><a href="#board" data-toggle="tab"
 					aria-expanded="true" class="nav-link active"> <i
@@ -101,21 +99,26 @@
 												<td>${m.appSeq}</td>
 												<td><c:out value="${m.letterTitle }" /></td>
 												<td><c:out value="${m.appWriteDate}" /></td>
-												<td><c:out value="${m.empNos}" />
-													<c:forEach var="b" items="${m.apvWriter}"
-														varStatus="i">
-														<c:choose>
-															<c:when test="${i.index == 0}">
+											<td><c:out value="${m.empNos}" /> 
+											<c:forEach var="b" items="${m.apvWriter}" varStatus="i">
+													<c:choose>
+														<c:when test="${i.index == 0}">
 									                            ${b.apvEmpNo} 
 									                        </c:when>
 														<c:otherwise>
 									                          , ${b.apvEmpNo}
 									                     </c:otherwise>
-														</c:choose>
-													</c:forEach>
-												</td>
-												<td><c:out value="${m.appCheck}" /></td>
-											</tr>
+													</c:choose>
+												</c:forEach></td>
+											<td
+												class="${m.appCheck eq '결재중' ? 'appChecking' : 'appChecked'}"
+												onclick="showDetail('${m.appSeq}')"
+												style="cursor: pointer; color: ${m.appCheck eq '결재중' ? 'red' : 'blue'};">
+												<c:out value="${m.appCheck}" />
+											</td>
+
+
+										</tr>
 										</c:if>
 									</c:forEach>
 								  <%-- <c:forEach var="m" items="${myTodoApprovalList}">
@@ -170,9 +173,19 @@
 		</div>
 	</div>
 </div>
-<div>
 
-</div>
+<!--결재 상세페이지  --> 
+<script>
+function showDetail(appSeq) {
+    const width = 800;
+    const height = 600;
+    const left = (window.screen.width / 2) - (width / 2);
+    const top = (window.screen.height / 2) - (height / 2);
+
+    const detailUrl = '${path}/approval/approvalDetailView?appSeq=' + appSeq;
+    window.open(detailUrl, '_blank', 'width=' + width + ',height=' + height + ',top=' + top + ',left=' + left);
+}
+</script>
 
 
 
