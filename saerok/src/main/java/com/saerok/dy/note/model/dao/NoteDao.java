@@ -10,7 +10,7 @@ import com.saerok.jh.employee.model.dto.Employee;
 public interface NoteDao {
 
 	// 어떤 사용자가 받은 쪽지함을 조회할 것인지
-	List<Note> getReceivedNotes(SqlSession session);
+	List<Note> getReceivedNotes(SqlSession session,String revName);
 	
 	// 어떤 사용자가 보낸 쪽지함을 조회할 것인지
 	List<Note> getSentNotes(String empNo, SqlSession session);

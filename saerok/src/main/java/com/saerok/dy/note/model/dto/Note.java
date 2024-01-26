@@ -2,13 +2,15 @@ package com.saerok.dy.note.model.dto;
 
 import java.util.Date;
 
-import lombok.Getter;
-import lombok.Setter;
+import com.saerok.jh.employee.model.dto.Employee;
 
-@Getter
-@Setter
+import lombok.Data;
+
+@Data
 public class Note {
 	private int noteNo;
+	private Employee revEmp;
+	private Employee sndEmp;
 	private String revEmpNo;
 	private String sndEmpNo;
 	private String noteTitle;
