@@ -11,6 +11,10 @@
    <script src="https://kit.fontawesome.com/cbe4aa3844.js" crossorigin="anonymous"></script>
          <link rel="stylesheet"
             href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css" />
+            
+          <!-- Favicon -->
+		<link rel="shortcut icon" href="${path}/resources/img/logo-bage.png">
+		<link rel="icon" href="${path}/resources/img/logo-bage.png"type="image/x-icon">
 <!--            <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
      <link rel="stylesheet" href="//code.jquery.com/ui/1.13.2/themes/base/jquery-ui.css"> -->
 <style>
