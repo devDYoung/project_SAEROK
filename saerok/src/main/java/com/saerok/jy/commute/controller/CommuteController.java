@@ -136,7 +136,7 @@ public class CommuteController {
 		        if (result > 0) {
 		            status.put("status", "퇴근");
 		        } else {
-		            status.put("status", "퇴근 처리 실패");
+		            status.put("status", "이미 퇴근");
 		        }
 		    }
 		} else {
