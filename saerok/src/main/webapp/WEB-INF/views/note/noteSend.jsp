@@ -35,13 +35,14 @@
 						</tr>
 					</thead>
 					<tbody>
+					
 						<c:if test="${not empty sentNotes}">
 							<c:forEach var="note" items="${sentNotes}">
 								<tr>
 									<!-- <td><input type="checkbox" name="noteCheckBox" /></td> -->
 									<td><c:out value="${note.noteNo}" /></td>
-									<td><c:out value="${note.revEmpNo}" /></td>
-									<td><c:out value="${note.regDtime}" /></td>
+									<td onclick="sendMessage('${note.revEmp.empNo}');"><c:out value="${note.revEmp.empName}" /></td>
+									<td><fmt:formatDate value="${note.regDtime}" pattern="yyyy-MM-dd HH:mm:ss"/></td>
 									<td><c:out value="${note.readYn}" /></td>
 									<td>
 										<!-- 삭제 버튼 -->
@@ -66,6 +67,7 @@
          ordering : true,
          paging : true
       }); */
+      
       $('#send-btn').click(function() {
          var recipientName = $('#recipient-name').val();
          var messageText = $('#message-text').val();
@@ -90,6 +92,9 @@
          });
       });
    });
+   function sendMessage(empNo){
+ 	  alert(empNo);
+   }
 </script>
 
 <jsp:include page="/WEB-INF/views/common/footer.jsp" />

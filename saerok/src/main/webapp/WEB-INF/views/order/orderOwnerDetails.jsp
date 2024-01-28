@@ -148,20 +148,43 @@
 		</div>
 		
         <c:if test="${orderStatus == '대기중'}">
-        <div class="button-group">
+         <div class="button-group">
             <button id="cancelOrderButton" class="custom-btn btn-reject">발주 취소하기</button>
-        </div>
-    </c:if>
+        </div> 
+    	</c:if>
+    	
 	</div>
 	
 	
-</script>
+
 	<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
 	<script
 		src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
 	<script
 		src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
 
+
+
+ <script>
+        $(document).ready(function() {
+            $('#cancelOrderButton').click(function() {
+                const orderId = $(this).data('order-id'); // 발주 ID 추출 방식에 맞게 조정 필요
+                if (confirm('발주를 취소하시겠습니까?')) {
+                    $.ajax({
+                        url: `${path}/owner/order/cancel/${orderId}`,
+                        type: 'POST',
+                        success: function(response) {
+                            alert('발주가 취소되었습니다.');
+                            location.reload();
+                        },
+                        error: function(error) {
+                            alert('오류가 발생했습니다. 다시 시도해 주세요.');
+                        }
+                    });
+                }
+            });
+        });
+    </script>
 
 </body>
 </html>

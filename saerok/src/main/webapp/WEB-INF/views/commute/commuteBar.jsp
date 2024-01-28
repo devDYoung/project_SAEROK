@@ -155,7 +155,8 @@ document.querySelector('#endBtn').addEventListener('click', function () {
 	$.ajax({
 		   url : '${path }/commute/workOut.do',
 		   method : 'POST',
-		   success(data){
+/* 		   contentType : "application/json; charset=utf-8",
+ */		   success(data){
 			   console.log(data);
 			   
 			   if(data.status === "퇴근"){
