@@ -7,7 +7,8 @@
 <c:set var="path" value="${pageContext.request.contextPath}" />
 <c:set var="loginEmployee"
 	value="${sessionScope.SPRING_SECURITY_CONTEXT.authentication.principal }" />
-
+<script
+		src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 <div class="all-container app-dashboard-body-content off-canvas-content"
 	data-off-canvas-content>
 	<div class="page-wrapper">
@@ -67,57 +68,58 @@
 	</div>
 
 	<script>
-window.addEventListener('load', function(){
-	
-	getStartAndEndDateOfWeek();
-	
-    $.ajax({
- 	   url : '${path }/commute/commute.do',
- 	   method:'GET',
- 	   contentType : "application/json; charset=utf-8",
- 	   success(data){
- 		   console.log(data);
- 		   if(data){
- 			   const {commuteNo,inDtime,outDtime,overtime,workingDay,status,lateYN,empNo,workingHours} = data[0];
- 			   var starttime = new Date(inDtime);
- 			   var endtime = new Date(outDtime);
- 			   
- 			   //하루 근무시간 계산
- 			   var daytimes = endtime-starttime; //
- 			   console.log(daytimes);
- 			   
- 			   const workStatus = document.querySelector("#work-status");
- 			  workStatus.textContent = status;
- 			   
- 			   
- 			   if(inDtime){
- 				 var hours = (starttime.getHours()); 
-                 var minutes = starttime.getMinutes();
-                 var seconds = starttime.getSeconds();
-                 var startWorkTime = `\${hours < 10 ? '0' + hours : hours}:\${minutes < 10 ? '0'+minutes : minutes}:\${seconds < 10 ? '0'+seconds : seconds}`;
-                 // 출근시간 정보 출력
-                 document.querySelector('#startwork-time').textContent = startWorkTime;
- 			   }
- 			   
- 			   if(outDtime){
-  				  var hours = (endtime.getHours()); 
-                  var minutes = endtime.getMinutes();
-                  var seconds = endtime.getSeconds();
-                  var endWorkTime = `\${hours < 10 ? '0' + hours : hours}:\${minutes < 10 ? '0'+minutes : minutes}:\${seconds < 10 ? '0'+seconds : seconds}`;
-                  // 퇴근시간 정보 출력
- 				  document.querySelector('#endwork-time').textContent = endWorkTime;
- 			   }
- 			   
- 			  /*  if(daytimes > 0){
- 				   //하루 근무시간 update
- 				  updateWorkTime(daytimes);
- 			   }  */
- 		   }
- 	   },
- 	   error : console.log
-    });
-   
-});
+	window.addEventListener('load', function(){
+
+	    getStartAndEndDateOfWeek();
+
+	    $.ajax({
+	        url : '${path }/commute/commute.do',
+	        method:'GET',
+	        success(data){
+	            console.log(data);
+	            if(data && data[0]){
+	                const {commuteNo,inDtime,outDtime,overtime,workingDay,status,lateYN,empNo,workingHours} = data[0];
+	                var starttime = new Date(inDtime);
+	                var endtime = new Date(outDtime);
+
+	                //하루 근무시간 계산
+	                var daytimes = endtime-starttime; //
+	                console.log(daytimes);
+
+	                const workStatus = document.querySelector("#work-status");
+	                workStatus.textContent = status;
+
+	                if(inDtime){
+	                    var hours = (starttime.getHours()); 
+	                    var minutes = starttime.getMinutes();
+	                    var seconds = starttime.getSeconds();
+	                    var startWorkTime = `\${hours < 10 ? '0' + hours : hours}:\${minutes < 10 ? '0'+minutes : minutes}:\${seconds < 10 ? '0'+seconds : seconds}`;
+	                    // 출근시간 정보 출력
+	                    document.querySelector('#startwork-time').textContent = startWorkTime;
+	                }
+
+	                if(outDtime){
+	                    var hours = (endtime.getHours()); 
+	                    var minutes = endtime.getMinutes();
+	                    var seconds = endtime.getSeconds();
+	                    var endWorkTime = `\${hours < 10 ? '0' + hours : hours}:\${minutes < 10 ? '0'+minutes : minutes}:\${seconds < 10 ? '0'+seconds : seconds}`;
+
+	                    // 퇴근시간 정보 출력
+	                    document.querySelector('#endwork-time').textContent = endWorkTime;
+	                }
+
+	                /*  if(daytimes > 0){
+	                    //하루 근무시간 update
+	                   updateWorkTime(daytimes);
+	                }  */
+	            }
+	        },
+	        error(jqXHR, textStatus, errorThrown) {
+	            console.error("AJAX Error: ", textStatus, ", ", errorThrown);
+	        }
+	    });
+	});
+
 
 
 
@@ -127,7 +129,6 @@ document.querySelector('#startBtn').addEventListener('click', function () {
 	$.ajax({
 		   url : '${path }/commute/workIn.do',
 		   method : 'POST',
-		   contentType : "application/json; charset=utf-8",
 		   success(data){
 				console.log(data);
 		       if(data.status === "출근"){
@@ -269,5 +270,4 @@ function changeWorkTime(times){
 
 
 </script>
-	<script
-		src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+	
