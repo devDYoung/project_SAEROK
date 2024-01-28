@@ -77,8 +77,8 @@
 	        method:'GET',
 	        success(data){
 	            console.log(data);
-	            if(data && data[0]){
-	                const {commuteNo,inDtime,outDtime,overtime,workingDay,status,lateYN,empNo,workingHours} = data[0];
+	            if(data && data[0] !== null && typeof data[0] === 'object'){
+	                const {commuteNo, inDtime, outDtime, overtime, workingDay, status, lateYN, empNo, workingHours} = data[0];
 	                var starttime = new Date(inDtime);
 	                var endtime = new Date(outDtime);
 
@@ -229,7 +229,6 @@ function getStartAndEndDateOfWeek() {
 $.ajax({
 	  url : "${path }/commute/weekTotalTime.do",
 	  data: { start, end },
-	  contentType : "application/json; charset=utf-8",
 	  success(data){
 		  console.log("Success", data);
 		  const {totalMonthOverTime ,totalMonthTime, weekOverTime ,weekTotalTime} = data;
