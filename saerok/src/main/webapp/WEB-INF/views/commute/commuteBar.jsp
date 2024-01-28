@@ -177,8 +177,12 @@ document.querySelector('#endBtn').addEventListener('click', function () {
                 return;
             }
         },
-        error: function (error) {
-            console.log("퇴근 요청 중 에러", error);
+        error: function (xhr, status, error) {
+            console.log("퇴근 요청 중 에러");
+            console.error(xhr);
+            console.error(status);
+            console.error(error);
+
         }
     });
 });
