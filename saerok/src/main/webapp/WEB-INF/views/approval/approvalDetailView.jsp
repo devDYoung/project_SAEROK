@@ -75,12 +75,12 @@ ${approvalDetailView}
 }
 </style>
 <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
-
-
+<img
+	src="https://approval.office.hiworks.com/gabia.biz/approval/sign/approval/A/2/87786"
+	style="width: auto; height: auto; max-width: none;" alt="아이콘">
 
 
 <form class="documentForm" name="basicForm"
-	action="${path }/approval/insertAppLetter.do" method="POST"
 	enctype="multipart/form-data">
 	<input type="hidden" name="loginEmp" value="${loginEmployee.empNo }">
 	<div id="documentForm " class="documentForm"
@@ -92,7 +92,8 @@ ${approvalDetailView}
 						style="width: 300px; height: 140px; font-size: 40px; font-weight: 600;">품
 						의 서</td>
 					<td rowspan="3"
-						style="width: 20px; padding-top: 30px; font-size: 25px;">결 재</td>
+						style="width: 20px; padding-top: 30px; font-size: 25px;">결 재
+					</td>
 					<c:forEach var="apvLine"
 						items="${approvalDetailView.apvWriter.stream()
 				    .sorted((e,e2)->e2.getWriterList()-e.getWriterList()).toList() }">
@@ -103,48 +104,41 @@ ${approvalDetailView}
 				</tr>
 
 				<tr>
-				    <c:forEach var="writer" items="${approvalDetailView.apvWriter.stream()
+					<c:forEach var="writer"
+						items="${approvalDetailView.apvWriter.stream()
 				        .sorted((e,e2)->e2.getWriterList()-e.getWriterList()).toList() }">
-				        <td>
-				            <c:if test="${writer.apvEmpNo eq loginEmployee.empNo }">
-				                <c:if test="${approvalDetailView.apvWriter.stream()
+						<td><c:if test="${writer.apvEmpNo eq loginEmployee.empNo }">
+								<c:if
+									test="${approvalDetailView.apvWriter.stream()
 				                                .filter(e->e.getWriterList()>writer.getWriterList())
 				                                .allMatch(e->e.getApvState()==300).orElse(true)}">
-				                    <!-- 결재 버튼을 누르면 모달 창을 띄움 -->
-				                    <input type="button" id="apv1" value="결재" onclick="showModal();" />
-				                    <!-- 모달 창 -->
-				                    <div id="myModal" class="modal">
-									  <div class="modal-content">
-									    <h2>결재</h2>
-									    <p>결재하시겠습니까?</p>
-									    <div class="button-container">
-									      <button onclick="approve()" class="btn approve">승인</button>
-									      <button onclick="showRejectModal()" class="btn reject">반려</button>
-									      <button onclick="cancel()" class="btn cancel">취소</button>
-									    </div>
-									  </div>
+									<!-- 결재 버튼을 누르면 모달 창을 띄움 -->
+									<input type="button" id="apv1" value="결재"
+										onclick="showModal();" />
+									<!-- 모달 창 -->
+									<div id="myModalApv" class="modal">
+										<div class="modal-content">
+											<h2>결재</h2>
+											<p>결재하시겠습니까?</p>
+											<div class="button-container">
+												<button onclick="aprv()" class="btn approve">승인</button>
+												<button onclick="reject()" class="btn reject">반려</button>
+												<button onclick="cancel()" class="btn cancel">취소</button>
+											</div>
+										</div>
 									</div>
 									<div id="rejectModal" class="modal">
-									  <div class="modal-content">
-									    <h2>반려</h2>
-									    <p>반려 사유를 입력하시오.</p>
-									    <textarea id="returnReason" rows="4" cols="50"></textarea>
-									    <button onclick="reject()" class="btn reject">확인</button>
-									  </div>
+										<div class="modal-content">
+											<h2>반려</h2>
+											<p>반려 사유를 입력하시오.</p>
+											<textarea id="returnReason" rows="4" cols="50"></textarea>
+											<button onclick="reject()" class="btn reject">확인</button>
+										</div>
 									</div>
-									
-									<!-- 승인 모달 창 -->
-									<div id="approveModal" class="modal">
-									  <div class="modal-content">
-									    <h2>승인 완료</h2>
-									    <p>승인이 완료되었습니다.</p>
-									    <img id="stamp" src="${path }/img/approval.png" alt="Image Approval" />
-									  </div>
-									</div>
-				                </c:if>
-				            </c:if>
-				        </td>
-				    </c:forEach>
+
+								</c:if>
+							</c:if></td>
+					</c:forEach>
 				</tr>
 				<tr>
 					<td colspan="2" style="color: black; height: 70px;">수신참조자</td>
@@ -180,6 +174,7 @@ ${approvalDetailView}
 						class="custom-file-input" name="upFileView" style="display: none;"
 						id="fileDownloadLink" value="${approvalDetailView.oriFileName}"
 						readonly /></td>
+
 				</tr>
 				<tr>
 					<td style="color: black; height: 70px; width: 300px;">상세내용</td>
@@ -221,29 +216,69 @@ ${approvalDetailView}
 	</div>
 </form>
 
+
 <script>
 function showModal() {
-  document.getElementById("myModal").style.display = "block";
+    document.getElementById("myModalApv").style.display = "block";
 }
 
 function showRejectModal() {
-  document.getElementById("myModal").style.display = "none";
-  document.getElementById("rejectModal").style.display = "block";
+    document.getElementById("myModalApv").style.display = "none";
+    document.getElementById("rejectModal").style.display = "block";
 }
 
-function approve() {
-  document.getElementById("myModal").style.display = "none";
-  document.getElementById("approveModal").style.display = "block";
+function aprv() {
+    // AJAX를 사용하여 서버에 승인을 전송
+    $.ajax({
+        type: "POST",
+        url: "${path}/updateApprovalStatus",
+        data: {
+            appSeq: "${approvalDetailView.appSeq}", // 결재 문서 번호
+            apvState: "승인"
+        },
+        success: function(response) {
+            // 성공 시 처리
+            console.log("승인 성공");
+            // 추가적으로 필요한 처리 로직 작성
+        },
+        error: function(error) {
+            // 실패 시 처리
+            console.error("승인 실패");
+            // 추가적으로 필요한 처리 로직 작성
+        }
+    });
+
+    // 모달 창 숨기기
+    document.getElementById("myModalApv").style.display = "none";
 }
 
 function reject() {
-  var reason = document.getElementById("returnReason").value;
-  alert("결재가 반려되었습니다. 반려 사유: " + reason);
-  document.getElementById("rejectModal").style.display = "none";
-}
+    // 반려 사유를 가져와서 처리하는 로직 추가
+    var returnReason = document.getElementById("returnReason").value;
 
-function cancel() {
-  document.getElementById("myModal").style.display = "none";
+    // AJAX를 사용하여 서버에 반려 사유를 전송
+    $.ajax({
+        type: "POST",
+        url: "${path}/updateApprovalStatus",
+        data: {
+            appSeq: "${approvalDetailView.appSeq}", // 결재 문서 번호
+            apvState: "반려",
+            returnReason: returnReason
+        },
+        success: function(response) {
+            // 성공 시 처리
+            console.log("반려 성공");
+            // 추가적으로 필요한 처리 로직 작성
+        },
+        error: function(error) {
+            // 실패 시 처리
+            console.error("반려 실패");
+            // 추가적으로 필요한 처리 로직 작성
+        }
+    });
+
+    // 모달 창 숨기기
+    document.getElementById("rejectModal").style.display = "none";
 }
 </script>
 

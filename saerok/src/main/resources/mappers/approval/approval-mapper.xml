@@ -201,8 +201,52 @@
         JOIN DEPARTMENT d ON E.DEPT_CODE =d.DEPT_CODE 
         JOIN ATO_JOB aj ON E.JOB_CODE =aj.JOB_CODE 
     WHERE
-        t1.APPSEQ = ${appSeq}
+        t1.APPSEQ = #{appSeq}
 	</select>
+   
+  <!-- 승인 또는 반려 업데이트 쿼리 -->
+	<update id="updateApprovalStatus" parameterType="java.util.Map">
+	    UPDATE APV_WRITER
+	    SET APV_STATE =
+	        <choose>
+	            <when test="#apvState == '승인'">
+	                '300'
+	            </when>
+	            <when test="#apvState == '반려'">
+	                '200'
+	            </when>
+	        </choose>,
+	    APV_EMP_TIME =
+	        <choose>
+	            <when test="#apvState == '승인'">
+	                SYSDATE
+	            </when>
+	            <otherwise>
+	                null
+	            </otherwise>
+	        </choose>,
+	    RETURN_TIME =
+	        <choose>
+	            <when test="#apvState == '반려'">
+	                SYSDATE
+	            </when>
+	            <otherwise>
+	                null
+	            </otherwise>
+	        </choose>,
+	    RETURN_REASON =
+	        <choose>
+	            <when test="#apvState == '반려'">
+	                #{returnReason}
+	            </when>
+	            <otherwise>
+	                null
+	            </otherwise>
+	        </choose>
+	    WHERE APPSEQ = #{appSeq} AND EMP_NO = #{empNo}
+	</update>
+
+
    
    
    
