@@ -4,73 +4,67 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
-<c:set var="path" value="${pageContext.request.contextPath}" />
+<c:set var="path" value="${pageContext.request.contextPath}"/>
 <c:set var="loginEmployee"
-	value="${sessionScope.SPRING_SECURITY_CONTEXT.authentication.principal }" />
+	value="${sessionScope.SPRING_SECURITY_CONTEXT.authentication.principal }"/>
 <jsp:include page="/WEB-INF/views/common/header.jsp">
 	<jsp:param value="CommuteMain" name="ATO" />
 </jsp:include>
-<jsp:include page="/WEB-INF/views/commute/commuteBar.jsp" />
+<jsp:include page="/WEB-INF/views/commute/commuteBar.jsp" />  
 <script
 	src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-<script src="${path }/resources/js/emp.js"></script>
-<link rel="stylesheet" href="${path }/resources/css/emp.css">
-<style>
-#work-week-container {
-	text-align: center;
-	width: 900px; /* 원하는 너비 값으로 조절 */
-	margin: 0 auto; /* 가운데 정렬을 위해 필요한 부분 */
-}
+ <link rel="stylesheet" href="${path }/resources/css/emp.css">
+ <style>
+    #work-week-container {
+        text-align: center;
+        width: 900px; /* 원하는 너비 값으로 조절 */
+        margin: 0 auto; /* 가운데 정렬을 위해 필요한 부분 */
+    }
+    #work-week-container > div {
+        margin: 0 10px;
+    }
+</style>	
+  <div class="home-container" class="div-padding div-margin page-wrapper">
+                    <!-- <div class="div-padding"> -->
+                        <div id="date-box">
+                            <h4>
+                                <button id="prev-btn"><i class="fas fa-chevron-left"></i></button>
+                                <span id="date-text">2023.12</span>
+                                <button id="next-btn"><i class="fas fa-chevron-right"></i></button>
+                            </h4>
+                        </div>
 
-#work-week-container>div {
-	margin: 0 10px;
-}
-</style>
-<div class="home-container" class="div-padding div-margin page-wrapper">
-	<!-- <div class="div-padding"> -->
-	<div id="date-box">
-		<h4>
-			<button id="prev-btn">
-				<i class="fas fa-chevron-left"></i>
-			</button>
-			<span id="date-text">2023.12</span>
-			<button id="next-btn">
-				<i class="fas fa-chevron-right"></i>
-			</button>
-		</h4>
-	</div>
+                        <div id="work-week-container">
+                            <div id="work-week-time">
+                                <div>
+                                    <p class="font-14">이번주 누적</p>
+                                    <h4 class="main-color" id="main-totalwork-time">0h 0m 0s</h4>
+                                </div>
+                                <div>
+                                    <p class="font-14">이번주 초과</p>
+                                    <h4 class="main-color" id="main-week-over-time">0h 0m 0s</h4>
+                                </div>
+                                <div>
+                                    <p class="font-14">이번주 잔여</p>
+                                    <h4 class="main-color" id="main-work-time">40h 0m 0s</h4>
+                                </div>
+                                <div>
+                                    <p class="font-14">이번달 누적</p>
+                                    <h4 class="color-gray" id="main-month-work-time">0h 0m 0s</h4>
+                                </div>
+                                <div>
+                                    <p class="font-14">이번달 연장</p>
+                                    <h4 class="color-gray" id="main-month-over-time">0h 0m 0s</h4>
+                                </div>
+                            </div>
+                        </div>
 
-	<div id="work-week-container">
-		<div id="work-week-time">
-			<div>
-				<p class="font-14">이번주 누적</p>
-				<h4 class="main-color" id="main-totalwork-time">0h 0m 0s</h4>
-			</div>
-			<div>
-				<p class="font-14">이번주 초과</p>
-				<h4 class="main-color" id="main-week-over-time">0h 0m 0s</h4>
-			</div>
-			<div>
-				<p class="font-14">이번주 잔여</p>
-				<h4 class="main-color" id="main-work-time">40h 0m 0s</h4>
-			</div>
-			<div>
-				<p class="font-14">이번달 누적</p>
-				<h4 class="color-gray" id="main-month-work-time">0h 0m 0s</h4>
-			</div>
-			<div>
-				<p class="font-14">이번달 연장</p>
-				<h4 class="color-gray" id="main-month-over-time">0h 0m 0s</h4>
-			</div>
-		</div>
-	</div>
+                        <div id="work-info-container"></div>
 
-	<div id="work-info-container"></div>
-
-</div>
-</div>
-
-<script>
+                    </div>
+                </div>
+     
+	<script>
         window.addEventListener('load',()=>{
                 sendData();
                 weekTimes();
@@ -109,6 +103,7 @@
                      $.ajax({
                         url : "${path }/commute/selectMonthWork.do",
                         data : {dateText},
+                        contentType : "application/json; charset=utf-8",
                         success(data){
                             console.log(data);
                             const {weekDates, workList} = data;
@@ -303,6 +298,7 @@
     	$.ajax({
     		  url : "${path }/commute/weekTotalTime.do",
     		  data: { start, end },
+    		  contentType : "application/json; charset=utf-8",
     		  success(data){
     			  console.log("Success", data);
     			  const {totalMonthOverTime ,totalMonthTime, weekOverTime ,weekTotalTime} = data;
@@ -406,5 +402,5 @@ function changeWorkTimeNew(inDtime, outDtime) {
 
     </script>
 
-
+<script src="${path }/resources/js/emp.js"></script>
 <jsp:include page="/WEB-INF/views/common/footer.jsp" />

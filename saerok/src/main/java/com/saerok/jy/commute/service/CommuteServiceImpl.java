@@ -13,7 +13,7 @@ import com.saerok.jy.commute.dao.CommuteDao;
 import com.saerok.jy.commute.dto.Commute;
 
 @Service
-@Repository
+//@Repository
 public class CommuteServiceImpl implements CommuteService {
 
 	@Autowired

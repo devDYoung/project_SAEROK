@@ -7,8 +7,7 @@
 <c:set var="path" value="${pageContext.request.contextPath}" />
 <c:set var="loginEmployee"
 	value="${sessionScope.SPRING_SECURITY_CONTEXT.authentication.principal }" />
-<script
-	src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+
 <div class="all-container app-dashboard-body-content off-canvas-content"
 	data-off-canvas-content>
 	<div class="page-wrapper">
@@ -152,40 +151,35 @@ document.querySelector('#startBtn').addEventListener('click', function () {
 	
 //퇴근하기 버튼 누를시
 document.querySelector('#endBtn').addEventListener('click', function () {
-    console.log("퇴근 버튼 클릭");
-    
-    $.ajax({
-        url: '${path}/commute/workOut.do',
-        method: 'POST',
-        success: function (data) {
-            console.log("퇴근 성공", data);
-
-            if (data.status === "퇴근") {
-                alert("퇴근 성공입니다.");
-                location.reload();
-            } else if (data.status === '출근전') {
-                alert("출근전입니다.");
-                return;
-            } else if (data.status === '출장') {
-                alert("출장시에는 자동으로 퇴근처리됩니다.");
-                return;
-            } else if (data.status === '연차') {
-                alert("연차중입니다.");
-                return;
-            } else {
-                alert("이미 퇴근하셨습니다.");
-                return;
-            }
-        },
-        error: function (xhr, status, error) {
-            console.log("퇴근 요청 중 에러");
-            console.error(xhr);
-            console.error(status);
-            console.error(error);
-
-        }
-    });
-});
+	
+	$.ajax({
+		   url : '${path }/commute/workOut.do',
+		   method : 'POST',
+/* 		   contentType : "application/json; charset=utf-8",
+ */		   success(data){
+			   console.log(data);
+			   
+			   if(data.status === "퇴근"){
+		           alert("퇴근 성공입니다.");
+		            location.reload();
+		       }else if(data.status === '출근전'){
+		    	   alert("출근전입니다.");
+		    	   return;
+		       }else if(data.status === '출장'){
+		    	   alert("출장시에는 자동으로 퇴근처리됩니다.");
+		    	  return;
+		       }else if(data.status === '연차'){
+		    	   alert("연차중입니다.");
+		    	   return;
+		       }
+		       else{
+		           alert("이미 퇴근하셨습니다.");
+	                return;
+		       }
+			},
+		   error : console.log
+	   });
+	});
 
 
 const updateWorkTime = (daytimes) =>{
@@ -234,6 +228,7 @@ function getStartAndEndDateOfWeek() {
 $.ajax({
 	  url : "${path }/commute/weekTotalTime.do",
 	  data: { start, end },
+	  contentType : "application/json; charset=utf-8",
 	  success(data){
 		  console.log("Success", data);
 		  const {totalMonthOverTime ,totalMonthTime, weekOverTime ,weekTotalTime} = data;
@@ -274,3 +269,5 @@ function changeWorkTime(times){
 
 
 </script>
+	<script
+		src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
