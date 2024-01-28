@@ -1,374 +1,362 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+    pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
-<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
-<c:set var="path" value="${pageContext.request.contextPath}" />
-<c:set var="loginEmployee"
-	value="${sessionScope.SPRING_SECURITY_CONTEXT.authentication.principal }" />
+<c:set var="path" value="${pageContext.request.contextPath}"/>
+   
+
 <jsp:include page="/WEB-INF/views/common/header.jsp">
-	<jsp:param value="CommuteMain" name="ATO" />
+   <jsp:param name="title" value=""/>
 </jsp:include>
-<jsp:include page="/WEB-INF/views/commute/commuteBar.jsp" />  
-<script
-	src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
- <link rel="stylesheet" href="${path }/resources/css/emp.css">
- <style>
-    #work-week-container {
-        text-align: center;
-        width: 900px; /* 원하는 너비 값으로 조절 */
-        margin: 0 auto; /* 가운데 정렬을 위해 필요한 부분 */
+<style>
+    table {
+        width: 100%;
+        table-layout: fixed;
+        border-collapse: collapse;
     }
-    #work-week-container > div {
-        margin: 0 10px;
+    th,
+    td {
+        border: 1px solid black;
+        padding: 15px;
+        text-align: left;
+    }
+    th {
+        background-color: #f2f2f2;
     }
 </style>
-  <div class="home-container" class="div-padding div-margin page-wrapper">
-                    <!-- <div class="div-padding"> -->
-                        <div id="date-box">
-                            <h4>
-                                <button id="prev-btn"><i class="fas fa-chevron-left"></i></button>
-                                <span id="date-text">2023.12</span>
-                                <button id="next-btn"><i class="fas fa-chevron-right"></i></button>
-                            </h4>
-                        </div>
-
-                        <div id="work-week-container">
-                            <div id="work-week-time">
-                                <div>
-                                    <p class="font-14">이번주 누적</p>
-                                    <h4 class="main-color" id="main-totalwork-time">0h 0m 0s</h4>
-                                </div>
-                                <div>
-                                    <p class="font-14">이번주 초과</p>
-                                    <h4 class="main-color" id="main-week-over-time">0h 0m 0s</h4>
-                                </div>
-                                <div>
-                                    <p class="font-14">이번주 잔여</p>
-                                    <h4 class="main-color" id="main-work-time">40h 0m 0s</h4>
-                                </div>
-                                <div>
-                                    <p class="font-14">이번달 누적</p>
-                                    <h4 class="color-gray" id="main-month-work-time">0h 0m 0s</h4>
-                                </div>
-                                <div>
-                                    <p class="font-14">이번달 연장</p>
-                                    <h4 class="color-gray" id="main-month-over-time">0h 0m 0s</h4>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div id="work-info-container"></div>
-
+<div class="content-wrapper">
+    <div class="container-full">
+        <!-- Content Header (Page header) -->
+        <div class="content-header">
+            <div class="d-flex align-items-center">
+                <div class="me-auto">
+                    <h4 class="page-title">Editors</h4>
+                    <div class="d-inline-block align-items-center">
+                        <nav>
+                            <ol class="breadcrumb">
+                                <li class="breadcrumb-item"><a href="#"><i class="mdi mdi-home-outline"></i></a></li>
+                                <li class="breadcrumb-item" aria-current="page">Forms</li>
+                                <li class="breadcrumb-item active" aria-current="page">Editors</li>
+                            </ol>
+                        </nav>
                     </div>
                 </div>
-     
-	<script>
-        window.addEventListener('load',()=>{
-                sendData();
-                weekTimes();
-        });
-        
-        let currentDate = new Date();
+            </div>
+        </div>
+        <!-- Main content -->
+        <section class="content">
+            <div class="row">
+                <div class="col-12">
+                    <div class="box">
+                        <div class="box-header">
+                            <h3>결재문서</h3>
+                            <div class="row">
+                                <div class="col-md-12 col-12">
+                                 <div class="table table-bordered mb-0">
+                                                <table style="border: 1px solid black; " id="aprvtable">
+                                                    <tr style="background-color: #f2f2f2; ">
+                                                        <td rowspan="4" style="text-align: center;">결재</td>
+                                                    </tr>
+                                                    <tr style="background-color: #f2f2f2;" id="name">
+                                           <c:forEach var="doc" items="${docu}">
+                                               <c:if test="${doc.APRV_LV ne 99}">
+                                                   <td><c:out value="${doc.EMP_NAME}"/></td>
+                                               </c:if>
+                                           </c:forEach>
+                                       </tr>
+                                       <tr style="height: 120px;" id="empty">
+                                           <c:forEach var="doc" items="${docu}">
+                                              <c:if test="${doc.APRV_LV ne 99}">
+                                                  <c:if test="${doc.APRV_SQ == 1}">
+                                                  <td style="text-align: center; vertical-align: middle;">
+                                                       <img src="https://approval.office.hiworks.com/gabia.biz/approval/sign/approval/A/2/87786" 
+                                                           style="width: 70%; height: auto; max-width: none;" 
+                                                           alt="아이콘">
+                                                       <p style="color: gray; margin: 0;"><fmt:formatDate value="${doc.APRV_DATE }" pattern="yyyy-MM-DD"/></p>
+                                                   </td>
+                                                                                                     
+                                                  
+                                               
+                                                  </c:if>
+                                                  <c:if test="${doc.APRV_SQ == 0}">
+                                                      <td id="APRV_EMP">
+                                                          <c:if test="${doc.APRV_EMP eq user.empNo}">
+                                                              <button type="button" class="btn btn-primary" id="targetbtn">
+                                                                           결재
+                                                                       </button>
+                                                          </c:if>
+                                                      </td>
+                                                  </c:if>
+                                                  <c:if test="${doc.APRV_SQ == -1}">
+                                                      <td>
+                                                          <img src="https://approval.office.hiworks.com/gabia.biz/approval/sign/approval/A/4/87789" 
+                                                              style="width: 100%; height: 100%"
+                                                              alt="아이콘">
+                                                      </td>
+                                                  </c:if>
+                                              </c:if>
+                                          </c:forEach>
 
-            function setCurrentDate() {
-                const dateText = document.getElementById("date-text");
-                const year = currentDate.getFullYear();
-                const month = currentDate.getMonth() + 1;
-                const monthText = month < 10 ? `0\${month}` : month;
-                dateText.textContent = `\${year}.\${monthText}`;
-            }
+                                       </tr>
+                                       <tr id="emplv">
+                                           <c:forEach var="doc" items="${docu}">
+                                               <c:if test="${doc.APRV_LV ne 99}">
+                                                   <td><c:out value="${doc.EMP_LV}"/></td>
+                                               </c:if>
+                                           </c:forEach>
+                                       </tr>
 
-            setCurrentDate();
 
-            document.getElementById("prev-btn").addEventListener("click", () => {
-                    currentDate.setMonth(currentDate.getMonth() - 1);
-                    setCurrentDate();
-                     sendData();
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-12 col-12" style="display: flex">
+                                        <div class="box-header" style="display: flex" id="singleTag">
+                                            <h4>
+                                                참조자 
+                                            </h4>
+                                            &nbsp;
+                                            <c:forEach var="doc" items="${docu}">
+                              <c:if test="${doc.APRV_LV eq 99}">
+                                  <c:if test="${doc.APRV_EMP eq user.empNo}">
+                                         <p>
+                                          <c:out value="${doc.EMP_LV }"/>
+                                          <c:out value="${doc.EMP_NAME }"/>
+                                         
+                                          <c:if test="${doc.APRV_SQ eq 0}"> 
+                                             <button type="button" class="btn btn-primary" onclick="read();">확인</button>
+                                             <input type="hidden" value="${doc.APRV_LV }" name="APRV_LV">
+                                             &nbsp;
+                                          </c:if>
+                                        
+                                        <c:if test="${doc.APRV_SQ eq 1}">
+                                               <img style="width: 7px;height: 7px;" alt="check" src="https://approval.office.hiworks.com/gabia.biz/approval/sign/approval/F/2">
+                                        </c:if>
+                                        <p>
+                                  </c:if>
+                                  <c:if test="${doc.APRV_EMP ne user.empNo}">
+                                      <p id="taget-reader">
+                                          &nbsp;
+                                          <c:out value="${doc.EMP_LV }"/>
+                                          <c:out value="${doc.EMP_NAME }"/>  
+                               
+                                          <c:if test="${doc.APRV_SQ eq 1}">
+                                               <img alt="check" src="https://approval.office.hiworks.com/gabia.biz/approval/sign/approval/F/2   ">
+                                        </c:if>
+                                        &nbsp;   
+                                      </p>
+                                  </c:if>
+                              </c:if>
+
+                              </c:forEach>                                     
+                                        </div>
+                                    </div>
+                             </div>                        
+                                    <div class="box">
+                                        <div class="box-header">
+                                            
+                                   <c:if test="${docu[0]['DOC_TAG'] eq 1}" >
+                                      
+                              </div>
+                                         <div class="box-body">
+                                                        <table>
+                        <thead>
+                            <th colspan="2"><h1 style="text-align: center;">휴가신청서</h1></th>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>성명</td>
+                                <td>${docu[0]['EMP_NAME']}</td>
+                            </tr>
+                            
+                <tr>
+                    <td>기간</td>
+                    <td >
+                    <p id="startDate"></p>
+                       <fmt:formatDate value="${docu[0]['START_DATE']}" pattern="yyyy-MM-DD"/>
                     
-            });
-
-                document.getElementById("next-btn").addEventListener("click", () => {
-                    currentDate.setMonth(currentDate.getMonth() + 1);
-                    setCurrentDate();
-                    sendData();
-            });
-                
-                // ajax 호출
-                function sendData() {
-                    const dateText = document.getElementById("date-text").textContent;
-                    const container = document.querySelector("#work-info-container");
-                    container.innerHTML = "";
-                     $.ajax({
-                        url : "${path }/commute/selectMonthWork.do",
-                        data : {dateText},
-                        contentType : "application/json; charset=utf-8",
-                        success(data){
-                            console.log(data);
-                            const {weekDates, workList} = data;
-                            console.log("weekDates", weekDates);
-                            console.log("workList", workList);
+                    <p id="endDate"></p>
+                       <fmt:formatDate value="${docu[0]['END_DATE']}" pattern="yyyy-MM-DD"/>
+                    </td>
+                </tr>
+                <tr>
+                    <td>휴가종류</td>
+                    <td>${docu[0]['DOC_TITLE']}</td>
+                </tr>
+                <tr>
+                    <td>휴가사유</td>
+                    
+                    <td><c:out value="${textData}"/></td>
+                </tr>
+                <tr style="height: 500px">
+                    <td colspan="2" style="text-align: center;">상기와 같은 이유로 휴가를 신청합니다.<br><br><br><br><br><br>
+                      <fmt:formatDate value="${docu[0]['U_DATE']}" pattern="yyyy-MM-DD"/>
+                      </td> 
+                </tr>
+            </tbody>
+        </table>
+                                        </div> 
+                                    </div>
+                           </c:if>
+      <table>                     
+      <c:if test="${docu[0]['DOC_TAG'] eq 2}" >                     
+         <c:out value="${textData}" escapeXml="false"/>
+        </c:if>
+        </table> 
+    
+                                    
+                                    
+                                    
+                                    
+                                    
+                                  
+                                    
+                                    
+                                    
+                                    
+                                    
+                                </div>
+                            </div>
                             
-                            const container = document.querySelector("#work-info-container");
+                            <div class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true" style="display: none; width: 100%">
+                <div class="modal-dialog modal-lg">
+                    <div class="modal-content" style="background-color: white;">
+                        <div class="modal-header">
+                            <h4 class="modal-title" id="myLargeModalLabel">결재하기</h4>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" id="myBtn"></button>
+                        </div>
+                        <div class="modal-body">
+                                <h3>결재하면 수정하실수없습니다 정말 결재하시겠습니까?</h3>
+                            <div id="flex-cotainer" style="display: flex">
+                                
+                                <button type="button" class="btn btn-danger text-start"  onclick="aprv();"> 결재 </button>
+                                
+                                <button type="button" class="btn btn-danger text-start"  onclick="reject();"> 반려 </button>
+                                
+                                <button type="button" class="btn btn-danger text-start" data-bs-dismiss="modal"> 닫기 </button>
+                                
+                                
+                            </div>
                             
-                            const table = document.createElement("table");
-                            table.classList.add("table-expand");
+                        </div>
+                        <!-- /.modal-content -->
+                    </div>
+                    <!-- /.modal-dialog -->
+                </div>
+                <!-- /.modal -->
+                        </div>
+                    </div>
+                    <!-- /.box -->
+                </div>
+                <!-- /.col-->
+            </div>
+            <!-- ./row -->
+  
 
-                            const tbody = document.createElement("tbody");
-    						
-                            
-                            //주간별 정보
-                            Object.keys(weekDates).sort().forEach(key  =>{
-      
-    	                        const row1 = document.createElement("tr");
-    	                       row1.classList.add("table-expand-row");
-    	                        row1.setAttribute("id","work-container-tr");
-    	                        row1.dataset.openDetails = "";
-    	        				row1.dataset.start = weekDates[key].start;
-    	        				row1.dataset.end = weekDates[key].end;
-    	        				
-    	        				const tbody2 = document.createElement("tbody");
-    							
-    	        				row1.onclick = (e) =>{
-    	        					const start = e.currentTarget.dataset.start;
-    	        					const end = e.currentTarget.dataset.end;
-    	        					$.ajax({
-    	        						url : "${path }/commute/selectWeekDatas.do",
-    	        						data : {start,end},
-    	        						success:(data)=>{
-    	        							console.log(data);
-    	        							if(tbody2.innerHTML==""){
-	    		        							data.forEach((datas) =>{
-	    		        								const subTr = document.createElement("tr");
-	    		        								const {empNo, outDtime, commuteNo, overtime, workingDay, inDtime, status, workingHours} = datas;
-	    		        								const subTd1 = document.createElement("td");
-	    		        								subTd1.textContent = changeWorkingDay(workingDay);
-	    		        								
-	    		        								const subTd2 = document.createElement("td");
-	    		        								subTd2.textContent = changeTimeText(inDtime);
-	    		        								
-	    		        								const subTd3 = document.createElement("td");
-	    		        								subTd3.textContent = changeTimeText(outDtime);
-	    		        								
-	    		        								const subTd4 = document.createElement("td");
-	    		        								subTd4.classList.add("font-bold");
-	    		        								//subTd4.textContent = changeWorkTime(workingHours+overtime);
-	    		        								subTd4.textContent = changeWorkTimeNew(inDtime, outDtime);
-	    		        								
-	    		        								const subTd5 = document.createElement("td");
-	    		        								subTd5.textContent = "기본 "+ changeWorkTime(workingHours) + " / 연장 " + changeWorkTime(overtime);
-	    		        								
-	    		        								const subTd6 = document.createElement("td");
-	    		        								if(status == '연차'){
-	    			        								subTd6.textContent = "완료(" + status + " 8.00h)";
-	    		        								}
-	    		        								else if(status == '반차'){
-	    		        									subTd6.textContent = "완료(" + status + " 4.00h)";
-	    		        								}
-	    		        								else{
-	    		        									subTd6.textContent = "";
-	    		        								}
-	    		        								
-	    		        								subTr.append(subTd1,subTd2,subTd3,subTd4,subTd5,subTd6);
-	    		        								tbody2.append(subTr);
-	    		        							});
-    	        							}
-    	        						},
-    	        						error :console.log
-    	        					});
-    	        				};
-    	
-    	                        const td1 = document.createElement("td");
-    	                        td1.classList.add("border-bottom", "font-18");
-    	                        td1.setAttribute("width", "400");
-    	                        td1.textContent = key;
-    	             
-    	                        const start = weekDates[key].start.substring(5);
-    	                        const end = weekDates[key].end.substring(5);
-    	                        const workTime = weekDates[key].workTime;
-    	                        const workOverTime = weekDates[key].workOverTime;
-    	                        const span = document.createElement("span");
-    	                        span.classList.add("font-14","color-gray");
-    	                        span.textContent = " ( " + start + " ~ " + end + " ) ";
-    	                        td1.append(span);
-    	                        
-    	                        const expandIcon = document.createElement("span");
-    	                        expandIcon.classList.add("expand-icon");
-    	                        td1.append(expandIcon);
-    	
-    	                        const td2 = document.createElement("td");
-    	                        td2.classList.add("total-time-info");
-    	                        td2.textContent = "누적 근무시간 " + changeWorkTime(workTime+workOverTime);
-    							const span0 = document.createElement("span");
-    							span0.classList.add("font-12","color-gray");
-    							span0.textContent = " ( 초과 근무시간 " + changeWorkTime(workOverTime) +" )";
-    							td2.append(span0);
-    	                        
-    	                        const row2 = document.createElement("tr");
-    	                        row2.classList.add("table-expand-row-content");
-    	
-    	                        const td3 = document.createElement("td");
-    	                        td3.colSpan = 6;
-    	                        td3.classList.add("table-expand-row-nested");
-    	
-    	                        const nestedTable = document.createElement("table");
-    	                        nestedTable.setAttribute("id", "date-table");
-    	
-    	                        const thead = document.createElement("thead");
-    	
-    	                        const headerRow = document.createElement("tr");
-    	
-    	                        const header1 = document.createElement("th");
-    	                        header1.setAttribute("width", "50");
-    	                        header1.textContent = "일자";
-    	
-    	                        const header2 = document.createElement("th");
-    	                        header2.setAttribute("width", "100");
-    	                        header2.textContent = "출근시간";
-    	
-    	                        const header3 = document.createElement("th");
-    	                        header3.setAttribute("width", "100");
-    	                        header3.textContent = "퇴근시간";
-    	
-    	                        const header4 = document.createElement("th");
-    	                        header4.setAttribute("width", "100");
-    	                        header4.textContent = "총근무시간";
-    	
-    	                        const header5 = document.createElement("th");
-    	                        header5.setAttribute("width", "200");
-    	                        header5.textContent = "근무시간 상세";
-    	
-    	                        const header6 = document.createElement("th");
-    	                        header6.setAttribute("width", "100");
-    	                        header6.textContent = "승인요청내역"; 
-    	
-    	                        
-    	                        headerRow.append(header1,header2,header3,header4,header5);
-    	                        thead.append(headerRow);
-    	                        nestedTable.append(thead,tbody2);
-    	                        td3.append(nestedTable);
-    	                        row2.append(td3);
-    	                        row1.append(td1,td2);
-    	                        tbody.append(row1,row2);
-    	                        
-                            });
-                            table.append(tbody);
-                            container.append(table);
+   
+<jsp:include page="/WEB-INF/views/common/footer.jsp"/>
+<script>
+const docNo = "${docNo}";
+const empNo = "${user.empNo}";
 
-                        },
-                        error:console.log
-                    }); 
-                }
-                
-    document.querySelector("#work-info-container").addEventListener('click',(e)=>{
-     
-    		$('[data-open-details]').click(function (e) {
-            	  $(this).next().toggleClass('is-active');
-            	  $(this).toggleClass('is-active');
-    		});
+
+    
+
+
+ function aprv() {
+    $.ajax({
+        type: "POST",
+        url: `${path}/docu/updateaprv`,
+        data: {
+            DOC_NO: docNo,
+            EMP_NO: empNo
+        },
+        dataType: "text",
+        success: function(response){
+           console.log(response);
+           if(response === "결재 성공") {
+                alert(response);
+                location.reload();
+            } else {
+                alert("결재 실패. 전산팀에게 문의하세요.");
+                location.reload();
+            }
+        }
+
+
     });
+}
 
-    // 시간으로 변경
-    function changeTimeText(time) {
-    	if(time !== null){
-    	  const date = new Date(time); // Epoch 시간을 한국 시간으로 변환한 Date 객체 생성
-    	  
-    	  const hours = date.getHours().toString().padStart(2, '0'); 
-    	  const minutes = date.getMinutes().toString().padStart(2, '0'); 
-    	  const seconds = date.getSeconds().toString().padStart(2, '0'); 
-    	  
-    	  return `\${hours}:\${minutes}:\${seconds}`;				
-    	}
-    }
 
-    function weekTimes(){
-    	const today = new Date();
-    	const todayDay = today.getDay(); // 오늘 날짜의 요일 (0: 일요일, 1: 월요일, ..., 6: 토요일)
+</script>
 
-    	const startDate = new Date(today); // 해당 주의 시작일
-    	startDate.setDate(startDate.getDate() - todayDay);
+<script>
+function reject() {
+    $.ajax({
+        type: "POST",
+        url: `${path}/docu/rejectAprv`,
+        data: {
+            DOC_NO: docNo,
+            EMP_NO: empNo
+        },
+        dataType: "text",
+        success: function(response){
+           console.log(response);
+           if(response === "반려 성공") {
+                alert(response);
+                location.reload();
+            } else {
+                alert("반려 실패. 전산팀에게 문의하세요.");
+                location.reload();
+            }
+        }
 
-    	const endDate = new Date(today); // 해당 주의 종료일
-    	endDate.setDate(endDate.getDate() + (6 - todayDay));
 
-    	const start = startDate.getFullYear() + "." + (startDate.getMonth() + 1) + "." + startDate.getDate();
-    	const end = endDate.getFullYear() + "." + (endDate.getMonth() + 1) + "." + endDate.getDate();
-    	  
-    	$.ajax({
-    		  url : "${path }/commute/weekTotalTime.do",
-    		  data: { start, end },
-    		  contentType : "application/json; charset=utf-8",
-    		  success(data){
-    			  console.log("Success", data);
-    			  const {totalMonthOverTime ,totalMonthTime, weekOverTime ,weekTotalTime} = data;
-    			  const mainTotalWorkTime = document.querySelector("#main-totalwork-time");
-    			  const mainWeekOverTime = document.querySelector("#main-week-over-time");
-    			  const mainWorkTime = document.querySelector("#main-work-time");
-    			  const monthWorkTime = document.querySelector("#main-month-work-time");
-    			  const monthOverTime = document.querySelector("#main-month-over-time")
-    			  
-    			  let times = 144000000 - (weekTotalTime + weekOverTime); // 40시간 - 주간 기본 근무시간
-    			  mainTotalWorkTime.textContent = changeWorkTime(weekTotalTime + weekOverTime);
-    			  mainWeekOverTime.textContent = changeWorkTime(weekOverTime);
-    			  if(times < 0){
-    				  mainWorkTime.textContent = changeWorkTime(0);
-    			  }else{
-    				  mainWorkTime.textContent = changeWorkTime(times);				  
-    			  }
-    			  monthWorkTime.textContent = changeWorkTime(totalMonthTime + totalMonthOverTime);
-    			  monthOverTime.textContent = changeWorkTime(totalMonthOverTime);
-    		  },
-    		  error(error) {
-    		        console.error("Error:", error);
-    		    }
-    		  
-    	  });
-    }
+    });
+}
 
-    // 총근무시간
-    function changeWorkTime(times){
-    	const time = times / 1000;
-    	const hours = Math.floor(time / 3600); // 시간 계산
-    	const minutes = Math.floor((time % 3600) / 60); // 분 계산
-    	const seconds = Math.floor(time % 60); // 초 계산
-    	
-    	return `\${hours}h \${minutes}m \${seconds}s`;	
-    }
+</script>
+<script>
+function read(){
+   
+   if(confirm("참조 확인하시겠습니까?")){
+      aprv();
+   }else{
+      close();
+   }
+   
+}
 
-    function changeWorkTimeNew(inDtime, outDtime) {
-    	var inDate = new Date(inDtime);
-    	var outDate = new Date(outDtime);
-    	
-    	var overDay = Math.trunc((outDate-inDate)/1000/3600/24);
-    	var overHour = Math.trunc(((outDate-inDate)/1000/3600)%24);
-    	var overMin = Math.trunc(((outDate-inDate)/1000/3600/24)%60);
-    	var overSec = Math.trunc(((outDate-inDate)/1000/3600/24/60)%60);
-    	
-    	console.log("hjhjhj", overDay, overHour, overMin, overSec);
-		
-    	return `\${overHour}h \${overMin}m \${overSec}s`;
-    }
+</script>
+<script>
+
+document.getElementById("targetbtn").addEventListener("click", function(e) {
+   $.ajax({
+       type: "POST",
+       url: `${path}/docu/checkaprvlv`,
+       data: {
+           DOC_NO: docNo,
+           EMP_NO: empNo
+       },
+       dataType: "text",
+       success: function(response){
+          console.log(response);
+          if(response === "true") {
+             $('.bs-example-modal-lg').modal('show');
+               
+           } else {
+              alert('전 결재자 결재를 안했어요');
+              e.preventDefault();
+               
+           }
+       }
+
+
+   });
     
-    // workingDay날짜 00일 (월)로 변경
-    function changeWorkingDay(workingDay) {
-     console.log("Input Date:", workingDay);
-      const day = new Date(workingDay);
-      console.log("Parsed Date:", day);
-      const year = day.getFullYear();
-      const month = day.getMonth()+1; // JavaScript의 Date 객체에서 월은 0부터 시작합니다.
-      const date = day.getDate();
-      
-      const dayOfWeekNames = ["일", "월", "화", "수", "목", "금", "토"];
-      const dayOfWeekIndex = day.getDay(); // 해당 날짜의 요일을 구합니다.
-      const dayOfWeek = dayOfWeekNames[dayOfWeekIndex]; // 요일 이름을 배열에서 찾아옵니다.
-      
-      return `\${date}일 (\${dayOfWeek})`;
-    }
     
+});
 
-
-    </script>
-
-<script src="${path }/resources/js/emp.js"></script>
-<jsp:include page="/WEB-INF/views/common/footer.jsp" />
+</script>

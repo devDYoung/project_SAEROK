@@ -110,6 +110,43 @@
 	</select>
 	
 	
+	 <!-- 주문 세부사항 삭제 -->
+    <delete id="deleteOrderDetails" parameterType="int">
+        DELETE FROM ORDER_LIST_DETAIL
+        WHERE ORDER_ID = #{orderId}
+    </delete>
+
+
+    <!-- 주문 삭제 -->
+    <delete id="deleteOrder" parameterType="int">
+        DELETE FROM ORDER_LIST
+        WHERE ORDER_ID = #{orderId}
+    </delete>
+	
+	
+	    <!-- 주문 생성 -->
+    <insert id="createOrder" parameterType="map">
+        INSERT INTO ORDER_LIST (ORDER_ID, BRANCH_NO, ORDER_DATE, ORDER_STATUS)
+        VALUES (
+            ORDER_DETAIL_ID_SEQ.NEXTVAL,
+            (SELECT BRANCH_NO FROM BRANCH WHERE EMP_NO = #{empNo}),
+            #{orderDate},
+            '대기중'
+        )
+    </insert>
+
+    <!-- 주문 세부사항 추가 -->
+    <insert id="addOrderDetail" parameterType="map">
+        INSERT INTO ORDER_LIST_DETAIL (ORDER_DETAIL_ID, ORDER_ID, ITEM_ID, QUANTITY)
+        VALUES (
+            ORDER_ID_SEQ.NEXTVAL,
+            ORDER_DETAIL_ID_SEQ.CURRVAL,
+            #{itemId},
+            #{quantity}
+        )
+    </insert>
+	
+	
 
 
 
