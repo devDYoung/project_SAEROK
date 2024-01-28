@@ -150,38 +150,30 @@ document.querySelector('#startBtn').addEventListener('click', function () {
 	   });
 	});
 	
-//퇴근하기 버튼 누를시
+//퇴근 버튼 클릭 시
 document.querySelector('#endBtn').addEventListener('click', function () {
-	
-	$.ajax({
-		   url : '${path }/commute/workOut.do',
-		   method : 'POST',
-/* 		   contentType : "application/json; charset=utf-8",
- */		   success(data){
-			   console.log(data);
-			   
-			   if(data.status === "퇴근"){
-		           alert("퇴근 성공입니다.");
-		            location.reload();
-		       }else if(data.status === '출근전'){
-		    	   alert("출근전입니다.");
-		    	   return;
-		       }else if(data.status === '출장'){
-		    	   alert("출장시에는 자동으로 퇴근처리됩니다.");
-		    	  return;
-		       }else if(data.status === '연차'){
-		    	   alert("연차중입니다.");
-		    	   return;
-		       }
-		       else{
-		           alert("이미 퇴근하셨습니다.");
-	                return;
-		       }
-			},
-		   error : console.log
-	   });
-	});
+    $.ajax({
+        url: '${path}/commute/workOut.do',
+        method: 'POST',
+        success(data) {
+            console.log(data);
 
+            if (data.status === "퇴근") {
+                alert("퇴근 성공입니다.");
+                location.reload();
+            } else if (data.status === '이미 퇴근') {
+                alert("이미 퇴근하셨습니다.");
+                return;
+            } else if (data.status === '출근 기록이 없음') {
+                alert("출근 기록이 없습니다.");
+                return;
+            }
+        },
+        error(jqXHR, textStatus, errorThrown) {
+            console.error("AJAX Error: ", textStatus, ", ", errorThrown);
+        }
+    });
+});
 
 const updateWorkTime = (daytimes) =>{
 	
@@ -203,14 +195,16 @@ function getStartAndEndDateOfWeek() {
 	  const todayDay = today.getDay(); // 오늘 날짜의 요일 (0: 일요일, 1: 월요일, ..., 6: 토요일)
 
 	  const startDate = new Date(today); // 해당 주의 시작일
-	  startDate.setDate(startDate.getDate() - todayDay);
+	  startDate.setDate(startDate.getDate() - todayDay + (todayDay === 0 ? -6 : 1));
 
 	  const endDate = new Date(today); // 해당 주의 종료일
-	  endDate.setDate(endDate.getDate() + (6 - todayDay));
+	  endDate.setDate(endDate.getDate() + (6 - todayDay + (todayDay === 0 ? 0 : 1))); 
 
 	  const start = startDate.getFullYear() + "." + (startDate.getMonth() + 1) + "." + startDate.getDate();
-	  const end = endDate.getFullYear() + "." + (endDate.getMonth() + 1) + "." + endDate.getDate();
-	  
+	    const end = endDate.getFullYear() + "." + (endDate.getMonth() + 1) + "." + endDate.getDate();
+
+
+		   
 /* 	  $.ajax({
 		  url : "${path }/commute/weekTotalTime.do",
 		  data : {start, end},
