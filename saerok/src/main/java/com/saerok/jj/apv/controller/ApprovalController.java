@@ -58,15 +58,14 @@ public class ApprovalController {
 	// 내문서함 조회
 	@GetMapping("/myApproval")
 	public ModelAndView myApproval(ModelAndView model, Principal loginSession) {
-	    String empNo = loginSession.getName();
-	    List<Approval> myApprovalList = service.myApproval(empNo);
-	    List<Approval> myTodoApprovalList = service.myTodoApprovalList(empNo);
-	    model.addObject("myApprovalList", myApprovalList); 
-	    model.addObject("myTodoApprovalList", myTodoApprovalList); 
+		String empNo = loginSession.getName();
+		List<Approval> myApprovalList = service.myApproval(empNo);
+		List<Approval> myTodoApprovalList = service.myTodoApprovalList(empNo);
+		model.addObject("myApprovalList", myApprovalList);
+		model.addObject("myTodoApprovalList", myTodoApprovalList);
 		model.setViewName("approval/myApproval");
-	    return model;
+		return model;
 	}
-
 
 	// 결재선 사원리스트불러오기
 	@GetMapping("/checkDept")
@@ -111,9 +110,8 @@ public class ApprovalController {
 		// service.insertAppLetter(basicForm, approvalList);
 
 		int result = 0;
-		log.debug("{}", upFile.getOriginalFilename());
 		try {
-			if (!upFile.isEmpty()) {
+			if (upFile != null && !upFile.isEmpty()) {
 				String originalFileName = upFile.getOriginalFilename();
 				String destFileName = System.currentTimeMillis() + "_" + originalFileName;
 				String path = session.getServletContext().getRealPath("/resources/upload/approvalFile");
@@ -122,40 +120,65 @@ public class ApprovalController {
 				basicForm.setOriFileName(originalFileName);
 				basicForm.setReFileName(destFileName);
 				result = service.insertAppLetter(basicForm, approvalList);
-			}
 
-			String msg, loc;
-			if (result > 0) {
-				return "redirect:/approval/approvalList.do";
+				String msg, loc;
+				if (result > 0) {
+					return "redirect:/approval/approvalList.do";
+				} else {
+					msg = "등록실패";
+					loc = "/";
+				}
+
+				model.addAttribute("msg", msg);
+				model.addAttribute("loc", loc);
 			} else {
-				msg = "등록실패";
-				loc = "/";
+				// 파일이 비어있는 경우 처리
+				model.addAttribute("msg", "파일이 비어있습니다.");
+				model.addAttribute("loc", "/");
+				return "common/msg";
 			}
-
-			model.addAttribute("msg", msg);
-			model.addAttribute("loc", loc);
-
 		} catch (IOException e) {
 			e.printStackTrace();
 			model.addAttribute("msg", "파일 업로드 실패!!!");
-			model.addAttribute("loc", "index");
+			model.addAttribute("loc", "/");
 		}
 
 		return "common/msg";
 	}
-	
-	//상세페이지
+
+	// 상세페이지
 	@GetMapping("/approvalDetailView")
 	public void approvalDetailView(String appSeq, Model model) {
 		Approval approvalDetail = service.approvalDetailView(appSeq);
-	    model.addAttribute("approvalDetailView", approvalDetail);
+		model.addAttribute("approvalDetailView", approvalDetail);
 	}
 
-	
-	
-	
-	
-	
+	// 결재 승인 반려
+	@PostMapping("/updateApprovalStatus")
+	public String updateApprovalStatus(@RequestParam Map<String, String> paramMap, HttpSession session) {
+	    // 승인 또는 반려 처리
+	    Map<String, String> updateResult = service.updateApprovalStatus(paramMap);
+
+	    String apvState = paramMap.get("apvState");
+	    String appSeq = paramMap.get("appSeq");
+
+	    // 승인 처리
+	    if ("300".equals(apvState) && "1".equals(updateResult.get("RESULT"))) {
+	        session.setAttribute("approvalMessage", "결재가 승인 처리되었습니다.");
+	    }
+
+	    // 반려 처리 
+	    if ("200".equals(apvState) && "1".equals(updateResult.get("RESULT"))) {
+	        String returnReason = paramMap.get("returnReason");
+	        session.setAttribute("approvalMessage", "결재가 반려 처리되었습니다. 사유: " + (returnReason != null ? returnReason : ""));
+	    }
+
+	    // 업데이트 후에는 적절한 리다이렉션 또는 응답을 수행
+	    return "redirect:/approval/approvalDetailView?appSeq=" + appSeq;
+	}
+
+
+
 	// 테스트
 	@GetMapping("/test")
 	public void test() {
