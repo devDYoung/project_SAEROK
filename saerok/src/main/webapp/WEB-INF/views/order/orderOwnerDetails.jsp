@@ -4,14 +4,12 @@
 <c:set var="path" value="${pageContext.request.contextPath}" />
 <html>
 <head>
-<title>세부 발주 목록</title>
-<link rel="stylesheet"
-	href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link
-	href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400&display=swap"
-	rel="stylesheet">
+<head>
+    <title>세부 발주 목록</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400&display=swap" rel="stylesheet">
 
 <style>
 
@@ -92,14 +90,10 @@
 	color: #343a40; 
 }
 </style>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 </head>
 <body>
 	<div class="container-fluid">
-
-	
-    <c:if test="${orderStatus == '대기중'}">
-        
-    </c:if>
 		<div
 			class="d-sm-flex align-items-center justify-content-center mb-4 mt-3">
 			<h1 class="h3 mb-0 text-gray-800">발주 품목</h1>
@@ -148,43 +142,37 @@
 		</div>
 		
         <c:if test="${orderStatus == '대기중'}">
-         <div class="button-group">
-            <button id="cancelOrderButton" class="custom-btn btn-reject">발주 취소하기</button>
-        </div> 
-    	</c:if>
+    <div class="button-group">
+        <button id="cancelOrderButton" class="custom-btn btn-reject" data-order-id="${orderId}">발주 취소하기</button>
+    </div> 
+</c:if>
     	
 	</div>
 	
 	
+<script>
+ $(document).ready(function() {
+     // '발주 취소하기' 버튼에 이벤트 리스너 추가
+     $('#cancelOrderButton').click(function() {
+         var orderId = $(this).data('order-id'); // 주문 ID 가져오기
 
-	<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
-	<script
-		src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
-	<script
-		src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+         if (confirm('발주를 취소하시겠습니까?')) {
+             $.ajax({
+                 url: '${path}/owner/order/two/' + orderId, // 수정된 발주 취소 URL
+                 type: 'POST',
+                 success: function(response) {
+                     alert('발주가 취소되었습니다.');
+                     window.opener.location.reload();
+                     window.close();                  },
+                 error: function(error) {
+                     alert('발주 취소에 실패했습니다.');
+                 }
+             });
+         }
+     });
+ });
+</script>
 
-
-
- <script>
-        $(document).ready(function() {
-            $('#cancelOrderButton').click(function() {
-                const orderId = $(this).data('order-id'); // 발주 ID 추출 방식에 맞게 조정 필요
-                if (confirm('발주를 취소하시겠습니까?')) {
-                    $.ajax({
-                        url: `${path}/owner/order/cancel/${orderId}`,
-                        type: 'POST',
-                        success: function(response) {
-                            alert('발주가 취소되었습니다.');
-                            location.reload();
-                        },
-                        error: function(error) {
-                            alert('오류가 발생했습니다. 다시 시도해 주세요.');
-                        }
-                    });
-                }
-            });
-        });
-    </script>
 
 </body>
 </html>

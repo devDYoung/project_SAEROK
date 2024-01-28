@@ -77,7 +77,7 @@ public class OwnerSalesController {
         }
         salesService.addBranchSales(salesDataList);
         redirectAttributes.addFlashAttribute("message", "매출이 성공적으로 등록되었습니다.");
-        return "redirect:/owner/detail";
+        return "redirect:/sales/branchOwnerDetail";
     }
 
     
