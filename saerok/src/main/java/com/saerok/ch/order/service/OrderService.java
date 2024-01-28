@@ -1,6 +1,7 @@
 package com.saerok.ch.order.service;
 
 import java.util.List;
+import java.util.Map;
 
 import org.apache.ibatis.annotations.Param;
 
@@ -21,7 +22,11 @@ public interface OrderService {
     //점주-본인지점 발주리스트 가져오기
     List<OrderList> findBranchOwnerOrderLists(@Param("empNo") String empNo);
     
+    void deleteOrderWithDetails(int orderId);
+
     
+    void createOrder(Map<String, Object> orderData);
+    void addOrderDetails(List<Map<String, Object>> detailsDataList);
     
     
 

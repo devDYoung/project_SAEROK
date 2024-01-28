@@ -85,16 +85,16 @@
 		ORDER BY s.SALES_DATE DESC, s.SALES_ID
 	</select>
 
+
 	<!-- 일간 매출액 조회 -->
-	<select id="findTodaySalesTotal"
-		resultType="java.math.BigDecimal">
-		SELECT SUM(i.ITEM_PRICE * s.QUANTITY)
-		FROM SALES s
-		JOIN ITEM
-		i ON s.ITEM_ID = i.ITEM_ID
-		WHERE TO_CHAR(s.SALES_DATE, 'YYYY-MM-DD') =
-		TO_CHAR(SYSDATE, 'YYYY-MM-DD')
-	</select>
+   <select id="findTodaySalesTotal"
+      resultType="java.math.BigDecimal">
+      SELECT COALESCE(SUM(i.ITEM_PRICE * s.QUANTITY), 0)
+      FROM SALES s
+      JOIN ITEM i ON s.ITEM_ID = i.ITEM_ID
+      WHERE TO_CHAR(s.SALES_DATE, 'YYYY-MM-DD') = TO_CHAR(SYSDATE, 'YYYY-MM-DD')
+   </select>
+	
 
 	<!-- 월간 매출액 조회 -->
 	<select id="findCurrentMonthSalesTotal"
