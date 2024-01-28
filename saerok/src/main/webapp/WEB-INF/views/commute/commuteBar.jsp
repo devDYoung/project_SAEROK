@@ -75,105 +75,84 @@
 	    $.ajax({
 	        url : '${path }/commute/commute.do',
 	        method:'GET',
-	        success(data){
+	        success: handleCommuteData,
+	        error: handleAjaxError
+	    });
+	    // 출근 버튼 클릭 시
+	    document.querySelector('#startBtn').addEventListener('click', handleStartBtnClick);
+
+	    // 퇴근 버튼 클릭 시
+	    document.querySelector('#endBtn').addEventListener('click', handleEndBtnClick);
+	});
+	
+	function handleCommuteData(data) {
+	    console.log(data);
+	    if (data && data[0] !== null && typeof data[0] === 'object') {
+	        const { commuteNo, inDtime, outDtime, status } = data[0];
+	        const starttime = new Date(inDtime);
+	        const endtime = new Date(outDtime);
+
+	        const workStatus = document.querySelector("#work-status");
+	        workStatus.textContent = status;
+
+	        displayTime("#startwork-time", inDtime);
+	        displayTime("#endwork-time", outDtime);
+	    }
+	}
+	   // 출근 버튼 클릭 시의 처리
+	function handleStartBtnClick() {
+	    $.ajax({
+	        url: '${path }/commute/workIn.do',
+	        method: 'POST',
+	        success: function (data) {
 	            console.log(data);
-	            if(data && data[0] !== null && typeof data[0] === 'object'){
-	                const {commuteNo, inDtime, outDtime, overtime, workingDay, status, lateYN, empNo, workingHours} = data[0];
-	                var starttime = new Date(inDtime);
-	                var endtime = new Date(outDtime);
-
-	                //하루 근무시간 계산
-	                var daytimes = endtime-starttime; //
-	                console.log(daytimes);
-
-	                const workStatus = document.querySelector("#work-status");
-	                workStatus.textContent = status;
-
-	                if(inDtime){
-	                    var hours = (starttime.getHours()); 
-	                    var minutes = starttime.getMinutes();
-	                    var seconds = starttime.getSeconds();
-	                    var startWorkTime = `\${hours < 10 ? '0' + hours : hours}:\${minutes < 10 ? '0'+minutes : minutes}:\${seconds < 10 ? '0'+seconds : seconds}`;
-	                    // 출근시간 정보 출력
-	                    document.querySelector('#startwork-time').textContent = startWorkTime;
-	                }
-
-	                if(outDtime){
-	                    var hours = (endtime.getHours()); 
-	                    var minutes = endtime.getMinutes();
-	                    var seconds = endtime.getSeconds();
-	                    var endWorkTime = `\${hours < 10 ? '0' + hours : hours}:\${minutes < 10 ? '0'+minutes : minutes}:\${seconds < 10 ? '0'+seconds : seconds}`;
-
-	                    // 퇴근시간 정보 출력
-	                    document.querySelector('#endwork-time').textContent = endWorkTime;
-	                }
-
-	                /*  if(daytimes > 0){
-	                    //하루 근무시간 update
-	                   updateWorkTime(daytimes);
-	                }  */
+	            if (data.status === "출근") {
+	                alert("출근 성공입니다.");
+	                location.reload();
+	            } else if (data.status === '출장') {
+	                alert("출장시에는 출근처리됩니다.");
+	                return;
+	            } else if (data.status === '연차') {
+	                alert("연차중입니다.");
+	                return;
+	            } else {
+	                alert("이미 출근하셨습니다.");
+	                return;
 	            }
 	        },
-	        error(jqXHR, textStatus, errorThrown) {
+	        error: console.log
+	    });
+	}
+	// 퇴근 버튼 클릭 시의 처리
+	function handleEndBtnClick() {
+	    $.ajax({
+	        url: '${path}/commute/workOut.do',
+	        method: 'POST',
+	        success: function (data) {
+	            console.log(data);
+
+	            if (data.status === "퇴근") {
+	                alert("퇴근 성공입니다.");
+	                location.reload();
+	            } else if (data.status === '이미 퇴근') {
+	                alert("이미 퇴근하셨습니다.");
+	                return;
+	            } else if (data.status === '출근 기록이 없음') {
+	                alert("출근 기록이 없습니다.");
+	                return;
+	            }
+	        },
+	        error: function (jqXHR, textStatus, errorThrown) {
 	            console.error("AJAX Error: ", textStatus, ", ", errorThrown);
 	        }
 	    });
-	});
-
-
-
-
-//출근 버튼 클릭 시
-document.querySelector('#startBtn').addEventListener('click', function () {
-
-	$.ajax({
-		   url : '${path }/commute/workIn.do',
-		   method : 'POST',
-		   success(data){
-				console.log(data);
-		       if(data.status === "출근"){
-		           alert("출근 성공입니다.");
-		            location.reload();
-		       }else if(data.status === '출장'){
-		    	   alert("출장시에는 출근처리됩니다.");
-		    	  return;
-		       }else if(data.status === '연차'){
-		    	   alert("연차중입니다.");
-		    	   return;
-		       }
-		       else{
-		           alert("이미 출근하셨습니다.");
-		           	return;
-		       }
-		   },
-		   error : console.log
-	   });
-	});
-	
-//퇴근 버튼 클릭 시
-document.querySelector('#endBtn').addEventListener('click', function () {
-    $.ajax({
-        url: '${path}/commute/workOut.do',
-        method: 'POST',
-        success(data) {
-            console.log(data);
-
-            if (data.status === "퇴근") {
-                alert("퇴근 성공입니다.");
-                location.reload();
-            } else if (data.status === '이미 퇴근') {
-                alert("이미 퇴근하셨습니다.");
-                return;
-            } else if (data.status === '출근 기록이 없음') {
-                alert("출근 기록이 없습니다.");
-                return;
-            }
-        },
-        error(jqXHR, textStatus, errorThrown) {
-            console.error("AJAX Error: ", textStatus, ", ", errorThrown);
-        }
-    });
-});
+	}
+	function formatTime(time) {
+	    const hours = time.getHours().toString().padStart(2, '0');
+	    const minutes = time.getMinutes().toString().padStart(2, '0');
+	    const seconds = time.getSeconds().toString().padStart(2, '0');
+	    return `${hours}:${minutes}:${seconds}`;
+	}
 
 const updateWorkTime = (daytimes) =>{
 	
@@ -189,66 +168,51 @@ const updateWorkTime = (daytimes) =>{
       });
 	};
 
-//이번주 누적시간 가져오기
-function getStartAndEndDateOfWeek() {
-	  const today = new Date();
-	  const todayDay = today.getDay(); // 오늘 날짜의 요일 (0: 일요일, 1: 월요일, ..., 6: 토요일)
+	// 이번주 누적시간 가져오기
+	function getStartAndEndDateOfWeek() {
+	    const today = new Date();
+	    const todayDay = today.getDay();
 
-	  const startDate = new Date(today); // 해당 주의 시작일
-	  startDate.setDate(startDate.getDate() - todayDay + (todayDay === 0 ? -6 : 1));
+	    const startDate = new Date(today);
+	    startDate.setDate(startDate.getDate() - todayDay + (todayDay === 0 ? -6 : 1));
 
-	  const endDate = new Date(today); // 해당 주의 종료일
-	  endDate.setDate(endDate.getDate() + (6 - todayDay + (todayDay === 0 ? 0 : 1))); 
+	    const endDate = new Date(today);
+	    endDate.setDate(endDate.getDate() + (6 - todayDay + (todayDay === 0 ? 0 : 1)));
 
-	  const start = startDate.getFullYear() + "." + (startDate.getMonth() + 1) + "." + startDate.getDate();
+	    const start = startDate.getFullYear() + "." + (startDate.getMonth() + 1) + "." + startDate.getDate();
 	    const end = endDate.getFullYear() + "." + (endDate.getMonth() + 1) + "." + endDate.getDate();
 
+	    $.ajax({
+	        url: "${path}/commute/weekTotalTime.do",
+	        data: { start, end },
+	        success: function (data) {
+	            console.log("Success", data);
+	            const { totalMonthOverTime, totalMonthTime, weekOverTime, weekTotalTime } = data;
+	            const mainTotalWorkTime = document.querySelector("#main-totalwork-time");
+	            const mainWeekOverTime = document.querySelector("#main-week-over-time");
+	            const mainWorkTime = document.querySelector("#main-work-time");
+	            const monthWorkTime = document.querySelector("#main-month-work-time");
+	            const monthOverTime = document.querySelector("#main-month-over-time");
 
-		   
-/* 	  $.ajax({
-		  url : "${path }/commute/weekTotalTime.do",
-		  data : {start, end},
-		  contentType : "application/json; charset=utf-8",
-		  success(data){
-			  console.log(data);
-			  const {totalMonthOverTime ,totalMonthTime, weekOverTime ,weekTotalTime} = data;
-			  const totalWorkTime = document.querySelector("#totalwork-time");
-			  
-			  totalWorkTime.textContent = changeWorkTime(weekTotalTime + weekOverTime);
-		  },
-		  error : console.log
-		  
-	  });
-} */
-$.ajax({
-	  url : "${path }/commute/weekTotalTime.do",
-	  data: { start, end },
-	  success(data){
-		  console.log("Success", data);
-		  const {totalMonthOverTime ,totalMonthTime, weekOverTime ,weekTotalTime} = data;
-		  const mainTotalWorkTime = document.querySelector("#main-totalwork-time");
-		  const mainWeekOverTime = document.querySelector("#main-week-over-time");
-		  const mainWorkTime = document.querySelector("#main-work-time");
-		  const monthWorkTime = document.querySelector("#main-month-work-time");
-		  const monthOverTime = document.querySelector("#main-month-over-time")
-		  
-		  let times = 144000000 - (weekTotalTime + weekOverTime); // 40시간 - 주간 기본 근무시간
-		  mainTotalWorkTime.textContent = changeWorkTime(weekTotalTime + weekOverTime);
-		  mainWeekOverTime.textContent = changeWorkTime(weekOverTime);
-		  if(times < 0){
-			  mainWorkTime.textContent = changeWorkTime(0);
-		  }else{
-			  mainWorkTime.textContent = changeWorkTime(times);				  
-		  }
-		  monthWorkTime.textContent = changeWorkTime(totalMonthTime + totalMonthOverTime);
-		  monthOverTime.textContent = changeWorkTime(totalMonthOverTime);
-	  },
-	  error(error) {
-	        console.error("Error:", error);
-	    }
-	  
-});
-}
+	            let times = 144000000 - (weekTotalTime + weekOverTime);
+	            mainTotalWorkTime.textContent = changeWorkTime(weekTotalTime + weekOverTime);
+	            mainWeekOverTime.textContent = changeWorkTime(weekOverTime);
+	            if (times < 0) {
+	                mainWorkTime.textContent = changeWorkTime(0);
+	            } else {
+	                mainWorkTime.textContent = changeWorkTime(times);
+	            }
+	            monthWorkTime.textContent = changeWorkTime(totalMonthTime + totalMonthOverTime);
+	            monthOverTime.textContent = changeWorkTime(totalMonthOverTime);
+	        },
+	        error: function (xhr, status, error) {
+	            console.error("Error:", error);
+	            console.error("Status:", status);
+	            console.error("Response:", xhr.responseText);
+	            // 에러 정보 출력
+	        }
+	    });
+	}
 
 function changeWorkTime(times){
 	const time = times / 1000;
