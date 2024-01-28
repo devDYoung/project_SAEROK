@@ -180,7 +180,7 @@ document.querySelector('#endBtn').addEventListener('click', function () {
 	$.ajax({
 	   url : '${path }/commute/workOut.do',
 	   method : 'POST',
-	   contentType : "application/json; charset=utf-8",
+	  contentType : "application/json; charset=utf-8",
 	   success(data){
 		   console.log(data);
 		   
