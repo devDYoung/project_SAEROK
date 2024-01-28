@@ -116,7 +116,7 @@
       )
    </insert>
 
-	<update id="updateCommuteEndTime" parameterType="map">
+<update id="updateCommuteEndTime" parameterType="map">
 		UPDATE COMMUTE
 		SET
 		OUT_DTIME = TO_CHAR(SYSTIMESTAMP, 'yyyy-MM-dd HH24:MI:SS'),
@@ -133,7 +133,7 @@
 			=TO_CHAR(WORKINGDAY,'YYYY-MM-DD')
 		</selectKey>
 	</update> 
-<!-- 		<update id="updateCommuteEndTime" parameterType="map">
+<!-- 	<update id="updateCommuteEndTime" parameterType="map">
 		UPDATE COMMUTE
 		SET
 		OUT_DTIME = TO_DATE('yyyy-MM-dd'),
@@ -149,15 +149,14 @@
 			TO_DATE('YYYY-MM-DD')
 			=TO_DATE(WORKINGDAY,'YYYY-MM-DD')
 		</selectKey>
-	</update>
+	</update> 
  -->
-<!-- <update id="updateCommuteEndTime" parameterType="map">
+<!--  <update id="updateCommuteEndTime" parameterType="map">
     UPDATE commute
     SET out_Dtime = FROM_TZ(TO_TIMESTAMP(SYSTIMESTAMP, 'YYYY-MM-DD HH24:MI:SS.FF3'), 'Asia/Seoul'),
         status = '업무종료' 
     WHERE emp_no = #{empNo} AND TRUNC(workingDay) = TO_DATE(#{time}, 'YYYY-MM-DD')
-</update> -->
-
+</update>  -->
 <update id="updateStartWork" parameterType="map">
       update
       commute

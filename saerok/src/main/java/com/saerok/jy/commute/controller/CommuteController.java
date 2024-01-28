@@ -130,35 +130,30 @@ public class CommuteController {
 //	    }else if(commute.getOutDtime() != null) {
 //	    	status.put("status", "이미퇴근");
 //	    }
-		if (commute != null) {
-		    if (commute.getInDtime() != null) {
-		        int result = commuteService.updateCommuteEndTime(param);
-		        if (result > 0) {
-		            status.put("status", "퇴근");
-		        } else {
-		            status.put("status", "이미 퇴근");
-		        }
-		    }
-		} else {
-		    status.put("status", "출근 기록이 없음");
-		}
-
+//		if (commute != null) {
+//		    if (commute.getInDtime() != null) {
+//		        int result = commuteService.updateCommuteEndTime(param);
+//		        if (result > 0) {
+//		            status.put("status", "퇴근");
+//		        } else {
+//		            status.put("status", "이미 퇴근");
+//		        }
+//		    }
+//		} else {
+//		    status.put("status", "출근 기록이 없음");
+//		}
 		
-//		if(commute == null) {
-//			status.put("status","출근전");
-//		}else if(commute.getStatus().equals("출장")) {
-//			status.put("status", "출장");
-//		}else if(commute.getStatus().equals("연차")) {
-//			status.put("status", "연차");
-//		}
-//		else if(commute.getOutDtime() == null || commute.getStatus().equals("반차")) {
-//			//퇴근시간 업데이트
-//			int result = commuteService.updateCommuteEndTime(param);
-//			status.put("status", "성공");	
-//		}
-//		else {
-//			status.put("status", "실패");
-//		}
+		if(commute == null) {
+			status.put("status","출근전");
+		}
+		else if(commute.getOutDtime() == null ) {
+			//퇴근시간 업데이트
+			int result = commuteService.updateCommuteEndTime(param);
+			status.put("status", "퇴근");	
+		}
+		else {
+			status.put("status", "이미 퇴근");
+		}
 			
 		return ResponseEntity.ok()
 				.header(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_JSON.toString())
