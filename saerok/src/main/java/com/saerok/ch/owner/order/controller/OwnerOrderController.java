@@ -95,7 +95,7 @@ public class OwnerOrderController {
         Map<String, Object> orderMap = gson.fromJson(jsonData, type);
 
 
-        // 현재 로그인된 사용자의 EMP_NO 가져오기
+     
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         Employee loggedInEmployee = (Employee) authentication.getPrincipal();
         String empNo = loggedInEmployee.getEmpNo();

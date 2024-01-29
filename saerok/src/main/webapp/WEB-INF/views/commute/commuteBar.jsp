@@ -149,38 +149,30 @@ document.querySelector('#startBtn').addEventListener('click', function () {
 	   });
 	});
 	
-//퇴근하기 버튼 누를시
+ //퇴근하기 버튼 누를시
 document.querySelector('#endBtn').addEventListener('click', function () {
-	
-	$.ajax({
-		   url : '${path }/commute/workOut.do',
-		   method : 'POST',
-/* 		   contentType : "application/json; charset=utf-8",
- */		   success(data){
-			   console.log(data);
-			   
-			   if(data.status === "퇴근"){
-		           alert("퇴근 성공입니다.");
-		            location.reload();
-		       }else if(data.status === '출근전'){
-		    	   alert("출근전입니다.");
-		    	   return;
-		       }else if(data.status === '출장'){
-		    	   alert("출장시에는 자동으로 퇴근처리됩니다.");
-		    	  return;
-		       }else if(data.status === '연차'){
-		    	   alert("연차중입니다.");
-		    	   return;
-		       }
-		       else{
-		           alert("이미 퇴근하셨습니다.");
-	                return;
-		       }
-			},
-		   error : console.log
-	   });
-	});
-
+ 
+ $.ajax({
+	   url : '${path}/commute/workOut.do',
+	   method : 'POST',
+	   contentType : "application/json; charset=utf-8",
+	   success(data){
+		   console.log(data);
+		   if(data.status === "퇴근"){
+	           alert("퇴근 성공입니다.");
+	           location.reload();
+	       }else if(data.status === '출근전'){
+	    	   alert("출근전입니다.");
+	    	   return;
+	       }
+	       else{
+	           alert("이미 퇴근하셨습니다.");
+	           return;
+	       }
+		},
+	   error : console.log
+ });
+});
 
 const updateWorkTime = (daytimes) =>{
 	

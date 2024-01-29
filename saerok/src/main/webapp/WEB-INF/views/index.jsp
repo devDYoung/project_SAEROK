@@ -7,6 +7,8 @@
 <c:set var="path" value="${pageContext.request.contextPath}" />
 <c:set var="loginEmployee"
 	value="${sessionScope.SPRING_SECURITY_CONTEXT.authentication.principal }" />
+	<%@page import="java.util.List"%>
+<%@page import="com.saerok.jy.schedule.dto.*"%>
 <jsp:include page="/WEB-INF/views/common/header.jsp">
 	<jsp:param value="MainPage" name="ATO" />
 </jsp:include>
@@ -18,6 +20,21 @@
 <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
 <script
 	src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+	<link
+   href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css">
+   <link rel="stylesheet"
+   href="https://cdn.jsdelivr.net/npm/fullcalendar@5.10.1/main.css">
+
+<script src="https://cdn.jsdelivr.net/npm/fullcalendar@5.10.1/main.js"></script>
+<script
+   src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.18.1/moment.min.js"></script>
+<!-- fullcalendar 언어 설정관련 script -->
+<script
+   src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+<script
+   src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
+<link rel="stylesheet"
+   href="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.css" />
 
 <style>
 .ato-login-img {
@@ -178,33 +195,26 @@ document.querySelector('#startBtn').addEventListener('click', function () {
 document.querySelector('#endBtn').addEventListener('click', function () {
 	
 	$.ajax({
-	   url : '${path }/commute/workOut.do',
-	   method : 'POST',
-	   contentType : "application/json; charset=utf-8",
-	   success(data){
-		   console.log(data);
-		   
-		   if(data.status === "퇴근"){
-	           alert("퇴근 성공입니다.");
-	          location.reload();
-	       }else if(data.status === '출근전'){
-	    	   alert("출근전입니다.");
-	    	   return;
-	       }else if(data.status === '출장'){
-	    	   alert("출장시에는 자동으로 퇴근처리됩니다.");
-	    	  return;
-	       }else if(data.status === '연차'){
-	    	   alert("연차중입니다.");
-	    	   return;
-	       }
-	       else{
-	           alert("이미 퇴근하셨습니다.");
-	           return;
-	       }
-		},
-	   error : console.log
-   });
-});
+		   url : '${path}/commute/workOut.do',
+		   method : 'POST',
+		   contentType : "application/json; charset=utf-8",
+		   success(data){
+			   console.log(data);
+			   if(data.status === "퇴근"){
+		           alert("퇴근 성공입니다.");
+		           location.reload();
+		       }else if(data.status === '출근전'){
+		    	   alert("출근전입니다.");
+		    	   return;
+		       }
+		       else{
+		           alert("이미 퇴근하셨습니다.");
+		           return;
+		       }
+			},
+		   error : console.log
+	 });
+	});
 
 const updateWorkTime = (daytimes) =>{
 	
@@ -234,14 +244,14 @@ const updateWorkTime = (daytimes) =>{
 												class="mdi mdi-home-variant d-lg-none d-block mr-1"></i> <span
 												class="d-none d-lg-block  font-weight-bold">공지사항</span>
 										</a></li>
-										<li class="nav-item"><a href="#calendar"
+								<!-- 		<li class="nav-item"><a href="#calendar"
 											data-toggle="tab" aria-expanded="true"
 											class="nav-link active"> <i
 												class="mdi mdi-account-circle d-lg-none d-block mr-1"></i> <span
 												class="d-none d-lg-block  font-weight-bold">일정</span>
-										</a></li>
+										</a></li> -->
 										<li class="nav-item"><a href="#approval"
-											data-toggle="tab" aria-expanded="true" class="nav-link">
+											data-toggle="tab" aria-expanded="true" class="nav-link active">
 												<i class="mdi mdi-account-circle d-lg-none d-block mr-1"></i>
 												<span class="d-none d-lg-block  font-weight-bold">결재</span>
 										</a></li>
@@ -276,7 +286,7 @@ const updateWorkTime = (daytimes) =>{
 							</tbody>
 											</table> --%>
 										</div>
-										<div class="tab-pane active" id="calendar">
+								<%-- 		<div class="tab-pane active" id="calendar">
 											<!--  <div class="col-xl-6 col-lg-6"> -->
 											<!--  <div class="card shadow mb-4 border-left-info"> -->
 											<!-- Card Header - Dropdown -->
@@ -311,7 +321,7 @@ const updateWorkTime = (daytimes) =>{
 											</table>
 											<!--  </div> -->
 											<!--   </div> -->
-										</div>
+										</div> --%>
 										<div class="tab-pane" id="approval">결재</div>
 									</div>
 
@@ -332,8 +342,89 @@ const updateWorkTime = (daytimes) =>{
 					<!-- 본문 오른쪽 -->
 					<div>
 						<div id="home-right-div" class="div-padding div-margin">
-							<h5 style="padding: 20px">이번주 신제품</h5>
+						<div id='calendar'></div>
+		<style>
+       #calendar .fc-scroller {
+        overflow-x: hidden !important;
+        overflow-y: auto;
+      }
+      /* 일요일 날짜 빨간색 */
+      .fc-day-sun a {
+        color: red;
+        text-decoration: none;
+      }
+      
+      /* 토요일 날짜 파란색 */
+/*       .fc-day-sat a {
+        color: blue;
+        text-decoration: none;
+      } */
+      .fc-license-message{
+         display: none;
+      }
+    </style>
+ <script>
+    $('#cancelModifyBtn').on('click', function () {
+        // 취소 버튼 클릭 시 모달 닫기
+        $('#calendarModal').modal('hide');
+        $('#calendarModal').modal('show');
+    });</script> 
 
+         <script>
+                  document.addEventListener('DOMContentLoaded', function() {
+                     var calendarEl = document.getElementById('calendar');
+                     var calendar = new FullCalendar.Calendar(calendarEl, {
+                             googleCalendarApiKey: 'AIzaSyDZTRgjuENE0svix_V-Fzl6EKEOttucbHw',
+                               eventSources: [
+                                   {
+                                       googleCalendarId: 'ko.south_korea#holiday@group.v.calendar.google.com',
+                                       color: 'pink',
+                                       textColor: 'black'
+                                   }
+                               ],
+                        initialView : 'dayGridMonth', // 초기 로드 될때 보이는 캘린더 화면(기본 설정: 달)
+                        headerToolbar : { // 헤더에 표시할 툴 바
+                          /*  start : 'prev next today',
+                           center : 'title',
+                           end : 'dayGridMonth,dayGridWeek,dayGridDay' */
+                        },
+                     
+                        selectable : true, // 달력 일자 드래그 설정가능
+                        droppable : true,
+                        editable : true,
+                        locale: 'ko', // 한국어 설정
+                        eventDisplay:'block',
+                        dateClick: function(info) {
+                           $("#addCalendarBtn").click();
+                           //alert('clicked ' + info.dateStr);
+                         },
+                        //DB에서 List 불러오기
+                           events : [ 
+                                <%List<Schedule> scheduleList = (List<Schedule>) request.getAttribute("scheduleList");%>
+                                 <%if (scheduleList != null) {%>
+                                 <%for (Schedule schedule : scheduleList) {%>
+                                 {
+                                    title : '<%=schedule.getSkdTitle()%>',
+                                     start : '<%=schedule.getSkdStart()%>',
+                                     end : '<%=schedule.getSkdEnd()%>',
+                                     backgroundColor : '#03a' + Math.round(Math.random() * 0xfff).toString(16),
+                                 borderColor : '#FFFFFF'
+                                  },
+                        <%}
+                     }%>
+                                 ]
+                     });
+
+                   // 캘린더 렌더링
+                   calendar.render();
+           
+                  });
+                  
+               </script>
+	<!-- 						<h5 style="padding: 20px">이번주 신제품</h5>
+ -->
+ 
+ <br>
             <div id="carouselExampleIndicators" class="carousel slide"
                data-ride="carousel">
                <div class="carousel-inner" role="listbox">
@@ -366,19 +457,15 @@ const updateWorkTime = (daytimes) =>{
 				</div>
 
 				<!-- 본문 오른쪽 -->
-				<div>
+ 				<div>
 					<div id="home-right-div" class="div-padding div-margin">
 						<h5 style="padding: 20px">최근 알림</h5>
-
-
-
-
 						<div class="notification-list">
 							<div class="left-noti"></div>
 							<div class="right-noti"></div>
 						</div>
 					</div>
-				</div>
+				</div> 
 			</div>
 		</div>
 	</div>

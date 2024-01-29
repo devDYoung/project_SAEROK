@@ -103,6 +103,7 @@
                      $.ajax({
                         url : "${path }/commute/selectMonthWork.do",
                         data : {dateText},
+                        contentType : "application/json; charset=utf-8",
                         success(data){
                             console.log(data);
                             const {weekDates, workList} = data;
@@ -297,6 +298,7 @@
     	$.ajax({
     		  url : "${path }/commute/weekTotalTime.do",
     		  data: { start, end },
+    		  contentType : "application/json; charset=utf-8",
     		  success(data){
     			  console.log("Success", data);
     			  const {totalMonthOverTime ,totalMonthTime, weekOverTime ,weekTotalTime} = data;
