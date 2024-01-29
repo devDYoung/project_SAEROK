@@ -130,7 +130,7 @@
         VALUES (
             ORDER_DETAIL_ID_SEQ.NEXTVAL,
             (SELECT BRANCH_NO FROM BRANCH WHERE EMP_NO = #{empNo}),
-            #{orderDate},
+            TO_DATE(#{orderDate},'YYYY/MM/DD'),
             '대기중'
         )
     </insert>
