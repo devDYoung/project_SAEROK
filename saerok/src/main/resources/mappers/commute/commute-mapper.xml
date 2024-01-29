@@ -119,7 +119,7 @@
 <update id="updateCommuteEndTime" parameterType="map">
 		UPDATE COMMUTE
 		SET
-		OUT_DTIME = TO_CHAR(SYSTIMESTAMP, 'yyyy-MM-dd HH24:MI:SS'),
+		OUT_DTIME = SYSTIMESTAMP,
 		STATUS=#{status}
 		WHERE EMP_NO = #{empNo} AND
 		TO_CHAR(SYSDATE,'YYYY-MM-DD')
