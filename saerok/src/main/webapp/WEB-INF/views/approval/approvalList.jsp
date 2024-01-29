@@ -39,12 +39,12 @@
 				<li class="nav-item"><a href="#proceeding" data-toggle="tab"
 					aria-expanded="false" class="nav-link"> <i
 						class="mdi mdi-account-circle d-lg-none d-block mr-1"></i> <span
-						class="d-none d-lg-block  font-weight-bold">진행중인 문서</span>
+						class="d-none d-lg-block  font-weight-bold">전체 진행중 문서</span>
 				</a></li>
 				<li class="nav-item"><a href="#complete" data-toggle="tab"
 					aria-expanded="false" class="nav-link"> <i
 						class="mdi mdi-account-circle d-lg-none d-block mr-1"></i> <span
-						class="d-none d-lg-block  font-weight-bold">완료 문서</span>
+						class="d-none d-lg-block  font-weight-bold">전체 완료문서</span>
 				</a></li>
 			</ul>
 			
@@ -89,7 +89,7 @@
 						</table>
 					</div>
 				</div>
-				<!--진행중 문서  -->
+				<!--진행중 전체문서  -->
 				<div class="tab-pane" id="proceeding">
 					<div class="table-responsive">
 						<table class="table table-bordered" id="dataTable" width="100%"
@@ -105,19 +105,21 @@
 							</thead>
 							<tbody>
 								<c:forEach var="a" items="${list}">
+									<c:if test="${a.appCheck eq '결재중'}">
 									<tr>
-										<%--  <td><c:out value="${a.appSeq}" /></td> 
-										<td><c:out value="제목" /></td>
-										 <td><c:out value="${a.empName}" /></td> 
-										<td><c:out value="${a.appWriteDate}" /></td>
-										<td><c:out value="${a.appCheck}" /></td> --%>
+										 <td>${a.appSeq}</td>
+										<td>${a.letterTitle}</td>
+										<td>${a.appEmpName}</td>
+										<td>${a.appWriteDate}</td>
+										<td>${a.appCheck }</td> 
 									</tr>
+									</c:if>
 								</c:forEach>
 							</tbody>
 						</table>
 					</div>
 				</div>
-				<!-- 완료 문서 -->
+				<!-- 완료 전체문서 -->
 				<div class="tab-pane" id="complete">
 					<div class="table-responsive">
 						<table class="table table-bordered" id="dataTable" width="100%"
@@ -132,9 +134,17 @@
 								</tr>
 							</thead>
 							<tbody>
-								<tr>
-
-								</tr>
+								<c:forEach var="a" items="${list}">
+									<c:if test="${a.appCheck eq '결재완료'}">
+									<tr>
+										 <td>${a.appSeq}</td>
+										<td>${a.letterTitle}</td>
+										<td>${a.appEmpName}</td>
+										<td>${a.appWriteDate}</td>
+										<td>${a.appCheck }</td> 
+									</tr>
+									</c:if>
+								</c:forEach>
 							</tbody>
 						</table>
 					</div>

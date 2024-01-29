@@ -4,19 +4,12 @@ import java.util.List;
 import java.util.Map;
 
 import org.apache.ibatis.session.SqlSession;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import org.springframework.web.multipart.MultipartFile;
 
-import com.saerok.jh.employee.model.dao.EmployeeDao;
-import com.saerok.jh.employee.model.dto.Employee;
 import com.saerok.jj.apv.model.dao.ApprovalDao;
-import com.saerok.jj.apv.model.dto.Approval;
-
-import jakarta.servlet.http.HttpSession;
-
 import com.saerok.jj.apv.model.dto.AppLetter;
+import com.saerok.jj.apv.model.dto.Approval;
 
 import lombok.RequiredArgsConstructor;
 @Service
@@ -79,9 +72,18 @@ public class ApprovalServiceImpl implements ApprovalService {
         return dao.approvalDetailView(session, appSeq);
     }
 
-    //승인 반려 결재
+    //승인 반려 결재 //최종결재완료
     @Override
-    public Map<String, String> updateApprovalStatus(Map<String, String> paramMap) {
-        return dao.updateApprovalStatus(session,paramMap);
+    @Transactional
+    public int updateApprovalStatus(Map<String, String> paramMap) {
+    	int result=dao.updateApprovalStatus(session,paramMap);
+    	if(result>0 && paramMap.get("writerList").equals("1")) {
+    		//approval update
+    		result=dao.updateApproval(session,paramMap);
+    		if(result==0) throw new RuntimeException("결제실패");
+    	}else {
+    		throw new RuntimeException("결제실패");
+    	}
+        return result ;
     }
 }
