@@ -175,5 +175,6 @@ WHERE
 ORDER BY
     e.dept_code, e.job_code;
 
+SELECT * FROM commute;
 
 
