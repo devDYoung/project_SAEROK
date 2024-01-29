@@ -204,7 +204,7 @@ public class CommuteController {
 				.body(status);
 	}
 	
-	// 달의 전체 workingManagement, 그 달의 주차별 시작,종료일 가져오기 (table에 뿌려주는 용도)
+	// 달의 전체 /  그 달의 주차별 시작일, 종료일 가져오기 (table에 뿌려주는 용도)
 		@ResponseBody
 		@GetMapping("/selectMonthWork.do")
 		public ResponseEntity<?> selectMonthWork(String dateText,Principal loginSession){

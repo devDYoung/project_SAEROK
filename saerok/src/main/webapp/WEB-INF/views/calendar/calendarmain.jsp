@@ -194,12 +194,12 @@ textarea::placeholder {
          display: none;
       }
     </style>
- <!--    <script>
+ <script>
     $('#cancelModifyBtn').on('click', function () {
         // 취소 버튼 클릭 시 모달 닫기
         $('#calendarModal').modal('hide');
         $('#calendarModal').modal('show');
-    });</script> -->
+    });</script> 
 
          <script>
                   document.addEventListener('DOMContentLoaded', function() {
@@ -245,7 +245,10 @@ textarea::placeholder {
                      }%>
                                  ]
                      });
-                     calendar.render();
+
+                   // 캘린더 렌더링
+                   calendar.render();
+           
                   });
                   
                </script>
