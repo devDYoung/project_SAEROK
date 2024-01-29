@@ -33,6 +33,7 @@ public class SecurityConfig{
                .requestMatchers("/owner/detail").hasAnyAuthority(MyAuthority.BRANCHER.name())
                .requestMatchers("/inventory").hasAnyAuthority(MyAuthority.BRANCHER.name())
                .requestMatchers("/owner/order/detail").hasAnyAuthority(MyAuthority.BRANCHER.name())
+               .requestMatchers("/owner/order/add").hasAnyAuthority(MyAuthority.BRANCHER.name())
                //메소드 방식으로 선언할 수도 있다. 
                .anyRequest().authenticated(); //권한이 있어야 해!  // 나머지 모든 요청에 대해 인증이 필요함
                // 폼 로그인 설정
