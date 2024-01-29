@@ -13,7 +13,6 @@
    src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 <link
    href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css">
-</script>
 <jsp:include page="/WEB-INF/views/common/header.jsp">
    <jsp:param value="CommuteMain" name="ATO" />
 </jsp:include>
@@ -194,12 +193,12 @@ textarea::placeholder {
          display: none;
       }
     </style>
- <!--    <script>
+ <script>
     $('#cancelModifyBtn').on('click', function () {
         // 취소 버튼 클릭 시 모달 닫기
         $('#calendarModal').modal('hide');
         $('#calendarModal').modal('show');
-    });</script> -->
+    });</script> 
 
          <script>
                   document.addEventListener('DOMContentLoaded', function() {
@@ -245,7 +244,10 @@ textarea::placeholder {
                      }%>
                                  ]
                      });
-                     calendar.render();
+
+                   // 캘린더 렌더링
+                   calendar.render();
+           
                   });
                   
                </script>

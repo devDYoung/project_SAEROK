@@ -141,3 +141,39 @@ DELETE FROM COMMUTE WHERE TO_CHAR(in_dtime,'YY/MM/DD') ='24/01/24';
 
 
 SELECT * FROM commute WHERE emp_no='ATO_2';
+
+
+SELECT 
+    E.*,
+    JOB_NAME,
+    DEPT_NAME,
+    (SELECT dest_filename FROM employee WHERE pk_no = e.emp_no) AS destFilename
+FROM 
+    EMPLOYEE E 
+    JOIN DEPARTMENT D ON e.dept_code = d.dept_code
+    JOIN ATO_JOB J ON e.job_code = J.job_code
+WHERE
+    (
+        e.work_yn = 'N'
+        OR
+        e.emp_date >= TO_DATE(SYSDATE, 'YY-MM-DD HH24:MI:SS')
+    )
+    AND (
+        ('dept_name' = 'HR' AND d.dept_name LIKE '%HR%')
+        OR
+        ('job_name' = 'ASSI' AND J.job_name LIKE '%ASSI%')
+        OR
+        ('emp_name' = '이새록' AND e.emp_name LIKE '%이새록%')
+        OR
+        1 = 1
+    )
+    AND (
+        (100 IS NOT NULL AND e.dept_code = 100)
+        OR
+        1 = 1
+    )
+ORDER BY
+    e.dept_code, e.job_code;
+
+
+
