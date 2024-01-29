@@ -39,6 +39,7 @@ public interface ApprovalDao {
 	Approval approvalDetailView(SqlSession session, String appSeq);
 	
 	//승인 반려 결재
-	Map<String, String> updateApprovalStatus(SqlSession session, Map<String, String> paramMap);
-	
+	int updateApprovalStatus(SqlSession session, Map<String, String> paramMap);
+	//최종결재완료
+	int updateApproval(SqlSession session, Map<String, String> paramMap);
 }

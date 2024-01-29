@@ -91,58 +91,34 @@
 								</tr>
 							</thead>
 							<tbody>
-								<c:set var="currentAppSeq" value="0"/>
-									<c:forEach var="m" items="${myTodoApprovalList}">
+								<c:set var="currentAppSeq" value="0" />
+								<c:forEach var="m" items="${myTodoApprovalList}">
+									<c:if test="${m.appCheck eq '결재중'}">
 										<c:if test="${currentAppSeq ne m.appSeq }">
-											<c:set var="currentAppSeq" value="${m.appSeq}"/>
+											<c:set var="currentAppSeq" value="${m.appSeq}" />
 											<tr>
 												<td>${m.appSeq}</td>
 												<td><c:out value="${m.letterTitle }" /></td>
 												<td><c:out value="${m.appWriteDate}" /></td>
-											<td><c:out value="${m.empNos}" /> 
-											<c:forEach var="b" items="${m.apvWriter}" varStatus="i">
-													<c:choose>
-														<c:when test="${i.index == 0}">
+												<td><c:out value="${m.empNos}" /> 
+												<c:forEach var="b" items="${m.apvWriter}" varStatus="i">
+														<c:choose>
+															<c:when test="${i.index == 0}">
 									                            ${b.apvEmpNo} 
 									                        </c:when>
-														<c:otherwise>
+															<c:otherwise>
 									                          , ${b.apvEmpNo}
 									                     </c:otherwise>
-													</c:choose>
-												</c:forEach></td>
-											<td
-												class="${m.appCheck eq '결재중' ? 'appChecking' : 'appChecked'}"
-												onclick="showDetail('${m.appSeq}')"
-												style="cursor: pointer; color: ${m.appCheck eq '결재중' ? 'red' : 'blue'};">
-												<c:out value="${m.appCheck}" />
-											</td>
-
-
-										</tr>
-										</c:if>
-									</c:forEach>
-								  <%-- <c:forEach var="m" items="${myTodoApprovalList}">
-										<tr>
-											<td>${m.appSeq}</td>
-											<td><c:out value="${m.letterTitle }" /></td>
-											<td><c:out value="${m.appWriteDate}" /></td>
-											<td><c:out value="${m.empNos}" />
-												<c:forEach var="b" items="${m.apvWriter}"
-													varStatus="i">
-													<c:choose>
-														<c:when test="${i.index == 0}">
-								                            ${b.apvEmpName} 
-								                        </c:when>
-													<c:otherwise>
-								                          , ${b.apvEmpName}
-								                     </c:otherwise>
-													</c:choose>
+														</c:choose>
 												</c:forEach>
-												
-											</td>
-											<td><c:out value="${m.appCheck}" /></td>
-										</tr>
-								</c:forEach> --%>
+												</td>
+												<td onclick="showDetail('${m.appSeq}')" style="color: red; cursor: pointer;"><c:out
+														value="${m.appCheck}" />
+												</td>
+											</tr>
+										</c:if>
+									</c:if>
+								</c:forEach>
 							</tbody>
 						</table>
 					</div>
@@ -162,9 +138,35 @@
 								</tr>
 							</thead>
 							<tbody>
-								<tr>
-									
-								</tr>
+								<c:set var="currentAppSeq" value="0" />
+								<c:forEach var="m" items="${myTodoApprovalList}">
+									<c:if test="${m.appCheck eq '결재완료'}">
+										<c:if test="${currentAppSeq ne m.appSeq }">
+											<c:set var="currentAppSeq" value="${m.appSeq}" />
+											<tr>
+												<td>${m.appSeq}</td>
+												<td><c:out value="${m.letterTitle }" /></td>
+												<td><c:out value="${m.appWriteDate}" /></td>
+												<td><c:out value="${m.empNos}" /> 
+												<c:forEach var="b"
+														items="${m.apvWriter}" varStatus="i">
+														<c:choose>
+															<c:when test="${i.index == 0}">
+									                            ${b.apvEmpNo} 
+									                        </c:when>
+															<c:otherwise>
+									                          , ${b.apvEmpNo}
+									                     </c:otherwise>
+														</c:choose>
+												</c:forEach>
+												</td>
+												<td onclick="showDetail('${m.appSeq}')" style="color: blue; cursor: pointer;"><c:out
+														value="${m.appCheck}" />
+												</td>
+											</tr>
+										</c:if>
+									</c:if>
+								</c:forEach>
 							</tbody>
 						</table>
 					</div>
@@ -174,7 +176,7 @@
 	</div>
 </div>
 
-<!--결재 상세페이지  --> 
+<!--결재 상세페이지  -->
 <script>
 function showDetail(appSeq) {
     const width = 800;
@@ -202,3 +204,25 @@ function showDetail(appSeq) {
 
 
 <jsp:include page="/WEB-INF/views/common/footer.jsp" />
+<%-- <c:forEach var="m" items="${myTodoApprovalList}">
+										<tr>
+											<td>${m.appSeq}</td>
+											<td><c:out value="${m.letterTitle }" /></td>
+											<td><c:out value="${m.appWriteDate}" /></td>
+											<td><c:out value="${m.empNos}" />
+												<c:forEach var="b" items="${m.apvWriter}"
+													varStatus="i">
+													<c:choose>
+														<c:when test="${i.index == 0}">
+								                            ${b.apvEmpName} 
+								                        </c:when>
+													<c:otherwise>
+								                          , ${b.apvEmpName}
+								                     </c:otherwise>
+													</c:choose>
+												</c:forEach>
+												
+											</td>
+											<td><c:out value="${m.appCheck}" /></td>
+										</tr>
+								</c:forEach> --%>

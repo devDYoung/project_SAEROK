@@ -131,6 +131,7 @@
 	 WHERE t1.APPSEQ = t2.APPSEQ 
 	   AND t1.APPSEQ = t3.APPSEQ 
 	   AND t1.EMP_NO = #{empNo}
+	   
 	  
    </select>
    <!--결재해야할 문서  -->
@@ -160,7 +161,7 @@
 	   		 WHERE aw.APPSEQ = t3.APPSEQ 
 	   		   AND aw.emp_no = #{empNo}
 	   )
-	   ORDER BY t1.APPSEQ DESC
+	   ORDER BY t1.APPWRITEDATE DESC
 	    <!--  SELECT appseq
 		 , (SELECT max(APPWRITEDATE) FROM APPROVAL a2 WHERE a2.appseq = t1.appseq) as APPWRITEDATE
 		 , (SELECT max(APPCHECK) FROM APPROVAL a2 WHERE a2.appseq = t1.appseq) as APPCHECK
@@ -205,20 +206,20 @@
 	</select>
    
   <!-- 승인 또는 반려 업데이트 쿼리 -->
-	<update id="updateApprovalStatus" parameterType="java.util.Map">
+	<update id="updateApprovalStatus" parameterType="map">
 	    UPDATE APV_WRITER
 	    SET APV_STATE =
 	        <choose>
-	            <when test="#apvState == '승인'">
+	            <when test="apvState == '승인'">
 	                '300'
 	            </when>
-	            <when test="#apvState == '반려'">
+	            <when test="apvState == '반려'">
 	                '200'
 	            </when>
 	        </choose>,
 	    APV_EMP_TIME =
 	        <choose>
-	            <when test="#apvState == '승인'">
+	            <when test="apvState == '승인'">
 	                SYSDATE
 	            </when>
 	            <otherwise>
@@ -227,7 +228,7 @@
 	        </choose>,
 	    RETURN_TIME =
 	        <choose>
-	            <when test="#apvState == '반려'">
+	            <when test="apvState == '반려'">
 	                SYSDATE
 	            </when>
 	            <otherwise>
@@ -236,7 +237,7 @@
 	        </choose>,
 	    RETURN_REASON =
 	        <choose>
-	            <when test="#apvState == '반려'">
+	            <when test="apvState == '반려'">
 	                #{returnReason}
 	            </when>
 	            <otherwise>
@@ -244,8 +245,15 @@
 	            </otherwise>
 	        </choose>
 	    WHERE APPSEQ = #{appSeq} AND EMP_NO = #{empNo}
+	    <selectKey keyProperty="writerList" resultType="string" order="AFTER">
+	    	SELECT WRITERLIST FROM APV_WRITER WHERE APPSEQ = #{appSeq} AND EMP_NO = #{empNo}
+	    </selectKey>
 	</update>
 
+	<!--결재 최종완료 문서  -->
+	<update id="updateApproval" parameterType="map">
+		UPDATE APPROVAL SET APPCHECK='결재완료' WHERE APPSEQ = #{appSeq}
+	</update>
 
    
    
