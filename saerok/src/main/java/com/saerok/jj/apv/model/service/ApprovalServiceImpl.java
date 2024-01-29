@@ -79,5 +79,9 @@ public class ApprovalServiceImpl implements ApprovalService {
         return dao.approvalDetailView(session, appSeq);
     }
 
-
+    //승인 반려 결재
+    @Override
+    public Map<String, String> updateApprovalStatus(Map<String, String> paramMap) {
+        return dao.updateApprovalStatus(session,paramMap);
+    }
 }

@@ -181,7 +181,7 @@
                         <div class="bg-white py-2 collapse-inner rounded">
                             <a class="collapse-item" href="${path }/owner/detail">매출관리</a>
                             <a class="collapse-item" href="${path }/inventory">재고목록</a>
-                            <a class="collapse-item" href="">물품발주</a>
+                            <a class="collapse-item" href="${path }/owner/order/add">발주신청</a>
                             <a class="collapse-item" href="${path }/owner/order/detail">발주목록</a>
                         <!-- ㅎㅎ -->
                         </div>

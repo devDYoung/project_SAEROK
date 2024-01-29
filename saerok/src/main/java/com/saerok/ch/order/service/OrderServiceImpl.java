@@ -1,6 +1,7 @@
 package com.saerok.ch.order.service;
 
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -50,14 +51,32 @@ public class OrderServiceImpl implements OrderService {
         return orderMapper.findBranchOwnerOrderLists(empNo);
     }
     
+    
+    @Override
+    @Transactional
+    public void deleteOrderWithDetails(int orderId) {
+        orderMapper.deleteOrderDetails(orderId);
+        orderMapper.deleteOrder(orderId);
+    }
 
     @Transactional
     @Override
     public void updateInventory(int orderId) {
         List<OrderListDetail> details = orderMapper.findOrderDetailsByOrderId(orderId);
         for (OrderListDetail detail : details) {
-            System.out.println("Branch No: " + detail.getBranchNo() + ", Item ID: " + detail.getItemId() + ", Quantity: " + detail.getQuantity());
             inventoryMapper.increaseStock(detail.getBranchNo(), detail.getItemId(), detail.getQuantity());
+        }
+    }
+    
+    @Override
+    public void createOrder(Map<String, Object> orderData) {
+        orderMapper.createOrder(orderData);
+    }
+
+    @Override
+    public void addOrderDetails(List<Map<String, Object>> detailsDataList) {
+        for (Map<String, Object> detailData : detailsDataList) {
+            orderMapper.addOrderDetail(detailData);
         }
     }
 

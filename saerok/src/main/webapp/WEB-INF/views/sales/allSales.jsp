@@ -242,25 +242,25 @@ const monthlySalesChart = new Chart(ctx, {
             fontSize: 20
         },
         scales: {
-            yAxes: [{
-                gridLines: {
+            y: {
+                grid: {
+                    drawBorder: true,
+                    color: 'lightgrey'
+                },
+                beginAtZero: true,
+                ticks: {
+                    fontColor: 'black'
+                }
+            },
+            x: {
+                grid: {
                     drawBorder: true,
                     color: 'lightgrey'
                 },
                 ticks: {
-                    beginAtZero: true,
                     fontColor: 'black'
                 }
-            }],
-            xAxes: [{
-                gridLines: {
-                    drawBorder: true,
-                    color: 'lightgrey'
-                },
-                ticks: {
-                    fontColor: 'black'
-                }
-            }]
+            }
         },
         legend: {
             labels: {

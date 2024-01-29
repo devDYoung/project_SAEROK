@@ -1,5 +1,6 @@
 package com.saerok.jj.apv.model.dao;
 
+import java.util.HashMap;
 import java.util.List;
 
 import java.util.Map;
@@ -78,10 +79,26 @@ public class ApprovalDaoImpl implements ApprovalDao {
 	}
 	
 	
-	
+	//상세
 	@Override
 	public Approval approvalDetailView(SqlSession session, String appSeq) {
 	    return session.selectOne("approval.approvalDetailView", appSeq);
 	}
+	
+	//결재 승인 반려
+	@Override
+	public Map<String, String> updateApprovalStatus(SqlSession session, Map<String, String> paramMap) {
+	    int updateCount = session.update("approval.updateApprovalStatus", paramMap);
+
+	    // 성공 여부에 따라 Map에 값을 설정
+	    Map<String, String> result = new HashMap<>();
+	    if (updateCount > 0) {
+	        result.put("result", "success");
+	    } else {
+	        result.put("result", "fail");
+	    }
+	    return result;
+	}
+
 
 }
