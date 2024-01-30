@@ -89,4 +89,9 @@
     <update id="updateNoteDelStatus" parameterType="note">
     UPDATE note SET DEL_YN=#{delYn} WHERE NOTE_NO=#{noteNo}
     </update>
+    
+    <select id="getNoteByNoteNo" parameterType="int" resultMap="receivedNotes">
+    	SELECT * FROM note WHERE NOTE_NO = #{noteNo}
+   	</select>
+    
 </mapper>

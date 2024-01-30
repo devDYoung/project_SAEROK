@@ -17,7 +17,11 @@ public interface NoteService {
     // 이름으로 사원 조회
     List<Employee> selectEmpByName(String empName);
 
+    // 쪽지 전송
 	boolean sendNote(Note note);
+
+	// 쪽지 삭제 및 휴지통에서 쪽지 가져오기
+	Note getNoteByNoteNo(int noteNo);
 
 	boolean deleteToTrash(String empNo, int noteNo);
 }

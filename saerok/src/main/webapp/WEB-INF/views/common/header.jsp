@@ -120,8 +120,8 @@
                     <div class="bg-white py-2 collapse-inner rounded">
                         <a class="collapse-item" href="${path }/calendar/calendarmain">내 일정</a>
                         <a class="collapse-item" href="${path }/calendar/calendarview">일정조회</a>
-                        <a class="collapse-item" href="${path }/calendar/calendarstarview">중요일정</a>
-                         <a class="collapse-item" href="${path }/calendar/calendarwrite">일정작성</a>
+                       <%--  <a class="collapse-item" href="${path }/calendar/calendarstarview">중요일정</a>
+                         <a class="collapse-item" href="${path }/calendar/calendarwrite">일정작성</a> --%>
                     </div>
                 </div> 
             </li>
@@ -438,7 +438,7 @@
                         <li class="nav-item dropdown no-arrow">
 
                             <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button"
-                                data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+                                data-toggle="dropdown" aria-haspopup="true" aria-expanded="fasle">
                                 <span class="mr-2 d-none d-lg-inline text-gray-600 small">${loginEmployee.empName }</span>
                                 <!-- <img class="img-profile rounded-circle"
                                     src="img/undraw_profile.svg"> -->
