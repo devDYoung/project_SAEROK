@@ -14,10 +14,10 @@
 </jsp:include>
 <link rel="stylesheet" href="${path }/resources/css/emp.css">
 <!-- Bootstrap core JavaScript-->
-<script src="${path }/resources/vendor/jquery/jquery.min.js"></script>
+<%-- <script src="${path }/resources/vendor/jquery/jquery.min.js"></script>
 <script
-	src="${path }/resources/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
-<script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+	src="${path }/resources/vendor/bootstrap/js/bootstrap.bundle.min.js"></script> --%>
+<!-- <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script> -->
 <script
 	src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 	<link
@@ -578,9 +578,9 @@ const monthlySalesChart = new Chart(ctx, {
 <script src="${path}/resources/js/emp.js"></script>
 
 <!-- Core plugin JavaScript-->
-<script src="/vendor/jquery-easing/jquery.easing.min.js"></script>
+<script src="${path}/resources/vendor/jquery-easing/jquery.easing.min.js"></script>
 
 <!— Custom scripts for all pages—>
-<script src="/js/sb-admin-2.min.js"></script>
+<script src="${path}/resources/js/sb-admin-2.min.js"></script>
 <br>
 <jsp:include page="/WEB-INF/views/common/footer.jsp" />
