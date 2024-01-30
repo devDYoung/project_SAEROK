@@ -70,7 +70,7 @@
         FROM note n 
                  join EMPLOYEE REV ON n.RCV_EMP_NO=rev.EMP_NO
                  join EMPLOYEE SND ON n.SND_EMP_NO=SND.EMP_NO
-        WHERE SND_EMP_NO = #{empNo} order by REG_DTIME DESC
+        WHERE RCV_EMP_NO = #{empNo} order by REG_DTIME DESC
     </select>
     
     <!--  </select>

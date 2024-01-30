@@ -128,5 +128,11 @@ public class NoteController {
 			return "쪽지 전송에 실패하였습니다.";
 		}
 	}
+	
+	@GetMapping("/getNoteByNoteNo")
+	@ResponseBody
+	public Note getNoteByNoteNo(int noteNo) {
+		return noteService.getNoteByNoteNo(noteNo);
+	}
 
 }

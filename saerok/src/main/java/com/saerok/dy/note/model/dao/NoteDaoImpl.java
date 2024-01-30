@@ -48,6 +48,6 @@ public class NoteDaoImpl implements NoteDao {
 	@Override
 	public Note getNoteByNoteNo(int noteNo, SqlSession session) {
 		// TODO Auto-generated method stub
-		return null;
+		return session.selectOne("note.getNoteByNoteNo",noteNo);
 	}
 }
