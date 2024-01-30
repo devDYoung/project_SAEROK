@@ -79,7 +79,7 @@
                                                          console.log('adfadsf');
                                                          $.ajax({
                                                          type: "get",
-                                                         url: `${path}/calendar/star`,
+                                                         url: "${path}/calendar/star",
                                                          data: {
                                                             scheduleNo : '${s.scheduleNo}'
                                                          },
