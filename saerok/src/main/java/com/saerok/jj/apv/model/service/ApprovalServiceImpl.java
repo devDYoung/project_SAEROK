@@ -81,8 +81,6 @@ public class ApprovalServiceImpl implements ApprovalService {
     		//approval update
     		result=dao.updateApproval(session,paramMap);
     		if(result==0) throw new RuntimeException("결제실패");
-    	}else {
-    		throw new RuntimeException("결제실패");
     	}
         return result ;
     }

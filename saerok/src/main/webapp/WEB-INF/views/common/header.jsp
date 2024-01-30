@@ -13,8 +13,8 @@
             href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css" />
             
           <!-- Favicon -->
-		<link rel="shortcut icon" href="${path}/resources/img/logo-bage.png">
-		<link rel="icon" href="${path}/resources/img/logo-bage.png"type="image/x-icon">
+      <link rel="shortcut icon" href="${path}/resources/img/logo-bage.png">
+      <link rel="icon" href="${path}/resources/img/logo-bage.png"type="image/x-icon">
 <!--            <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
      <link rel="stylesheet" href="//code.jquery.com/ui/1.13.2/themes/base/jquery-ui.css"> -->
 <style>
@@ -137,7 +137,7 @@
                          <a class="collapse-item" href="${path }/board/noticelist">공지 사항</a>
 
                        <!-- <a class="collapse-item" href="">전체게시판</a> -->
-                        <a class="collapse-item" href="${path }/board/Part">부서별 게시판</a>
+                        <!-- <a class="collapse-item" href="${path }/board/Part">부서별 게시판</a> -->
                     </div>
                 </div>
             </li>
