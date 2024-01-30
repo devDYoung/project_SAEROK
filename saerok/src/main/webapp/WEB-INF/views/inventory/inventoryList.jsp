@@ -152,6 +152,7 @@
 					<th>품목 이름</th>
 					<th>재고</th>
 					<th>안전 재고</th>
+					
 				</tr>
 			</thead>
 			<tbody>
