@@ -129,8 +129,8 @@ textarea::placeholder {
                            class="form-select form-select-sm"
                            aria-label=".form-select-sm example">
                            <option value="99" selected>기타</option>
-                           <option value="10">휴가</option>
-                           <option value="20">반차</option>
+                           <option value="10">개인일정</option>
+                           <option value="20">부서일정</option>
                         </select>
                      </div>
                      <div id="start">

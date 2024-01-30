@@ -240,54 +240,52 @@ const updateWorkTime = (daytimes) =>{
 								<div id="board-div" class="home-div">
 									<ul class="nav nav-tabs mb-3">
 										<li class="nav-item"><a href="#board" data-toggle="tab"
-											aria-expanded="false" class="nav-link"> <i
+											aria-expanded="true" class="nav-link active"> <i
 												class="mdi mdi-home-variant d-lg-none d-block mr-1"></i> <span
 												class="d-none d-lg-block  font-weight-bold">공지사항</span>
 										</a></li>
-								<!-- 		<li class="nav-item"><a href="#calendar"
-											data-toggle="tab" aria-expanded="true"
-											class="nav-link active"> <i
-												class="mdi mdi-account-circle d-lg-none d-block mr-1"></i> <span
-												class="d-none d-lg-block  font-weight-bold">일정</span>
-										</a></li> -->
 										<li class="nav-item"><a href="#approval"
-											data-toggle="tab" aria-expanded="true" class="nav-link active">
+											data-toggle="tab" aria-expanded="false" class="nav-link">
 												<i class="mdi mdi-account-circle d-lg-none d-block mr-1"></i>
 												<span class="d-none d-lg-block  font-weight-bold">결재</span>
 										</a></li>
 									</ul>
+									
 									<div class="tab-content">
-										<div class="tab-pane" id="board">
-											<%-- <table class="table table-bordered" id="dataTable"
-												width="100%" cellspacing="0">
-												<thead>
+										<div class="tab-pane active" id="board">
+							<table class="table table-bordered" id="dataTable" width="100%"
+							cellspacing="0">
+							<thead>
 								<tr>
-									<th scope="col" class="text-center">번호</th>
-									<th scope="col" class="text-center">제목</th>
-									<th scope="col" class="text-center">작성자</th>
-									<th scope="col" class="text-center">작성일</th>
+									<th>번호</th>
+									<th>구분</th>
+									<th>제목</th>
+									<th>작성자</th>
+									<th>작성일</th>
 								</tr>
 							</thead>
 							<tbody>
-								<c:if test="${not empty boardAll}">
-									<c:forEach var="b" items="${boardAll}">
+								<c:if test="${not empty noticeList}">
+									<c:forEach var="b" items="${noticeList}">
 										<tr>
 											<td><c:out value="${b.boardNo}" /></td>
-											<td><c:out value="${b.boardTitle}" /></td>
-											<td class="bordTd"><c:out value="${b.bordContent}" /></td>
-											<td><c:out value="${b.oriFileName}" /></td>
+											<td><c:out value="${b.boardCategory}" /></td>
+											<td><c:out value="${b.boardTitle }"/></td>
 											<td><c:out value="${b.regId}" /></td>
 											<td><fmt:formatDate value="${b.regDtime}"
 													pattern="yyyy-MM-dd" /></td>
 										</tr>
 									</c:forEach>
-
 								</c:if>
 							</tbody>
-											</table> --%>
+						</table>
+						<c:if test="${empty noticeList}">
+							<p id="noticeFont">조회할 공지사항이 없습니다</p>
+						</c:if>
 										</div>
-										<div class="tab-pane" id="approval"></div>
 										
+							<!-- <div class="tab-content"> -->
+										<div class="tab-pane" id="approval">
 									<!-- <div id="home-center" class="div-padding div-margin"> -->
 										<%-- <h5 class="sign-h5" onclick="location.href='${path}/approval/approvalList.do?appCheck='결재중'';">결재 대기 문서</h5> --%>
 										<table class="table table-bordered" id="dataTable"
@@ -335,9 +333,9 @@ const updateWorkTime = (daytimes) =>{
 												</c:if>
 											</tbody>
 										</table>
-									<!-- </div>-->
+								<!-- </div>  -->
 									</div>
-									
+									</div>
 								</div>
 							</div>
 
@@ -353,6 +351,7 @@ const updateWorkTime = (daytimes) =>{
 					</div>
 
 					<!-- 본문 오른쪽 -->
+					
 					<div>
 						<div id="home-right-div" class="div-padding div-margin">
 						<div id='calendar'></div>
@@ -415,7 +414,7 @@ const updateWorkTime = (daytimes) =>{
                          },
                         //DB에서 List 불러오기
                 events : [ 
-                                <%List<Schedule> scheduleList = (List<Schedule>) request.getAttribute("scheduleList");%>
+                               <%--  <%List<Schedule> scheduleList = (List<Schedule>) request.getAttribute("scheduleList");%>
                                  <%if (scheduleList != null) {%>
                                  <%for (Schedule schedule : scheduleList) {%>
                                  {
@@ -426,7 +425,7 @@ const updateWorkTime = (daytimes) =>{
                                  borderColor : '#FFFFFF'
                                   },
                         <%}
-                     }%>
+                     }%> --%>
                                  ]
                      });  
  
@@ -440,7 +439,7 @@ const updateWorkTime = (daytimes) =>{
  -->
  
  <br>
-            <div id="carouselExampleIndicators" class="carousel slide"
+           <%--  <div id="carouselExampleIndicators" class="carousel slide"
                data-ride="carousel">
                <div class="carousel-inner" role="listbox">
                   <div class="carousel-item">
@@ -465,22 +464,22 @@ const updateWorkTime = (daytimes) =>{
                   class="carousel-control-next-icon" aria-hidden="true"></span> <span
                   class="sr-only">Next</span>
                </a>
-            </div> 
-
+            </div>  --%>
+ 
 						</div>
 					</div>
 				</div>
 
 				<!-- 본문 오른쪽 -->
- 				<!-- <div>
+ 				 <div>
 					<div id="home-right-div" class="div-padding div-margin">
-						<h5 style="padding: 20px">최근 알림</h5>
+						<!-- <h5 style="padding: 20px">최근 알림</h5> -->
 						<div class="notification-list">
 							<div class="left-noti"></div>
 							<div class="right-noti"></div>
 						</div>
 					</div>
-				</div>  -->
+				</div> 
 			</div>
 		</div>
 	</div>
