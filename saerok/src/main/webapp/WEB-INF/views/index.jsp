@@ -286,45 +286,58 @@ const updateWorkTime = (daytimes) =>{
 							</tbody>
 											</table> --%>
 										</div>
-								<%-- 		<div class="tab-pane active" id="calendar">
-											<!--  <div class="col-xl-6 col-lg-6"> -->
-											<!--  <div class="card shadow mb-4 border-left-info"> -->
-											<!-- Card Header - Dropdown -->
-											<!--  <div
-                    class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
-                    <h6 class="m-0 font-weight-bold text-primary">중요일정</h6>
-                </div>  -->
-											<!-- Card Body -->
-											<!--   <div class="card-body"> -->
-											<table class="table table-bordered" id="dataTable"
+										<div class="tab-pane" id="approval"></div>
+										
+									<!-- <div id="home-center" class="div-padding div-margin"> -->
+										<%-- <h5 class="sign-h5" onclick="location.href='${path}/approval/approvalList.do?appCheck='결재중'';">결재 대기 문서</h5> --%>
+										<table class="table table-bordered" id="dataTable"
 												width="100%" cellspacing="0">
-												<tbody>
-													<c:if test="${not empty scheduleList }">
-														<c:forEach var="i" begin="0" end="4">
-															<c:if test="${not empty schduleList[i] }">
-																<tr>
-																	<td colspan="2">
-																		<a href="{path}/calendar/Detail/${scheduleList[i].scheduleNo }">
-																					${ scheduleList[i].skdTitle }
-																	 	</a>
-																	 </td>
-																</tr>
-															</c:if>
-														</c:forEach>
-													</c:if>
-													<c:if test="${empty scheduleList }">
-														<tr>
-															<td colspan="2">중요한 일정이 없습니다.</td>
-														</tr>
-													</c:if>
-												</tbody>
-											</table>
-											<!--  </div> -->
-											<!--   </div> -->
-										</div> --%>
-										<div class="tab-pane" id="approval">결재</div>
+											<thead>
+												<tr>
+													<th>결재번호</th>
+													<th>제목</th>
+													<th>기안자</th>
+													<th>기안일</th>
+													<th>진행상태</th>
+												</tr>
+											</thead>
+											<tbody>
+												<c:if test="">
+													<tr>
+														<td colspan="4" class="home-sign-no">결재 대기 문서가 없습니다.</td>
+													</tr>
+												</c:if>
+												<c:if test="">
+													<c:forEach items="" var="app" varStatus="vs">
+														<c:if test="">
+															<tr class="div-sign-all-tbl-tr" data-no="" data-type="">
+																<td></td>
+																<td>
+																	<c:choose>
+																		<c:when test="">휴가신청서</c:when>
+																		<c:when test="">기본신청서</c:when>
+																		<c:when test="">지출결의서</c:when>
+																	</c:choose>
+																</td>
+																<td class="div-sign-all-tbl-td-btn">
+																	<c:forEach items="" var="signStatus" varStatus="vs">
+																		<c:if test="">
+																			<button class="tiny warning button">승인</button>
+																		</c:if>
+																		<c:if test="">
+																			<button class="tiny warning button">반려</button>
+																		</c:if>
+																	</c:forEach>
+																</td>
+															</tr>
+														</c:if>
+													</c:forEach>
+												</c:if>
+											</tbody>
+										</table>
+									<!-- </div>-->
 									</div>
-
+									
 								</div>
 							</div>
 
@@ -372,6 +385,7 @@ const updateWorkTime = (daytimes) =>{
 
          <script>
                   document.addEventListener('DOMContentLoaded', function() {
+                	  
                      var calendarEl = document.getElementById('calendar');
                      var calendar = new FullCalendar.Calendar(calendarEl, {
                              googleCalendarApiKey: 'AIzaSyDZTRgjuENE0svix_V-Fzl6EKEOttucbHw',
@@ -387,6 +401,7 @@ const updateWorkTime = (daytimes) =>{
                           /*  start : 'prev next today',
                            center : 'title',
                            end : 'dayGridMonth,dayGridWeek,dayGridDay' */
+                           
                         },
                      
                         selectable : true, // 달력 일자 드래그 설정가능
@@ -399,7 +414,7 @@ const updateWorkTime = (daytimes) =>{
                            //alert('clicked ' + info.dateStr);
                          },
                         //DB에서 List 불러오기
-                           events : [ 
+                events : [ 
                                 <%List<Schedule> scheduleList = (List<Schedule>) request.getAttribute("scheduleList");%>
                                  <%if (scheduleList != null) {%>
                                  <%for (Schedule schedule : scheduleList) {%>
@@ -413,8 +428,8 @@ const updateWorkTime = (daytimes) =>{
                         <%}
                      }%>
                                  ]
-                     });
-
+                     });  
+ 
                    // 캘린더 렌더링
                    calendar.render();
            
@@ -457,7 +472,7 @@ const updateWorkTime = (daytimes) =>{
 				</div>
 
 				<!-- 본문 오른쪽 -->
- 				<div>
+ 				<!-- <div>
 					<div id="home-right-div" class="div-padding div-margin">
 						<h5 style="padding: 20px">최근 알림</h5>
 						<div class="notification-list">
@@ -465,7 +480,7 @@ const updateWorkTime = (daytimes) =>{
 							<div class="right-noti"></div>
 						</div>
 					</div>
-				</div> 
+				</div>  -->
 			</div>
 		</div>
 	</div>

@@ -29,44 +29,7 @@ public class ScheduleServiceImpl implements ScheduleService{
 	@Override
 	public int write(Schedule sc) {
 		
-		int result = 0;
-		
-//		try {
-//		    SimpleDateFormat dateFormat = new SimpleDateFormat("MM/dd/yyyy"); 
-//		    Date parsedSDate = dateFormat.parse(sc.getSkdStart());
-//		    Date parsedEDate = dateFormat.parse(sc.getSkdEnd());
-//		    Timestamp timestamp = new java.sql.Timestamp(parsedSDate.getTime());
-//		    Timestamp timestamp2 = new java.sql.Timestamp(parsedEDate.getTime());
-//		    sc.setSkdStart(timestamp.toString());
-//		    sc.setSkdEnd(timestamp2.toString());
-//		    
-//		    
-//		    result = skddao.insertSkd(session, sc);
-//		} catch(Exception e) { 
-//			e.printStackTrace();
-//		}
-//		
-//		return result;
-//		
-		  try {
-		        SimpleDateFormat dateFormat = new SimpleDateFormat("yy-mm-dd"); 
-
-		        // null 체크 추가
-		        if (sc.getSkdStart() != null && sc.getSkdEnd() != null) {
-		            Date parsedSDate = dateFormat.parse(sc.getSkdStart());
-		            Date parsedEDate = dateFormat.parse(sc.getSkdEnd());
-		            Timestamp timestamp = new java.sql.Timestamp(parsedSDate.getTime());
-		            Timestamp timestamp2 = new java.sql.Timestamp(parsedEDate.getTime());
-		            sc.setSkdStart(timestamp.toString());
-		            sc.setSkdEnd(timestamp2.toString());
-
-		            result = skddao.insertSkd(session, sc);
-		        } else {
-		            System.out.println("날짜가 null입니다.");
-		        }
-		    } catch(Exception e) { 
-		        e.printStackTrace();
-		    }
+		int result = skddao.insertSkd(session, sc);
 
 		    return result;
 	}

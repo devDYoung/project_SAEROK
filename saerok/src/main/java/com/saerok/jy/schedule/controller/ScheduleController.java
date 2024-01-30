@@ -1,42 +1,29 @@
 package com.saerok.jy.schedule.controller;
 
 import java.security.Principal;
-import java.time.LocalDate;
-import java.time.LocalDateTime;
-import java.time.LocalTime;
-import java.time.format.DateTimeFormatter;
-import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Locale;
-import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import com.saerok.PageFactory;
-import com.saerok.jh.employee.model.dto.Employee;
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.saerok.jy.schedule.dto.Schedule;
 import com.saerok.jy.schedule.service.ScheduleService;
-
 
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
 
 
-@RequestMapping("calendar")
+@RequestMapping("/calendar")
 @Controller
 public class ScheduleController {
 	
@@ -62,7 +49,13 @@ public class ScheduleController {
 		}
 		// 내문서함 조회
 		@GetMapping("/calendarmain")
-		public void calendarMain() {
+		public void calendarMain(Model model,Principal loginSession) {
+			String empNo = loginSession.getName();
+			try {
+				model.addAttribute("scheduleList", new ObjectMapper().writeValueAsString(skdService.selectList(empNo)));
+			}catch(Exception e ) {
+				e.printStackTrace();
+			}
 		}
 		
 	
@@ -84,7 +77,7 @@ public class ScheduleController {
 		
 		
 		//일정 작성 (화면)
-		@GetMapping("write")
+		@GetMapping("/write")
 		public String write(Model model) {
 			model.addAttribute("title", "CALENDAR");
 			model.addAttribute("page", "calendar/calendarmain");
@@ -92,7 +85,7 @@ public class ScheduleController {
 		}
 		
 		//일정 작성
-		@PostMapping("write")
+		@PostMapping("/write")
 		public String write(Schedule sc, Model model, HttpSession session,Principal loginSession) {
 			
 			String empNo = loginSession.getName();
@@ -100,14 +93,13 @@ public class ScheduleController {
 			sc.setEmpNo(empNo);
 			int result = skdService.write(sc);
 			
-			
-			//화면 선택
-			if(result ==1) {
-				session.setAttribute("alertMsg", "일정 등록 완료");
-				return "redirect:/calendar/calendarview/1";
+			if(result>0) {
+
+				return "redirect:/calendar/calendarmain";
 			}else {
-				session.setAttribute("alertMsg" , "일정 등록 실패");
-				return "redirect:/calendar/calendarview/1";
+				model.addAttribute("msg","일정등록실패");
+				model.addAttribute("loc","calendar/main");
+				return "common/msg";
 			}
 			
 		}
@@ -132,10 +124,10 @@ public class ScheduleController {
 			
 			if(result == 1) {
 				session.setAttribute("alertMsg", "일정 수정 완료");
-				return "redirect:/calendar/view/1";
+				return "redirect:/calendar/view";
 			}else {
 				session.setAttribute("alertMsg", "일정 수정 실패");
-				return "redirect:/calendar/view/1";
+				return "redirect:/calendar/view";
 			}
 			
 		}
@@ -150,10 +142,10 @@ public class ScheduleController {
 			
 			if(result ==1) {
 				session.setAttribute("alertMsg", "일정이 삭제되었습니다.");
-				return "redirect:/calendar/view/1";
+				return "redirect:/calendar/view";
 			}else {
 				session.setAttribute("alertMsg", "일정 삭제 실패");
-				return "redirect:/calendar/view/1";
+				return "redirect:/calendar/view";
 			}
 		}
 		
