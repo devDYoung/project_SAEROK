@@ -257,7 +257,6 @@ $(document).ready(function() {
 
 
 
-
 <form class="documentForm" name="basicForm"
 	action="${path }/approval/insertAppLetter.do" method="POST"
 	enctype="multipart/form-data">
@@ -330,8 +329,9 @@ $(document).ready(function() {
 				</tr>
 				<tr style="color: black; border-top: none; border-bottom: none;">
 					<td colspan="8" style="text-align: center; height: 100px;">
-						2024년 &nbsp; 2 월 &nbsp; 2일 &nbsp;</td>
+						2024년 &nbsp; 1 월 &nbsp; 31일 &nbsp;</td>
 				</tr>
+				
 				<tr>
 					<td colspan="8"
 						style="color: black; text-align: right; height: 100px; padding-right: 50px;">

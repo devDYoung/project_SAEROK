@@ -81,7 +81,7 @@ public class EmployeeController {
                         
                } else {
                    msg = "사원등록실패";
-                   loc = "/";
+                   loc = "";
                }
 
                model.addAttribute("msg", msg);

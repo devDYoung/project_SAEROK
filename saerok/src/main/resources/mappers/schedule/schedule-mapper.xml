@@ -40,13 +40,13 @@
 			, #{skdTitle}
 			, #{skdContent}
 			, #{empNo} 
-			, #{skdStart}
-			, #{skdEnd}
-			,#{skdTypeCd}
+			, TO_CHAR(TO_DATE(#{skdStart},'MM/DD/YYYY'),'YYYY-MM-DD')
+			, TO_CHAR(TO_DATE(#{skdEnd},'MM/DD/YYYY'),'YYYY-MM-DD')
+			,'01'
 		) 
 	</insert>
 	
-	<!-- 모달에서 일정 작성 -->
+<!-- 	모달에서 일정 작성 -->
 	<insert id="insertModalSkd">
 	INSERT INTO SCHEDULE 
 		( 
@@ -99,31 +99,30 @@
 		        ,S.CATEGORY
 		        ,S.SKD_TITLE
 		        ,S.SKD_CONTENT
-		        ,TO_CHAR(S.REG_DTIME, 'YYYY-MM-DD') AS REG_DTIME
-		        ,TO_CHAR(S.MOD_DTIME, 'YYYY-MM-DD') AS MOD_DTIME
-		        ,TO_CHAR(S.SKD_START, 'YYYY-MM-DD') AS SKD_START
-		        ,TO_CHAR(S.SKD_END, 'YYYY-MM-DD') AS SKD_END
+		        ,S.REG_DTIME
+		        ,S.MOD_DTIME
+		        ,SKD_START
+		        ,SKD_END
 		        ,S.SKD_TYPE_CD
 		        ,E.EMP_NO AS WRITER
 		        ,S.STAR
 		    FROM SCHEDULE S
 		    JOIN EMPLOYEE E
 		    ON S.EMP_NO = E.EMP_NO
-		    WHERE S.SKD_TYPE_CD = '02'
-		    AND E.DEPT_CODE = #{DEPT_CODE}
+		    WHERE S.EMP_NO=#{empNo}
 		    ORDER BY S.SKD_START ASC
 	</select>
 	
 	
-	<!-- 일정 갯수 -->
+	<!-- 일정 수 -->
 	<select id="selectCountAll" resultType="_int">
 		SELECT COUNT(SCHEDULE_NO)
 		FROM SCHEDULE
-		<!-- WHERE STATUS = 'Y' -->
+		WHERE STATUS = 'Y'
 	</select>
 	
 	
-	<!-- 일정 상세 조회 -->
+<!-- 	일정 상세 조회 -->
 	<select id="selectOne" resultType="map">
 		SELECT
 			 S.SCHEDULE_NO
@@ -140,11 +139,11 @@
 		 JOIN EMPLOYEE E
 		ON S.EMP_NO = E.EMP_NO
 		WHERE S.SCHEDULE_NO = #{scheduleNo}
-		<!-- AND C.STATUS = 'Y' -->
+		AND C.STATUS = 'Y'
 	</select>
 	
-	
-	<!-- 캘린더에 일정 출력 -->
+	<!-- 
+	캘린더에 일정 출력 -->
 	<select id="calendarList" resultType="map">
 		SELECT
 			 S.SCHEDULE_NO
@@ -201,6 +200,6 @@
 		    AND S.STAR = 'Y'
 		    AND S.EMP_NO = #{empNo}
 		    ORDER BY C.SKD_START ASC		
-	</select>
+	</select> 
 
 </mapper> 

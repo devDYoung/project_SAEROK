@@ -7,7 +7,6 @@
 <c:set var="path" value="${pageContext.request.contextPath}" />
 <c:set var="loginEmployee"
 	value="${sessionScope.SPRING_SECURITY_CONTEXT.authentication.principal }" />
-
 <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
 
 <link
@@ -16,7 +15,6 @@
 
 <script
 	src="https://cdn.datatables.net/v/dt/dt-1.13.8/datatables.min.js">
-   
 </script>
 
 <jsp:include page="/WEB-INF/views/common/header.jsp" />
@@ -29,14 +27,14 @@
 		</div>
 		<div class="card-body">
 			<div class="table-responsive">
+		
+								<!-- 쪽지 쓰기 버튼 -->
+								<button type="button" class="btn btn-primary" id="sendMsgModal" data-toggle="modal"
+								data-target="#msgModal" >쪽지 쓰기</button><br><br>
 				<table class="table table-bordered" id="dataTable" width="100%"
 					cellspacing="0">
 					<thead>
-					<!-- 쪽지 쓰기 버튼 -->
-							<button type="button" class="btn btn-primary" data-toggle="modal"
-								data-target="#exampleModal" data-whatever="@fat">쪽지 쓰기</button>
-						<tr>
-							
+						<tr>							
 							<th>번호</th>
 							<th>보낸사람</th>
 							<th>날짜</th>
@@ -64,7 +62,7 @@
 		</div>
 	</div>
 </div>
-<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog"
+<div class="modal fade" id="msgModal" tabindex="-1" role="dialog"
 	aria-labelledby="exampleModalLabel" aria-hidden="true">
 	<div class="modal-dialog" role="document">
 		<div class="modal-content">
@@ -113,8 +111,6 @@
 	</div>
 </div>
 
-<jsp:include page="/WEB-INF/views/common/footer.jsp" />
-
 <script>
    $(document).ready(function() {
       /* 
@@ -148,6 +144,7 @@
                }
             });
          }
+      
          // AJAX로 데이터 전송
          $.ajax({
             type : 'POST',
@@ -169,3 +166,4 @@
       });
    });
 </script>
+<script src="${path }/resources/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>

@@ -90,7 +90,7 @@
 				</tr>
 				<tr style="color: black; border-top: none; border-bottom: none;">
 					<td colspan="8" style="text-align: center; height: 100px;">
-						2024년 &nbsp; test 월 &nbsp; test 일 &nbsp;</td>
+						2024년 &nbsp; 1월 &nbsp; 31일 &nbsp;</td>
 				</tr>
 				<tr>
 					<td colspan="8"

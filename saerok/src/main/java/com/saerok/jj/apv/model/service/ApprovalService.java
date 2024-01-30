@@ -30,7 +30,7 @@ public interface ApprovalService {
 	
 	Approval approvalDetailView(String appSeq); //품의서 상세조회 결재
 	
-	Map<String, String> updateApprovalStatus(Map<String, String> paramMap); // 승인 반려 결재 부분
+	int updateApprovalStatus(Map<String, String> paramMap); // 승인 반려 결재 부분
 	
 
 }

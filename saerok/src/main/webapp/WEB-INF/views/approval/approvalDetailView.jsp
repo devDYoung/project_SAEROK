@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ page import="java.util.Optional" %>	
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
@@ -7,8 +8,6 @@
 <c:set var="path" value="${pageContext.request.contextPath}" />
 <c:set var="loginEmployee"
 	value="${sessionScope.SPRING_SECURITY_CONTEXT.authentication.principal }" />
-
-${approvalDetailView}
 <style>
 .custom-file-link {
 	color: blue;
@@ -75,9 +74,9 @@ ${approvalDetailView}
 }
 </style>
 <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
-<img
+<!-- <img
 	src="https://approval.office.hiworks.com/gabia.biz/approval/sign/approval/A/2/87786"
-	style="width: auto; height: auto; max-width: none;" alt="아이콘">
+	style="width: auto; height: auto; max-width: none;" alt="아이콘"> -->
 
 
 <form class="documentForm" name="basicForm"
@@ -97,47 +96,68 @@ ${approvalDetailView}
 					<c:forEach var="apvLine"
 						items="${approvalDetailView.apvWriter.stream()
 				    .sorted((e,e2)->e2.getWriterList()-e.getWriterList()).toList() }">
-						<td style="height: 25px; width: 100px; font-size: 17px">
+						<td class="apvLine"
+							style="height: 25px; width: 100px; font-size: 17px">
 							${apvLine.apvEmpName}</td>
 					</c:forEach>
 
 				</tr>
 
+
 				<tr>
 					<c:forEach var="writer"
 						items="${approvalDetailView.apvWriter.stream()
-				        .sorted((e,e2)->e2.getWriterList()-e.getWriterList()).toList() }">
-						<td><c:if test="${writer.apvEmpNo eq loginEmployee.empNo }">
-								<c:if
-									test="${approvalDetailView.apvWriter.stream()
-				                                .filter(e->e.getWriterList()>writer.getWriterList())
-				                                .allMatch(e->e.getApvState()==300).orElse(true)}">
-									<!-- 결재 버튼을 누르면 모달 창을 띄움 -->
-									<input type="button" id="apv1" value="결재"
-										onclick="showModal();" />
-									<!-- 모달 창 -->
-									<div id="myModalApv" class="modal">
-										<div class="modal-content">
-											<h2>결재</h2>
-											<p>결재하시겠습니까?</p>
-											<div class="button-container">
-												<button onclick="aprv()" class="btn approve">승인</button>
-												<button onclick="reject()" class="btn reject">반려</button>
-												<button onclick="cancel()" class="btn cancel">취소</button>
-											</div>
-										</div>
-									</div>
-									<div id="rejectModal" class="modal">
-										<div class="modal-content">
-											<h2>반려</h2>
-											<p>반려 사유를 입력하시오.</p>
-											<textarea id="returnReason" rows="4" cols="50"></textarea>
-											<button onclick="reject()" class="btn reject">확인</button>
-										</div>
-									</div>
+        .sorted((e,e2)->e2.getWriterList()-e.getWriterList()).toList() }">
+						<td><c:set var="apvStatus"
+								value="${approvalDetailView.apvWriter.stream()
+                .filter(e->e.getWriterList()==writer.getWriterList())
+                .toList().get(0).getApvState()}" />
+							<c:choose>
+								<c:when test="${apvStatus eq 300}">
+									<img src="${path }/resources/img/approval.png"
+										style="width: 30px;" />
+								</c:when>
+								<c:when test="${apvStatus eq 200}">
+									<img src="${path }/resources/img/rejection.png"
+										style="width: 30px;" />
+								</c:when>
+								<c:otherwise>
+									<c:if test="${writer.apvEmpNo eq loginEmployee.empNo }">
+										<c:if
+											test="${approvalDetailView.apvWriter.stream()
+                            .filter(e->e.getWriterList()>writer.getWriterList())
+                            .allMatch(e->e.getApvState()=='300').orElse(true) }">
+											<!-- 결재 버튼을 누르면 모달 창을 띄움 -->
+											<input type="button" id="apv1" class="apvLineButton"
+												value="결재" onclick="showModal();" />
+											<!-- 모달 창 -->
 
-								</c:if>
-							</c:if></td>
+											<div id="myModalApv" class="modal">
+												<div class="modal-content">
+													<h2>결재</h2>
+													<p>결재하시겠습니까?</p>
+													<div class="button-container">
+														<button type="button" onclick="aprv(event)"
+															class="btn approve">승인</button>
+														<button type="button" onclick="aprv(event)"
+															class="btn reject">반려</button>
+														<button type="button" onclick="cancel(event)"
+															class="btn cancel">취소</button>
+													</div>
+												</div>
+											</div>
+											<div id="rejectModal" class="modal">
+												<div class="modal-content">
+													<h2>반려</h2>
+													<p>반려 사유를 입력하시오.</p>
+													<textarea id="returnReason" rows="4" cols="50"></textarea>
+													<button onclick="reject()" class="btn reject">확인</button>
+												</div>
+											</div>
+										</c:if>
+									</c:if>
+								</c:otherwise>
+							</c:choose></td>
 					</c:forEach>
 				</tr>
 				<tr>
@@ -209,77 +229,90 @@ ${approvalDetailView}
 		</div>
 		<div id="button" style="text-align: center; margin-top: 10px">
 			<input type="hidden" name="basicForm" value="품의서">
-			<button type="submit" class="btn btn-primary" onclick="">확인</button>
-			<input type="text" style="border: none; width: 10px;" disabled>
-			<button type="reset" class="btn btn-primary" onclick="">취소</button>
+			<button type="button" class="btn btn-primary"
+				onclick="window.close();">확인</button>
 		</div>
 	</div>
 </form>
 
-
+<!--결재 모달 창  -->
 <script>
-function showModal() {
-    document.getElementById("myModalApv").style.display = "block";
-}
+	function showModal() {
+		document.getElementById("myModalApv").style.display = "block";
+	}
 
-function showRejectModal() {
-    document.getElementById("myModalApv").style.display = "none";
-    document.getElementById("rejectModal").style.display = "block";
-}
+	function showRejectModal() {
+		document.getElementById("myModalApv").style.display = "none";
+		document.getElementById("rejectModal").style.display = "block";
+	}
+	 function cancel() {
+	        document.getElementById("myModalApv").style.display = "none";
+	        document.getElementById("rejectModal").style.display = "none";
 
-function aprv() {
-    // AJAX를 사용하여 서버에 승인을 전송
-    $.ajax({
-        type: "POST",
-        url: "${path}/updateApprovalStatus",
-        data: {
-            appSeq: "${approvalDetailView.appSeq}", // 결재 문서 번호
-            apvState: "승인"
-        },
-        success: function(response) {
-            // 성공 시 처리
-            console.log("승인 성공");
-            // 추가적으로 필요한 처리 로직 작성
-        },
-        error: function(error) {
-            // 실패 시 처리
-            console.error("승인 실패");
-            // 추가적으로 필요한 처리 로직 작성
-        }
-    });
+	 }
 
-    // 모달 창 숨기기
-    document.getElementById("myModalApv").style.display = "none";
-}
+	function aprv(e) {
+		let returnReason = "";
+		let status = e.target.innerText.trim();
+		if (status == "반려") {
+			returnReason = prompt("반려사유를 작성하세요 ");
+		}
+		// AJAX를 사용하여 서버에 승인을 전송
+		$.ajax({
+			type : "POST",
+			url : "${path}/approval/updateApprovalStatus",
+			data : {
+				appSeq : "${approvalDetailView.appSeq}", 
+				apvState : status,
+				returnReason : returnReason,
+			},
+			success : function(response) {
+				alert(response.approvalMessage);
+				const $img = document.createElement("img");
+				$img.src = "${path}/resources/img/"
+						+ (response.resultCode == 300 ? "approval.png"
+								: "rejection.png");
+				$img.style.width = "30px";
 
-function reject() {
-    // 반려 사유를 가져와서 처리하는 로직 추가
-    var returnReason = document.getElementById("returnReason").value;
+				const apvLineBtn = document.querySelector("#apv1");
+				const apvContainer = apvLineBtn.parentElement
+				apvContainer.innerHTML = "";
+				apvContainer.appendChild($img);
+			},
+			error : function(error) {
+				// 실패 시 처리
+				console.error("승인 실패");
+			}
+		});
 
-    // AJAX를 사용하여 서버에 반려 사유를 전송
-    $.ajax({
-        type: "POST",
-        url: "${path}/updateApprovalStatus",
-        data: {
-            appSeq: "${approvalDetailView.appSeq}", // 결재 문서 번호
-            apvState: "반려",
-            returnReason: returnReason
-        },
-        success: function(response) {
-            // 성공 시 처리
-            console.log("반려 성공");
-            // 추가적으로 필요한 처리 로직 작성
-        },
-        error: function(error) {
-            // 실패 시 처리
-            console.error("반려 실패");
-            // 추가적으로 필요한 처리 로직 작성
-        }
-    });
+		// 모달 창 숨기기
+		document.getElementById("myModalApv").style.display = "none";
+	}
 
-    // 모달 창 숨기기
-    document.getElementById("rejectModal").style.display = "none";
-}
+	function reject() {
+		
+		var returnReason = document.getElementById("returnReason").value;
+
+		// AJAX를 사용하여 서버에 반려 사유를 전송
+		$.ajax({
+			type : "POST",
+			url : "${path}/updateApprovalStatus",
+			data : {
+				appSeq : "${approvalDetailView.appSeq}", 
+				apvState : "반려",
+				returnReason : returnReason
+			},
+			success : function(response) {
+				console.log("반려 성공");
+			},
+			error : function(error) {
+				console.error("반려 실패");
+			}
+		});
+
+		// 모달 창 숨기기
+		document.getElementById("rejectModal").style.display = "none";
+	}
 </script>
 
 

@@ -1,11 +1,8 @@
 package com.saerok.jj.apv.controller;
 
-import java.io.IOException;
 import java.io.File;
-import java.nio.file.Path;
+import java.io.IOException;
 import java.security.Principal;
-import java.sql.Date;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -153,34 +150,38 @@ public class ApprovalController {
 		model.addAttribute("approvalDetailView", approvalDetail);
 	}
 
-	// 결재 승인 반려
+	// 결재 승인 반려 //최종결재완료
 	@PostMapping("/updateApprovalStatus")
-	public String updateApprovalStatus(@RequestParam Map<String, String> paramMap, HttpSession session) {
-	    // 승인 또는 반려 처리
-	    Map<String, String> updateResult = service.updateApprovalStatus(paramMap);
+	@ResponseBody
+	public Map<String,String> updateApprovalStatus(
+			@RequestParam Map<String, String> paramMap, HttpSession session,
+			Principal loginMember) {
+	    
+		paramMap.put("empNo", loginMember.getName());
+		// 승인 또는 반려 처리
+	    int updateResult = service.updateApprovalStatus(paramMap);
 
 	    String apvState = paramMap.get("apvState");
 	    String appSeq = paramMap.get("appSeq");
-
+	    String approvalMessage="",resultCode="";
 	    // 승인 처리
-	    if ("300".equals(apvState) && "1".equals(updateResult.get("RESULT"))) {
-	        session.setAttribute("approvalMessage", "결재가 승인 처리되었습니다.");
+	    if(updateResult>0) {
+		    if ("승인".equals(apvState)) {
+		    	resultCode="300";
+		    	approvalMessage= "결재가 승인 처리되었습니다.";
+		    }
+	
+		    // 반려 처리 
+		    if ("반려".equals(apvState)) {
+		        String returnReason = paramMap.get("returnReason");
+		        resultCode="200";
+		        approvalMessage="결재가 반려 처리되었습니다. 사유: " + (returnReason != null ? returnReason : "");
+		    }
 	    }
 
-	    // 반려 처리 
-	    if ("200".equals(apvState) && "1".equals(updateResult.get("RESULT"))) {
-	        String returnReason = paramMap.get("returnReason");
-	        session.setAttribute("approvalMessage", "결재가 반려 처리되었습니다. 사유: " + (returnReason != null ? returnReason : ""));
-	    }
-
-	    // 업데이트 후에는 적절한 리다이렉션 또는 응답을 수행
-	    return "redirect:/approval/approvalDetailView?appSeq=" + appSeq;
+	   return Map.of("approvalMessage",approvalMessage,"resultCode",resultCode);
 	}
 
 
 
-	// 테스트
-	@GetMapping("/test")
-	public void test() {
-	}
 }

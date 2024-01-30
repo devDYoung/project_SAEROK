@@ -12,6 +12,8 @@ public interface BoardService {
     
     
     List<Board> boardPart();
+    
+    // 게시글 저장
     void save(Board board);
    
 }
