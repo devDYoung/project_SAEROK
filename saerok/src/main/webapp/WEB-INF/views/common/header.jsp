@@ -8,13 +8,15 @@
 <!DOCTYPE html>
 <html lang="utf-8">
 <head>
-  <script src="https://kit.fontawesome.com/cbe4aa3844.js" crossorigin="anonymous"></script>
+   <script src="https://kit.fontawesome.com/cbe4aa3844.js" crossorigin="anonymous"></script>
          <link rel="stylesheet"
-            href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css" /> 
+            href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css" />
             
           <!-- Favicon -->
-		<link rel="shortcut icon" href="${path}/resources/img/logo-bage.png">
-		<link rel="icon" href="${path}/resources/img/logo-bage.png"type="image/x-icon">
+      <link rel="shortcut icon" href="${path}/resources/img/logo-bage.png">
+      <link rel="icon" href="${path}/resources/img/logo-bage.png"type="image/x-icon">
+<!--            <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+     <link rel="stylesheet" href="//code.jquery.com/ui/1.13.2/themes/base/jquery-ui.css"> -->
 <style>
 
 .dropdown-list-image img {
@@ -102,7 +104,7 @@
                     data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
                         <a class="collapse-item" href="${path }/commute/commuteMain.do">내 근태현황</a>
-                       <%--  <a class="collapse-item" href="${path }/commute/commuteList.do">부서별 근태현황</a> --%>
+                        <a class="collapse-item" href="${path }/commute/commuteList.do">부서별 근태현황</a>
                         <a class="collapse-item" href="${path }/commute/AnnualList.do">연차현황</a>
                     </div>
                 </div>
@@ -118,7 +120,7 @@
                     <div class="bg-white py-2 collapse-inner rounded">
                         <a class="collapse-item" href="${path }/calendar/calendarmain">내 일정</a>
                         <a class="collapse-item" href="${path }/calendar/calendarview">일정조회</a>
-<%--                         <a class="collapse-item" href="${path }/calendar/calendarstarview">중요일정</a>
+                       <%--  <a class="collapse-item" href="${path }/calendar/calendarstarview">중요일정</a>
                          <a class="collapse-item" href="${path }/calendar/calendarwrite">일정작성</a> --%>
                     </div>
                 </div> 
@@ -131,8 +133,11 @@
                 </a>
                 <div id="collapseBoard" class="collapse" aria-labelledby="headingBoard" data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
+                       <%-- <a class="collapse-item" href="${path }/board/write">작성하기</a> --%>
                          <a class="collapse-item" href="${path }/board/noticelist">공지 사항</a>
-                        <a class="collapse-item" href="${path }/board/Part">부서별 게시판</a>
+
+                       <!-- <a class="collapse-item" href="">전체게시판</a> -->
+                        <!-- <a class="collapse-item" href="${path }/board/Part">부서별 게시판</a> -->
                     </div>
                 </div>
             </li>
@@ -144,6 +149,7 @@
                 </a>
                 <div id="collapseMsg" class="collapse" aria-labelledby="headingMsg" data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
+                       <%-- <a class="collapse-item" href="javascript:requestNote('${path }/note/write');">쪽지쓰기</a> --%>
                         <a class="collapse-item" href="${path }/note/get">받은쪽지함</a>
                         <a class="collapse-item" href="${path }/note/send">보낸쪽지함</a>
                         <a class="collapse-item" href="${path }/note/basket">휴지통</a>
@@ -259,13 +265,172 @@
                                 </form> 
                             </div>
                         </li>
+
+                        <!-- Nav Item - Alerts -->
+                        <!--  <li class="nav-item dropdown no-arrow mx-1">
+                            <a class="nav-link dropdown-toggle" href="#" id="alertsDropdown" role="button"
+                                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                <i class="fas fa-bell fa-fw"></i>
+                                Counter - Alerts
+                                <span class="badge badge-danger badge-counter">3+</span>
+                            </a>
+                            Dropdown - Alerts
+                            <div class="dropdown-list dropdown-menu dropdown-menu-right shadow animated--grow-in"
+                                aria-labelledby="alertsDropdown">
+                                <h6 class="dropdown-header">
+                                    알림
+                                </h6>
+                                <a class="dropdown-item d-flex align-items-center" href="#">
+                                    <div class="mr-3">
+                                        <div class="icon-circle bg-primary">
+                                            <i class="fas fa-file-alt text-white"></i>
+                                        </div>
+                                    </div>
+                                    <div>
+                                        <div class="small text-gray-500">알림날짜</div>
+                                        <span class="font-weight-bold">알림내용!</span>
+                                    </div>
+                                </a>
+                                <a class="dropdown-item d-flex align-items-center" href="#">
+                                    <div class="mr-3">
+                                        <div class="icon-circle bg-success">
+                                            <i class="fas fa-donate text-white"></i>
+                                        </div>
+                                    </div>
+                                    <div>
+                                        <div class="small text-gray-500">알림날짜</div>
+                                        알림내용!
+                                    </div>
+                                </a>
+                                <a class="dropdown-item d-flex align-items-center" href="#">
+                                    <div class="mr-3">
+                                        <div class="icon-circle bg-warning">
+                                            <i class="fas fa-exclamation-triangle text-white"></i>
+                                        </div>
+                                    </div>
+                                    <div>
+                                        <div class="small text-gray-500">알림날짜</div>
+                                        알림내용!
+                                    </div>
+                                </a>
+                                <a class="dropdown-item text-center small text-gray-500" href="#">모든알림보기</a>
+                            </div>
+                        </li> -->
+
+                       <!-- Nav Item - Alerts -->
+                   <!--       <li class="nav-item dropdown no-arrow mx-1">
+                            <a class="nav-link dropdown-toggle" href="#" id="alertsDropdown" role="button"
+                                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                <i class="fas fa-bell fa-fw"></i>
+                                Counter - Alerts
+                                <span class="badge badge-danger badge-counter">3+</span>
+                            </a>
+                            Dropdown - Alerts
+                            <div class="dropdown-list dropdown-menu dropdown-menu-right shadow animated--grow-in"
+                                aria-labelledby="alertsDropdown">
+                                <h6 class="dropdown-header">
+                                    알림
+                                </h6>
+                                <a class="dropdown-item d-flex align-items-center" href="#">
+                                    <div class="mr-3">
+                                        <div class="icon-circle bg-primary">
+                                            <i class="fas fa-file-alt text-white"></i>
+                                        </div>
+                                    </div>
+                                    <div>
+                                        <div class="small text-gray-500">알림날짜</div>
+                                        <span class="font-weight-bold">알림내용!</span>
+                                    </div>
+                                </a>
+                                <a class="dropdown-item d-flex align-items-center" href="#">
+                                    <div class="mr-3">
+                                        <div class="icon-circle bg-success">
+                                            <i class="fas fa-donate text-white"></i>
+                                        </div>
+                                    </div>
+                                    <div>
+                                        <div class="small text-gray-500">알림날짜</div>
+                                        알림내용!
+                                    </div>
+                                </a>
+                                <a class="dropdown-item d-flex align-items-center" href="#">
+                                    <div class="mr-3">
+                                        <div class="icon-circle bg-warning">
+                                            <i class="fas fa-exclamation-triangle text-white"></i>
+                                        </div>
+                                    </div>
+                                    <div>
+                                        <div class="small text-gray-500">알림날짜</div>
+                                        알림내용!
+                                    </div>
+                                </a>
+                                <a class="dropdown-item text-center small text-gray-500" href="#">모든알림보기</a>
+                            </div>
+                        </li> -->
+
+                        <!-- Nav Item - Messages
+                        <li class="nav-item dropdown no-arrow mx-1">
+                            <a class="nav-link dropdown-toggle" href="#" id="messagesDropdown" role="button"
+                                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                <i class="fas fa-envelope fa-fw"></i>
+                                Counter - Messages
+                                <span class="badge badge-danger badge-counter">7</span>
+                            </a>
+                            Dropdown - Messages
+                            <div class="dropdown-list dropdown-menu dropdown-menu-right shadow animated--grow-in"
+                                aria-labelledby="messagesDropdown">
+                                <h6 class="dropdown-header">
+                                    쪽지알림
+                                </h6>
+                                <a class="dropdown-item d-flex align-items-center" href="#">
+                                    <div class="dropdown-list-image mr-3">
+                                        <img class="rounded-circle" src="img/undraw_profile_1.svg"
+                                            alt="...">
+                                        <div class="status-indicator bg-success"></div>
+                                    </div>
+                                    <div class="font-weight-bold">
+                                        <div class="text-truncate">쪽지내용.</div>
+                                        <div class="small text-gray-500">보낸사람 · 58m</div>
+                                    </div>
+                                </a>
+                                <a class="dropdown-item d-flex align-items-center" href="#">
+                                    <div class="dropdown-list-image mr-3">
+                                        <img class="rounded-circle" src="img/undraw_profile_2.svg"
+                                            alt="...">
+                                        <div class="status-indicator"></div>
+                                    </div>
+                                    <div>
+                                        <div class="text-truncate">쪽지내용</div>
+                                        <div class="small text-gray-500">보낸사람 · 1d</div>
+                                    </div>
+                                </a>
+                                <a class="dropdown-item d-flex align-items-center" href="#">
+                                    <div class="dropdown-list-image mr-3">
+                                        <img class="rounded-circle" src="img/undraw_profile_3.svg"
+                                            alt="...">
+                                        <div class="status-indicator bg-warning"></div>
+                                    </div>
+                                    <div>
+                                        <div class="text-truncate">쪽지내용!</div>
+                                        <div class="small text-gray-500">보낸사람 · 2d</div>
+                                    </div>
+                                </a> -->
+                                <!-- <a class="dropdown-item d-flex align-items-center" href="#"> -->
                                     <div class="dropdown-list-image mr-3" name="oriFileName">
                                         <a href="${path }/mypage">
                                  <img src="${path}/resources/upload/profile/${loginEmployee.destFileName}" alt="ato-profile-img">
                                  </a>
                                         <div class="status-indicator bg-success"></div>
                                     </div>
-   
+                                    
+                                    <!-- <div>
+                                        <div class="text-truncate">쪽지내용.</div>
+                                        <div class="small text-gray-500">보낸사람 · 2w</div>
+                                    </div>
+                                </a>
+                                <a class="dropdown-item text-center small text-gray-500" href="#">쪽지 더보기</a>
+                            </div>
+                        </li> -->
  
                         <div class="topbar-divider d-none d-sm-block"></div> 
 

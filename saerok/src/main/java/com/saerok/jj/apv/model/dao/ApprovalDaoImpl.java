@@ -87,18 +87,16 @@ public class ApprovalDaoImpl implements ApprovalDao {
 	
 	//결재 승인 반려
 	@Override
-	public Map<String, String> updateApprovalStatus(SqlSession session, Map<String, String> paramMap) {
-	    int updateCount = session.update("approval.updateApprovalStatus", paramMap);
-
-	    // 성공 여부에 따라 Map에 값을 설정
-	    Map<String, String> result = new HashMap<>();
-	    if (updateCount > 0) {
-	        result.put("result", "success");
-	    } else {
-	        result.put("result", "fail");
-	    }
-	    return result;
+	public int updateApprovalStatus(SqlSession session, Map<String, String> paramMap) {
+	    return session.update("approval.updateApprovalStatus", paramMap);
+	}
+	
+	//최종결재완료
+	@Override
+	public int updateApproval(SqlSession session, Map<String, String> paramMap) {
+		// TODO Auto-generated method stub
+		 return session.update("approval.updateApproval", paramMap);
 	}
 
-
+	
 }

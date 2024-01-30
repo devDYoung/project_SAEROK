@@ -246,6 +246,7 @@ $(document).ready(function() {
 		});
 </script>
 
+				${approvalDetailView }
 
 <strong>&nbsp; 문서 종류 : </strong>
 <select id="selectDoc" name="selectDoc" class="form-select"

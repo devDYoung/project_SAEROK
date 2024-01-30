@@ -41,4 +41,10 @@ public class BoardDaoImpl implements BoardDao {
    public void save(Board board) {
       sqlSession.insert("board.save",board);
    }
+
+@Override
+public void save(SqlSession session, Board board) {
+	// TODO Auto-generated method stub
+	
+}
 }
