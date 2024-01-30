@@ -113,28 +113,28 @@ textarea::placeholder {
          <div class="modal fade" id="calendarModal" tabindex="-1"
             aria-labelledby="exampleModalLabel" aria-hidden="true">
             <div class="modal-dialog">
-               <form class="modal-content" action="${path}/write" method="post">
+               <form class="modal-content" action="${path}/calendar/write" method="post">
                   <!-- <div class="modal-header">
                   </div> -->
                   <div class="modal-body">
                      <div>
-                        <textarea id="title" name="title" placeholder="일정 제목"></textarea>
+                        <textarea id="title" name="skdTitle" placeholder="일정 제목"></textarea>
                      </div>
                      <div id="create">
                         작성일 <input id="now_date" type="date" value="">
                         <script>document.getElementById('now_date').valueAsDate = new Date();</script>
                      </div>
                      <div id="cate">
-                        카테고리<select name="cateNo" id="select"
+                        카테고리<select name="category" id="select"
                            class="form-select form-select-sm"
                            aria-label=".form-select-sm example">
-                           <option value="3" selected>기타</option>
-                           <option value="1">휴가</option>
-                           <option value="2">반차</option>
+                           <option value="99" selected>기타</option>
+                           <option value="10">휴가</option>
+                           <option value="20">반차</option>
                         </select>
                      </div>
                      <div id="start">
-                        시작일 <input class="datepicker-start" name="startDate">
+                        시작일 <input class="datepicker-start" name="skdStart">
                         <script>
                                           $(function(){
                                             $( ".datepicker-start" ).datepicker({ minDate: 0});
@@ -143,7 +143,7 @@ textarea::placeholder {
                                         </script>
                      </div>
                      <div id="end">
-                        종료일 <input class="datepicker-end" name="endDate">
+                        종료일 <input class="datepicker-end" name="skdEnd">
                         <script>
                                           $(function(){
                                             $('.datepicker-end').datepicker({ minDate: 0});
@@ -153,7 +153,7 @@ textarea::placeholder {
                      </div>
                      <hr id="line">
                      <div>
-                        <textarea id="con" placeholder="내용을 입력하세요" name="content"></textarea>
+                        <textarea id="con" placeholder="내용을 입력하세요" name="skdContent"></textarea>
                      </div>
                   </div>
                   <!-- </div> -->
@@ -202,6 +202,8 @@ textarea::placeholder {
 
          <script>
                   document.addEventListener('DOMContentLoaded', function() {
+                	  const eventsList=JSON.parse('${scheduleList}');
+                      console.log(eventsList);
                      var calendarEl = document.getElementById('calendar');
                      var calendar = new FullCalendar.Calendar(calendarEl, {
                              googleCalendarApiKey: 'AIzaSyDZTRgjuENE0svix_V-Fzl6EKEOttucbHw',
@@ -228,28 +230,21 @@ textarea::placeholder {
                            $("#addCalendarBtn").click();
                            //alert('clicked ' + info.dateStr);
                          },
+                         
                         //DB에서 List 불러오기
-                           events : [ 
-                                <%List<Schedule> scheduleList = (List<Schedule>) request.getAttribute("scheduleList");%>
-                                 <%if (scheduleList != null) {%>
-                                 <%for (Schedule schedule : scheduleList) {%>
-                                 {
-                                    title : '<%=schedule.getSkdTitle()%>',
-                                     start : '<%=schedule.getSkdStart()%>',
-                                     end : '<%=schedule.getSkdEnd()%>',
-                                     backgroundColor : '#03a' + Math.round(Math.random() * 0xfff).toString(16),
-                                 borderColor : '#FFFFFF'
-                                  },
-                        <%}
-                     }%>
-                                 ]
+                        events : eventsList.map(e=>{
+                      	   return ({
+                      		   title :e.SKD_TITLE ,
+                      		   start: e.SKD_START,
+                      		   end: e.SKD_END,
+                      		   backgroundColor : '#03a' + Math.round(Math.random() * 0xfff).toString(16),
+                      		   borderColor : '#FFFFFF'
+                      	   });
+                      	}),
                      });
-
                    // 캘린더 렌더링
                    calendar.render();
-           
                   });
-                  
                </script>
          <!--end-->
       </div>
