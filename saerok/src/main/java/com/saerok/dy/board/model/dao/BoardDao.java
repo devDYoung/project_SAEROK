@@ -15,9 +15,11 @@ public interface BoardDao {
 	// 부서별 조회
 	List<Board> boardPart(SqlSession session);
 	
-	void save(Board board);
+	void save(SqlSession session, Board board);
 	
 	//공지사항 상세보기
 	Board selectNoticeByNo(SqlSession session, int boardNo);
+
+	void save(Board board);
 
 }
