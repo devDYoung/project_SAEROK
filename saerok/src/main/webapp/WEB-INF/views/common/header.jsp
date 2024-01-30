@@ -137,7 +137,7 @@
                          <a class="collapse-item" href="${path }/board/noticelist">공지 사항</a>
 
                        <!-- <a class="collapse-item" href="">전체게시판</a> -->
-                        <a class="collapse-item" href="${path }/board/Part">부서별 게시판</a>
+                        <!-- <a class="collapse-item" href="${path }/board/Part">부서별 게시판</a> -->
                     </div>
                 </div>
             </li>
