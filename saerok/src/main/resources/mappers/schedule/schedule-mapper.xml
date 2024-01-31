@@ -46,31 +46,6 @@
 		) 
 	</insert>
 	
-<!-- 	모달에서 일정 작성 -->
-<!-- 	<insert id="insertModalSkd">
-	INSERT INTO SCHEDULE 
-		( 
-			SCHEDULE_NO
-			,CATEGORY
-			,SKD_TITLE
-			,SKD_CONTENT
-			,EMP_NO
-			,SKD_START
-			,SKD_END 
-		) 
-		VALUES 
-		( 
-			SEQ_SCHEDULE_NO.NEXTVAL 
-			, #{category} 
-			, #{skdTitle}
-			, #{skdContent}
-			, #{empNo} 
-			, #{skdStart}
-			, #{skdEnd}
-		) 
-	</insert>
-	 -->
-	
 	<!-- 일정 삭제 -->
 	<update id="deleteCalendar">
 		DELETE FROM schedule
