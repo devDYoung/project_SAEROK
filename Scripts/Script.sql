@@ -70,6 +70,51 @@ INSERT INTO SCHEDULE
 			, '2024-01-21'
 			,'01'
 		) ;
+	
+	INSERT INTO SCHEDULE 
+		( 
+			SCHEDULE_NO
+			,CATEGORY
+			,SKD_TITLE
+			,SKD_CONTENT
+			,EMP_NO
+			,SKD_START
+			,SKD_END 
+			,SKD_TYPE_CD
+		) 
+		VALUES 
+		( 
+			SEQ_SCHEDULE_NO.NEXTVAL 
+			, '20'
+			, '인사팀일정'
+			, '인사팀일정입니다.'
+			, 'ATO_1'
+			, '2024-01-18'
+			, '2024-01-21'
+			,'02'
+		) ;
+		INSERT INTO SCHEDULE 
+		( 
+			SCHEDULE_NO
+			,CATEGORY
+			,SKD_TITLE
+			,SKD_CONTENT
+			,EMP_NO
+			,SKD_START
+			,SKD_END 
+			,SKD_TYPE_CD
+		) 
+		VALUES 
+		( 
+			SEQ_SCHEDULE_NO.NEXTVAL 
+			, '99'
+			, '회의일정'
+			, '회의일정입니다.'
+			, 'ATO_1'
+			, '2024-01-22'
+			, '2024-01-23'
+			,'02'
+		) ;
 
 SELECT min(IN_DTIME)
 		  , max(OUT_DTIME)
@@ -179,5 +224,5 @@ SELECT * FROM commute;
 
 
 SELECT * FROM SCHEDULE s ;
-DELETE FROM SCHEDULE s  WHERE schedule_no=4;
+DELETE FROM SCHEDULE s  WHERE schedule_no=40;
 

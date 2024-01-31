@@ -13,7 +13,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-<title>발주 신청</title>
+<title>발주신청</title>
 <link
 	href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
 	rel="stylesheet">

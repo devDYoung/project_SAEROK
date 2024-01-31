@@ -21,7 +21,7 @@ public interface NoteDao {
 	// 쪽지를 DB에 저장하는 메소드
 	int insertNote(SqlSession session, Note note);
 
-	// 휴지통으로 이동하는 메소드
+	// 보낸쪽지 메소드
 	Note getNoteByNoteNo(int noteNo, SqlSession session);
 
 	int updateNoteDelStatus(SqlSession session, Note note);

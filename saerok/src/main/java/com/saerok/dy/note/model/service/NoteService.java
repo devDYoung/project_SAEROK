@@ -24,4 +24,7 @@ public interface NoteService {
 	Note getNoteByNoteNo(int noteNo);
 
 	boolean deleteToTrash(String empNo, int noteNo);
+	
+	
+	
 }
