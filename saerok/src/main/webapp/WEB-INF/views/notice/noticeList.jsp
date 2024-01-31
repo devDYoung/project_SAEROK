@@ -44,7 +44,7 @@
 							<thead>
 								<tr>
 									<th scope="col" class="text-center">번호</th>
-									<th scope="col" class="text-center">구분</th>
+									<!-- <th scope="col" class="text-center">구분</th>-->
 									<th scope="col" class="text-center">제목</th>
 									<th scope="col" class="text-center">작성자</th>
 									<th scope="col" class="text-center">작성일</th>
@@ -55,7 +55,7 @@
 									<c:forEach var="b" items="${noticeList}">
 										<tr>
 											<td><c:out value="${b.boardNo}" /></td>
-											<td><c:out value="${b.boardCategory}" /></td>
+											<!-- <td><c:out value="${b.boardCategory}" /></td>-->
 											<td><a
 												href="${path }/board/noticeview?boardNo=${b.boardNo}"> <c:out
 														value="${b.boardTitle}" escapeXml="true" />
@@ -81,7 +81,7 @@
 			info : false,
 			ordering : true,
 			paging : true,
-			columns : [ null, null, null, null, null ]
+			columns : [ null, null, null, null ]
 		// 열의 수에 따라 수정
 		});
 	});
