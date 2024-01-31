@@ -214,6 +214,7 @@
 				<tr style="color: black; border-top: none; border-bottom: none;">
 					<td colspan="8" style="text-align: center; height: 100px;">
 						${approvalDetailView.appWriteDate}</td>
+						<!-- test -->
 				</tr>
 				<tr>
 					<td colspan="8"
