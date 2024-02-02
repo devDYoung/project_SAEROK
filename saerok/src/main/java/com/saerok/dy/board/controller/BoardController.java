@@ -61,7 +61,7 @@ public class BoardController {
         	model.addAttribute("msg","게시글을 등록하였습니다.");
         	model.addAttribute("loc","board/noticelist");
         }catch(Exception e) {
-        	model.addAttribute("msg","글이 작성되지 않았습니다.");
+        	model.addAttribute("msg","게시글을 다시 작성해주세요.");
         	model.addAttribute("loc","board/noticewrite");
         }
         return "common/msg";
