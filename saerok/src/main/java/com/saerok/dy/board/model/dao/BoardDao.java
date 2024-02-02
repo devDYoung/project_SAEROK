@@ -15,6 +15,7 @@ public interface BoardDao {
 	// 부서별 조회
 	List<Board> boardPart(SqlSession session);
 	
+	// 데이터 가져오기
 	void save(SqlSession session, Board board);
 	
 	//공지사항 상세보기
