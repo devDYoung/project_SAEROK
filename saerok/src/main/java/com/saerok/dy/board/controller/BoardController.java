@@ -19,6 +19,7 @@ import lombok.RequiredArgsConstructor;
 
 @Controller
 @RequiredArgsConstructor
+// 일일히 board 써주는 귀찮음 해소
 @RequestMapping("/board")
 public class BoardController {
 

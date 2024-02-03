@@ -14,15 +14,6 @@
 
 <!-- CKEditor 초기화 스크립트 -->
 <script>
-	/* window.onload = function() {
-		CKEDITOR.replace("boardContent", {
-			filebrowserUploadUrl : '${path}/board/imageUpload.do',
-			height : 500,
-			width : 1000
-		});
-	};
-	
-	 */
 	window.onload = function() {
 		CKEDITOR.replace("boardContent");
 	};

@@ -44,18 +44,6 @@ public class NoteServiceImpl implements NoteService {
 		return result > 0; // 삼항 연산자로 변경하여 간결하게 표현
 	}
 
-	/*
-	 * @Override
-	 * 
-	 * @Transactional public boolean deleteToTrash(String empNo, int noteNo) { //
-	 * 휴지통으로 이동할 쪽지를 조회 Note note = dao.getNoteByNoteNo(noteNo, session);
-	 * 
-	 * // 로그인한 사용자의 쪽지만 삭제 가능하도록 if (note != null &&
-	 * empNo.equals(note.getSndEmpNo())) { // 쪽지의 DEL_YN 상태를 'Y'로 변경하여 휴지통으로 이동
-	 * note.setDelYn("Y"); int result = dao.updateNoteDelStatus(session, note);
-	 * return result > 0; } return false; }
-	 */
-
 	@Override
 	@Transactional
 	public boolean deleteToTrash(String empNo, int noteNo) {
