@@ -14,7 +14,7 @@
 </jsp:include>
 
 <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
-<!-- js위로올리기 -->
+
 
 <!-- Modal-->
 <div class="modal fade" id="testModal" tabindex="-1" role="dialog"
