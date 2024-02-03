@@ -13,11 +13,6 @@
 	<jsp:param value="MainPage" name="ATO" />
 </jsp:include>
 <link rel="stylesheet" href="${path }/resources/css/emp.css">
-<!-- Bootstrap core JavaScript-->
-<%-- <script src="${path }/resources/vendor/jquery/jquery.min.js"></script>
-<script
-	src="${path }/resources/vendor/bootstrap/js/bootstrap.bundle.min.js"></script> --%>
-<!-- <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script> -->
 <script
 	src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 	<link
@@ -232,8 +227,6 @@ const updateWorkTime = (daytimes) =>{
    
 
 </script>
-						<!-- </div>
-               </div> -->
 						<!-- 본문 가운데 -->
 						<div>
 							<div id="home-center" class="div-padding div-margin">
@@ -284,9 +277,7 @@ const updateWorkTime = (daytimes) =>{
 						</c:if>
 										</div>
 										
-							<!-- <div class="tab-content"> -->
 										<div class="tab-pane" id="approval">
-									<!-- <div id="home-center" class="div-padding div-margin"> -->
 										<%-- <h5 class="sign-h5" onclick="location.href='${path}/approval/approvalList.do?appCheck='결재중'';">결재 대기 문서</h5> --%>
 										<table class="table table-bordered" id="dataTable"
 												width="100%" cellspacing="0">
