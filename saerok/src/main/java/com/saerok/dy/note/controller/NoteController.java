@@ -29,14 +29,7 @@ public class NoteController {
 
 	@Autowired
 	private final NoteService noteService;
-
-	/*
-	 * // 쪽지 쓰기 페이지로 이동
-	 * 
-	 * @GetMapping("/write") public String noteWritePage() { return
-	 * "note/noteWrite"; }
-	 */
-
+	
 	// 받은 쪽지함 페이지로 이동
 	@GetMapping("/get")
 	public String readNotePage(Model model, Principal loginMember) {
@@ -45,14 +38,7 @@ public class NoteController {
 		model.addAttribute("receivedNotes", receivedNotes);
 		return "note/noteGet";
 	}
-
-	/*
-	 * // 받은 쪽지함 처리
-	 * 
-	 * @PostMapping("/get/{noteNo}") public String getReceivedNotes(@PathVariable
-	 * int sndEmpNo,String rcvEmpNo) {
-	 */
-
+	
 	// 보낸 쪽지함 페이지로 이동
 	@GetMapping("/send")
 	public String sendNotePage(Principal loginSession, Model model) {
