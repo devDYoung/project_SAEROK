@@ -43,7 +43,7 @@
 						<thead>
 							<tr>
 								<th style="text-align: center; background-color: #F2F2F2;">제목</th>
-								<th> <input id="notice-title" name="boardTitle" style="width: 500px;"
+								<th> <input id="board-title" name="boardTitle" style="width: 500px;"
 									type="text"></th>
 							</tr>
 						</thead>

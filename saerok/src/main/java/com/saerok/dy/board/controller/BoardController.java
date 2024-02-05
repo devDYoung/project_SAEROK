@@ -27,26 +27,26 @@ public class BoardController {
     private final BoardService boardService;
 
     // 공지사항 페이지로 이동
-    @GetMapping("/noticelist")
+    @GetMapping("/boardlist")
     public String noticeList(Model model) {
-        List<Board> noticeList = boardService.noticeList();
-        model.addAttribute("noticeList", noticeList);
-        return "notice/noticeList";
+        List<Board> noticeList = boardService.boardList();
+        model.addAttribute("boardList", boardList);
+        return "board/boardList";
     }
 
     // 공지사항 상세보기 페이지
-    @GetMapping("/noticeview")
-    public String selectNoticeByNo(@RequestParam int boardNo, Model model) {
+    @GetMapping("/boardview")
+    public String selectBoardByNo(@RequestParam int boardNo, Model model) {
         // 게시글 상세보기 로직
-        Board board = boardService.selectNoticeByNo(boardNo);
+        Board board = boardService.selectBoardByNo(boardNo);
         model.addAttribute("b", board);
-        return "notice/noticeView";
+        return "board/boardView";
     }
 
     // 공지사항 작성 페이지로 이동
-    @GetMapping("/noticewrite")
-    public String noticeWrite() {
-        return "notice/noticeWrite";
+    @GetMapping("/boardwrite")
+    public String boardWrite() {
+        return "board/boardWrite";
     }
 
     // 게시글 저장
@@ -60,10 +60,10 @@ public class BoardController {
         try {
         	boardService.save(board);
         	model.addAttribute("msg","게시글을 등록하였습니다.");
-        	model.addAttribute("loc","board/noticelist");
+        	model.addAttribute("loc","board/boardlist");
         }catch(Exception e) {
         	model.addAttribute("msg","게시글을 다시 작성해주세요.");
-        	model.addAttribute("loc","board/noticewrite");
+        	model.addAttribute("loc","board/boardwrite");
         }
         return "common/msg";
     }

@@ -24,5 +24,6 @@ public interface NoteDao {
 	// 보낸쪽지 메소드
 	Note getNoteByNoteNo(int noteNo, SqlSession session);
 
+	// 지운 쪽지 업데이트 메소드
 	int updateNoteDelStatus(SqlSession session, Note note);
 }

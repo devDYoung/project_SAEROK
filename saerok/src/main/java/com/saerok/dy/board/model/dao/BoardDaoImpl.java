@@ -19,14 +19,14 @@ public class BoardDaoImpl implements BoardDao {
 
 	// 공지사항 조회
 	@Override
-	public List<Board> noticeList(SqlSession session) {
+	public List<Board> boardList(SqlSession session) {
 		return session.selectList("board.boardAll");
 	}
 
 	// 공지사항 상세보기
 	@Override
-	public Board selectNoticeByNo(SqlSession session, int boardNo) {
-		return sqlSession.selectOne("board.selectNoticeByNo", boardNo);
+	public Board selectBoardByNo(SqlSession session, int boardNo) {
+		return sqlSession.selectOne("board.selectBoardByNo", boardNo);
 	}
 
 // 부서별 게시판 조회
