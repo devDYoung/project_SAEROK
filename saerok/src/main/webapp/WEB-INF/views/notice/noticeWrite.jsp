@@ -14,15 +14,6 @@
 
 <!-- CKEditor 초기화 스크립트 -->
 <script>
-	/* window.onload = function() {
-		CKEDITOR.replace("boardContent", {
-			filebrowserUploadUrl : '${path}/board/imageUpload.do',
-			height : 500,
-			width : 1000
-		});
-	};
-	
-	 */
 	window.onload = function() {
 		CKEDITOR.replace("boardContent");
 	};
@@ -52,10 +43,7 @@
 						<thead>
 							<tr>
 								<th style="text-align: center; background-color: #F2F2F2;">제목</th>
-								<th><select id="selectCategory" name="selectCategory">
-										<option value="공통">공통</option>
-										<option value="회계">회계</option>
-								</select> <input id="notice-title" name="boardTitle" style="width: 500px;"
+								<th> <input id="notice-title" name="boardTitle" style="width: 500px;"
 									type="text"></th>
 							</tr>
 						</thead>

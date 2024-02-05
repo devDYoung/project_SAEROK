@@ -10,8 +10,10 @@
 
 <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
 
-<form class="documentForm" name="basicForm" action="" method="POST"
-	onsubmit="return check_onclick()">
+<form class="documentForm" name="basicForm"
+	action="${path }/approval/insertAppLetter.do" method="POST"
+	enctype="multipart/form-data">
+	<input type="hidden" name="loginEmp" value="${loginEmployee.empNo }">
 	<div id="documentForm " class="documentForm"
 		style="margin: 50px 50px 50px 50px; width: min-content;">
 		<div class="basicForm">
@@ -35,7 +37,8 @@
 				</tr>
 				<tr>
 					<td
-						style="color: black; height: 70px; width: 80px; font-size: 15px;">성명</td>
+						style="color: black; height: 70px; width: 80px; font-size: 15px;">성
+						명</td>
 					<td><input type="text" name="writerName"
 						style="border: none; background: transparent; text-align: center;"
 						value="${ loginEmployee.empName }" readonly></td>
@@ -50,19 +53,17 @@
 				</tr>
 				<tr>
 					<td style="color: black; height: 50px; width: 80px;">제 목</td>
-					<td colspan="8"><textarea class="form-control" name="loaTitle"
-							id="loaTitle"
+					<td colspan="8"><textarea class="form-control"
+							name="letterTitle" id="loaTitle"
 							style="width: 100%; height: 50px; resize: none; overflow: hidden;"></textarea></td>
 				</tr>
 				<tr>
 					<td colspan="8" style="height: 90px;">
-						<!-- <label class="inputFileButton" for="inputFile">
-                       첨부파일 업로드
-                         </label>
-               
-                         <input type="file" id="inputFile" style="display: none;" /> -->
-
-						<input type="file" id="inputFile" name="appLoaFileUpload" />
+						<div class="custom-file">
+							<input type="file" class="custom-file-input" name="upFile"
+								id="upFile1"> <label class="custom-file-label"
+								for="upFile1">파일을 선택하세요</label>
+						</div>
 					</td>
 				</tr>
 				<tr>
@@ -70,7 +71,7 @@
 
 
 					<td colspan="8"><textarea class="form-control"
-							name="loaContent" id="loaContent" cols="151px" rows="11px"
+							name="letterDetail" id="loaContent" cols="151px" rows="11px"
 							style="width: 100%; height: 300px; border: none; resize: none; overflow: hidden; font-size: 25px;"></textarea>
 					</td>
 				</tr>
@@ -81,8 +82,9 @@
 				</tr>
 				<tr style="color: black; border-top: none; border-bottom: none;">
 					<td colspan="8" style="text-align: center; height: 100px;">
-						2024년 &nbsp; 2 월 &nbsp; 2일 &nbsp;</td>
+						2024년 &nbsp; 1 월 &nbsp; 31일 &nbsp;</td>
 				</tr>
+				
 				<tr>
 					<td colspan="8"
 						style="color: black; text-align: right; height: 100px; padding-right: 50px;">
@@ -96,7 +98,7 @@
 			</table>
 		</div>
 		<div id="button" style="text-align: center; margin-top: 10px">
-			<input type="hidden" name="basicForm" value="폼의서">
+			<input type="hidden" name="basicForm" value="품의서">
 			<button type="submit" class="btn btn-primary" onclick="">등록</button>
 			<!-- ${path}/approval/updateLeave -->
 			<input type="text" style="border: none; width: 10px;" disabled>

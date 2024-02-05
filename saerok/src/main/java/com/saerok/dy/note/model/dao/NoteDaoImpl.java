@@ -15,39 +15,41 @@ public class NoteDaoImpl implements NoteDao {
 
 	// 받은 쪽지 조회
 	@Override
-	public List<Note> getReceivedNotes(SqlSession session,String revName) {
-		return session.selectList("note.getReceivedNotes",revName);
+	public List<Note> getReceivedNotes(SqlSession session, String revName) {
+		return session.selectList("note.getReceivedNotes", revName);
 	}
-	
+
 	// 보낸 쪽지 조회
-    @Override
-    public List<Note> getSentNotes(String empNo, SqlSession session) {
-        // 매개변수를 Map에 담아 전달
-        Map<String, Object> params = new HashMap<>();
-        params.put("empNo", empNo);
-        return session.selectList("note.getSentNotes", params);
-    }
+	@Override
+	public List<Note> getSentNotes(String empNo, SqlSession session) {
+		// 매개변수를 Map에 담아 전달
+		Map<String, Object> params = new HashMap<>();
+		params.put("empNo", empNo);
+		return session.selectList("note.getSentNotes", params);
+	}
 
 	// 이름으로 사원 조회
 	@Override
 	public List<Employee> selectEmpByName(SqlSession session) {
 		return session.selectList("note.selectEmpByName");
 	}
-	
+
 	@Override
 	public int insertNote(SqlSession session, Note note) {
 		return session.insert("note.insertNote", note);
 	}
 
+	// 쪽지 삭제여부
 	@Override
 	public int updateNoteDelStatus(SqlSession sessoin, Note note) {
 		// TODO Auto-generated method stub
 		return 0;
 	}
 
+	// 쪽지 번호로 가져오기 
 	@Override
 	public Note getNoteByNoteNo(int noteNo, SqlSession session) {
 		// TODO Auto-generated method stub
-		return null;
+		return session.selectOne("note.getNoteByNoteNo", noteNo);
 	}
 }
