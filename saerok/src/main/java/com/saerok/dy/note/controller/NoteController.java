@@ -106,9 +106,9 @@ public class NoteController {
 		boolean isSentSuccessfully = noteService.sendNote(note);
 
 		if (isSentSuccessfully) {
-			return "쪽지를 전송하였습니다.";
+			return "쪽지를 성공적으로 전송하였습니다.";
 		} else {
-			return "쪽지 전송에 실패하였습니다.";
+			return "쪽지가 전송되지 않았습니다.";
 		}
 	}
 

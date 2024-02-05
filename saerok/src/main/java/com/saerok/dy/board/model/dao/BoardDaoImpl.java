@@ -26,7 +26,7 @@ public class BoardDaoImpl implements BoardDao {
 	// 공지사항 상세보기
 	@Override
 	public Board selectBoardByNo(SqlSession session, int boardNo) {
-		return sqlSession.selectOne("board.selectNoticeByNo", boardNo);
+		return sqlSession.selectOne("board.selectBoardByNo", boardNo);
 	}
 
 // 부서별 게시판 조회

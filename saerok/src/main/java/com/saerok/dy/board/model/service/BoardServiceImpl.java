@@ -28,6 +28,7 @@ public class BoardServiceImpl implements BoardService {
 		return dao.selectBoardByNo(session, boardNo);
 	}
 
+	// 부서별 게시판 구현
 	@Override
 	public List<Board> boardPart() {
 		return dao.boardPart(session);

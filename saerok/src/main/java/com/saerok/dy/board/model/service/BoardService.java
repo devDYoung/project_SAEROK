@@ -10,7 +10,7 @@ public interface BoardService {
     //공지사항 상세보기
     Board selectBoardByNo(int boardNo);
     
-    
+    // 부서별 게시판 구현
     List<Board> boardPart();
     
     // 게시글 저장
