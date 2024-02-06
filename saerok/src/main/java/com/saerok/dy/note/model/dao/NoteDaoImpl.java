@@ -52,4 +52,10 @@ public class NoteDaoImpl implements NoteDao {
 		// TODO Auto-generated method stub
 		return session.selectOne("note.getNoteByNoteNo", noteNo);
 	}
+	
+	// 쪽지 삭제
+	@Override
+	public int deleteNote(SqlSession session, Note noteNo) {
+		return session.delete("note.deleteNote",noteNo);
+	}
 }

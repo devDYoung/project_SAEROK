@@ -10,6 +10,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -49,32 +50,12 @@ public class NoteController {
 		model.addAttribute("sentNotes", sentNotes);
 		return "note/noteSend";
 	}
-
-	// 휴지통 페이지로 이동
-	@GetMapping("/basket")
-	public String deleteNotePage(Model model) {
-		return "note/noteBasket";
-	}
-
+	
 	@PostMapping("/basket")
 	@ResponseBody
-	public String deleteNote(Principal loginSession, @RequestParam int noteNo, Model model) {
-		// 현재 로그인 중인 사원의 사원번호
-		String empNo = loginSession.getName();
-
-		// NoteService를 통해 쪽지 삭제 후 휴지통으로 이동
-		boolean isDeleted = noteService.deleteToTrash(empNo, noteNo);
-
-		if (isDeleted) {
-			// 삭제된 쪽지 가져와 휴지통 모델에 추가
-			Note deletedeNote = noteService.getNoteByNoteNo(noteNo);
-			model.addAttribute("deletedNote", deletedeNote);
-			return "쪽지가 삭제되었습니다.";
-		} else {
-			return "쪽지 삭제 실패하였습니다.";
-
-		}
-
+	public String deleteNote(@RequestBody Note note, Model model) {
+	    int result = noteService.deleteNote(note);
+	    return result > 0 ? "성공" : "실패";
 	}
 
 	// 이름으로 사원 조회
