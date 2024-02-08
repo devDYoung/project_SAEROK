@@ -430,11 +430,11 @@ const updateWorkTime = (daytimes) =>{
  -->
  
  <br>
-           <%--  <div id="carouselExampleIndicators" class="carousel slide"
+            <div id="carouselExampleIndicators" class="carousel slide"
                data-ride="carousel">
                <div class="carousel-inner" role="listbox">
                   <div class="carousel-item">
-                     <img class="img-fluid"
+                     <%-- <img class="img-fluid"
                         src="${paht }/resources/upload/IMG_2341.jpg" alt="First slide">
                   </div>
                   <div class="carousel-item">
@@ -454,8 +454,8 @@ const updateWorkTime = (daytimes) =>{
                   role="button" data-slide="next"> <span
                   class="carousel-control-next-icon" aria-hidden="true"></span> <span
                   class="sr-only">Next</span>
-               </a>
-            </div>  --%>
+               </a> --%>
+            </div>  
  
 						</div>
 					</div>
