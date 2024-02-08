@@ -24,9 +24,7 @@
 					<span aria-hidden="true">&times;</span>
 				</button>
 			</div>
-			<div class="modal-body" id="noteContentModalBody">
-				<!-- 쪽지 내용이 여기에 표시됩니다. -->
-			</div>
+			<div class="modal-body" id="noteContentModalBody"></div>
 			<div class="modal-footer">
 				<button type="button" class="btn btn-secondary" data-dismiss="modal">닫기</button>
 			</div>
@@ -36,13 +34,17 @@
 
 <!-- 전체 리스트 출력 -->
 <div class="container-fluid">
-	<!-- DataTales Example -->
 	<div class="card shadow mb-4">
 		<div class="card-header py-3">
 			<h6 class="m-0 font-weight-bold text-primary">보낸 쪽지함</h6>
 		</div>
 		<div class="card-body">
 			<div class="table-responsive">
+
+				<!-- 쪽지 쓰기 버튼 -->
+				<button type="button" class="btn btn-primary" id="sendMsgModal"
+					data-toggle="modal" data-target="#msgModal">쪽지 쓰기</button>
+				<br> <br>
 				<table class="table table-bordered" id="dataTable" width="100%"
 					cellspacing="0">
 					<thead>
@@ -50,6 +52,7 @@
 							<th>번호</th>
 							<th>받는사람</th>
 							<th>날짜</th>
+							<th>수신확인</th>
 							<th>삭제</th>
 						</tr>
 					</thead>
@@ -64,7 +67,7 @@
 									</a></td>
 									<td><fmt:formatDate value="${note.regDtime}"
 											pattern="yyyy-MM-dd HH:mm:ss" /></td>
-									<%-- <td><c:out value="${note.readYn}" /></td> --%>
+									<td><c:out value="${note.readYn}" /></td>
 									<td>
 										<!-- 삭제 버튼 -->
 										<button type="button" class="btn btn-danger"
@@ -76,6 +79,52 @@
 					</tbody>
 				</table>
 			</div>
+		</div>
+	</div>
+</div>
+<div class="modal fade" id="msgModal" tabindex="-1" role="dialog"
+	aria-labelledby="exampleModalLabel" aria-hidden="true">
+	<div class="modal-dialog" role="document">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h5 class="modal-title" id="exampleModalLabel">Message</h5>
+				<button type="button" class="close" data-dismiss="modal"
+					aria-label="Close">
+					<span aria-hidden="true">&times;</span>
+				</button>
+			</div>
+
+			<!-- keydown 사용해서 사원 조회 -->
+			<div class="modal-body">
+				<form autocomplete="off">
+					<div class="form-group">
+						<label for="recipient-name" class="col-form-label">수신자 </label> <input
+							type="text" class="form-control" id="recipient-name"
+							placeholder="사원 이름을 검색해주세요." data-sb-validations="required,email"
+							onkeyup="searchEmp();" list="searchResult" />
+						<datalist id="searchResult"></datalist>
+					</div>
+					<div class="form-group">
+						<label for="message-text" class="col-form-label">내용</label>
+						<textarea class="form-control" id="message-text"></textarea>
+					</div>
+				</form>
+			</div>
+			<style>
+.material-symbols-outlined {
+	font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+}
+
+.btn-primary {
+	font-family: 'material-symbols-outlined', sans-serif;
+}
+</style>
+
+			<div class="modal-footer">
+				<button type="button"
+					class="btn btn-primary material-symbols-outlined" id="send-btn">보내기</button>
+			</div>
+
 		</div>
 	</div>
 </div>
