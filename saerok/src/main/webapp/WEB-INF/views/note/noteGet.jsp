@@ -76,7 +76,7 @@
                 </button>
             </div>
 
-            <!-- keyup 사용해서 사원 조회 -->
+            <!-- keydown 사용해서 사원 조회 -->
             <div class="modal-body">
                 <form autocomplete="off">
                     <div class="form-group">
@@ -98,9 +98,7 @@
                 }
 
                 .btn-primary {
-                    /* 여기에 원하는 스타일 속성을 추가하세요 */
                     font-family: 'material-symbols-outlined', sans-serif;
-                    /* 추가적으로 필요한 스타일 속성을 설정하세요 */
                 }
             </style>
 
@@ -115,13 +113,6 @@
 
 <script>
     $(document).ready(function () {
-        /* 
-        new DataTable('#dataTable', {
-            info: false,
-            ordering: true,
-            paging: true
-        });
-         */
         $('#send-btn').click(function () {
 
             var recipientName = $('#recipient-name').val();
