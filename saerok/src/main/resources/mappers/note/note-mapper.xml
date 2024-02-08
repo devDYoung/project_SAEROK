@@ -93,5 +93,10 @@
     <select id="getNoteByNoteNo" parameterType="int" resultMap="receivedNotes">
     	SELECT * FROM note WHERE NOTE_NO = #{noteNo}
    	</select>
-    
+   	
+   	<!-- 쪽지 삭제 -->
+   <delete id="deleteNote" parameterType="note">
+    DELETE FROM note WHERE NOTE_NO=#{noteNo}
+	</delete>
+   	
 </mapper>

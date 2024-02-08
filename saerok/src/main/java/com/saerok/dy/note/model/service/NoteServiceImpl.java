@@ -44,17 +44,10 @@ public class NoteServiceImpl implements NoteService {
 		return result > 0; // 삼항 연산자로 변경하여 간결하게 표현
 	}
 
+	// 쪽지 삭제
 	@Override
-	@Transactional
-	public boolean deleteToTrash(String empNo, int noteNo) {
-		Note note = dao.getNoteByNoteNo(noteNo, session);
-
-		if (note != null && empNo.equals(note.getSndEmpNo())) {
-			note.setDelYn("Y");
-			int result = dao.updateNoteDelStatus(session, note);
-			return result > 0;
-		}
-		return false;
+	public int deleteNote(Note noteNo) {
+		return dao.deleteNote(session, noteNo);
 	}
 
 	// 쪽지 번호로 쪽지 가져오기

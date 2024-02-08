@@ -264,20 +264,19 @@
 								</form>
 							</div></li>
 
-						<!-- 알림 구현하자 -->
+						<!-- 알림 -->
 						<!-- Nav Item - Alerts -->
-						<!--  <li class="nav-item dropdown no-arrow mx-1">
+						<li class="nav-item dropdown no-arrow mx-1">
                             <a class="nav-link dropdown-toggle" href="#" id="alertsDropdown" role="button"
                                 data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                 <i class="fas fa-bell fa-fw"></i>
-                                Counter - Alerts
+                                알림
                                 <span class="badge badge-danger badge-counter">3+</span>
                             </a>
-                            Dropdown - Alerts
                             <div class="dropdown-list dropdown-menu dropdown-menu-right shadow animated--grow-in"
                                 aria-labelledby="alertsDropdown">
                                 <h6 class="dropdown-header">
-                                    알림
+                                    새로운 알림이 있습니다.
                                 </h6>
                                 <a class="dropdown-item d-flex align-items-center" href="#">
                                     <div class="mr-3">
@@ -286,8 +285,8 @@
                                         </div>
                                     </div>
                                     <div>
-                                        <div class="small text-gray-500">알림날짜</div>
-                                        <span class="font-weight-bold">알림내용!</span>
+                                        <div class="small text-gray-500">2024/02/06</div>
+                                        <span class="font-weight-bold">알림을 구현할거에요</span>
                                     </div>
                                 </a>
                                 <a class="dropdown-item d-flex align-items-center" href="#">
@@ -314,7 +313,7 @@
                                 </a>
                                 <a class="dropdown-item text-center small text-gray-500" href="#">모든알림보기</a>
                             </div>
-                        </li> -->
+                        </li>
 
 						<!-- Nav Item - Alerts -->
 						<!--       <li class="nav-item dropdown no-arrow mx-1">
