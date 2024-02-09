@@ -105,9 +105,9 @@
 					aria-labelledby="headingWORK" data-parent="#accordionSidebar">
 					<div class="bg-white py-2 collapse-inner rounded">
 						<a class="collapse-item" href="${path }/commute/commuteMain.do">내
-							근태현황</a> <a class="collapse-item"
-							href="${path }/commute/commuteList.do">부서별 근태현황</a> <a
-							class="collapse-item" href="${path }/commute/AnnualList.do">연차현황</a>
+							근태현황</a> <%-- <a class="collapse-item"
+							href="${path }/commute/commuteList.do">부서별 근태현황</a>  --%>
+							<a class="collapse-item" href="${path }/commute/AnnualList.do">연차현황</a>
 					</div>
 				</div></li>
 			<li class="nav-item"><a class="nav-link collapsed" href="#"
@@ -119,7 +119,7 @@
 					data-parent="#accordionSidebar">
 					<div class="bg-white py-2 collapse-inner rounded">
 						<a class="collapse-item" href="${path }/calendar/calendarmain">내
-							일정</a> <a class="collapse-item" href="${path }/calendar/calendarview">일정조회</a>
+							일정</a> <%-- <a class="collapse-item" href="${path }/calendar/calendarview">일정조회</a> --%>
 						<%--  <a class="collapse-item" href="${path }/calendar/calendarstarview">중요일정</a>
                          <a class="collapse-item" href="${path }/calendar/calendarwrite">일정작성</a> --%>
 					</div>
