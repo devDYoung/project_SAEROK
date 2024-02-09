@@ -23,48 +23,51 @@ import lombok.RequiredArgsConstructor;
 @RequestMapping("/board")
 public class BoardController {
 
-    @Autowired
-    private final BoardService boardService;
+	@Autowired
+	private final BoardService boardService;
 
-    // 공지사항 페이지로 이동
-    @GetMapping("/boardlist")
-    public String noticeList(Model model) {
-        List<Board> noticeList = boardService.boardList();
-        model.addAttribute("boardList", boardList);
-        return "board/boardList";
-    }
+	// 공지사항 페이지로 이동
+	@GetMapping("/boardlist")
+	public String noticeList(Model model) {
+		List<Board> boardList = boardService.boardList();
+		model.addAttribute("boardList", boardList);
+		return "board/boardList";
+	}
 
-    // 공지사항 상세보기 페이지
-    @GetMapping("/boardview")
-    public String selectBoardByNo(@RequestParam int boardNo, Model model) {
-        // 게시글 상세보기 로직
-        Board board = boardService.selectBoardByNo(boardNo);
-        model.addAttribute("b", board);
-        return "board/boardView";
-    }
+	// 공지사항 상세보기 페이지
+	@GetMapping("/boardview")
+	public String selectBoardByNo(@RequestParam int boardNo, Model model) {
+		// 게시글 상세보기 로직
+		Board board = boardService.selectBoardByNo(boardNo);
+		model.addAttribute("b", board);
+		return "board/boardView";
+	}
 
-    // 공지사항 작성 페이지로 이동
-    @GetMapping("/boardwrite")
-    public String boardWrite() {
-        return "board/boardWrite";
-    }
+	// 공지사항 작성 페이지로 이동
+	@GetMapping("/boardwrite")
+	public String boardWrite() {
+		return "board/boardWrite";
+	}
 
-    // 게시글 저장
-    @PostMapping("/save")
-    public String saveBoard(@ModelAttribute Board board, Model model) {
-        // 현재 로그인 중인 사원의 사원번호
-        String empNo = SecurityContextHolder.getContext().getAuthentication().getName();
-        board.setRegId(empNo);
-        model.addAttribute("content", board.getBoardContent());
-        // 게시글 저장 로직 수행
-        try {
-        	boardService.save(board);
-        	model.addAttribute("msg","게시글을 등록하였습니다.");
-        	model.addAttribute("loc","board/boardlist");
-        }catch(Exception e) {
-        	model.addAttribute("msg","게시글을 다시 작성해주세요.");
-        	model.addAttribute("loc","board/boardwrite");
-        }
-        return "common/msg";
-    }
+	// 게시글 저장
+	@PostMapping("/save")
+	public String saveBoard(@ModelAttribute Board board, Model model) {
+		// 현재 로그인 중인 사원의 사원번호
+		String empNo = SecurityContextHolder.getContext().getAuthentication().getName();
+		board.setRegId(empNo);
+		model.addAttribute("content", board.getBoardContent());
+		// 게시글 저장 로직 수행
+		try {
+			boardService.save(board);
+			// 게시글 저장 후 다시 목록을 불러와서 보여줌
+			List<Board> boardList = boardService.boardList();
+			model.addAttribute("boardList", boardList);
+			model.addAttribute("msg", "게시글을 등록하였습니다.");
+			model.addAttribute("loc", "board/boardlist");
+		} catch (Exception e) {
+			model.addAttribute("msg", "게시글을 다시 작성해주세요.");
+			model.addAttribute("loc", "board/boardwrite");
+		}
+		return "common/msg";
+	}
 }
