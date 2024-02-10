@@ -122,7 +122,6 @@
 	<input type="hidden" name=""/>
 </form>
 <script>
-
 var yearNow = document.getElementById("yearAnnual");
         function clock() {
             var time = new Date();
