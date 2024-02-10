@@ -133,8 +133,9 @@
 					aria-labelledby="headingBoard" data-parent="#accordionSidebar">
 					<div class="bg-white py-2 collapse-inner rounded">
 						<%-- <a class="collapse-item" href="${path }/board/write">작성하기</a> --%>
-						<a class="collapse-item" href="${path }/board/noticelist">공지
+						<a class="collapse-item" href="${path }/board/boardlist">공지
 							사항</a>
+						<a class="collapse-item" href="${path }">부서별 게시판</a>
 
 						<!-- <a class="collapse-item" href="">전체게시판</a> -->
 						<!-- <a class="collapse-item" href="${path }/board/Part">부서별 게시판</a> -->
