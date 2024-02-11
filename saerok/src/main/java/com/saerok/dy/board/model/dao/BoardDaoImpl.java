@@ -29,7 +29,7 @@ public class BoardDaoImpl implements BoardDao {
 		return sqlSession.selectOne("board.selectBoardByNo", boardNo);
 	}
 
-// 부서별 게시판 조회
+	// 부서별 게시판 조회
 	@Override
 	public List<Board> boardPart(SqlSession session) {
 		return session.selectList("board.boardPart");
@@ -42,6 +42,8 @@ public class BoardDaoImpl implements BoardDao {
 		sqlSession.insert("board.save", board);
 	}
 
+	
+	// 게시글 데이터 저장
 	@Override
 	public void save(SqlSession session, Board board) {
 		// TODO Auto-generated method stub
