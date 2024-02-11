@@ -36,7 +36,8 @@ public class BoardServiceImpl implements BoardService {
 
 	@Override
 	public void save(Board board) {
-		// 게시글을 DB에 저장하는 로직을 여기에 구현
+		
+	// 게시글을 DB에 저장하는 로직을 여기에 구현
 		dao.save(board);
 	}
 }

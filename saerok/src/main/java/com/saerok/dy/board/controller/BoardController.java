@@ -19,7 +19,6 @@ import lombok.RequiredArgsConstructor;
 
 @Controller
 @RequiredArgsConstructor
-// 일일히 board 써주는 귀찮음 해소
 @RequestMapping("/board")
 public class BoardController {
 
@@ -37,6 +36,7 @@ public class BoardController {
 	// 공지사항 상세보기 페이지
 	@GetMapping("/boardview")
 	public String selectBoardByNo(@RequestParam int boardNo, Model model) {
+		
 		// 게시글 상세보기 로직
 		Board board = boardService.selectBoardByNo(boardNo);
 		model.addAttribute("b", board);
@@ -52,6 +52,7 @@ public class BoardController {
 	// 게시글 저장
 	@PostMapping("/save")
 	public String saveBoard(@ModelAttribute Board board, Model model) {
+		
 		// 현재 로그인 중인 사원의 사원번호
 		String empNo = SecurityContextHolder.getContext().getAuthentication().getName();
 		board.setRegId(empNo);
@@ -59,7 +60,7 @@ public class BoardController {
 		// 게시글 저장 로직 수행
 		try {
 			boardService.save(board);
-			// 게시글 저장 후 다시 목록을 불러와서 보여줌
+			// 게시글 저장 후 다시 목록 불러옴
 			List<Board> boardList = boardService.boardList();
 			model.addAttribute("boardList", boardList);
 			model.addAttribute("msg", "게시글을 등록하였습니다.");
