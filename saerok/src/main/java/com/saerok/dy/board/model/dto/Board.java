@@ -19,7 +19,8 @@ public class Board {
 	private String destFileName;
 	private String regId;
 	private Date regDtime;
-	private String modId;
-	private Date modDtime;
+	/*
+	 * private String modId; private Date modDtime;
+	 */
 
 }
