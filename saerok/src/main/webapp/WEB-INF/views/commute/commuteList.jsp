@@ -53,7 +53,6 @@ window.addEventListener('load', () => {
 							            <input type="text" name="searchKeyword" id="searchKeyword" placeholder="검색할 이름을 입력하세요." />
 							            <button type="button">검색</button>			
 						    </div>
-						  
 					    </div> <!-- search-container end -->
 
                         <div>

@@ -26,7 +26,7 @@
 
 <!-- 전체 리스트 -->
 <!--수정중  -->
-<div class="container-fluid">
+<div clas="container-fluid">
 
 	<div class="card shadow mb-4">
 
