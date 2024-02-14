@@ -27,7 +27,7 @@
 					<td style="color: black; font-size: 15px;">최종승인자</td>
 				</tr>
 				<tr>
-
+<!-- 수정중 -->
 				</tr>
 				<tr>
 					<td colspan="2" style="color: black; height: 70px;">수신참조자</td>
