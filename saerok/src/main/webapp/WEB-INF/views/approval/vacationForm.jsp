@@ -10,7 +10,6 @@
 <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
 <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 
-
 <form class="documentForm" name="basicForm" action="" method="POST"
 	onsubmit="return check_onclick()">
 	<div id="documentForm " class="documentForm"
@@ -28,7 +27,7 @@
 					<td style="color: black; font-size: 15px;">최종승인자</td>
 				</tr>
 				<tr>
-
+<!-- 수정중 -->
 				</tr>
 				<tr>
 					<td colspan="2" style="color: black; height: 70px;">수신참조자</td>

@@ -287,7 +287,7 @@
                                     </div>
                                     <div>
                                         <div class="small text-gray-500">2024/02/06</div>
-                                        <span class="font-weight-bold">알림을 구현할거에요</span>
+                                        <span class="font-weight-bold">알림 구현중. .</span>
                                     </div>
                                 </a>
                                 <a class="dropdown-item d-flex align-items-center" href="#">
@@ -367,61 +367,51 @@
                             </div>
                         </li> -->
 
-						<!-- Nav Item - Messages
+						<!-- Nav Item - Messages-->
                         <li class="nav-item dropdown no-arrow mx-1">
                             <a class="nav-link dropdown-toggle" href="#" id="messagesDropdown" role="button"
                                 data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                 <i class="fas fa-envelope fa-fw"></i>
-                                Counter - Messages
-                                <span class="badge badge-danger badge-counter">7</span>
+                                Messages
+                                <span class="badge badge-danger badge-counter">2</span>
                             </a>
-                            Dropdown - Messages
+                           <!--  Dropdown - Messages--> 
                             <div class="dropdown-list dropdown-menu dropdown-menu-right shadow animated--grow-in"
                                 aria-labelledby="messagesDropdown">
                                 <h6 class="dropdown-header">
-                                    쪽지알림
+                                    쪽지 알림
                                 </h6>
                                 <a class="dropdown-item d-flex align-items-center" href="#">
                                     <div class="dropdown-list-image mr-3">
-                                        <img class="rounded-circle" src="img/undraw_profile_1.svg"
+                                        <img class="rounded-circle" src="resources/img/message icon.png"
                                             alt="...">
                                         <div class="status-indicator bg-success"></div>
                                     </div>
                                     <div class="font-weight-bold">
-                                        <div class="text-truncate">쪽지내용.</div>
-                                        <div class="small text-gray-500">보낸사람 · 58m</div>
+                                        <div class="text-truncate">설 연휴 잘 보내셨습니까?</div>
+                                        <div class="small text-gray-500">김도영 · 58m</div>
                                     </div>
                                 </a>
                                 <a class="dropdown-item d-flex align-items-center" href="#">
                                     <div class="dropdown-list-image mr-3">
-                                        <img class="rounded-circle" src="img/undraw_profile_2.svg"
+                                        <img class="rounded-circle" src="resources/img/message icon.png"
                                             alt="...">
                                         <div class="status-indicator"></div>
                                     </div>
                                     <div>
-                                        <div class="text-truncate">쪽지내용</div>
-                                        <div class="small text-gray-500">보낸사람 · 1d</div>
+                                        <div class="text-truncate">이력서 얼른 쓰세요.</div>
+                                        <div class="small text-gray-500">유병승 · 1d</div>
                                     </div>
                                 </a>
-                                <a class="dropdown-item d-flex align-items-center" href="#">
-                                    <div class="dropdown-list-image mr-3">
-                                        <img class="rounded-circle" src="img/undraw_profile_3.svg"
-                                            alt="...">
-                                        <div class="status-indicator bg-warning"></div>
-                                    </div>
-                                    <div>
-                                        <div class="text-truncate">쪽지내용!</div>
-                                        <div class="small text-gray-500">보낸사람 · 2d</div>
-                                    </div>
-                                </a> -->
+                                
 						<!-- <a class="dropdown-item d-flex align-items-center" href="#"> -->
-						<div class="dropdown-list-image mr-3" name="oriFileName">
+						<%-- <div class="dropdown-list-image mr-3" name="oriFileName">
 							<a href="${path }/mypage"> <img
 								src="${path}/resources/upload/profile/${loginEmployee.destFileName}"
 								alt="ato-profile-img">
 							</a>
 							<div class="status-indicator bg-success"></div>
-						</div>
+						</div> --%>
 
 						<!-- <div>
                                         <div class="text-truncate">쪽지내용.</div>

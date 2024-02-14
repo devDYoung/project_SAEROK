@@ -82,7 +82,7 @@ public class NoteController {
 		note.setRevEmpNo(recipientName.split(" ")[0]);
 		note.setNoteContent(messageText);
 		note.setSndEmpNo(empNo);
-		note.setModId(empNo);
+		//note.setModId(empNo);
 
 		boolean isSentSuccessfully = noteService.sendNote(note);
 
