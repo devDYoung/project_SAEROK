@@ -134,10 +134,6 @@ var yearNow = document.getElementById("yearAnnual");
                 
         }
  clock();
- 
-
-
-
 </script>
 	<jsp:include page="/WEB-INF/views/common/footer.jsp"/>
 	<script src="${path}/resources/js/emp.js"></script>			
