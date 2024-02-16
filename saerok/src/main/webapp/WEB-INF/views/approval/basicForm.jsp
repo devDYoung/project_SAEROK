@@ -12,7 +12,7 @@
 <jsp:include page="/WEB-INF/views/common/header.jsp">
 	<jsp:param value="품의서" name="title" />
 </jsp:include>
-
+<!--ajax수정중  -->
 <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
 
 
