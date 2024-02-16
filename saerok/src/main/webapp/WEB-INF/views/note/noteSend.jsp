@@ -158,8 +158,8 @@
                     location.replace("${path}/note/send");
                 },
                 error: function (error) {
-                    console.log("에러에러", error);
-                    alert("쪽지쪽지");
+                    console.log("에러", error);
+                    alert("쪽지");
                 }
             });
         });
@@ -167,7 +167,7 @@
 
     function confirmDelete(noteNo) {
         // 삭제 여부를 확인하는 confirm 창 띄우기
-        var isDelete = confirm("쪽지를 삭제하시겠습니까?");
+        var isDelete = confirm("해당 쪽지를 삭제하시겠습니까?");
 
         if (isDelete) {
             // 확인을 눌렀을 때 휴지통으로 이동
@@ -189,7 +189,7 @@
                 location.replace("${path}/note/basket");
             },
             error: function (error) {
-                console.error("에러 발생:", error);
+                console.error("에러:", error);
                 alert("쪽지 삭제에 실패하였습니다.");
             }
         });
@@ -208,7 +208,7 @@
                 $('#noteContentModal').modal('show');
             },
             error: function (error) {
-                console.error("에러 발생:", error);
+                console.error("에러:", error);
                 alert("쪽지 내용을 불러오는 데 실패했습니다.");
             }
         });

@@ -50,7 +50,7 @@ public class NoteServiceImpl implements NoteService {
 		return dao.deleteNote(session, noteNo);
 	}
 
-	// 쪽지 번호로 쪽지 가져오기
+	// 번호로 쪽지 가져오기
 	@Override
 	public Note getNoteByNoteNo(int noteNo) {
 		return dao.getNoteByNoteNo(noteNo, session);

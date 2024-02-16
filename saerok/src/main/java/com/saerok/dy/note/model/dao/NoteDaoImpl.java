@@ -23,7 +23,7 @@ public class NoteDaoImpl implements NoteDao {
 	@Override
 	public List<Note> getSentNotes(String empNo, SqlSession session) {
 		
-		// 매개변수를 Map에 담아 전달
+	// 매개변수를 Map에 담아 전달
 		Map<String, Object> params = new HashMap<>();
 		params.put("empNo", empNo);
 		return session.selectList("note.getSentNotes", params);

@@ -19,7 +19,7 @@ public class Note {
 	private String delYn;
 	private String tempYn;
 	//private String regId;
-	//private Date regDtime;
+	private Date regDtime;
 	//private String modId;
 	//private Date modDtime;
 }
