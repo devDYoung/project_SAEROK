@@ -1,11 +1,13 @@
+![Java](https://img.shields.io/badge/java-%23ED8B00.svg?style=for-the-badge&logo=openjdk&logoColor=white)
+
 ## 목차
   - [개요](#개요)
   - [설명](#프로젝트-설명)
 
 ## 개요
-- 프로젝트 이름: ATO groupware
-- 프로젝트 기간: 2023.11-2024.01
-- ![Java](https://img.shields.io/badge/java-%23ED8B00.svg?style=for-the-badge&logo=openjdk&logoColor=white)
+> 프로젝트명: **ATO groupware**  
+> 기간      : **2023.11-2024.01**
+
 
 |     팀원       |Git                            |
 |----------------|-------------------------------|
