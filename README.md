@@ -37,5 +37,7 @@
 
 ## 담당 기능
 
+<img src="img/boardmain.png">
+
 
 ## <img src="https://raw.githubusercontent.com/Tarikul-Islam-Anik/Animated-Fluent-Emojis/master/Emojis/Symbols/Bubbles.png" alt="Bubbles" width="25" height="25" /> 프로젝트를 마치며..
