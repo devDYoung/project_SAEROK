@@ -28,6 +28,7 @@
 
 
 ## 프로젝트 설명
+
 - 인사관리
 - 근태관리
 - 일정관리
@@ -38,8 +39,10 @@
 - 전자결재
 
 ## 담당 기능
+<img src="https://github.com/jjiyeong/-Saerok_final/assets/148295598/5d4485d6-e9b4-464b-94eb-be62d43ddb38" width="500" height="200">
 
-<img src="img/boardmain.png">
+<img src="https://github.com/jjiyeong/-Saerok_final/assets/148295598/4e2d173d-67cc-4bbf-8661-2d8215a1db55" width="600" height="250">
+
 
 
 ## <img src="https://raw.githubusercontent.com/Tarikul-Islam-Anik/Animated-Fluent-Emojis/master/Emojis/Symbols/Bubbles.png" alt="Bubbles" width="25" height="25" /> 프로젝트를 마치며..
