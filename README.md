@@ -2,7 +2,9 @@
 
 
 ## <img src="https://raw.githubusercontent.com/Tarikul-Islam-Anik/Animated-Fluent-Emojis/master/Emojis/Hand%20gestures/Backhand%20Index%20Pointing%20Right%20Light%20Skin%20Tone.png" alt="Backhand Index Pointing Right Light Skin Tone" width="25" height="25" /> *What's the "ATO" ?*
-> 지점관리 본사 그룹웨어
+> 각 지점과 협업을 위해 다양한 기능을 하나의 플랫폼에서 제공하는 그룹웨어 **아토**입니다.
+
+> 인사관리, 사내쪽지, 전자결재, 게시판, 일정, 근태관리 등 여러 기능을 한 곳에서 이용할 수 있는 기본에 충실한 서비스를 제공합니다.
 
 
 ## 목차
