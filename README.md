@@ -5,7 +5,7 @@
 > 지점관리 본사 그룹웨어
 
 
-## <img src="https://raw.githubusercontent.com/Tarikul-Islam-Anik/Animated-Fluent-Emojis/master/Emojis/Objects/Receipt.png" alt="Receipt" width="25" height="25" /> 목차
+## 목차
   - [개요](#개요)
   - [소개](#프로젝트-설명)
   - [기능](#담당-기능)
@@ -38,4 +38,4 @@
 ## 담당 기능
 
 
-## 프로젝트를 마치며..
+## <img src="https://raw.githubusercontent.com/Tarikul-Islam-Anik/Animated-Fluent-Emojis/master/Emojis/Symbols/Bubbles.png" alt="Bubbles" width="25" height="25" /> 프로젝트를 마치며..
